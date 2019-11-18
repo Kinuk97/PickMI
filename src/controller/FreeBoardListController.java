@@ -17,7 +17,7 @@ public class FreeBoardListController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		//헤헤
 	}
 
 }
