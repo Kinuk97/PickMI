@@ -16,14 +16,16 @@
 
 #header {
 	text-align : center;
-/* 	background :  */
+
 }
 
 #footer {
-	text-align : center;
-/* 	background :  */
-	margin : 0px; /* background를 전체에 적용하기 위한 설정 */
-	padding : 20px 0;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	width: 100px;
+	height: 50px;
+	background: #A9E2F3;
 }
 
 
@@ -31,6 +33,18 @@
 </head>
 <body>
 
-<div id="header"></div>
+<div id="header" class="header">
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 <div id="wrapper">
