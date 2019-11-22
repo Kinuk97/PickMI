@@ -1,4 +1,4 @@
-package controller.profileBoardController;
+package controller.Board.profileBoard;
 
 import java.io.IOException;
 
