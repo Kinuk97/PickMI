@@ -1,4 +1,4 @@
-package controller;
+package controller.Board.ProjectBoard;
 
 import java.io.IOException;
 
