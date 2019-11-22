@@ -2,7 +2,7 @@ package dto;
 
 import java.util.Date;
 
-public class ProfileBoardDto {
+public class ProfileBoard {
 	
 	private int prof_no;
 	private int userno;
