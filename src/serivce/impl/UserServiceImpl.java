@@ -8,9 +8,9 @@ import dto.User;
 import serivce.face.UserService;
 
 public class UserServiceImpl implements UserService {
-	
+
 	UserDao userDao = new UserDaoImpl();
-	
+
 	@Override
 	public User getLoginParam(HttpServletRequest req) {
 		// 유저객체
@@ -32,11 +32,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean login(User user) {
-		
+
 		int cnt = 0;
 		cnt = userDao.selectCntUserByUserid(user);
-		
-		return false;
+		System.out.println(cnt);
+
+		if (cnt == 1) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

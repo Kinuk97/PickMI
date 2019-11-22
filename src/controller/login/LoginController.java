@@ -37,6 +37,18 @@ public class LoginController extends HttpServlet {
 		
 		// 로그인 확인
 		boolean login = userService.login(user);
+		
+		if(login == true) {
+			String eamil = req.getParameter("eamil");
+			String pw = req.getParameter("pw");
+			
+			session.setAttribute("login", true);
+			session.setAttribute("email", eamil);
+			
+			resp.sendRedirect("/main");
+		} else {
+			resp.sendRedirect("/login");
+		}
 	}
 
 }

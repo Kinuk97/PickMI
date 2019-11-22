@@ -86,14 +86,21 @@
 	z-index: 1;
 }
 #log{
-	margin: 280px auto;
+	margin: 5px auto;
 	width: 500px;
+}
+#logo{
+	height: 10px;
 }
 </style>
 </head>
 <body>
-	<span> <img src="pickmi.png">
+	<span id="logo"> 
+		<a href="/main"> 
+			<img src="/resources/pickmi_sm.png"class="img-rounded center-block">
+		</a>
 	</span>
+	
 	<div class="login-form" id="log">
 		<form action="/login" method="post">
 			<h2 class="text-center">로그인</h2>
