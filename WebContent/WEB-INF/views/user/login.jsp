@@ -92,8 +92,7 @@
 </style>
 </head>
 <body>
-	<span>
-		<img src="pickmi.png">
+	<span> <img src="pickmi.png">
 	</span>
 	<div class="login-form" id="log">
 		<form action="/login" method="post">
@@ -101,14 +100,14 @@
 			<div class="form-group">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
-						type="text" class="form-control" name="username"
+						type="text" class="form-control" name="email" id="email"
 						placeholder="이메일을 입력하세요" required="required">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-						type="password" class="form-control" name="password"
+						type="password" class="form-control" name="pw" id="pw"
 						placeholder="패스워드를 입력하세요" required="required">
 				</div>
 			</div>
