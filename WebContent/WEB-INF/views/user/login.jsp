@@ -97,7 +97,7 @@
 <body>
 	<span id="logo"> 
 		<a href="/main"> 
-			<img src="/resources/pickmi_sm.png"class="img-rounded center-block">
+			<img src="/resources/black.png"class="img-rounded center-block" style="height: 250px;">
 		</a>
 	</span>
 	
