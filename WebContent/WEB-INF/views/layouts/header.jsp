@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,6 +144,7 @@ button, input, optgroup, select, textarea {
 <!-- 							<li><a href="#">One more separated link</a></li> -->
 <!-- 						</ul></li> -->
 					</ul>
+<<<<<<< HEAD
 					
 						<!-- 검색 폼 -->
 <!-- 					<form class="navbar-form navbar-left" role="search"> -->
@@ -185,6 +188,35 @@ button, input, optgroup, select, textarea {
 <!-- 							</ul></li> -->
 					</ul>
 				</div>
+=======
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				<ul class="nav navbar-nav navbar-right">
+					<c:if test=${not login }>
+						<li><a href="/login">로그인</a></li>
+						<c:otherwise>
+							<li><a href="/mypage">로그인됐음(추후 아이콘으로)</a></li>
+						</c:otherwise>
+					</c:if>
+					<li><a href="/mypage">Link</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
+							<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+						</ul></li>
+				</ul>
+			</div>
+>>>>>>> refs/remotes/origin/testing
 				<!-- /.navbar-collapse -->
 			</div>
 			<!-- /.container-fluid -->
