@@ -130,13 +130,14 @@
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 				<ul class="nav navbar-nav navbar-right">
-					<c:if test=${not login }>
-						<li><a href="/login">로그인</a></li>
+					<c:choose>
+						<c:when test="${not login }">
+							<li><a href="/login">로그인</a></li>
+						</c:when>
 						<c:otherwise>
-							<li><a href="/mypage">로그인됐음(추후 아이콘으로)</a></li>
+							<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
 						</c:otherwise>
-					</c:if>
-					<li><a href="/mypage">Link</a></li>
+					</c:choose>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
 							<span class="caret"></span>
