@@ -3,7 +3,8 @@
 
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
-<div class="jumbotron">
+<div class="jumbotron" style="background-image: url(/resources/mainphoto.png)">
+
 	<h3>좋은 아이디어를 공유하고, </h3>
 	<h3>좋은 팀원을 찾아보세요.</h3>
 	<h3>아이디어 공유, 소통 플랫폼</h3>
@@ -15,10 +16,10 @@
 
 <div class="container">
 	<!-- 첫번째 줄 -->
+	<h4>프로필 게시판</h4>
 	<div class="row">
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -31,7 +32,6 @@
 		</div>
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -44,7 +44,6 @@
 		</div>
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -57,10 +56,10 @@
 		</div>
 	</div>
 	<!-- 두번째 줄 -->
+	<h4>프로젝트 게시판</h4>
 	<div class="row">
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -73,7 +72,6 @@
 		</div>
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -86,7 +84,6 @@
 		</div>
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -99,10 +96,10 @@
 		</div>
 	</div>
 	<!-- 세번째 줄 -->
+	<h4>자유게시판</h4>
 	<div class="row">
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -115,7 +112,6 @@
 		</div>
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>
@@ -128,7 +124,6 @@
 		</div>
 		<div class="col-sm-6 col-md-4 col-lg-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
 				<div class="caption">
 					<h3>Thumbnail label</h3>
 					<p>...</p>

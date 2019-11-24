@@ -65,6 +65,12 @@
     padding-right: 13%;
 }
 
+button, input, optgroup, select, textarea {
+    margin: 10px;
+    font: inherit;
+    color: inherit;
+}
+
 </style>
 </head>
 <body>
@@ -153,7 +159,17 @@
 
   						<li role="presentation"><a href="#">Alert <span class="badge">7</span></a></li>
   						<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
-			
+  						
+<!-- 						<li><button type="button" class="btn btn-default" aria-label="Left Align"> -->
+<!--   						<span class="glyphicon glyphicon-bell" aria-hidden="true"></span> -->
+<!-- 							</button> -->
+<!-- 						</li> -->
+
+<!-- 						<li><button type="button" class="btn btn-default btn-sm"> -->
+<!--   							<span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Alert -->
+<!-- 							</button> -->
+<!-- 						</li> -->
+
 						<li><a href="#">Login/Join</a></li>
 						
 <!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
