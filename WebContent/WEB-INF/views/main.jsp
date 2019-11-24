@@ -4,10 +4,12 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
 <div class="jumbotron">
-	<h1>Hello, world!</h1>
-	<p>...</p>
+	<h3>좋은 아이디어를 공유하고, </h3>
+	<h3>좋은 팀원을 찾아보세요.</h3>
+	<h3>아이디어 공유, 소통 플랫폼</h3>
+	
 	<p>
-		<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+		<a class="btn btn-primary" href="#" role="button">서비스 소개</a>
 	</p>
 </div>
 
