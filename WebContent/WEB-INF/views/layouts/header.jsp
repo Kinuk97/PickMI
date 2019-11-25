@@ -126,7 +126,7 @@ button, input, optgroup, select, textarea {
 						<li><a href="/profileBoard/list">프로필 게시판</a></li>
 						<li><a href="/projectBoard/list">프로젝트 게시판</a></li>
 						<li><a href="/compBoard/list">완성된 프로젝트 게시판</a></li>
-						<li><a href="/freeBoard/list">자유게시판</a></li>
+						<li><a href="/freeboard/list">자유게시판</a></li>
 
 						
 						<!-- dropdown드롭다운 -->	
@@ -164,9 +164,19 @@ button, input, optgroup, select, textarea {
 							<li><a href="/login">로그인</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
+							<ul>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown"><img src="/resources/pickmiBlack.jpg" class="img-circle" style="width: 50px; height: 50px;"></a>
+									<ul class="dropdown-menu">
+										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
+										<li><a href="#"><i class="icon-arrow-down"></i>추가할거</a></li>
+										<li><a href="#"><i class="icon-arrow-left"></i>추가해주세요~</a></li>
+										<li><a href="/logout"><i class="icon-arrow-right"></i>로그아웃</a></li>
+									</ul>
+								</li>
+							</ul>
 						</c:otherwise>
-					</c:choose>
+				</c:choose>
 					</li>
 					
 <!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
