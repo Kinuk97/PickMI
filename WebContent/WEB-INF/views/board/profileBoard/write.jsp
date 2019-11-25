@@ -9,8 +9,8 @@
 $(document).ready(function() {
 	$("#write").click(function() {
 		submitContents("#write")
-	});
 	$("form").submit();
+	});
 	
 	$("#cancel").click(function () {
 		history.go(-1);
@@ -18,7 +18,7 @@ $(document).ready(function() {
 });
 </script>
 
-<h1 class="text-center">프로필 작성</h1>
+<h1 class="text-center">프로필 작성✍</h1>
 
 <form action="/profileBoard/write" method="post">
 <table>
