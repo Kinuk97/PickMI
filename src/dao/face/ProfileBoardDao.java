@@ -6,6 +6,8 @@ import dto.ProfileBoard;
 
 public interface ProfileBoardDao {
 	
+//	public selectNameByUserno();
+	
 	/**
 	 * profileboard의 모든 게시글을 불러온다
 	 * @return
@@ -18,3 +20,4 @@ public interface ProfileBoardDao {
 	 */
 	public int selectCntAll();
 }
+
