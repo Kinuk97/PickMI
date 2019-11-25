@@ -27,6 +27,7 @@ public class ProfileBoardListController extends HttpServlet {
 		
 		req.setAttribute("list", list);
 		
+		System.out.println("profile list controller : " + list);
 		//view 보내기
 		req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/list.jsp").forward(req, resp);
 	

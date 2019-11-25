@@ -30,7 +30,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		String sql="";
 		sql += "SELECT";
 		sql += " prof_no, userno, prof_time,";
-		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career";
+		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
 		sql += " prof_content, prof_like FROM profile";
 		sql += " ORDER BY prof_no";
 		
@@ -68,7 +68,8 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			}
 		}
 		
+		System.out.println("profile board dao impl : " + list);
 		return list;
-	}
+	} //selectProfileList() end
 
-}
+}// class end
