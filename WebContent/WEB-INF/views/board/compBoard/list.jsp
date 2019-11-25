@@ -21,7 +21,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -71,7 +71,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -82,7 +82,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -93,7 +93,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -107,7 +107,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -118,7 +118,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div> 
@@ -129,7 +129,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -140,7 +140,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -154,7 +154,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -165,7 +165,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div> 
@@ -176,7 +176,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -187,7 +187,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -198,7 +198,7 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
@@ -209,17 +209,16 @@
 					<h3>Thumbnail label</h3>
 					<p>...</p>
 					<p>
-						<a href="/compBoard/view" class="btn btn-default" role="button">Button</a>
+						<a href="/compBoard/view?comp_no=${comp_no }" class="btn btn-default" role="button">Button</a>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
+
+<jsp:include page="/WEB-INF/views/layouts/paging.jsp"/>
+
 </div>
-
-
-
-
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
