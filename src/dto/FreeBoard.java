@@ -5,7 +5,6 @@ import java.util.Date;
 public class FreeBoard {
 	private int free_no;
 	private int userno;
-	private int fileno;
 	private int categoryno;
 	private String free_title;
 	private String free_content;
@@ -14,9 +13,8 @@ public class FreeBoard {
 
 	@Override
 	public String toString() {
-		return "FreeBoard [free_no=" + free_no + ", userno=" + userno + ", fileno=" + fileno + ", categoryno="
-				+ categoryno + ", free_title=" + free_title + ", free_content=" + free_content + ", free_time="
-				+ free_time + ", views=" + views + "]";
+		return "FreeBoard [free_no=" + free_no + ", userno=" + userno + ", categoryno=" + categoryno + ", free_title="
+				+ free_title + ", free_content=" + free_content + ", free_time=" + free_time + ", views=" + views + "]";
 	}
 
 	public int getFree_no() {
@@ -33,14 +31,6 @@ public class FreeBoard {
 
 	public void setCategoryno(int categoryno) {
 		this.categoryno = categoryno;
-	}
-
-	public int getFileno() {
-		return fileno;
-	}
-
-	public void setFileno(int fileno) {
-		this.fileno = fileno;
 	}
 
 	public int getUserno() {

@@ -12,4 +12,9 @@ public interface ProfileBoardDao {
 	 */
 	public List<ProfileBoard> selectProfileList();
 
+	/**
+	 * 게시글 의 수 조회
+	 * @return int - 총 게시글 수
+	 */
+	public int selectCntAll();
 }

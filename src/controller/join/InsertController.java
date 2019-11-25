@@ -1,4 +1,3 @@
-
 package controller.join;
 
 import java.io.IOException;
@@ -38,3 +37,6 @@ public class InsertController extends HttpServlet {
 	}
 
 }
+
+		
+

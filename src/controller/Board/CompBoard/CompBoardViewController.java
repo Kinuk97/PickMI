@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.CompBoard;
 import serivce.face.CompBoardService;
 import serivce.impl.CompBoardServiceImpl;
 
@@ -19,7 +20,16 @@ public class CompBoardViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-	req.getRequestDispatcher("/WEB-INF/views/board/compBoard/view.jsp").forward(req, resp);
+		//요청 파라미터 얻기
+		CompBoard compBoard = compBoardService.getParam(req);
+		
+		System.out.println(compBoard);
+		
+		CompBoard compBoardView = compBoardService.compBoardDetail(compBoard);
+		
+		req.setAttribute("compBoard", compBoardView);
+		
+		req.getRequestDispatcher("/WEB-INF/views/board/compBoard/view.jsp").forward(req, resp);
 	
 	}
 	
