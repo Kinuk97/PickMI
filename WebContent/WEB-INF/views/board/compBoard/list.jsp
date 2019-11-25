@@ -8,7 +8,7 @@
 
 
 <div class="container">
-	<h2 class="text-center">프로필 게시판</h2>
+	<h2 class="text-center">완성된 프로젝트 게시판</h2>
 	<div class="text-right">
 		<button onclick="location.href='/compBoard/write';" class="btn btn-info">&emsp;&emsp;글쓰기&emsp;&emsp;</button>
 	</div>

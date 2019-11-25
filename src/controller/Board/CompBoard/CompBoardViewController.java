@@ -27,7 +27,7 @@ public class CompBoardViewController extends HttpServlet {
 		
 		CompBoard compBoardView = compBoardService.compBoardDetail(compBoard);
 		
-		req.setAttribute("CompBoard", compBoardView);
+		req.setAttribute("compBoard", compBoardView);
 		
 		req.getRequestDispatcher("/WEB-INF/views/board/compBoard/view.jsp").forward(req, resp);
 	
