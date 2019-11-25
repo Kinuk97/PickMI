@@ -1,5 +1,7 @@
 package serivce.impl;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import dao.face.UserDao;
@@ -50,6 +52,12 @@ public class UserServiceImpl implements UserService {
 		
 		
 		String param = null;
+		
+		try {
+			req.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		
 		// email
 		param = req.getParameter("email");
