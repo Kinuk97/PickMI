@@ -68,7 +68,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		//수행할 SQL쿼리
 		String sql ="";
 		sql += "SELECT * FROM compBoard ";
-		sql += "WHERE comp_no = ?";
+		sql += "WHERE comp_no = ? ";
 		
 		CompBoard res = null;
 		
