@@ -29,9 +29,11 @@ public class CompBoardListController extends HttpServlet {
 		req.setAttribute("paging", paging);
 		
 		//게시글 목록 조회
-		List<CompBoard> List = compBoardService.getBoardList();
+		List<CompBoard> List = compBoardService.getBoardList(paging);
 		
-		req.setAttribute("list", List);
+		req.setAttribute("compList", List);
+		
+		System.out.println(List);
 		
 		//VIEW지정
 		req.getRequestDispatcher("/WEB-INF/views/board/compBoard/list.jsp").forward(req, resp);

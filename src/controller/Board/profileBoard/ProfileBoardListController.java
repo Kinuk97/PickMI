@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dto.ProfileBoard;
 import serivce.face.ProfileBoardService;
 import serivce.impl.ProfileBoardServiceImpl;
@@ -29,6 +31,8 @@ public class ProfileBoardListController extends HttpServlet {
 		//Paging 객체를 model값으로 지정
 		req.setAttribute("paging", paging);
 		
+		req.setAttribute("boardList", profileBoardService.getBoardList(paging));
+
 		
 		
 		//게시글 목록 조회
@@ -40,5 +44,18 @@ public class ProfileBoardListController extends HttpServlet {
 		//view 보내기
 		req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/list.jsp").forward(req, resp);
 	
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setCharacterEncoding("UTF-8");
+		
+		Paging paging = profileBoardService.getPaging(req);
+	
+		Gson gson = new Gson();
+		
+		resp.getWriter().println(gson.toJson(profileBoardService.getBoardList(paging)));
+
 	}
 }

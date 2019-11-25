@@ -12,31 +12,24 @@ import dto.User;
 import serivce.face.UserService;
 import serivce.impl.UserServiceImpl;
 
-@WebServlet("/insert")
-public class InsertController extends HttpServlet {
 
-	private UserService userService = new UserServiceImpl();
-
+@WebServlet("/emailCheck")
+public class EmailCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/user/join.jsp").forward(req, resp);
-	}
-
+	
+	UserService userService = new UserServiceImpl();
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		User user = userService.getJoinParam(req);
-
-		req.setCharacterEncoding("UTF-8");
-
-		userService.join(user);
-		resp.sendRedirect("/main");
-
-	}
-
-}
-
 		
-
+		User user = userService.getJoinParam(req);
+		
+		boolean checkResult = userService.emailCheck(user);
+		
+		if(checkResult == false) {
+			req.setAttribute("email", checkResult);
+		}else {
+			resp.sendRedirect("/insert");
+		}
+	}
+}
