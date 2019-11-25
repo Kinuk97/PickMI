@@ -126,7 +126,7 @@ button, input, optgroup, select, textarea {
 						<li><a href="/profileBoard/list">프로필 게시판</a></li>
 						<li><a href="/projectBoard/list">프로젝트 게시판</a></li>
 						<li><a href="/compBoard/list">완성된 프로젝트 게시판</a></li>
-						<li><a href="/freeBoard/list">자유게시판</a></li>
+						<li><a href="/freeboard/list">자유게시판</a></li>
 
 						
 						<!-- dropdown드롭다운 -->	
