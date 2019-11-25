@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.FreeBoard;
+import util.Paging;
 
 public interface FreeBoardService {
 
@@ -17,28 +18,20 @@ public interface FreeBoardService {
 	public FreeBoard getParam(HttpServletRequest req);
 
 	/**
+	 * 현재 페이지와 검색어, 카테고리를 Paging으로 반환하는 메소드
+	 * 
+	 * @param req - 받은 요청
+	 * @return Paging - 페이징 처리 객체
+	 */
+	public Paging getPaging(HttpServletRequest req);
+
+	/**
 	 * 자유게시판의 게시글 목록
 	 * 
+	 * @param paging - 페이징 처리 객체
 	 * @return List<FreeBoard> - 게시글 목록
 	 */
-	public List<FreeBoard> getBoardList();
-
-	/**
-	 * 카테고리로 분류한 게시글 목록
-	 * 
-	 * @param categoryno - 카테고리 종류
-	 * @return List<FreeBoard> - 게시글 목록
-	 */
-	public List<FreeBoard> getBoardListByCategory(int categoryno);
-
-	/**
-	 * 게시글 검색하는 기능
-	 * 
-	 * @param searchStr - 검색 문자열
-	 * @param filter    - 제목, 작성자, 제목&&내용 필터
-	 * @return List<FreeBoard> - 검색 게시글 목록
-	 */
-	public List<FreeBoard> searchBoard(String searchStr, int filter);
+	public List<FreeBoard> getBoardList(Paging paging);
 
 	/**
 	 * 게시글 작성 기능

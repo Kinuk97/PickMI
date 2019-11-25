@@ -3,6 +3,7 @@ package dao.face;
 import java.util.List;
 
 import dto.FreeBoard;
+import util.Paging;
 
 public interface FreeBoardDao {
 
@@ -12,41 +13,23 @@ public interface FreeBoardDao {
 	 * @return 다음 게시글 번호
 	 */
 	public int getNextBoardno();
+	
+	/**
+	 * 페이징 처리를 위한 게시글 수 가져오기
+	 * 
+	 * @param search - 검색어
+	 * @param categoryno - 카테고리 번호
+	 * @return int - 게시글 수
+	 */
+	public int selectCntAll(String search, int categoryno);
 
 	/**
-	 * 자유게시판 게시글 전체목록 가져오는 메소드
+	 * 게시글 목록 불러오기
 	 * 
-	 * @return List<FreeBoard> - 전체 게시글 목록
+	 * @param paging - 페이징 처리를 위한 객체
+	 * @return List<FreeBoard> - 게시글 리스트
 	 */
-	public List<FreeBoard> selectAll();
-
-	/**
-	 * 자유게시판 제목으로 검색하는 메소드
-	 * 
-	 * @return List<FreeBoard> - 검색 게시글 목록
-	 */
-	public List<FreeBoard> selectBoardByTitle(FreeBoard freeBoard);
-
-	/**
-	 * 자유게시판 작성자로 검색하는 메소드
-	 * 
-	 * @return List<FreeBoard> - 검색 게시글 목록
-	 */
-	public List<FreeBoard> selectBoardByUser(FreeBoard freeBoard);
-
-	/**
-	 * 자유게시판 제목&&내용으로 검색하는 메소드
-	 * 
-	 * @return List<FreeBoard> - 검색 게시글 목록
-	 */
-	public List<FreeBoard> selectBoardByTitleContent(FreeBoard freeBoard);
-
-	/**
-	 * 자유게시판 카테고리로 게시글 가져오는 메소드
-	 * 
-	 * @return List<FreeBoard> - 카테고리 게시글 목록
-	 */
-	public List<FreeBoard> selectBoardByCategory(FreeBoard freeBoard);
+	public List<FreeBoard> selectAll(Paging paging);
 
 	/**
 	 * 게시글 작성하는 메소드
