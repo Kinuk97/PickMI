@@ -1,8 +1,11 @@
 package serivce.face;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import dto.Manager;
+import dto.ProfileBoard;
 
 public interface MgrService {
 
@@ -27,7 +30,11 @@ public interface MgrService {
 	 */
 	public Manager getMgrByMgrid(Manager mgr);
 		
-
+	/**
+	 * 게시글 목록 조회
+	 * @return List<ProfileBoard> 프로필게시글 목록
+	 */
+	public List<ProfileBoard> getpbList();
 	
 	
 }

@@ -94,11 +94,17 @@
 				<div class="or-seperator">
 			</div>
 		</form>
-		<p class="text-center text-muted small">
-			부여받은 아이디와 비밀번호를 넣으신 후 로그인을 하시면 됩니다.<br>
-			아이디와 비밀번호를 잊으셨을 경우 당사 담당자에게 연락해 주시기 바랍니다.		
+
+		<ul style="padding: 10px;">
+			<li>
+		<p class="text-center text-muted small" style="text-align: left;">
+			부여받은 아이디와 비밀번호를 넣으신 후 로그인을 하시면 됩니다.	
 		</p>
-		
-		
-	</div>
+			</li>
+			<li>
+		<p class="text-center text-muted small" style="text-align: left;">
+			아이디와 비밀번호를 잊으셨을 경우 당사 담당자에게 연락해 주시기 바랍니다.			</p>
+			</li>
+		</ul>
+
 <c:import url="/WEB-INF/views/layouts/footer.jsp" />
