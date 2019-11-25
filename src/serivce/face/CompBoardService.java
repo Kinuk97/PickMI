@@ -27,10 +27,11 @@ public interface CompBoardService {
 	
 	/**
 	 * 완성된 프로젝트 게시판의 게시글 목록 List
+	 * @param paging 
 	 * 
 	 * @return List<CompBoard> - 게시글 목록
 	 */
-	public List<CompBoard> getBoardList();
+	public List<CompBoard> getBoardList(Paging paging);
 	
 	/**
 	 * 게시글 상세 보기

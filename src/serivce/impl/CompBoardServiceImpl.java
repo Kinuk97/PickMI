@@ -61,9 +61,9 @@ public class CompBoardServiceImpl implements CompBoardService {
 	}
 
 	@Override
-	public List<CompBoard> getBoardList() {
+	public List<CompBoard> getBoardList(Paging paging) {
 		
-		return null;
+		return compBoardDao.compList(paging);
 	}
 
 	@Override
