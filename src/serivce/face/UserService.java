@@ -21,5 +21,20 @@ public interface UserService {
 	 * @return boolean - true & false로 로그인 인증
 	 */
 	boolean login(User user);
+	
+	/**
+	 * 회원가입에 필요한 파라미터 값 받기
+	 * 
+	 * @param req - 요청받은 파라미터 값(email,pw,name)
+	 * @return user - 회원가입 정보
+	 */
+	User getJoinParam(HttpServletRequest req);
+	
+	/**
+	 * 회원가입
+	 * 
+	 * @param user - 회원가입 정보
+	 */
+	void join(User user);
 
 }

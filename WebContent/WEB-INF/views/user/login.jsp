@@ -139,7 +139,7 @@
 			</div>
 		</form>
 		<p class="text-center text-muted small">
-			Don't have an account? <a href="#">Sign up here!</a>
+			Don't have an account? <a href="/insert">Sign up here!</a>
 		</p>
 	</div>
 
