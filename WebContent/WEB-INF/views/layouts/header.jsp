@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -158,16 +159,14 @@ button, input, optgroup, select, textarea {
   						<li role="presentation"><a href="#">Alert <span class="badge">7</span></a></li>
   						<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
 						<li>
-							<c:choose>
-								<c:when test="${not empty login }">
-									<li><a href="/mypage">로그인됐음(추후 아이콘으로)</a></li>
-									<li><a href="#">로그아웃</a></li>
-								</c:when>
-								<c:otherwise>
-									<li><a href="/login">로그인</a></li>
-									<li><a href="#">회원가입</a></li>
-								</c:otherwise>
-							</c:choose>
+						<c:choose>
+							<c:when test="${not login }">
+								<li><a href="/login">로그인</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
+							</c:otherwise>
+						</c:choose>
 						</li>
 						
 <!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
@@ -185,6 +184,5 @@ button, input, optgroup, select, textarea {
 				</div>
 			</div>
 		</nav>
-
 
 	<div id="wrapper">

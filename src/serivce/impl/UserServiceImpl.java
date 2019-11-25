@@ -10,11 +10,12 @@ import serivce.face.UserService;
 public class UserServiceImpl implements UserService {
 
 	UserDao userDao = new UserDaoImpl();
+	
+	// 유저객체
+	User user = new User();
 
 	@Override
 	public User getLoginParam(HttpServletRequest req) {
-		// 유저객체
-		User user = new User();
 
 		// 파마리터
 		String param = null;
@@ -35,7 +36,6 @@ public class UserServiceImpl implements UserService {
 
 		int cnt = 0;
 		cnt = userDao.selectCntUserByUserid(user);
-		System.out.println(cnt);
 
 		if (cnt == 1) {
 			return true;
@@ -43,6 +43,33 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 
+	}
+
+	@Override
+	public User getJoinParam(HttpServletRequest req) {
+		
+		
+		String param = null;
+		
+		// email
+		param = req.getParameter("email");
+		user.setEmail(param);
+		
+		// pw
+		param = req.getParameter("pw");
+		user.setPw(param);
+		
+		// name
+		param = req.getParameter("name");
+		user.setName(param);
+		
+		return user; // user로 반환(email, pw, name)
+	}
+
+	@Override
+	public void join(User user) {
+		userDao.insert(user);
+		
 	}
 
 }

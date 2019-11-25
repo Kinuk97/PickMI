@@ -20,6 +20,11 @@ public class UserDaoImpl implements UserDao {
 
 		conn = DBConn.getConnection();
 
+		if (user.getEmail() == null || user.getPw() == null) {
+			return -1;
+
+		}
+
 		int cnt = -1;
 
 		String sql = "";
@@ -35,7 +40,7 @@ public class UserDaoImpl implements UserDao {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				cnt = rs.getInt(1);
+				cnt = rs.getInt("count(*)");
 			}
 
 		} catch (SQLException e) {
@@ -52,8 +57,38 @@ public class UserDaoImpl implements UserDao {
 				e.printStackTrace();
 			}
 		}
-
+		System.out.println("login 확인 : " + cnt);
 		return cnt;
+	}
+
+	@Override
+	public void insert(User user) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "INSERT INTO user_table(userno, email, pw, name)";
+		sql += " VALUES(userno_seq.nextval, ?, ?, ?)";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getPw());
+			ps.setString(3, user.getName());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }
