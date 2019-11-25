@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package serivce.face;
 
 import java.util.List;
