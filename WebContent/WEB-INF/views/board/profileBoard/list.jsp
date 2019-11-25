@@ -6,7 +6,39 @@
 
 
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
-
+<script type="text/javascript">
+$(document).ready(function() {
+	var curPage = 1;
+	
+	$(window).scroll(function() {
+	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	    	curPage += 1;
+	    	$.ajax({
+				type : "post",
+				url : "/profileBoard/list",
+				data : { "curPage" : curPage },
+				dataType : "json",
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						
+						var caption = $("<div class='caption'></div>");
+						
+						caption.append($("<p></p>").html($("<a></a>").text(data[i].prof_no)));
+						caption.append($("<div class='text-right'></div>").text("작성일 : " + data[i].prof_time));
+						
+						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
+						
+						$("#board").append(board);
+					}					
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+	    }
+	});
+});
+</script>
 <div class="text-center">
 <h1>나를 소개해보세요!😉</h1>
 </div>
