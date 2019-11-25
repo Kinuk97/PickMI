@@ -7,15 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Pick MI (Mate&Idea)</title>
+<title>Pick MI (Mate&amp;Idea)</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 부트스트랩 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -35,6 +33,8 @@
 	min-height: 600px;
 	background-color: #f3f3f3;
 	clear: both;
+	padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .container {
@@ -79,7 +79,6 @@ button, input, optgroup, select, textarea {
 <body>
 
 <div id="header">
-</div>
 <!-- 		<div class="col-md-3"> -->
 <!-- 			<img id="logo" alt="logo" src="/resources/black.png"> -->
 <!-- 		</div> -->
@@ -106,31 +105,31 @@ button, input, optgroup, select, textarea {
 <!-- 			</div> -->
 <!-- 		</div> -->
 
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="/main"><img id="logo" alt="logo"
-						src="/resources/pickmiBlack.jpg"></a>
-				</div>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/main"><img id="logo" alt="logo"
+					src="/resources/pickmiBlack.jpg"></a>
+			</div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav center" >
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav center" >
 <!-- 					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-						<li><a href="#">프로필 게시판</a></li>
-						<li><a href="#">프로젝트 게시판</a></li>
-						<li><a href="#">완성된 프로젝트 게시판</a></li>
-						<li><a href="#">자유게시판</a></li>
-						
-						<!-- dropdown드롭다운 -->	
+					<li><a href="#">프로필 게시판</a></li>
+					<li><a href="#">프로젝트 게시판</a></li>
+					<li><a href="#">완성된 프로젝트 게시판</a></li>
+					<li><a href="#">자유게시판</a></li>
+					
+					<!-- dropdown드롭다운 -->	
 <!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle" -->
 <!-- 						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
 <!-- 								<span class="caret"></span> -->
@@ -144,9 +143,9 @@ button, input, optgroup, select, textarea {
 <!-- 							<li class="divider"></li> -->
 <!-- 							<li><a href="#">One more separated link</a></li> -->
 <!-- 						</ul></li> -->
-					</ul>
-					
-						<!-- 검색 폼 -->
+				</ul>
+				
+					<!-- 검색 폼 -->
 <!-- 					<form class="navbar-form navbar-left" role="search"> -->
 <!-- 						<div class="form-group"> -->
 <!-- 							<input type="text" class="form-control" placeholder="Search"> -->
@@ -155,21 +154,21 @@ button, input, optgroup, select, textarea {
 <!-- 					</form> -->
 
 
-					<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right">
 
-  						<li role="presentation"><a href="#">Alert <span class="badge">7</span></a></li>
-  						<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
-						<li>
-						<c:choose>
-							<c:when test="${not login }">
-								<li><a href="/login">로그인</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
-							</c:otherwise>
-						</c:choose>
-						</li>
-						
+ 						<li role="presentation"><a href="#">Alert <span class="badge">7</span></a></li>
+ 						<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+					<li>
+					<c:choose>
+						<c:when test="${not login }">
+							<li><a href="/login">로그인</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
+						</c:otherwise>
+					</c:choose>
+					</li>
+					
 <!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
 <!-- 							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
 <!-- 								<span class="caret"></span> -->
@@ -181,9 +180,10 @@ button, input, optgroup, select, textarea {
 <!-- 								<li class="divider"></li> -->
 <!-- 								<li><a href="#">Separated link</a></li> -->
 <!-- 							</ul></li> -->
-					</ul>
-				</div>
+				</ul>
 			</div>
-		</nav>
+		</div>
+	</nav>
+</div>
 
 	<div id="wrapper">
