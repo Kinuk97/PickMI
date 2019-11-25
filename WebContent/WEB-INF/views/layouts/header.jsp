@@ -119,17 +119,17 @@ button, input, optgroup, select, textarea {
 					src="/resources/pickmiBlack.jpg"></a>
 			</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav center" >
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav center" >
 <!-- 					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-					<li><a href="#">프로필 게시판</a></li>
-					<li><a href="#">프로젝트 게시판</a></li>
-					<li><a href="#">완성된 프로젝트 게시판</a></li>
-					<li><a href="#">자유게시판</a></li>
-					
-					<!-- dropdown드롭다운 -->	
+						<li><a href="/profileBoard/list">프로필 게시판</a></li>
+						<li><a href="/projectBoard/list">프로젝트 게시판</a></li>
+						<li><a href="/compBoard/list">완성된 프로젝트 게시판</a></li>
+						<li><a href="/freeBoard/list">자유게시판</a></li>
+
+						
+						<!-- dropdown드롭다운 -->	
 <!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle" -->
 <!-- 						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
 <!-- 								<span class="caret"></span> -->

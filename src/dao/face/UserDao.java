@@ -17,5 +17,14 @@ public interface UserDao {
 	 * @param user - 회원가입 정보
 	 */
 	void insert(User user);
+	
+	/**
+	 * 아이디 중복 체크
+	 * 
+	 * @param user - 아이디 정보
+	 * @return boolean - true(존재하는 아이디), false(존재하지 않는 아이디)
+	 * 
+	 */
+	int selectEmail(User user);
 
 }

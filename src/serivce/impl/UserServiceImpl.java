@@ -67,9 +67,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean emailCheck(User user) {
+		
+		int checkResult = 0;
+		checkResult = userDao.selectEmail(user);
+		
+		if(checkResult == 1) {
+			return true;
+		} else {
+			return false;			
+		}
+	}
+	
+	@Override
 	public void join(User user) {
 		userDao.insert(user);
 		
 	}
+
 
 }
