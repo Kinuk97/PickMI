@@ -3,8 +3,16 @@ package dao.face;
 import java.util.List;
 
 import dto.ProfileBoard;
+import util.Paging;
 
 public interface ProfileBoardDao {
+	
+	/**
+	 * 페이징을 이용한 게시글 조회
+	 * @return
+	 */
+	public List<ProfileBoard> selectAll(Paging paging);
+
 	
 //	public selectNameByUserno();
 	
