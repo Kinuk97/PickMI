@@ -53,7 +53,7 @@
 	        // 비밀번호 확인
 	        if($("#pwCheck").val() ==''){
 	            alert('비밀번호를 다시 한번 더 입력하세요');
-	            $("#inputPasswordCheck").focus();
+	            $("#pwCheck").focus();
 	            return false;
 	        }
 	        
@@ -73,6 +73,54 @@
 		// 가입취소
 		$('#join-cancel').click(function(){
 			$(location).attr("href", "/login");
+		});
+
+		// 중복체크
+		//(아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
+		var idck = 0;
+		$(function() {
+		    //idck 버튼을 클릭했을 때 
+		    $("#idck").click(function() {
+		        
+		        //userid 를 param.
+		        var userid =  $("#userid").val(); 
+		        
+		        $.ajax({
+		            async: true,
+		            type : 'POST',
+		            data : email,
+		            url : "/insert",
+		            dataType : "json",
+		            contentType: "application/json; charset=UTF-8",
+		            success : function(data) {
+		                if (data.emailCheck > 0) {
+		                    
+		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+		                    $("#email").addClass("has-error")
+		                    $("#email").removeClass("has-success")
+		                    $("#email").focus();
+		                    
+		                
+		                } else {
+		                    alert("사용가능한 아이디입니다.");
+		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
+		                    $("#email").addClass("has-success")
+		                    $("#email").removeClass("has-error")
+		                    $("#email").focus();
+		                    //아이디가 중복하지 않으면  idck = 1 
+		                    idck = 1;
+		                    
+		                }
+		            },
+		            error : function(error) {
+		                
+		                alert("error : " + error);
+		            }
+		        });
+		    });
+		});
+	});
 		});
 
 	});
@@ -96,6 +144,7 @@
 					<label for="email">이메일 주소</label> <input type="email"
 						class="form-control" id="email" name="email" placeholder="이메일 주소를 입력해주세요">
 					<br>
+					<button type="button"  id ="emailCheck" class="btn btn-success">중복 체크</button>
 					<button type="button" class="btn btn-success">이메일 인증</button>
 				</div>
 				<div class="form-group">

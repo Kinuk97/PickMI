@@ -32,9 +32,14 @@ public class InsertController extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		userService.join(user);
+		boolean checkResult = userService.emailCheck(user);
 		
-		resp.sendRedirect("/main");
+		if(checkResult == false) {
+			userService.join(user);
+			resp.sendRedirect("/main");
+		} else {
+			
+		}
 		
 	}
 	
