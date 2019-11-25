@@ -14,6 +14,15 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	
 	private ProfileBoardDao profileBoardDao = new ProfileBoardDaoImpl();
 	
+	
+	/**
+	 * 페이징을 이용한 전체 목록 조회
+	 */
+	@Override
+	public List<ProfileBoard> getBoardList(Paging paging) {
+		return profileBoardDao.selectAll(paging);
+	}
+	
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 		// 요청 파라미터 파싱하기
