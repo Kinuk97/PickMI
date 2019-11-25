@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pick ME</title>
+<title>Pick MI (Mate&Idea)</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -130,13 +130,11 @@
 				<i>or</i>
 			</div>
 			<p class="text-center">소셜계정 로그인</p>
-			<div class="text-center social-btn">
-				<a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;
-					Facebook</a> <a href="#" class="btn btn-info"><i
-					class="fa fa-twitter"></i>&nbsp; Twitter</a> <a href="#"
-					class="btn btn-danger"><i class="fa fa-google"></i>&nbsp;
-					Google</a>
-			</div>
+				<div class="text-center social-btn">
+					<a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a> 
+					<a href="#" class="btn btn-info"><i	class="fa fa-twitter"></i>&nbsp; Twitter</a> 
+					<a href="#"	class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
+				</div>
 		</form>
 		<p class="text-center text-muted small">
 			Don't have an account? <a href="/insert">Sign up here!</a>

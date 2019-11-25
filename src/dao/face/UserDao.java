@@ -3,7 +3,6 @@ package dao.face;
 import dto.User;
 
 public interface UserDao {
-	
 	/**
 	 * email와 pw가 일치하는 회원 수 조회
 	 * 

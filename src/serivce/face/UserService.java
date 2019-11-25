@@ -21,7 +21,6 @@ public interface UserService {
 	 * @return boolean - true & false로 로그인 인증
 	 */
 	boolean login(User user);
-	
 	/**
 	 * 회원가입에 필요한 파라미터 값 받기
 	 * 
@@ -36,5 +35,4 @@ public interface UserService {
 	 * @param user - 회원가입 정보
 	 */
 	void join(User user);
-
 }

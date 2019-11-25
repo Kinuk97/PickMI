@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -13,8 +14,8 @@
 <!-- 부트스트랩 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -57,6 +58,22 @@
 .navbar {
 	margin-top: 20px;
 }
+
+#logo {
+    height: 32px;
+}
+
+.jumbotron {
+    padding-left: 13%;
+    padding-right: 13%;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 10px;
+    font: inherit;
+    color: inherit;
+}
+
 </style>
 </head>
 <body>
@@ -99,62 +116,74 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><img id="logo" alt="logo"
-						src="/resources/black.png"></a>
+					<a class="navbar-brand" href="/main"><img id="logo" alt="logo"
+						src="/resources/pickmiBlack.jpg"></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-						<li><a href="#">Link</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-								<li class="divider"></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
+					<ul class="nav navbar-nav center" >
+<!-- 					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+						<li><a href="#">프로필 게시판</a></li>
+						<li><a href="#">프로젝트 게시판</a></li>
+						<li><a href="#">완성된 프로젝트 게시판</a></li>
+						<li><a href="#">자유게시판</a></li>
+						
+						<!-- dropdown드롭다운 -->	
+<!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle" -->
+<!-- 						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
+<!-- 								<span class="caret"></span> -->
+<!-- 						</a> -->
+<!-- 						<ul class="dropdown-menu" role="menu"> -->
+<!-- 							<li><a href="#">Action</a></li> -->
+<!-- 							<li><a href="#">Another action</a></li> -->
+<!-- 							<li><a href="#">Something else here</a></li> -->
+<!-- 							<li class="divider"></li> -->
+<!-- 							<li><a href="#">Separated link</a></li> -->
+<!-- 							<li class="divider"></li> -->
+<!-- 							<li><a href="#">One more separated link</a></li> -->
+<!-- 						</ul></li> -->
 					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
-				<ul class="nav navbar-nav navbar-right">
-					<c:choose>
-						<c:when test="${not login }">
-							<li><a href="/login">로그인</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
-						</c:otherwise>
-					</c:choose>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-							<span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
-						</ul></li>
-				</ul>
-			</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
+					
+						<!-- 검색 폼 -->
+<!-- 					<form class="navbar-form navbar-left" role="search"> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<input type="text" class="form-control" placeholder="Search"> -->
+<!-- 						</div> -->
+<!-- 						<button type="submit" class="btn btn-default">Submit</button> -->
+<!-- 					</form> -->
 
+
+					<ul class="nav navbar-nav navbar-right">
+
+  						<li role="presentation"><a href="#">Alert <span class="badge">7</span></a></li>
+  						<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+						<li>
+						<c:choose>
+							<c:when test="${not login }">
+								<li><a href="/login">로그인</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/mypage">로그인됐음/마이페이지(추후 아이콘으로)</a></li>
+							</c:otherwise>
+						</c:choose>
+						</li>
+						
+<!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
+<!-- 							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
+<!-- 								<span class="caret"></span> -->
+<!-- 						</a> -->
+<!-- 							<ul class="dropdown-menu" role="menu"> -->
+<!-- 								<li><a href="#">Action</a></li> -->
+<!-- 								<li><a href="#">Another action</a></li> -->
+<!-- 								<li><a href="#">Something else here</a></li> -->
+<!-- 								<li class="divider"></li> -->
+<!-- 								<li><a href="#">Separated link</a></li> -->
+<!-- 							</ul></li> -->
+					</ul>
+				</div>
+			</div>
+		</nav>
 
 	<div id="wrapper">
