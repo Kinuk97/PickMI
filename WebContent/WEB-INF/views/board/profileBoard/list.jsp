@@ -1,47 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-<h1>hello , it's profile board list here!😁</h1>
+<jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
+
+<div class="text-center">
+<h1>나를 소개해보세요!😉</h1>
+</div>
 <hr>
-<table class="table table-hover table-striped">
-<tr class="success">
-	<th>게시판 번호</th>
-	<th>작성자 이름</th>
-	<th>관심 분야</th>
-	<th>지역</th>
-	<th>직무</th>
-	<th>경력</th>
-	<th>상태</th>
-	<th>좋아요</th>
-	<th>작성시간</th>
-</tr>
+<div class="text-right">
+<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
+</div>
+<br>
 <c:forEach items="${ list }" var="pro">
-<tr>
-	<td>${ pro.prof_no }</td>
-	<td>${ pro.userno }</td>
-	<td>${ pro.prof_interest }</td>
-	<td>${ pro.prof_loc }</td>
-	<td>${ pro.prof_job }</td>
-	<td>${ pro.prof_career }</td>
-	<td>${ pro.prof_state }</td>
-	<td>${ pro.prof_like }</td>
-	<td>${ pro.prof_time }</td>
-</tr>
+	<div class="col-sm-6 col-md-4 col-lg-3">
+		<div class="thumbnail">
+			<div class="caption">
+				<h4>${ pro.prof_no }</h4>
+				<h3>${ pro.userno }</h3>
+				<p>${ pro.prof_interest }</p>
+				<p>${ pro.prof_loc }</p>
+				<p>${ pro.prof_job }</p>
+				<p>${ pro.prof_state }</p>
+				<p>${ pro.prof_career }</p>
+				<p class="text-right">
+					<a href="#" class="btn btn-primary" role="button">${ pro.prof_like }❤찜하기</a> 
+<!-- 					<a href="#" class="btn btn-default" role="button">Button</a> -->
+				</p>
+				<p>${ pro.prof_time }에 작성</p>
+			</div>
+		</div>
+	</div>
 </c:forEach>
-</table>
+<div style="clear: both;"></div>
+
+	
 
 
 
-</body>
-</html>
+
+<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

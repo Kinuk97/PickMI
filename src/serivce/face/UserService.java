@@ -35,4 +35,6 @@ public interface UserService {
 	 * @param user - 회원가입 정보
 	 */
 	void join(User user);
+
+	boolean emailCheck(User user);
 }

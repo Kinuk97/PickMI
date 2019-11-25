@@ -19,6 +19,47 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	private ResultSet rs = null;
 	
 	/**
+	 * 총 게시글 수 조회
+	 */
+	@Override
+	public int selectCntAll() {
+	conn = DBConn.getConnection(); //db연결
+		
+
+	//수행할 sql 쿼리
+	String sql ="";
+		
+	sql += "SELECT ";
+	sql += " count(*)";
+	sql += " FROM board";
+	
+		
+	//결과 저장 리스트
+	int cnt = 0;
+	
+	try {
+		ps = conn.prepareStatement(sql); //쿼리 수행 객체 얻기
+		
+		rs = ps.executeQuery();
+		
+		while(rs.next() ) {
+			cnt = rs.getInt(1);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if(rs!=null)rs.close();
+			if(ps!=null)ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	return cnt;
+	}
+	
+	/**
 	 * 프로필게시판 모든 글 불러오기
 	 */
 	@Override
@@ -30,7 +71,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		String sql="";
 		sql += "SELECT";
 		sql += " prof_no, userno, prof_time,";
-		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career";
+		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
 		sql += " prof_content, prof_like FROM profile";
 		sql += " ORDER BY prof_no";
 		
@@ -68,7 +109,8 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			}
 		}
 		
+//		System.out.println("profile board dao impl : " + list);
 		return list;
-	}
+	} //selectProfileList() end
 
-}
+}// class end
