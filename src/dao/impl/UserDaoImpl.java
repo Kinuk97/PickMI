@@ -91,4 +91,31 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
+	@Override
+	public int selectEmail(User user) {
+		conn = DBConn.getConnection();
+		
+		int checkResult = -1;
+		
+		String sql = "";
+		sql += "SELECT count(*) FROM user_table";
+		sql += " WHERE email = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getEmail());
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				checkResult = rs.getInt("count(*)");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return checkResult;
+	}
+
 }
