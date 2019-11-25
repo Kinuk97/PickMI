@@ -68,7 +68,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			}
 		}
 		
-		System.out.println("profile board dao impl : " + list);
+//		System.out.println("profile board dao impl : " + list);
 		return list;
 	} //selectProfileList() end
 
