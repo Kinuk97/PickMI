@@ -108,7 +108,7 @@ public class UserDaoImpl implements UserDao {
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				checkResult = rs.getInt("count(*)");
+				checkResult = rs.getInt(1);
 			}
 			
 		} catch (SQLException e) {

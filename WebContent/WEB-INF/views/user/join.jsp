@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +17,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+	var check = false;
 	$(document).ready(function() {
 		// 가입버튼
 	    $('#join-submit').click(function(){
@@ -67,7 +67,15 @@
 	        if($("#agree").is(":checked") == false){
 	            alert('약관에 동의해주세요');
 	            return false;      
-	        }               
+	        }
+	        
+	        // 이메일 중복
+	        if(!check){
+	            alert('중복체크를 해주세요');
+	            $("#email").focus();
+	            return false;
+	        }
+	        
 	        
 	    });
 		
@@ -77,54 +85,34 @@
 		});
 
 		// 중복체크
-		//(아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
-		var idck = 0;
-		$(function() {
-		    //idck 버튼을 클릭했을 때 
-		    $("#idck").click(function() {
-		        
-		        //userid 를 param.
-		        var userid =  $("#userid").val(); 
-		        
-		        $.ajax({
-		            async: true,
-		            type : 'POST',
-		            data : email,
-		            url : "/insert",
-		            dataType : "json",
-		            contentType: "application/json; charset=UTF-8",
-		            success : function(data) {
-		                if (data.emailCheck > 0) {
-		                    
-		                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#email").addClass("has-error")
-		                    $("#email").removeClass("has-success")
-		                    $("#email").focus();
-		                    
-		                
-		                } else {
-		                    alert("사용가능한 아이디입니다.");
-		                    //아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-		                    $("#email").addClass("has-success")
-		                    $("#email").removeClass("has-error")
-		                    $("#email").focus();
-		                    //아이디가 중복하지 않으면  idck = 1 
-		                    idck = 1;
-		                    
-		                }
-		            },
-		            error : function(error) {
-		                
-		                alert("error : " + error);
-		            }
-		        });
-		    });
-		});
-	});
-		});
+   		 $('#emailCheck').click(function(){
+        	$.ajax({
+	    	 	type:"POST",
+	     		url:"/emailCheck",
+	     		data:{
+	            "email":$('#email').val()
+	     		},
+	    		 success:function(data){
+	            if(data==false){
+	            	check = true;
+	               if($('#email').val()!=''){ 
+	               	alert("사용가능한 아이디입니다.");
+	               	
+	               }
+	           	}else{
+	            	check = false;
+	               if($('#email').val()!=''){
+	                  alert("중복된 아이디입니다.");
+	                  $('#email').focus();	
+	               }
+	            }
+	         }
+	    });
+     }); // 중복체크 끝
 
+		
 	});
+
 </script>
 
 </head>
@@ -145,6 +133,7 @@
 					<label for="email">이메일 주소</label> <input type="email"
 						class="form-control" id="email" name="email" placeholder="이메일 주소를 입력해주세요">
 					<br>
+
 					<button type="button"  id ="emailCheck" class="btn btn-success">중복 체크</button>
 					<button type="button" class="btn btn-success">이메일 인증</button>
 				</div>

@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/project/board/list")
+@WebServlet("/projectBoard/list")
 public class ProjectBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/board/projectBoardList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board/projectBoard/list.jsp").forward(req, resp);
 	}
 }
