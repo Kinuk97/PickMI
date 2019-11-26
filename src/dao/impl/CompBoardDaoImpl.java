@@ -253,5 +253,35 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 	}
 
+	@Override
+	public void countViews(CompBoard compBoard) {
+		
+		conn = DBConn.getConnection();
+		
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "UPDATE compBoard SET comp_view = comp_view+1 ";
+		sql += "WHERE comp_no = ? ";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, compBoard.getComp_no());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 }

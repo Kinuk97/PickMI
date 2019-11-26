@@ -127,7 +127,8 @@ select {
 <div id="board">
 	<c:forEach items="${compList }" var="compList">
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="thumbnail">
+				<div class="thumbnail" onclick="location.href='/compBoard/view?comp_no=${compList.comp_no }'" 
+					 id="compboardlist" style="cursor:pointer; hover: #ccc;">
 					<div class="caption caption-comp">
 	<%-- 					<input type="checkbox" name="checkRow" id="checkRow" value="${compList.comp_no }"> --%>
 						<h4>${compList.comp_no}. ${compList.comp_title }</h4>

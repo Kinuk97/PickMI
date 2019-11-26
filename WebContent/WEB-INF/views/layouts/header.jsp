@@ -94,6 +94,10 @@ button, input, optgroup, select, textarea {
 	width: 80%;
 }
 
+#compboardlist:hover {
+	background: #ccc;
+}
+
 </style>
 </head>
 <body>

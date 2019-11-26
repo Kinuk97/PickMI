@@ -32,7 +32,18 @@ public interface CompBoardDao {
 	 */
 	public List<CompBoard> compList(Paging paging);
 	
-	
+	/**
+	 * 게시글 작성
+	 * 
+	 * @param compBoard
+	 */
 	public void insert(CompBoard compBoard);
+	
+	/**
+	 * 각 게시글의 조회수
+	 * 
+	 * @param compBoard
+	 */
+	public void countViews(CompBoard compBoard);
 
 }
