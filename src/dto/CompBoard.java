@@ -10,7 +10,6 @@ public class CompBoard {
 	private int userno;
 	private String comp_title;
 	private String comp_name;
-	private Date comp_time;
 	private String comp_content;
 	private int comp_member;
 	private Date comp_date;
@@ -18,13 +17,12 @@ public class CompBoard {
 	private int comp_reply;
 	private int comp_like;
 	
-	
 	@Override
 	public String toString() {
 		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", fileno=" + fileno + ", userno="
-				+ userno + ", comp_title=" + comp_title + ", comp_name=" + comp_name + ", comp_time=" + comp_time
-				+ ", comp_content=" + comp_content + ", comp_member=" + comp_member + ", comp_date=" + comp_date
-				+ ", comp_view=" + comp_view + ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + "]";
+				+ userno + ", comp_title=" + comp_title + ", comp_name=" + comp_name + ", comp_content=" + comp_content
+				+ ", comp_member=" + comp_member + ", comp_date=" + comp_date + ", comp_view=" + comp_view
+				+ ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + "]";
 	}
 
 
@@ -85,16 +83,6 @@ public class CompBoard {
 
 	public void setComp_name(String comp_name) {
 		this.comp_name = comp_name;
-	}
-
-
-	public Date getComp_time() {
-		return comp_time;
-	}
-
-
-	public void setComp_time(Date comp_time) {
-		this.comp_time = comp_time;
 	}
 
 

@@ -4,11 +4,29 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import dto.FreeBoard;
 import dto.ProfileBoard;
 import util.Paging;
 
 public interface ProfileBoardService {
+	/**
+	 * 게시글 작성하기
+	 * @param req
+	 */
+	public void write(HttpServletRequest req);
+	
+	/**
+	 * 게시글 상세정보 불러오기
+	 * @param profile
+	 * @return
+	 */
+	public ProfileBoard view(ProfileBoard profile);
+	
+	/**
+	 * 요청 파라미터 파싱
+	 * @param req - 요청 정보 객체
+	 * @return Board - 요청정보에 포함된 전달 파라미터
+	 */
+	public ProfileBoard getProfileno(HttpServletRequest req);
 	
 	/**
 	 * 페이징을 이용한 전체 목록 가져오기

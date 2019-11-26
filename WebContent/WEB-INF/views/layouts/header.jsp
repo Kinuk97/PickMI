@@ -18,9 +18,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+
 #header {
 	text-align: center;
-	/* 	background-color: #a2e2ff; */
 }
 
 #footer {
@@ -36,10 +36,6 @@
 	clear: both;
 	padding-top: 10px;
     padding-bottom: 10px;
-}
-
-.container {
-	
 }
 
 .jumbotron {
@@ -74,15 +70,28 @@ button, input, optgroup, select, textarea {
 
 .carousel-caption {
     position: absolute;
-/*     right: 15%; */
     bottom: 20px;
-/*     left: 15%; */
     z-index: 10;
-/*     padding-top: 10px; */
-/*     padding-bottom: 20px; */
     color: #000;
     text-align: center;
-/*     text-shadow: 0 1px 2px rgba(0,0,0,.6); */
+}
+
+/* 각 게시판 리스트 높이 */
+.caption-profile {
+	height: 320px;
+}
+.caption-project {
+	height: 350px;
+}
+.caption-comp {
+	height: 200px;
+}
+.caption-free {
+	height: 180px;
+}
+
+.list-container {
+	width: 80%;
 }
 
 </style>
@@ -90,32 +99,6 @@ button, input, optgroup, select, textarea {
 <body>
 
 <div id="header">
-<!-- 		<div class="col-md-3"> -->
-<!-- 			<img id="logo" alt="logo" src="/resources/black.png"> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-6"> -->
-<!-- 			<span>프로필</span> -->
-<!-- 			<span>프로젝트</span> -->
-<!-- 			<span>자유게시판</span> -->
-<!-- 			<span>완성된 프로젝트</span> -->
-<!-- 		</div> -->
-<!-- 		<div class="col-md-3"> -->
-			<!-- Single button -->
-<!-- 			<div class="btn-group"> -->
-<!-- 				<button type="button" class="btn btn-default dropdown-toggle" -->
-<!-- 					data-toggle="dropdown" aria-expanded="false"> -->
-<!-- 					Action <span class="caret"></span> -->
-<!-- 				</button> -->
-<!-- 				<ul class="dropdown-menu" role="menu"> -->
-<!-- 					<li><a href="#">Action</a></li> -->
-<!-- 					<li><a href="#">Another action</a></li> -->
-<!-- 					<li><a href="#">Something else here</a></li> -->
-<!-- 					<li class="divider"></li> -->
-<!-- 					<li><a href="#">Separated link</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -138,23 +121,7 @@ button, input, optgroup, select, textarea {
 						<li><a href="/projectBoard/list">프로젝트 게시판</a></li>
 						<li><a href="/compBoard/list">완성된 프로젝트 게시판</a></li>
 						<li><a href="/freeboard/list">자유게시판</a></li>
-
-						
-						<!-- dropdown드롭다운 -->	
-<!-- 					<li class="dropdown"><a href="#" class="dropdown-toggle" -->
-<!-- 						data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
-<!-- 								<span class="caret"></span> -->
-<!-- 						</a> -->
-<!-- 						<ul class="dropdown-menu" role="menu"> -->
-<!-- 							<li><a href="#">Action</a></li> -->
-<!-- 							<li><a href="#">Another action</a></li> -->
-<!-- 							<li><a href="#">Something else here</a></li> -->
-<!-- 							<li class="divider"></li> -->
-<!-- 							<li><a href="#">Separated link</a></li> -->
-<!-- 							<li class="divider"></li> -->
-<!-- 							<li><a href="#">One more separated link</a></li> -->
-<!-- 						</ul></li> -->
-				</ul>
+					</ul>
 				
 					<!-- 검색 폼 -->
 <!-- 					<form class="navbar-form navbar-left" role="search"> -->
@@ -167,8 +134,58 @@ button, input, optgroup, select, textarea {
 
 				<ul class="nav navbar-nav navbar-right">
 
- 						<li role="presentation"><a href="#">Alert <span class="badge">7</span></a></li>
- 						<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+ 						<li role="presentation"> 					
+ 							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button"
+									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+									Alert <span class="badge">7</span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Another action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Something else here</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Separated link</a></li>
+								</ul>
+							</div>
+						</li>
+						
+						<li role="presentation"> 					
+ 							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle" type="button"
+									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+									Message <span class="badge">5</span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Another action</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Something else here</a></li>
+									<li role="presentation"><a role="menuitem" tabindex="-1"
+										href="#">Separated link</a></li>
+								</ul>
+							</div>
+						</li>
+						
 					<li>
 					<c:choose>
 						<c:when test="${not login }">
@@ -189,18 +206,6 @@ button, input, optgroup, select, textarea {
 						</c:otherwise>
 				</c:choose>
 					</li>
-					
-<!-- 						<li class="dropdown"><a href="#" class="dropdown-toggle" -->
-<!-- 							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown -->
-<!-- 								<span class="caret"></span> -->
-<!-- 						</a> -->
-<!-- 							<ul class="dropdown-menu" role="menu"> -->
-<!-- 								<li><a href="#">Action</a></li> -->
-<!-- 								<li><a href="#">Another action</a></li> -->
-<!-- 								<li><a href="#">Something else here</a></li> -->
-<!-- 								<li class="divider"></li> -->
-<!-- 								<li><a href="#">Separated link</a></li> -->
-<!-- 							</ul></li> -->
 				</ul>
 			</div>
 		</div>

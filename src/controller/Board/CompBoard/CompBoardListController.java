@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dto.CompBoard;
 import serivce.face.CompBoardService;
 import serivce.impl.CompBoardServiceImpl;
@@ -33,11 +35,27 @@ public class CompBoardListController extends HttpServlet {
 		
 		req.setAttribute("compList", List);
 		
-		System.out.println(List);
+//		System.out.println(List);
 		
 		//VIEW지정
 		req.getRequestDispatcher("/WEB-INF/views/board/compBoard/list.jsp").forward(req, resp);
 		
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setCharacterEncoding("UTF-8");
+		
+		Paging paging = compBoardService.getPaging(req);
+		
+		Gson gson = new Gson();
+		
+		resp.getWriter().println(gson.toJson(compBoardService.getBoardList(paging)));
+		
+		
+	}
+	
+	
 	
 }
