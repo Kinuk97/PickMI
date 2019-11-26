@@ -26,7 +26,8 @@
 #footer {
 	text-align: center;
 	height: 50px;
-	/*  	background: #a2e2ff; */
+	margin-top: 35px;
+	margin-bottom: 20px;
 }
 
 #wrapper {
@@ -39,10 +40,6 @@
 
 .container {
 	
-}
-
-#logo {
-	height: 100px;
 }
 
 .jumbotron {
@@ -60,7 +57,8 @@
 }
 
 #logo {
-    height: 32px;
+    height: 100px;
+    margin-top: -38px;
 }
 
 .jumbotron {
@@ -72,6 +70,19 @@ button, input, optgroup, select, textarea {
     margin: 10px;
     font: inherit;
     color: inherit;
+}
+
+.carousel-caption {
+    position: absolute;
+/*     right: 15%; */
+    bottom: 20px;
+/*     left: 15%; */
+    z-index: 10;
+/*     padding-top: 10px; */
+/*     padding-bottom: 20px; */
+    color: #000;
+    text-align: center;
+/*     text-shadow: 0 1px 2px rgba(0,0,0,.6); */
 }
 
 </style>
@@ -116,7 +127,7 @@ button, input, optgroup, select, textarea {
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/main"><img id="logo" alt="logo"
-					src="/resources/pickmiBlack.jpg"></a>
+					src="/resources/logo2.png"></a>
 			</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->

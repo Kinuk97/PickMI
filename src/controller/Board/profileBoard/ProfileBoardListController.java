@@ -31,12 +31,10 @@ public class ProfileBoardListController extends HttpServlet {
 		//Paging 객체를 model값으로 지정
 		req.setAttribute("paging", paging);
 		
-		req.setAttribute("boardList", profileBoardService.getBoardList(paging));
-
 		
 		
 		//게시글 목록 조회
-		List<ProfileBoard> list = profileBoardService.getProfileList();
+		List<ProfileBoard> list = profileBoardService.getBoardList(paging);
 		
 		req.setAttribute("list", list);
 		
