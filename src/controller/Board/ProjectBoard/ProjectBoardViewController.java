@@ -22,9 +22,11 @@ public class ProjectBoardViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		ProjectBoard viewBoard = projectBoardService.getProjectBoardno(req);
+		ProjectBoard projectBoard = projectBoardService.getProjectBoardno(req);
 		
-		viewBoard = projectBoardService.view(viewBoard);
+		projectBoard = projectBoardService.view(projectBoard);
+		
+		req.setAttribute("projectBoard", projectBoard);
 		
 		req.getRequestDispatcher("/WEB-INF/views/board/projectBoard/view.jsp").forward(req, resp);
 	}

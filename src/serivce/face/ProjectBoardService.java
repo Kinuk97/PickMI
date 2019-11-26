@@ -15,6 +15,6 @@ public interface ProjectBoardService {
 
 	public ProjectBoard getProjectBoardno(HttpServletRequest req);
 
-	public ProjectBoard view(ProjectBoard viewBoard);
+	public ProjectBoard view(ProjectBoard projectBoard);
 
 }

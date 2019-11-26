@@ -66,9 +66,9 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 	}
 
 	@Override
-	public ProjectBoard view(ProjectBoard viewBoard) {
+	public ProjectBoard view(ProjectBoard projectBoard) {
 		
-		return null;
+		return projectBoardDao.selectBoardByProjectno(projectBoard);
 	}
 
 }

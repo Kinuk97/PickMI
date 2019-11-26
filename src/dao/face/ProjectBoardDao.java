@@ -10,4 +10,6 @@ public interface ProjectBoardDao {
 	public int selectCntAll();
 
 	public List<ProjectBoard> selectAll(Paging paging);
+
+	public ProjectBoard selectBoardByProjectno(ProjectBoard projectBoard);
 }
