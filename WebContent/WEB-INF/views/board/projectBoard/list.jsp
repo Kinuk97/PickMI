@@ -80,7 +80,7 @@ select {
 				<div class="caption">
 
 					<h2>
-						<a>${board.proj_title }</a>
+						<a href="/projectBoard/view?proj_no=${board.proj_no }">${board.proj_title }</a>
 					</h2>
 
 					<p>프로젝트 이름 : ${board.proj_name }</p>
