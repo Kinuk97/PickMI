@@ -1,10 +1,13 @@
 package serivce.impl;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import dao.face.ManagerDao;
 import dao.impl.ManagerDaoImpl;
 import dto.Manager;
+import dto.ProfileBoard;
 import serivce.face.MgrService;
 
 public class MgrServiceImpl implements MgrService{
@@ -29,7 +32,7 @@ public class MgrServiceImpl implements MgrService{
 		int cnt=0;
 		cnt = managerDao.selectCntMemberByMgridAndMgrpw(mgr);
 		
-		System.out.println("cnt: " + cnt);
+//		System.out.println("로그인 정보 존재여부: " + cnt);
 		
 		// 존재하면 true 반환
 		//	아니면 false 반환
@@ -45,6 +48,11 @@ public class MgrServiceImpl implements MgrService{
 	public Manager getMgrByMgrid(Manager mgr) {
 			
 		return managerDao.selectMgrByMgr(mgr);
+	}
+
+	@Override
+	public List<ProfileBoard> getpbList() {
+		return managerDao.pbselectAll();
 	}
 	
 	

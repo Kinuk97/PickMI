@@ -1,6 +1,9 @@
 package dao.face;
 
+import java.util.List;
+
 import dto.Manager;
+import dto.ProfileBoard;
 
 public interface ManagerDao {
 	
@@ -18,6 +21,12 @@ public interface ManagerDao {
 	 * @return Manager 조회된 결과
 	 */
 	public Manager selectMgrByMgr(Manager mgr);
+
+	/**
+	 * 게시글 전체 목록 조회
+	 * @return List<ProfileBoard> - 조회된 게시글 목록
+	 */
+	public List<ProfileBoard> pbselectAll();
 	
 	
 	
