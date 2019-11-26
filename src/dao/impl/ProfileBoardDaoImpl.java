@@ -19,59 +19,102 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 	
-	
-@Override
-public List<ProfileBoard> selectAll(Paging paging) {
-//	System.out.println("test");
-	String sql = "";
-	sql += "select * from (";
-	sql += "  select rownum rnum, B.* FROM(";
-	sql += "   select * from profile";
-	
-	sql += "   order by prof_no desc";
-	sql += "  ) B";
-	sql += "  ORDER BY rnum";
-	sql += " ) BOARD";
-	sql += " WHERE rnum BETWEEN ? AND ?";
-	
-	List<ProfileBoard> list = new ArrayList<ProfileBoard>();
-	
-	try {
-		ps = conn.prepareStatement(sql);
+	@Override
+	public ProfileBoard selectProfileByProfileno(ProfileBoard profile) {
+		conn = DBConn.getConnection(); //db연결
 		
-		ps.setInt(1, paging.getStartNo());
-		ps.setInt(2, paging.getEndNo());
+		String sql="";
+		sql += "SELECT * FROM profile";
+		sql += " WHERE prof_no = ?";
 		
-		rs = ps.executeQuery();
-		
-		while (rs.next()) {
-			ProfileBoard profileBoard = new ProfileBoard();
+		try {
+			ps = conn.prepareStatement(sql); //쿼리 수행 객체
 			
-			profileBoard.setProf_no(rs.getInt("prof_no"));
-			profileBoard.setUserno(rs.getInt("userno"));
-			profileBoard.setProf_interest(rs.getString("prof_interest"));
-			profileBoard.setProf_loc(rs.getString("prof_loc"));
-			profileBoard.setProf_job(rs.getString("prof_job"));
-			profileBoard.setProf_state(rs.getString("prof_state"));
-			profileBoard.setProf_career(rs.getString("prof_career"));
-			profileBoard.setProf_time(rs.getDate("prof_time"));
-			profileBoard.setProf_like(rs.getInt("prof_like"));
+			ps.setInt(1, profile.getProf_no()); //? 채우기
 			
-			list.add(profileBoard);
+			rs = ps.executeQuery(); //sql 쿼리 수행 및 resultset 반환
+			
+			//sql 수행결과 처리
+			while (rs.next()) {
+				profile.setProf_no(rs.getInt("prof_no"));
+				profile.setUserno(rs.getInt("userno"));
+				profile.setProf_interest(rs.getString("prof_interest"));
+				profile.setProf_loc(rs.getString("prof_loc"));
+				profile.setProf_job(rs.getString("prof_job"));
+				profile.setProf_state(rs.getString("prof_state"));
+				profile.setProf_career(rs.getString("prof_career"));
+				profile.setProf_content(rs.getString("prof_content"));
+				profile.setProf_like(rs.getInt("prof_like"));
+				profile.setProf_time(rs.getDate("prof_time"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}try {
-		if (rs != null)
-			rs.close();
-		if (ps != null)
-			ps.close();
-	} catch (SQLException e) {
-		e.printStackTrace();
+		
+		System.out.println("profileBoardDaoImpl : " + profile);
+		return profile;
 	}
 	
-	return list;
-}
+	
+	@Override
+	public List<ProfileBoard> selectAll(Paging paging) {
+	//	System.out.println("test");
+		String sql = "";
+		sql += "select * from (";
+		sql += "  select rownum rnum, B.* FROM(";
+		sql += "   select * from profile";
+		
+		sql += "   order by prof_no desc";
+		sql += "  ) B";
+		sql += "  ORDER BY rnum";
+		sql += " ) BOARD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		List<ProfileBoard> list = new ArrayList<ProfileBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, paging.getStartNo());
+			ps.setInt(2, paging.getEndNo());
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				ProfileBoard profileBoard = new ProfileBoard();
+				
+				profileBoard.setProf_no(rs.getInt("prof_no"));
+				profileBoard.setUserno(rs.getInt("userno"));
+				profileBoard.setProf_interest(rs.getString("prof_interest"));
+				profileBoard.setProf_loc(rs.getString("prof_loc"));
+				profileBoard.setProf_job(rs.getString("prof_job"));
+				profileBoard.setProf_state(rs.getString("prof_state"));
+				profileBoard.setProf_career(rs.getString("prof_career"));
+				profileBoard.setProf_time(rs.getDate("prof_time"));
+				profileBoard.setProf_like(rs.getInt("prof_like"));
+				
+				list.add(profileBoard);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}try {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	/**
 	 * 총 게시글 수 조회
 	 */
