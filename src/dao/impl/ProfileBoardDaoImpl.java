@@ -9,7 +9,6 @@ import java.util.List;
 
 import dao.face.ProfileBoardDao;
 import dbutil.DBConn;
-import dto.FreeBoard;
 import dto.ProfileBoard;
 import util.Paging;
 
@@ -23,7 +22,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	
 @Override
 public List<ProfileBoard> selectAll(Paging paging) {
-
+//	System.out.println("test");
 	String sql = "";
 	sql += "select * from (";
 	sql += "  select rownum rnum, B.* FROM(";

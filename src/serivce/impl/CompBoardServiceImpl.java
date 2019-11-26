@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import dao.face.CompBoardDao;
 import dao.impl.CompBoardDaoImpl;
 import dto.CompBoard;
+import dto.ProfileBoard;
 import serivce.face.CompBoardService;
 import util.Paging;
 
@@ -14,6 +15,7 @@ public class CompBoardServiceImpl implements CompBoardService {
 	
 	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 	
+
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 
