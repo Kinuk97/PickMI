@@ -26,7 +26,8 @@
 #footer {
 	text-align: center;
 	height: 50px;
-	/*  	background: #a2e2ff; */
+	margin-top: 35px;
+	margin-bottom: 20px;
 }
 
 #wrapper {
@@ -72,6 +73,19 @@ button, input, optgroup, select, textarea {
     margin: 10px;
     font: inherit;
     color: inherit;
+}
+
+.carousel-caption {
+    position: absolute;
+/*     right: 15%; */
+    bottom: 20px;
+/*     left: 15%; */
+    z-index: 10;
+/*     padding-top: 10px; */
+/*     padding-bottom: 20px; */
+    color: #000;
+    text-align: center;
+/*     text-shadow: 0 1px 2px rgba(0,0,0,.6); */
 }
 
 </style>
