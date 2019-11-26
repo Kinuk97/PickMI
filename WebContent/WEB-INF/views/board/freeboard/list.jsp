@@ -9,7 +9,13 @@ $(document).ready(function() {
 	var curPage = 1;
 	
 	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		let $window = $(this);
+        let scrollTop = $window.scrollTop();
+        let windowHeight = $window.height();
+        let documentHeight = $(document).height();
+        
+        // scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다.
+        if( scrollTop + windowHeight + 30 > documentHeight ) {
 	    	curPage += 1;
 	    	$.ajax({
 				type : "post",
@@ -42,7 +48,7 @@ $(document).ready(function() {
 					console.log(e);
 				}
 			});
-	    }
+        }
 	});
 });
 </script>
