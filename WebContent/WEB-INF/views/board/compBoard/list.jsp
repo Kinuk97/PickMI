@@ -34,7 +34,7 @@ $(document).ready(function() {
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
 						
-						var caption = $("<div class='caption'></div>");
+						var caption = $("<div class='caption caption-comp'></div>");
 						
 						if (data[i].categoryno == 1) {
 							caption.append($("<h2></h2>").html($("<a></a>").text("[작성자] " + data[i].comp_title)));
@@ -73,7 +73,7 @@ select {
 }
 </style>
 
-<div class="container" style="width: 80%;">
+<div class="container list-container">
 	<h1 class="text-center">완성된 프로젝트 게시판</h1>
 	
 	<br><br>
@@ -133,9 +133,9 @@ select {
 						<h4>${compList.comp_no}. ${compList.comp_title }</h4>
 						<p>팀 이름 : ${compList.comp_name }</p>
 						<br><br>
-						<p class="text-right">작성자 : ${compList.userno }</p>
-						<p class="text-right">조회수 : ${compList.comp_view }</p>
-						<p class="text-right">작성날짜 : ${compList.comp_date }</p>
+						<p class="text-right" style="margin: 0 0 0px;">작성자 : ${compList.userno }</p>
+						<p class="text-right" style="margin: 0 0 0px;">조회수 : ${compList.comp_view }</p>
+						<p class="text-right" style="margin: 0 0 0px;">작성날짜 : ${compList.comp_date }</p>
 					</div>
 				</div>
 			</div>

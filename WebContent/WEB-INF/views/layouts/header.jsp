@@ -90,7 +90,7 @@ button, input, optgroup, select, textarea {
 	height: 180px;
 }
 
-.container {
+.list-container {
 	width: 80%;
 }
 
@@ -140,8 +140,7 @@ button, input, optgroup, select, textarea {
 									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 									Alert <span class="badge">7</span>
 								</button>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="dropdownMenu1">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#">Action</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -166,8 +165,7 @@ button, input, optgroup, select, textarea {
 									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 									Message <span class="badge">5</span>
 								</button>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="dropdownMenu1">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#">Action</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"

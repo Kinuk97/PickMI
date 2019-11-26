@@ -27,7 +27,7 @@ $(document).ready(function() {
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
 						
-						var caption = $("<div class='caption'></div>");
+						var caption = $("<div class='caption caption-profile'></div>");
 						
 						caption.append($("<h4></h4>").text(data[i].prof_no));
 						caption.append($("<h3></h3>").text(data[i].userno));
@@ -39,7 +39,7 @@ $(document).ready(function() {
 						caption.append($("<p class='text-right'></p>").html($("<a href='#' class='btn btn-primary' role='button'></a>").text(data[i].prof_like +"❤찜하기")));
 						caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
 					
-						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
+						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append($("<a href='/profile/view?profileno='"+data[i].prof_no+"'></a>")).append(caption));
 						
 						$("#board").append(board);
 					}	

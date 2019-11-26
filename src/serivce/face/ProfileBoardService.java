@@ -5,10 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.ProfileBoard;
-import sun.java2d.cmm.Profile;
 import util.Paging;
 
 public interface ProfileBoardService {
+	/**
+	 * 게시글 작성하기
+	 * @param req
+	 */
+	public void write(HttpServletRequest req);
 	
 	/**
 	 * 게시글 상세정보 불러오기
