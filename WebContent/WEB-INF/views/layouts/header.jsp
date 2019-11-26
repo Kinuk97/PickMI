@@ -42,10 +42,6 @@
 	
 }
 
-#logo {
-	height: 100px;
-}
-
 .jumbotron {
 	padding-left: 5%;
 	padding-right: 5%;
@@ -61,7 +57,8 @@
 }
 
 #logo {
-    height: 32px;
+    height: 100px;
+    margin-top: -38px;
 }
 
 .jumbotron {
@@ -130,7 +127,7 @@ button, input, optgroup, select, textarea {
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/main"><img id="logo" alt="logo"
-					src="/resources/pickmiBlack.jpg"></a>
+					src="/resources/logo2.png"></a>
 			</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
