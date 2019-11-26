@@ -90,7 +90,7 @@ button, input, optgroup, select, textarea {
 	height: 180px;
 }
 
-.container {
+.list-container {
 	width: 80%;
 }
 
