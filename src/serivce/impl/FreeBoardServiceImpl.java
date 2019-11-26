@@ -26,8 +26,54 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public FreeBoard getParam(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		FreeBoard freeBoard = new FreeBoard();
+		
+		String param = req.getParameter("free_no");
+		if (param != null && !"".equals(param)) {
+			try {
+				freeBoard.setFree_no(Integer.parseInt(param));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		param = req.getParameter("userno");
+		if (param != null && !"".equals(param)) {
+			try {
+				freeBoard.setUserno(Integer.parseInt(param));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		param = req.getParameter("categoryno");
+		if (param != null && !"".equals(param)) {
+			try {
+				freeBoard.setCategoryno(Integer.parseInt(param));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		param = req.getParameter("free_title");
+		if (param != null && !"".equals(param)) {
+			try {
+				freeBoard.setFree_title(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		param = req.getParameter("free_content");
+		if (param != null && !"".equals(param)) {
+			try {
+				freeBoard.setFree_content(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return freeBoard;
 	}
 	
 	@Override
@@ -35,7 +81,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		String param = req.getParameter("curPage");
 		int curPage = 0;
 		if (param != null && !"".equals(param)) {
-			curPage = Integer.parseInt(param);
+			try {
+				curPage = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		param = req.getParameter("search");
@@ -91,8 +141,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public FreeBoard FreeBoardDetail(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return null;
+		return freeBoardDao.boardView(freeBoard);
 	}
 
 
