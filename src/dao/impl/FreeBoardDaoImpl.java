@@ -92,6 +92,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public List<FreeBoard> selectAll(Paging paging) {
+		System.out.println("feeboarddaoimpl : test dongs" );
 		String sql = "";
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
