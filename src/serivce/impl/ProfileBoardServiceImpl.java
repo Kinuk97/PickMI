@@ -1,11 +1,23 @@
 package serivce.impl;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import dao.face.ProfileBoardDao;
 import dao.impl.ProfileBoardDaoImpl;
+import dto.Files;
 import dto.ProfileBoard;
 import serivce.face.ProfileBoardService;
 import util.Paging;
@@ -14,6 +26,134 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	
 	private ProfileBoardDao profileBoardDao = new ProfileBoardDaoImpl();
 	
+	
+	@Override
+	public void write(HttpServletRequest req) {
+		
+//		boolean isMultipart = false;
+//		isMultipart = ServletFileUpload.isMultipartContent(req);
+//
+//		if (!isMultipart) {
+//
+//			return;
+//		}
+//		DiskFileItemFactory factory = null;
+//		factory = new DiskFileItemFactory();
+//		
+//		int maxMem = 1 * 1024 * 1024; // 1mb
+//		factory.setSizeThreshold(maxMem);
+//		
+//		ServletContext context = req.getServletContext();
+//		String path = context.getRealPath("tmp");
+//
+//		File repository = new File(path);
+//
+//		factory.setRepository(repository);
+//		
+//		int maxFile = 10 * 1024 * 1024; // 10MB
+//		
+//		// 파일 업로드 객체 생성
+//		ServletFileUpload upload = null;
+//		upload = new ServletFileUpload(factory);
+//		
+//		upload.setFileSizeMax(maxFile);
+//		
+//		List<FileItem> items = null;
+//		
+//		try {
+//			items = upload.parseRequest(req);
+//		} catch (FileUploadException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		Iterator<FileItem> iter = items.iterator();
+//		
+//		ProfileBoard profile = new ProfileBoard();
+//		Files file = null;
+//		
+//		while (iter.hasNext()) {
+//
+//			FileItem item = iter.next();
+//
+//			// 1) 빈파일 처리
+//			if (item.getSize() <= 0)
+//				continue;
+//
+//			// 2) 일반적인 요청 데이터 처리
+//			if (item.isFormField()) {
+//				String key = item.getFieldName();
+//
+//				if ("prof_interest".equals(key)) {
+//					try {
+//						profile.setProf_interest(item.getString("utf-8"));
+//					} catch (UnsupportedEncodingException e) {
+//						e.printStackTrace();
+//					}
+//				} else if ("prof_job".equals(key)) {
+//					try {
+//						profile.setProf_job(item.getString("utf-8"));
+//					} catch (UnsupportedEncodingException e) {
+//						e.printStackTrace();
+//					}
+//				} else if ("prof_state".equals(key)) {
+//					try {
+//						profile.setProf_state(item.getString("utf-8"));
+//					} catch (UnsupportedEncodingException e) {
+//						e.printStackTrace();
+//					}
+//				} else if ("prof_loc".equals(key)) {
+//					try {
+//						profile.setProf_loc(item.getString("utf-8"));
+//					} catch (UnsupportedEncodingException e) {
+//						e.printStackTrace();
+//					}
+//				} else if ("prof_career".equals(key)) {
+//					try {
+//						profile.setProf_career(item.getString("utf-8"));
+//					} catch (UnsupportedEncodingException e) {
+//						e.printStackTrace();
+//					}
+//				} else if ("prof_content".equals(key)) {
+//					try {
+//						profile.setProf_content(item.getString("utf-8"));
+//					} catch (UnsupportedEncodingException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			} else {
+//				file = new Files();
+//			
+//			//uuid 생성
+//			UUID uuid = UUID.randomUUID();	
+//			String u = uuid.toString().split("-")[4];
+//		
+//			File up = new File(context.getRealPath("upload"), item.getName() + "_" + u);
+//
+//			file.setFilename(item.getName());
+////			file.setStoredname(item.getName() + "_" + u);
+//			file.setFilepath(item.getString());
+//
+//			try {
+//				item.write(up);
+//				item.delete();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+//		int profileno = profileBoardDao.selectProfileno();
+//		
+//		HttpSession session = req.getSession();
+//		
+//		profile.setUserno((Integer.parseInt(session.getAttribute("userno"))));
+//		profile.setProf_no(profileno);
+//		profileBoardDao.insertProfile(profile);
+//		if(file != null) {
+//			file.setBoardno(profileno);
+//			profileBoardDao.insertFile(file);
+//		}
+	
+	}
 	
 	@Override
 	public ProfileBoard view(ProfileBoard profile) {

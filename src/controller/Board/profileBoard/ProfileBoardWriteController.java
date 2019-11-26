@@ -26,6 +26,8 @@ public class ProfileBoardWriteController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
+		req.setAttribute("userno", session.getAttribute("userno"));
+		
 		
 		//view 전달
 		req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/write.jsp").forward(req, resp);
@@ -36,7 +38,7 @@ public class ProfileBoardWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//write에 저장
-//		profileBoardService.write(req);
+		profileBoardService.write(req);
 		
 		//list로 리다이렉트
 		resp.sendRedirect("/profileBoard/list");
