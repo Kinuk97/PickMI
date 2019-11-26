@@ -10,8 +10,12 @@
 $(document).ready(function() {
 	var curPage = 1;
 	var totalPage = "${paging.totalPage}";
+	var loading = false;
 	
 	$(window).scroll(function() {
+		if (loading) {
+			return;
+		}
 		if (curPage >= totalPage) {
 			return;
 		}
@@ -51,6 +55,7 @@ $(document).ready(function() {
 						
 						$("#board").append(board);
 					}					
+					loading = false;
 				},
 				error : function(e) {
 					console.log(e);
@@ -68,50 +73,47 @@ select {
 }
 </style>
 
-<div class="row">
-	<form action="/freeboard/list" method="get">
-		<div class="col-lg-1 col-xs-3">
-			<select name="categoryno">
-				<option value="1">아이디어</option>
-				<option value="2">정보</option>
-				<option value="3">공모전</option>
-			</select>
-		</div>
-		<div class="col-lg-2 col-xs-5">
-			<div class="input-group">
-				<input type="text" class="form-control" name="search" placeholder="Search for...">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">검색</button>
-				</span>
+<div id="board" class="list-container">
+	<div class="row">
+		<form action="/freeboard/list" method="get">
+			<div class="col-lg-1 col-xs-2">
+				<select name="categoryno">
+					<option value="1">아이디어</option>
+					<option value="2">정보</option>
+					<option value="3">공모전</option>
+				</select>
 			</div>
+			<div class="col-lg-5 col-xs-5 text-left">
+				<div class="input-group">
+					<input type="text" class="form-control" name="search" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" style="margin: 10px;">검색</button>
+					</span>
+				</div>
+			</div>
+		</form>
+		<div class="col-lg-6 col-xs-4 text-right">
+			<a class="btn btn-primary" href="/freeboard/write">글작성</a>
 		</div>
-	</form>
-	<div class="col-lg-9 col-xs-4 text-right">
-		<a class="btn btn-primary" href="/freeboard/write">글작성</a>
 	</div>
-</div>
-
-<hr>
-<div id="board">
+	<hr>
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail">
-				<div class="caption">
 					<c:choose>
 						<c:when test="${board.categoryno == 1 }">
-							<h2><a>[아이디어] ${board.free_title }</a></h2>
+							<h5><a href="/freeboard/view?free_no=${board.free_no }">[아이디어] ${board.free_title }</a></h5>
 						</c:when>
 						<c:when test="${board.categoryno == 2 }">
-							<h2><a>[정보] ${board.free_title }</a></h2>
+							<h2><a href="/freeboard/view?free_no=${board.free_no }">[정보] ${board.free_title }</a></h2>
 						</c:when>
 						<c:when test="${board.categoryno == 3 }">
-							<h2><a>[공모전] ${board.free_title }</a></h2>
+							<h4><a href="/freeboard/view?free_no=${board.free_no }">[공모전] ${board.free_title }</a></h4>
 						</c:when>
 					</c:choose>
-					<p><a>${board.free_content }</a></p>
+					<p class="content"><a href="/freeboard/view?free_no=${board.free_no }">${board.free_content }</a></p>
 					<div class="text-right">${board.views }</div>
 					<div class="text-right">${board.free_time }</div>
-				</div>
 			</div>
 		</div>
 	</c:forEach>

@@ -188,8 +188,43 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public FreeBoard boardView(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM freeboard WHERE free_no = ?";
+		
+		FreeBoard result = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, freeBoard.getFree_no());
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				result = new FreeBoard();
+				
+				result.setFree_no(rs.getInt("free_no"));
+				result.setCategoryno(rs.getInt("categoryno"));
+				result.setUserno(rs.getInt("userno"));
+				result.setFree_title(rs.getString("free_title"));
+				result.setFree_content(rs.getString("free_content"));
+				result.setFree_time(rs.getDate("free_time"));
+				result.setViews(rs.getInt("views"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
