@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.ProfileBoard;
-import sun.java2d.cmm.Profile;
 import util.Paging;
 
 public interface ProfileBoardService {
