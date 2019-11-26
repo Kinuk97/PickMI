@@ -19,16 +19,11 @@ $(document).ready(function() {
 		if (curPage >= totalPage) {
 			return;
 		}
-		
-		let $window = $(this);
-        let scrollTop = $window.scrollTop();
-        let windowHeight = $window.height();
-        let documentHeight = $(document).height();
         
-        // scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다.
-        if( scrollTop + windowHeight + 30 > documentHeight ) {
-        		
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 	    	curPage += 1;
+	    	loading = true;
+	    	
 	    	$.ajax({
 				type : "post",
 				url : "/freeboard/list",
@@ -54,7 +49,8 @@ $(document).ready(function() {
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 						
 						$("#board").append(board);
-					}					
+					}			
+					
 					loading = false;
 				},
 				error : function(e) {
@@ -78,6 +74,7 @@ select {
 		<form action="/freeboard/list" method="get">
 			<div class="col-lg-1 col-xs-2">
 				<select name="categoryno">
+					<option value="">선택없음</option>
 					<option value="1">아이디어</option>
 					<option value="2">정보</option>
 					<option value="3">공모전</option>
@@ -87,7 +84,7 @@ select {
 				<div class="input-group">
 					<input type="text" class="form-control" name="search" placeholder="Search for...">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" style="margin: 10px;">검색</button>
+						<button class="btn btn-default" type="submit" style="margin: 10px;">검색</button>
 					</span>
 				</div>
 			</div>

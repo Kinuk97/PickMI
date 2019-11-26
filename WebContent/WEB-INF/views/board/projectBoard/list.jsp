@@ -11,9 +11,13 @@
 $(document).ready(function() {
 	var curPage = 1;
 	var loading = false;
+	var totalPage = "${paging.totalPage}";
 	
 	$(window).scroll(function() {
 		if (loading) {
+			return;
+		}
+		if (curPage >= totalPage) {
 			return;
 		}
 		

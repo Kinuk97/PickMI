@@ -11,20 +11,18 @@
 $(document).ready(function() {
 	var curPage = 1;
 	var totalPage = "${paging.totalPage}";
+	var loading = false;
 	
 	$(window).scroll(function() {
+		if (loading) {
+			return;
+		}
 		if (curPage >= totalPage) {
 			return;
 		}
-		
-		let $window = $(this);
-        let scrollTop = $window.scrollTop();
-        let windowHeight = $window.height();
-        let documentHeight = $(document).height();
-        
-        // scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다.
-        if( scrollTop + windowHeight + 30 > documentHeight ) {
-        		
+
+		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+	    	loading = true;
 	    	curPage += 1;
 	    	$.ajax({
 				type : "post",
@@ -56,7 +54,9 @@ $(document).ready(function() {
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 						
 						$("#board").append(board);
-					}					
+					}
+					
+					loading = false;
 				},
 				error : function(e) {
 					console.log(e);

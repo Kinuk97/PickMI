@@ -9,10 +9,14 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var curPage = 1;
+	var totalPage = "${paging.totalPage}";
 	var loading = false;
 	
 	$(window).scroll(function() {
 		if (loading) {
+			return;
+		}
+		if (curPage >= totalPage) {
 			return;
 		}
 		
