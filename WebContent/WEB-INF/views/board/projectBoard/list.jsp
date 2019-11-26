@@ -28,7 +28,7 @@ $(document).ready(function() {
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
 						
-						var caption = $("<div class='caption'></div>");
+						var caption = $("<div class='caption caption-project'></div>");
 						
 						caption.append($("<h2></h2>").html($("<a href='#'></a>").text(data[i].proj_title)));
 						caption.append($("<p></p>").text("프로젝트 이름 : " + data[i].proj_name));
@@ -77,7 +77,7 @@ select {
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail">
-				<div class="caption">
+				<div class="caption caption-project">
 
 					<h2>
 						<a href="/projectBoard/view?proj_no=${board.proj_no }">${board.proj_title }</a>

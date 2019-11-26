@@ -48,4 +48,27 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 		return projectBoardDao.selectAll(paging);
 	}
 
+	@Override
+	public ProjectBoard getProjectBoardno(HttpServletRequest req) {
+		
+		String param = null;	
+		param = req.getParameter("proj_no");
+		
+		int projno = 0;
+		if(param != null && !"".equals(param)) {
+			projno = Integer.parseInt(param);
+		}
+		
+		ProjectBoard projectBoard = new ProjectBoard();
+		projectBoard.setProj_no(projno);
+		
+		return projectBoard;
+	}
+
+	@Override
+	public ProjectBoard view(ProjectBoard viewBoard) {
+		
+		return null;
+	}
+
 }

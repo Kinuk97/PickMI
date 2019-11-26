@@ -13,4 +13,8 @@ public interface ProjectBoardService {
 
 	public List<ProjectBoard> getBoardList(Paging paging);
 
+	public ProjectBoard getProjectBoardno(HttpServletRequest req);
+
+	public ProjectBoard view(ProjectBoard viewBoard);
+
 }
