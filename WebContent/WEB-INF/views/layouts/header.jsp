@@ -26,7 +26,8 @@
 #footer {
 	text-align: center;
 	height: 50px;
-	/*  	background: #a2e2ff; */
+	margin-top: 35px;
+	margin-bottom: 20px;
 }
 
 #wrapper {
@@ -72,6 +73,12 @@ button, input, optgroup, select, textarea {
     margin: 10px;
     font: inherit;
     color: inherit;
+}
+
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+    list-style: none;
 }
 
 </style>

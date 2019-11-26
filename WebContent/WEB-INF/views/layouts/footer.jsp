@@ -4,21 +4,17 @@
 </div>
 
 <div id="footer">
-<!-- 	<div class="fotter_center_tl"> -->
-<!-- 		<span class="logo"> <img src="/img/logo.svg"> 이미지 로고 주소? -->
-<!-- 		</span> -->
-<!-- 		<ul class="ft_menu"> -->
-<!-- 			<li><a href="#">서비스소개</a></li> -->
-<!-- 			<li><a href="#">회원약관</a></li> -->
-<!-- 			<li><a href="#">개인정보처리방침</a></li> -->
-<!-- 			<li><a href="#">광고문의</a></li> -->
-<!-- 			<li><a href="#">고객센터</a></li> -->
-<!-- 		</ul> -->
-<!-- 		<div class="company_info">"상호 : " "KH정보교육원"</div> -->
-<!-- 		<span class="ft_copyright"> "2017 " <strong>PickMi.</strong> " -->
-<!-- 			All rights reserved." -->
-<!-- 		</span> -->
-<!-- 	</div> -->
+	<div class="fotter_center_tl">		
+			<a href="#">서비스소개&emsp;|</a>
+			<a href="#">&emsp;회원약관&emsp;|</a>
+			<a href="#">&emsp;개인정보처리방침&emsp;|</a>
+			<a href="#">&emsp;광고문의&emsp;|</a>
+			<a href="#">&emsp;고객센터</a>
+		<div class="company_info">&copy; copyright 강김서이채&emsp;&emsp;&emsp;&emsp;
+		<span class="ft_copyright">&emsp; 2019 <strong>PickMI</strong>&emsp;All rights reserved.
+		</span>
+		</div>
+	</div>
 </div>
 
 </body>
