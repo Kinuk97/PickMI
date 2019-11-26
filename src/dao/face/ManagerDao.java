@@ -4,6 +4,7 @@ import java.util.List;
 
 import dto.Manager;
 import dto.ProfileBoard;
+import util.Paging;
 
 public interface ManagerDao {
 	
@@ -28,7 +29,18 @@ public interface ManagerDao {
 	 */
 	public List<ProfileBoard> pbselectAll();
 	
+	/**
+	 * 총 게시글 수 조회
+	 * @param search 
+	 * @return int - 총 게시글 수
+	 */
+	public int selectCntAll(String search);
 	
-	
+	/**
+	 * 페이징 대상 게시글 목록 조회
+	 * @param paging - 페이징 정보
+	 * @return List<ProfileBoard> - 조회된 게시글 목록
+	 */
+	public List<ProfileBoard> pbselectAll(Paging paging);	
 	
 }

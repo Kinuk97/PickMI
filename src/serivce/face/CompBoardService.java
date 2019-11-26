@@ -3,6 +3,7 @@ package serivce.face;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import dto.CompBoard;
 import util.Paging;
@@ -40,6 +41,13 @@ public interface CompBoardService {
 	 * @return compBoardDao.
 	 */
 	public CompBoard compBoardDetail(CompBoard compBoard);
+	
+	/**
+	 * 게시글 작성
+	 * 
+	 * @param compBoard
+	 */
+	public void write(CompBoard compBoard);
 
 	
 }

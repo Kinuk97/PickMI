@@ -8,11 +8,13 @@ import util.Paging;
 public interface CompBoardDao {
 	
 	/**
-	 * 게시글의 총 개수 
+	 * 페이징 처리를 위한 게시글 수 가져오기
 	 * 
-	 * @return int - 총 게시글 수
+	 * @param search - 검색어
+	 * @param categoryno - 카테고리 번호
+	 * @return int - 게시글 수
 	 */
-	public int selectCntAll();
+	public int selectCntAll(String search, int categoryno);
 	
 	/**
 	 * comp_no를 이용해 게시글 세부사항 조회
@@ -29,5 +31,8 @@ public interface CompBoardDao {
 	 * @return List - 조회된 게시글 목록
 	 */
 	public List<CompBoard> compList(Paging paging);
+	
+	
+	public void insert(CompBoard compBoard);
 
 }

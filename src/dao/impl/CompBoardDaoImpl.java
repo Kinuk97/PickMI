@@ -19,14 +19,31 @@ public class CompBoardDaoImpl implements CompBoardDao {
 	private ResultSet rs = null; //SQL수행결과객체
 
 	@Override
-	public int selectCntAll() {
+	public int selectCntAll(String search, int categoryno) {
 
 		conn = DBConn.getConnection(); //DB연결
 
 		//수행할 DB쿼리
 		String sql = "";
-		sql += "SELECT count(*) FROM compBoard ORDER BY comp_no ";
+		sql += "SELECT count(*) FROM compBoard ";
 
+		//검색어가 존재하거나 카테고리가 존재한다면
+		if (search != null || categoryno != 0) {
+			
+			//WHERE  추가
+			sql += "WHERE 1 = 1";
+			
+			//검색어가 존재한다면 검색조건 추가
+			if (search != null) {
+				sql += " AND title LIKE '%' || ? || '%'";
+			}
+			
+			//카테고리가 존재한다면 카테고리 추가
+			if (categoryno != 0) {
+				sql += " AND categoryno = ?";
+			}
+		}
+		
 		int cnt = 0;
 
 		//결과 저장 리스트
@@ -35,6 +52,17 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		try {
 			//SQL수행객체
 			ps = conn.prepareStatement(sql);
+			
+			if (search != null && categoryno == 0) {
+				ps.setString(1, search);
+				
+			} else if (categoryno != 0 && search == null) {
+				ps.setInt(1, categoryno);
+				
+			} else if (search != null && categoryno != 0) {
+				ps.setString(1, search);
+				ps.setInt(2, categoryno);
+			}
 
 			//SQL수행 및 결과 저장
 			rs = ps.executeQuery();
@@ -88,7 +116,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res.setUserno( rs.getInt("userno") );
 				res.setComp_title( rs.getString("comp_title") );
 				res.setComp_name( rs.getString("comp_name") );
-				res.setComp_time( rs.getDate("comp_time") );
 				res.setComp_content( rs.getString("comp_content") );
 				res.setComp_member( rs.getInt("comp_member") );
 				res.setComp_date( rs.getDate("comp_date") );
@@ -125,10 +152,21 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			String sql = "";
 			sql += "SELECT * FROM (";
 			sql += "    SELECT rownum rnum, B.* FROM (";
-			sql += "        SELECT";
-			sql += "            comp_no, categoryno, fileno, userno, comp_title, comp_name, ";
-			sql += "	        comp_time, comp_content, comp_member, comp_date, comp_view, comp_reply, comp_like";
-			sql += "	    FROM compBoard";
+			sql += "		SELECT * FROM compBoard";
+			
+			//검색어가 존재할 때
+			if (paging.getSearch() != null || paging.getCategoryno() != 0) {
+				sql += "WHERE 1 = 1";
+				
+				if (paging.getSearch() != null) {
+					sql += " AND title LIKE '%' || ? || '%'";
+				}
+				
+				if (paging.getCategoryno() != 0) {
+					sql += " AND categoryno = ?";
+				}
+			}
+
 			sql += "        ORDER BY comp_no DESC";
 			sql += "    )B";
 			sql += "    ORDER BY rnum";
@@ -136,15 +174,32 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += " WHERE rnum BETWEEN ? AND ?";
 
 
-
 			//결과 저장 리스트
-			List<CompBoard> List = new ArrayList<>();
+			List<CompBoard> List = new ArrayList<CompBoard>();
 
 			try {
 				ps = conn.prepareStatement(sql);
 
-				ps.setInt(1, paging.getStartNo());
-				ps.setInt(2, paging.getEndNo());
+				if (paging.getSearch() != null && paging.getCategoryno() == 0) {
+					ps.setString(1, paging.getSearch());
+					ps.setInt(2, paging.getStartNo());
+					ps.setInt(3, paging.getEndNo());
+					
+				} else if (paging.getCategoryno() != 0 && paging.getSearch() == null) {
+					ps.setInt(1, paging.getCategoryno());
+					ps.setInt(2, paging.getStartNo());
+					ps.setInt(3, paging.getEndNo());
+					
+				} else if (paging.getSearch() != null && paging.getCategoryno() != 0) {
+					ps.setString(1, paging.getSearch());
+					ps.setInt(2, paging.getCategoryno());
+					ps.setInt(3, paging.getStartNo());
+					ps.setInt(4, paging.getEndNo());
+					
+				} else {
+					ps.setInt(1, paging.getStartNo());
+					ps.setInt(2, paging.getEndNo());
+				}
 
 				rs = ps.executeQuery();
 
@@ -157,7 +212,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					compBoard.setUserno( rs.getInt("userno") );
 					compBoard.setComp_title( rs.getString("comp_title") );
 					compBoard.setComp_name( rs.getString("comp_name") );
-					compBoard.setComp_time( rs.getDate("comp_time") );
 					compBoard.setComp_content( rs.getString("comp_content") );
 					compBoard.setComp_member( rs.getInt("comp_member") );
 					compBoard.setComp_date( rs.getDate("comp_date") );
@@ -183,6 +237,20 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			}
 		
 		return List;
+	}
+
+	@Override
+	public void insert(CompBoard compBoard) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql +="INSERT INTO compBoard(comp_no, categoryno, fileno, userno, comp_title, comp_name, ";
+		sql +="		 				 comp_content, comp_member, comp_date, comp_view, ";
+		sql +="						 comp_reply, comp_like )";
+		sql +=" VALUES(?, ?, ?)";
+				
+		
 	}
 
 
