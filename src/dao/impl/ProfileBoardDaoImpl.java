@@ -22,7 +22,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	
 @Override
 public List<ProfileBoard> selectAll(Paging paging) {
-	System.out.println("test");
+//	System.out.println("test");
 	String sql = "";
 	sql += "select * from (";
 	sql += "  select rownum rnum, B.* FROM(";
