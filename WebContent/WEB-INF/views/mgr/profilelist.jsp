@@ -4,16 +4,8 @@
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Mgr ProfileBoard List</title>
-
-<!--  jQuery 2.2.4 -->
-<script type="text/javascript"
- src="http://code.jquery.com/jquery-2.2.4.min.js">
-</script>
+<!-- Header -->
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
 
 <!-- checkBox -->
 <script type="text/javascript">
@@ -45,40 +37,42 @@ $(document).ready(function(){
 </head>
 <body>
 
-<a href="/mgr/logout"><button>로그아웃</button></a>
+<div class="container" >
+	<table class="table table-condensed">
+		<tr class="info">
+			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 10%">글번호</th>
+			<th style="width: 10%">사용자번호</th>
+			<th style="width: 10%">작성시간</th>
+			<th style="width: 10%">직무</th>
+			<th style="width: 10%">상태</th>
+			<th style="width: 10%">지역</th>
+		</tr>
+		<c:forEach items="${list }" var="pbboard">
+		<tr>
+			<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
+			<td>${pbboard.prof_no }</td>
+			<td>${pbboard.userno }</td>
+			<td>${pbboard.prof_time }</td>
+			<td>${pbboard.prof_job }</td>
+			<td>${pbboard.prof_state }</td>
+			<td>${pbboard.prof_loc }</td>
+		</tr>	
+		</c:forEach>
+	</table>
+	
+	<div class="src" style="text-align: center;">
+		<form action="/mgr/complist" method="get">
+			<input type="text" name="search" id="search"/>
+			<button id="btnSearch" class="btn btn-primary">검색</button>
+		</form>
+	</div>
 
-<table>
-	<tr>
-		<th><input type="checkbox" id="checkAll"/></th>
-		<th>글번호</th>
-		<th>사용자번호</th>
-		<th>작성시간</th>
-		<th>직무</th>
-		<th>상태</th>
-		<th>지역</th>
-	</tr>
-	<c:forEach items="${list }" var="pbboard">
-	<tr>
-		<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
-		<td>${pbboard.prof_no }</td>
-		<td>${pbboard.userno }</td>
-		<td>${pbboard.prof_time }</td>
-		<td>${pbboard.prof_job }</td>
-		<td>${pbboard.prof_state }</td>
-		<td>${pbboard.prof_loc }</td>
-	</tr>	
-	</c:forEach>
-</table>
+	<jsp:include page = "/WEB-INF/views/mgr/paging/profilePaging.jsp" />
+	
+</div>	
+</div> <!-- .container -->
 
-<jsp:include page = "/WEB-INF/views/mgr/paging/profilePaging.jsp" />
+<!-- Footer -->
 
-<div class="src">
-	<form action="/mgr/profilelist" method="get">
-		<input type="text" name="search" id="search"/>
-		<button id="btnSearch" class="btn">검색</button>
-	</form>
-</div>
-
-
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  

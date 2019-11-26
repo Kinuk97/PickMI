@@ -1,4 +1,4 @@
-package controller.mrg;
+package controller.mgr;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,16 +26,16 @@ public class MgrProjectListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-	//요청파라미터에서 curPage를 구하고 Paging 객체 반환
+	//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
 	Paging paging = projectBoardService.getPaging(req);
 	
-	//Paging 객체를 model값으로 지정
+	//Paging 객체�? model값으�? �??��
 	req.setAttribute("paging", paging);
 	
-	// ProjectBoard 게시글 목록 조회
+	// ProjectBoard 게시�? 목록 조회
 	List<ProjectBoard>projectlist = projectBoardService.getBoardList(paging);
 	
-	// projectlist 객체를 model값으로 지정
+	// projectlist 객체�? model값으�? �??��
 	req.setAttribute("list", projectlist);
 		
 	req.getRequestDispatcher("/WEB-INF/views/mgr/projectlist.jsp")

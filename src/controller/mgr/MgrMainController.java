@@ -1,4 +1,4 @@
-package controller.mrg;
+package controller.mgr;
 
 import java.io.IOException;
 

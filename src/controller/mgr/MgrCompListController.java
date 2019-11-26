@@ -1,4 +1,4 @@
-package controller.mrg;
+package controller.mgr;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +18,7 @@ import util.Paging;
  * Servlet implementation class MgrCompordListController
  */
 @WebServlet("/mgr/complist")
-public class MgrCompordListController extends HttpServlet {
+public class MgrCompListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	CompBoardService compBoardService = new CompBoardServiceImpl();
@@ -26,21 +26,21 @@ public class MgrCompordListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//요청파라미터에서 curPage를 구하고 Paging 객체 반환
+		//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
 		Paging paging = compBoardService.getPaging(req);
 		
-		 // 검색어 파라미터 
+		 // �??��?�� ?��?��미터 
 		paging.setSearch(req.getParameter("search"));
 		
-		//Paging 객체를 model값으로 지정
+		//Paging 객체�? model값으�? �??��
 		req.setAttribute("paging", paging);
 		System.out.println(paging);		
 		
 		
-		// ProfileBoard 게시글 목록 조회
+		// ProfileBoard 게시�? 목록 조회
 		List<CompBoard> list = compBoardService.getBoardList(paging);
 		
-		// list 객체를 model값으로 지정
+		// list 객체�? model값으�? �??��
 		req.setAttribute("list", list);
 
 		
