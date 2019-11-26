@@ -7,8 +7,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var curPage = 1;
+	var totalPage = "${paging.totalPage}";
 	
 	$(window).scroll(function() {
+		if (curPage >= totalPage) {
+			return;
+		}
+		
 		let $window = $(this);
         let scrollTop = $window.scrollTop();
         let windowHeight = $window.height();
@@ -16,11 +21,12 @@ $(document).ready(function() {
         
         // scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다.
         if( scrollTop + windowHeight + 30 > documentHeight ) {
+        		
 	    	curPage += 1;
 	    	$.ajax({
 				type : "post",
 				url : "/freeboard/list",
-				data : { "curPage" : curPage, "search" : "${search}", "categoryno" : ${categoryno} },
+				data : { "curPage" : curPage, "search" : "${paging.search}", "categoryno" : "${paging.categoryno}" },
 				dataType : "json",
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
