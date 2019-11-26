@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<jsp:include page="/WEB-INF/views/layouts/header.jsp"></jsp:include>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	var curPage = 1;
@@ -115,3 +117,5 @@ select {
 	</c:forEach>
 </div>
 <div style="clear: both;"></div>
+
+<jsp:include page="/WEB-INF/views/layouts/footer.jsp"></jsp:include>
