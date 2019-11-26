@@ -27,11 +27,10 @@ public class FreeBoardListController extends HttpServlet {
 		Paging paging = freeBoardService.getPaging(req);
 		
 		req.setAttribute("postno", 3);
-		req.setAttribute("search", paging.getSearch());
-		req.setAttribute("categoryno", paging.getCategoryno());
+		req.setAttribute("paging", paging);
 		req.setAttribute("boardList", freeBoardService.getBoardList(paging));
 		
-		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/board/freeboard/list.jsp").forward(req, resp);
 	}
 	
 	@Override
