@@ -55,7 +55,7 @@ public class MgrLoginController extends HttpServlet {
 			
 			
 			//////////////////////////// sendRedirect 관리자 페이지 첫 화면 // 첫화면 뭐인지..
-			resp.sendRedirect("/mgr/list");
+			resp.sendRedirect("/mgr/pblist");
 			////////////////////////////
 			
 		} else { // 로그인 실패시

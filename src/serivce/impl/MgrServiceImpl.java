@@ -9,6 +9,7 @@ import dao.impl.ManagerDaoImpl;
 import dto.Manager;
 import dto.ProfileBoard;
 import serivce.face.MgrService;
+import util.Paging;
 
 public class MgrServiceImpl implements MgrService{
 
@@ -53,6 +54,35 @@ public class MgrServiceImpl implements MgrService{
 	@Override
 	public List<ProfileBoard> getpbList() {
 		return managerDao.pbselectAll();
+	}
+
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		
+		// 요청파라미터 curPage 파싱
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if ( param!=null && !"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
+//		System.out.println("curPage : " + curPage);
+		
+		String search = req.getParameter("search");
+//		System.out.println(search);
+		
+		// ProfileBoard TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+		int totalCount = managerDao.selectCntAll(search);
+			
+		// Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+
+	@Override
+	public List<ProfileBoard> getpbList(Paging paging) {
+//		return managerDao.pbselectAll();
+		return managerDao.pbselectAll(paging);
 	}
 	
 	
