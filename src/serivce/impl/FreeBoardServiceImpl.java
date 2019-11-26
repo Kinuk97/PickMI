@@ -37,10 +37,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 			}
 		}
 		
-		param = req.getParameter("userno");
-		if (param != null && !"".equals(param)) {
+		Object userno = req.getSession().getAttribute("userno");
+		if (userno != null && !"".equals(userno)) {
 			try {
-				freeBoard.setUserno(Integer.parseInt(param));
+				freeBoard.setUserno(Integer.parseInt((String) userno));
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
@@ -123,8 +123,21 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public boolean writeBoard(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return false;
+		// 세션에 userno가 아직 없어서 주석
+//		if (freeBoard.getUserno() == 0) {
+//			return false;
+//		}
+		
+		int queryResult = freeBoardDao.insertBoard(freeBoard);
+		boolean result = false;
+		
+		if (queryResult == 1) {
+			result = true;
+		} else {
+			result = false;
+		}
+		
+		return result;
 	}
 
 	@Override

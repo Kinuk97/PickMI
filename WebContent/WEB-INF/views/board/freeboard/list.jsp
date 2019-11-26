@@ -62,17 +62,11 @@ $(document).ready(function() {
 });
 </script>
 
-
-<style type="text/css">
-select {
-	padding: 7px;
-}
-</style>
-
 <div id="board" class="container list-container">
+	<h1 style="text-center">자유게시판</h1>
 	<div class="row">
 		<form action="/freeboard/list" method="get">
-			<div class="col-lg-1 col-xs-2">
+			<div style="width: 10%; float: left; margin-left: 20px;">
 				<select name="categoryno">
 					<option value="">선택없음</option>
 					<option value="1">아이디어</option>
@@ -80,37 +74,50 @@ select {
 					<option value="3">공모전</option>
 				</select>
 			</div>
-			<div class="col-lg-5 col-xs-5 text-left">
-				<div class="input-group">
-					<input type="text" class="form-control" name="search" placeholder="Search for...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit" style="margin: 10px;">검색</button>
-					</span>
-				</div>
+			<div class="input-group" style="width: 40%; float: left;">
+				<input type="text" class="form-control" name="search" placeholder="Search for...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit" style="margin: 10px;">검색</button>
+				</span>
+			</div>
+			<div style="width: 45%; text-align: right; float: left;">
+				<a class="btn btn-primary" href="/freeboard/write" style="margin-top: 10px;">글작성</a>
 			</div>
 		</form>
-		<div class="col-lg-6 col-xs-4 text-right">
-			<a class="btn btn-primary" href="/freeboard/write">글작성</a>
-		</div>
 	</div>
 	<hr>
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail">
+				<div class="caption caption-free">
 					<c:choose>
 						<c:when test="${board.categoryno == 1 }">
-							<h5><a href="/freeboard/view?free_no=${board.free_no }">[아이디어] ${board.free_title }</a></h5>
+							<b>[아이디어]</b>
 						</c:when>
 						<c:when test="${board.categoryno == 2 }">
-							<h2><a href="/freeboard/view?free_no=${board.free_no }">[정보] ${board.free_title }</a></h2>
+							<b>[정보]</b>
 						</c:when>
 						<c:when test="${board.categoryno == 3 }">
-							<h4><a href="/freeboard/view?free_no=${board.free_no }">[공모전] ${board.free_title }</a></h4>
+							<b>[공모전]</b>
 						</c:when>
 					</c:choose>
-					<p class="content"><a href="/freeboard/view?free_no=${board.free_no }">${board.free_content }</a></p>
-					<div class="text-right">${board.views }</div>
-					<div class="text-right">${board.free_time }</div>
+					<h4><a href="/freeboard/view?free_no=${board.free_no }">${board.free_title }</a></h4>
+					<div class="free_content" style="height: 88px;"></div>
+					<script type="text/javascript">
+						var text = "${board.free_content}";
+						
+						text = text.replace(/<br\/>/ig, "\n");
+						text = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
+						
+						console.log(text);
+						
+						$(".free_content").text(text);
+						// 이거 이용해서 리스트 처음부터 ajax로 불러오기
+						// header.jsp에서 스타일도 확인하기
+					</script>
+					<div class="text-right"><span style="float: left;">${board.views }</span><span style="float: right;">${board.free_time }</span></div>
+					<div style="clear: both;"></div>
+				</div>
 			</div>
 		</div>
 	</c:forEach>

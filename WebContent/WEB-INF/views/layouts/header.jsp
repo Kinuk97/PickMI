@@ -34,8 +34,8 @@
 	min-height: 600px;
 	background-color: #f3f3f3;
 	clear: both;
-	padding-top: 10px;
-    padding-bottom: 10px;
+	padding-top: 25px;
+    padding-bottom: 15px;
 }
 
 .jumbotron {
@@ -92,6 +92,29 @@ button, input, optgroup, select, textarea {
 
 .list-container {
 	width: 80%;
+}
+
+select {
+	padding: 7px;
+}
+
+.free_content {
+ 	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+/*     display: -webkit-box; */
+/* 	display: -ms-flexbox; */
+/* 	display: box; */
+/* 	margin-top:1px; */
+/* 	max-height:88px; */
+/* 	overflow:hidden; */
+/* 	vertical-align:top; */
+/* 	text-overflow: ellipsis; */
+/* 	word-break:break-all; */
+/* 	-webkit-box-orient:vertical; */
+/* 	-webkit-line-clamp:3; */
+
 }
 
 #compboardlist:hover {
