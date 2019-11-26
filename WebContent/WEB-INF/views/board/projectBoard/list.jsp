@@ -73,7 +73,7 @@ select {
 </div>
 
 <hr>
-<div id="board">
+<div id="board" class="container list-container">
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail">
