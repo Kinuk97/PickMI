@@ -46,7 +46,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			
 			// 검색어가 존재한다면 검색조건 추가
 			if (search != null) {
-				sql += " AND title LIKE '%' || ? || '%'";
+				sql += " AND free_title LIKE '%' || ? || '%'";
 			}
 			
 			// 카테고리가 존재한다면 카테고리 추가
@@ -102,7 +102,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			sql += " WHERE 1 = 1";
 			
 			if (paging.getSearch() != null) {
-				sql += " AND title LIKE '%' || ? || '%'";
+				sql += " AND free_title LIKE '%' || ? || '%'";
 			}
 			
 			if (paging.getCategoryno() != 0) {
