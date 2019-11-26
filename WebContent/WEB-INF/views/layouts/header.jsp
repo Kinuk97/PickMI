@@ -80,6 +80,10 @@ button, input, optgroup, select, textarea {
 	height: 200px;
 }
 
+.container {
+	width: 80%;
+}
+
 </style>
 </head>
 <body>

@@ -44,10 +44,15 @@ $(document).ready(function() {
 							caption.append($("<h2></h2>").html($("<a></a>").text("[제목 + 내용] " + data[i].comp_title)));
 						}
 						
-						caption.append($("<p></p>").html($("<a></a>").text(data[i].comp_content)));
-						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].views));
-						caption.append($("<div class='text-right'></div>").text("작성일 : " + data[i].comp_date));
-						
+// 						caption.append($("<p></p>").html($("<a></a>").text(data[i].comp_content)));
+// 						caption.append($("<div class='text-left'></div>").text(data[i].comp_no));
+						caption.append($("<h4></h4>").text(data[i].comp_no + ". " + data[i].comp_title));
+						caption.append($("<p></p>").text("팀 이름 : " + data[i].comp_name));
+						caption.append($("<br>"));
+						caption.append($("<br>"));
+						caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].userno));
+						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));			
+						caption.append($("<div class='text-right'></div>").text("작성날짜 : " + data[i].comp_date));
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 						
 						$("#board").append(board);
@@ -119,23 +124,24 @@ select {
 <!-- 	<br> -->
 	
 <!-- 두번째 줄 -->
-<c:forEach items="${compList }" var="compList">
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="thumbnail">
-				<div class="caption">
-<%-- 					<input type="checkbox" name="checkRow" id="checkRow" value="${compList.comp_no }"> --%>
-					<h4>프로젝트 제목 : ${compList.comp_title }</h4>
-					<p>팀 이름 : ${compList.comp_name }</p>
-					<p>작성날짜 : ${compList.comp_date }</p>
-					<p>작성자 : ${compList.userno }</p>
-					<p>
-						<a href="/compBoard/view?comp_no=${compList.comp_no }" class="btn btn-default" role="button">상세보기</a>
-					</p>
+<div id="board">
+	<c:forEach items="${compList }" var="compList">
+			<div class="col-sm-6 col-md-4 col-lg-3">
+				<div class="thumbnail">
+					<div class="caption">
+	<%-- 					<input type="checkbox" name="checkRow" id="checkRow" value="${compList.comp_no }"> --%>
+						<h4>${compList.comp_no}. ${compList.comp_title }</h4>
+						<p>팀 이름 : ${compList.comp_name }</p>
+						<br><br>
+						<p class="text-right">작성자 : ${compList.userno }</p>
+						<p class="text-right">조회수 : ${compList.comp_view }</p>
+						<p class="text-right">작성날짜 : ${compList.comp_date }</p>
+					</div>
 				</div>
 			</div>
-		</div>
-</c:forEach>
+	</c:forEach>
 	
+</div>
 
 
 </div>
