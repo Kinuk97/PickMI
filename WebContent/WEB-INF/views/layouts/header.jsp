@@ -76,8 +76,18 @@ button, input, optgroup, select, textarea {
     text-align: center;
 }
 
-.caption {
+/* 각 게시판 리스트 높이 */
+.caption-profile {
+	height: 320px;
+}
+.caption-project {
+	height: 350px;
+}
+.caption-comp {
 	height: 200px;
+}
+.caption-free {
+	height: 180px;
 }
 
 .container {
