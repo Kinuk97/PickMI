@@ -10,9 +10,15 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var curPage = 1;
+	var loading = false;
 	
 	$(window).scroll(function() {
-	    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		if (loading) {
+			return;
+		}
+		
+		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+	    	loading = true;
 	    	curPage += 1;
 	    	$.ajax({
 				type : "post",
@@ -24,13 +30,25 @@ $(document).ready(function() {
 						
 						var caption = $("<div class='caption'></div>");
 						
-						caption.append($("<p></p>").html($("<a></a>").text(data[i].prof_no)));
-						caption.append($("<div class='text-right'></div>").text("작성일 : " + data[i].prof_time));
+						caption.append($("<h2></h2>").html($("<a href='#'></a>").text(data[i].proj_title)));
+						caption.append($("<p></p>").text("프로젝트 이름 : " + data[i].proj_name));
+						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
+						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
+						caption.append($("<p></p>").text("참여 인원 : " + data[i].proj_member));
+						caption.append($("<p></p>").text("시작 날짜 : " + data[i].proj_sdate));
+						caption.append($("<p></p>").text("마감 날짜 : " + data[i].proj_ddate));
+						caption.append($("<p></p>").text("모집 기간 : " + data[i].proj_rec_date));
+						caption.append($("<p class='text-right'></p>").text("신청수 : "+data[i].proj_apply));
+						caption.append($("<p class='text-right'></p>").text("찜개수 : "+data[i].proj_like));
+						caption.append($("<p class='text-right'></p>").text("작성시간 : "+data[i].proj_time));
 						
+					
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 						
 						$("#board").append(board);
-					}					
+					}	
+					
+					loading = false;
 				},
 				error : function(e) {
 					console.log(e);
@@ -48,8 +66,8 @@ select {
 }
 </style>
 
-<div class="row">
-	<div class="col-lg-9 col-xs-12 text-right">
+<div class="row" style="margin-bottom: -15px; margin-right: 0px;">
+	<div class="col-lg-12 col-xs-12 text-right">
 		<a class="btn btn-primary" href="/projectBoard/write">글작성</a>
 	</div>
 </div>
@@ -69,12 +87,12 @@ select {
 					<p>지역 : ${board.proj_loc }</p>
 					<p>경력 : ${board.proj_career }</p>
 					<p>참여 인원 : ${board.proj_member }</p>
-					<p>시작날짜 : ${board.proj_sdate }</p>
-					<p>마감날짜 : ${board.proj_ddate }</p>
-					<p>모집기간 : ${board.proj_rec_date }</p>
+					<p>시작 날짜 : ${board.proj_sdate }</p>
+					<p>마감 날짜 : ${board.proj_ddate }</p>
+					<p>모집 기간 : ${board.proj_rec_date }</p>
 					
 					<div class="text-right">신청수 : ${board.proj_apply }</div>
-					<div class="text-right">찜 개수 : ${board.proj_like }</div>
+					<div class="text-right">찜개수 : ${board.proj_like }</div>
 					<div class="text-right">작성시간 : ${board.proj_time }</div>
 				</div>
 			</div>
