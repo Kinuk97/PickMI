@@ -40,14 +40,14 @@ $(document).ready(function() {
 						var caption = $("<div class='caption'></div>");
 						
 						if (data[i].categoryno == 1) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[아이디어] " + data[i].free_title)));
+							caption.append($("<h2></h2>").html($("<a href='/freeboard/view?free_no=" + data[i].free_no + "'></a>").text("[아이디어] " + data[i].free_title)));
 						} else if (data[i].categoryno == 2) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[정보] " + data[i].free_title)));
+							caption.append($("<h2></h2>").html($("<a href='/freeboard/view?free_no=" + data[i].free_no + "'></a>").text("[정보] " + data[i].free_title)));
 						} else if (data[i].categoryno == 3) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[공모전] " + data[i].free_title)));
+							caption.append($("<h2></h2>").html($("<a href='/freeboard/view?free_no=" + data[i].free_no + "'></a>").text("[공모전] " + data[i].free_title)));
 						}
 						
-						caption.append($("<p></p>").html($("<a></a>").text(data[i].free_content)));
+						caption.append($("<p></p>").html($("<a href='/freeboard/view?free_no=" + data[i].free_no + "'></a>").text(data[i].free_content)));
 						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].views));
 						caption.append($("<div class='text-right'></div>").text("작성일 : " + data[i].free_time));
 						
