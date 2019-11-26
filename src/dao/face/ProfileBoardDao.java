@@ -8,6 +8,13 @@ import util.Paging;
 public interface ProfileBoardDao {
 	
 	/**
+	 * 게시글 번호로 프로필 상세보기
+	 * @param profile
+	 * @return
+	 */
+	public ProfileBoard selectProfileByProfileno(ProfileBoard profile);
+	
+	/**
 	 * 페이징을 이용한 게시글 조회
 	 * @return
 	 */

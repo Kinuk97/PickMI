@@ -15,6 +15,31 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	private ProfileBoardDao profileBoardDao = new ProfileBoardDaoImpl();
 	
 	
+	@Override
+	public ProfileBoard view(ProfileBoard profile) {
+		
+		return profileBoardDao.selectProfileByProfileno(profile);
+	}
+	/**
+	 * 요청파라미터 받기
+	 */
+	@Override
+	public ProfileBoard getProfileno(HttpServletRequest req) {
+		// 전달 파라미터 받기
+		String param = req.getParameter("profileno");
+
+		int prof_no = 0;
+		if (param != null && !"".equals(param)) {
+			prof_no = Integer.parseInt(param);
+		}
+		// DTO에 저장
+		ProfileBoard profile = new ProfileBoard();
+		profile.setProf_no(prof_no);
+		
+		System.out.println("profileBoardServiceImpl : " + profile);
+		return profile;
+	}
+	
 	/**
 	 * 페이징을 이용한 전체 목록 조회
 	 */
