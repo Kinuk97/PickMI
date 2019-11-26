@@ -144,7 +144,7 @@ $(document).ready(function() {
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail">
 			<a href="/profile/view?profileno=${pro.prof_no }">
-					<div class="caption">
+					<div class="caption caption-profile">
 					<h4>${ pro.prof_no }</h4>
 					<h3>${ pro.userno }</h3>
 					<p>${ pro.prof_interest }</p>
