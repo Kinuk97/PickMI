@@ -8,13 +8,16 @@ import dao.face.ManagerDao;
 import dao.impl.ManagerDaoImpl;
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.User;
 import serivce.face.MgrService;
 import util.Paging;
 
 public class MgrServiceImpl implements MgrService{
-
+	
 	//ManagerDao 객체
 	private ManagerDao managerDao = new ManagerDaoImpl();
+
+// Login -----
 	
 	@Override
 	public Manager getLoginMgr(HttpServletRequest req) {
@@ -50,12 +53,9 @@ public class MgrServiceImpl implements MgrService{
 			
 		return managerDao.selectMgrByMgr(mgr);
 	}
+// ----- Login
 
-	@Override
-	public List<ProfileBoard> getpbList() {
-		return managerDao.pbselectAll();
-	}
-
+// ----- User List 
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 		
@@ -78,12 +78,19 @@ public class MgrServiceImpl implements MgrService{
 		
 		return paging;
 	}
+	
+	@Override
+	public List<User> getuserList() {
+		return managerDao.userselectAll();
+	}
 
 	@Override
-	public List<ProfileBoard> getpbList(Paging paging) {
-//		return managerDao.pbselectAll();
-		return managerDao.pbselectAll(paging);
+	public List<User> getuserList(Paging paging) {
+		return managerDao.userselectAll(paging);
 	}
+	
+// User List -----
+
 	
 	
 	

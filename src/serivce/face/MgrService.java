@@ -6,10 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.User;
 import util.Paging;
 
 public interface MgrService {
 
+	
+//----- Login
 	/**
 	 * 로그인 정보 파싱
 	 * @param req
@@ -30,26 +33,29 @@ public interface MgrService {
 	 * @return Manager - 조회된 관리자
 	 */
 	public Manager getMgrByMgrid(Manager mgr);
-		
-	/**
-	 * 게시글 목록 조회
-	 * @return List<ProfileBoard> 프로필게시글 목록
-	 */
-	public List<ProfileBoard> getpbList();
+// Login -----		
 
+// ----- UserList
 	/**
 	 * 요청파라미터 curPage를 파싱
 	 * @param req - 요청 정보 객체
 	 * @return Paging - 페이징 정보
 	 */
 	public Paging getPaging(HttpServletRequest req);
+	
+	/**
+	 * user리스트 목록 조회 
+	 * @return List<User> - user리스트 목록
+	 */
+	public List<User> getuserList();
 
 	/**
-	 * 페이징 정보를 활용하여 보여질 게시글 목록만 조히
+	 * 페이징 정보를 활용하여 보여질 유저 목록만 조회
 	 * @param paging - 페이징 정보
-	 * @return pbList - 프로필 게시글 목록
+	 * @return uList - 유저리스트 목록
 	 */
-	public List<ProfileBoard> getpbList(Paging paging);
-	
+	public List<User> getuserList(Paging paging);
+
+// UserList ----- 
 	
 }

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mgr ProfileBoard List</title>
+<title>Mgr User List</title>
 
 <!--  jQuery 2.2.4 -->
 <script type="text/javascript"
@@ -50,30 +50,28 @@ $(document).ready(function(){
 <table>
 	<tr>
 		<th><input type="checkbox" id="checkAll"/></th>
-		<th>글번호</th>
 		<th>사용자번호</th>
-		<th>작성시간</th>
-		<th>직무</th>
-		<th>상태</th>
-		<th>지역</th>
+		<th>아이디(email)</th>
+		<th>이름</th>
+		<th>사진저장1</th>
+		<th>사진저장2</th>
 	</tr>
-	<c:forEach items="${pblist }" var="pbboard">
+	<c:forEach items="${userlist }" var="userboard">
 	<tr>
-		<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
-		<td>${pbboard.prof_no }</td>
-		<td>${pbboard.userno }</td>
-		<td>${pbboard.prof_time }</td>
-		<td>${pbboard.prof_job }</td>
-		<td>${pbboard.prof_state }</td>
-		<td>${pbboard.prof_loc }</td>
+		<td><input type="checkbox" name="checkRow" value="${userboard.userno }"/></td>
+		<td>${userboard.userno }</td>
+		<td>${userboard.email }</td>
+		<td>${userboard.name }</td>
+		<td>${userboard.photo_originname }</td>
+		<td>${userboard.photo_storedname }</td>
 	</tr>	
 	</c:forEach>
 </table>
 
-<jsp:include page = "/WEB-INF/views/mgr/paging/pblistPaging.jsp" />
+<jsp:include page = "/WEB-INF/views/mgr/paging/userlistPaging.jsp" />
 
 <div class="src">
-	<form action="/mgr/pblist" method="get">
+	<form action="/mgr/userlist" method="get">
 		<input type="text" name="search" id="search"/>
 		<button id="btnSearch" class="btn">검색</button>
 	</form>

@@ -30,7 +30,7 @@
 	<!-- 처음으로 가기 -->
 	<c:if test="${paging.curPage ne 1 }">
 	<li>
-		<a href="/mgr/pblist">&larr;처음</a>
+		<a href="/mgr/userlist">&larr;처음</a>
 	</li>
 	</c:if>
 	
@@ -43,7 +43,7 @@
 	<!-- 이전 페이징 리스트로 가기 -->
 	<c:if test="${paging.startPage gt paging.pageCount }">
 	<li>
-		<a href="/mgr/pblist?curPage=${paging.startPage - paging.pageCount }">&laquo;</a>
+		<a href="/mgr/userlist?curPage=${paging.startPage - paging.pageCount }&search=${param.search}">&laquo;</a>
 	</li>
 	</c:if>
 	
@@ -55,7 +55,7 @@
 	<!-- 이전 페이지로 가기 -->
 	<c:if test="${paging.curPage ne 1 }">
 	<li>
-		<a href="/mgr/pblist?curPage=${paging.curPage-1 }">&lt;</a>
+		<a href="/mgr/userlist?curPage=${paging.curPage-1 }&search=${param.search}">&lt;</a>
 	</li>
 	</c:if>
 	
@@ -69,11 +69,11 @@
 	
 		<c:choose>
 			<c:when test="${paging.curPage eq i }">
-				<li class="active"><a href ="/mgr/pblist?curPage=${i }">${i }</a></li>
+				<li class="active"><a href ="/mgr/userlist?curPage=${i }&search=${param.search}">${i }</a></li>
 			</c:when>
 			
 			<c:otherwise>
-				<li><a href ="/mgr/pblist?curPage=${i }">${i }</a></li>
+				<li><a href ="/mgr/userlist?curPage=${i }&search=${param.search}">${i }</a></li>
 			</c:otherwise>
 		</c:choose>
 		
@@ -82,7 +82,7 @@
 	
 	<!-- 다음 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage }">
-		<li><a href="/mgr/pblist?curPage=${paging.curPage + 1 }">&gt;</a></li>
+		<li><a href="/mgr/userlist?curPage=${paging.curPage + 1 }&search=${param.search}">&gt;</a></li>
 	</c:if>
 	
 	<c:if test="${paging.curPage eq paging.totalPage }">
@@ -93,7 +93,7 @@
 	<!--  다음 페이징 리스트로 가기 -->
 	<c:if test="${paging.endPage ne paging.totalPage }">
 	<li>
-		<a href="/mgr/pblist?curPage=${paging.startPage + paging.pageCount }">&raquo;</a>
+		<a href="/mgr/userlist?curPage=${paging.startPage + paging.pageCount }&search=${param.search}">&raquo;</a>
 	</li>
 	</c:if>
 	
@@ -104,7 +104,7 @@
 
 	<!-- 끝 페이지로 가기 -->
 	<c:if test="${paging.curPage ne paging.totalPage }">
-		<li><a href="/mgr/pblist?curPage=${paging.totalPage }">&rarr;끝</a></li>
+		<li><a href="/mgr/userlist?curPage=${paging.totalPage }&search=${param.search}">&rarr;끝</a></li>
 	</c:if>
 	
 	<c:if test="${paging.curPage eq paging.totalPage }">
