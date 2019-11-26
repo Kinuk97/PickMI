@@ -41,9 +41,11 @@ public class LoginController extends HttpServlet {
 		if(login == true) {
 			String eamil = req.getParameter("eamil");
 			String pw = req.getParameter("pw");
+			String userno = req.getParameter("userno");
 			
 			session.setAttribute("login", true);
 			session.setAttribute("email", eamil);
+			session.setAttribute("userno", userno);
 			
 			resp.sendRedirect("/main");
 		} else {

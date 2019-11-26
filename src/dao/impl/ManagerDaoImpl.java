@@ -11,6 +11,7 @@ import dao.face.ManagerDao;
 import dbutil.DBConn;
 import dto.Manager;
 import dto.ProfileBoard;
+import util.Paging;
 
 public class ManagerDaoImpl implements ManagerDao{
 
@@ -83,6 +84,7 @@ public class ManagerDaoImpl implements ManagerDao{
 		sql += "SELECT * FROM manager";
 		sql += " WHERE 1=1";
 		sql += " AND mgrid = ?";
+//		sql += " And mgrpw = ?";
 		
 		try {
 			ps=conn.prepareStatement(sql);
@@ -164,4 +166,116 @@ public class ManagerDaoImpl implements ManagerDao{
 		return list;
 	}
 
+	@Override
+	public int selectCntAll(String search) {
+		
+		conn = DBConn.getConnection(); // DB연결
+		// 수행할 SQL
+		String sql = "";
+		sql += "SELECT ";
+		sql += " count(*)";
+		sql += " FROM profile";
+		if(search!=null && !"".equals(search)) {
+			sql+= "   WHERE prof_no LIKE '%'||'"+search+"'||'%'";
+		}
+
+		
+		
+		// 최종 결과 변수
+		int cnt = 0;
+		
+		try {
+			// SQL 수행 객체
+			ps = conn.prepareStatement(sql);
+			
+			// SQL 수행 및 결과 저장
+			rs = ps.executeQuery();
+			
+			// SQL 수행 결과 처리
+			while( rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		// 최종 결과 반환
+		return cnt;
+	}
+
+	@Override
+	public List<ProfileBoard> pbselectAll(Paging paging) {
+
+		conn = DBConn.getConnection(); //DB 연결
+		
+		//수행할 SQL
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "    SELECT rownum rnum, B.* FROM (";
+		sql += "        SELECT";
+		sql += "             prof_no, userno, prof_time,"; 
+		sql += "             prof_interest, prof_job, prof_state, prof_loc, prof_career,";
+		sql += "			  prof_content, prof_like"	;		
+		sql += "        FROM profile";
+		if(paging.getSearch()!=null && !"".equals(paging.getSearch())) {
+			sql+= "   WHERE prof_no LIKE '%'||'"+paging.getSearch()+"'||'%'";
+		}
+
+		sql += "        ORDER BY prof_no DESC";
+		sql += "    ) B";
+		sql += "    ORDER BY rnum";
+		sql += " ) profile";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		
+		//최종 결과를 저장할 List
+		List<ProfileBoard> list = new ArrayList<>();		
+		try {
+			//SQL 수행 객체
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, paging.getStartNo());
+			ps.setInt(2, paging.getEndNo());
+			
+			//SQL 수행 및 결과 저장
+			rs = ps.executeQuery();
+			
+			//SQL 수행 결과 처리
+			while( rs.next() ) {
+				ProfileBoard pb = new ProfileBoard();
+				pb.setProf_no(rs.getInt("prof_no"));
+				pb.setUserno(rs.getInt("userno"));
+				pb.setProf_time(rs.getDate("prof_time"));
+				pb.setProf_interest(rs.getString("prof_interest"));
+				pb.setProf_job(rs.getString("prof_job"));
+				pb.setProf_state(rs.getString("prof_state"));
+				pb.setProf_loc(rs.getString("prof_loc"));
+				pb.setProf_career(rs.getString("prof_career"));
+				pb.setProf_content(rs.getString("prof_content"));
+				pb.setProf_like(rs.getInt("prof_like"));
+				
+				list.add(pb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//최종 결과 반환
+		return list;
+	}	
 }

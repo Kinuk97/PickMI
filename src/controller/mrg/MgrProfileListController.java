@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import dto.ProfileBoard;
 import serivce.face.MgrService;
 import serivce.impl.MgrServiceImpl;
+import util.Paging;
 
 /**
  * Servlet implementation class MgrMain
  */
-@WebServlet("/mgr/list")
-public class MgrListController extends HttpServlet {
+@WebServlet("/mgr/pblist")
+public class MgrProfileListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	MgrService mgrService = new MgrServiceImpl();
@@ -30,8 +31,20 @@ public class MgrListController extends HttpServlet {
 //		System.out.println(s.getAttribute("login"));
 //		System.out.println(s.getAttribute("mgrid"));
 		
+		// 요청파라미터에서 curPage를 구하고 Paging 객체 반환
+		Paging paging = mgrService.getPaging(req);
+//		System.out.println("ProfileListController - " + paging);
+		
+		// 검색어 파라미터 
+		paging.setSearch(req.getParameter("search"));
+//		System.out.println(paging);
+		
+		// paging 객체를 MODEL값으로 지정
+		req.setAttribute("paging", paging);
+		System.out.println("paging : " + paging);
+		
 		//ProfileBoard 테이블의 목록 조회
-		List<ProfileBoard> pbList = mgrService.getpbList();
+		List<ProfileBoard> pbList = mgrService.getpbList(paging);
 		
 		//게시글 목록을 MODEL값으로 지정
 		req.setAttribute("pblist", pbList);
