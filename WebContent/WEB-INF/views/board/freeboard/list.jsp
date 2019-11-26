@@ -73,7 +73,7 @@ select {
 }
 </style>
 
-<div id="board" class="list-container">
+<div id="board" class="container list-container">
 	<div class="row">
 		<form action="/freeboard/list" method="get">
 			<div class="col-lg-1 col-xs-2">

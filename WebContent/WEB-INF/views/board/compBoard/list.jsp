@@ -73,7 +73,7 @@ select {
 }
 </style>
 
-<div class="list-container" style="width: 80%;">
+<div class="container list-container">
 	<h1 class="text-center">완성된 프로젝트 게시판</h1>
 	
 	<br><br>
