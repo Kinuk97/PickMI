@@ -30,7 +30,7 @@ $(document).ready(function() {
 						
 						var caption = $("<div class='caption caption-project'></div>");
 						
-						caption.append($("<h2></h2>").html($("<a href='#'></a>").text(data[i].proj_title)));
+						caption.append($("<h2></h2>").html($("<a href='/projectBoard/view?proj_no="+data[i].proj_no+"'>"+" </a>").text(data[i].proj_title)));
 						caption.append($("<p></p>").text("프로젝트 이름 : " + data[i].proj_name));
 						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
 						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
