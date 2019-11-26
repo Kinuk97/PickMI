@@ -75,10 +75,17 @@ button, input, optgroup, select, textarea {
     color: inherit;
 }
 
-ol, ul {
-    margin-top: 0;
-    margin-bottom: 10px;
-    list-style: none;
+.carousel-caption {
+    position: absolute;
+/*     right: 15%; */
+    bottom: 20px;
+/*     left: 15%; */
+    z-index: 10;
+/*     padding-top: 10px; */
+/*     padding-bottom: 20px; */
+    color: #000;
+    text-align: center;
+/*     text-shadow: 0 1px 2px rgba(0,0,0,.6); */
 }
 
 </style>
