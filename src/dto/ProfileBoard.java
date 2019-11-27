@@ -14,16 +14,25 @@ public class ProfileBoard {
 	private String prof_career;
 	private String prof_content;
 	private int prof_like;
+	private String username;
 	
 	
 	@Override
 	public String toString() {
-		return "ProfileBoardDto [prof_no=" + prof_no + ", userno=" + userno + ", prof_time=" + prof_time
+		return "ProfileBoard [prof_no=" + prof_no + ", userno=" + userno + ", prof_time=" + prof_time
 				+ ", prof_interest=" + prof_interest + ", prof_job=" + prof_job + ", prof_state=" + prof_state
 				+ ", prof_loc=" + prof_loc + ", prof_career=" + prof_career + ", prof_content=" + prof_content
-				+ ", prof_like=" + prof_like + "]";
+				+ ", prof_like=" + prof_like + ", username=" + username + "]";
 	}
-	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public int getProf_no() {
 		return prof_no;
 	}

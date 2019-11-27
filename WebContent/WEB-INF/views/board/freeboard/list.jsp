@@ -15,20 +15,22 @@ function loadList() {
 	$.ajax({
 		type : "post",
 		url : "/freeboard/list",
-		data : { "curPage" : curPage, "search" : "${paging.search}", "categoryno" : "${paging.categoryno}" },
+		data : { "curPage" : curPage, "search" : "${paging.search}", "categoryno" : "${paging.categoryno}", "searchno" : "${paging.searchno}" },
 		dataType : "json",
 		success : function(data) {
 			
 			for (var i = 0; i < data.length; i++) {
-				var caption = $("<div class='caption caption-free'></div>");
+				var caption = $("<div class='caption caption-free' onclick=\"location.href='/freeboard/view?free_no=" + data[i].free_no + "'\"></div>");
 				
 				// 카테고리 추가
 				if (data[i].categoryno == 1) {
-					caption.append($("<a href=\"/freeboard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[아이디어]"));
+					caption.append($("<a href=\"/freeboard/list?categoryno=1\"></a>").text("[아이디어]"));
 				} else if (data[i].categoryno == 2) {
-					caption.append($("<a href=\"/freeboard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[정보]"));
+					caption.append($("<a href=\"/freeboard/list?categoryno=2\"></a>").text("[정보]"));
 				} else if (data[i].categoryno == 3) {
-					caption.append($("<a href=\"/freeboard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[공모전]"));
+					caption.append($("<a href=\"/freeboard/list?categoryno=3\"></a>").text("[공모전]"));
+				} else {
+					caption.append($("<a href='/freeboard/list'></a>").text("[기타]"));
 				}
 				
 				// 제목
@@ -49,12 +51,6 @@ function loadList() {
 				// 조회, 작성일
 				caption.append($("<div></div>").html($("<span style='float: left;'>조회 : " + data[i].views + "</span><span style='float: right;'>" + data[i].free_time + "</span>")));
 				
-				var free_no = data[i].free_no;
-				
-				caption.on("click", function() {
-					location.href = "/freeboard/view?free_no=" + free_no;
-				})
-				
 				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 				
 				$("#board").append(board);
@@ -71,6 +67,31 @@ function loadList() {
 
 $(document).ready(function() {
 	loadList();
+	
+	var categoryno = "${paging.categoryno}";
+	
+	if (categoryno == "1") {
+		$("#ideaBtn").addClass("active");
+	} else if (categoryno == "2") {
+		$("#infoBtn").addClass("active");
+	} else if (categoryno == "3") {
+		$("#compBtn").addClass("active");
+	} else {
+		$("#allBtn").addClass("active");
+	}
+	
+	$("#ideaBtn").on("click", function() {
+		location.href = "/freeboard/list?categoryno=1";
+	});
+	$("#infoBtn").on("click", function() {
+		location.href = "/freeboard/list?categoryno=2";
+	});
+	$("#compBtn").on("click", function() {
+		location.href = "/freeboard/list?categoryno=3";
+	});
+	$("#allBtn").on("click", function() {
+		location.href = "/freeboard/list";
+	});
 	
 	
 	$(window).scroll(function() {
@@ -92,24 +113,31 @@ $(document).ready(function() {
 </script>
 
 <div id="board" class="container list-container">
-	<h1 class="text-center">자유게시판</h1>
-	<div class="row">
+	<h1 class="text-center">😉자유게시판😉</h1>
+	<div class="row" style="margin-left: 20px;">
+		<button class="btn btn-info" id="allBtn">전체</button>
+		<button class="btn btn-info" id="ideaBtn">아이디어</button>
+		<button class="btn btn-info" id="infoBtn">정보</button>
+		<button class="btn btn-info" id="compBtn">공모전</button>
+	</div>
+	<div class="row" style="margin-left: 20px;">
 		<form action="/freeboard/list" method="get">
-			<div style="width: 10%; float: left; margin-left: 20px;">
-				<select name="categoryno">
+			<div style="width: 10%; float: left;">
+				<select name="searchno">
 					<option value="">선택없음</option>
-					<option value="1">아이디어</option>
-					<option value="2">정보</option>
-					<option value="3">공모전</option>
+					<option value="1">제목</option>
+					<option value="2">내용</option>
+					<option value="3">제목&amp;내용</option>
 				</select>
 			</div>
-			<div class="input-group" style="width: 30%; float: left;">
+			<div class="input-group" style="width: 31%; float: left;">
 				<input type="text" class="form-control" name="search" placeholder="Search for...">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="submit" style="margin: 10px;">검색</button>
 				</span>
 			</div>
 			<div style="width: 55%; text-align: right; float: left;">
+				<input type="hidden" value="${paging.categoryno }" name="categoryno">
 				<a class="btn btn-primary" href="/freeboard/write" style="margin-top: 10px;">글작성</a>
 			</div>
 		</form>

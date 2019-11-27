@@ -59,7 +59,6 @@
     border-color: #e7e7e700;
 }
 
-
 #logo {
     height: 100px;
     margin-top: -38px;
@@ -93,15 +92,12 @@ button, input, optgroup, select, textarea {
 .caption-profile {
 	height: 320px;
 }
-
 .caption-project {
 	height: 350px;
 }
-
 .caption-comp {
 	height: 200px;
 }
-
 .caption-free {
 	height: 150px;
 	-ms-user-select: none;
@@ -140,6 +136,15 @@ select {
 	text-overflow: ellipsis;
     overflow : hidden;
     white-space: nowrap;
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #mainslide{
