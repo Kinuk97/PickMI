@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.ProjectBoard;
 import dto.User;
 import util.Paging;
 
@@ -57,5 +58,21 @@ public interface MgrService {
 	public List<User> getuserList(Paging paging);
 
 // UserList ----- 
+
+// ----- ProfileList
 	
+	public List<ProfileBoard> getPfBoardList();
+	
+	public List<ProfileBoard> getPfBoardList(Paging paging);
+	
+// ProjectList -----
+
+	public List<ProjectBoard> getPjBoardList();
+	
+	public List<ProjectBoard> getPjBoardList(Paging paging);
+	
+// ----- ProjectList
+
+
+
 }

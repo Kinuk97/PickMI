@@ -64,4 +64,11 @@ public interface FreeBoardService {
 	 * @return FreeBoard - 선택한 게시글 상세내용
 	 */
 	public FreeBoard FreeBoardDetail(FreeBoard freeBoard);
+
+	/**
+	 * 게시글 조회수 올리기
+	 * 
+	 * @param freeBoard - 게시글 번호가 담긴 DTO
+	 */
+	public void viewCounting(FreeBoard freeBoard);
 }

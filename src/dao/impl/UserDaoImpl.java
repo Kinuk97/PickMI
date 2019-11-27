@@ -123,7 +123,7 @@ public class UserDaoImpl implements UserDao {
 		conn = DBConn.getConnection();
 
 		String sql = "";
-		sql += "SELECT userno FROM user_table";
+		sql += "SELECT userno, name FROM user_table";
 		sql += " WHERE email = ?";
 
 		try {
@@ -135,7 +135,7 @@ public class UserDaoImpl implements UserDao {
 
 			while (rs.next()) {
 				user.setUserno(rs.getInt("userno"));
-
+				user.setName(rs.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
