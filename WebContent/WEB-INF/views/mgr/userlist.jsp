@@ -44,8 +44,6 @@ $(document).ready(function(){
 			<th style="width: 10%">사용자번호</th>
 			<th style="width: 10%">아이디(email)</th>
 			<th style="width: 10%">이름</th>
-			<th style="width: 10%">사진저장1</th>
-			<th style="width: 10%">사진저장2</th>
 		</tr>
 		<c:forEach items="${userlist }" var="userboard">
 		<tr>
@@ -53,13 +51,11 @@ $(document).ready(function(){
 			<td>${userboard.userno }</td>
 			<td>${userboard.email }</td>
 			<td>${userboard.name }</td>
-			<td>${userboard.photo_originname }</td>
-			<td>${userboard.photo_storedname }</td>
 		</tr>	
 		</c:forEach>
 	</table>
 	<div class="src" style="text-align: center;">
-	<form action="/mgr/complist" method="get">
+	<form action="/mgr/userlist" method="get">
 		<input type="text" name="search" id="search"/>
 		<button id="btnSearch" class="btn btn-primary">검색</button>
 	</form>

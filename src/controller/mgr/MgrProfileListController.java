@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.ProfileBoard;
+import serivce.face.MgrService;
 import serivce.face.ProfileBoardService;
+import serivce.impl.MgrServiceImpl;
 import serivce.impl.ProfileBoardServiceImpl;
 import util.Paging;
 
@@ -22,31 +24,32 @@ public class MgrProfileListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
+	MgrService mgrService = new MgrServiceImpl();
 	
 //	CompBoardService compBoard = new CompBoardServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
-		//?š”ì²??ŒŒ?¼ë¯¸í„°?—?„œ curPageë¥? êµ¬í•˜ê³? Paging ê°ì²´ ë°˜í™˜
-		Paging paging = profileBoardService.getPaging(req);
 		
-		 // ê²??ƒ‰?–´ ?ŒŒ?¼ë¯¸í„° 
+		//?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½ë¯¸í„°?ï¿½ï¿½?ï¿½ï¿½ curPageï¿½? êµ¬í•˜ï¿½? Paging ê°ì²´ ë°˜í™˜
+		Paging paging = mgrService.getPaging(req);
+		
+		 // ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë¯¸í„° 
 		paging.setSearch(req.getParameter("search"));
 		
-		//Paging ê°ì²´ë¥? modelê°’ìœ¼ë¡? ì§?? •
+		//Paging ê°ì²´ï¿½? modelê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("paging", paging);
-		System.out.println(paging);		
+//		System.out.println(paging);		
+
+		// ProfileBoard ê²Œì‹œï¿½? ëª©ë¡ ì¡°íšŒ
+		List<ProfileBoard> list = mgrService.getPfBoardList(paging);		
 		
-		
-		// ProfileBoard ê²Œì‹œê¸? ëª©ë¡ ì¡°íšŒ
-		List<ProfileBoard> list = profileBoardService.getBoardList(paging);
-		
-		// list ê°ì²´ë¥? modelê°’ìœ¼ë¡? ì§?? •
+		// list ê°ì²´ï¿½? modelê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("list", list);
 		
 //		System.out.println("profile list controller : " + list);
-		//view ë³´ë‚´ê¸?
+		//view ë³´ë‚´ï¿½?
 		req.getRequestDispatcher("/WEB-INF/views/mgr/profilelist.jsp").forward(req, resp);
 
 	}

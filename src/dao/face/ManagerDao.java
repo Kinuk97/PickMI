@@ -4,6 +4,7 @@ import java.util.List;
 
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.ProjectBoard;
 import dto.User;
 import util.Paging;
 
@@ -53,4 +54,55 @@ public interface ManagerDao {
 	public List<User> userselectAll(Paging paging);	
 
 // UserList -----
+		
+// ----- Search
+	
+// ----- profileBoard
+	
+	/**
+	 * 페이징 처리를 위한 게시글 수 가져오기
+	 * @param search - 프로필 게시판에서의 검색어
+	 * @return int - 게시글 수
+	 */
+	public int profileseleCtntAll(String search);
+	
+	public List<ProfileBoard> profileselectAll();
+	
+	/**
+	 * 프로필 게시글 목록 불러오기
+	 * @param paging - 페이징 처리를 위한 객체
+	 * @return List<ProfileBoard> - 프로필 게시글 리스트
+	 */
+	public List<ProfileBoard> profileselectAll(Paging paging);
+// projectBoard ------
+	
+	
+	
+// ----- projectBoard
+	
+	/**
+	 * 페이징 처리를 위한 게시글 수 가져오기
+	 * @param search - 프로젝트 게시판에서의 검색어
+	 * @return int - 게시글 수
+	 */
+	public int projecteleCtntAll(String search);
+
+	/**
+	 * 페이징 처리를 위한 게시글 수 가져오기
+	 * @param search - 프로젝트 게시판에서의 검색어
+	 * @return int - 게시글 수  
+	 */
+	
+	public List<ProjectBoard> projectselectAll();
+
+	/**
+	 * 프로젝트 게시글 목록 불러오기
+	 * @param paging - 페이징 처리를 위한 객체
+	 * @return List<ProjectBoard> - 프로젝트 게시글 리스트
+	 */
+	public List<ProjectBoard> projectselectAll(Paging paging);
+
+// projectBoard ----- 
+
+	
 }

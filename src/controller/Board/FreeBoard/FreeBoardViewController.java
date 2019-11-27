@@ -22,6 +22,8 @@ public class FreeBoardViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		FreeBoard freeBoard = freeBoardService.getParam(req);
 		
+		freeBoardService.viewCounting(freeBoard);
+		
 		freeBoard = freeBoardService.FreeBoardDetail(freeBoard);
 		
 		if (freeBoard != null) {

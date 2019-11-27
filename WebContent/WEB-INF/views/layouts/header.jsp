@@ -21,6 +21,7 @@
 
 #header {
 	text-align: center;
+	background-color: #99E8F6;
 }
 
 #footer {
@@ -50,6 +51,12 @@
 
 .navbar {
 	margin-top: 20px;
+
+}
+
+.navbar-default {
+
+    border-color: #e7e7e700;
 }
 
 #logo {
@@ -78,7 +85,7 @@ button, input, optgroup, select, textarea {
 
 /* 게시글 호버 */
 .thumbnail:hover {
-	border-color: blue;
+	border-color: tomato;
 }
 
 /* 각 게시판 리스트 높이 */
@@ -92,7 +99,7 @@ button, input, optgroup, select, textarea {
 	height: 200px;
 }
 .caption-free {
-	height: 130px;
+	height: 150px;
 	-ms-user-select: none;
     -moz-user-select: -moz-none;
     -webkit-user-select: none;
@@ -131,8 +138,18 @@ select {
     white-space: nowrap;
 }
 
-#compboardlist:hover {
-	background: #ccc;
+h1 {
+	margin-bottom: 20px;
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#mainslide{
+	width: 1900px;
+	height: 335px;
 }
 
 </style>
