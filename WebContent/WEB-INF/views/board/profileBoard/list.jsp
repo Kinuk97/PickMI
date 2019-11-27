@@ -56,6 +56,8 @@ $(document).ready(function() {
 	    }
 	});
 	
+
+	
 });
 
 </script>
@@ -96,6 +98,14 @@ $(document).ready(function() {
 .thumbnail:hover {
 	background: #D6F0FF;
 }
+a#top {
+    position: fixed;
+    right: 5%;
+    bottom: 50px;
+    z-index: 999;
+    font-size: 20px;
+}
+
 </style>
 <div class="text-center">
 <h1>나를 소개해보세요!😉</h1>
@@ -143,7 +153,7 @@ $(document).ready(function() {
 </div>
 <br>
 <br>
-
+<a id="top" href="#">TOP👆</a>
 <div id="board" class="container list-container">
 	<c:forEach items="${ list }" var="pro">
 			<div class="col-sm-6 col-md-4 col-lg-3">
@@ -166,6 +176,7 @@ $(document).ready(function() {
 	</c:forEach>
 </div>
 <div style="clear: both;"></div>
+
 
 
 
