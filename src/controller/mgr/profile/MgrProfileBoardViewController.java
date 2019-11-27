@@ -15,7 +15,7 @@ import serivce.impl.ProfileBoardServiceImpl;
 /**
  * Servlet implementation class MgrProfileBoardViewController
  */
-@WebServlet("/mgr/profileboard/view")
+@WebServlet("/mgr/profileview")
 public class MgrProfileBoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -25,17 +25,16 @@ public class MgrProfileBoardViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("두겟");
-		
+//		System.out.println("두겟");
+
 		//게시글 정보 얻기
-		ProfileBoard profile = profileService.getProfileno(req);
+		ProfileBoard profile = profileService.getProfileno(req);	
+//		System.out.println("profile객체의 메소드 : " + profile);
 		
 		//게시판 상세정보 얻기
 		ProfileBoard detailProfile = profileService.view(profile);
+//		System.out.println("게시판 상세정보 : " + detailProfile);
 		
-		
-		System.out.println("프로필 객체 : " + profile);
-		System.out.println("디테일프로필 객체 : " + detailProfile);
 		
 		//모델값 지정하기
 		req.setAttribute("profile", profile);

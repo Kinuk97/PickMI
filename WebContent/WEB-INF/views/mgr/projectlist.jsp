@@ -52,7 +52,7 @@ $(document).ready(function(){
 			<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
 			<td>${pjboard.proj_no }</td>
 			<td>${pjboard.userno }</td>
-			<td>${pjboard.proj_title }</td>
+			<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no }">${pjboard.proj_title }</a></td>
 			<td>${pjboard.proj_name }</td>
 		</tr>	
 		</c:forEach>

@@ -51,7 +51,7 @@ $(document).ready(function(){
 			<td><input type="checkbox" name="checkRow" value="${comp.comp_no }"/></td>
 			<td>${comp.comp_no }</td>
 			<td>${comp.userno }</td>
-			<td><a href="/mgr/compboard/view?comp_no=${ comp.comp_no }">${comp.comp_title }</a></td>
+			<td><a href="/mgr/compview?comp_no=${ comp.comp_no }">${comp.comp_title }</a></td>
 			<td>${comp.comp_name }</td>
 			<td>${comp.comp_date }</td>
 		</tr>	

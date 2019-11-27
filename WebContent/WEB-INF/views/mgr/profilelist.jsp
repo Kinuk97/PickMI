@@ -51,8 +51,8 @@ $(document).ready(function(){
 		<c:forEach items="${list }" var="pbboard">
 		<tr>
 			<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
-			<td><a href="/mgr/profileboard/view?prof_no=${pbboard.prof_no }">${pbboard.prof_no }</a></td>
-			<td>${pbboard.userno }</td>
+			<td>${pbboard.prof_no}</td>
+			<td><a href="/mgr/profileview?prof_no=${pbboard.prof_no}">${pbboard.userno }</a></td>
 			<td>${pbboard.prof_time }</td>
 			<td>${pbboard.prof_job }</td>
 			<td>${pbboard.prof_state }</td>

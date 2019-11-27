@@ -26,16 +26,16 @@ public class MgrFreeListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//?š”ì²??ŒŒ?¼ë¯¸í„°?—?„œ curPageë¥? êµ¬í•˜ê³? Paging ê°ì²´ ë°˜í™˜
+		//?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½ë¯¸í„°?ï¿½ï¿½?ï¿½ï¿½ curPageï¿½? êµ¬í•˜ï¿½? Paging ê°ì²´ ë°˜í™˜
 		Paging paging = freeBoardService.getPaging(req);
 		
-		//Paging ê°ì²´ë¥? modelê°’ìœ¼ë¡? ì§?? •
+		//Paging ê°ì²´ï¿½? modelê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("paging", paging);
 		
-		// FreeBoard ê²Œì‹œê¸? ëª©ë¡ ì¡°íšŒ
+		// FreeBoard ê²Œì‹œï¿½? ëª©ë¡ ì¡°íšŒ
 		List<FreeBoard>freelist = freeBoardService.getBoardList(paging);
 		
-		//freelist ê°ì²´ë¥? modelê°’ìœ¼ë¡? ì§?? •
+		//freelist ê°ì²´ï¿½? modelê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("list", freelist);
 		
 		req.getRequestDispatcher("/WEB-INF/views/mgr/freelist.jsp").forward(req, resp);

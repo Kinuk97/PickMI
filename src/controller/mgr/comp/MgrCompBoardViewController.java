@@ -17,7 +17,7 @@ import serivce.impl.CompBoardServiceImpl;
 /**
  * Servlet implementation class MgrCompBoardViewController
  */
-@WebServlet("/mgr/compboard/view")
+@WebServlet("/mgr/compview")
 public class MgrCompBoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
