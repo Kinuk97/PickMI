@@ -21,6 +21,7 @@
 
 #header {
 	text-align: center;
+	background-color: #99E8F6;
 }
 
 #footer {
@@ -50,7 +51,14 @@
 
 .navbar {
 	margin-top: 20px;
+
 }
+
+.navbar-default {
+
+    border-color: #e7e7e700;
+}
+
 
 #logo {
     height: 100px;
@@ -85,12 +93,15 @@ button, input, optgroup, select, textarea {
 .caption-profile {
 	height: 320px;
 }
+
 .caption-project {
 	height: 350px;
 }
+
 .caption-comp {
 	height: 200px;
 }
+
 .caption-free {
 	height: 150px;
 	-ms-user-select: none;
@@ -131,8 +142,9 @@ select {
     white-space: nowrap;
 }
 
-#compboardlist:hover {
-	background: #ccc;
+#mainslide{
+	width: 1900px;
+	height: 335px;
 }
 
 </style>

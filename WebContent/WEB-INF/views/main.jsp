@@ -15,19 +15,19 @@
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="/resources/gray.png" alt="...">
-      <div class="carousel-caption">
-		<h3>회원가입을 한 후 이용해보세요 :-)</h3>
-        <h3>더 많은 서비스를 이용할 수 있습니다.</h3>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
+    <div id="mainslide" class="item active">
+      <img src="/resources/blue.png" alt="...">
+	      <div class="carousel-caption">
+			<h3>회원가입을 한 후 이용해보세요 :-)</h3>
+	        <h3>더 많은 서비스를 이용할 수 있습니다.</h3>
+	        <br>
+	        <br>
+	        <br>
+	        <br>
+	      </div>
     </div>
-    <div class="item">
-      <img src="/resources/gray.png" alt="...">
+    <div id="mainslide" class="item">
+      <img src="/resources/blue.png" alt="...">
       <div class="carousel-caption">
         <h3>게시판에 글을 업로드해보세요</h3>
         <h3>팀원을 찾거나 아이디어를 공유할 수 있습니다.</h3>
@@ -37,8 +37,8 @@
         <br>
       </div>
     </div>
-    <div class="item">
-      <img src="/resources/gray.png" alt="...">
+    <div id="mainslide" class="item">
+      <img src="/resources/blue.png" alt="...">
       <div class="carousel-caption">
 		<h3>프로젝트와 일정관리를 해보세요</h3>
         <h3>하기싫은 거 나만 그런 거 아니죠?</h3>
