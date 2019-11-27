@@ -1,4 +1,4 @@
-package controller.mrg;
+package controller.mgr;
 
 import java.io.IOException;
 
@@ -18,10 +18,10 @@ public class MgrLogOutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//ì„¸ì…˜ ì •ë³´ ì§€ìš°ê¸° - ë¡œê·¸ì•„ì›ƒ
+		//?„¸?…˜ ? •ë³? ì§??š°ê¸? - ë¡œê·¸?•„?›ƒ
 		req.getSession().invalidate();
 		
-		//ë©”ì¸í™”ë©´ìœ¼ë¡œ ë¦¬ë‹¤ì´ë ‰ì…˜
+		//ë©”ì¸?™”ë©´ìœ¼ë¡? ë¦¬ë‹¤?´? ‰?…˜
 		resp.sendRedirect("/main");
 		
 	}

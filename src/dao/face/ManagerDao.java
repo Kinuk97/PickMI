@@ -4,11 +4,13 @@ import java.util.List;
 
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.User;
 import util.Paging;
 
 public interface ManagerDao {
-	
 
+	
+// Login -----
 	/**
 	 * mgrid와 mgrpw가 일치하는 관리자 수 조회
 	 * @param mgr - mgrid와 mgrpw를 가진 관리자
@@ -22,13 +24,9 @@ public interface ManagerDao {
 	 * @return Manager 조회된 결과
 	 */
 	public Manager selectMgrByMgr(Manager mgr);
+// ----- Login
 
-	/**
-	 * 게시글 전체 목록 조회
-	 * @return List<ProfileBoard> - 조회된 게시글 목록
-	 */
-	public List<ProfileBoard> pbselectAll();
-	
+// ----- 검색	
 	/**
 	 * 총 게시글 수 조회
 	 * @param search 
@@ -36,11 +34,23 @@ public interface ManagerDao {
 	 */
 	public int selectCntAll(String search);
 	
+// 검색 -----
+	
+// ----- UserList 	
+	
+	/**
+	 * 게시글 전체 목록 조회
+	 * @return List<ProfileBoard> - 조회된 게시글 목록
+	 */
+	public List<User> userselectAll();
+
+	
 	/**
 	 * 페이징 대상 게시글 목록 조회
 	 * @param paging - 페이징 정보
 	 * @return List<ProfileBoard> - 조회된 게시글 목록
 	 */
-	public List<ProfileBoard> pbselectAll(Paging paging);	
-	
+	public List<User> userselectAll(Paging paging);	
+
+// UserList -----
 }

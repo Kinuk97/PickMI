@@ -46,7 +46,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			
 			// 검색어가 존재한다면 검색조건 추가
 			if (search != null) {
-				sql += " AND title LIKE '%' || ? || '%'";
+				sql += " AND free_title LIKE '%' || ? || '%'";
 			}
 			
 			// 카테고리가 존재한다면 카테고리 추가
@@ -102,7 +102,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			sql += " WHERE 1 = 1";
 			
 			if (paging.getSearch() != null) {
-				sql += " AND title LIKE '%' || ? || '%'";
+				sql += " AND free_title LIKE '%' || ? || '%'";
 			}
 			
 			if (paging.getCategoryno() != 0) {
@@ -170,8 +170,33 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public int insertBoard(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "INSERT INTO freeboard VALUES (freeboard_seq.nextval, ?, ?, ?, ?, sysdate, 0)";
+		
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, freeBoard.getCategoryno());
+			ps.setInt(2, freeBoard.getUserno());
+			ps.setString(3, freeBoard.getFree_title());
+			ps.setString(4, freeBoard.getFree_content());
+			
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
 	}
 
 	@Override

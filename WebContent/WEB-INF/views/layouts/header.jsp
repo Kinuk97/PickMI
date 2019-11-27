@@ -34,8 +34,8 @@
 	min-height: 600px;
 	background-color: #f3f3f3;
 	clear: both;
-	padding-top: 10px;
-    padding-bottom: 10px;
+	padding-top: 25px;
+    padding-bottom: 15px;
 }
 
 .jumbotron {
@@ -76,6 +76,11 @@ button, input, optgroup, select, textarea {
     text-align: center;
 }
 
+/* 게시글 호버 */
+.thumbnail:hover {
+	border-color: blue;
+}
+
 /* 각 게시판 리스트 높이 */
 .caption-profile {
 	height: 320px;
@@ -87,11 +92,47 @@ button, input, optgroup, select, textarea {
 	height: 200px;
 }
 .caption-free {
-	height: 180px;
+	height: 130px;
+	-ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 .list-container {
 	width: 80%;
+}
+
+select {
+	padding: 7px;
+}
+
+.free_content {
+	height: 40px;
+    
+/*     display: -webkit-box; */
+/* 	display: -ms-flexbox; */
+/* 	display: box; */
+/* 	margin-top:1px; */
+/* 	max-height:88px; */
+/* 	overflow:hidden; */
+/* 	vertical-align:top; */
+/* 	text-overflow: ellipsis; */
+/* 	word-break:break-all; */
+/* 	-webkit-box-orient:vertical; */
+/* 	-webkit-line-clamp:3; */
+
+}
+
+.overtext {
+	text-overflow: ellipsis;
+    overflow : hidden;
+    white-space: nowrap;
+}
+
+#compboardlist:hover {
+	background: #ccc;
 }
 
 </style>

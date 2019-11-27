@@ -11,21 +11,20 @@
 $(document).ready(function() {
 	var curPage = 1;
 	var totalPage = "${paging.totalPage}";
+	var loading = false;
 	
 	$(window).scroll(function() {
+		if (loading) {
+			return;
+		}
 		if (curPage >= totalPage) {
 			return;
 		}
-		
-		let $window = $(this);
-        let scrollTop = $window.scrollTop();
-        let windowHeight = $window.height();
-        let documentHeight = $(document).height();
-        
-        // scrollbar의 thumb가 바닥 전 30px까지 도달 하면 리스트를 가져온다.
-        if( scrollTop + windowHeight + 30 > documentHeight ) {
-        		
+
+		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 	    	curPage += 1;
+	    	loading = true;
+	    	
 	    	$.ajax({
 				type : "post",
 				url : "/compBoard/list",
@@ -37,11 +36,11 @@ $(document).ready(function() {
 						var caption = $("<div class='caption caption-comp'></div>");
 						
 						if (data[i].categoryno == 1) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[작성자] " + data[i].comp_title)));
+							caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[작성자] " + data[i].comp_title)));
 						} else if (data[i].categoryno == 2) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[제목] " + data[i].comp_title)));
+							caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[제목] " + data[i].comp_title)));
 						} else if (data[i].categoryno == 3) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[제목 + 내용] " + data[i].comp_title)));
+							caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[제목 + 내용] " + data[i].comp_title)));
 						}
 						
 // 						caption.append($("<p></p>").html($("<a></a>").text(data[i].comp_content)));
@@ -51,12 +50,15 @@ $(document).ready(function() {
 						caption.append($("<br>"));
 						caption.append($("<br>"));
 						caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].userno));
-						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));			
+						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));	
+						caption.append($("<div class='text-right'></div>").text("찜한수 : " + data[i].comp_like));
 						caption.append($("<div class='text-right'></div>").text("작성날짜 : " + data[i].comp_date));
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 						
 						$("#board").append(board);
-					}					
+					}
+					
+					loading = false;
 				},
 				error : function(e) {
 					console.log(e);
@@ -127,7 +129,8 @@ select {
 <div id="board">
 	<c:forEach items="${compList }" var="compList">
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="thumbnail">
+				<div class="thumbnail" onclick="location.href='/compBoard/view?comp_no=${compList.comp_no }'" 
+					 id="compboardlist" style="cursor:pointer; hover: #ccc;">
 					<div class="caption caption-comp">
 	<%-- 					<input type="checkbox" name="checkRow" id="checkRow" value="${compList.comp_no }"> --%>
 						<h4>${compList.comp_no}. ${compList.comp_title }</h4>
@@ -135,6 +138,7 @@ select {
 						<br><br>
 						<p class="text-right" style="margin: 0 0 0px;">작성자 : ${compList.userno }</p>
 						<p class="text-right" style="margin: 0 0 0px;">조회수 : ${compList.comp_view }</p>
+						<p class="text-right" style="margin: 0 0 0px;">찜한수 : ${compList.comp_like }</p>
 						<p class="text-right" style="margin: 0 0 0px;">작성날짜 : ${compList.comp_date }</p>
 					</div>
 				</div>

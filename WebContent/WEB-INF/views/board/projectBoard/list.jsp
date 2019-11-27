@@ -11,9 +11,13 @@
 $(document).ready(function() {
 	var curPage = 1;
 	var loading = false;
+	var totalPage = "${paging.totalPage}";
 	
 	$(window).scroll(function() {
 		if (loading) {
+			return;
+		}
+		if (curPage >= totalPage) {
 			return;
 		}
 		
@@ -73,7 +77,7 @@ select {
 </div>
 
 <hr>
-<div id="board">
+<div id="board" class="container list-container">
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail">

@@ -2,22 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pick MI (Mate&Idea)</title>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Header -->
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
 
 <style type="text/css">
 .mgrlogin-form{
@@ -54,20 +40,11 @@
 	margin: 5px auto;
 	width: 500px;
 }
-#logo{
-	height: 10px;
-}
 
 </style>
 
 </head>
 <body>
-	<span id="logo">
-		<a href="/main">
-			<img src="/resources/black.png"class="img-rounded center-block" style="height: 250px;">
-		</a>
-	</span>
-
 	<div class="mgrlogin-form" id="mgrlog">
 		<form action="/mgr/login" method="post">
 			<h2 class="text-center">관리자 로그인</h2>
@@ -106,5 +83,8 @@
 			아이디와 비밀번호를 잊으셨을 경우 당사 담당자에게 연락해 주시기 바랍니다.			</p>
 			</li>
 		</ul>
+</div> <!-- .container -->
 
-<c:import url="/WEB-INF/views/layouts/footer.jsp" />
+<!-- Footer -->
+
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  

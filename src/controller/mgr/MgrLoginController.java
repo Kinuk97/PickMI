@@ -1,4 +1,4 @@
-package controller.mrg;
+package controller.mgr;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class MgrLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// VIEW ì§€ì •
+		// VIEW ì§?? •
 		req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
 		.forward(req, resp);
 
@@ -37,30 +37,30 @@ public class MgrLoginController extends HttpServlet {
 
 	
 		
-		// ë¡œê·¸ì¸ ì •ë³´ ì–»ì–´ì˜¤ê¸°
+		// ë¡œê·¸?¸ ? •ë³? ?–»?–´?˜¤ê¸?
 		Manager mgr = mgrService.getLoginMgr(req);
 		
 		
-		// ë¡œê·¸ì¸ ì¸ì¦
+		// ë¡œê·¸?¸ ?¸ì¦?
 		boolean login = mgrService.login(mgr);
 		
-		if(login == true) { // ë¡œê·¸ì¸ ëì„ ê²½ìš°
+		if(login == true) { // ë¡œê·¸?¸ ??„ ê²½ìš°
 			
-			// ë¡œê·¸ì¸í•œ ê´€ë¦¬ì ì •ë³´ ì–»ì–´ì˜¤ê¸°
+			// ë¡œê·¸?¸?•œ ê´?ë¦¬ì ? •ë³? ?–»?–´?˜¤ê¸?
 			mgr = mgrService.getMgrByMgrid(mgr);
 			
-			//ì„¸ì…˜ì •ë³´ ì €ì¥
+			//?„¸?…˜? •ë³? ???¥
 			req.getSession().setAttribute("login", login);
 			req.getSession().setAttribute("mgrid", mgr.getMgrid());
 			
 			
-			//////////////////////////// sendRedirect ê´€ë¦¬ì í˜ì´ì§€ ì²« í™”ë©´ // ì²«í™”ë©´ ë­ì¸ì§€..
-			resp.sendRedirect("/mgr/pblist");
+			//////////////////////////// sendRedirect ê´?ë¦¬ì ?˜?´ì§? ì²? ?™”ë©? // ì²«í™”ë©? ë­ì¸ì§?..
+			resp.sendRedirect("/mgr/main");
 			////////////////////////////
 			
-		} else { // ë¡œê·¸ì¸ ì‹¤íŒ¨ì‹œ
-			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
-			req.setAttribute("login", login); // ì´ê±° ì™œ ? ë¡œê·¸ì¸ ì‹¤íŒ¨ì¸ë° ì„¸ì…˜ì €ì¥?
+		} else { // ë¡œê·¸?¸ ?‹¤?Œ¨?‹œ
+			System.out.println("ë¡œê·¸?¸ ?‹¤?Œ¨");
+			req.setAttribute("login", login); // ?´ê±? ?™œ ? ë¡œê·¸?¸ ?‹¤?Œ¨?¸?° ?„¸?…˜???¥?
 			req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
 			.forward(req, resp);
 		}

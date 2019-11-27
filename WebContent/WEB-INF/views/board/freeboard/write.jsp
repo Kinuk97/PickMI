@@ -11,7 +11,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#write").click(function() {
-		submitContents("#write")
+// 		submitContents("#write")
 		$("form").submit();
 	});
 	
@@ -24,24 +24,36 @@ $(document).ready(function() {
 <div class="container text-center">
 	<h1>게시글 작성✍</h1>
 	
-	<div>
-		<form action="/freeboard/write" method="post">
-			<div class="col-lg-3"><p><label for="free_title">제목 : </label></p></div>
-			<div class="col-lg-4">
-				<input class="form-control" type="text" placeholder="제목을 입력하세요" id="free_title" name="free_title">
-			</div>
-			<div class="col-lg-5" style="height: 1px;"></div>
-			<div class="col-lg-12">
-				<textarea id="free_content" name="free_content"></textarea>
+	<form class="form-horizontal" action="/freeboard/write" method="post">
+  		<div class="form-group">
+    		<label for="inputEmail3" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">제목 : </label>
+    		<div class="col-sm-2 col-md-2 col-lg-1">
+    			<select name="categoryno" style="margin-left: -14px;">
+	  				<option value="">선택없음</option>
+	  				<option value="1">아이디어</option>
+	  				<option value="2">정보</option>
+	  				<option value="3">공모전</option>
+  				</select>
+    		</div>
+    		<div class="col-sm-9 col-md-9 col-lg-10">
+      			<input type="text" class="form-control" id="free_title" placeholder="제목을 입력하세요" name="free_title" maxlength="120">
+    		</div>
+  		</div>
+	  	<div class="form-group">
+		  	<textarea id="free_content" name="free_content"></textarea>
 			</div>
 		  	<script>
-				CKEDITOR.replace( 'free_content' );
+				CKEDITOR.replace( 'free_content', {
+					height : "500px"
+				} );
 		    </script>
-		    <div style="clear: both;"></div>
-			<button type="button" id="write">작성완료</button>
-			<button type="button" id="cancel">취소</button>
-		</form>
-	</div>
+	 	<div class="form-group">
+	    	<div class="col-sm-offset-2 col-sm-8 text-center">
+				<button class="btn btn-default" type="button" id="write">작성완료</button>
+				<button class="btn btn-default" type="button" id="cancel">취소</button>
+	    	</div>
+	  	</div>
+	</form>
 </div>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.face.CompBoardDao;
+import dao.impl.CompBoardDaoImpl;
 import dto.CompBoard;
 import serivce.face.CompBoardService;
 import serivce.impl.CompBoardServiceImpl;
@@ -16,12 +18,15 @@ import serivce.impl.CompBoardServiceImpl;
 public class CompBoardViewController extends HttpServlet {
 	
 	private CompBoardService compBoardService = new CompBoardServiceImpl();
+	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		//요청 파라미터 얻기
 		CompBoard compBoard = compBoardService.getParam(req);
+		
+		compBoardDao.countViews(compBoard);
 		
 		System.out.println(compBoard);
 		

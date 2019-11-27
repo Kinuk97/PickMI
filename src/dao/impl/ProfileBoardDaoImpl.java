@@ -58,7 +58,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			}
 		}
 		
-		System.out.println("profileBoardDaoImpl : " + profile);
+//		System.out.println("profileBoardDaoImpl : " + profile);
 		return profile;
 	}
 	

@@ -11,6 +11,7 @@ import dao.face.ManagerDao;
 import dbutil.DBConn;
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.User;
 import util.Paging;
 
 public class ManagerDaoImpl implements ManagerDao{
@@ -110,61 +111,6 @@ public class ManagerDaoImpl implements ManagerDao{
 		return mgr;
 	}
 
-	@Override
-	public List<ProfileBoard> pbselectAll() {
-		
-		conn = DBConn.getConnection(); // DB연결
-		
-		//수행할 SQL
-		String sql="";
-		sql += "SELECT";
-		sql += " prof_no, userno, prof_time,";
-		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += " prof_content, prof_like FROM profile";
-		sql += " ORDER BY prof_no DESC";
-		
-		// 결과 저장 리스트
-		List<ProfileBoard> list = new ArrayList<>();
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				ProfileBoard pb = new ProfileBoard();
-				pb.setProf_no(rs.getInt("prof_no"));
-				pb.setUserno(rs.getInt("userno"));
-				pb.setProf_time(rs.getDate("prof_time"));
-				pb.setProf_interest(rs.getString("prof_interest"));
-				pb.setProf_job(rs.getString("prof_job"));
-				pb.setProf_state(rs.getString("prof_state"));
-				pb.setProf_loc(rs.getString("prof_loc"));
-				pb.setProf_career(rs.getString("prof_career"));
-				pb.setProf_content(rs.getString("prof_content"));
-				pb.setProf_like(rs.getInt("prof_like"));
-				
-				list.add(pb);
-				
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(rs!=null)rs.close();
-				if(ps!=null)ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	
-		
-		
-		
-		
-		return list;
-	}
 
 	@Override
 	public int selectCntAll(String search) {
@@ -211,8 +157,52 @@ public class ManagerDaoImpl implements ManagerDao{
 	}
 
 	@Override
-	public List<ProfileBoard> pbselectAll(Paging paging) {
+	public List<User> userselectAll() {
+		conn = DBConn.getConnection(); // DB연결
+		
+		//수행할 SQL
+		String sql="";
+		sql += "SELECT";
+		sql += "	userno, email, pw,"; 
+		sql += "    name, photo_originname, photo_storedname";
+		sql += "    FROM user_table";
+		
+		// 결과 저장 리스트
+		List<User> userlist = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				User user = new User();
+				
+				user.setUserno(rs.getInt("user_no"));
+				user.setEmail(rs.getString("email"));
+				user.setName(rs.getString("name"));
+				user.setPhoto_originname(rs.getString("photo_originaname"));
+				user.setPhoto_storedname(rs.getString("photo_storedname"));
+				
+				userlist.add(user);				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
+		return userlist;
+	}
 
+	@Override
+	public List<User> userselectAll(Paging paging) {
 		conn = DBConn.getConnection(); //DB 연결
 		
 		//수행할 SQL
@@ -220,23 +210,24 @@ public class ManagerDaoImpl implements ManagerDao{
 		sql += "SELECT * FROM (";
 		sql += "    SELECT rownum rnum, B.* FROM (";
 		sql += "        SELECT";
-		sql += "             prof_no, userno, prof_time,"; 
-		sql += "             prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += "			  prof_content, prof_like"	;		
-		sql += "        FROM profile";
+		sql += "             userno, email, pw,"; 
+		sql += "           name, photo_originname, photo_storedname";
+		sql += "        FROM user_table";
 		if(paging.getSearch()!=null && !"".equals(paging.getSearch())) {
-			sql+= "   WHERE prof_no LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql+= "   WHERE email LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql+= "   AND userno LIKE '%'||'"+paging.getSearch()+"'||'%'";
+			sql+= "   AND name LIKE '%'||'"+paging.getSearch()+"'||'%'";
 		}
 
-		sql += "        ORDER BY prof_no DESC";
+		sql += "        ORDER BY userno";
 		sql += "    ) B";
 		sql += "    ORDER BY rnum";
-		sql += " ) profile";
+		sql += " ) user_table";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 		
 		
 		//최종 결과를 저장할 List
-		List<ProfileBoard> list = new ArrayList<>();		
+		List<User> userlist = new ArrayList<>();		
 		try {
 			//SQL 수행 객체
 			ps = conn.prepareStatement(sql);
@@ -249,19 +240,14 @@ public class ManagerDaoImpl implements ManagerDao{
 			
 			//SQL 수행 결과 처리
 			while( rs.next() ) {
-				ProfileBoard pb = new ProfileBoard();
-				pb.setProf_no(rs.getInt("prof_no"));
-				pb.setUserno(rs.getInt("userno"));
-				pb.setProf_time(rs.getDate("prof_time"));
-				pb.setProf_interest(rs.getString("prof_interest"));
-				pb.setProf_job(rs.getString("prof_job"));
-				pb.setProf_state(rs.getString("prof_state"));
-				pb.setProf_loc(rs.getString("prof_loc"));
-				pb.setProf_career(rs.getString("prof_career"));
-				pb.setProf_content(rs.getString("prof_content"));
-				pb.setProf_like(rs.getInt("prof_like"));
+				User user = new User();
+				user.setUserno(rs.getInt("userno"));
+				user.setEmail(rs.getString("email"));
+				user.setName(rs.getString("name"));
+				user.setPhoto_originname(rs.getString("photo_originname"));
+				user.setPhoto_storedname(rs.getString("photo_storedname"));
 				
-				list.add(pb);
+				userlist.add(user);
 			}
 			
 		} catch (SQLException e) {
@@ -276,6 +262,6 @@ public class ManagerDaoImpl implements ManagerDao{
 		}
 		
 		//최종 결과 반환
-		return list;
-	}	
+		return userlist;
+	}
 }
