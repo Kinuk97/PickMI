@@ -79,7 +79,6 @@ public class MgrServiceImpl implements MgrService{
 		
 		return paging;
 	}
-// User List -----
 	
 	@Override
 	public List<User> getuserList() {
@@ -91,6 +90,8 @@ public class MgrServiceImpl implements MgrService{
 		return managerDao.userselectAll(paging);
 	}
 
+// ----- User List
+	
 	@Override
 	public List<ProfileBoard> getPfBoardList() {
 		return managerDao.profileselectAll();
