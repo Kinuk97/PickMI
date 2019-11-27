@@ -12,7 +12,7 @@
 $(document).ready(function() {
 	$("#write").click(function() {
 		
-		submitContents("#write");
+// 		submitContents("#write");
 		
 		$("form").submit();
 	});
