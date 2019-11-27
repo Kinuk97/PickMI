@@ -27,7 +27,7 @@ public class CompBoardWriteController extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-//		compBoardService.write(compBoard);
+		compBoardService.write(req, resp);
 		
 		resp.sendRedirect("/compBoard/list");
 		

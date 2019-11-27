@@ -49,7 +49,8 @@ $(document).ready(function() {
 						caption.append($("<br>"));
 						caption.append($("<br>"));
 						caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].userno));
-						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));			
+						caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));	
+						caption.append($("<div class='text-right'></div>").text("찜한수 : " + data[i].comp_like));
 						caption.append($("<div class='text-right'></div>").text("작성날짜 : " + data[i].comp_date));
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 						
@@ -136,6 +137,7 @@ select {
 						<br><br>
 						<p class="text-right" style="margin: 0 0 0px;">작성자 : ${compList.userno }</p>
 						<p class="text-right" style="margin: 0 0 0px;">조회수 : ${compList.comp_view }</p>
+						<p class="text-right" style="margin: 0 0 0px;">찜한수 : ${compList.comp_like }</p>
 						<p class="text-right" style="margin: 0 0 0px;">작성날짜 : ${compList.comp_date }</p>
 					</div>
 				</div>
