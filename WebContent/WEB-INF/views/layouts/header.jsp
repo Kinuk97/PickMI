@@ -78,7 +78,7 @@ button, input, optgroup, select, textarea {
 
 /* 게시글 호버 */
 .thumbnail:hover {
-	border-color: blue;
+	border-color: tomato;
 }
 
 /* 각 게시판 리스트 높이 */
@@ -92,7 +92,7 @@ button, input, optgroup, select, textarea {
 	height: 200px;
 }
 .caption-free {
-	height: 130px;
+	height: 150px;
 	-ms-user-select: none;
     -moz-user-select: -moz-none;
     -webkit-user-select: none;
