@@ -17,7 +17,11 @@
 		</tr>
 
 		<tr>
-			<td colspan="4">${board.free_content }</td>
+			<td colspan="4" style="height: 500px; background: #CCC;">${board.free_content }</td>
+		</tr>
+		<tr>
+			<td class="info">첨부파일</td>
+			<td colspan="3"><a href="/file/download?fileno=${file.fileno }">${file.originName }</a></td>
 		</tr>
 	</table>
 	

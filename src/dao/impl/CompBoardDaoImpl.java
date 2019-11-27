@@ -342,7 +342,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps = conn.prepareStatement(sql);
 
 			//SQL쿼리의 ?채우기
-			ps.setString(1, files.getFilename());
+//			ps.setString(1, files.getFilename());
 			ps.setInt(2, files.getBoardno());
 
 			//					System.out.println(files.getBoardno());
