@@ -38,6 +38,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		}
 		
 		Object userno = req.getSession().getAttribute("userno");
+		System.out.println(userno);
 		if (userno != null && !"".equals(userno)) {
 			try {
 				freeBoard.setUserno(Integer.parseInt((String) userno));

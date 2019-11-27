@@ -97,6 +97,18 @@ $(document).ready(function() {
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//로그인을 하지 않았는데 새로운 글 작성을 눌렀을 때
+	$("#btnNoLoginWrite").click(function() {
+		$(location).attr("href", "/login");
+	});
+});
+
+</script>
+
+
 <style type="text/css">
 select {
 	padding: 7px;
@@ -127,10 +139,25 @@ select {
 				</div>
 		
 			<div class="text-right">
-				<a href="/compBoard/write" class="btn btn-info" style="margin-top: 10px;">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</a>
+<!-- 				<a href="/compBoard/write" id="btnNoLoginWrite" name="btnNoLoginWrite" class="btn btn-info" style="margin-top: 10px;">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</a> -->
 			</div>
 
 		</form>
+		
+		<c:choose>
+
+			<c:when test="${not empty login }">
+				<!-- 로그인이 되어있으면 글 작성으로 넘어감 -->
+				<button onclick="location.href = '/compBoard/write';" 
+						class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+			</c:when>
+
+			<c:otherwise>
+				<!-- 로그인되어있지 않으면 글쓰기 페이지로 넘어가지 않음 -->
+				<button id="btnNoLoginWrite" onclick="alert('로그인이 필요한 서비스입니다.')"
+						class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 	<br>
