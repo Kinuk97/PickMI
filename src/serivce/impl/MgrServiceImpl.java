@@ -8,6 +8,7 @@ import dao.face.ManagerDao;
 import dao.impl.ManagerDaoImpl;
 import dto.Manager;
 import dto.ProfileBoard;
+import dto.ProjectBoard;
 import dto.User;
 import serivce.face.MgrService;
 import util.Paging;
@@ -78,6 +79,7 @@ public class MgrServiceImpl implements MgrService{
 		
 		return paging;
 	}
+// User List -----
 	
 	@Override
 	public List<User> getuserList() {
@@ -88,8 +90,27 @@ public class MgrServiceImpl implements MgrService{
 	public List<User> getuserList(Paging paging) {
 		return managerDao.userselectAll(paging);
 	}
+
+	@Override
+	public List<ProfileBoard> getPfBoardList() {
+		return managerDao.profileselectAll();
+	}
+
+	@Override
+	public List<ProfileBoard> getPfBoardList(Paging paging) {
+		return managerDao.profileselectAll(paging);
+	}
+
+	@Override
+	public List<ProjectBoard> getPjBoardList() {
+		return managerDao.projectselectAll();
+	}
+
+	@Override
+	public List<ProjectBoard> getPjBoardList(Paging paging) {
+		return managerDao.projectselectAll(paging);
+	}
 	
-// User List -----
 
 	
 	

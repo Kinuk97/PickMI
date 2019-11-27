@@ -62,7 +62,7 @@ $(document).ready(function(){
 	</table>
 	
 	<div class="src" style="text-align: center;">
-		<form action="/mgr/complist" method="get">
+		<form action="/mgr/profilelist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary">검색</button>
 		</form>
