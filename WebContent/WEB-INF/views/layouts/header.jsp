@@ -131,6 +131,15 @@ select {
     white-space: nowrap;
 }
 
+h1 {
+	margin-bottom: 20px;
+}
+
+hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 #compboardlist:hover {
 	background: #ccc;
 }

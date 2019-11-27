@@ -36,7 +36,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	}
 
 	@Override
-	public int selectCntAll(String search, int categoryno) {
+	public int selectCntAll(String search, int searchno, int categoryno) {
 		String sql = "SELECT count(*) FROM freeboard";
 		
 		// 검색어가 존재하거나 카테고리가 존재한다면
@@ -46,7 +46,18 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			
 			// 검색어가 존재한다면 검색조건 추가
 			if (search != null) {
-				sql += " AND free_title LIKE '%' || ? || '%'";
+				if (searchno == 2) {
+					// 내용으로 검색할 경우
+					sql += " AND free_content LIKE '%' || ? || '%'";
+				} else if (searchno == 3) {
+					// 제목 & 내용으로 검색할 경우
+					sql += " AND free_title LIKE '%' || ? || '%'";
+					sql += " AND free_content LIKE '%' || ? || '%'";
+				} else {
+					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
+					sql += " AND free_title LIKE '%' || ? || '%'";
+				}
+				
 			}
 			
 			// 카테고리가 존재한다면 카테고리 추가
@@ -60,13 +71,27 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			
+			// 검색어만 존재할 경우
 			if (search != null && categoryno == 0) {
 				ps.setString(1, search);
+				// 제목&내용으로 검색할 경우
+				if (searchno == 3) {
+					ps.setString(2, search);
+				}
 			} else if (categoryno != 0 && search == null) {
+				// 검색어가 존재하지 않을 경우
 				ps.setInt(1, categoryno);
 			} else if (search != null && categoryno != 0) {
+				// 검색어와 카테고리가 존재할 경우
 				ps.setString(1, search);
-				ps.setInt(2, categoryno);
+				
+				if (searchno == 3) {
+					// 제목&내용으로 검색할 경우
+					ps.setString(2, search);
+					ps.setInt(3, categoryno);
+				} else {
+					ps.setInt(2, categoryno);
+				}
 			}
 			
 			rs = ps.executeQuery();
@@ -97,12 +122,24 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		sql += "  select rownum rnum, B.* FROM(";
 		sql += "   select * from freeboard";
 		
-		// 검색어가 존재할 때
+		// 검색어나 카테고리가 존재한다면 WHERE절 추가
 		if (paging.getSearch() != null || paging.getCategoryno() != 0) {
 			sql += " WHERE 1 = 1";
 			
+			// 검색어가 존재할 경우
 			if (paging.getSearch() != null) {
-				sql += " AND free_title LIKE '%' || ? || '%'";
+				if (paging.getSearchno() == 2) {
+					// 내용으로 검색할 경우
+					System.out.println("test");
+					sql += " AND free_content LIKE '%' || ? || '%'";
+				} else if (paging.getSearchno() == 3) {
+					// 제목 & 내용으로 검색할 경우
+					sql += " AND free_title LIKE '%' || ? || '%'";
+					sql += " AND free_content LIKE '%' || ? || '%'";
+				} else {
+					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
+					sql += " AND free_title LIKE '%' || ? || '%'";
+				}
 			}
 			
 			if (paging.getCategoryno() != 0) {
@@ -123,18 +160,38 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			
 			if (paging.getSearch() != null && paging.getCategoryno() == 0) {
 				ps.setString(1, paging.getSearch());
-				ps.setInt(2, paging.getStartNo());
-				ps.setInt(3, paging.getEndNo());
+				if (paging.getSearchno() == 3) {
+					// 제목 & 내용으로 검색할 때
+					ps.setString(2, paging.getSearch());
+					ps.setInt(3, paging.getStartNo());
+					ps.setInt(4, paging.getEndNo());
+				} else {
+					// 제목이나 내용으로 검색할 때
+					ps.setInt(2, paging.getStartNo());
+					ps.setInt(3, paging.getEndNo());
+				}
 			} else if (paging.getCategoryno() != 0 && paging.getSearch() == null) {
+				// 검색어가 없고 카테고리만 존재한다면
 				ps.setInt(1, paging.getCategoryno());
 				ps.setInt(2, paging.getStartNo());
 				ps.setInt(3, paging.getEndNo());
 			} else if (paging.getSearch() != null && paging.getCategoryno() != 0) {
+				// 검색어가 존재하고 카테고리가 존재할 때
 				ps.setString(1, paging.getSearch());
-				ps.setInt(2, paging.getCategoryno());
-				ps.setInt(3, paging.getStartNo());
-				ps.setInt(4, paging.getEndNo());
+				if (paging.getSearchno() == 3) {
+					// 제목 & 내용으로 검색할 때
+					ps.setString(2, paging.getSearch());
+					ps.setInt(3, paging.getCategoryno());
+					ps.setInt(4, paging.getStartNo());
+					ps.setInt(5, paging.getEndNo());
+				} else {
+					// 제목으로 검색하거나 내용으로 검색할 때
+					ps.setInt(2, paging.getCategoryno());
+					ps.setInt(3, paging.getStartNo());
+					ps.setInt(4, paging.getEndNo());
+				}
 			} else {
+				// 검색어, 카테고리가 존재하지 않는 경우 (전체 리스트)
 				ps.setInt(1, paging.getStartNo());
 				ps.setInt(2, paging.getEndNo());
 			}
@@ -187,8 +244,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (rs != null)
-					rs.close();
 				if (ps != null)
 					ps.close();
 			} catch (SQLException e) {
@@ -254,8 +309,25 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public void countViews(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-
+		String sql = "UPDATE freeboard SET views = views + 1 WHERE free_no = ?";
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, freeBoard.getFree_no());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
