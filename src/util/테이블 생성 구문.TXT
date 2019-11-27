@@ -1,0 +1,144 @@
+DROP TABLE profile;
+CREATE TABLE profile (
+    prof_no NUMBER,
+    userno NUMBER,
+    prof_time DATE DEFAULT sysdate,
+    prof_interest VARCHAR2(20),
+    prof_job VARCHAR2(20),
+    prof_state VARCHAR2(20),
+    prof_loc VARCHAR2(20),
+    prof_career VARCHAR2(20),
+    prof_content VARCHAR2(500),
+    prof_like   NUMBER
+);
+
+DROP SEQUENCE profile_seq;
+CREATE SEQUENCE profile_seq;
+
+DROP TABLE projboard;
+CREATE TABLE projboard (
+    proj_no NUMBER,
+    userno NUMBER,
+    proj_title VARCHAR2(100),
+    proj_name VARCHAR2(100),
+    proj_time DATE DEFAULT sysdate,
+    proj_loc VARCHAR2(100),
+    proj_career VARCHAR2(50),
+    proj_member NUMBER,
+    proj_apply NUMBER,
+    proj_sdate DATE,
+    proj_ddate DATE,
+    proj_rec_date DATE,
+    proj_progress VARCHAR2(50),
+    proj_content VARCHAR2(500),
+    proj_like   NUMBER
+);
+    
+DROP SEQUENCE proj_no_seq;
+CREATE SEQUENCE proj_no_seq;
+
+DROP TABLE compboard;
+CREATE TABLE compboard (
+    comp_no NUMBER PRIMARY KEY,
+    categoryno NUMBER,
+    fileno NUMBER,
+    userno NUMBER,
+    comp_title VARCHAR2(50),
+    comp_name VARCHAR2(50),
+    comp_content VARCHAR2(1000),
+    comp_member NUMBER,
+    comp_date DATE default SYSDATE,
+    comp_view NUMBER,
+    comp_reply NUMBER,
+    comp_like NUMBER,
+    comp_startdate NUMBER,
+    comp_enddate NUMBER
+);
+
+ALTER TABLE compboard
+ADD CONSTRAINT compboard_fk_01
+    FOREIGN KEY (categoryno)
+    REFERENCES category(categoryno);
+ALTER TABLE compboard
+ADD CONSTRAINT compboard_fk_02
+    FOREIGN KEY (fileno)
+    REFERENCES files(fileno);
+ALTER TABLE compboard
+ADD CONSTRAINT compboard_fk_03
+    FOREIGN KEY (userno)
+    REFERENCES user_table(userno);
+    
+    
+DROP SEQUENCE compBoard_seq;
+CREATE SEQUENCE compBoard_seq;
+
+DROP TABLE freeboard;
+CREATE TABLE freeboard (
+    free_no NUMBER PRIMARY KEY,
+    categoryno NUMBER NOT NULL,
+    userno NUMBER NOT NULL,
+    free_title VARCHAR2(100) NOT NULL,
+    free_content VARCHAR2(4000) NOT NULL,
+    free_time DATE DEFAULT sysdate,
+    views NUMBER DEFAULT 0
+);
+
+DROP SEQUENCE freeboard_seq;
+CREATE SEQUENCE freeboard_seq;
+
+DROP TABLE reply;
+CREATE TABLE reply (
+    replyno NUMBER PRIMARY KEY,
+    userno NUMBER NOT NULL,
+    boardno NUMBER NOT NULL,
+    reply VARCHAR2(500) NOT NULL,
+    replytime DATE DEFAULT sysdate,
+    postno NUMBER NOT NULL
+);
+
+DROP SEQUENCE reply_seq;
+CREATE SEQUENCE reply_seq;
+
+DROP TABLE user_table;
+CREATE TABLE user_table(
+    userno NUMBER PRIMARY KEY,
+    email VARCHAR2(30),
+    pw VARCHAR2(20),
+    name VARCHAR2(30),
+    photo_originname VARCHAR2(300),
+    photo_storedname VARCHAR2(300)
+);
+
+DROP SEQUENCE userno_seq;
+CREATE SEQUENCE userno_seq;
+
+DROP TABLE manager;
+CREATE TABLE manager (
+    mgrid VARCHAR2(100) PRIMARY KEY,
+    mgrpw VARCHAR2(100)
+);
+
+DROP TABLE likepost;
+CREATE TABLE likepost(
+    userno NUMBER,
+    postno NUMBER,
+    boardno NUMBER
+);
+
+ALTER TABLE likepost
+ADD CONSTRAINT likepost_fk_01
+    FOREIGN KEY (userno)
+    REFERENCES user_table(userno);
+
+DROP TABLE files;
+CREATE TABLE files(
+    fileno NUMBER PRIMARY KEY,
+    postno NUMBER NOT NULL,
+    boardno NUMBER NOT NULL,
+    originname VARCHAR2(80) NOT NULL,
+    storedname VARCHAR2(100) NOT NULL,
+    filesize VARCHAR2(20) NOT NULL
+);
+
+DROP SEQUENCE files_seq;
+CREATE SEQUENCE files_seq;
