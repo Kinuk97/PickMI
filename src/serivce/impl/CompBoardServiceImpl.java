@@ -76,8 +76,6 @@ public class CompBoardServiceImpl implements CompBoardService {
 	@Override
 	public CompBoard getParam(HttpServletRequest req) {
 		
-		System.out.println(req.getParameter("comp_no"));
-		
 		//요청 파라미터 comp_no를 파싱
 		String param = req.getParameter("comp_no");
 		

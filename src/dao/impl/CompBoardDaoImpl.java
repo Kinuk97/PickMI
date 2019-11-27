@@ -174,7 +174,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += " ) compBoard";
 			sql += " WHERE rnum BETWEEN ? AND ?";
 
-			System.out.println(sql);
+//			System.out.println(sql);
 
 			//결과 저장 리스트
 			List<CompBoard> List = new ArrayList<CompBoard>();
@@ -262,7 +262,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "UPDATE compBoard SET comp_view = comp_view+1 ";
+		sql += "UPDATE compBoard SET comp_view = comp_view + 1 ";
 		sql += "WHERE comp_no = ? ";
 		
 		try {
