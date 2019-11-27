@@ -2,10 +2,29 @@ package dao.face;
 
 import java.util.List;
 
+import dto.Files;
 import dto.ProfileBoard;
 import util.Paging;
 
 public interface ProfileBoardDao {
+	
+	/**
+	 * 프로필 테이블에 프로필을 저장한다
+	 * @param profile
+	 */
+	public void insertProfile(ProfileBoard profile);
+	
+	/**
+	 * 파일 테이블에 파일을 저장한다
+	 * @param file
+	 */
+	public void insertFile(Files file);
+	
+	/**
+	 * profileno와 fileno를 맞추기 위해 필요함
+	 * @return
+	 */
+	public int selectProfileno();
 	
 	/**
 	 * 게시글 번호로 프로필 상세보기
