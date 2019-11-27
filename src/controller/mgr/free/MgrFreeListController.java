@@ -1,4 +1,4 @@
-package controller.mgr;
+package controller.mgr.free;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +38,7 @@ public class MgrFreeListController extends HttpServlet {
 		//freelist 객체�? model값으�? �??��
 		req.setAttribute("list", freelist);
 		
-		req.getRequestDispatcher("/WEB-INF/views/mgr/freelist.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/mgr/free/freelist.jsp").forward(req, resp);
 	}
 	
 	

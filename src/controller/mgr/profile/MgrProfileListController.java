@@ -1,4 +1,4 @@
-package controller.mgr;
+package controller.mgr.profile;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,25 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.CompBoard;
-import serivce.face.CompBoardService;
-import serivce.impl.CompBoardServiceImpl;
+import dto.ProfileBoard;
+import serivce.face.MgrService;
+import serivce.face.ProfileBoardService;
+import serivce.impl.MgrServiceImpl;
+import serivce.impl.ProfileBoardServiceImpl;
 import util.Paging;
 
 /**
- * Servlet implementation class MgrCompordListController
+ * Servlet implementation class MgrProfileListController
  */
-@WebServlet("/mgr/complist")
-public class MgrCompListController extends HttpServlet {
+@WebServlet("/mgr/profilelist")
+public class MgrProfileListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	CompBoardService compBoardService = new CompBoardServiceImpl();
+	ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
+	MgrService mgrService = new MgrServiceImpl();
+	
+//	CompBoardService compBoard = new CompBoardServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+				
 		
 		//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-		Paging paging = compBoardService.getPaging(req);
+		Paging paging = mgrService.getPaging(req);
 		
 		 // �??��?�� ?��?��미터 
 		paging.setSearch(req.getParameter("search"));
@@ -35,18 +41,19 @@ public class MgrCompListController extends HttpServlet {
 		//Paging 객체�? model값으�? �??��
 		req.setAttribute("paging", paging);
 //		System.out.println(paging);		
-		
-		
+
 		// ProfileBoard 게시�? 목록 조회
-		List<CompBoard> list = compBoardService.getBoardList(paging);
+		List<ProfileBoard> list = mgrService.getPfBoardList(paging);		
 		
 		// list 객체�? model값으�? �??��
 		req.setAttribute("list", list);
-
 		
-		req.getRequestDispatcher("/WEB-INF/views/mgr/complist.jsp")
-		.forward(req, resp);
-	
+//		System.out.println("profile list controller : " + list);
+		//view 보내�?
+		req.getRequestDispatcher("/WEB-INF/views/mgr/profile/profilelist.jsp").forward(req, resp);
+
 	}
 	
 }
+
+
