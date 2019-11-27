@@ -16,13 +16,16 @@ public class CompBoard {
 	private int comp_view;
 	private int comp_reply;
 	private int comp_like;
+	private int comp_startdate;
+	private int comp_enddate;
 	
 	@Override
 	public String toString() {
 		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", fileno=" + fileno + ", userno="
 				+ userno + ", comp_title=" + comp_title + ", comp_name=" + comp_name + ", comp_content=" + comp_content
 				+ ", comp_member=" + comp_member + ", comp_date=" + comp_date + ", comp_view=" + comp_view
-				+ ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + "]";
+				+ ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + ", comp_startdate=" + comp_startdate
+				+ ", comp_enddate=" + comp_enddate + "]";
 	}
 
 
@@ -145,6 +148,25 @@ public class CompBoard {
 		this.comp_like = comp_like;
 	}
 	
+	public int getComp_startdate() {
+		return comp_startdate;
+	}
+
+
+	public void setComp_startdate(int comp_startdate) {
+		this.comp_startdate = comp_startdate;
+	}
+
+
+	public int getComp_enddate() {
+		return comp_enddate;
+	}
+
+
+	public void setComp_enddate(int comp_enddate) {
+		this.comp_enddate = comp_enddate;
+	}
+
 	
 	
 	

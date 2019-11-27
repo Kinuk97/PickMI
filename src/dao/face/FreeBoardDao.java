@@ -21,7 +21,7 @@ public interface FreeBoardDao {
 	 * @param categoryno - 카테고리 번호
 	 * @return int - 게시글 수
 	 */
-	public int selectCntAll(String search, int categoryno);
+	public int selectCntAll(String search, int searchno, int categoryno);
 
 	/**
 	 * 게시글 목록 불러오기

@@ -1,6 +1,7 @@
 package serivce.impl;
 
 import java.io.File;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +28,14 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	private ProfileBoardDao profileBoardDao = new ProfileBoardDaoImpl();
 	
 	
+	@Override
+	public ProfileBoard getNameByUserno(int userno) {
+		
+		ProfileBoard profile = null;
+		profile.setUserno(userno);
+		
+		return profile;
+	}
 	@Override
 	public void write(HttpServletRequest req) {
 		
