@@ -24,8 +24,11 @@ function loadList() {
 				
 				// 카테고리 추가
 				if (data[i].categoryno == 1) {
+					caption.append($("<a href=\"/freeboard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[아이디어]"));
 				} else if (data[i].categoryno == 2) {
+					caption.append($("<a href=\"/freeboard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[정보]"));
 				} else if (data[i].categoryno == 3) {
+					caption.append($("<a href=\"/freeboard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[공모전]"));
 				}
 				
 				// 제목
@@ -42,7 +45,7 @@ function loadList() {
 				caption.append($("<div class='free_content overtext'></div>").text(content));
 				
 				// 작성자
-				caption.append($("<div class='text-right'>").text(data[i].userno));
+				caption.append($("<div class='text-right'>").text("작성자 : " + data[i].userno));
 				// 조회, 작성일
 				caption.append($("<div></div>").html($("<span style='float: left;'>조회 : " + data[i].views + "</span><span style='float: right;'>" + data[i].free_time + "</span>")));
 				
@@ -112,29 +115,6 @@ $(document).ready(function() {
 		</form>
 	</div>
 	<hr>
-<%-- 	<c:forEach var="board" items="${boardList }"> --%>
-<!-- 		<div class="col-sm-6 col-md-4 col-lg-3"> -->
-<!-- 			<div class="thumbnail"> -->
-<!-- 				<div class="caption caption-free"> -->
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${board.categoryno == 1 }"> --%>
-<!-- 							<b>[아이디어]</b> -->
-<%-- 						</c:when> --%>
-<%-- 						<c:when test="${board.categoryno == 2 }"> --%>
-<!-- 							<b>[정보]</b> -->
-<%-- 						</c:when> --%>
-<%-- 						<c:when test="${board.categoryno == 3 }"> --%>
-<!-- 							<b>[공모전]</b> -->
-<%-- 						</c:when> --%>
-<%-- 					</c:choose> --%>
-<%-- 					<h4><a href="/freeboard/view?free_no=${board.free_no }">${board.free_title }</a></h4> --%>
-<!-- 					<div class="free_content"></div> -->
-<%-- 					<div class="text-right"><span style="float: left;">${board.views }</span><span style="float: right;">${board.free_time }</span></div> --%>
-<!-- 					<div style="clear: both;"></div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<%-- 	</c:forEach> --%>
 </div>
 <div style="clear: both;"></div>
 
