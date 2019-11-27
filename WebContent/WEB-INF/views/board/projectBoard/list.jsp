@@ -32,9 +32,9 @@ $(document).ready(function() {
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
 						
-						var caption = $("<div class='caption caption-project'></div>");
+						var caption = $("<div class='caption caption-project' onclick=\"location.href='/projectBoard/view?proj_no="+data[i].proj_no+"'\"></div>");
 						
-						caption.append($("<h2></h2>").html($("<a href='/projectBoard/view?proj_no="+data[i].proj_no+"'>"+" </a>").text(data[i].proj_title)));
+						caption.append($("<h2></h2>").text(data[i].proj_title));
 						caption.append($("<p></p>").text("프로젝트 이름 : " + data[i].proj_name));
 						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
 						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
@@ -68,16 +68,87 @@ $(document).ready(function() {
 select {
 	padding: 7px;
 }
+
+#filterBtn {
+  background-color: #66CCFF;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+#filter {
+  position: relative;
+  display: inline-block;
+}
+
+#filter-list {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+#filter-list a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+#filter-list a:hover {background-color: #ddd;}
+#filter:hover #filter-list {display: block;}
+#filter:hover #filterBtn {background-color: #CEE3F6;}
+
+
 </style>
 
-<div class="row" style="margin-bottom: -15px; margin-right: 0px;">
-	<div class="col-lg-12 col-xs-12 text-right">
-		<a class="btn btn-primary" href="/projectBoard/write">글작성</a>
+
+<div id="board" class="container list-container">
+	<h1 class="text-center">😉프로젝트게시판😉</h1>
+	<div id="filtersystem">
+	<div id="filter">
+	<button class="btn btn-info" id="filterBtn">관심</button>
+	<div id="filter-list">
+		<a href="#">java</a>
+		<a href="#">algorithm</a>
+		<a href="#">html/css</a>
+		<a href="#">design</a>
+	</div>
+	</div>
+	<button class="btn btn-info" id="filterBtn">지역</button>
+	<div id="filter-list">
+		<a href="#">서울</a>
+		<a href="#">경기</a>
+		<a href="#">그외</a>
+	</div>
+	<button class="btn btn-info" id="filterBtn">직업</button>
+	<div id="filter-list">
+		<a href="#">개발자</a>
+		<a href="#">프리랜서</a>
+		<a href="#">디자이너</a>
+		<a href="#">무직</a>
+	</div>
+	<button class="btn btn-info" id="filterBtn">상태</button>
+	<div id="filter-list">
+		<a href="#">구직중</a>
+		<a href="#">재직중</a>
+		<a href="#">프리랜서</a>
+	</div>
+	<button class="btn btn-info" id="filterBtn">경력</button>
+	<div id="filter-list">
+		<a href="#">1-2년차</a>
+		<a href="#">3-4년차</a>
+		<a href="#">5-7년차</a>
+		<a href="#">8년차이상</a>
 	</div>
 </div>
-
-<hr>
-<div id="board" class="container list-container">
+	<div class="text-right" style="padding: 0 40px;">
+			<a class="btn btn-primary" href="/projectBoard/write">글작성</a>
+	</div>
+	<hr>
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
