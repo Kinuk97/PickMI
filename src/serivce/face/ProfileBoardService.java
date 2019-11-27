@@ -8,6 +8,13 @@ import dto.ProfileBoard;
 import util.Paging;
 
 public interface ProfileBoardService {
+	
+	/**
+	 * 유저 번호로 유저 이름 가져오기
+	 * @param profile
+	 * @return
+	 */
+	public ProfileBoard getNameByUserno(HttpServletRequest req);
 	/**
 	 * 게시글 작성하기
 	 * @param req

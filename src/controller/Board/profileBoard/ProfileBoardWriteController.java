@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.ProfileBoard;
+import dto.User;
 import serivce.face.ProfileBoardService;
 import serivce.impl.ProfileBoardServiceImpl;
 
@@ -26,8 +28,13 @@ public class ProfileBoardWriteController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
-		req.setAttribute("userno", session.getAttribute("userno"));
+		ProfileBoard profile = profileBoardService.getNameByUserno(req);
 		
+		req.setAttribute("userno", ((User)session.getAttribute("userno")).getUserno());
+		req.setAttribute("username", profile.getUsername() );
+		
+		System.out.println("profileBoard write controller : " + session.getAttribute("userno"));
+		System.out.println("profileBoard write controller : " + profile.getUsername());
 		
 		//view 전달
 		req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/write.jsp").forward(req, resp);
