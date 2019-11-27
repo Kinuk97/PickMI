@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("login 확인 : " + cnt);
+//		System.out.println("login 확인 : " + cnt); //
 		return cnt;
 	}
 
@@ -94,28 +94,54 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int selectEmail(User user) {
 		conn = DBConn.getConnection();
-		
+
 		int checkResult = -1;
-		
+
 		String sql = "";
 		sql += "SELECT count(*) FROM user_table";
 		sql += " WHERE email = ?";
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getEmail());
-			
+
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				checkResult = rs.getInt(1);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return checkResult;
+	}
+
+	@Override
+	public User selectUserByEmail(User user) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "SELECT userno FROM user_table";
+		sql += " WHERE email = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, user.getEmail());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				user.setUserno(rs.getInt("userno"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return user;
 	}
 
 }

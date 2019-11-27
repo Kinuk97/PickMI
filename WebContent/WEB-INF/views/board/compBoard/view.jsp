@@ -7,8 +7,9 @@
     
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
+<h2 class="text-center">완성된 프로젝트<%=compBoard.getComp_no() %></h2>
+
 <div class="container">
-	<h2 class="text-center">완성된 프로젝트</h2>
 	
 	<table class="table table-bordered">
 
@@ -19,11 +20,12 @@
 
 			<tr>
 				<td class="info">팀 이름</td><td><%=compBoard.getComp_name()%></td>
-				<td class="info">참여인원</td><td><%=compBoard.getComp_member() %></td>
+				<td class="info">작성날짜</td><td><%=compBoard.getComp_date()%></td>
 			</tr>
 
 			<tr>
-				<td class="info">프로젝트 기간</td><td colspan="3"><%=compBoard.getComp_date()%></td>
+				<td class="info">참여인원</td><td><%=compBoard.getComp_member()%></td>
+				<td class="info">조회수</td><td><%=compBoard.getComp_view()%></td>
 			</tr>
 
 			<tr>

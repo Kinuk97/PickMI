@@ -21,6 +21,7 @@
 
 #header {
 	text-align: center;
+	background-color: #99E8F6;
 }
 
 #footer {
@@ -50,7 +51,14 @@
 
 .navbar {
 	margin-top: 20px;
+
 }
+
+.navbar-default {
+
+    border-color: #e7e7e700;
+}
+
 
 #logo {
     height: 100px;
@@ -76,18 +84,31 @@ button, input, optgroup, select, textarea {
     text-align: center;
 }
 
+/* 게시글 호버 */
+.thumbnail:hover {
+	border-color: tomato;
+}
+
 /* 각 게시판 리스트 높이 */
 .caption-profile {
 	height: 320px;
 }
+
 .caption-project {
 	height: 350px;
 }
+
 .caption-comp {
 	height: 200px;
 }
+
 .caption-free {
-	height: 180px;
+	height: 150px;
+	-ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 .list-container {
@@ -99,9 +120,7 @@ select {
 }
 
 .free_content {
- 	text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+	height: 40px;
     
 /*     display: -webkit-box; */
 /* 	display: -ms-flexbox; */
@@ -117,8 +136,15 @@ select {
 
 }
 
-#compboardlist:hover {
-	background: #ccc;
+.overtext {
+	text-overflow: ellipsis;
+    overflow : hidden;
+    white-space: nowrap;
+}
+
+#mainslide{
+	width: 1900px;
+	height: 335px;
 }
 
 </style>

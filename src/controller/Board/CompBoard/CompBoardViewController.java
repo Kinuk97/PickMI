@@ -25,10 +25,8 @@ public class CompBoardViewController extends HttpServlet {
 
 		//요청 파라미터 얻기
 		CompBoard compBoard = compBoardService.getParam(req);
-		
+
 		compBoardDao.countViews(compBoard);
-		
-		System.out.println(compBoard);
 		
 		CompBoard compBoardView = compBoardService.compBoardDetail(compBoard);
 		

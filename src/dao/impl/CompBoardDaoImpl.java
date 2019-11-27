@@ -10,6 +10,7 @@ import java.util.List;
 import dao.face.CompBoardDao;
 import dbutil.DBConn;
 import dto.CompBoard;
+import dto.Files;
 import util.Paging;
 
 public class CompBoardDaoImpl implements CompBoardDao {
@@ -35,7 +36,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			
 			//검색어가 존재한다면 검색조건 추가
 			if (search != null) {
-				sql += " AND title LIKE '%' || ? || '%'";
+				sql += " AND comp_title LIKE '%' || ? || '%'";
 			}
 			
 			//카테고리가 존재한다면 카테고리 추가
@@ -156,10 +157,10 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			
 			//검색어가 존재할 때
 			if (paging.getSearch() != null || paging.getCategoryno() != 0) {
-				sql += "WHERE 1 = 1";
+				sql += " WHERE 1 = 1";
 				
 				if (paging.getSearch() != null) {
-					sql += " AND title LIKE '%' || ? || '%'";
+					sql += " AND comp_title LIKE '%' || ? || '%'";
 				}
 				
 				if (paging.getCategoryno() != 0) {
@@ -173,6 +174,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += " ) compBoard";
 			sql += " WHERE rnum BETWEEN ? AND ?";
 
+//			System.out.println(sql);
 
 			//결과 저장 리스트
 			List<CompBoard> List = new ArrayList<CompBoard>();
@@ -260,7 +262,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "UPDATE compBoard SET comp_view = comp_view+1 ";
+		sql += "UPDATE compBoard SET comp_view = comp_view + 1 ";
 		sql += "WHERE comp_no = ? ";
 		
 		try {
@@ -281,6 +283,85 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public int selectCompBoardno() {
+		
+		//DB연결
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "SELECT compBoard_seq.nextval FROM dual";
+
+		int nextval = -1;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			rs.next();
+
+			nextval = rs.getInt(1); //조회된 결과의 1번째 컬럼
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+
+
+		return nextval;
+	}
+
+	@Override
+	public void insertFile(Files files) {
+		
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "INSERT INTO files(fileno, postno, filename, boardno)";
+		sql += " VALUES(files_seq.nextval, 4, ?, ?)";
+
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			//SQL쿼리의 ?채우기
+			ps.setString(1, files.getFilename());
+			ps.setInt(2, files.getBoardno());
+
+			//					System.out.println(files.getBoardno());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		}
+
+		
 	}
 
 

@@ -5,7 +5,7 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
 <div class="container">
-	<h2 class="text-center">완성된 프로젝트</h2>
+	<h2 class="text-center">자유게시판</h2>
 	
 	<table class="table table-bordered">
 		<tr>

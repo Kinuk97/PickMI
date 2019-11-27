@@ -33,19 +33,23 @@ public class LoginController extends HttpServlet {
 		
 		// 로그인에 필요한 파라미터 받기
 		User user = userService.getLoginParam(req);
-		System.out.println("email, pw : " + user);
+//		System.out.println("email, pw : " + user); // 유저 정보 확인
 		
 		// 로그인 확인
 		boolean login = userService.login(user);
 		
 		if(login == true) {
+			System.out.println(user);
 			String eamil = req.getParameter("eamil");
 			String pw = req.getParameter("pw");
-			String userno = req.getParameter("userno");
+			
+			User userno = userService.getUserno(user);
 			
 			session.setAttribute("login", true);
 			session.setAttribute("email", eamil);
-			session.setAttribute("userno", userno);
+			session.setAttribute("name", userno.getName());
+			session.setAttribute("userno", userno.getUserno());
+//			System.out.println(user);
 			
 			resp.sendRedirect("/main");
 		} else {

@@ -5,13 +5,12 @@ public class Files {
 	private int fileno;
 	private int postno;
 	private String filename;
-	private String filepath;
 	private int boardno;
 	
 	@Override
 	public String toString() {
-		return "Files [fileno=" + fileno + ", postno=" + postno + ", filename=" + filename + ", filepath=" + filepath
-				+ ", boardno=" + boardno + "]";
+		return "Files [fileno=" + fileno + ", postno=" + postno + ", filename=" + filename + ", boardno=" + boardno
+				+ "]";
 	}
 
 	public int getFileno() {
@@ -36,14 +35,6 @@ public class Files {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
-	}
-
-	public String getFilepath() {
-		return filepath;
-	}
-
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
 	}
 
 	public int getBoardno() {

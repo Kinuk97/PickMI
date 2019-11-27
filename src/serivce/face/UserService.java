@@ -35,6 +35,18 @@ public interface UserService {
 	 * @param user - 회원가입 정보
 	 */
 	void join(User user);
-
+	
+	/**
+	 * 이메일 중복검사
+	 * @param user - 이메일 
+	 * @return boolean - true : 중복 & false : 중복이 아님
+	 */
 	boolean emailCheck(User user);
+	
+	/**
+	 * 유저 번호 가져오기
+	 * @param user - 이메일
+	 * @return user - 유저번호
+	 */
+	User getUserno(User user);
 }

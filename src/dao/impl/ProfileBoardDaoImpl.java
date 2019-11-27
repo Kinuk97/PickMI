@@ -9,6 +9,7 @@ import java.util.List;
 
 import dao.face.ProfileBoardDao;
 import dbutil.DBConn;
+import dto.Files;
 import dto.ProfileBoard;
 import util.Paging;
 
@@ -18,6 +19,109 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
+	
+	
+	@Override
+	public void insertProfile(ProfileBoard profile) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql="";
+		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content)";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, profile.getProf_no());
+			ps.setInt(2, profile.getUserno());
+			ps.setString(3, profile.getProf_interest());
+			ps.setString(4, profile.getProf_job());
+			ps.setString(5, profile.getProf_state());
+			ps.setString(6, profile.getProf_loc());
+			ps.setString(7, profile.getProf_career());
+			ps.setString(8, profile.getProf_content());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	@Override
+	public void insertFile(Files file) {
+		
+		conn = DBConn.getConnection(); //db연결
+		
+		//수행할 sql 쿼리
+		String sql ="";
+		sql += "INSERT INTO files (fileno, postno, filename, boardno)";
+		sql += " VALUES (files_seq.nextval, 1, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, file.getFilename());
+			ps.setInt(2, file.getBoardno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+	}
+	
+	@Override
+	public int selectProfileno() {
+		
+		conn = DBConn.getConnection(); //db연결
+		
+		int profileno = 0;
+		
+		String sql ="";
+		sql += "SELECT profile_seq.nextval FROM dual";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				profileno = rs.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+//		System.out.println(profileno);
+			return profileno;
+	}
 	
 	@Override
 	public ProfileBoard selectProfileByProfileno(ProfileBoard profile) {
@@ -58,7 +162,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			}
 		}
 		
-		System.out.println("profileBoardDaoImpl : " + profile);
+//		System.out.println("profileBoardDaoImpl : " + profile);
 		return profile;
 	}
 	

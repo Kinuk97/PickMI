@@ -48,6 +48,14 @@ public interface CompBoardService {
 	 * @param compBoard
 	 */
 	public void write(CompBoard compBoard);
+	
+	/**
+	 * 게시글 파일 업로드
+	 * 
+	 * @param req
+	 * @param resp
+	 */
+	public void write(HttpServletRequest req, HttpServletResponse resp);
 
 	
 }
