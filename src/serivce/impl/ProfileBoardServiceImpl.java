@@ -176,7 +176,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 		ProfileBoard profile = new ProfileBoard();
 		profile.setProf_no(prof_no);
 		
-		System.out.println("profileBoardServiceImpl : " + profile);
+//		System.out.println("profileBoardServiceImpl : " + profile);
 		return profile;
 	}
 	
@@ -203,7 +203,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 		// paging객체를 생성하고 반환
 		int totalCount = profileBoardDao.selectCntAll();
 
-		Paging paging = new Paging(totalCount, curPage);
+		Paging paging = new Paging(totalCount, curPage, 20);
 		// Paging 객체 생성
 		return paging;
 	}
