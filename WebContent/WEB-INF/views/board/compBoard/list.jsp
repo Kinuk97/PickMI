@@ -24,11 +24,11 @@ function compLoadList(){
 				var caption = $("<div class='caption caption-comp' onclick=\"location.href='/compBoard/view?comp_no=" + data[i].comp_no + "'\"></div>");
 				
 				if (data[i].categoryno == 1) {
-					caption.append($("<a href=\"/compBoard/list?categoryno=1\"></a>").text("[작성자]"));
+// 					caption.append($("<a href=\"/compBoard/list?categoryno=1\"></a>").text("[작성자]"));
 				} else if (data[i].categoryno == 2) {
-					caption.append($("<a href=\"/compBoard/list?categoryno=2\"></a>").text("[제목]"));
+// 					caption.append($("<a href=\"/compBoard/list?categoryno=2\"></a>").text("[제목]"));
 				} else if (data[i].categoryno == 3) {
-					caption.append($("<a href=\"/compBoard/list?categoryno=3\"></a>").text("[제목 + 내용]"));				
+// 					caption.append($("<a href=\"/compBoard/list?categoryno=3\"></a>").text("[제목 + 내용]"));				
 				}
 				
 				//게시글 제목

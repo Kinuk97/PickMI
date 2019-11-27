@@ -26,7 +26,7 @@ $(document).ready(function() {
 <div class="container text-center">
 	<h1>완성된 프로젝트 글 작성</h1>
 	
-	<form class="form-horizontal" action="/compBoard/write" method="post">
+	<form class="form-horizontal" action="/compBoard/write" method="post" enctype="multipart/form-data">
   		<div class="form-group">
     		<label for="comp_title" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 10px; text-align: center;">프로젝트 이름</label>
