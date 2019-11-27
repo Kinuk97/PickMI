@@ -33,7 +33,7 @@ public class MgrProfileListController extends HttpServlet {
 				
 		
 		//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-		Paging paging = profileBoardService.getPaging(req);
+		Paging paging = mgrService.getPaging(req);
 		
 		 // �??��?�� ?��?��미터 
 		paging.setSearch(req.getParameter("search"));

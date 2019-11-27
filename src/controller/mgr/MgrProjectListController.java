@@ -23,14 +23,13 @@ import util.Paging;
 public class MgrProjectListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	ProjectBoardService projectBoardService = new ProjectBoardServiceImpl();
 	MgrService mgrService = new MgrServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-	Paging paging = projectBoardService.getPaging(req);
+	Paging paging = mgrService.getPaging(req);
 	
 	// 검색어 파라미터
 	paging.setSearch(req.getParameter("search"));
