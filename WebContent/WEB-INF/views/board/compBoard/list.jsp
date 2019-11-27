@@ -22,8 +22,9 @@ $(document).ready(function() {
 		}
 
 		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-	    	loading = true;
 	    	curPage += 1;
+	    	loading = true;
+	    	
 	    	$.ajax({
 				type : "post",
 				url : "/compBoard/list",
@@ -35,11 +36,11 @@ $(document).ready(function() {
 						var caption = $("<div class='caption caption-comp'></div>");
 						
 						if (data[i].categoryno == 1) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[작성자] " + data[i].comp_title)));
+							caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[작성자] " + data[i].comp_title)));
 						} else if (data[i].categoryno == 2) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[제목] " + data[i].comp_title)));
+							caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[제목] " + data[i].comp_title)));
 						} else if (data[i].categoryno == 3) {
-							caption.append($("<h2></h2>").html($("<a></a>").text("[제목 + 내용] " + data[i].comp_title)));
+							caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[제목 + 내용] " + data[i].comp_title)));
 						}
 						
 // 						caption.append($("<p></p>").html($("<a></a>").text(data[i].comp_content)));
