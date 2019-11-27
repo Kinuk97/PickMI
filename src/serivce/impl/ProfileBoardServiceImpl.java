@@ -28,6 +28,22 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	
 	
 	@Override
+	public ProfileBoard getNameByUserno(HttpServletRequest req) {
+		
+		String param = req.getParameter("userno");
+
+		int userno = 0;
+		if (param != null && !"".equals(param)) {
+			userno = Integer.parseInt(param);
+		}
+		// DTO에 저장
+		ProfileBoard profile = new ProfileBoard();
+		profile.setUserno(userno);
+		
+		System.out.println("profileBoardServiceImpl : " + profile);
+		return profile;
+	}
+	@Override
 	public void write(HttpServletRequest req) {
 		
 		boolean isMultipart = false;
