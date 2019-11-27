@@ -24,11 +24,11 @@ function compLoadList(){
 				var caption = $("<div class='caption caption-comp' onclick=\"location.href='/compBoard/view?comp_no=" + data[i].comp_no + "'\"></div>");
 				
 				if (data[i].categoryno == 1) {
-					caption.append($("<a href=\"/compBoard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[작성자]"));
+					caption.append($("<a href=\"/compBoard/list?categoryno=1\"></a>").text("[작성자]"));
 				} else if (data[i].categoryno == 2) {
-					caption.append($("<a href=\"/compBoard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[제목]"));
+					caption.append($("<a href=\"/compBoard/list?categoryno=2\"></a>").text("[제목]"));
 				} else if (data[i].categoryno == 3) {
-					caption.append($("<a href=\"/compBoard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[제목 + 내용]"));				
+					caption.append($("<a href=\"/compBoard/list?categoryno=3\"></a>").text("[제목 + 내용]"));				
 				}
 				
 				//게시글 제목
@@ -122,12 +122,12 @@ select {
 	
 	<div class="row">
 		<form action="/compBoard/list" method="get">
-			<div style="width: 10%; float: left; margin-left: 10px;">
+			<div style="width: 10%; float: left; margin-left: 21px;">
 				<select name="categoryno">
 					<option value="">선택없음</option>
 					<option value="1">작성자</option>
 					<option value="2">제목</option>
-					<option value="3">제목 + 내용</option>
+					<option value="3">제목&amp;내용</option>
 				</select>
 			</div>
 			
@@ -147,15 +147,19 @@ select {
 		<c:choose>
 
 			<c:when test="${not empty login }">
-				<!-- 로그인이 되어있으면 글 작성으로 넘어감 -->
-				<button onclick="location.href = '/compBoard/write';" 
-						class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+				<div style="width: 67.3%; text-align: right; float: left;">
+					<!-- 로그인이 되어있으면 글 작성으로 넘어감 -->
+					<button  onclick="location.href = '/compBoard/write';" 
+							class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+				</div>
 			</c:when>
 
 			<c:otherwise>
-				<!-- 로그인되어있지 않으면 글쓰기 페이지로 넘어가지 않음 -->
-				<button id="btnNoLoginWrite" onclick="alert('로그인이 필요한 서비스입니다.')"
-						class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+				<div style="width: 67.3%; text-align: right; float: left;">	
+					<!-- 로그인되어있지 않으면 글쓰기 페이지로 넘어가지 않음 -->
+					<button id="btnNoLoginWrite" onclick="alert('로그인이 필요한 서비스입니다.')"
+							class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>
