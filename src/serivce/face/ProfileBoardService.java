@@ -14,7 +14,7 @@ public interface ProfileBoardService {
 	 * @param profile
 	 * @return
 	 */
-	public ProfileBoard getNameByUserno(HttpServletRequest req);
+	public ProfileBoard getNameByUserno(int userno);
 	/**
 	 * 게시글 작성하기
 	 * @param req
