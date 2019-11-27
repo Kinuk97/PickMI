@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
 		boolean login = userService.login(user);
 		
 		if(login == true) {
-			System.out.println(user);
+//			System.out.println(user);
 			String eamil = req.getParameter("eamil");
 			String pw = req.getParameter("pw");
 			
@@ -49,6 +49,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("email", eamil);
 			session.setAttribute("userno", userno);
 //			System.out.println(user);
+//			System.out.println("test" + session.getAttribute("userno"));
 			
 			resp.sendRedirect("/main");
 		} else {

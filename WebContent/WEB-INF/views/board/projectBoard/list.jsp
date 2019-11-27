@@ -80,11 +80,11 @@ select {
 <div id="board" class="container list-container">
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="thumbnail">
+			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
 				<div class="caption caption-project">
 
 					<h2>
-						<a href="/projectBoard/view?proj_no=${board.proj_no }">${board.proj_title }</a>
+						${board.proj_title }
 					</h2>
 
 					<p>프로젝트 이름 : ${board.proj_name }</p>
