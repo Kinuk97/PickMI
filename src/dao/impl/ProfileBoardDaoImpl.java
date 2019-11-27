@@ -20,6 +20,42 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 	
+	@Override
+	public ProfileBoard selectNameByUserno(ProfileBoard profile) {
+		
+		conn = DBConn.getConnection(); //db연결
+		
+		String sql="";
+		sql += "SELECT name, userno FROM user_table";
+		sql += " WHERE userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql); //쿼리 수행 객체
+			
+			ps.setInt(1, profile.getProf_no()); //? 채우기
+			
+			rs = ps.executeQuery(); //sql 쿼리 수행 및 resultset 반환
+			
+			//sql 수행결과 처리
+			while (rs.next()) {
+				profile.setUserno(rs.getInt("userno"));
+				profile.setUsername(rs.getString("name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println("profileBoardDaoImpl : " + profile);
+		return profile;
+	}
+	
 	
 	@Override
 	public void insertProfile(ProfileBoard profile) {
@@ -27,8 +63,8 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql="";
-		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content)";
-		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content, username)";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -41,6 +77,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			ps.setString(6, profile.getProf_loc());
 			ps.setString(7, profile.getProf_career());
 			ps.setString(8, profile.getProf_content());
+			ps.setString(9, profile.getUsername());
 			
 			ps.executeUpdate();
 			

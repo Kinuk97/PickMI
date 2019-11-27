@@ -7,14 +7,7 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 <script type="text/javascript">
 
-//form submit되면 내용을 textarea에 반영해주는 함수
-function submitContents(elClickedObj) {
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-	
-	try {
-		elClickedObj.form.submit(); //<form> submit 수행
-	} catch(e) {}
-}
+
 
 $(document).ready(function() {
 	
@@ -29,42 +22,69 @@ $(document).ready(function() {
 });
 </script>
 <!-- 스마트에디터 -->
-<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script src="//cdn.ckeditor.com/4.13.0/basic/ckeditor.js"></script>
 
 <h1 class="text-center">프로필 작성✍</h1>
 
 <form action="/profileBoard/write" method="post" enctype="multipart/form-data">
 <table>
 <tr>
-	<td>${ name }</td>
+	<td>${ username }</td>
 	<td>${ userno }</td>
 </tr>
 <tr>
 	<td><label for="interest">관심분야 :</label></td>
 	<td><select name="interest">
-		<option value="1"></option>
-	</select></td>
+			<option value="1">개발</option>
+			<option value="2">디자인</option>
+			<option value="3">스타트업</option>
+			<option value="4">언어</option>
+		</select>
+	</td>
 </tr>
 <tr>
 	<td><label for="location">활동 지역 : </label></td>
-	<td><input type="text" id="location" /></td>
+	<td><select name="location">
+			<option value="1">서울</option>
+			<option value="2">경기</option>
+			<option value="3">그 외</option>
+		</select>
+	</td>
 </tr>
 <tr>
 	<td><label for="job">직업 : </label></td>
-	<td><input type="text" id="job" /></td>
+	<td><select name="job">
+			<option value="1">개발자</option>
+			<option value="2">디자이너</option>
+			<option value="3">프리랜서</option>
+			<option value="4">무직</option>
+		</select>
+	</td>
 </tr>
 <tr>
 	<td><label for="state">상태 : </label></td>
-	<td><input type="text" id="state" /></td>
+	<td><select name="state">
+			<option value="1">구직중</option>
+			<option value="2">재직중</option>
+			<option value="3">프리랜서</option>
+		</select>
+	</td>
 </tr>
 <tr>
 	<td><label for="career">경력 : </label></td>
-	<td><input type="text" id="career" /></td>
+	<td><select name="career">
+			<option value="1">1-2년 차</option>
+			<option value="2">3-4년 차</option>
+			<option value="3">5-7년 차</option>
+			<option value="4">8년 이상</option>
+		</select>
+	</td>
 </tr>
 <tr>
-	<td style="width:100px"><label for="content" >내용 : </label></td>
+	<td><label for="content" >내용 : </label></td>
 	<td><textarea name="content" id="content"></textarea></td>
 </tr>
+	
 <tr>
 	<td></td>
 	<td><label>파일 : <input type="file" name="file" /></label></td>
@@ -77,12 +97,8 @@ $(document).ready(function() {
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 
 <!-- 스마트 에디터 적용코드, textarea에 스킨 입히기 -->
-<script type="text/javascript">
-	var oEditors = [];
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditors,
-		elPlaceHolder: "content", //에디터가 적용되는 <textarea>의 id
-		sSkinURI: "/resources/se2/SmartEditor2Skin.html", //에디터 스킨
-		fCreator: "createSEditor2"
-	});
+<script>
+	CKEDITOR.replace( 'content', {
+		height : "500px"
+	} );
 </script>

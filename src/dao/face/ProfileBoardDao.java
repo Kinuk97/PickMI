@@ -9,6 +9,13 @@ import util.Paging;
 public interface ProfileBoardDao {
 	
 	/**
+	 * 유저 번호로 유저 이름 받아오기
+	 * @param profile
+	 * @return
+	 */
+	public ProfileBoard selectNameByUserno(ProfileBoard profile);
+	
+	/**
 	 * 프로필 테이블에 프로필을 저장한다
 	 * @param profile
 	 */
