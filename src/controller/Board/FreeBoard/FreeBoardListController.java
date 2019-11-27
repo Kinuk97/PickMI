@@ -26,9 +26,7 @@ public class FreeBoardListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Paging paging = freeBoardService.getPaging(req);
 		
-		req.setAttribute("postno", 3);
 		req.setAttribute("paging", paging);
-		req.setAttribute("boardList", freeBoardService.getBoardList(paging));
 		
 		req.getRequestDispatcher("/WEB-INF/views/board/freeboard/list.jsp").forward(req, resp);
 	}
