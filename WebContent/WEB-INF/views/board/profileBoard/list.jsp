@@ -43,8 +43,7 @@ $(document).ready(function() {
 						caption.append($("<p class='text-right'></p>").html($("<a href='#' class='btn btn-primary' role='button'></a>").text(data[i].prof_like +"❤찜하기")));
 						caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
 					
-						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append($("<a href='/profile/view?profileno='"+data[i].prof_no+"'></a>")).append(caption));
-						
+						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profile/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
 						$("#board").append(board);
 					}	
 					
@@ -57,9 +56,9 @@ $(document).ready(function() {
 	    }
 	});
 	
+
+	
 });
-
-
 
 </script>
 <style type="text/css">
@@ -95,15 +94,27 @@ $(document).ready(function() {
 #filter-list a:hover {background-color: #ddd;}
 #filter:hover #filter-list {display: block;}
 #filter:hover #filterBtn {background-color: #CEE3F6;}
+
+.thumbnail:hover {
+	background: #D6F0FF;
+}
+a#top {
+    position: fixed;
+    right: 5%;
+    bottom: 50px;
+    z-index: 999;
+    font-size: 20px;
+}
+
 </style>
 <div class="text-center">
 <h1>나를 소개해보세요!😉</h1>
 </div>
 <hr>
-<div class="text-right">
+<div class="text-right" style="padding: 0 150px;">
 <a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
 </div>
-<div id=filtersystem>
+<div id=filtersystem style="padding:0 150px;">
 <div id="filter">
 	<button class="btn btn-info" id="filterBtn">관심</button>
 	<div id="filter-list">
@@ -142,32 +153,30 @@ $(document).ready(function() {
 </div>
 <br>
 <br>
-
+<a id="top" href="#">TOP👆</a>
 <div id="board" class="container list-container">
 	<c:forEach items="${ list }" var="pro">
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="thumbnail">
-			<a href="/profile/view?profileno=${pro.prof_no }">
+			<div class="col-sm-6 col-md-4 col-lg-3">
+				<div class="thumbnail" onclick="location.href='/profile/view?profileno=${pro.prof_no }'">
 					<div class="caption caption-profile">
-					<h4>${ pro.prof_no }</h4>
-					<h3>${ pro.userno }</h3>
-					<p>${ pro.prof_interest }</p>
-					<p>${ pro.prof_loc }</p>
-					<p>${ pro.prof_job }</p>
-					<p>${ pro.prof_state }</p>
-					<p>${ pro.prof_career }</p>
-					<p class="text-right">
+						<h4>${ pro.prof_no }</h4>
+						<h3>${ pro.userno }</h3>
+						<p>${ pro.prof_interest }</p>
+						<p>${ pro.prof_loc }</p>
+						<p>${ pro.prof_job }</p>
+						<p>${ pro.prof_state }</p>
+						<p>${ pro.prof_career }</p>
+						<p class="text-right">
 						<a href="#" class="btn btn-primary" role="button">${ pro.prof_like }❤찜하기</a> 
-	<!-- 					<a href="#" class="btn btn-default" role="button">Button</a> -->
-					</p>
-					<p>${ pro.prof_time }에 작성</p>
+	<!-- 				<a href="#" class="btn btn-default" role="button">Button</a> --></p>
+						<p>${ pro.prof_time }에 작성</p>
+					</div>
 				</div>
-			</a>
 			</div>
-		</div>
 	</c:forEach>
 </div>
 <div style="clear: both;"></div>
+
 
 
 

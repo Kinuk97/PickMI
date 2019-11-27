@@ -3,6 +3,7 @@ package dao.face;
 import java.util.List;
 
 import dto.CompBoard;
+import dto.Files;
 import util.Paging;
 
 public interface CompBoardDao {
@@ -45,5 +46,11 @@ public interface CompBoardDao {
 	 * @param compBoard
 	 */
 	public void countViews(CompBoard compBoard);
+	
+	
+	public int selectCompBoardno();
+	
+	
+	public void insertFile(Files files);
 
 }
