@@ -26,5 +26,13 @@ public interface UserDao {
 	 * 
 	 */
 	int selectEmail(User user);
+	
+	/**
+	 * email로 userno 가져오기(글쓰기 작성시 user를 불러오기 위함)
+	 * 
+	 * @param user - 이메일
+	 * @return user - 유저번호
+	 */
+	User selectUserByEmail(User user);
 
 }

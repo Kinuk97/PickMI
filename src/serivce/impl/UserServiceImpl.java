@@ -40,6 +40,8 @@ public class UserServiceImpl implements UserService {
 		cnt = userDao.selectCntUserByUserid(user);
 
 		if (cnt == 1) {
+			userDao.selectUserByEmail(user);
+			
 			return true;
 		} else {
 			return false;
@@ -91,6 +93,12 @@ public class UserServiceImpl implements UserService {
 	public void join(User user) {
 		userDao.insert(user);
 		
+	}
+
+	@Override
+	public User getUserno(User user) {
+		
+		return userDao.selectUserByEmail(user);
 	}
 
 
