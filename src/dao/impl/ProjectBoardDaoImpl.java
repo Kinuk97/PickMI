@@ -42,7 +42,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 			
 		sql += "SELECT ";
 		sql += " count(*)";
-		sql += " FROM board";
+		sql += " FROM projboard";
 		
 			
 		//결과 저장 리스트
