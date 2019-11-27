@@ -76,6 +76,11 @@ button, input, optgroup, select, textarea {
     text-align: center;
 }
 
+/* 게시글 호버 */
+.thumbnail:hover {
+	border-color: blue;
+}
+
 /* 각 게시판 리스트 높이 */
 .caption-profile {
 	height: 320px;
@@ -87,7 +92,12 @@ button, input, optgroup, select, textarea {
 	height: 200px;
 }
 .caption-free {
-	height: 180px;
+	height: 130px;
+	-ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 .list-container {
@@ -99,9 +109,7 @@ select {
 }
 
 .free_content {
- 	text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+	height: 40px;
     
 /*     display: -webkit-box; */
 /* 	display: -ms-flexbox; */
@@ -115,6 +123,12 @@ select {
 /* 	-webkit-box-orient:vertical; */
 /* 	-webkit-line-clamp:3; */
 
+}
+
+.overtext {
+	text-overflow: ellipsis;
+    overflow : hidden;
+    white-space: nowrap;
 }
 
 #compboardlist:hover {
