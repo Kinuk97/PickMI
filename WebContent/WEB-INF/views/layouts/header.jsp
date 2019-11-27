@@ -21,6 +21,7 @@
 
 #header {
 	text-align: center;
+	background-color: #99E8F6;
 }
 
 #footer {
@@ -50,6 +51,12 @@
 
 .navbar {
 	margin-top: 20px;
+
+}
+
+.navbar-default {
+
+    border-color: #e7e7e700;
 }
 
 #logo {
@@ -140,8 +147,9 @@ hr {
 	margin-bottom: 10px;
 }
 
-#compboardlist:hover {
-	background: #ccc;
+#mainslide{
+	width: 1900px;
+	height: 335px;
 }
 
 </style>

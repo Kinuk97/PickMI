@@ -21,45 +21,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js">
 </script>
 
-<style type="text/css">
-#header {
-	text-align: center;
-	background: #1a3a5a;
-}
-#header h1 {
-	margin:0;	/* background를 전체에 적용하기 위한 설정 */
-	padding:30px 0; /* h1태그의 높이 지정 */
-}
 
-#footer{
-	text-align: center; 
-	background: #1a3a5a;
-}
 
-#footer{
-	margin: 0; /* background를 전체에 적용하기 위한 설정 */
-	padding: 20px 0; /* h1태그의 높이 지정 */
-}
 
-#logo{
-	height: 10px;
-}
+<div>
+	<ul class="nav navbar-nav center" >
+		<li><a href="/mgr/userlist" target="_self" class="a-link" data-title="New Arrivals" style="color:#"> 사용자 목록 </a></li>
+		<li><a href="/mgr/profilelist" target="_self" class="a-link" data-title="New Arrivals" style="color:#"> 프로필 게시판 목록 </a></li>
+		<li><a href="/mgr/projectlist" target="_self" class="a-link" data-title="New Arrivals" style="color:#"> 프로젝트 게시판 목록 </a></li>
+		<li><a href="/mgr/freelist" target="_self" class="a-link" data-title="New Arrivals" style="color:#"> 자유 게시판 목록 </a></li>
+		<li><a href="/mgr/complist" target="_self" class="a-link" data-title="New Arrivals" style="color:#"> 완성된 게시판 목록 </a></li>
+	</ul>
+</div> <!-- header -->
 
-</style>
-
- 
- 
-</head>
-<body>
-
-<div id="header">
-	<a href="/mgr/main"><h1 style=color:#d9edf7>administrator page</h1></a>
-</div>
 <div id="wrapper">
-
-<span id="logo">
-		<img src="/resources/black.png"class="img-rounded center-block" style="height: 250px;">
-</span>
-
-</body>
-</html>
