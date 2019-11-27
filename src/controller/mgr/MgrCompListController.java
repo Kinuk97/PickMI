@@ -26,21 +26,21 @@ public class MgrCompListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//?š”ì²??ŒŒ?¼ë¯¸í„°?—?„œ curPageë¥? êµ¬í•˜ê³? Paging ê°ì²´ ë°˜í™˜
+		//?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½ë¯¸í„°?ï¿½ï¿½?ï¿½ï¿½ curPageï¿½? êµ¬í•˜ï¿½? Paging ê°ì²´ ë°˜í™˜
 		Paging paging = compBoardService.getPaging(req);
 		
-		 // ê²??ƒ‰?–´ ?ŒŒ?¼ë¯¸í„° 
+		 // ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë¯¸í„° 
 		paging.setSearch(req.getParameter("search"));
 		
-		//Paging ê°ì²´ë¥? modelê°’ìœ¼ë¡? ì§?? •
+		//Paging ê°ì²´ï¿½? modelê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("paging", paging);
-		System.out.println(paging);		
+//		System.out.println(paging);		
 		
 		
-		// ProfileBoard ê²Œì‹œê¸? ëª©ë¡ ì¡°íšŒ
+		// ProfileBoard ê²Œì‹œï¿½? ëª©ë¡ ì¡°íšŒ
 		List<CompBoard> list = compBoardService.getBoardList(paging);
 		
-		// list ê°ì²´ë¥? modelê°’ìœ¼ë¡? ì§?? •
+		// list ê°ì²´ï¿½? modelê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("list", list);
 
 		

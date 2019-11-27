@@ -50,7 +50,7 @@ $(document).ready(function(){
 			<td><input type="checkbox" name="checkRow" value="${frboard.free_no }"/></td>
 			<td>${frboard.free_no }</td>
 			<td>${frboard.userno }</td>
-			<td>${frboard.free_title }</td>
+			<td><a href="/mgr/freeboard/view?free_no=${frboard.free_no}">${frboard.free_title }</a></td>
 			<td>${frboard.free_time }</td>
 		</tr>	
 		</c:forEach>

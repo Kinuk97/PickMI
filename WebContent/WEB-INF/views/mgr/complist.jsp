@@ -42,16 +42,16 @@ $(document).ready(function(){
 			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
 			<th style="width: 10%">게시글 번호</th>
 			<th style="width: 10%">사용자 번호</th>
-			<th style="width: 35%">제목</th>
+			<th style="width: 35%" >제목</th>
 			<th style="width: 20%">팀이름</th>
 			<th style="width: 15%">작성시간</th>
 		</tr>
-		<c:forEach items="${list }" var="comp">
+		<c:forEach items="${ list }" var="comp">
 		<tr>
 			<td><input type="checkbox" name="checkRow" value="${comp.comp_no }"/></td>
 			<td>${comp.comp_no }</td>
 			<td>${comp.userno }</td>
-			<td>${comp.comp_title }</td>
+			<td><a href="/mgr/compboard/view?comp_no=${ comp.comp_no }">${comp.comp_title }</a></td>
 			<td>${comp.comp_name }</td>
 			<td>${comp.comp_date }</td>
 		</tr>	
@@ -71,5 +71,4 @@ $(document).ready(function(){
 </div> <!-- .container -->
 
 <!-- Footer -->
-
 <jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
