@@ -21,14 +21,14 @@ function compLoadList(){
 		success : function(data) {
 			for (var i = 0; i < data.length; i++) {
 				
-				var caption = $("<div class='caption caption-comp'></div>");
+				var caption = $("<div class='caption caption-comp' onclick=\"location.href='/compBoard/view?comp_no=" + data[i].comp_no + "'\"></div>");
 				
 				if (data[i].categoryno == 1) {
-// 					caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[작성자] " + data[i].comp_title)));
+					caption.append($("<a href=\"/compBoard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[작성자]"));
 				} else if (data[i].categoryno == 2) {
-// 					caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[제목] " + data[i].comp_title)));
+					caption.append($("<a href=\"/compBoard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[제목]"));
 				} else if (data[i].categoryno == 3) {
-// 					caption.append($("<h2></h2>").html($("<a href='/compBoard/view?comp_no=" + data[i].comp_no + "'></a>").text("[제목 + 내용] " + data[i].comp_title)));
+					caption.append($("<a href=\"/compBoard/list?categoryno=" + data[i].categoryno + "\"></a>").text("[제목 + 내용]"));				
 				}
 				
 				//게시글 제목
@@ -44,28 +44,23 @@ function compLoadList(){
 				content = content.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
 				
 				//팀 이름
-				caption.append($("<div class='comp_name overtext'></div>").text(data[i].comp_name));
+				caption.append($("<div class='comp_name overtext'></div>").text("팀 이름 : " + data[i].comp_name));
 				
 				caption.append($("<br>"));
 				caption.append($("<br>"));
 				
 				// 작성자
-				caption.append($("<div class='text-right'></div>").text(data[i].userno));
+				caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].userno));
 				
 				//조회수
-				caption.append($("<div class='text-right'></div>").text(data[i].comp_view));
+				caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));
 				
 				//찜한수				
-				caption.append($("<div class='text-right'></div>").text(data[i].comp_like));
+				caption.append($("<div class='text-right'></div>").text("찜한수 : " + data[i].comp_like));
+				 
 				
 				//작성일
-				caption.append($("<div class='text-right'></div>").text(data[i].comp_date));
-				
-				var comp_no = data[i].comp_no;
-				
-				caption.on("click", function(){
-					location.href="/compBoard/view?comp_no=" + comp_no;
-				});
+				caption.append($("<div class='text-right'></div>").text("작성날짜 : " + data[i].comp_date));
 				
 				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 				
@@ -108,7 +103,7 @@ select {
 }
 </style>
 
-<div class="container list-container">
+<div id="board" class="container list-container">
 	<h1 class="text-center">완성된 프로젝트 게시판</h1>
 	
 	<br><br>

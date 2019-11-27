@@ -7,7 +7,7 @@
     
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
-<h2 class="text-center">완성된 프로젝트</h2>
+<h2 class="text-center">완성된 프로젝트<%=compBoard.getComp_no() %></h2>
 
 <div class="container">
 	

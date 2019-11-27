@@ -26,17 +26,30 @@ $(document).ready(function() {
 	
 	<form class="form-horizontal" action="/compBoard/write" method="post">
   		<div class="form-group">
-    		<label for="comp_title" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">제목 : </label>
+    		<label for="comp_title" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;">프로젝트 이름</label>
     		<div class="col-sm-9 col-md-9 col-lg-10">
       			<input type="text" class="form-control" id="comp_title" placeholder="제목을 입력하세요" name="comp_title" maxlength="120">
     		</div>
   		</div>
   		
   		<div class="form-group">
-    		<label for="comp_name" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">팀 이름 : </label>
+    		<label for="comp_name" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">팀 이름 </label>
     		<div class="col-sm-9 col-md-9 col-lg-10">
       			<input type="text" class="form-control" id="comp_name" placeholder="팀 이름을 입력하세요" name="comp_name" maxlength="120">
     		</div>
+  		</div>
+  		
+  		<div class="form-group">
+    		<label for="comp_name" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">참여인원</label>
+    		<div class="col-sm-9 col-md-9 col-lg-4">
+      			<input type="text" class="form-control" id="comp_name" placeholder="참여인원을 입력하세요" name="comp_name" maxlength="120">
+    		</div>
+    		
+    		<label for="comp_name" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">프로젝트 기간</label>
+    		<div class="col-sm-9 col-md-9 col-lg-5">
+      			<input type="text" class="form-control" id="comp_name" placeholder="기간을 입력하세요" name="comp_name" maxlength="120">
+    		</div>
+    		
   		</div>
   		
 	  	<div class="form-group">
