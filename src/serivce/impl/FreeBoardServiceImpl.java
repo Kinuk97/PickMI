@@ -165,7 +165,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public FreeBoard FreeBoardDetail(FreeBoard freeBoard) {
-		viewCounting(freeBoard);
 		return freeBoardDao.boardView(freeBoard);
 	}
 	
