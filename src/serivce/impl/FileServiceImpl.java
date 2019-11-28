@@ -22,8 +22,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
+import dao.face.CompBoardDao;
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
+import dao.impl.CompBoardDaoImpl;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
 import dto.CompBoard;
@@ -33,6 +35,7 @@ import serivce.face.FileService;
 
 public class FileServiceImpl implements FileService {
 	private FreeBoardDao freeBoardDao = FreeBoardDaoImpl.getInstance();
+	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
 
@@ -162,6 +165,7 @@ public class FileServiceImpl implements FileService {
 							e.printStackTrace();
 						}
 					}
+					
 				} else if (postno == 4) {
 					if (compBoard == null)
 						compBoard = new CompBoard();
@@ -224,6 +228,7 @@ public class FileServiceImpl implements FileService {
 				try {
 					item.write(up);
 					item.delete(); // 임시 파일 삭제
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				} // 실제 업로드
@@ -252,7 +257,19 @@ public class FileServiceImpl implements FileService {
 			uploadFile.setBoardno(freeBoard.getFree_no());
 		} else if (postno == 4) {
 			// 완성된 게시판
-
+			compBoard.setComp_no(compBoardDao.selectCompBoardno());
+			
+			if (compBoard.getComp_title() == null) {
+				compBoard.setComp_title("제목없음");
+				
+			}
+			
+			compBoard.setUserno((Integer) req.getSession().getAttribute("userno"));
+			
+			compBoardDao.insert(compBoard);
+			
+			uploadFile.setBoardno(compBoard.getComp_no());
+	
 		}
 
 		// 공통적인 파일 처리, 파일이 있다면 db에 저장
