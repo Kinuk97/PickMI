@@ -52,7 +52,7 @@ $(document).ready(function(){
 		<tr>
 			<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
 			<td>${pbboard.prof_no}</td>
-			<td><a href="/mgr/profileview?profileno=${pbboard.prof_no}">${pbboard.userno }</a></td>
+			<td><a href="/mgr/profileview?prof_no=${pbboard.prof_no}">${pbboard.userno }</a></td>
 			<td>${pbboard.prof_time }</td>
 			<td>${pbboard.prof_job }</td>
 			<td>${pbboard.prof_state }</td>

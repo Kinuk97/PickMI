@@ -23,7 +23,7 @@ import util.Paging;
 public class MgrProfileListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
+	ProfileBoardService profileBoardService = ProfileBoardServiceImpl.getInstance();
 	MgrService mgrService = new MgrServiceImpl();
 	
 //	CompBoardService compBoard = new CompBoardServiceImpl();

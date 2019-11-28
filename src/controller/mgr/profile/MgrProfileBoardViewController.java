@@ -19,7 +19,7 @@ import serivce.impl.ProfileBoardServiceImpl;
 public class MgrProfileBoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ProfileBoardService profileService = new ProfileBoardServiceImpl();
+	private ProfileBoardService profileService = ProfileBoardServiceImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,6 +39,7 @@ public class MgrProfileBoardViewController extends HttpServlet {
 			
 			//모델값 지정하기
 			req.setAttribute("profile", profile);
+			req.setAttribute("boardno", 2);
 			
 			//view 지정
 			req.getRequestDispatcher("/WEB-INF/views/mgr/profile/profileview.jsp").forward(req, resp);
