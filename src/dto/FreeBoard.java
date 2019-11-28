@@ -8,13 +8,15 @@ public class FreeBoard {
 	private int categoryno;
 	private String free_title;
 	private String free_content;
+	private String username;
 	private Date free_time;
 	private int views;
 
 	@Override
 	public String toString() {
 		return "FreeBoard [free_no=" + free_no + ", userno=" + userno + ", categoryno=" + categoryno + ", free_title="
-				+ free_title + ", free_content=" + free_content + ", free_time=" + free_time + ", views=" + views + "]";
+				+ free_title + ", free_content=" + free_content + ", username=" + username + ", free_time=" + free_time
+				+ ", views=" + views + "]";
 	}
 
 	public int getFree_no() {
@@ -25,20 +27,20 @@ public class FreeBoard {
 		this.free_no = free_no;
 	}
 
-	public int getCategoryno() {
-		return categoryno;
-	}
-
-	public void setCategoryno(int categoryno) {
-		this.categoryno = categoryno;
-	}
-
 	public int getUserno() {
 		return userno;
 	}
 
 	public void setUserno(int userno) {
 		this.userno = userno;
+	}
+
+	public int getCategoryno() {
+		return categoryno;
+	}
+
+	public void setCategoryno(int categoryno) {
+		this.categoryno = categoryno;
 	}
 
 	public String getFree_title() {
@@ -55,6 +57,14 @@ public class FreeBoard {
 
 	public void setFree_content(String free_content) {
 		this.free_content = free_content;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Date getFree_time() {

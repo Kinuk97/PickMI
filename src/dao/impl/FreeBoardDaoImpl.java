@@ -75,8 +75,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					sql += " AND free_content LIKE '%' || ? || '%'";
 				} else if (searchno == 3) {
 					// 제목 & 내용으로 검색할 경우
-					sql += " AND free_title LIKE '%' || ? || '%'";
-					sql += " AND free_content LIKE '%' || ? || '%'";
+					sql += " AND (free_title LIKE '%' || ? || '%'";
+					sql += " OR free_content LIKE '%' || ? || '%')";
 				} else {
 					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
 					sql += " AND free_title LIKE '%' || ? || '%'";
@@ -144,7 +144,9 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		String sql = "";
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
-		sql += "   select * from freeboard";
+		sql += "   select free_no, categoryno, userno, free_title, free_content, free_time, views, "
+				+ " (SELECT name FROM user_table WHERE freeboard.userno = userno) username"
+				+ " from freeboard";
 
 		// 검색어나 카테고리가 존재한다면 WHERE절 추가
 		if (paging.getSearch() != null || paging.getCategoryno() != 0) {
@@ -158,8 +160,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					sql += " AND free_content LIKE '%' || ? || '%'";
 				} else if (paging.getSearchno() == 3) {
 					// 제목 & 내용으로 검색할 경우
-					sql += " AND free_title LIKE '%' || ? || '%'";
-					sql += " AND free_content LIKE '%' || ? || '%'";
+					sql += " AND (free_title LIKE '%' || ? || '%'";
+					sql += " OR free_content LIKE '%' || ? || '%')";
 				} else {
 					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
 					sql += " AND free_title LIKE '%' || ? || '%'";
@@ -228,6 +230,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				freeBoard.setFree_no(rs.getInt("free_no"));
 				freeBoard.setCategoryno(rs.getInt("categoryno"));
 				freeBoard.setUserno(rs.getInt("userno"));
+				freeBoard.setUsername(rs.getString("username"));
 				freeBoard.setFree_title(rs.getString("free_title"));
 				freeBoard.setFree_content(rs.getString("free_content"));
 				freeBoard.setFree_time(rs.getDate("free_time"));
