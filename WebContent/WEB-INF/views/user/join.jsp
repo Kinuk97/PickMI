@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Pick MI (Mate&Idea)</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -19,12 +19,25 @@
 <script type="text/javascript">
 	var check = false;
 	$(document).ready(function() {
+		
+			//경고 모달 호출 메서드
+		   function warningModal(content) {
+		      $(".modal-contents").text(content);
+		      $("#defaultModal").modal('show');
+		   }
+// 			//인증코드 모달 호출 메서드
+// 		   function codeModal(content) {
+// 		      $(".modal-contentt").text(content);
+// 		      $("#codeModal").modal('show');
+// 		   }
+		
+		
 		// 가입버튼
 	    $('#join-submit').click(function(){
 	        
 	     	// 이름 입력
 	        if($("#name").val() ==''){
-	            alert('이름을 입력하세요');
+	        	warningModal("이름을 입력하세요");
 	            $("#name").focus();
 	            return false;
 	        }
@@ -32,7 +45,7 @@
 	        // 이메일 입력
 	        var email = $('#email').val();
 	        if(email == ''){
-	            alert('이메일을 입력하세요');
+	            warningModal('이메일을 입력하세요');
 	            $("#email").focus();
 	            return false;
 	        } else {
@@ -46,32 +59,32 @@
 			
 	        // 비밀번호 입력
 	        if($("#pw").val() ==''){
-	            alert('비밀번호를 입력하세요');
+	        	warningModal('비밀번호를 입력하세요');
 	            $("#pw").focus();
 	            return false;
 	        }
 			
 	        // 비밀번호 확인
 	        if($("#pwCheck").val() ==''){
-	            alert('비밀번호를 다시 한번 더 입력하세요');
+	        	warningModal('비밀번호를 다시 한번 더 입력하세요');
 	            $("#pwCheck").focus();
 	            return false;
 	        }
 	        
 	        if($("#pw").val()!== $("#pwCheck").val()){
-	            alert('비밀번호를 동일하게 입력하세요');
+	        	warningModal('비밀번호를 동일하게 입력하세요');
 	            return false;
 	        }
 	        
 	        // 약관 동의
 	        if($("#agree").is(":checked") == false){
-	            alert('약관에 동의해주세요');
+	        	warningModal('약관에 동의해주세요');
 	            return false;      
 	        }
 	        
 	        // 이메일 중복
 	        if(!check){
-	            alert('중복체크를 해주세요');
+	        	warningModal('중복체크를 해주세요');
 	            $("#email").focus();
 	            return false;
 	        }
@@ -90,19 +103,19 @@
 	    	 	type:"POST",
 	     		url:"/emailCheck",
 	     		data:{
-	            "email":$('#email').val()
+	            "email":$('#email').val(),
 	     		},
 	    		 success:function(data){
 	            if(data==false){
 	            	check = true;
 	               if($('#email').val()!=''){ 
-	               	alert("사용가능한 아이디입니다.");
+	            	   warningModal('사용가능한 아이디 입니다.');
 	               	
 	               }
 	           	}else{
 	            	check = false;
 	               if($('#email').val()!=''){
-	                  alert("중복된 아이디입니다.");
+	            	   warningModal('중복된 아이디 입니다.');
 	                  $('#email').focus();	
 	               }
 	            }
@@ -124,7 +137,7 @@
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-offset-3">
-			<form role="form" action="/insert" method="post">
+			<form role="form" action="/email" method="post">
 				<div class="form-group">
 					<label for="name">성명</label> <input type="text"
 						class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요">
@@ -135,7 +148,7 @@
 					<br>
 
 					<button type="button"  id ="emailCheck" class="btn btn-success">중복 체크</button>
-					<button type="button" class="btn btn-success">이메일 인증</button>
+					
 				</div>
 				<div class="form-group">
 					<label for="pw">비밀번호</label> <input type="password"
@@ -166,5 +179,27 @@
 		</div>
 
 	</article>
+	
+
+<!-- 경고 모달창 -->
+            <div class="modal fade" id="defaultModal">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-danger">
+                        <div class="modal-header panel-heading">
+                            <h4 class="modal-title">알림</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+       
+            <!--// 경고 모달창 -->
+
+
 </body>
 </html>
