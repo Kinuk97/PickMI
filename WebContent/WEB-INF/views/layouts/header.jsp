@@ -21,7 +21,7 @@
 
 #header {
 	text-align: center;
-	background-color: #d8f1f9;
+	background-color: #ffffff;
 }
 
 #footer {
@@ -33,7 +33,7 @@
 
 #wrapper {
 	min-height: 1200px;
-	background-color: #d8f1f9;
+	background-color: #ffffff;
 	clear: both;
 	padding-top: 25px;
     padding-bottom: 15px;
@@ -56,7 +56,7 @@
 
 .navbar-default {
 
-    border-color: #d8f1f9;
+    border-color: #ffffff;
 }
 
 #logo {
@@ -150,7 +150,7 @@ hr {
 #mainslide{
 	width: 1900px;
 	height: 335px;
-	background-color: #ffffff;
+	background-color: #d8f1f9;
 }
 
 #mainboard {
