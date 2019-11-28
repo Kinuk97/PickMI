@@ -31,7 +31,7 @@ public class ReplyDaoImpl implements ReplyDao {
 
 	@Override
 	public int selectCntAll(Reply reply) {
-		String sql = "SELECT count(*) cnt FROM board WHERE postno = ? AND boardno = ?";
+		String sql = "SELECT count(*) cnt FROM reply WHERE postno = ? AND boardno = ?";
 
 		int totalCount = 0;
 
@@ -72,7 +72,7 @@ public class ReplyDaoImpl implements ReplyDao {
 
 		sql += " WHERE postno = ? AND boardno = ?";
 
-		sql += "   order by free_no desc";
+		sql += "   order by replyno desc";
 		sql += "  ) B";
 		sql += "  ORDER BY rnum";
 		sql += " ) BOARD";
