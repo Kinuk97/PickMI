@@ -41,7 +41,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		if (userno != null && !"".equals(userno)) {
 			try {
 				freeBoard.setUserno((Integer) userno);
-			} catch (NumberFormatException e) {
+			} catch (ClassCastException e) {
 				e.printStackTrace();
 			}
 		}

@@ -51,7 +51,7 @@ $(document).ready(function() {
     		</div>
   		</div>
 	  	<div class="form-group">
-		  	<textarea id="free_content" name="free_content">${board.free_title }</textarea>
+		  	<textarea id="free_content" name="free_content">${board.free_content }</textarea>
 		</div>
 	  	<script>
 			CKEDITOR.replace( 'free_content', {

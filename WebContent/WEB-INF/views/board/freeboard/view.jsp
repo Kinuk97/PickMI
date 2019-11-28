@@ -51,7 +51,7 @@ $(document).ready(function () {
 	
 	<div class="row text-right">
 		<form action="/freeboard/comment/write" method="get">
-			<textarea class="form-control" style="resize: none; width: 94%; display: inline; float: left; margin: 10px 0; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="free_content" required="required"></textarea>
+			<textarea class="form-control" style="resize: none; width: 94%; display: inline; float: left; margin: 10px 0; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="reply" required="required"></textarea>
 			<button type="button" id="cmtBtn" class="btn" style="height: 54px; width: 5%; padding: 0; margin-left: 0px; float: left; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">작성</button>
 		</form>	
 	</div>

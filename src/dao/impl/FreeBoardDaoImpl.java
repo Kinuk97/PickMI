@@ -75,8 +75,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					sql += " AND free_content LIKE '%' || ? || '%'";
 				} else if (searchno == 3) {
 					// 제목 & 내용으로 검색할 경우
-					sql += " AND free_title LIKE '%' || ? || '%'";
-					sql += " AND free_content LIKE '%' || ? || '%'";
+					sql += " AND (free_title LIKE '%' || ? || '%'";
+					sql += " OR free_content LIKE '%' || ? || '%')";
 				} else {
 					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
 					sql += " AND free_title LIKE '%' || ? || '%'";
@@ -160,8 +160,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					sql += " AND free_content LIKE '%' || ? || '%'";
 				} else if (paging.getSearchno() == 3) {
 					// 제목 & 내용으로 검색할 경우
-					sql += " AND free_title LIKE '%' || ? || '%'";
-					sql += " AND free_content LIKE '%' || ? || '%'";
+					sql += " AND (free_title LIKE '%' || ? || '%'";
+					sql += " OR free_content LIKE '%' || ? || '%')";
 				} else {
 					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
 					sql += " AND free_title LIKE '%' || ? || '%'";
