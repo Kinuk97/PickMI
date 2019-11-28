@@ -21,7 +21,7 @@ $(document).ready(function() {
 	}
 	
 	$("#write").click(function() {
-		$("#updateForm").prepend("<input type=\"text\" name='free_no' value='${board.free_no}'></input>");
+		$("#updateForm").prepend("<input type=\"hidden\" name='free_no' value='${board.free_no}'></input>");
 		
 		$("#updateForm").submit();
 	});
