@@ -50,6 +50,10 @@
 <tr>
 	<td class="info">내용</td><td>${ profile.prof_content }</td>
 </tr>
+<tr>
+	<td class="info">첨부파일</td>
+	<td><a href="/file/download?fileno=${file.fileno }">${file.originName }</a></td>
+</tr>
 </table>
 
 

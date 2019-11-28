@@ -21,7 +21,7 @@
 
 #header {
 	text-align: center;
-	background-color: #99E8F6;
+	background-color: #ffffff;
 }
 
 #footer {
@@ -32,8 +32,8 @@
 }
 
 #wrapper {
-	min-height: 600px;
-	background-color: #f3f3f3;
+	min-height: 1200px;
+	background-color: #ffffff;
 	clear: both;
 	padding-top: 25px;
     padding-bottom: 15px;
@@ -56,7 +56,7 @@
 
 .navbar-default {
 
-    border-color: #e7e7e700;
+    border-color: #ffffff;
 }
 
 #logo {
@@ -150,14 +150,21 @@ hr {
 #mainslide{
 	width: 1900px;
 	height: 335px;
+	background-color: #d8f1f9;
 }
+
+#mainboard {
+	height: 500px;
+}
+
+
 
 </style>
 </head>
 <body>
 
 <div id="header">
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default" id="header">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">

@@ -6,9 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<% CompBoard compBoard = (CompBoard) request.getAttribute("compBoard"); %>
-<% Files files = (Files) request.getAttribute("files"); %>
-
     
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
@@ -35,45 +32,46 @@ $(document).ready(function(){
 </script>
 
 
-<h2 class="text-center">완성된 프로젝트</h2>
+<h2 class="text-center"><strong>완성된 프로젝트</strong>&nbsp;&nbsp; <small>${compBoard.comp_no }</small></h2>
+<br>
 
 <div class="container">
 	
 	<table class="table table-bordered">
 
 			<tr>
-				<td class="info">프로젝트 제목</td><td><%=compBoard.getComp_no() %>.<%=compBoard.getComp_title() %></td>
-				<td class="info">팀장</td><td><%=compBoard.getUserno() %></td>
+				<td>프로젝트 제목</td><td>${compBoard.comp_title }</td>
+				<td>팀장</td><td>${compBoard.userno }</td>
 			</tr>
 
 			<tr>
-				<td class="info">팀 이름</td><td><%=compBoard.getComp_name()%></td>
-				<td class="info">작성날짜</td><td><%=compBoard.getComp_date()%></td>
+				<td>팀 이름</td><td>${compBoard.comp_name }</td>
+				<td>작성날짜</td><td>${compBoard.comp_date }</td>
 			</tr>
 
 			<tr>
-				<td class="info">참여인원</td><td><%=compBoard.getComp_member()%></td>
-				<td class="info">조회수</td><td><%=compBoard.getComp_view()%></td>
+				<td>참여인원</td><td>${compBoard.comp_member }</td>
+				<td>조회수</td><td>${compBoard.comp_view }</td>
 			</tr>
 
 			<tr>
-				<td class="info">프로젝트 기간</td><td><%=compBoard.getComp_startdate()%> ~ <%=compBoard.getComp_enddate() %></td>
-				<td class="info">찜한수</td><td><%=compBoard.getComp_like()%></td>
+				<td>프로젝트 기간</td><td>${compBoard.comp_startdate } ~ ${compBoard.comp_enddate }</td>
+				<td>찜한수</td><td>${compBoard.comp_like }</td>
 			</tr>
+
+<!-- 			<tr> -->
+<!-- 				<td class="info" colspan="4">본문</td> -->
+<!-- 			</tr> -->
 
 			<tr>
-				<td class="info" colspan="4">본문</td>
+				<td colspan="4" style="height: 500px;">${compBoard.comp_content }</td>
 			</tr>
 
-			<tr>
-				<td colspan="4"><%=compBoard.getComp_content() %></td>
-			</tr>
-
-<%-- 			<c:if test="<%=files.getOriginName() != null %>"> --%>
-<!-- 				<tr><td class="info" colspan="4">첨부파일</td></tr> -->
-<%-- 				<tr><td colspan="4"><%=files.getOriginName() %>	 --%>
-<%-- 					<a href ="/compBoard/download?fileno=${files.fileno}">다운로드</a></td></tr> --%>
-<%-- 			</c:if>	 --%>
+				<tr>
+					<td colspan="4">첨부파일
+					<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a>
+					</td>
+				</tr>
 			
 		</table>
 	
