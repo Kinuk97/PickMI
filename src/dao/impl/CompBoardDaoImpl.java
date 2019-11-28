@@ -39,8 +39,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				sql += " AND comp_name LIKE '%' || ? || '%'";
 
 			} else if (searchno == 3) {
-				sql += " AND comp_title LIKE '%' || ? || '%'";
-				sql += " AND comp_content LIKE '%' || ? || '%'";
+				sql += " AND (comp_title LIKE '%' || ? || '%'";
+				sql += " OR comp_content LIKE '%' || ? || '%')";
 
 			} else {
 				//제목으로 검색할 경우

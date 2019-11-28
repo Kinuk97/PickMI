@@ -48,11 +48,11 @@ public class CompBoardServiceImpl implements CompBoardService {
 			search = param;
 		}
 		
-		param = req.getParameter("categoryno");
-		int categoryno = 0;
+		param = req.getParameter("searchno");
+		int searchno = 0;
 		if (param != null && !"".equals(param)) {
 			try {
-				categoryno = Integer.parseInt(param);
+				searchno = Integer.parseInt(param);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
@@ -61,13 +61,13 @@ public class CompBoardServiceImpl implements CompBoardService {
 //		System.out.println("curPage : " + curPage);
 
 		// Board TB와 curPage값을 이용한 Paging객체를 생성하고 반환
-		int totalCount = compBoardDao.selectCntAll(search, categoryno);
+		int totalCount = compBoardDao.selectCntAll(search, searchno);
 
 		// Paging객체 생성
 		Paging paging = new Paging(totalCount, curPage, 20);
 
 		paging.setSearch(search);
-		paging.setCategoryno(categoryno);
+		paging.setSearchno(searchno);
 		
 		return paging;
 	}
