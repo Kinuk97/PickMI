@@ -22,18 +22,22 @@ public class MgrProjectBoardViewController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// 로그인 됐을 경우
+		if(req.getSession().getAttribute("mgrlogin") != null) {
+			
+			ProjectBoard projectBoard = projectBoardService.getProjectBoardno(req);
+			
+			projectBoard = projectBoardService.view(projectBoard);
+			
+			req.setAttribute("projectBoard", projectBoard);
+			
+			req.getRequestDispatcher("/WEB-INF/views/mgr/project/projectview.jsp").forward(req, resp);
+		} else {
+			// 로그인 안됐을 경우
+			req.getRequestDispatcher("/WEB-INF/views/mgr/layouts/mustlogin.jsp")
+			.forward(req, resp);
 
-		ProjectBoard projectBoard = projectBoardService.getProjectBoardno(req);
-		
-		projectBoard = projectBoardService.view(projectBoard);
-		
-		req.setAttribute("projectBoard", projectBoard);
-		
-		req.getRequestDispatcher("/WEB-INF/views/mgr/project/projectview.jsp").forward(req, resp);
-
-		
-	
+		}
 	}
-	
-
 }
