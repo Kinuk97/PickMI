@@ -416,6 +416,7 @@ public class FileServiceImpl implements FileService {
 		}
 
 		FreeBoard freeBoard = null;
+		CompBoard compBoard = null;
 		Files uploadFile = null;
 		
 
@@ -529,6 +530,61 @@ public class FileServiceImpl implements FileService {
 					}
 				} else if (postno == 4) {
 					// 완성된 게시판
+					if (compBoard == null) compBoard = new CompBoard();
+					
+					if ("comp_title".equals(key)) {
+						try {
+							compBoard.setComp_title(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("comp_name".equals(key)) {
+						try {
+							compBoard.setComp_name(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("comp_member".equals(key)) {
+						try {
+							compBoard.setComp_member(Integer.parseInt(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+
+					} else if ("comp_startdate".equals(key)) {
+						try {
+							compBoard.setComp_startdate(Integer.parseInt(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+
+					} else if ("comp_enddate".equals(key)) {
+						try {
+							compBoard.setComp_enddate(Integer.parseInt(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+
+					} else if ("comp_content".equals(key)) {
+						try {
+							compBoard.setComp_content(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+						
+					} else if ("comp_no".equals(key)) {
+						
+					}
+						try {
+							compBoard.setComp_no(Integer.parseInt(item.getString()));
+						} catch (NumberFormatException e) {
+							e.printStackTrace();
+							// 게시글 번호를 가져오지 못했다면 리턴
+							resultBoardno =  -2;
+							return resultBoardno;
+						}
+					
+					// key값 비교 if
 
 				}
 
@@ -598,6 +654,7 @@ public class FileServiceImpl implements FileService {
 
 		} else if (postno == 4) {
 			// 완성된 게시판
+			
 
 		}
 

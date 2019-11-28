@@ -12,20 +12,20 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	//목록 버튼 동작
+// 	목록 버튼 동작
 	$("#btnList").click(function() {
 		$(location).attr("href", "/compBoard/list");
 	});
 	
-	//수정 버튼 동작
-// 	$("#btnUpdate").click(function(){
-// 		$(location).attr("href", "/compBoard/update?comp_no=${compBoard.comp_no }");
-// 	});
+// 	수정 버튼 동작
+	$("#btnUpdate").click(function(){
+		$(location).attr("href", "/compBoard/update?comp_no=${compBoard.comp_no }");
+	});
 	
-	//삭제 버튼 동작
-// 	$("#btnDelete").click(function(){
-// 		 $(location).attr("href", "/compBoard/delete?comp_no=${compBoard.comp_no }");
-// 	});
+// 	삭제 버튼 동작
+	$("#btnDelete").click(function(){
+		 $(location).attr("href", "/compBoard/delete?comp_no=${compBoard.comp_no }");
+	});
 	
 });
 
@@ -74,6 +74,11 @@ $(document).ready(function(){
 				</tr>
 			
 		</table>
+		
+		<div class="row text-center">
+			<button id="btnUpdate">게시글 수정</button>
+			<button id="btnDelete" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+		</div>
 	
 </div>
 
