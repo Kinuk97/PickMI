@@ -101,5 +101,41 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectUserByEmail(user);
 	}
 
+	@Override
+	public User getPwParam(HttpServletRequest req) {
+		String param = null;
+		
+		param = req.getParameter("email");
+		user.setEmail(param);
+		
+		param = req.getParameter("name");
+		user.setName(param);
+		
+		return user;
+	}
+
+	@Override
+	public User findPw(User user) {
+		
+		return userDao.selectPwByEmail(user);
+	}
+
+	@Override
+	public User getNewParam(HttpServletRequest req) {
+		
+		String param = null;
+		
+		param = req.getParameter("pw1");
+		user.setPw(param);
+		
+		return user;
+	}
+
+	@Override
+	public void updatePw(User newPw) {
+		
+		 userDao.updatePw(newPw);
+	}
+
 
 }

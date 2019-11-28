@@ -49,4 +49,37 @@ public interface UserService {
 	 * @return user - 유저번호
 	 */
 	User getUserno(User user);
+	
+	/**
+	 * 비밀번호 찾기에 필요한 파라미터 받기
+	 * 
+	 * @param req - 요청받은 파라미터 값
+	 * @return - 비밀번호
+	 */
+	User getPwParam(HttpServletRequest req);
+	
+	/**
+	 * 비밀번호 확인
+	 * @param user
+	 * @return User - 비밀번호
+	 */
+	User findPw(User user);
+	
+	/**
+	 * 새로운 비밀번호를 받는다.
+	 * 
+	 * @param req
+	 * @return
+	 */
+	User getNewParam(HttpServletRequest req);
+	
+	/**
+	 * 비밀번호 변경
+	 * 
+	 * @param newPw
+	 * @return
+	 */
+	public void updatePw(User newPw);
+	
+
 }
