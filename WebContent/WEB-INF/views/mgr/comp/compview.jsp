@@ -37,5 +37,5 @@
 		</table>
 </div>
 
-<!-- Footer -->
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>

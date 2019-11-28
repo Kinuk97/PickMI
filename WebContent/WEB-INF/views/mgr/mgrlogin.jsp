@@ -1,90 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 
-<!-- Header -->
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <style type="text/css">
-.mgrlogin-form{
-	width: 385px;
-	margin: 30px auto;
-}
-
-.mgrlogin-form form{
-	margin-botoom: 15px;
-	background: #f7f7f7;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	padding: 30px;
-}
-
-.mgrlogin-form h2 {
-	margin: 0 0 15px;
-}
-
-.mgrform-control, .login-btn {
-	min-height: 38px;
-	border-radius: 2px;
-}
-
-.input-group-addon .fa {
-	font-size: 18px;
-}
-
-.login-btn {
-	font-size: 15px;
-	font-weight: bold;
-}
-
-#log{
-	margin: 5px auto;
-	width: 500px;
-}
 
 </style>
 
+
 </head>
 <body>
-	<div class="mgrlogin-form" id="mgrlog">
-		<form action="/mgr/login" method="post">
-			<h2 class="text-center">관리자 로그인</h2>
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span>
-					<input type="text" class="form-control" name="mgrid" id="mgrid" placeholder="아이디를 입력하세요" required="required">
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input type="password" class="form-control" name="mgrpw" id="mgrpw" placeholder="비밀번호를 입력하세요" required="required">
-				</div>
-			</div>
-			
-			<c:if test="${!empty login && !login }">
-				<script type="text/javascript"> alert("로그인 실패")</script>
-			</c:if>
-			
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary login-btn btn-block">로그인</button>
-			</div>
-				<div class="or-seperator">
-			</div>
-		</form>
 
-		<ul style="padding: 10px;">
-			<li>
-		<p class="text-center text-muted small" style="text-align: left;">
-			부여받은 아이디와 비밀번호를 넣으신 후 로그인을 하시면 됩니다.	
-		</p>
-			</li>
-			<li>
-		<p class="text-center text-muted small" style="text-align: left;">
-			아이디와 비밀번호를 잊으셨을 경우 당사 담당자에게 연락해 주시기 바랍니다.			</p>
-			</li>
+<div class="container" style="text-align:center;">
+
+	<span id="logo"> 
+		<a href="/mgr/login"> 
+			<img src="/resources/black.png"class="img-rounded center-block" style="height: 360px;">
+		</a>
+	</span>
+
+	<form class="form-inline" action="/mgr/login" method="post">
+	  <div class="form-group">
+	    <label class="sr-only" for="mgrid"></label>
+	    <input type="text" class="form-control" id="mgrid" name="mgrid" placeholder="Enter AdminID">
+	  </div>
+	  <div class="form-group">
+	    <label class="sr-only" for="mgrpw">Password</label>
+	    <input type="password" class="form-control" id="mgrpw" name="mgrpw" placeholder="Password">
+	  </div>
+	  <button type="submit" class="btn btn-default">Sign in</button>
+	</form>
+<hr>	
+	
+</div>
+
+<div class="bottom">
+	<div class="col-lg-offset-4 col-md-4">
+		<ul style="color: #444a; margin-left:40px;">
+			<li>이곳은 관리자전용페이지입니다. 로그인을 하셔야 이용하실 수 있습니다.</li>
+			<li>부여받은 아이디와 비밀번호를 넣으신 후 로그인을 하시면됩니다.</li>
+			<li>아이디와 비밀번호를 잊으셨을 경우는 당사 담당자에게 연락해 주시기 바랍니다.</li>
 		</ul>
-</div> <!-- .container -->
+	</div>
+</div>
 
-<!-- Footer -->
-
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>

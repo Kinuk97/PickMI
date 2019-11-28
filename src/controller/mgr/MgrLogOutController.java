@@ -18,11 +18,11 @@ public class MgrLogOutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//?„¸?…˜ ? •ë³? ì§??š°ê¸? - ë¡œê·¸?•„?›ƒ
+		//?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½ï¿½? - ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½
 		req.getSession().invalidate();
 		
-		//ë©”ì¸?™”ë©´ìœ¼ë¡? ë¦¬ë‹¤?´? ‰?…˜
-		resp.sendRedirect("/main");
+		//ë©”ì¸?ï¿½ï¿½ë©´ìœ¼ï¿½? ë¦¬ë‹¤?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+		resp.sendRedirect("/mgr/login");
 		
 	}
 	

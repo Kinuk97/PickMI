@@ -40,9 +40,9 @@ $(document).ready(function(){
 <div class="container" >
 	<table class="table table-condensed">
 		<tr class="info">
-			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 10%">사용자번호</th>
-			<th style="width: 10%">아이디(email)</th>
+			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 5%">사용자번호</th>
+			<th style="width: 20%">아이디(email)</th>
 			<th style="width: 10%">이름</th>
 		</tr>
 		<c:forEach items="${userlist }" var="userboard">
@@ -66,6 +66,5 @@ $(document).ready(function(){
 </div>
 </div> <!-- .container -->
 
-<!-- Footer -->
-
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>

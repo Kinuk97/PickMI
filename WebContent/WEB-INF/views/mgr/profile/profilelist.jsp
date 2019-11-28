@@ -40,8 +40,8 @@ $(document).ready(function(){
 <div class="container" >
 	<table class="table table-condensed">
 		<tr class="info">
-			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 10%">글번호</th>
+			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 5%">글번호</th>
 			<th style="width: 10%">사용자번호</th>
 			<th style="width: 10%">작성시간</th>
 			<th style="width: 10%">직무</th>
@@ -52,7 +52,7 @@ $(document).ready(function(){
 		<tr>
 			<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
 			<td>${pbboard.prof_no}</td>
-			<td><a href="/mgr/profileview?prof_no=${pbboard.prof_no}">${pbboard.userno }</a></td>
+			<td><a href="/mgr/profileview?profileno=${pbboard.prof_no}">${pbboard.userno }</a></td>
 			<td>${pbboard.prof_time }</td>
 			<td>${pbboard.prof_job }</td>
 			<td>${pbboard.prof_state }</td>
@@ -71,8 +71,5 @@ $(document).ready(function(){
 	<jsp:include page = "/WEB-INF/views/mgr/paging/profilePaging.jsp" />
 	
 </div>	
-</div> <!-- .container -->
-
-<!-- Footer -->
-
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>
