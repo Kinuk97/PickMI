@@ -35,7 +35,7 @@ public class MgrFreeListController extends HttpServlet {
 			req.setAttribute("paging", paging);
 			
 			//mgr main navTab에서 사용할 번호
-			req.setAttribute("boardno", 4);
+			req.setAttribute("boardno", 5);
 			
 			
 			// FreeBoard 게시�? 목록 조회

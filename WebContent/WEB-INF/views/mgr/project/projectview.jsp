@@ -11,14 +11,10 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+
 	//목록버튼 동작
 	$("#btnList").click(function() {
-		$(location).attr("href", "/projectBoard/list");
-	});
-	
-	//수정버튼 동작
-	$("#btnUpdate").click(function() {
-		$(location).attr("href", "/projectBoard/update?proj_no=${projectBoard.proj_no }");
+		$(location).attr("href", "/mgr/projectlist");
 	});
 
 	//삭제버튼 동작
@@ -86,10 +82,8 @@ $(document).ready(function() {
 
 
 	<div class="box-footer">
-		<c:if test="${userno eq projectBoard.userno }">
-		<button id="btnUpdate" class="btn btn-warning">수정</button>
+
 		<button id="btnDelete" class="btn btn-danger">삭제</button>
-		</c:if>
 		<button id="btnList" class="btn btn-primary">목록</button>
 	</div>
 
