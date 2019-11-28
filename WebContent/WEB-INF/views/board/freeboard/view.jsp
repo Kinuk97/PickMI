@@ -7,10 +7,17 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+	$("#cmtBtn").popover({"show" : 500, "hide" : 100});
+	
 	$("#cmtBtn").on("click", function() {
-		$("form").prepend("<input type=\"text\" name='free_no' value='${board.free_no}'></input>");
-		
-		$("form").submit();
+		var login = "${login}"
+		if (login != "" && login) {
+			$(this).popover('destroy');
+			
+			$("form").prepend("<input type=\"hidden\" name='boardno' value='${board.free_no}'></input>");
+			
+			$("form").submit();
+		}
 	});
 });
 </script>
@@ -52,9 +59,29 @@ $(document).ready(function () {
 	<div class="row text-right">
 		<form action="/freeboard/comment/write" method="get">
 			<textarea class="form-control" style="resize: none; width: 94%; display: inline; float: left; margin: 10px 0; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="reply" required="required"></textarea>
-			<button type="button" id="cmtBtn" class="btn" style="height: 54px; width: 5%; padding: 0; margin-left: 0px; float: left; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">작성</button>
+			<button type="button" id="cmtBtn" class="btn" style="height: 54px; width: 5%; padding: 0; margin-left: 0px; float: left; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"
+			 data-container="body" data-placement="top" data-content="댓글을 작성하기 위해서는 로그인이 필요합니다.">작성</button>
 		</form>	
 	</div>
+	
+	<hr>
+	
+	<c:forEach items="${replyList }" var="reply">
+		<div class="row" style="border: 1px solid rgb(221, 221, 221); margin-top: 10px;">
+			<div class="col-lg-12">
+				<div class="col-lg-6 text-left">
+					${reply.username }
+				</div>
+				<div class="col-lg-6 text-right">
+					작성일 : ${reply.replytime }
+				</div>
+			</div>
+			<hr style="clear: both;">
+			<div class="col-lg-12">
+				<p>${reply.reply }</p>
+			</div>
+		</div>
+	</c:forEach>
 		
 </div>
 

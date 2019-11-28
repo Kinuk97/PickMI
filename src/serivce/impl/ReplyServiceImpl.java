@@ -22,11 +22,11 @@ public class ReplyServiceImpl implements ReplyService {
 	public static ReplyService getInstance() {
 		return Singleton.instance;
 	}
-	
+
 	@Override
 	public Reply getParam(HttpServletRequest req) {
 		Reply reply = new Reply();
-		
+
 		String param = req.getParameter("replyno");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -35,7 +35,7 @@ public class ReplyServiceImpl implements ReplyService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		Object userno = req.getSession().getAttribute("userno");
 		if (userno != null && !"".equals(userno)) {
 			try {
@@ -44,7 +44,7 @@ public class ReplyServiceImpl implements ReplyService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("boardno");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -53,7 +53,7 @@ public class ReplyServiceImpl implements ReplyService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("reply");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -61,17 +61,17 @@ public class ReplyServiceImpl implements ReplyService {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
+		} else {
+			reply.setReply("내용없음");
 		}
-		
+
 		return reply;
 	}
-	
+
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
-		System.out.println(req.getAttribute("test"));;
-		
 		Reply reply = new Reply();
-		
+
 		String param = req.getParameter("curPage");
 		int curPage = 0;
 		if (param != null && !"".equals(param)) {
@@ -82,19 +82,31 @@ public class ReplyServiceImpl implements ReplyService {
 			}
 		}
 		
+		Object postno = req.getAttribute("postno");
+		if (postno != null && !"".equals(postno)) {
+			try {
+				reply.setPostno((Integer) postno);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
 		
+		Object boardno = req.getAttribute("boardno");
+		if (boardno != null && !"".equals(boardno)) {
+			try {
+				reply.setBoardno((Integer) boardno);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+		
+//		Reply TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+		int totalCount = replyDao.selectCntAll(reply);
 
-		// Reply TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
-//		int totalCount = replyDao.selectCntAll(reply);
+//		Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage, 20);
 
-		// Paging 객체 생성
-//		Paging paging = new Paging(totalCount, curPage, 20);
-
-//		paging.setSearch(search);
-//		paging.setSearchno(searchno);
-//		paging.setCategoryno(categoryno);
-
-		return null;
+		return paging;
 	}
 
 	@Override
