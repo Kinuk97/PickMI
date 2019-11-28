@@ -107,7 +107,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, file.getFilename());
+//			ps.setString(1, file.getFilename());
 			ps.setInt(2, file.getBoardno());
 			
 			ps.executeUpdate();

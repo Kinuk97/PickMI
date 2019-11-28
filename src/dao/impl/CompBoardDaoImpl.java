@@ -123,6 +123,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res.setComp_view( rs.getInt("comp_view") );
 				res.setComp_reply( rs.getInt("comp_reply") );
 				res.setComp_like( rs.getInt("comp_like") );
+				res.setComp_startdate( rs.getInt("comp_startdate"));
+				res.setComp_enddate( rs.getInt("comp_enddate"));
 			}
 			
 			ps.executeUpdate();
@@ -250,7 +252,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		sql +="INSERT INTO compBoard(comp_no, categoryno, fileno, userno, comp_title, comp_name, ";
 		sql +="		 				 comp_content, comp_member, comp_date, comp_view, ";
 		sql +="						 comp_reply, comp_like )";
-		sql +=" VALUES(?, ?, ?)";
+		sql +=" VALUES(?, ?, ?, ?, )";
 				
 		
 	}
@@ -340,7 +342,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps = conn.prepareStatement(sql);
 
 			//SQL쿼리의 ?채우기
-			ps.setString(1, files.getFilename());
+//			ps.setString(1, files.getFilename());
 			ps.setInt(2, files.getBoardno());
 
 			//					System.out.println(files.getBoardno());

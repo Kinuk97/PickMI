@@ -24,9 +24,9 @@ $(document).ready(function() {
 <div class="container text-center">
 	<h1>게시글 작성✍</h1>
 	
-	<form class="form-horizontal" action="/freeboard/write" method="post">
+	<form class="form-horizontal" action="/freeboard/write" method="post" enctype="multipart/form-data">
   		<div class="form-group">
-    		<label for="inputEmail3" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">제목 : </label>
+    		<label for="free_title" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">제목 : </label>
     		<div class="col-sm-2 col-md-2 col-lg-1">
     			<select name="categoryno" style="margin-left: -14px;">
 	  				<option value="">선택없음</option>
@@ -41,12 +41,15 @@ $(document).ready(function() {
   		</div>
 	  	<div class="form-group">
 		  	<textarea id="free_content" name="free_content"></textarea>
-			</div>
-		  	<script>
-				CKEDITOR.replace( 'free_content', {
-					height : "500px"
-				} );
-		    </script>
+		</div>
+	  	<script>
+			CKEDITOR.replace( 'free_content', {
+				height : "500px"
+			} );
+	    </script>
+	    <div class="text-left">
+	    	<input class="btn btn-info" type="file" name="uploadFile">
+	    </div>
 	 	<div class="form-group">
 	    	<div class="col-sm-offset-2 col-sm-8 text-center">
 				<button class="btn btn-default" type="button" id="write">작성완료</button>

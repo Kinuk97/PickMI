@@ -2,11 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 
-
-
 <!-- Header -->
 <jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
-
 
 <!-- checkBox -->
 <script type="text/javascript">
@@ -38,6 +35,7 @@ $(document).ready(function(){
 </head>
 <body>
 
+
 <div class="container" >
 	<table class="table table-condensed">
 		<tr class="info">
@@ -47,26 +45,27 @@ $(document).ready(function(){
 			<th style="width: 10%">제목</th>
 			<th style="width: 10%">작성시간</th>
 		</tr>
-		<c:forEach items="${list }" var="pjboard">
+		<c:forEach items="${list }" var="frboard">
 		<tr>
-			<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
-			<td>${pjboard.proj_no }</td>
-			<td>${pjboard.userno }</td>
-			<td>${pjboard.proj_title }</td>
-			<td>${pjboard.proj_name }</td>
+			<td><input type="checkbox" name="checkRow" value="${frboard.free_no }"/></td>
+			<td>${frboard.free_no }</td>
+			<td>${frboard.userno }</td>
+			<td><a href="/mgr/freeview?free_no=${frboard.free_no}">${frboard.free_title }</a></td>
+			<td>${frboard.free_time }</td>
 		</tr>	
 		</c:forEach>
 	</table>
 
 	<div class="src" style="text-align: center;">
-		<form action="/mgr/projectlist" method="get">
-			<input type="text" name="search" id="search"/>
-			<button id="btnSearch" class="btn btn-primary">검색</button>
-		</form>
+	<form action="/mgr/freelist" method="get">
+		<input type="text" name="search" id="search"/>
+		<button id="btnSearch" class="btn btn-primary">검색</button>
+	</form>
 	</div>
+	
+	<jsp:include page = "/WEB-INF/views/mgr/paging/freePaging.jsp" />
 
-<jsp:include page = "/WEB-INF/views/mgr/paging/projectPaging.jsp" />
-
+</div>
 </div> <!-- .container -->
 
 <!-- Footer -->

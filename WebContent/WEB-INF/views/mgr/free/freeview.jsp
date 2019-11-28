@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
+<!-- Header -->
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
 
 <div class="container">
 	<h2 class="text-center">자유게시판</h2>
@@ -17,14 +18,11 @@
 		</tr>
 
 		<tr>
-			<td colspan="4" style="height: 500px; background: #CCC;">${board.free_content }</td>
-		</tr>
-		<tr>
-			<td class="info">첨부파일</td>
-			<td colspan="3"><a href="/file/download?fileno=${file.fileno }">${file.originName }</a></td>
+			<td colspan="4">${board.free_content }</td>
 		</tr>
 	</table>
 	
 </div>
 
-<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
+<!-- Footer -->
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  

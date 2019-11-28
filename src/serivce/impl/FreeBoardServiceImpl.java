@@ -27,7 +27,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public FreeBoard getParam(HttpServletRequest req) {
 		FreeBoard freeBoard = new FreeBoard();
-		
+
 		String param = req.getParameter("free_no");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -36,16 +36,16 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		Object userno = req.getSession().getAttribute("userno");
 		if (userno != null && !"".equals(userno)) {
 			try {
-				freeBoard.setUserno(Integer.parseInt((String) userno));
+				freeBoard.setUserno((Integer) userno);
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("categoryno");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -54,7 +54,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("free_title");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -63,7 +63,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("free_content");
 		if (param != null && !"".equals(param)) {
 			try {
@@ -72,10 +72,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return freeBoard;
 	}
-	
+
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 		String param = req.getParameter("curPage");
@@ -87,13 +87,13 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("search");
 		String search = null;
 		if (param != null && !"".equals(param)) {
 			search = param;
 		}
-		
+
 		param = req.getParameter("searchno");
 		int searchno = 0;
 		if (param != null && !"".equals(param)) {
@@ -103,7 +103,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		param = req.getParameter("categoryno");
 		int categoryno = 0;
 		if (param != null && !"".equals(param)) {
@@ -119,11 +119,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 		// Paging 객체 생성
 		Paging paging = new Paging(totalCount, curPage, 20);
-		
+
 		paging.setSearch(search);
 		paging.setSearchno(searchno);
 		paging.setCategoryno(categoryno);
-		
+
 		return paging;
 	}
 
@@ -132,12 +132,13 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		return freeBoardDao.selectAll(paging);
 	}
 
+	// 파일 처리가 없는 글쓰기 (사용 x, FileService로 대체)
 	@Override
 	public boolean writeBoard(FreeBoard freeBoard) {
-		// 세션에 userno가 아직 없어서 주석
-//		if (freeBoard.getUserno() == 0) {
-//			return false;
-//		}
+//		 일반적인 게시글 요청
+		if (freeBoard.getUserno() == 0) {
+			return false;
+		}
 		
 		int queryResult = freeBoardDao.insertBoard(freeBoard);
 		boolean result = false;
@@ -165,14 +166,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public FreeBoard FreeBoardDetail(FreeBoard freeBoard) {
-		viewCounting(freeBoard);
 		return freeBoardDao.boardView(freeBoard);
 	}
-	
+
 	@Override
 	public void viewCounting(FreeBoard freeBoard) {
 		freeBoardDao.countViews(freeBoard);
 	}
-
 
 }
