@@ -12,7 +12,7 @@
 $(document).ready(function() {
 	
 	$("#write").click(function() {
-		submitContents("#write")
+// 		submitContents("#write")
 	$("form").submit();
 	});
 	
@@ -21,6 +21,13 @@ $(document).ready(function() {
 	});
 });
 </script>
+
+<style type="text/css">
+table {
+text-align:center;
+}
+
+</style>
 <!-- 스마트에디터 -->
 <script src="//cdn.ckeditor.com/4.13.0/basic/ckeditor.js"></script>
 

@@ -20,7 +20,7 @@ import util.Paging;
 public class ProfileBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
+	private ProfileBoardService profileBoardService = ProfileBoardServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
