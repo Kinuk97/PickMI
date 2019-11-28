@@ -32,9 +32,9 @@ public class ProfileBoardListController extends HttpServlet {
 		req.setAttribute("paging", paging);
 		
 		
-		
 		//게시글 목록 조회
 		List<ProfileBoard> list = profileBoardService.getBoardList(paging);
+		
 		
 		req.setAttribute("list", list);
 		
