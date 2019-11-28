@@ -35,6 +35,7 @@ public interface FreeBoardService {
 
 	/**
 	 * 게시글 작성 기능
+	 * 파일 처리가 없는 글쓰기 (사용 x, FileService로 대체)
 	 * 
 	 * @param freeBoard - 게시글 작성 내용이 담겨있는 객체
 	 * @return 작성 성공 여부 반환

@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.FreeBoard;
+import serivce.face.FileService;
 import serivce.face.FreeBoardService;
+import serivce.impl.FileServiceImpl;
 import serivce.impl.FreeBoardServiceImpl;
 
 @WebServlet("/freeboard/write")
 public class FreeBoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private FreeBoardService freeBoardService = FreeBoardServiceImpl.getInstance();
+	private FileService fileService = FileServiceImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,14 +29,8 @@ public class FreeBoardWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		FreeBoard freeBoard = freeBoardService.getParam(req);
+		fileService.writeBoard(req, 3);
 		
-		if (freeBoardService.writeBoard(freeBoard)) {
-			
-			// 일단 list 나중에 view페이지로 보내주기
-			resp.sendRedirect("/freeboard/list");
-		} else {
-			resp.sendRedirect("/login");
-		}
+		resp.sendRedirect("/freeboard/list");
 	}
 }

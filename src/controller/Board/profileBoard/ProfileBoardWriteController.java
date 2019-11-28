@@ -34,7 +34,7 @@ public class ProfileBoardWriteController extends HttpServlet {
 		req.setAttribute("userno", userno );
 		req.setAttribute("username", session.getAttribute("name") );
 //		System.out.println("profileBoard write controller : " + session.getAttribute("userno"));
-		System.out.println("profileBoard write controller : " + session.getAttribute("name"));
+//		System.out.println("profileBoard write controller : " + session.getAttribute("name"));
 		
 		//view 전달
 		req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/write.jsp").forward(req, resp);

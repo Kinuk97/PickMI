@@ -26,22 +26,22 @@ public class MgrUserListController extends HttpServlet {
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// ?š”ì²??ŒŒ?¼ë¯¸í„°?—?„œ curPageë¥? êµ¬í•˜ê³? Paging ê°ì²´ ë°˜í™˜
+		// ?ï¿½ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½ë¯¸í„°?ï¿½ï¿½?ï¿½ï¿½ curPageï¿½? êµ¬í•˜ï¿½? Paging ê°ì²´ ë°˜í™˜
 		Paging paging = mgrService.getPaging(req);
 				
-		// paging ê°ì²´ë¥? MODELê°’ìœ¼ë¡? ì§?? •
+		// paging ê°ì²´ï¿½? MODELê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("paging", paging);
 
-		// ê²??ƒ‰?–´ ?ŒŒ?¼ë¯¸í„° 
+		// ï¿½??ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ë¯¸í„° 
 		paging.setSearch(req.getParameter("search"));
 
-		//ProfileBoard ?…Œ?´ë¸”ì˜ ëª©ë¡ ì¡°íšŒ
+		//ProfileBoard ?ï¿½ï¿½?ï¿½ï¿½ë¸”ì˜ ëª©ë¡ ì¡°íšŒ
 		List<User> userlist = mgrService.getuserList(paging);
 
-		//ê²Œì‹œê¸? ëª©ë¡?„ MODELê°’ìœ¼ë¡? ì§?? •
+		//ê²Œì‹œï¿½? ëª©ë¡?ï¿½ï¿½ MODELê°’ìœ¼ï¿½? ï¿½??ï¿½ï¿½
 		req.setAttribute("userlist", userlist);
 		
-		req.getRequestDispatcher("/WEB-INF/views/mgr/userlist.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/mgr/user/userlist.jsp")
 		.forward(req, resp);
 
 		}

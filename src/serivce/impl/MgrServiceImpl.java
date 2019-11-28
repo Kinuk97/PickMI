@@ -75,11 +75,10 @@ public class MgrServiceImpl implements MgrService{
 		int totalCount = managerDao.selectCntAll(search);
 			
 		// Paging 객체 생성
-		Paging paging = new Paging(totalCount, curPage);
+		Paging paging = new Paging(totalCount, curPage, 20);
 		
 		return paging;
 	}
-// User List -----
 	
 	@Override
 	public List<User> getuserList() {
@@ -91,6 +90,8 @@ public class MgrServiceImpl implements MgrService{
 		return managerDao.userselectAll(paging);
 	}
 
+// ----- User List
+	
 	@Override
 	public List<ProfileBoard> getPfBoardList() {
 		return managerDao.profileselectAll();

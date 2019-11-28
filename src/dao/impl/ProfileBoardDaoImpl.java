@@ -107,7 +107,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, file.getFilename());
+//			ps.setString(1, file.getFilename());
 			ps.setInt(2, file.getBoardno());
 			
 			ps.executeUpdate();
@@ -269,7 +269,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		
 	sql += "SELECT ";
 	sql += " count(*)";
-	sql += " FROM board";
+	sql += " FROM profile";
 	
 		
 	//결과 저장 리스트

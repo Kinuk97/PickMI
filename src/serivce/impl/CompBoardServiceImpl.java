@@ -261,7 +261,7 @@ public class CompBoardServiceImpl implements CompBoardService {
 
 				File up = new File(context.getRealPath("upload"), item.getName() + "_" + u);
 
-				files.setFilename(item.getName() + "_" + u);
+//				files.setFilename(item.getName() + "_" + u);
 //				files.setBoardno((int)item.getSize());
 
 				try {
@@ -286,11 +286,11 @@ public class CompBoardServiceImpl implements CompBoardService {
 		
 		write(compBoard);
 		
-		if (files.getFilename() != null) {
-			files.setBoardno(nextval);
-			
-			compBoardDao.insertFile(files);
-		}
+//		if (files.getFilename() != null) {
+//			files.setBoardno(nextval);
+//			
+//			compBoardDao.insertFile(files);
+//		}
 	}
 
 }

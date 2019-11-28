@@ -138,7 +138,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 		
 			File up = new File(context.getRealPath("upload"), item.getName() + "_" + u);
 
-			file.setFilename(item.getName());
+//			file.setFilename(item.getName());
 //			file.setStoredname(item.getName() + "_" + u);
 
 			try {

@@ -7,6 +7,7 @@
 <!-- Header -->
 <jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
 
+
 <!-- checkBox -->
 <script type="text/javascript">
 
@@ -43,34 +44,29 @@ $(document).ready(function(){
 			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
 			<th style="width: 10%">글번호</th>
 			<th style="width: 10%">사용자번호</th>
+			<th style="width: 10%">제목</th>
 			<th style="width: 10%">작성시간</th>
-			<th style="width: 10%">직무</th>
-			<th style="width: 10%">상태</th>
-			<th style="width: 10%">지역</th>
 		</tr>
-		<c:forEach items="${list }" var="pbboard">
+		<c:forEach items="${list }" var="pjboard">
 		<tr>
-			<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
-			<td>${pbboard.prof_no }</td>
-			<td>${pbboard.userno }</td>
-			<td>${pbboard.prof_time }</td>
-			<td>${pbboard.prof_job }</td>
-			<td>${pbboard.prof_state }</td>
-			<td>${pbboard.prof_loc }</td>
+			<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
+			<td>${pjboard.proj_no }</td>
+			<td>${pjboard.userno }</td>
+			<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no }">${pjboard.proj_title }</a></td>
+			<td>${pjboard.proj_name }</td>
 		</tr>	
 		</c:forEach>
 	</table>
-	
+
 	<div class="src" style="text-align: center;">
-		<form action="/mgr/profilelist" method="get">
+		<form action="/mgr/projectlist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary">검색</button>
 		</form>
 	</div>
 
-	<jsp:include page = "/WEB-INF/views/mgr/paging/profilePaging.jsp" />
-	
-</div>	
+<jsp:include page = "/WEB-INF/views/mgr/paging/projectPaging.jsp" />
+
 </div> <!-- .container -->
 
 <!-- Footer -->

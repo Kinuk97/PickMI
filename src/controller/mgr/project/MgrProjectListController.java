@@ -1,4 +1,4 @@
-package controller.mgr;
+package controller.mgr.project;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.ProjectBoard;
 import serivce.face.MgrService;
-import serivce.face.ProjectBoardService;
 import serivce.impl.MgrServiceImpl;
-import serivce.impl.ProjectBoardServiceImpl;
 import util.Paging;
 
 /**
@@ -44,9 +42,12 @@ public class MgrProjectListController extends HttpServlet {
 	// projectlist 객체�? model값으�? �??��
 	req.setAttribute("list", list);
 		
-	req.getRequestDispatcher("/WEB-INF/views/mgr/projectlist.jsp")
+	req.getRequestDispatcher("/WEB-INF/views/mgr/project/projectlist.jsp")
 	.forward(req, resp);
 	
 	}
 	
 }
+
+
+

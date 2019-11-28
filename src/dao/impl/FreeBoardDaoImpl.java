@@ -31,8 +31,32 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public int getNextBoardno() {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "SELECT freeboard_seq.nextval FROM dual";
+		
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -227,17 +251,18 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public int insertBoard(FreeBoard freeBoard) {
-		String sql = "INSERT INTO freeboard VALUES (freeboard_seq.nextval, ?, ?, ?, ?, sysdate, 0)";
+		String sql = "INSERT INTO freeboard VALUES (?, ?, ?, ?, ?, sysdate, 0)";
 		
 		int result = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, freeBoard.getCategoryno());
-			ps.setInt(2, freeBoard.getUserno());
-			ps.setString(3, freeBoard.getFree_title());
-			ps.setString(4, freeBoard.getFree_content());
+			ps.setInt(1, freeBoard.getFree_no());
+			ps.setInt(2, freeBoard.getCategoryno());
+			ps.setInt(3, freeBoard.getUserno());
+			ps.setString(4, freeBoard.getFree_title());
+			ps.setString(5, freeBoard.getFree_content());
 			
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -256,8 +281,31 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 
 	@Override
 	public int updateBoard(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "UPDATE freeboard SET free_title = ?, free_content = ?, categoryno = ? WHERE free_no = ?";
+		
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, freeBoard.getFree_title());
+			ps.setString(2, freeBoard.getFree_content());
+			ps.setInt(3, freeBoard.getCategoryno());
+			ps.setInt(4, freeBoard.getFree_no());
+			
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -310,7 +358,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public void countViews(FreeBoard freeBoard) {
 		String sql = "UPDATE freeboard SET views = views + 1 WHERE free_no = ?";
-		
 		
 		try {
 			ps = conn.prepareStatement(sql);
