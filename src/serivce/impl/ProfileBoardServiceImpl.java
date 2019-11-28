@@ -176,7 +176,9 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	@Override
 	public ProfileBoard getProfileno(HttpServletRequest req) {
 		// 전달 파라미터 받기
-		String param = req.getParameter("profileno");
+		String param = req.getParameter("prof_no");
+		
+//		System.out.println("profile board service impl : " + param);
 
 		int prof_no = 0;
 		if (param != null && !"".equals(param)) {

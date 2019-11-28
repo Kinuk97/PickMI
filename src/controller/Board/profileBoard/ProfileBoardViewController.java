@@ -24,12 +24,13 @@ public class ProfileBoardViewController extends HttpServlet {
 
 		//게시글 정보 얻기
 		ProfileBoard profile = profileService.getProfileno(req);
+//		System.out.println("profile view controller : " + profile);
 		
 		//게시판 상세정보 얻기
 		ProfileBoard detailProfile = profileService.view(profile);
 		
 		//모델값 지정하기
-		req.setAttribute("profile", profile);
+		req.setAttribute("profile", detailProfile);
 		
 		
 		//view 지정
