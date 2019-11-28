@@ -35,8 +35,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += "WHERE 1 = 1";
 			
 			if (searchno == 2) {
-				//작성자로 검색할 경우
-				sql += " AND userno LIKE '%' || ? || '%'";
+				//내용으로 검색할 경우
+				sql += " AND comp_content LIKE '%' || ? || '%'";
 
 			} else if (searchno == 3) {
 				sql += " AND comp_title LIKE '%' || ? || '%'";
@@ -162,8 +162,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				sql += " WHERE 1 = 1";
 				
 				if (paging.getSearchno() == 2) {
-					//작성자로 검색할 경우
-					sql += " AND comp_title LIKE '%' || ? || '%'";
+					//내용으로 검색할 경우
+					sql += " AND comp_content LIKE '%' || ? || '%'";
 				
 				} else if (paging.getSearchno() == 3) {
 					//제목&내용으로 검색할 경우
@@ -253,23 +253,22 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql +="INSERT INTO compBoard(comp_no, categoryno, userno, comp_title, comp_name, ";
+		sql +="INSERT INTO compBoard(comp_no, userno, comp_title, comp_name, ";
 		sql +="		 				 comp_content, comp_member, comp_date, comp_view, ";
 		sql +="						 comp_reply, comp_like, comp_startdate, comp_enddate )";
-		sql +=" VALUES(?, ?, ?, ?, ?, ?, ?, sysdate, 0, 0, 0, ?, ?)";
+		sql +=" VALUES(?, ?, ?, ?, ?, ?, sysdate, 0, 0, 0, ?, ?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, compBoard.getComp_no());
-			ps.setInt(2, compBoard.getCategoryno());
-			ps.setInt(3, compBoard.getUserno());
-			ps.setString(4, compBoard.getComp_title());
-			ps.setString(5, compBoard.getComp_name());
-			ps.setString(6, compBoard.getComp_content());
-			ps.setInt(7, compBoard.getComp_member());
-			ps.setInt(8, compBoard.getComp_startdate());
-			ps.setInt(9, compBoard.getComp_enddate());
+			ps.setInt(2, compBoard.getUserno());
+			ps.setString(3, compBoard.getComp_title());
+			ps.setString(4, compBoard.getComp_name());
+			ps.setString(5, compBoard.getComp_content());
+			ps.setInt(6, compBoard.getComp_member());
+			ps.setInt(7, compBoard.getComp_startdate());
+			ps.setInt(8, compBoard.getComp_enddate());
 			
 			ps.executeQuery();
 			

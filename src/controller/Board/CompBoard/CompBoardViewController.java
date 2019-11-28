@@ -37,7 +37,7 @@ public class CompBoardViewController extends HttpServlet {
 		if (compBoard != null) {
 			Files files = new Files();
 			files.setPostno(4);
-			files.setBoardno(compBoard.getComp_no());
+			files.setBoardno(compBoardView.getComp_no());
 			
 			req.setAttribute("files", fileService.getFiles(files));
 			

@@ -98,7 +98,7 @@ select {
 </style>
 
 <div id="board" class="container list-container">
-	<h1 class="text-center">완성된 프로젝트 게시판</h1>
+	<h1 class="text-center">😉 완성된 프로젝트 게시판 😉</h1>
 	
 	<br><br>
 	
@@ -107,8 +107,8 @@ select {
 			<div style="width: 10%; float: left; margin-left: 21px;">
 				<select name="searchno">
 					<option value="">선택없음</option>
-					<option value="1">작성자</option>
-					<option value="2">제목</option>
+					<option value="1">제목</option>
+					<option value="2">내용</option>
 					<option value="3">제목&amp;내용</option>
 				</select>
 			</div>
