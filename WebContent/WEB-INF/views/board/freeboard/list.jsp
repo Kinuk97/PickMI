@@ -138,7 +138,9 @@ $(document).ready(function() {
 			</div>
 			<div style="width: 55%; text-align: right; float: left;">
 				<input type="hidden" value="${paging.categoryno }" name="categoryno">
-				<a class="btn btn-primary" href="/freeboard/write" style="margin-top: 10px;">글작성</a>
+				<c:if test="${login }">
+					<a class="btn btn-primary" href="/freeboard/write" style="margin-top: 10px;">글작성</a>
+				</c:if>
 			</div>
 		</form>
 	</div>

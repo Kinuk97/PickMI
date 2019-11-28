@@ -108,9 +108,11 @@ a#top {
 <h1>나를 소개해보세요!😉</h1>
 </div>
 <hr>
+<c:if test="${ login }">
 <div class="text-right" style="padding: 0 150px;">
 <a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
 </div>
+</c:if>
 <div id=filtersystem style="padding:0 150px;">
 <div id="filter">
 	<button class="btn btn-info" id="filterBtn">관심</button>
