@@ -53,7 +53,8 @@ public class LoginController extends HttpServlet {
 //			System.out.println("test" + session.getAttribute("userno"));
 			
 			resp.sendRedirect("/main");
-		} else {
+		} else {		
+			session.setAttribute("login", false);
 			resp.sendRedirect("/login");
 		}
 	}

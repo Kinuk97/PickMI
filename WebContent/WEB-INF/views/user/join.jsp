@@ -109,13 +109,13 @@
 	            if(data==false){
 	            	check = true;
 	               if($('#email').val()!=''){ 
-	               	alert("사용가능한 아이디입니다.");
+	            	   warningModal('사용가능한 아이디 입니다.');
 	               	
 	               }
 	           	}else{
 	            	check = false;
 	               if($('#email').val()!=''){
-	                  alert("중복된 아이디입니다.");
+	            	   warningModal('중복된 아이디 입니다.');
 	                  $('#email').focus();	
 	               }
 	            }
@@ -186,7 +186,7 @@
                <div class="modal-dialog">
                     <div class="modal-content panel-danger">
                         <div class="modal-header panel-heading">
-                            <h4 class="modal-title">오류 메시지</h4>
+                            <h4 class="modal-title">알림</h4>
                         </div>
                         <div class="modal-body">
                             <p class="modal-contents"></p>

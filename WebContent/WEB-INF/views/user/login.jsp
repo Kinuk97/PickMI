@@ -154,7 +154,7 @@ function getCookie(cookieName) {
 <body>
 	<span id="logo"> 
 		<a href="/main"> 
-			<img src="/resources/black.png"class="img-rounded center-block" style="height: 250px;">
+			<img src="/resources/black.png"class="img-rounded center-block" style="height: 170px;">
 		</a>
 	</span>
 	
