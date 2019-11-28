@@ -37,8 +37,8 @@ $(document).ready(function() {
 						caption.append($("<h2></h2>").text(data[i].proj_title));
 						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
 						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
-						caption.append($("<p></p>").text("직업 : " + data[i].proj_career));
-						caption.append($("<p></p>").text("진행상황 : " + data[i].proj_career));
+						caption.append($("<p></p>").text("직업 : " + data[i].proj_job));
+						caption.append($("<p></p>").text("진행상황 : " + data[i].proj_progress));
 						
 						caption.append($("<p class='text-right'></p>").text("신청수 : "+data[i].proj_apply));
 						caption.append($("<p class='text-right'></p>").text("찜개수 : "+data[i].proj_like));
@@ -61,6 +61,22 @@ $(document).ready(function() {
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//경고 모달 호출 메서드
+	 function warningModal(content) {
+	    $(".modal-contents").text(content);
+	    $("#defaultModal").modal('show');
+	   }
+	
+	//로그인을 하지 않았는데 새로운 글 작성을 눌렀을 때
+	$("#btnNoLogWrite").click(function() {
+		warningModal("로그인이 필요합니다.");
+	});
+});
+
+</script>
 
 <style type="text/css">
 select {
@@ -172,9 +188,21 @@ select {
 	</div>
 	
 </div>
-	<div class="text-right" style="padding: 0 40px;">
-			<a class="btn btn-primary" href="/projectBoard/write">글작성</a>
-	</div>
+	<c:choose>
+	<c:when test="${not empty login }">
+		<div class="text-right" style="padding: 0 40px;">
+			<button  onclick="location.href = '/projectBoard/write';" class="btn btn-primary">글 작성</button>
+		</div>
+	</c:when>
+	
+	<c:otherwise>
+		<div class="text-right" style="padding: 0 40px;">
+			<button id="btnNoLogWrite" type="button" class="btn btn-primary">글 작성</button>
+		</div>
+	</c:otherwise>
+	
+	</c:choose>
+	
 	<hr>
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
@@ -200,6 +228,24 @@ select {
 </div>
 <div style="clear: both;"></div>
 
+<!-- 경고 모달창 -->
+            <div class="modal fade" id="defaultModal">
+               <div class="modal-dialog">
+                    <div class="modal-content panel-danger">
+                        <div class="modal-header panel-heading">
+                            <h4 class="modal-title">알림</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="modal-contents"></p>
+                        </div>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+       
+            <!--// 경고 모달창 -->
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

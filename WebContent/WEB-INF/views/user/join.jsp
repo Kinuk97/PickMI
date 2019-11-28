@@ -25,11 +25,11 @@
 		      $(".modal-contents").text(content);
 		      $("#defaultModal").modal('show');
 		   }
-			//인증코드 모달 호출 메서드
-		   function codeModal(content) {
-		      $(".modal-contentt").text(content);
-		      $("#codeModal").modal('show');
-		   }
+// 			//인증코드 모달 호출 메서드
+// 		   function codeModal(content) {
+// 		      $(".modal-contentt").text(content);
+// 		      $("#codeModal").modal('show');
+// 		   }
 		
 		
 		// 가입버튼

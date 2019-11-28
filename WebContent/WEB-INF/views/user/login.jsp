@@ -23,7 +23,7 @@
 	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	 
+	
     // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
     var key = getCookie("key");
     $("#email").val(key); 
@@ -152,11 +152,11 @@ function getCookie(cookieName) {
 </style>
 </head>
 <body>
-	<span id="logo"> 
+	
 		<a href="/main"> 
 			<img src="/resources/black.png"class="img-rounded center-block" style="height: 170px;">
 		</a>
-	</span>
+
 	
 	<div class="login-form" id="log">
 		<form action="/login" method="post">
@@ -176,7 +176,7 @@ function getCookie(cookieName) {
 				</div>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary login-btn btn-block">로그인</button>
+				<button type="submit" class="btn btn-primary login-btn btn-block" id="login">로그인</button>
 			</div>
 			<div class="clearfix">
 				<label class="pull-left checkbox-inline"><input
