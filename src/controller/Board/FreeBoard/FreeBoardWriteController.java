@@ -29,8 +29,13 @@ public class FreeBoardWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		fileService.writeBoard(req, 3);
+		int resultBoardno = fileService.writeBoard(req, 3);
 		
-		resp.sendRedirect("/freeboard/list");
+		if (resultBoardno > 0) {
+			resp.sendRedirect("/freeboard/view?free_no=" + resultBoardno);
+		} else {
+			System.out.println("게시글 작성 오류 : " + resultBoardno);
+			resp.sendRedirect("/freeboard/list");
+		}
 	}
 }

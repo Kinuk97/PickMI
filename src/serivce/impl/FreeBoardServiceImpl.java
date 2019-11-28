@@ -160,8 +160,13 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Override
 	public boolean removeBoard(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return false;
+		int result = freeBoardDao.deleteBoard(freeBoard);
+		
+		if (result == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
