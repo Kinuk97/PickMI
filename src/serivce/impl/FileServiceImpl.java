@@ -196,16 +196,21 @@ public class FileServiceImpl implements FileService {
 			// 프로젝트 게시판
 
 		} else if (postno == 3) {
+			if (board == null) {
+				board = new FreeBoard();
+			}
 			// 자유게시판
 			board.setFree_no(freeBoardDao.getNextBoardno());
 
-			if (board.getFree_title() == null)
+			if (board.getFree_title() == null || "".equals(board.getFree_title().trim()))
 				board.setFree_title("제목없음");
 
+			if (board.getFree_content() == null || "".equals(board.getFree_content().trim()))
+				board.setFree_content("내용없음");
+			
 			board.setUserno((Integer) req.getSession().getAttribute("userno"));
 
 			freeBoardDao.insertBoard(board);
-
 		} else if (postno == 4) {
 			// 완성된 게시판
 
