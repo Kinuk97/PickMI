@@ -108,7 +108,7 @@ select {
 				<select name="searchno">
 					<option value="">선택없음</option>
 					<option value="1">제목</option>
-					<option value="2">내용</option>
+					<option value="2">팀 이름</option>
 					<option value="3">제목&amp;내용</option>
 				</select>
 			</div>

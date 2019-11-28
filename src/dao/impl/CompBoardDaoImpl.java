@@ -35,8 +35,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += "WHERE 1 = 1";
 			
 			if (searchno == 2) {
-				//내용으로 검색할 경우
-				sql += " AND comp_content LIKE '%' || ? || '%'";
+				//팀이름으로 검색할 경우
+				sql += " AND comp_name LIKE '%' || ? || '%'";
 
 			} else if (searchno == 3) {
 				sql += " AND comp_title LIKE '%' || ? || '%'";
@@ -56,7 +56,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps = conn.prepareStatement(sql);
 			
 			if (search != null) {
-
 				ps.setString(1, search);
 				
 				if (searchno == 3) {
@@ -162,8 +161,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				sql += " WHERE 1 = 1";
 				
 				if (paging.getSearchno() == 2) {
-					//내용으로 검색할 경우
-					sql += " AND comp_content LIKE '%' || ? || '%'";
+					//팀이름으로 검색할 경우
+					sql += " AND comp_name LIKE '%' || ? || '%'";
 				
 				} else if (paging.getSearchno() == 3) {
 					//제목&내용으로 검색할 경우
@@ -174,8 +173,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					//제목으로 검색할 경우
 					sql += " AND comp_title LIKE '%' || ? || '%'";
 				}
-				
-			
 			}
  
 			sql += "        ORDER BY comp_no DESC";
