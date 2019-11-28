@@ -301,8 +301,10 @@ public class FileServiceImpl implements FileService {
 			
 			compBoardDao.insert(compBoard);
 			
-			uploadFile.setBoardno(compBoard.getComp_no());
-	
+			if (uploadFile != null) {
+				uploadFile.setBoardno(compBoard.getComp_no());
+				uploadFile.setPostno(4);
+			}
 		}
 
 		// 공통적인 파일 처리, 파일이 있다면 db에 저장, postno와 boardno는 각자의 if문에서 설정
