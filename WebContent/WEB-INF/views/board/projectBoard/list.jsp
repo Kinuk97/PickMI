@@ -35,16 +35,14 @@ $(document).ready(function() {
 						var caption = $("<div class='caption caption-project' onclick=\"location.href='/projectBoard/view?proj_no="+data[i].proj_no+"'\"></div>");
 						
 						caption.append($("<h2></h2>").text(data[i].proj_title));
-						caption.append($("<p></p>").text("프로젝트 이름 : " + data[i].proj_name));
 						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
 						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
-						caption.append($("<p></p>").text("참여 인원 : " + data[i].proj_member));
-						caption.append($("<p></p>").text("시작 날짜 : " + data[i].proj_sdate));
-						caption.append($("<p></p>").text("마감 날짜 : " + data[i].proj_ddate));
-						caption.append($("<p></p>").text("모집 기간 : " + data[i].proj_rec_date));
+						caption.append($("<p></p>").text("직업 : " + data[i].proj_career));
+						caption.append($("<p></p>").text("진행상황 : " + data[i].proj_career));
+						
 						caption.append($("<p class='text-right'></p>").text("신청수 : "+data[i].proj_apply));
 						caption.append($("<p class='text-right'></p>").text("찜개수 : "+data[i].proj_like));
-						caption.append($("<p class='text-right'></p>").text("작성시간 : "+data[i].proj_time));
+						caption.append($("<p class='text-right'></p>").text(data[i].proj_time));
 						
 					
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
@@ -81,6 +79,18 @@ select {
   position: relative;
   display: inline-block;
 }
+#filter2 {
+  position: relative;
+  display: inline-block;
+}
+#filter3 {
+  position: relative;
+  display: inline-block;
+}
+#filter4 {
+  position: relative;
+  display: inline-block;
+}
 
 #filter-list {
   display: none;
@@ -102,6 +112,15 @@ select {
 #filter:hover #filter-list {display: block;}
 #filter:hover #filterBtn {background-color: #CEE3F6;}
 
+#filter2:hover #filter-list {display: block;}
+#filter2:hover #filterBtn {background-color: #CEE3F6;}
+
+#filter3:hover #filter-list {display: block;}
+#filter3:hover #filterBtn {background-color: #CEE3F6;}
+
+#filter4:hover #filter-list {display: block;}
+#filter4:hover #filterBtn {background-color: #CEE3F6;}
+
 
 </style>
 
@@ -110,20 +129,28 @@ select {
 	<h1 class="text-center">😉프로젝트게시판😉</h1>
 	<div id="filtersystem">
 	<div id="filter">
-	<button class="btn btn-info" id="filterBtn">관심</button>
-	<div id="filter-list">
-		<a href="#">java</a>
-		<a href="#">algorithm</a>
-		<a href="#">html/css</a>
-		<a href="#">design</a>
-	</div>
-	</div>
 	<button class="btn btn-info" id="filterBtn">지역</button>
 	<div id="filter-list">
 		<a href="#">서울</a>
+		<a href="#">인천</a>
 		<a href="#">경기</a>
+		<a href="#">강원</a>
+		<a href="#">충청</a>
+		<a href="#">경상</a>
+		<a href="#">전라</a>
 		<a href="#">그외</a>
 	</div>
+	</div>
+	
+	<div id="filter2">
+	<button class="btn btn-info" id="filterBtn">진행상황</button>
+	<div id="filter-list">
+		<a href="#">설계단계</a>
+		<a href="#">구현단계</a>
+	</div>
+	</div>
+	
+	<div id="filter3">
 	<button class="btn btn-info" id="filterBtn">직업</button>
 	<div id="filter-list">
 		<a href="#">개발자</a>
@@ -131,19 +158,19 @@ select {
 		<a href="#">디자이너</a>
 		<a href="#">무직</a>
 	</div>
-	<button class="btn btn-info" id="filterBtn">상태</button>
-	<div id="filter-list">
-		<a href="#">구직중</a>
-		<a href="#">재직중</a>
-		<a href="#">프리랜서</a>
 	</div>
+	
+	<div id="filter3">
 	<button class="btn btn-info" id="filterBtn">경력</button>
 	<div id="filter-list">
-		<a href="#">1-2년차</a>
-		<a href="#">3-4년차</a>
-		<a href="#">5-7년차</a>
+		<a href="#">1년차</a>
+		<a href="#">3년차</a>
+		<a href="#">5년차</a>
+		<a href="#">7년차</a>
 		<a href="#">8년차이상</a>
 	</div>
+	</div>
+	
 </div>
 	<div class="text-right" style="padding: 0 40px;">
 			<a class="btn btn-primary" href="/projectBoard/write">글작성</a>
@@ -158,17 +185,14 @@ select {
 						${board.proj_title }
 					</h2>
 
-					<p>프로젝트 이름 : ${board.proj_name }</p>
 					<p>지역 : ${board.proj_loc }</p>
 					<p>경력 : ${board.proj_career }</p>
-					<p>참여 인원 : ${board.proj_member }</p>
-					<p>시작 날짜 : ${board.proj_sdate }</p>
-					<p>마감 날짜 : ${board.proj_ddate }</p>
-					<p>모집 기간 : ${board.proj_rec_date }</p>
+					<p>직업 : ${board.proj_job }</p>
+					<p>진행상황 : ${board.proj_progress }</p>
 					
 					<div class="text-right">신청수 : ${board.proj_apply }</div>
 					<div class="text-right">찜개수 : ${board.proj_like }</div>
-					<div class="text-right">작성시간 : ${board.proj_time }</div>
+					<div class="text-right">${board.proj_time }</div>
 				</div>
 			</div>
 		</div>

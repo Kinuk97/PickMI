@@ -45,6 +45,8 @@ $(document).ready(function() {
 			<tr>
 				<td class="info">프로젝트 제목</td>
 				<td colspan="3">${projectBoard.proj_title }</td>
+				<td class="info">직업</td>
+				<td>${projectBoard.proj_job }</td>
 			</tr>
 
 			<tr>

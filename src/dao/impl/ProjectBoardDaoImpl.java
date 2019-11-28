@@ -111,6 +111,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				projectBoard.setProj_time(rs.getDate("proj_time"));
 				projectBoard.setProj_progress(rs.getString("proj_progress"));
 				projectBoard.setProj_member(rs.getInt("proj_member"));
+				projectBoard.setProj_job(rs.getString("proj_job"));
 				
 
 				list.add(projectBoard);
@@ -163,6 +164,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				projectBoard.setProj_time(rs.getDate("proj_time"));
 				projectBoard.setProj_progress(rs.getString("proj_progress"));
 				projectBoard.setProj_member(rs.getInt("proj_member"));
+				projectBoard.setProj_job(rs.getString("proj_job"));
 			}
 		} catch (SQLException e) {
 			
