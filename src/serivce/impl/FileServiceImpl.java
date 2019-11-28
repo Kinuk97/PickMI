@@ -243,28 +243,38 @@ public class FileServiceImpl implements FileService {
 			// 프로젝트 게시판
 
 		} else if (postno == 3) {
+			// 게시글 내용이 전부 비어있다면
 			if (freeBoard == null) {
 				freeBoard = new FreeBoard();
 			}
 			// 자유게시판
-			freeBoard.setFree_no(freeBoardDao.getNextBoardno());
 
+			// 제목이 비어있는 경우 제목없음
 			if (freeBoard.getFree_title() == null || "".equals(freeBoard.getFree_title().trim()))
 				freeBoard.setFree_title("제목없음");
 
+			// 내용이 비어있는 경우 내용없음
 			if (freeBoard.getFree_content() == null || "".equals(freeBoard.getFree_content().trim()))
 				freeBoard.setFree_content("내용없음");
 			
 			try {
+				// 세션에서 userno를 가져오는데 없다면 catch블록으로
 				freeBoard.setUserno((Integer) req.getSession().getAttribute("userno"));
+				// nextval 가져오기
+				freeBoard.setFree_no(freeBoardDao.getNextBoardno());
+				// 게시글 작성
 				freeBoardDao.insertBoard(freeBoard);
 				
+				// 업로드하는 파일이 있다면
 				if (uploadFile != null) {
+					// 파일에 게시글 번호와 게시판 번호를 설정
 					uploadFile.setBoardno(freeBoard.getFree_no());
 					uploadFile.setPostno(3);
 				}
 			} catch (ClassCastException e) {
+				// 세션에서 userno를 가져오지 못했을 때
 				if (uploadFile != null) {
+					// 업로드하는 파일이 있었다면 서버 디스크에 저장된 파일 삭제
 					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
 					return;
 				}
@@ -312,7 +322,7 @@ public class FileServiceImpl implements FileService {
 			return;
 		}
 
-		FreeBoard board = null;
+		FreeBoard freeBoard = null;
 		Files uploadFile = null;
 
 		// 1-2 여기 이후는 multipart/form-data로 전송된 상황
@@ -378,6 +388,7 @@ public class FileServiceImpl implements FileService {
 			if (item.getSize() <= 0)
 				continue;
 
+			String key = item.getFieldName();
 			if (item.isFormField()) {
 				if (postno == 1) {
 					// 프로필 게시판
@@ -387,34 +398,33 @@ public class FileServiceImpl implements FileService {
 
 				} else if (postno == 3) {
 					// 자유게시판이라면...
-					if (board == null)
-						board = new FreeBoard();
+					if (freeBoard == null)
+						freeBoard = new FreeBoard();
 
-					String key = item.getFieldName();
 					if ("free_title".equals(key)) {
 						try {
-							board.setFree_title(item.getString("UTF-8"));
+							freeBoard.setFree_title(item.getString("UTF-8"));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 
 					} else if ("free_content".equals(key)) {
 						try {
-							board.setFree_content(item.getString("UTF-8"));
+							freeBoard.setFree_content(item.getString("UTF-8"));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 
 					} else if ("categoryno".equals(key)) {
 						try {
-							board.setCategoryno(Integer.parseInt(item.getString("UTF-8")));
+							freeBoard.setCategoryno(Integer.parseInt(item.getString("UTF-8")));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 						}
 					} else if ("free_no".equals(key)) {
-						board.setFree_no(Integer.parseInt(item.getString()));
+						freeBoard.setFree_no(Integer.parseInt(item.getString()));
 					}
 				} else if (postno == 4) {
 					// 완성된 게시판
@@ -453,11 +463,14 @@ public class FileServiceImpl implements FileService {
 
 		} else if (postno == 3) {
 			// 자유게시판
-			if (board.getFree_title() == null)
-				board.setFree_title("제목없음");
+			
+			if (freeBoard.getFree_title() == null)
+				freeBoard.setFree_title("제목없음");
 
-			freeBoardDao.updateBoard(board);
+			freeBoardDao.updateBoard(freeBoard);
 
+			uploadFile.setBoardno(freeBoard.getFree_no());
+			uploadFile.setPostno(3);
 		} else if (postno == 4) {
 			// 완성된 게시판
 
@@ -465,8 +478,6 @@ public class FileServiceImpl implements FileService {
 
 		// 공통적인 파일 처리, 업로드 파일이 있다면
 		if (uploadFile != null) {
-			uploadFile.setBoardno(board.getFree_no());
-			uploadFile.setPostno(3);
 
 			Files prevFile = fileDao.selectFile(uploadFile);
 
