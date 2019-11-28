@@ -573,8 +573,6 @@ public class FileServiceImpl implements FileService {
 						}
 						
 					} else if ("comp_no".equals(key)) {
-						
-					}
 						try {
 							compBoard.setComp_no(Integer.parseInt(item.getString()));
 						} catch (NumberFormatException e) {
@@ -583,8 +581,7 @@ public class FileServiceImpl implements FileService {
 							resultBoardno =  -2;
 							return resultBoardno;
 						}
-					
-					// key값 비교 if
+					}// key값 비교 if
 
 				}
 
@@ -654,7 +651,32 @@ public class FileServiceImpl implements FileService {
 
 		} else if (postno == 4) {
 			// 완성된 게시판
-			
+			// 게시글 내용이 전부 비어있다면
+			if (compBoard == null) {
+				if (uploadFile != null) {
+					// 업로드하는 파일만 존재한다면 만들어진 서버 디스크에 저장된 파일 삭제
+					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
+					return -4;
+				}
+				return -3;
+			}
+
+			// 제목이 비어있는 경우 제목없음
+			if (compBoard.getComp_title() == null || "".equals(compBoard.getComp_title().trim()))
+				compBoard.setComp_title("제목없음");
+
+			// 내용이 비어있는 경우 내용없음
+			if (compBoard.getComp_content() == null || "".equals(compBoard.getComp_content().trim()))
+				compBoard.setComp_content("내용없음");
+
+			resultBoardno = compBoard.getComp_no();
+
+			// 업로드하는 파일이 있다면
+			if (uploadFile != null) {
+				// 파일에 게시글 번호와 게시판 번호를 설정
+				uploadFile.setBoardno(compBoard.getComp_no());
+				uploadFile.setPostno(3);
+			}
 
 		}
 
