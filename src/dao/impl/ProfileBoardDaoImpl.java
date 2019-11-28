@@ -20,10 +20,21 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 	
+	private ProfileBoardDaoImpl() {
+		conn = DBConn.getConnection();
+	}
+	
+	private static class Singleton {
+		private static final ProfileBoardDao instance = new ProfileBoardDaoImpl();
+	}
+	
+	public static ProfileBoardDao getInstance() {
+		return Singleton.instance;
+	}
+	
 	@Override
 	public ProfileBoard selectNameByUserno(ProfileBoard profile) {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		String sql="";
 		sql += "SELECT name, userno FROM user_table";
@@ -60,7 +71,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public void insertProfile(ProfileBoard profile) {
 		
-		conn = DBConn.getConnection();
 		
 		String sql="";
 		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content, username)";
@@ -97,7 +107,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public void insertFile(Files file) {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		//수행할 sql 쿼리
 		String sql ="";
@@ -129,7 +138,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public int selectProfileno() {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		int profileno = 0;
 		
@@ -162,7 +170,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	
 	@Override
 	public ProfileBoard selectProfileByProfileno(ProfileBoard profile) {
-		conn = DBConn.getConnection(); //db연결
 		
 		String sql="";
 		sql += "SELECT prof_no, userno, prof_interest, prof_loc, prof_job, prof_state, prof_career, prof_content, prof_like,";
@@ -263,7 +270,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	 */
 	@Override
 	public int selectCntAll() {
-	conn = DBConn.getConnection(); //db연결
 		
 
 	//수행할 sql 쿼리
@@ -305,7 +311,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public List<ProfileBoard> selectProfileList() {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		//수행할 쿼리 
 		String sql="";

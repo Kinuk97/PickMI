@@ -2,7 +2,6 @@ package controller.Board.profileBoard;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dto.ProfileBoard;
-import serivce.face.ProfileBoardService;
-import serivce.impl.ProfileBoardServiceImpl;
+import serivce.face.FileService;
+import serivce.impl.FileServiceImpl;
 
 /**
  * Servlet implementation class ProfileBoardWriteController
@@ -21,7 +19,7 @@ import serivce.impl.ProfileBoardServiceImpl;
 public class ProfileBoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
+	private FileService fileService = FileServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,10 +28,10 @@ public class ProfileBoardWriteController extends HttpServlet {
 		
 		
 		int userno = (int)session.getAttribute("userno");
+//		System.out.println("profile write controller :" + userno);
 		
 		req.setAttribute("userno", userno );
 		req.setAttribute("username", session.getAttribute("name") );
-//		System.out.println("profileBoard write controller : " + session.getAttribute("userno"));
 //		System.out.println("profileBoard write controller : " + session.getAttribute("name"));
 		
 		//view 전달
@@ -45,7 +43,7 @@ public class ProfileBoardWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//write에 저장
-		profileBoardService.write(req);
+		fileService.writeBoard(req, 1);
 		
 		//list로 리다이렉트
 		resp.sendRedirect("/profileBoard/list");

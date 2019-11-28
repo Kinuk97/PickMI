@@ -1,6 +1,7 @@
 package serivce.impl;
 
 import java.io.BufferedInputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +16,7 @@ import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -24,14 +26,18 @@ import org.apache.commons.io.IOUtils;
 
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
+import dao.face.ProfileBoardDao;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
+import dao.impl.ProfileBoardDaoImpl;
 import dto.Files;
 import dto.FreeBoard;
+import dto.ProfileBoard;
 import serivce.face.FileService;
 
 public class FileServiceImpl implements FileService {
 	private FreeBoardDao freeBoardDao = FreeBoardDaoImpl.getInstance();
+	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
 
@@ -59,6 +65,7 @@ public class FileServiceImpl implements FileService {
 		}
 
 		FreeBoard board = null;
+		ProfileBoard profile = null;
 		Files uploadFile = null;
 
 		// 1-2 여기 이후는 multipart/form-data로 전송된 상황
@@ -127,6 +134,48 @@ public class FileServiceImpl implements FileService {
 			if (item.isFormField()) {
 				if (postno == 1) {
 					// 프로필 게시판
+					if(profile == null)
+						profile = new ProfileBoard();
+					
+					String key = item.getFieldName();
+					
+					if ("prof_interest".equals(key)) {
+						try {
+							profile.setProf_interest(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("prof_job".equals(key)) {
+						try {
+							profile.setProf_job(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("prof_state".equals(key)) {
+						try {
+							profile.setProf_state(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("prof_loc".equals(key)) {
+						try {
+							profile.setProf_loc(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("prof_career".equals(key)) {
+						try {
+							profile.setProf_career(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("prof_content".equals(key)) {
+						try {
+							profile.setProf_content(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					}
 
 				} else if (postno == 2) {
 					// 프로젝트 게시판
@@ -191,6 +240,19 @@ public class FileServiceImpl implements FileService {
 
 		if (postno == 1) {
 			// 프로필 게시판
+			int profileno = profileBoardDao.selectProfileno();
+			
+			HttpSession session = req.getSession();
+			
+			profile.setUserno((int)session.getAttribute("userno"));
+			profile.setUsername((String)session.getAttribute("name"));
+			profile.setProf_no(profileno);
+			profileBoardDao.insertProfile(profile);
+			if(uploadFile != null) {
+				uploadFile.setPostno(1);
+				uploadFile.setBoardno(profileno);
+			}
+	
 
 		} else if (postno == 2) {
 			// 프로젝트 게시판

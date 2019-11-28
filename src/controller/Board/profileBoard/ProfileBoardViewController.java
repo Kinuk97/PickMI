@@ -17,7 +17,7 @@ import serivce.impl.ProfileBoardServiceImpl;
 public class ProfileBoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ProfileBoardService profileService = new ProfileBoardServiceImpl();
+	private ProfileBoardService profileService = ProfileBoardServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
