@@ -12,10 +12,10 @@ public interface CompBoardDao {
 	 * 페이징 처리를 위한 게시글 수 가져오기
 	 * 
 	 * @param search - 검색어
-	 * @param categoryno - 카테고리 번호
+	 * @param searchno - 검색 카테고리(작성자, 제목, 제목&내용)
 	 * @return int - 게시글 수
 	 */
-	public int selectCntAll(String search, int categoryno);
+	public int selectCntAll(String search, int searchno);
 	
 	/**
 	 * comp_no를 이용해 게시글 세부사항 조회

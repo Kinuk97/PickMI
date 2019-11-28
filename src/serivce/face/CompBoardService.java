@@ -55,7 +55,7 @@ public interface CompBoardService {
 	 * @param req
 	 * @param resp
 	 */
-	public void write(HttpServletRequest req, HttpServletResponse resp);
+//	public void write(HttpServletRequest req, HttpServletResponse resp);
 
 	
 }
