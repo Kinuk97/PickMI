@@ -32,8 +32,9 @@ public class InsertController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		userService.join(user);
-		resp.sendRedirect("/main");
-
+//		resp.sendRedirect("/main");
+		
+		req.getRequestDispatcher("/WEB-INF/views/user/mail.jsp").forward(req, resp);;
 	}
 
 }

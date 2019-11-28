@@ -18,6 +18,7 @@ public class ProjectBoard {
 	private String proj_progress;
 	private String proj_content;
 	private int proj_like;
+	private String proj_job;
 
 	@Override
 	public String toString() {
@@ -25,7 +26,7 @@ public class ProjectBoard {
 				+ proj_name + ", proj_time=" + proj_time + ", proj_loc=" + proj_loc + ", proj_career=" + proj_career
 				+ ", proj_member=" + proj_member + ", proj_apply=" + proj_apply + ", proj_sdate=" + proj_sdate
 				+ ", proj_ddate=" + proj_ddate + ", proj_rec_date=" + proj_rec_date + ", proj_progress=" + proj_progress
-				+ ", proj_content=" + proj_content + ", proj_like=" + proj_like + "]";
+				+ ", proj_content=" + proj_content + ", proj_like=" + proj_like +  ", proj_job=" + proj_job + "]";
 	}
 
 	public int getProj_no() {
@@ -142,6 +143,14 @@ public class ProjectBoard {
 
 	public int getProj_like() {
 		return proj_like;
+	}
+
+	public String getProj_job() {
+		return proj_job;
+	}
+
+	public void setProj_job(String proj_job) {
+		this.proj_job = proj_job;
 	}
 
 	public void setProj_like(int proj_like) {
