@@ -109,11 +109,11 @@ a#top {
 </div>
 <hr>
 <c:if test="${ login }">
-<div class="text-right" style="padding: 0 150px;">
+<div class="text-right" style="padding: 0 150px; margin-right: 64px;">
 <a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
 </div>
 </c:if>
-<div id=filtersystem style="padding:0 150px;">
+<div id=filtersystem style="padding:0 150px; margin-left: 60px;">
 <div id="filter">
 	<button class="btn btn-info" id="filterBtn">관심</button>
 	<div id="filter-list">

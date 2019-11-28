@@ -68,28 +68,18 @@ $(document).ready(function(){
 			</tr>
 
 				<tr>
-					<td colspan="4">첨부파일
-					<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a>
-					</td>
+					<td>첨부파일<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a></td>
+<!-- 					<td>찜하기<button class="btn btn-default text-center" >찜하기</button></td><td></td> -->
 				</tr>
 			
 		</table>
 		
 		<div class="row text-center">
-			<button id="btnUpdate">게시글 수정</button>
-			<button id="btnDelete" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
+			<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
 		</div>
 	
 </div>
-
-
-
-
-
-
-
-
-
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
