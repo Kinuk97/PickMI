@@ -93,7 +93,7 @@ button, input, optgroup, select, textarea {
 	height: 320px;
 }
 .caption-project {
-	height: 350px;
+	height: 260px;
 }
 .caption-comp {
 	height: 200px;

@@ -37,12 +37,16 @@ function compLoadList(){
 				//태그 제거하기
 				var content = data[i].comp_content;
 				
+// 				console.log(content);
+				
 				//<br>포함하기
 				content = content.replace(/<br\/>/ig, "\n");
 				
 				//태그 제거
 				content = content.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
 				
+// 				console.log(content);
+
 				//팀 이름
 				caption.append($("<div class='comp_name overtext'></div>").text("팀 이름 : " + data[i].comp_name));
 				
