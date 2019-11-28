@@ -113,6 +113,17 @@ public class UserDaoImpl implements UserDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return checkResult;
@@ -139,9 +150,92 @@ public class UserDaoImpl implements UserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return user;
+	}
+
+	@Override
+	public User selectPwByEmail(User user) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT pw FROM user_table";
+		sql += " WHERE email = ? AND name = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getName());
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+
+				user.setPw(rs.getString("pw"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return user;
+	}
+
+	@Override
+	public void updatePw(User user) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		
+		sql += "UPDATE user_table SET pw = ?";
+		sql += " WHERE email = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, user.getPw());
+			ps.setString(2, user.getEmail());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

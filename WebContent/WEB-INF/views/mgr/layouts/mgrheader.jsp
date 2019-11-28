@@ -22,7 +22,7 @@
 
 $(document).ready(function() {
 	var boardno = "${boardno}";
-	
+	console.log(boardno);
 	if (boardno == "1") {
 		$("#main").addClass("active");
 	} else if (boardno == "2") {
@@ -60,21 +60,21 @@ $(document).ready(function() {
 			<li role="presentation" id="main"><a
 				href="/mgr/main" aria-controls="main" role="tab">AdminMain</a></li>
 			<li role="presentation" id="profile"><a href="/mgr/profilelist"
-				aria-controls="profile" role="tab">ProfileBoardList</a></li>
+				aria-controls="profile" role="tab">ProfileBoard</a></li>
 			<li role="presentation" id="project"><a href="/mgr/projectlist"
-				aria-controls="project" role="tab">ProjectBoardList</a></li>
+				aria-controls="project" role="tab">ProjectBoard</a></li>
 			<li role="presentation" id="free"><a href="/mgr/freelist"
-				aria-controls="free" role="tab">FreeBoardList</a></li>
+				aria-controls="free" role="tab">FreeBoard</a></li>
 			<li role="presentation" id="comp"><a href="/mgr/complist"
-				aria-controls="comp" role="tab">CompBoardList</a></li>
+				aria-controls="comp" role="tab">CompBoard</a></li>
 			<li role="presentation" id="user"><a href="/mgr/userlist"
-				aria-controls="user" role="tab">UserList</a></li>
+				aria-controls="user" role="tab">User</a></li>
 		</ul>
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane active" id="main">...</div>
-			<div role="tabpanel" class="tab-pane" id="user">...</div>
+			<div role="tabpanel" class="tab-pane active" id="main"></div>
+			<div role="tabpanel" class="tab-pane" id="user"></div>
 			<div role="tabpanel" class="tab-pane" id="profile"></div>
 			<div role="tabpanel" class="tab-pane" id="project"></div>
 			<div role="tabpanel" class="tab-pane" id="free"></div>

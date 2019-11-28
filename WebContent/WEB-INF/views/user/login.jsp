@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pick MI (Mate&Idea)</title>
+<title>Pick MI (Mate&amp;Idea)</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -180,7 +180,7 @@ function getCookie(cookieName) {
 			</div>
 			<div class="clearfix">
 				<label class="pull-left checkbox-inline"><input
-					type="checkbox" id="emailSaveCheck"> 아이디 저장</label> <a href="#" class="pull-right">비밀번호
+					type="checkbox" id="emailSaveCheck"> 아이디 저장</label> <a href="/pwFind" class="pull-right">비밀번호
 					찾기</a>
 			</div>
 			<div class="or-seperator">
@@ -198,4 +198,5 @@ function getCookie(cookieName) {
 		</p>
 	</div>
 
-	<c:import url="/WEB-INF/views/layouts/footer.jsp" />
+	</body>
+	</html>
