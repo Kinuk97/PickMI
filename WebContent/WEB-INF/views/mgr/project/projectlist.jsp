@@ -64,7 +64,7 @@ $(document).ready(function(){
 			<button id="btnSearch" class="btn btn-primary">검색</button>
 		</form>
 	</div>
-
+</div>
 <jsp:include page = "/WEB-INF/views/mgr/paging/projectPaging.jsp" />
 
 </body>

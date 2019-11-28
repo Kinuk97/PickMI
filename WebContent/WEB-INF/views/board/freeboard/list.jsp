@@ -47,7 +47,7 @@ function loadList() {
 				caption.append($("<div class='free_content overtext'></div>").text(content));
 				
 				// 작성자
-				caption.append($("<div class='text-right'>").text("작성자 : " + data[i].userno));
+				caption.append($("<div class='text-right'>").text("작성자 : " + data[i].username));
 				// 조회, 작성일
 				caption.append($("<div></div>").html($("<span style='float: left;'>조회 : " + data[i].views + "</span><span style='float: right;'>" + data[i].free_time + "</span>")));
 				
@@ -133,13 +133,13 @@ $(document).ready(function() {
 			<div class="input-group" style="width: 31%; float: left;">
 				<input type="text" class="form-control" name="search" placeholder="Search for...">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="submit" style="margin: 10px;">검색</button>
+					<button class="btn btn-warning" type="submit" style="margin: 10px;">검색</button>
 				</span>
 			</div>
 			<div style="width: 55%; text-align: right; float: left;">
 				<input type="hidden" value="${paging.categoryno }" name="categoryno">
 				<c:if test="${login }">
-					<a class="btn btn-primary" href="/freeboard/write" style="margin-top: 10px;">글작성</a>
+					<a class="btn btn-info" href="/freeboard/write" style="margin-top: 10px;">글작성</a>
 				</c:if>
 			</div>
 		</form>

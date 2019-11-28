@@ -27,18 +27,19 @@ public class MgrProfileBoardViewController extends HttpServlet {
 		// 로그인 안됐을 경우
 		if (req.getSession().getAttribute("mgrlogin") != null ) {
 			
-			//		System.out.println("두겟");
+			//System.out.println("Test doget");
 			
 			//게시글 정보 얻기
 			ProfileBoard profile = profileService.getProfileno(req);	
-			//		System.out.println("profile객체의 메소드 : " + profile);
+			//System.out.println("profile객체의 메소드 : " + profile);
 			
 			//게시판 상세정보 얻기
 			ProfileBoard detailProfile = profileService.view(profile);
-			//		System.out.println("게시판 상세정보 : " + detailProfile);
+			//System.out.println("게시판 상세정보 : " + detailProfile);
 			
 			//모델값 지정하기
 			req.setAttribute("profile", profile);
+			//menuTab 모델값
 			req.setAttribute("boardno", 2);
 			
 			//view 지정
