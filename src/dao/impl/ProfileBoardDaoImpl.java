@@ -269,7 +269,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		
 	sql += "SELECT ";
 	sql += " count(*)";
-	sql += " FROM board";
+	sql += " FROM profile";
 	
 		
 	//결과 저장 리스트
