@@ -113,7 +113,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				
 				res.setComp_no( rs.getInt("comp_no") );
 				res.setCategoryno( rs.getInt("categoryno") );
-				res.setFileno( rs.getInt("fileno") );
 				res.setUserno( rs.getInt("userno") );
 				res.setComp_title( rs.getString("comp_title") );
 				res.setComp_name( rs.getString("comp_name") );
@@ -212,7 +211,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 
 					compBoard.setComp_no( rs.getInt("comp_no") );
 					compBoard.setCategoryno( rs.getInt("categoryno") );
-					compBoard.setFileno( rs.getInt("fileno") );
 					compBoard.setUserno( rs.getInt("userno") );
 					compBoard.setComp_title( rs.getString("comp_title") );
 					compBoard.setComp_name( rs.getString("comp_name") );
@@ -222,6 +220,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					compBoard.setComp_view( rs.getInt("comp_view") );
 					compBoard.setComp_reply( rs.getInt("comp_reply") );
 					compBoard.setComp_like( rs.getInt("comp_like") );
+					compBoard.setComp_startdate( rs.getInt("comp_startdate"));
+					compBoard.setComp_enddate( rs.getInt("comp_enddate") );
 					
 					List.add(compBoard);
 				}
@@ -249,10 +249,39 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql +="INSERT INTO compBoard(comp_no, categoryno, fileno, userno, comp_title, comp_name, ";
+		sql +="INSERT INTO compBoard(comp_no, categoryno, userno, comp_title, comp_name, ";
 		sql +="		 				 comp_content, comp_member, comp_date, comp_view, ";
-		sql +="						 comp_reply, comp_like )";
-		sql +=" VALUES(?, ?, ?, ?, )";
+		sql +="						 comp_reply, comp_like, comp_startdate, comp_enddate )";
+		sql +=" VALUES(?, ?, ?, ?, ?, ?, ?, sysdate, 0, 0, 0, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, compBoard.getComp_no());
+			ps.setInt(2, compBoard.getCategoryno());
+			ps.setInt(3, compBoard.getUserno());
+			ps.setString(4, compBoard.getComp_title());
+			ps.setString(5, compBoard.getComp_name());
+			ps.setString(6, compBoard.getComp_content());
+			ps.setInt(7, compBoard.getComp_member());
+			ps.setInt(8, compBoard.getComp_startdate());
+			ps.setInt(9, compBoard.getComp_enddate());
+			
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			}
+		}
 				
 		
 	}
@@ -334,18 +363,20 @@ public class CompBoardDaoImpl implements CompBoardDao {
 
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "INSERT INTO files(fileno, postno, filename, boardno)";
-		sql += " VALUES(files_seq.nextval, 4, ?, ?)";
+		sql += "INSERT INTO files(fileno, postno, boardno, originname, storedname, filesize)";
+		sql += " VALUES(files_seq.nextval, 4, ?, ?, ?, ?)";
 
 
 		try {
 			ps = conn.prepareStatement(sql);
 
 			//SQL쿼리의 ?채우기
-//			ps.setString(1, files.getFilename());
-			ps.setInt(2, files.getBoardno());
-
-			//					System.out.println(files.getBoardno());
+			ps.setInt(1, files.getBoardno());
+			ps.setString(2, files.getOriginName());
+			ps.setString(3, files.getStoredName());
+			ps.setString(4, files.getFileSize());
+			
+			//System.out.println(files.getBoardno());
 
 			ps.executeUpdate();
 
