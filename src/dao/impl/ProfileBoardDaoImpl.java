@@ -165,7 +165,8 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		conn = DBConn.getConnection(); //db연결
 		
 		String sql="";
-		sql += "SELECT * FROM profile";
+		sql += "SELECT prof_no, userno, prof_interest, prof_loc, prof_job, prof_state, prof_career, prof_content, prof_like,";
+		sql	+= " prof_time, (SELECT name FROM user_table WHERE userno = profile.userno) AS username FROM profile";
 		sql += " WHERE prof_no = ?";
 		
 		try {
@@ -187,6 +188,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				profile.setProf_content(rs.getString("prof_content"));
 				profile.setProf_like(rs.getInt("prof_like"));
 				profile.setProf_time(rs.getDate("prof_time"));
+				profile.setUsername(rs.getString("username"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -310,7 +312,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		sql += "SELECT";
 		sql += " prof_no, userno, prof_time,";
 		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += " prof_content, prof_like FROM profile";
+		sql += " prof_content, prof_like, username(SELECT name FROM user_table WHERE userno.pforile = userno.user_table) FROM profile";
 		sql += " ORDER BY prof_no";
 		
 		//결과 저장 리스트
@@ -333,6 +335,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				proboard.setProf_career(rs.getString("prof_career"));
 				proboard.setProf_content(rs.getString("prof_content"));
 				proboard.setProf_like(rs.getInt("prof_like"));
+				proboard.setUsername(rs.getString("username"));
 				
 				list.add(proboard);
 			}
