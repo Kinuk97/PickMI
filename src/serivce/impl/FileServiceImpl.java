@@ -328,13 +328,13 @@ public class FileServiceImpl implements FileService {
 		Files selectFile = fileDao.selectFile(files);
 
 		if (selectFile != null) {
-
 			String filename = selectFile.getStoredName(); // 파일이름
 
 			File file = new File(path, filename);
 
-			file.delete();
-			fileDao.deleteFile(selectFile);
+			if (file.delete()) {
+				fileDao.deleteFile(selectFile);
+			}
 		}
 	}
 
