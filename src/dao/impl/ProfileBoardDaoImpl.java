@@ -73,8 +73,8 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		
 		
 		String sql="";
-		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content, username)";
-		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content)";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -87,7 +87,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			ps.setString(6, profile.getProf_loc());
 			ps.setString(7, profile.getProf_career());
 			ps.setString(8, profile.getProf_content());
-			ps.setString(9, profile.getUsername());
 			
 			ps.executeUpdate();
 			
