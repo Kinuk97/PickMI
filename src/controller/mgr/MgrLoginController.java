@@ -25,7 +25,7 @@ public class MgrLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// VIEW ì§?? •
+		// VIEW ï¿½??ï¿½ï¿½
 		req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
 		.forward(req, resp);
 
@@ -37,30 +37,30 @@ public class MgrLoginController extends HttpServlet {
 
 	
 		
-		// ë¡œê·¸?¸ ? •ë³? ?–»?–´?˜¤ê¸?
+		// ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 		Manager mgr = mgrService.getLoginMgr(req);
 		
 		
-		// ë¡œê·¸?¸ ?¸ì¦?
+		// ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½ï¿½?
 		boolean login = mgrService.login(mgr);
 		
-		if(login == true) { // ë¡œê·¸?¸ ??„ ê²½ìš°
+		if(login == true) { // ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ê²½ìš°
 			
-			// ë¡œê·¸?¸?•œ ê´?ë¦¬ì ? •ë³? ?–»?–´?˜¤ê¸?
+			// ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ ï¿½?ë¦¬ì ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½?
 			mgr = mgrService.getMgrByMgrid(mgr);
 			
-			//?„¸?…˜? •ë³? ???¥
-			req.getSession().setAttribute("login", login);
+			//?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ???ï¿½ï¿½
+			req.getSession().setAttribute("mgrlogin", login);
 			req.getSession().setAttribute("mgrid", mgr.getMgrid());
 			
 			
-			//////////////////////////// sendRedirect ê´?ë¦¬ì ?˜?´ì§? ì²? ?™”ë©? // ì²«í™”ë©? ë­ì¸ì§?..
+			//////////////////////////// sendRedirect ï¿½?ë¦¬ì ?ï¿½ï¿½?ï¿½ï¿½ï¿½? ï¿½? ?ï¿½ï¿½ï¿½? // ì²«í™”ï¿½? ë­ì¸ï¿½?..
 			resp.sendRedirect("/mgr/main");
 			////////////////////////////
 			
-		} else { // ë¡œê·¸?¸ ?‹¤?Œ¨?‹œ
-			System.out.println("ë¡œê·¸?¸ ?‹¤?Œ¨");
-			req.setAttribute("login", login); // ?´ê±? ?™œ ? ë¡œê·¸?¸ ?‹¤?Œ¨?¸?° ?„¸?…˜???¥?
+		} else { // ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½
+//			System.out.println("ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½");
+			req.setAttribute("login", login); // ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ ? ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½?
 			req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
 			.forward(req, resp);
 		}

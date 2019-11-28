@@ -32,14 +32,14 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 	@Override
 	public int getNextBoardno() {
 		String sql = "SELECT freeboard_seq.nextval FROM dual";
-		
+
 		int result = 0;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				result = rs.getInt(1);
 			}
@@ -55,19 +55,19 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public int selectCntAll(String search, int searchno, int categoryno) {
 		String sql = "SELECT count(*) FROM freeboard";
-		
+
 		// 검색어가 존재하거나 카테고리가 존재한다면
 		if (search != null || categoryno != 0) {
 			// where 추가
 			sql += " WHERE 1 = 1";
-			
+
 			// 검색어가 존재한다면 검색조건 추가
 			if (search != null) {
 				if (searchno == 2) {
@@ -81,20 +81,20 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					// 제목으로 검색하거나 searchno가 2,3이 아닐 때
 					sql += " AND free_title LIKE '%' || ? || '%'";
 				}
-				
+
 			}
-			
+
 			// 카테고리가 존재한다면 카테고리 추가
 			if (categoryno != 0) {
 				sql += " AND categoryno = ?";
 			}
 		}
-		
+
 		int total = 0;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			// 검색어만 존재할 경우
 			if (search != null && categoryno == 0) {
 				ps.setString(1, search);
@@ -108,7 +108,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			} else if (search != null && categoryno != 0) {
 				// 검색어와 카테고리가 존재할 경우
 				ps.setString(1, search);
-				
+
 				if (searchno == 3) {
 					// 제목&내용으로 검색할 경우
 					ps.setString(2, search);
@@ -117,9 +117,9 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					ps.setInt(2, categoryno);
 				}
 			}
-			
+
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				total = rs.getInt(1);
 			}
@@ -135,7 +135,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return total;
 	}
 
@@ -145,11 +145,11 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
 		sql += "   select * from freeboard";
-		
+
 		// 검색어나 카테고리가 존재한다면 WHERE절 추가
 		if (paging.getSearch() != null || paging.getCategoryno() != 0) {
 			sql += " WHERE 1 = 1";
-			
+
 			// 검색어가 존재할 경우
 			if (paging.getSearch() != null) {
 				if (paging.getSearchno() == 2) {
@@ -165,23 +165,23 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 					sql += " AND free_title LIKE '%' || ? || '%'";
 				}
 			}
-			
+
 			if (paging.getCategoryno() != 0) {
 				sql += " AND categoryno = ?";
 			}
 		}
-		
+
 		sql += "   order by free_no desc";
 		sql += "  ) B";
 		sql += "  ORDER BY rnum";
 		sql += " ) BOARD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
-		
+
 		List<FreeBoard> list = new ArrayList<FreeBoard>();
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			if (paging.getSearch() != null && paging.getCategoryno() == 0) {
 				ps.setString(1, paging.getSearch());
 				if (paging.getSearchno() == 3) {
@@ -219,12 +219,12 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				ps.setInt(1, paging.getStartNo());
 				ps.setInt(2, paging.getEndNo());
 			}
-			
+
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				FreeBoard freeBoard = new FreeBoard();
-				
+
 				freeBoard.setFree_no(rs.getInt("free_no"));
 				freeBoard.setCategoryno(rs.getInt("categoryno"));
 				freeBoard.setUserno(rs.getInt("userno"));
@@ -232,12 +232,13 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				freeBoard.setFree_content(rs.getString("free_content"));
 				freeBoard.setFree_time(rs.getDate("free_time"));
 				freeBoard.setViews(rs.getInt("views"));
-				
+
 				list.add(freeBoard);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}try {
+		}
+		try {
 			if (rs != null)
 				rs.close();
 			if (ps != null)
@@ -245,25 +246,25 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
 	@Override
 	public int insertBoard(FreeBoard freeBoard) {
 		String sql = "INSERT INTO freeboard VALUES (?, ?, ?, ?, ?, sysdate, 0)";
-		
+
 		int result = 0;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setInt(1, freeBoard.getFree_no());
 			ps.setInt(2, freeBoard.getCategoryno());
 			ps.setInt(3, freeBoard.getUserno());
 			ps.setString(4, freeBoard.getFree_title());
 			ps.setString(5, freeBoard.getFree_content());
-			
+
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -275,24 +276,24 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public int updateBoard(FreeBoard freeBoard) {
 		String sql = "UPDATE freeboard SET free_title = ?, free_content = ?, categoryno = ? WHERE free_no = ?";
-		
+
 		int result = 0;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setString(1, freeBoard.getFree_title());
 			ps.setString(2, freeBoard.getFree_content());
 			ps.setInt(3, freeBoard.getCategoryno());
 			ps.setInt(4, freeBoard.getFree_no());
-			
+
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -304,32 +305,52 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public int deleteBoard(FreeBoard freeBoard) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "DELETE FROM freeboard WHERE free_no = ?";
+
+		int result = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, freeBoard.getFree_no());
+
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 
 	@Override
 	public FreeBoard boardView(FreeBoard freeBoard) {
 		String sql = "SELECT * FROM freeboard WHERE free_no = ?";
-		
+
 		FreeBoard result = null;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setInt(1, freeBoard.getFree_no());
-			
+
 			rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				result = new FreeBoard();
-				
+
 				result.setFree_no(rs.getInt("free_no"));
 				result.setCategoryno(rs.getInt("categoryno"));
 				result.setUserno(rs.getInt("userno"));
@@ -337,7 +358,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				result.setFree_content(rs.getString("free_content"));
 				result.setFree_time(rs.getDate("free_time"));
 				result.setViews(rs.getInt("views"));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -351,19 +372,19 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public void countViews(FreeBoard freeBoard) {
 		String sql = "UPDATE freeboard SET views = views + 1 WHERE free_no = ?";
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setInt(1, freeBoard.getFree_no());
-			
+
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

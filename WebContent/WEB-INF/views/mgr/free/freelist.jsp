@@ -37,12 +37,16 @@ $(document).ready(function(){
 
 
 <div class="container" >
+<div class="row">
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
+
 	<table class="table table-condensed">
 		<tr class="info">
-			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 10%">글번호</th>
-			<th style="width: 10%">사용자번호</th>
-			<th style="width: 10%">제목</th>
+			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 5%">글번호</th>
+			<th style="width: 5%">사용자번호</th>
+			<th style="width: 20%">제목</th>
 			<th style="width: 10%">작성시간</th>
 		</tr>
 		<c:forEach items="${list }" var="frboard">
@@ -64,10 +68,9 @@ $(document).ready(function(){
 	</div>
 	
 	<jsp:include page = "/WEB-INF/views/mgr/paging/freePaging.jsp" />
-
+<div class="col-lg-1"></div>
 </div>
-</div> <!-- .container -->
+</div>
 
-<!-- Footer -->
-
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>

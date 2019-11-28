@@ -26,20 +26,29 @@ public class MgrFreeListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-		Paging paging = freeBoardService.getPaging(req);
+		if (req.getSession().getAttribute("mgrlogin") != null) {
 		
-		//Paging 객체�? model값으�? �??��
-		req.setAttribute("paging", paging);
-		
-		// FreeBoard 게시�? 목록 조회
-		List<FreeBoard>freelist = freeBoardService.getBoardList(paging);
-		
-		//freelist 객체�? model값으�? �??��
-		req.setAttribute("list", freelist);
-		
-		req.getRequestDispatcher("/WEB-INF/views/mgr/free/freelist.jsp").forward(req, resp);
-	}
-	
-	
+			//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
+			Paging paging = freeBoardService.getPaging(req);
+			
+			//Paging 객체�? model값으�? �??��
+			req.setAttribute("paging", paging);
+			
+			//mgr main navTab에서 사용할 번호
+			req.setAttribute("boardno", 4);
+			
+			
+			// FreeBoard 게시�? 목록 조회
+			List<FreeBoard>freelist = freeBoardService.getBoardList(paging);
+			
+			//freelist 객체�? model값으�? �??��
+			req.setAttribute("list", freelist);
+			
+			req.getRequestDispatcher("/WEB-INF/views/mgr/free/freelist.jsp").forward(req, resp);
+		} else {
+			// 에러페이지
+			req.getRequestDispatcher("/WEB-INF/views/mgr/layouts/mustlogin.jsp")
+			.forward(req, resp);
+		}
+	}	
 }

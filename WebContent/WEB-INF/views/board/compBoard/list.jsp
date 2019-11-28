@@ -1,6 +1,5 @@
 <%@page import="dto.CompBoard" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -16,37 +15,16 @@ function compLoadList(){
 	$.ajax({
 		type : "post",
 		url : "/compBoard/list",
-		data : { "curPage" : curPage, "search" : "${paging.search}", "categoryno" : "${paging.categoryno}" },
+		data : { "curPage" : curPage, "search" : "${paging.search}", "searchno" : "${paging.searchno}" },
 		dataType : "json",
 		success : function(data) {
 			for (var i = 0; i < data.length; i++) {
 				
 				var caption = $("<div class='caption caption-comp' onclick=\"location.href='/compBoard/view?comp_no=" + data[i].comp_no + "'\"></div>");
 				
-				if (data[i].categoryno == 1) {
-// 					caption.append($("<a href=\"/compBoard/list?categoryno=1\"></a>").text("[작성자]"));
-				} else if (data[i].categoryno == 2) {
-// 					caption.append($("<a href=\"/compBoard/list?categoryno=2\"></a>").text("[제목]"));
-				} else if (data[i].categoryno == 3) {
-// 					caption.append($("<a href=\"/compBoard/list?categoryno=3\"></a>").text("[제목 + 내용]"));				
-				}
-				
 				//게시글 제목
 				caption.append($("<h4 class='overtext'></h4>").text(data[i].comp_no + ". " + data[i].comp_title));
 				
-				//태그 제거하기
-				var content = data[i].comp_content;
-				
-// 				console.log(content);
-				
-				//<br>포함하기
-				content = content.replace(/<br\/>/ig, "\n");
-				
-				//태그 제거
-				content = content.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
-				
-// 				console.log(content);
-
 				//팀 이름
 				caption.append($("<div class='comp_name overtext'></div>").text("팀 이름 : " + data[i].comp_name));
 				
@@ -120,17 +98,17 @@ select {
 </style>
 
 <div id="board" class="container list-container">
-	<h1 class="text-center">완성된 프로젝트 게시판</h1>
+	<h1 class="text-center">😉 완성된 프로젝트 게시판 😉</h1>
 	
 	<br><br>
 	
 	<div class="row">
 		<form action="/compBoard/list" method="get">
 			<div style="width: 10%; float: left; margin-left: 21px;">
-				<select name="categoryno">
+				<select name="searchno">
 					<option value="">선택없음</option>
-					<option value="1">작성자</option>
-					<option value="2">제목</option>
+					<option value="1">제목</option>
+					<option value="2">팀 이름</option>
 					<option value="3">제목&amp;내용</option>
 				</select>
 			</div>

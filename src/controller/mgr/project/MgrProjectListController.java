@@ -26,27 +26,37 @@ public class MgrProjectListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-	//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-	Paging paging = mgrService.getPaging(req);
-	
-	// 검색어 파라미터
-	paging.setSearch(req.getParameter("search"));
+		// 로그인 안됐을 경우
+		if (req.getSession().getAttribute("mgrlogin") != null ) {
+		
+			//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
+			Paging paging = mgrService.getPaging(req);
+			
+			// 검색어 파라미터
+			paging.setSearch(req.getParameter("search"));
 //	System.out.println("검색어 확인 : " + paging);
-	
-	//Paging 객체�? model값으�? �??��
-	req.setAttribute("paging", paging);
-	
-	// ProjectBoard 게시�? 목록 조회
-	List<ProjectBoard> list = mgrService.getPjBoardList(paging);
-		
-	// projectlist 객체�? model값으�? �??��
-	req.setAttribute("list", list);
-		
-	req.getRequestDispatcher("/WEB-INF/views/mgr/project/projectlist.jsp")
-	.forward(req, resp);
-	
-	}
-	
+			
+			//Paging 객체�? model값으�? �??��
+			req.setAttribute("paging", paging);
+			
+			//mgr main navTab에서 사용할 번호
+			req.setAttribute("boardno", 3);
+			
+			// ProjectBoard 게시�? 목록 조회
+			List<ProjectBoard> list = mgrService.getPjBoardList(paging);
+			
+			// projectlist 객체�? model값으�? �??��
+			req.setAttribute("list", list);
+			
+			req.getRequestDispatcher("/WEB-INF/views/mgr/project/projectlist.jsp")
+			.forward(req, resp);
+			
+		} else {
+			// 로그인 안됐을 경우
+			req.getRequestDispatcher("/WEB-INF/views/mgr/layouts/mustlogin.jsp")
+			.forward(req, resp);
+		}
+	}	
 }
 
 

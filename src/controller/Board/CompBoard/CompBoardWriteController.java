@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import serivce.face.CompBoardService;
+import serivce.face.FileService;
 import serivce.impl.CompBoardServiceImpl;
+import serivce.impl.FileServiceImpl;
 
 @WebServlet("/compBoard/write")
 public class CompBoardWriteController extends HttpServlet {
 	
-	private CompBoardService compBoardService = new CompBoardServiceImpl();
+	private FileService fileService = FileServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +29,7 @@ public class CompBoardWriteController extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		compBoardService.write(req, resp);
+		fileService.writeBoard(req, 4);
 		
 		resp.sendRedirect("/compBoard/list");
 		

@@ -41,10 +41,10 @@ $(document).ready(function(){
 <div class="container" >
 	<table class="table table-condensed">
 		<tr class="info">
-			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 10%">글번호</th>
-			<th style="width: 10%">사용자번호</th>
-			<th style="width: 10%">제목</th>
+			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 5%">글번호</th>
+			<th style="width: 5%">사용자번호</th>
+			<th style="width: 20%">제목</th>
 			<th style="width: 10%">작성시간</th>
 		</tr>
 		<c:forEach items="${list }" var="pjboard">
@@ -67,8 +67,5 @@ $(document).ready(function(){
 
 <jsp:include page = "/WEB-INF/views/mgr/paging/projectPaging.jsp" />
 
-</div> <!-- .container -->
-
-<!-- Footer -->
-
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>

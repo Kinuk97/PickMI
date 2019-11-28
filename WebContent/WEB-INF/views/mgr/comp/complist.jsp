@@ -39,12 +39,12 @@ $(document).ready(function(){
 <div class="container" >
 	<table class="table table-condensed">
 		<tr class="info">
-			<th style="width: 10%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 10%">게시글 번호</th>
-			<th style="width: 10%">사용자 번호</th>
-			<th style="width: 35%" >제목</th>
-			<th style="width: 20%">팀이름</th>
-			<th style="width: 15%">작성시간</th>
+			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 5%">게시글 번호</th>
+			<th style="width: 5%">사용자 번호</th>
+			<th style="width: 20%" >제목</th>
+			<th style="width: 10%">팀이름</th>
+			<th style="width: 10%">작성시간</th>
 		</tr>
 		<c:forEach items="${ list }" var="comp">
 		<tr>
@@ -68,7 +68,6 @@ $(document).ready(function(){
 	
 	</div>
 </div>
-</div> <!-- .container -->
 
-<!-- Footer -->
-<jsp:include page="/WEB-INF/views/mgr/layouts/mgrfooter.jsp"/>  
+</body>
+</html>
