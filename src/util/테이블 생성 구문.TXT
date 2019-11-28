@@ -44,7 +44,8 @@ CREATE TABLE projboard (
     proj_rec_date DATE,
     proj_progress VARCHAR2(50),
     proj_content VARCHAR2(500),
-    proj_like   NUMBER
+    proj_like NUMBER,
+    proj_job VARCHAR2(50)
 );
     
 DROP SEQUENCE proj_no_seq;
