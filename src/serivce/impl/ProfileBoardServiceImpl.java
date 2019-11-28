@@ -1,7 +1,6 @@
 package serivce.impl;
 
 import java.io.File;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
@@ -25,8 +24,18 @@ import util.Paging;
 
 public class ProfileBoardServiceImpl implements ProfileBoardService {
 	
-	private ProfileBoardDao profileBoardDao = new ProfileBoardDaoImpl();
+	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	
+	private ProfileBoardServiceImpl() {
+	}
+
+	private static class Singleton {
+		private static final ProfileBoardService instance = new ProfileBoardServiceImpl();
+	}
+
+	public static ProfileBoardService getInstance() {
+		return Singleton.instance;
+	}
 	
 	@Override
 	public ProfileBoard getNameByUserno(int userno) {
@@ -138,8 +147,8 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 		
 			File up = new File(context.getRealPath("upload"), item.getName() + "_" + u);
 
-//			file.setFilename(item.getName());
-//			file.setStoredname(item.getName() + "_" + u);
+			file.setOriginName(item.getName());
+			file.setStoredName(item.getName() + "_" + u);
 
 			try {
 				item.write(up);
@@ -176,7 +185,9 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	@Override
 	public ProfileBoard getProfileno(HttpServletRequest req) {
 		// 전달 파라미터 받기
-		String param = req.getParameter("profileno");
+		String param = req.getParameter("prof_no");
+		
+//		System.out.println("profile board service impl : " + param);
 
 		int prof_no = 0;
 		if (param != null && !"".equals(param)) {

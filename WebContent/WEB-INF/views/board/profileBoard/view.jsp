@@ -13,7 +13,7 @@
 	<td class="info">번호</td><td>${ profile.prof_no }</td>
 </tr>
 <tr>
-	<td class="info">유저번호</td><td>${ profile.userno }</td>
+	<td class="info">유저이름</td><td>${ profile.username }</td>
 </tr>
 <tr>
 	<td class="info">작성일</td><td>${ profile.prof_time }</td>
@@ -49,6 +49,10 @@
 </tr>
 <tr>
 	<td class="info">내용</td><td>${ profile.prof_content }</td>
+</tr>
+<tr>
+	<td class="info">첨부파일</td>
+	<td><a href="/file/download?fileno=${file.fileno }">${file.originName }</a></td>
 </tr>
 </table>
 

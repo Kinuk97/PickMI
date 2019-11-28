@@ -40,7 +40,7 @@ $(document).ready(function() {
 						caption.append($("<p></p>").text(data[i].prof_job));
 						caption.append($("<p></p>").text(data[i].prof_state));
 						caption.append($("<p></p>").text(data[i].prof_career));
-						caption.append($("<p class='text-right'></p>").html($("<a href='#' class='btn btn-primary' role='button'></a>").text(data[i].prof_like +"❤찜하기")));
+						caption.append($("<p class='text-right'></p>").text(data[i].prof_like +"❤"));
 						caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
 					
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profile/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
@@ -55,9 +55,6 @@ $(document).ready(function() {
 			});
 	    }
 	});
-	
-
-	
 });
 
 </script>
@@ -95,9 +92,9 @@ $(document).ready(function() {
 #filter:hover #filter-list {display: block;}
 #filter:hover #filterBtn {background-color: #CEE3F6;}
 
-.thumbnail:hover {
-	background: #D6F0FF;
-}
+/* .thumbnail:hover { */
+/* 	background: #D6F0FF; */
+/* } */
 a#top {
     position: fixed;
     right: 5%;
@@ -111,9 +108,11 @@ a#top {
 <h1>나를 소개해보세요!😉</h1>
 </div>
 <hr>
+<c:if test="${ login }">
 <div class="text-right" style="padding: 0 150px;">
 <a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
 </div>
+</c:if>
 <div id=filtersystem style="padding:0 150px;">
 <div id="filter">
 	<button class="btn btn-info" id="filterBtn">관심</button>
@@ -157,7 +156,7 @@ a#top {
 <div id="board" class="container list-container">
 	<c:forEach items="${ list }" var="pro">
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="thumbnail" onclick="location.href='/profile/view?profileno=${pro.prof_no }'">
+				<div class="thumbnail" onclick="location.href='/profile/view?prof_no=${pro.prof_no }'">
 					<div class="caption caption-profile">
 						<h4>${ pro.prof_no }</h4>
 						<h3>${ pro.userno }</h3>
@@ -166,9 +165,7 @@ a#top {
 						<p>${ pro.prof_job }</p>
 						<p>${ pro.prof_state }</p>
 						<p>${ pro.prof_career }</p>
-						<p class="text-right">
-						<a href="#" class="btn btn-primary" role="button">${ pro.prof_like }❤찜하기</a> 
-	<!-- 				<a href="#" class="btn btn-default" role="button">Button</a> --></p>
+						<p class="text-right">${ pro.prof_like }❤</p>
 						<p>${ pro.prof_time }에 작성</p>
 					</div>
 				</div>

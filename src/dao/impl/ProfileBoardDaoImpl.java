@@ -20,10 +20,21 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 	
+	private ProfileBoardDaoImpl() {
+		conn = DBConn.getConnection();
+	}
+	
+	private static class Singleton {
+		private static final ProfileBoardDao instance = new ProfileBoardDaoImpl();
+	}
+	
+	public static ProfileBoardDao getInstance() {
+		return Singleton.instance;
+	}
+	
 	@Override
 	public ProfileBoard selectNameByUserno(ProfileBoard profile) {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		String sql="";
 		sql += "SELECT name, userno FROM user_table";
@@ -60,11 +71,10 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public void insertProfile(ProfileBoard profile) {
 		
-		conn = DBConn.getConnection();
 		
 		String sql="";
-		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content, username)";
-		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += "INSERT INTO profile(prof_no, userno, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content)";
+		sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -77,7 +87,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			ps.setString(6, profile.getProf_loc());
 			ps.setString(7, profile.getProf_career());
 			ps.setString(8, profile.getProf_content());
-			ps.setString(9, profile.getUsername());
 			
 			ps.executeUpdate();
 			
@@ -97,7 +106,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public void insertFile(Files file) {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		//수행할 sql 쿼리
 		String sql ="";
@@ -129,7 +137,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public int selectProfileno() {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		int profileno = 0;
 		
@@ -162,10 +169,10 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	
 	@Override
 	public ProfileBoard selectProfileByProfileno(ProfileBoard profile) {
-		conn = DBConn.getConnection(); //db연결
 		
 		String sql="";
-		sql += "SELECT * FROM profile";
+		sql += "SELECT prof_no, userno, prof_interest, prof_loc, prof_job, prof_state, prof_career, prof_content, prof_like,";
+		sql	+= " prof_time, (SELECT name FROM user_table WHERE userno = profile.userno) AS username FROM profile";
 		sql += " WHERE prof_no = ?";
 		
 		try {
@@ -187,6 +194,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				profile.setProf_content(rs.getString("prof_content"));
 				profile.setProf_like(rs.getInt("prof_like"));
 				profile.setProf_time(rs.getDate("prof_time"));
+				profile.setUsername(rs.getString("username"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -261,7 +269,6 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	 */
 	@Override
 	public int selectCntAll() {
-	conn = DBConn.getConnection(); //db연결
 		
 
 	//수행할 sql 쿼리
@@ -269,7 +276,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		
 	sql += "SELECT ";
 	sql += " count(*)";
-	sql += " FROM board";
+	sql += " FROM profile";
 	
 		
 	//결과 저장 리스트
@@ -303,14 +310,13 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	@Override
 	public List<ProfileBoard> selectProfileList() {
 		
-		conn = DBConn.getConnection(); //db연결
 		
 		//수행할 쿼리 
 		String sql="";
 		sql += "SELECT";
 		sql += " prof_no, userno, prof_time,";
 		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += " prof_content, prof_like FROM profile";
+		sql += " prof_content, prof_like, username(SELECT name FROM user_table WHERE userno.pforile = userno.user_table) FROM profile";
 		sql += " ORDER BY prof_no";
 		
 		//결과 저장 리스트
@@ -333,6 +339,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				proboard.setProf_career(rs.getString("prof_career"));
 				proboard.setProf_content(rs.getString("prof_content"));
 				proboard.setProf_like(rs.getInt("prof_like"));
+				proboard.setUsername(rs.getString("username"));
 				
 				list.add(proboard);
 			}

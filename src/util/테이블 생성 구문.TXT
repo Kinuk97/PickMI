@@ -44,17 +44,17 @@ CREATE TABLE projboard (
     proj_rec_date DATE,
     proj_progress VARCHAR2(50),
     proj_content VARCHAR2(500),
-    proj_like   NUMBER
+    proj_like NUMBER,
+    proj_job VARCHAR2(50)
 );
     
 DROP SEQUENCE proj_no_seq;
 CREATE SEQUENCE proj_no_seq;
 
 DROP TABLE compboard;
+
 CREATE TABLE compboard (
     comp_no NUMBER PRIMARY KEY,
-    categoryno NUMBER,
-    fileno NUMBER,
     userno NUMBER,
     comp_title VARCHAR2(50),
     comp_name VARCHAR2(50),
@@ -67,22 +67,9 @@ CREATE TABLE compboard (
     comp_startdate NUMBER,
     comp_enddate NUMBER
 );
-
-ALTER TABLE compboard
-ADD CONSTRAINT compboard_fk_01
-    FOREIGN KEY (categoryno)
-    REFERENCES category(categoryno);
-ALTER TABLE compboard
-ADD CONSTRAINT compboard_fk_02
-    FOREIGN KEY (fileno)
-    REFERENCES files(fileno);
-ALTER TABLE compboard
-ADD CONSTRAINT compboard_fk_03
-    FOREIGN KEY (userno)
-    REFERENCES user_table(userno);
-    
     
 DROP SEQUENCE compBoard_seq;
+
 CREATE SEQUENCE compBoard_seq;
 
 DROP TABLE freeboard;

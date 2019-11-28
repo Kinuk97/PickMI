@@ -30,13 +30,6 @@ public class CompBoardListController extends HttpServlet {
 		//Paging객체를 MODEL값으로 지정
 		req.setAttribute("paging", paging);
 		
-		//게시글 목록 조회
-		List<CompBoard> List = compBoardService.getBoardList(paging);
-		
-		req.setAttribute("compList", List);
-		
-//		System.out.println(List);
-		
 		//VIEW지정
 		req.getRequestDispatcher("/WEB-INF/views/board/compBoard/list.jsp").forward(req, resp);
 		
@@ -52,7 +45,6 @@ public class CompBoardListController extends HttpServlet {
 		Gson gson = new Gson();
 		
 		resp.getWriter().println(gson.toJson(compBoardService.getBoardList(paging)));
-		
 		
 	}
 	
