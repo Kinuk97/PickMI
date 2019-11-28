@@ -397,5 +397,77 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 	}
 
+	@Override
+	public void deleteboard(CompBoard compBoard) {
+		
+		conn = DBConn.getConnection();
+		
+		//수행할 SQL쿼리
+		String sql = "";
+		
+		sql += "DELETE FROM compBoard ";
+		sql += "WHERE comp_no = ? ";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, compBoard.getComp_no());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+
+	@Override
+	public void updateboard(CompBoard compBoard) {
+		
+		//DB연결객체
+		conn = DBConn.getConnection();
+		
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "UPDATE compBoard SET comp_title = ?, comp_name = ?, comp_member = ?, ";
+		sql += " comp_startdate = ?,comp_enddate = ?, comp_content = ?";
+		sql += " WHERE comp_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, compBoard.getComp_title());
+			ps.setString(2, compBoard.getComp_name());
+			ps.setInt(3, compBoard.getComp_member());
+			ps.setInt(4, compBoard.getComp_startdate());
+			ps.setInt(5, compBoard.getComp_enddate());
+			ps.setString(6, compBoard.getComp_content());
+			ps.setInt(7, compBoard.getComp_no());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 
 }

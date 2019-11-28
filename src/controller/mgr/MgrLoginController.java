@@ -25,10 +25,16 @@ public class MgrLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// VIEW �??��
-		req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
-		.forward(req, resp);
-
+		//로그인 ON
+		if (req.getSession().getAttribute("mgrlogin") != null ) {
+		
+			resp.sendRedirect("/mgr/main");
+		} else {
+			//로그인 OFF
+			// VIEW �??��
+			req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
+			.forward(req, resp);
+		}
 		
 	}
 	

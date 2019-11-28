@@ -114,7 +114,22 @@ public class CompBoardServiceImpl implements CompBoardService {
 		
 		compBoardDao.insert(compBoard);
 	}
-	
+
+
+	@Override
+	public void delete(CompBoard compBoard) {
+		
+		compBoardDao.deleteboard(compBoard);
+		
+	}
+
+
+
+
+
+
+
+
 	
 //	@Override
 //	public void write(HttpServletRequest req, HttpServletResponse resp) {

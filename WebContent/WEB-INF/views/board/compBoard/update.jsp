@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="//cdn.ckeditor.com/4.13.0/basic/ckeditor.js"></script>    
 
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
@@ -28,7 +28,7 @@ $(document).ready(function() {
     		<label for="comp_title" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 10px; text-align: center;">프로젝트 이름</label>
     		<div class="col-sm-9 col-md-9 col-lg-10">
-      			<input type="text" class="form-control" id="comp_title" placeholder="제목을 입력하세요" name="comp_title" maxlength="120">
+      			<input type="text" class="form-control" id="comp_title" value="${compBoard.comp_title }" name="comp_title" maxlength="120">
     		</div>
   		</div>
   		
@@ -36,7 +36,7 @@ $(document).ready(function() {
     		<label for="comp_name" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 16px; text-align: center;">팀 이름 </label>
     		<div class="col-sm-9 col-md-9 col-lg-10">
-      			<input type="text" class="form-control" id="comp_name" placeholder="팀 이름을 입력하세요" name="comp_name" maxlength="120">
+      			<input type="text" class="form-control" id="comp_name" value="${compBoard.comp_name }" name="comp_name" maxlength="120">
     		</div>
   		</div>
   		
@@ -44,20 +44,20 @@ $(document).ready(function() {
     		<label for="comp_member" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 16px; text-align: center;">참여인원</label>
     		<div class="col-sm-9 col-md-9 col-lg-4">
-      			<input type="text" class="form-control" id="comp_member" placeholder="참여인원을 입력하세요 (ex.5)" name="comp_member" >
+      			<input type="text" class="form-control" id="comp_member" value="${compBoard.comp_member }" name="comp_member" >
     		</div>
     		
     		<label class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 16px; text-align: center;">프로젝트 기간</label>
     		<div class="col-sm-9 col-md-9 col-lg-2">
-      			<input type="text" class="form-control" id="comp_startdate" placeholder="(ex.20191111)" name="comp_startdate">
-      			- <input type="text" class="form-control" id="comp_enddate" placeholder="(ex.20191114)" name="comp_enddate">
+      			<input type="text" class="form-control" id="comp_startdate" value="${compBoard.comp_startdate }" name="comp_startdate">
+      			- <input type="text" class="form-control" id="comp_enddate" value="${compBoard.comp_enddate }" name="comp_enddate">
     		</div>
     		
   		</div>
   		
 	  	<div class="form-group">
-		  	<textarea id="comp_content" name="comp_content"></textarea>
+		  	<textarea id="comp_content" name="comp_content">${compBoard.comp_content }</textarea>
 		</div>
 		  	<script>
 				CKEDITOR.replace( 'comp_content', {
@@ -68,11 +68,14 @@ $(document).ready(function() {
 		<div class="form-group text-left" style="margin-top: 5px;">
 		
 			 <input type="file" id="uploadfile" name="uploadfile">
-             <p class="help-block">파일은 10MB까지만 업로드 가능합니다.</p>
-
+             <p class="help-block">파일은 10MB까지만 업로드 가능합니다.
+             	<c:if test="${not empty file }">
+             		<br>원본 파일 : ${file.originName } (${file.fileSize })
+				</c:if>
+				</p>
 		</div> 
-				<button class="btn btn-default" id="write" onclick="alert('글 작성을 완료하시겠습니까?')">작성완료</button>
-				<button class="btn btn-default" type="button" id="cancel" onclick="alert('글 작성을 취소하시겠습니까?')">취소</button>
+				<button class="btn btn-default" id="update" onclick="alert('글 수정을 완료하시겠습니까?')">수정완료</button>
+				<button class="btn btn-default" type="button" id="cancel" onclick="alert('글 수정을 취소하시겠습니까?')">수정취소</button>
 		
 	</form>
 </div>

@@ -31,6 +31,8 @@ public class MgrProjectBoardViewController extends HttpServlet {
 			projectBoard = projectBoardService.view(projectBoard);
 			
 			req.setAttribute("projectBoard", projectBoard);
+			//menuTab 모델값
+			req.setAttribute("boardno", 3);
 			
 			req.getRequestDispatcher("/WEB-INF/views/mgr/project/projectview.jsp").forward(req, resp);
 		} else {
