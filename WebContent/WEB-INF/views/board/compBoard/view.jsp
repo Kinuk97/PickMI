@@ -1,8 +1,13 @@
+<%@page import="dto.Files"%>
 <%@page import="dto.CompBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <% CompBoard compBoard = (CompBoard) request.getAttribute("compBoard"); %>
+<% Files files = (Files) request.getAttribute("files"); %>
 
     
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
@@ -64,6 +69,12 @@ $(document).ready(function(){
 				<td colspan="4"><%=compBoard.getComp_content() %></td>
 			</tr>
 
+<%-- 			<c:if test="<%=files.getOriginName() != null %>"> --%>
+<!-- 				<tr><td class="info" colspan="4">첨부파일</td></tr> -->
+<%-- 				<tr><td colspan="4"><%=files.getOriginName() %>	 --%>
+<%-- 					<a href ="/compBoard/download?fileno=${files.fileno}">다운로드</a></td></tr> --%>
+<%-- 			</c:if>	 --%>
+			
 		</table>
 	
 </div>

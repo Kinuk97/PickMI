@@ -25,6 +25,10 @@
 		</tr>
 	</table>
 	
+	<div class="row text-right">
+		<button onclick="location.href='/freeboard/update?free_no=${board.free_no}';">수정</button>
+		<button onclick="location.href='/freeboard/delete?free_no=${board.free_no}';">삭제</button>
+	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

@@ -20,7 +20,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 	private ResultSet rs = null; //SQL수행결과객체
 
 	@Override
-	public int selectCntAll(String search, int categoryno) {
+	public int selectCntAll(String search, int searchno) {
 
 		conn = DBConn.getConnection(); //DB연결
 
@@ -28,41 +28,42 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		String sql = "";
 		sql += "SELECT count(*) FROM compBoard ";
 
-		//검색어가 존재하거나 카테고리가 존재한다면
-		if (search != null || categoryno != 0) {
+		//검색어가 존재한다면
+		if (search != null) {
 			
 			//WHERE  추가
 			sql += "WHERE 1 = 1";
 			
-			//검색어가 존재한다면 검색조건 추가
-			if (search != null) {
+			if (searchno == 2) {
+				//작성자로 검색할 경우
+				sql += " AND userno LIKE '%' || ? || '%'";
+
+			} else if (searchno == 3) {
+				sql += " AND comp_title LIKE '%' || ? || '%'";
+				sql += " AND comp_content LIKE '%' || ? || '%'";
+
+			} else {
+				//제목으로 검색할 경우
 				sql += " AND comp_title LIKE '%' || ? || '%'";
 			}
 			
-			//카테고리가 존재한다면 카테고리 추가
-			if (categoryno != 0) {
-				sql += " AND categoryno = ?";
-			}
 		}
 		
 		int cnt = 0;
-
-		//결과 저장 리스트
-		//List<Board> getList = new ArrayList<>();
 
 		try {
 			//SQL수행객체
 			ps = conn.prepareStatement(sql);
 			
-			if (search != null && categoryno == 0) {
+			if (search != null) {
+
 				ps.setString(1, search);
 				
-			} else if (categoryno != 0 && search == null) {
-				ps.setInt(1, categoryno);
+				if (searchno == 3) {
+					ps.setString(2, search);
+					
+				}
 				
-			} else if (search != null && categoryno != 0) {
-				ps.setString(1, search);
-				ps.setInt(2, categoryno);
 			}
 
 			//SQL수행 및 결과 저장
@@ -112,7 +113,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res = new CompBoard();
 				
 				res.setComp_no( rs.getInt("comp_no") );
-				res.setCategoryno( rs.getInt("categoryno") );
 				res.setUserno( rs.getInt("userno") );
 				res.setComp_title( rs.getString("comp_title") );
 				res.setComp_name( rs.getString("comp_name") );
@@ -157,18 +157,27 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += "		SELECT * FROM compBoard";
 			
 			//검색어가 존재할 때
-			if (paging.getSearch() != null || paging.getCategoryno() != 0) {
+			if (paging.getSearch() != null) {
+				//WHERE 추가
 				sql += " WHERE 1 = 1";
 				
-				if (paging.getSearch() != null) {
+				if (paging.getSearchno() == 2) {
+					//작성자로 검색할 경우
+					sql += " AND comp_title LIKE '%' || ? || '%'";
+				
+				} else if (paging.getSearchno() == 3) {
+					//제목&내용으로 검색할 경우
+					sql += " AND comp_title LIKE '%' || ? || '%'";
+					sql += " AND comp_content LIKE '%' || ? || '%'";
+					
+				} else {
+					//제목으로 검색할 경우
 					sql += " AND comp_title LIKE '%' || ? || '%'";
 				}
 				
-				if (paging.getCategoryno() != 0) {
-					sql += " AND categoryno = ?";
-				}
+			
 			}
-
+ 
 			sql += "        ORDER BY comp_no DESC";
 			sql += "    )B";
 			sql += "    ORDER BY rnum";
@@ -183,34 +192,29 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			try {
 				ps = conn.prepareStatement(sql);
 
-				if (paging.getSearch() != null && paging.getCategoryno() == 0) {
+				if (paging.getSearch() != null) {
 					ps.setString(1, paging.getSearch());
 					ps.setInt(2, paging.getStartNo());
 					ps.setInt(3, paging.getEndNo());
 					
-				} else if (paging.getCategoryno() != 0 && paging.getSearch() == null) {
-					ps.setInt(1, paging.getCategoryno());
-					ps.setInt(2, paging.getStartNo());
-					ps.setInt(3, paging.getEndNo());
-					
-				} else if (paging.getSearch() != null && paging.getCategoryno() != 0) {
-					ps.setString(1, paging.getSearch());
-					ps.setInt(2, paging.getCategoryno());
-					ps.setInt(3, paging.getStartNo());
-					ps.setInt(4, paging.getEndNo());
+					if (paging.getSearchno() == 3) {
+						ps.setString(2, paging.getSearch());
+						ps.setInt(3, paging.getStartNo());
+						ps.setInt(4, paging.getEndNo());
+					}
 					
 				} else {
+					//검색어가 존재하지 않을 경우 (전체 리스트)
 					ps.setInt(1, paging.getStartNo());
 					ps.setInt(2, paging.getEndNo());
 				}
-
+				
 				rs = ps.executeQuery();
 
 				while(rs.next()) {
 					CompBoard compBoard = new CompBoard();
 
 					compBoard.setComp_no( rs.getInt("comp_no") );
-					compBoard.setCategoryno( rs.getInt("categoryno") );
 					compBoard.setUserno( rs.getInt("userno") );
 					compBoard.setComp_title( rs.getString("comp_title") );
 					compBoard.setComp_name( rs.getString("comp_name") );

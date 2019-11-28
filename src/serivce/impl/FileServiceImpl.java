@@ -1,6 +1,7 @@
 package serivce.impl;
 
 import java.io.BufferedInputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,9 +24,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
+import dao.face.CompBoardDao;
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
 import dao.face.ProfileBoardDao;
+import dao.impl.CompBoardDaoImpl;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
@@ -38,6 +41,7 @@ import serivce.face.FileService;
 public class FileServiceImpl implements FileService {
 	private FreeBoardDao freeBoardDao = FreeBoardDaoImpl.getInstance();
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
+	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
 
@@ -53,7 +57,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public void writeBoard(HttpServletRequest req, int postno) {
+	public int writeBoard(HttpServletRequest req, int postno) {
 		// 1. 파일업로드 형태의 데이터가 맞는지 확인
 		// enctype이 multipart/form-data가 맞는지 확인
 		boolean isMultipart = false;
@@ -61,7 +65,7 @@ public class FileServiceImpl implements FileService {
 
 		// 1-1 multipart/form-data 인코딩으로 전송되지 않았을 경우
 		if (!isMultipart) {
-			return;
+			return - 1;
 		}
 
 		// 각자 만들어야하는 부분
@@ -70,6 +74,8 @@ public class FileServiceImpl implements FileService {
 		FreeBoard freeBoard = null;
 		ProfileBoard profile = null;
 		Files uploadFile = null;
+		
+		int resultBoardno = 0;
 
 		// 1-2 여기 이후는 multipart/form-data로 전송된 상황
 		// 파일이 전송된 상황
@@ -212,6 +218,7 @@ public class FileServiceImpl implements FileService {
 							e.printStackTrace();
 						}
 					}
+					
 				} else if (postno == 4) {
 					if (compBoard == null)
 						compBoard = new CompBoard();
@@ -274,8 +281,10 @@ public class FileServiceImpl implements FileService {
 				try {
 					item.write(up);
 					item.delete(); // 임시 파일 삭제
+					
 				} catch (Exception e) {
 					e.printStackTrace();
+					resultBoardno = -4;
 				} // 실제 업로드
 
 			} // 파일 처리 if 끝
@@ -326,6 +335,9 @@ public class FileServiceImpl implements FileService {
 				freeBoard.setFree_no(freeBoardDao.getNextBoardno());
 				// 게시글 작성
 				freeBoardDao.insertBoard(freeBoard);
+				resultBoardno = freeBoard.getFree_no();
+				
+				
 
 				// 업로드하는 파일이 있다면
 				if (uploadFile != null) {
@@ -338,19 +350,33 @@ public class FileServiceImpl implements FileService {
 				if (uploadFile != null) {
 					// 업로드하는 파일이 있었다면 서버 디스크에 저장된 파일 삭제
 					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
-					return;
+					resultBoardno =  -2;
 				}
 			}
 
 		} else if (postno == 4) {
 			// 완성된 게시판
-
+			compBoard.setComp_no(compBoardDao.selectCompBoardno());
+			
+			if (compBoard.getComp_title() == null) {
+				compBoard.setComp_title("제목없음");
+				
+			}
+			
+			compBoard.setUserno((Integer) req.getSession().getAttribute("userno"));
+			
+			compBoardDao.insert(compBoard);
+			
+			uploadFile.setBoardno(compBoard.getComp_no());
+	
 		}
 
 		// 공통적인 파일 처리, 파일이 있다면 db에 저장, postno와 boardno는 각자의 if문에서 설정
 		if (uploadFile != null) {
 			fileDao.insertFile(uploadFile);
 		}
+		
+		return resultBoardno; 
 	}
 
 	@Override
@@ -373,7 +399,9 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public void modifyBoard(HttpServletRequest req, int postno) {
+	public int modifyBoard(HttpServletRequest req, int postno) {
+		int resultBoardno = 0;
+		
 		// 1. 파일업로드 형태의 데이터가 맞는지 확인
 		// enctype이 multipart/form-data가 맞는지 확인
 		boolean isMultipart = false;
@@ -381,11 +409,13 @@ public class FileServiceImpl implements FileService {
 
 		// 1-1 multipart/form-data 인코딩으로 전송되지 않았을 경우
 		if (!isMultipart) {
-			return;
+			resultBoardno =  -1;
+			return resultBoardno;
 		}
 
 		FreeBoard freeBoard = null;
 		Files uploadFile = null;
+		
 
 		// 1-2 여기 이후는 multipart/form-data로 전송된 상황
 		// 파일이 전송된 상황
@@ -491,7 +521,8 @@ public class FileServiceImpl implements FileService {
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 							// 게시글 번호를 가져오지 못했다면 리턴
-							return;
+							resultBoardno =  -2;
+							return resultBoardno;
 						}
 					}
 				} else if (postno == 4) {
@@ -537,8 +568,9 @@ public class FileServiceImpl implements FileService {
 				if (uploadFile != null) {
 					// 업로드하는 파일만 존재한다면 만들어진 서버 디스크에 저장된 파일 삭제
 					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
+					return -4;
 				}
-				return;
+				return -3;
 			}
 			
 			// 제목이 비어있는 경우 제목없음
@@ -549,7 +581,11 @@ public class FileServiceImpl implements FileService {
 			if (freeBoard.getFree_content() == null || "".equals(freeBoard.getFree_content().trim()))
 				freeBoard.setFree_content("내용없음");
 
-			freeBoardDao.updateBoard(freeBoard);
+			if (freeBoardDao.updateBoard(freeBoard) != 1) {
+				resultBoardno = -5;
+			}
+			
+			resultBoardno = freeBoard.getFree_no();
 
 			// 업로드하는 파일이 있다면
 			if (uploadFile != null) {
@@ -575,6 +611,8 @@ public class FileServiceImpl implements FileService {
 
 			fileDao.insertFile(uploadFile);
 		}
+		
+		return resultBoardno;
 	}
 
 	@Override

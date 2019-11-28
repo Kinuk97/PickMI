@@ -52,9 +52,9 @@ DROP SEQUENCE proj_no_seq;
 CREATE SEQUENCE proj_no_seq;
 
 DROP TABLE compboard;
+
 CREATE TABLE compboard (
     comp_no NUMBER PRIMARY KEY,
-    categoryno NUMBER,
     userno NUMBER,
     comp_title VARCHAR2(50),
     comp_name VARCHAR2(50),
@@ -68,8 +68,8 @@ CREATE TABLE compboard (
     comp_enddate NUMBER
 );
     
-
 DROP SEQUENCE compBoard_seq;
+
 CREATE SEQUENCE compBoard_seq;
 
 DROP TABLE freeboard;
