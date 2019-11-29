@@ -6,6 +6,59 @@
     
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#unlike").click( function(){
+		console.log("된다");
+		$("#unlike").hide();
+		$("#like").show();
+		$.ajax({
+			url: "/profileBoard/like"
+			, type: "GET"
+			, data: {
+				prof_no : '${profile.prof_no}',
+				boardno : '${profile.prof_no}',
+				userno : '${profile.userno}',
+				postno : '${ 1 }'
+			}
+			, dataType : "json"
+			, success : like
+			, error : function() {
+				console.log("ajax fail")
+			}
+		})
+	})
+	
+		$("#like").click( function(){
+		console.log("된다");
+		$("#like").hide();
+		$("#unlike").show();
+		$.ajax({
+			url: "/profileBoard/like"
+			, type: "GET"
+			, data: {
+				prof_no : '${profile.prof_no}',
+				boardno : '${profile.prof_no}',
+				userno : '${profile.userno}',
+				postno : '${ 1 }'
+			}
+			, dataType : "json"
+			, success : like
+			, error : function() {
+				console.log("ajax fail")
+			}
+		})
+	})
+
+function like(data) {
+		console.log("좋아요되랏")
+	$("#countLike").html(data.countLike)
+}
+	
+})
+</script>
+
 <h1>${ profile.userno }</h1>
 
 <table class="table table-bordered">
@@ -34,13 +87,13 @@
 	<td class="info">경력</td><td>${ profile.prof_career }</td>
 </tr>
 <tr>
-	<td class="info">찜받은수</td><td><span id="numlike">${ like }</span>
+	<td class="info">찜받은수</td><td><span id="countLike">${ countLike }</span>
 		<c:if test="${ login }">
-			<c:if test="${ likelog }">
+			<c:if test="${ canLike }">
 				<button id="like">LIKE</button>
 				<button id="unlike" style="display: none;">UNLIKE</button>
 			</c:if>
-			<c:if test="${ !likelog }">
+			<c:if test="${ !canLike }">
 				<button id="like" style="display: none;">LIKE</button>
 				<button id="unlike">UNLIKE</button>
 			</c:if>

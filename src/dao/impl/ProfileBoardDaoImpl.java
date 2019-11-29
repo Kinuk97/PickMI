@@ -10,6 +10,7 @@ import java.util.List;
 import dao.face.ProfileBoardDao;
 import dbutil.DBConn;
 import dto.Files;
+import dto.LikePost;
 import dto.ProfileBoard;
 import util.Paging;
 
@@ -30,6 +31,131 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	
 	public static ProfileBoardDao getInstance() {
 		return Singleton.instance;
+	}
+	
+	@Override
+	public void deleteLike(LikePost like) {
+		String sql = "";
+		sql += "DELETE FROM likepost WHERE postno = 1 AND boardno = ? AND userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getBoardno());
+			ps.setInt(2, like.getUserno());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+	}
+	@Override
+	public void insertLike(LikePost like) {
+		String sql="";
+		sql += "INSERT INTO likepost (postno, userno, boardno)";
+		sql += " VALUES (1, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+			
+			ps.executeUpdate();
+			
+//			System.out.println("boardDaoImpl : " + like);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	@Override
+	public int checkCountUserByUserno(LikePost like) {
+		
+		String sql="";
+		sql += "SELECT COUNT(*)";
+		sql += " FROM likepost";
+//		sql += " WHERE 1=1";
+		sql += " WHERE postno = 1";
+		sql += " AND userno = ?";
+		sql += " AND boardno = ?";
+		
+		int check = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+//			System.out.println("profile daoimpl : " + like);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				check = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+//		System.out.println("profile dao impl :" + check);
+		return check;
+	}
+	
+	@Override
+	public int selectCountLike(LikePost like) {
+		String sql="";
+		sql += "SELECT ";
+		sql += " count(userno)";
+		sql += " FROM likepost";
+		sql += " WHERE postno = 1";
+		sql	+= " AND boardno = ?";
+		
+		int likeno = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,  like.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				likeno = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return likeno;
 	}
 	
 	@Override
