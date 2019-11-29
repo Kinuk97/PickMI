@@ -279,7 +279,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-
 		return result;
 	}
 

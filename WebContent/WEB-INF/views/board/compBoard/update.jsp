@@ -24,6 +24,7 @@ $(document).ready(function() {
 	<h1>게시글 수정</h1>
 	
 	<form class="form-horizontal" action="<%=response.encodeUrl("/compBoard/update") %>" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="comp_no" value="${compBoard.comp_no }" />
   		<div class="form-group">
     		<label for="comp_title" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 10px; text-align: center;">프로젝트 이름</label>

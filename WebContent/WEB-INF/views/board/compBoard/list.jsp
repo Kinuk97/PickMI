@@ -23,7 +23,7 @@ function compLoadList(){
 				var caption = $("<div class='caption caption-comp' onclick=\"location.href='/compBoard/view?comp_no=" + data[i].comp_no + "'\"></div>");
 				
 				//게시글 제목
-				caption.append($("<h4 class='overtext'></h4>").text(data[i].comp_no + ". " + data[i].comp_title));
+				caption.append($("<h4 class='overtext'></h4>").text(data[i].comp_no  + ". " + data[i].comp_title));
 				
 				//팀 이름
 				caption.append($("<div class='comp_name overtext'></div>").text("팀 이름 : " + data[i].comp_name));

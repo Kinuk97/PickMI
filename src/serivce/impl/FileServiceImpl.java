@@ -477,6 +477,7 @@ public class FileServiceImpl implements FileService {
 
 		// 모든 요청 정보 처리
 		while (iter.hasNext()) {
+
 			FileItem item = iter.next();
 
 			// 1) 빈 파일 처리
@@ -484,6 +485,7 @@ public class FileServiceImpl implements FileService {
 				continue;
 
 			if (item.isFormField()) {
+
 				String key = item.getFieldName();
 				if (postno == 1) {
 					// 프로필 게시판
@@ -530,7 +532,9 @@ public class FileServiceImpl implements FileService {
 					}
 				} else if (postno == 4) {
 					// 완성된 게시판
-					if (compBoard == null) compBoard = new CompBoard();
+					if (compBoard == null) {
+						compBoard = new CompBoard();
+					}
 					
 					if ("comp_title".equals(key)) {
 						try {
@@ -575,6 +579,7 @@ public class FileServiceImpl implements FileService {
 					} else if ("comp_no".equals(key)) {
 						try {
 							compBoard.setComp_no(Integer.parseInt(item.getString()));
+							
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 							// 게시글 번호를 가져오지 못했다면 리턴
@@ -582,9 +587,8 @@ public class FileServiceImpl implements FileService {
 							return resultBoardno;
 						}
 					}// key값 비교 if
-
 				}
-
+				
 			} else {
 				UUID uuid = UUID.randomUUID(); // 랜덤 UID 생성
 
@@ -670,7 +674,11 @@ public class FileServiceImpl implements FileService {
 				compBoard.setComp_content("내용없음");
 
 			resultBoardno = compBoard.getComp_no();
-
+			
+			compBoardDao.updateboard(compBoard);
+			
+			System.out.println(compBoard);
+			
 			// 업로드하는 파일이 있다면
 			if (uploadFile != null) {
 				// 파일에 게시글 번호와 게시판 번호를 설정

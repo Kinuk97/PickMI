@@ -123,6 +123,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res.setComp_like( rs.getInt("comp_like") );
 				res.setComp_startdate( rs.getInt("comp_startdate"));
 				res.setComp_enddate( rs.getInt("comp_enddate"));
+				
 			}
 			
 			ps.executeUpdate();
@@ -211,6 +212,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				while(rs.next()) {
 					CompBoard compBoard = new CompBoard();
 
+//					compBoard.setRownum( rs.getInt("rnum"));
 					compBoard.setComp_no( rs.getInt("comp_no") );
 					compBoard.setUserno( rs.getInt("userno") );
 					compBoard.setComp_title( rs.getString("comp_title") );
@@ -453,6 +455,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps.setInt(5, compBoard.getComp_enddate());
 			ps.setString(6, compBoard.getComp_content());
 			ps.setInt(7, compBoard.getComp_no());
+			
+			ps.executeQuery();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
