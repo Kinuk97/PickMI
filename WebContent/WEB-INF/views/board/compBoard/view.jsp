@@ -31,6 +31,58 @@ $(document).ready(function(){
 
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#unlike").click( function(){
+		console.log("된다");
+		$("#unlike").hide();
+		$("#like").show();
+		$.ajax({
+			url: "/compBoard/like"
+			, type: "GET"
+			, data: {
+				prof_no : '${compBoard.comp_no}',
+				boardno : '${compBoard.comp_no}',
+				userno : '${compBoard.userno}',
+				postno : '${ 4 }'
+			}
+			, dataType : "json"
+			, success : like
+			, error : function() {
+				console.log("ajax fail")
+			}
+		})
+	})
+	
+		$("#like").click( function(){
+		console.log("된다");
+		$("#like").hide();
+		$("#unlike").show();
+		$.ajax({
+			url: "/compBoard/like"
+			, type: "GET"
+			, data: {
+				prof_no : '${compBoard.comp_no}',
+				boardno : '${compBoard.comp_no}',
+				userno : '${compBoard.userno}',
+				postno : '${ 4 }'
+			}
+			, dataType : "json"
+			, success : like
+			, error : function() {
+				console.log("ajax fail")
+			}
+		})
+	})
+
+function like(data) {
+		console.log("좋아요되랏")
+	$("#countLike").html(data.countLike)
+}
+	
+})
+</script>
 
 <h2 class="text-center"><strong>완성된 프로젝트</strong>&nbsp;&nbsp; <small>${compBoard.comp_no }</small></h2>
 <br>
@@ -56,7 +108,19 @@ $(document).ready(function(){
 
 			<tr>
 				<td>프로젝트 기간</td><td>${compBoard.comp_startdate } ~ ${compBoard.comp_enddate }</td>
-				<td>찜한수</td><td>${compBoard.comp_like }</td>
+				<td>찜받은수</td><td><span id="countLike">${ countLike }</span>
+					<c:if test="${ login }">
+						<c:if test="${ canLike }">
+							<button id="like" class="btn btn-default" style="padding: 3px;">LIKE</button>
+							<button id="unlike" style="display: none; padding:3px;" class="btn btn-default">UNLIKE</button>
+						</c:if>
+						
+						<c:if test="${ !canLike }">
+							<button id="like" style="display: none;" class="btn btn-default" style="padding: 3px;">LIKE</button>
+							<button id="unlike" class="btn btn-default" style="padding: 3px;">UNLIKE</button>
+						</c:if>
+					</c:if>
+				</td>
 			</tr>
 
 <!-- 			<tr> -->

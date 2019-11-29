@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.CompBoard;
+import dto.LikePost;
 import util.Paging;
 
 public interface CompBoardService {
@@ -51,5 +52,14 @@ public interface CompBoardService {
 	
 
 	public void delete(CompBoard compBoard);
+	
+	
+	public boolean checkLike(LikePost like);
+	
+	
+	public void like(LikePost like);
+	
+	
+	public int countLike(LikePost like);
 	
 }

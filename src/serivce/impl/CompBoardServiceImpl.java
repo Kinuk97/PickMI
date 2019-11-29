@@ -21,6 +21,7 @@ import dao.face.CompBoardDao;
 import dao.impl.CompBoardDaoImpl;
 import dto.CompBoard;
 import dto.Files;
+import dto.LikePost;
 import dto.ProfileBoard;
 import serivce.face.CompBoardService;
 import util.Paging;
@@ -121,6 +122,41 @@ public class CompBoardServiceImpl implements CompBoardService {
 		
 		compBoardDao.deleteboard(compBoard);
 		
+	}
+
+
+	@Override
+	public boolean checkLike(LikePost like) {
+		
+		int check = compBoardDao.checkCountUserByUserno(like);
+		
+		if (check == 0) {
+			return true; //전에 찜을 한 적 없으면 함.
+			
+		} else {
+			return false; //전에 찜을 한 적 있으면 안 함.
+		}
+		
+	}
+
+
+	@Override
+	public void like(LikePost like) {
+		
+		boolean check = checkLike(like);
+		
+		if (check) {
+			compBoardDao.insertLike(like);
+		} else {
+			compBoardDao.deleteLike(like);
+		}
+	}
+
+
+	@Override
+	public int countLike(LikePost like) {
+		
+		return compBoardDao.selectCountLike(like);
 	}
 
 

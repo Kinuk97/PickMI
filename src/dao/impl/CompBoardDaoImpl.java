@@ -11,6 +11,7 @@ import dao.face.CompBoardDao;
 import dbutil.DBConn;
 import dto.CompBoard;
 import dto.Files;
+import dto.LikePost;
 import util.Paging;
 
 public class CompBoardDaoImpl implements CompBoardDao {
@@ -473,5 +474,152 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 	}
 
+	@Override
+	public int checkCountUserByUserno(LikePost like) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT COUNT(*) FROM likepost ";
+		sql += "WHERE postno = 4 AND userno = ? AND boardno = ?";
+		
+		int check = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				check = rs.getInt(1);
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+				
+		
+		return check;
+	}
+
+	@Override
+	public void insertLike(LikePost like) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "INSERT INTO likepost(postno, userno, boardno)";
+		sql += " VALUES(4, ?, ?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void deleteLike(LikePost like) {
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "DELETT FROM likepost WHERE postno = 4 AND userno = ? AND boardno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public int selectCountLike(LikePost like) {
+		
+		String sql="";
+		sql += "SELECT count(userno) FROM likepost ";
+		sql += " WHERE postno = 1 AND boardno = ?";
+		
+		int likeno = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,  like.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				likeno = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return likeno;
+	}
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
