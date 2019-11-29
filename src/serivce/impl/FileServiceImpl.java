@@ -345,12 +345,12 @@ public class FileServiceImpl implements FileService {
 					uploadFile.setBoardno(freeBoard.getFree_no());
 					uploadFile.setPostno(3);
 				}
-			} catch (ClassCastException e) {
+			} catch (NullPointerException | ClassCastException e) {
 				// 세션에서 userno를 가져오지 못했을 때
+				resultBoardno =  -2;
 				if (uploadFile != null) {
 					// 업로드하는 파일이 있었다면 서버 디스크에 저장된 파일 삭제
 					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
-					resultBoardno =  -2;
 				}
 			}
 
