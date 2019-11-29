@@ -3,10 +3,35 @@ package dao.face;
 import java.util.List;
 
 import dto.Files;
+import dto.LikePost;
 import dto.ProfileBoard;
 import util.Paging;
 
 public interface ProfileBoardDao {
+	/**
+	 * 좋아요 지우기
+	 * @param like
+	 */
+	public void deleteLike(LikePost like);
+
+	/**
+	 * 좋아요 추가하기
+	 * @param like
+	 */
+	public void insertLike(LikePost like);
+	/**
+	 * 전에 찜을 한적이 있는지 확인하기
+	 * @param like
+	 * @return
+	 */
+	public int checkCountUserByUserno(LikePost like);
+	
+	/**
+	 * 찜 받은 갯수 가져오기
+	 * @param like
+	 * @return
+	 */
+	public int selectCountLike(LikePost like);
 	
 	/**
 	 * 유저 번호로 유저 이름 받아오기

@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$("#cmtBtn").on("click", function() {
-		$("form").prepend("<input type=\"text\" name='free_no' value='${board.free_no}'></input>");	
+		$("form").prepend("<input type=\"text\" name='free_no' value='${board.free_no}'></input>");		
 		$("form").submit();
 	});
 });
@@ -28,7 +28,7 @@ $(document).ready(function () {
 		</tr>
 
 		<tr>
-			<td colspan="4" style="height: 500px; background: #CCC;">${board.free_content }</td>
+			<td colspan="4" style="height: 500px;">${board.free_content }</td>
 		</tr>
 		<c:if test="${not empty file }">
 			<tr>
@@ -42,19 +42,18 @@ $(document).ready(function () {
 	
 	
 	<div class="row text-right">
-		<button class="btn btn-info" onclick="history.go(-1);">목록</button>
-			<button class="btn btn-warning" onclick="location.href='/mgr/freeboard/delete?free_no=${board.free_no}';">삭제</button>
+		<button class="btn btn-info" onclick="location.href='/freeboard/list';">목록</button>
+		<button class="btn btn-warning" onclick="location.href='/freeboard/delete?free_no=${board.free_no}';">삭제</button>
 	</div>
 	
 	<div class="row text-right">
 		<form action="/freeboard/comment/write" method="get">
-			<textarea class="form-control" style="resize: none; width: 94%; display: inline; float: left; margin: 10px 0; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="free_content" required="required"></textarea>
+			<textarea class="form-control" style="resize: none; width: 94%; display: inline; float: left; margin: 10px 0; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="reply" required="required"></textarea>
 			<button type="button" id="cmtBtn" class="btn" style="height: 54px; width: 5%; padding: 0; margin-left: 0px; float: left; border-top-left-radius: 0px; border-bottom-left-radius: 0px;">작성</button>
 		</form>	
 	</div>
 		
 </div>
-
 
 </body>
 </html>

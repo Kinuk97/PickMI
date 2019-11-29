@@ -34,7 +34,7 @@ $(document).ready(function() {
 						var caption = $("<div class='caption caption-profile'></div>");
 						
 						caption.append($("<h4></h4>").text(data[i].prof_no));
-						caption.append($("<h3></h3>").text(data[i].userno));
+						caption.append($("<p></p>").text(data[i].userno));
 						caption.append($("<p></p>").text(data[i].prof_interest));
 						caption.append($("<p></p>").text(data[i].prof_loc));
 						caption.append($("<p></p>").text(data[i].prof_job));
@@ -43,7 +43,7 @@ $(document).ready(function() {
 						caption.append($("<p class='text-right'></p>").text(data[i].prof_like +"❤"));
 						caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
 					
-						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profile/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
+						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profileBoard/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
 						$("#board").append(board);
 					}	
 					
@@ -156,10 +156,10 @@ a#top {
 <div id="board" class="container list-container">
 	<c:forEach items="${ list }" var="pro">
 			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="thumbnail" onclick="location.href='/profile/view?prof_no=${pro.prof_no }'">
+				<div class="thumbnail" onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
 					<div class="caption caption-profile">
 						<h4>${ pro.prof_no }</h4>
-						<h3>${ pro.userno }</h3>
+						<p>${ pro.userno }</p>
 						<p>${ pro.prof_interest }</p>
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>

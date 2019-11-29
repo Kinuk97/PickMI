@@ -42,6 +42,8 @@ $(document).ready(function() {
 			<tr>
 				<td class="info">프로젝트 제목</td>
 				<td colspan="3">${projectBoard.proj_title }</td>
+				<td class="info">직업</td>
+				<td>${projectBoard.proj_job }</td>
 			</tr>
 
 			<tr>
@@ -82,7 +84,6 @@ $(document).ready(function() {
 
 
 	<div class="box-footer">
-
 		<button id="btnDelete" class="btn btn-danger">삭제</button>
 		<button id="btnList" class="btn btn-primary">목록</button>
 	</div>
