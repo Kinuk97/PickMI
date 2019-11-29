@@ -26,7 +26,7 @@ public class MgrLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//로그인 ON
-		if (req.getSession().getAttribute("mgrlogin") != null ) {
+		if (req.getSession().getAttribute("mgrlogin") != null && (boolean)(req.getSession().getAttribute("mgrlogin")))  {
 		
 			resp.sendRedirect("/mgr/main");
 		} else {
@@ -66,7 +66,7 @@ public class MgrLoginController extends HttpServlet {
 			
 		} else { // 로그?�� ?��?��?��
 //			System.out.println("로그?�� ?��?��");
-			req.setAttribute("login", login); // ?���? ?�� ? 로그?�� ?��?��?��?�� ?��?��???��?
+//			req.setAttribute("login", login); // ?���? ?�� ? 로그?�� ?��?��?��?�� ?��?��???��?
 			req.getRequestDispatcher("/WEB-INF/views/mgr/mgrlogin.jsp")
 			.forward(req, resp);
 		}

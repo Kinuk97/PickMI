@@ -42,8 +42,8 @@ $(document).ready(function () {
 	
 	
 	<div class="row text-right">
-		<button class="btn btn-info" onclick="location.href='/freeboard/list';">목록</button>
-		<button class="btn btn-warning" onclick="location.href='/freeboard/delete?free_no=${board.free_no}';">삭제</button>
+		<button class="btn btn-info" onclick="location.href='/mgr/freelist';">목록</button>
+		<button class="btn btn-warning" onclick="location.href='/mgr/freeboard/delete?free_no=${board.free_no}';">삭제</button>
 	</div>
 	
 	<div class="row text-right">

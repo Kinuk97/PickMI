@@ -30,8 +30,8 @@ public class MgrFreeBoardDeleteController extends HttpServlet {
 		
 		FreeBoard boardno = freeboardService.getParam(req);
 		FreeBoard selectBoard = freeboardService.FreeBoardDetail(boardno);
-		System.out.println("boardno : " + boardno);
-		System.out.println("selectBoard : " + selectBoard);
+//		System.out.println("boardno : " + boardno);
+//		System.out.println("selectBoard : " + selectBoard);
 		
 		if (boardno.getFree_no() != 0) {
 			try {
