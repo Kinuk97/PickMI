@@ -26,33 +26,32 @@ public class MgrCompListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		// 관리자 로그인 됐을 경우
 		if (req.getSession().getAttribute("mgrlogin") != null) {
 			
-			//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
 			Paging paging = compBoardService.getPaging(req);
 			
-			// �??��?�� ?��?��미터 
 			paging.setSearch(req.getParameter("search"));
 			
 			//mgr main navTab에서 사용할 번호
-			req.setAttribute("boardno", 5);
+			req.setAttribute("boardno", 4);
 			
-			//Paging 객체�? model값으�? �??��
+			//Paging 객체 모델값으로 전달
 			req.setAttribute("paging", paging);
 //		System.out.println(paging);		
 			
 			
-			// ProfileBoard 게시�? 목록 조회
+			// ProfileBoard 게시물 목록 조회
 			List<CompBoard> list = compBoardService.getBoardList(paging);
 			
-			// list 객체�? model값으�? �??��
+			// list 객체를 모델값으로 전달
 			req.setAttribute("list", list);
-			
-			
+						
 			req.getRequestDispatcher("/WEB-INF/views/mgr/comp/complist.jsp")
 			.forward(req, resp);
+			
 		} else {
-			// 에러페이지
+			// 관리자 로그인 안됐을 경우
 			req.getRequestDispatcher("/WEB-INF/views/mgr/layouts/mustlogin.jsp")
 			.forward(req, resp);
 		}

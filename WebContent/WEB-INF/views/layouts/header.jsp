@@ -157,6 +157,13 @@ hr {
 	height: 500px;
 }
 
+a#top {
+    position: fixed;
+    right: 5%;
+    bottom: 50px;
+    z-index: 999;
+    font-size: 20px;
+}
 
 
 </style>
@@ -255,9 +262,10 @@ hr {
 					<c:choose>
 						<c:when test="${not login }">
 							<li><a href="/login">로그인</a></li>
+							<li><a href="/insert">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<ul>
+							<ul style="list-style: none;">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 											data-toggle="dropdown"><img src="/resources/pickmiBlack.jpg" class="img-circle" style="width: 50px; height: 50px;"></a>
 									<ul class="dropdown-menu">
@@ -266,10 +274,10 @@ hr {
 										<li><a href="#"><i class="icon-arrow-left"></i>추가해주세요~</a></li>
 										<li><a href="/logout"><i class="icon-arrow-right"></i>로그아웃</a></li>
 									</ul>
-								</li>
-							</ul>
-						</c:otherwise>
-				</c:choose>
+									</li>
+								</ul>
+							</c:otherwise>
+						</c:choose>
 					</li>
 				</ul>
 			</div>

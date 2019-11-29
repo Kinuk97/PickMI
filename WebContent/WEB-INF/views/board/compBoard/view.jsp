@@ -12,20 +12,20 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	//목록 버튼 동작
+// 	목록 버튼 동작
 	$("#btnList").click(function() {
 		$(location).attr("href", "/compBoard/list");
 	});
 	
-	//수정 버튼 동작
-// 	$("#btnUpdate").click(function(){
-// 		$(location).attr("href", "/compBoard/update?comp_no=${compBoard.comp_no }");
-// 	});
+// 	수정 버튼 동작
+	$("#btnUpdate").click(function(){
+		$(location).attr("href", "/compBoard/update?comp_no=${compBoard.comp_no }");
+	});
 	
-	//삭제 버튼 동작
-// 	$("#btnDelete").click(function(){
-// 		 $(location).attr("href", "/compBoard/delete?comp_no=${compBoard.comp_no }");
-// 	});
+// 	삭제 버튼 동작
+	$("#btnDelete").click(function(){
+		 $(location).attr("href", "/compBoard/delete?comp_no=${compBoard.comp_no }");
+	});
 	
 });
 
@@ -68,23 +68,18 @@ $(document).ready(function(){
 			</tr>
 
 				<tr>
-					<td colspan="4">첨부파일
-					<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a>
-					</td>
+					<td>첨부파일<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a></td>
+<!-- 					<td>찜하기<button class="btn btn-default text-center" >찜하기</button></td><td></td> -->
 				</tr>
 			
 		</table>
+		
+		<div class="row text-center">
+			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
+			<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+		</div>
 	
 </div>
-
-
-
-
-
-
-
-
-
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

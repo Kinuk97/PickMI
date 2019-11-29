@@ -53,4 +53,9 @@ public interface CompBoardDao {
 	
 	public void insertFile(Files files);
 
+	
+	public void deleteboard(CompBoard compBoard);
+	
+	
+	public void updateboard(CompBoard compBoard);
 }

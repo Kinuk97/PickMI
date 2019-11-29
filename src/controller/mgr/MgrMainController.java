@@ -21,7 +21,7 @@ public class MgrMainController extends HttpServlet {
 		// 로그인 안됐을 경우
 		if (req.getSession().getAttribute("mgrlogin") != null ) {
 		
-			//mgrmain.jsp navTab에서 사용할 번호
+			//menuTab 모델값
 			req.setAttribute("boardno", 1);
 			
 			req.getRequestDispatcher("/WEB-INF/views/mgr/mgrmain.jsp")

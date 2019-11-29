@@ -458,12 +458,12 @@ public class FileServiceImpl implements FileService {
 					uploadFile.setBoardno(freeBoard.getFree_no());
 					uploadFile.setPostno(3);
 				}
-			} catch (ClassCastException e) {
+			} catch (NullPointerException | ClassCastException e) {
 				// 세션에서 userno를 가져오지 못했을 때
+				resultBoardno =  -2;
 				if (uploadFile != null) {
 					// 업로드하는 파일이 있었다면 서버 디스크에 저장된 파일 삭제
 					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
-					resultBoardno =  -2;
 				}
 			}
 
@@ -530,6 +530,7 @@ public class FileServiceImpl implements FileService {
 
 		FreeBoard freeBoard = null;
 		ProjectBoard projectBoard = null;
+		CompBoard compBoard = null;
 		Files uploadFile = null;
 		
 		
@@ -591,6 +592,7 @@ public class FileServiceImpl implements FileService {
 
 		// 모든 요청 정보 처리
 		while (iter.hasNext()) {
+
 			FileItem item = iter.next();
 
 			// 1) 빈 파일 처리
@@ -598,6 +600,7 @@ public class FileServiceImpl implements FileService {
 				continue;
 
 			if (item.isFormField()) {
+
 				String key = item.getFieldName();
 				if (postno == 1) {
 					// 프로필 게시판
@@ -722,9 +725,63 @@ public class FileServiceImpl implements FileService {
 					}
 				} else if (postno == 4) {
 					// 완성된 게시판
+					if (compBoard == null) {
+						compBoard = new CompBoard();
+					}
+					
+					if ("comp_title".equals(key)) {
+						try {
+							compBoard.setComp_title(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("comp_name".equals(key)) {
+						try {
+							compBoard.setComp_name(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("comp_member".equals(key)) {
+						try {
+							compBoard.setComp_member(Integer.parseInt(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
 
+					} else if ("comp_startdate".equals(key)) {
+						try {
+							compBoard.setComp_startdate(Integer.parseInt(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+
+					} else if ("comp_enddate".equals(key)) {
+						try {
+							compBoard.setComp_enddate(Integer.parseInt(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+
+					} else if ("comp_content".equals(key)) {
+						try {
+							compBoard.setComp_content(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+						
+					} else if ("comp_no".equals(key)) {
+						try {
+							compBoard.setComp_no(Integer.parseInt(item.getString()));
+							
+						} catch (NumberFormatException e) {
+							e.printStackTrace();
+							// 게시글 번호를 가져오지 못했다면 리턴
+							resultBoardno =  -2;
+							return resultBoardno;
+						}
+					}// key값 비교 if
 				}
-
+				
 			} else {
 				UUID uuid = UUID.randomUUID(); // 랜덤 UID 생성
 
@@ -822,6 +879,36 @@ public class FileServiceImpl implements FileService {
 
 		} else if (postno == 4) {
 			// 완성된 게시판
+			// 게시글 내용이 전부 비어있다면
+			if (compBoard == null) {
+				if (uploadFile != null) {
+					// 업로드하는 파일만 존재한다면 만들어진 서버 디스크에 저장된 파일 삭제
+					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
+					return -4;
+				}
+				return -3;
+			}
+
+			// 제목이 비어있는 경우 제목없음
+			if (compBoard.getComp_title() == null || "".equals(compBoard.getComp_title().trim()))
+				compBoard.setComp_title("제목없음");
+
+			// 내용이 비어있는 경우 내용없음
+			if (compBoard.getComp_content() == null || "".equals(compBoard.getComp_content().trim()))
+				compBoard.setComp_content("내용없음");
+
+			resultBoardno = compBoard.getComp_no();
+			
+			compBoardDao.updateboard(compBoard);
+			
+			System.out.println(compBoard);
+			
+			// 업로드하는 파일이 있다면
+			if (uploadFile != null) {
+				// 파일에 게시글 번호와 게시판 번호를 설정
+				uploadFile.setBoardno(compBoard.getComp_no());
+				uploadFile.setPostno(3);
+			}
 
 		}
 

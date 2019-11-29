@@ -22,7 +22,6 @@ public class MgrCompBoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private CompBoardService compBoardService = new CompBoardServiceImpl();
-	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +41,9 @@ public class MgrCompBoardViewController extends HttpServlet {
 			CompBoard compBoardView = compBoardService.compBoardDetail(compBoard);
 			req.setAttribute("compBoard", compBoardView);
 //		System.out.println("compBoardView : " + compBoardView);
+			
+			//menuTab 모델값
+			req.setAttribute("boardno", 4);
 			
 			req.getRequestDispatcher("/WEB-INF/views/mgr/comp/compview.jsp").forward(req, resp);
 

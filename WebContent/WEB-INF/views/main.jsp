@@ -41,7 +41,7 @@
 <!--       <img src="/resources/gray.png" alt="..."> -->
       <div class="carousel-caption">
 		<h3>프로젝트와 일정관리를 해보세요</h3>
-        <h3>하기싫은 거 나만 그런 거 아니죠?</h3>
+        <h3>편리하게 팀원들과 일정을 공유할 수 있습니다.</h3>
         <br>
         <br>
         <br>

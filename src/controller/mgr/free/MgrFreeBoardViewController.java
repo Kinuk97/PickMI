@@ -34,6 +34,9 @@ public class MgrFreeBoardViewController extends HttpServlet {
 		if (freeBoard != null) {
 			req.setAttribute("board", freeBoard);
 			//		System.out.println("자유게시판: " + freeBoard);
+			
+			//menuTab 모델값
+			req.setAttribute("boardno", 5);
 			req.getRequestDispatcher("/WEB-INF/views/mgr/free/freeview.jsp").forward(req, resp);
 			} else {
 				resp.sendRedirect("/mgr/main");

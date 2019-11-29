@@ -35,11 +35,20 @@ $(document).ready(function(){
 
 </script>
 
+<style type="text/css">
+
+table th {
+    width: auto !important;
+}
+
+</style>
 </head>
 <body>
 
+
 <div class="container" >
-	<table class="table table-condensed">
+	<div class="table-responsive">
+	<table class="table table-condensed table-hover">
 		<tr class="info">
 			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
 			<th style="width: 5%">글번호</th>
@@ -53,10 +62,11 @@ $(document).ready(function(){
 			<td>${pjboard.proj_no }</td>
 			<td>${pjboard.userno }</td>
 			<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no }">${pjboard.proj_title }</a></td>
-			<td>${pjboard.proj_name }</td>
+			<td>${pjboard.proj_time }</td>
 		</tr>	
 		</c:forEach>
 	</table>
+	</div>
 
 	<div class="src" style="text-align: center;">
 		<form action="/mgr/projectlist" method="get">
@@ -64,7 +74,7 @@ $(document).ready(function(){
 			<button id="btnSearch" class="btn btn-primary">검색</button>
 		</form>
 	</div>
-
+</div>
 <jsp:include page = "/WEB-INF/views/mgr/paging/projectPaging.jsp" />
 
 </body>

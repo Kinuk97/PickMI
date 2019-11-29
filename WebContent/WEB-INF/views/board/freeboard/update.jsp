@@ -21,7 +21,7 @@ $(document).ready(function() {
 	}
 	
 	$("#write").click(function() {
-		$("#updateForm").prepend("<input type=\"text\" name='free_no' value='${board.free_no}'></input>");
+		$("#updateForm").prepend("<input type=\"hidden\" name='free_no' value='${board.free_no}'></input>");
 		
 		$("#updateForm").submit();
 	});
@@ -51,27 +51,27 @@ $(document).ready(function() {
     		</div>
   		</div>
 	  	<div class="form-group">
-		  	<textarea id="free_content" name="free_content">${board.free_title }</textarea>
+		  	<textarea id="free_content" name="free_content">${board.free_content }</textarea>
 		</div>
 	  	<script>
 			CKEDITOR.replace( 'free_content', {
 				height : "500px"
 			} );
 	    </script>
-	    <div class="text-left">
-	    	<input class="btn btn-info" type="file" name="uploadFile">
-	    	<p class="help-block">파일은 10MB까지만 업로드 가능합니다.
-	    	<c:if test="${not empty file }">
-		    	<br>원본 파일 : ${file.originName } (${file.fileSize })
-	    	</c:if>
-	    	</p>
-	    </div>
-	 	<div class="form-group">
-	    	<div class="col-sm-offset-2 col-sm-8 text-center">
-				<button class="btn btn-default" type="button" id="write">작성완료</button>
-				<button class="btn btn-default" type="button" id="cancel">취소</button>
+	    <div class="row">
+	    	<div class="col-lg-6 text-left">
+		    	<input class="btn btn-info" type="file" name="uploadFile">
+		    	<p class="help-block">파일은 10MB까지만 업로드 가능합니다.
+		    	<c:if test="${not empty file }">
+			    	<br>원본 파일 : ${file.originName } (${file.fileSize })
+		    	</c:if>
+		    	</p>
 	    	</div>
-	  	</div>
+	    	<div class="col-lg-6 text-right">
+				<button class="btn btn-info" type="button" id="write">수정하기</button>
+				<button class="btn btn-error" type="button" id="cancel">취소</button>
+	    	</div>
+	    </div>
 	</form>
 </div>
 
