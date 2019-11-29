@@ -41,7 +41,7 @@ $(document).ready(function() {
 
 <style type="text/css">
 #menubar{
-	margin-top:50px;
+	margin-top:9px;
 	margin-bottom:65px;
 }
 

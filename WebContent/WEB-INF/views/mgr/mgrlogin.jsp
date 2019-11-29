@@ -58,7 +58,7 @@ font-size:0.7666666667em;
 		  </div>
 		  <button type="submit" class="btn btn-default">Sign in</button>
 		</form>
-	<hr>	
+	<hr width=30% size=3 color=#44444A align=center>	
 		
 	</div>
 	
