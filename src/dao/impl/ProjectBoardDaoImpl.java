@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,36 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 	public static ProjectBoardDao getInstance() {
 
 		return Singleton.instance;
+	}
+	
+	@Override
+	public int getNextBoardno() {
+		String sql = "SELECT proj_no_seq.nextval FROM dual";
+
+		int result = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 
 	@Override
@@ -181,5 +212,51 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		}
 		return projectBoard;
 	}
+
+	@Override
+	public void insert(ProjectBoard projectBoard) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql +="INSERT INTO projBoard(proj_no, userno, proj_title, proj_name, ";
+		sql +="		 				 proj_content, proj_member, proj_time, proj_loc, proj_job, ";
+		sql +="						 proj_career, proj_sdate, proj_ddate, proj_rec_date, proj_progress, proj_like, proj_apply )";
+		sql +=" VALUES(?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, 0, 0)";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, projectBoard.getProj_no());
+			ps.setInt(2, projectBoard.getUserno());
+			ps.setString(3, projectBoard.getProj_title());
+			ps.setString(4, projectBoard.getProj_name());
+			ps.setString(5, projectBoard.getProj_content());
+			ps.setInt(6, projectBoard.getProj_member());
+			ps.setString(7, projectBoard.getProj_loc());
+			ps.setString(8, projectBoard.getProj_job());
+			ps.setString(9, projectBoard.getProj_career());
+			ps.setDate(10, (Date) projectBoard.getProj_sdate());
+			ps.setDate(11, (Date) projectBoard.getProj_ddate());
+			ps.setDate(12, (Date) projectBoard.getProj_rec_date());
+			ps.setString(13, projectBoard.getProj_progress());
+
+			ps.executeQuery();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		}
+		
+	}
+
 
 }

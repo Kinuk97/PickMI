@@ -1,7 +1,6 @@
 package serivce.impl;
 
 import java.io.BufferedInputStream;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,20 +27,24 @@ import dao.face.CompBoardDao;
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
 import dao.face.ProfileBoardDao;
+import dao.face.ProjectBoardDao;
 import dao.impl.CompBoardDaoImpl;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
+import dao.impl.ProjectBoardDaoImpl;
 import dto.CompBoard;
 import dto.Files;
 import dto.FreeBoard;
 import dto.ProfileBoard;
+import dto.ProjectBoard;
 import serivce.face.FileService;
 
 public class FileServiceImpl implements FileService {
 	private FreeBoardDao freeBoardDao = FreeBoardDaoImpl.getInstance();
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
+	private ProjectBoardDao projectBoardDao = ProjectBoardDaoImpl.getInstance();
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
 
@@ -73,6 +76,7 @@ public class FileServiceImpl implements FileService {
 		CompBoard compBoard = null;
 		FreeBoard freeBoard = null;
 		ProfileBoard profile = null;
+		ProjectBoard projectBoard = null;
 		Files uploadFile = null;
 		
 		int resultBoardno = 0;
@@ -190,6 +194,76 @@ public class FileServiceImpl implements FileService {
 
 				} else if (postno == 2) {
 					// 프로젝트 게시판
+					if(projectBoard == null)
+						projectBoard = new ProjectBoard();
+					
+					if ("proj_title".equals(key)) {
+						try {
+							projectBoard.setProj_title(item.getString("UTF-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_name".equals(key)) {
+						try {
+							projectBoard.setProj_name(item.getString("UTF-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_member".equals(key)) {
+						try {
+							projectBoard.setProj_member(Integer.parseInt(item.getString("UTF-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_job".equals(key)) {
+						try {
+							projectBoard.setProj_job(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_progress".equals(key)) {
+						try {
+							projectBoard.setProj_progress(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_loc".equals(key)) {
+						try {
+							projectBoard.setProj_loc(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_career".equals(key)) {
+						try {
+							projectBoard.setProj_career(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_content".equals(key)) {
+						try {
+							projectBoard.setProj_content(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_sdate".equals(key)) {
+						try {
+							projectBoard.setProj_sdate(java.sql.Date.valueOf(item.getString("utf-8")));						
+							} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_ddate".equals(key)) {
+						try {
+							projectBoard.setProj_ddate(java.sql.Date.valueOf(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_rec_date".equals(key)) {
+						try {
+							projectBoard.setProj_rec_date(java.sql.Date.valueOf(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					}
 
 				} else if (postno == 3) {
 					// 자유게시판이라면...
@@ -312,6 +386,46 @@ public class FileServiceImpl implements FileService {
 
 		} else if (postno == 2) {
 			// 프로젝트 게시판
+			
+			// 게시글 내용이 전부 비어있다면
+			if (projectBoard == null) {
+				projectBoard = new ProjectBoard();
+			}
+			// 자유게시판
+
+			// 제목이 비어있는 경우 제목없음
+			if (projectBoard.getProj_title() == null || "".equals(projectBoard.getProj_title().trim()))
+				projectBoard.setProj_title("제목없음");
+
+			// 내용이 비어있는 경우 내용없음
+			if (projectBoard.getProj_content() == null || "".equals(projectBoard.getProj_content().trim()))
+				projectBoard.setProj_content("내용없음");
+
+			try {
+				// 세션에서 userno를 가져오는데 없다면 catch블록으로
+				projectBoard.setUserno((Integer) req.getSession().getAttribute("userno"));
+				// nextval 가져오기
+				projectBoard.setProj_no(projectBoardDao.getNextBoardno());
+				// 게시글 작성
+				projectBoardDao.insert(projectBoard);
+				resultBoardno = projectBoard.getProj_no();
+
+
+
+				// 업로드하는 파일이 있다면
+				if (uploadFile != null) {
+					// 파일에 게시글 번호와 게시판 번호를 설정
+					uploadFile.setBoardno(projectBoard.getProj_no());
+					uploadFile.setPostno(2);
+				}
+			} catch (ClassCastException e) {
+				// 세션에서 userno를 가져오지 못했을 때
+				if (uploadFile != null) {
+					// 업로드하는 파일이 있었다면 서버 디스크에 저장된 파일 삭제
+					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
+					resultBoardno =  -2;
+				}
+			}
 
 		} else if (postno == 3) {
 			// 게시글 내용이 전부 비어있다면
@@ -345,12 +459,12 @@ public class FileServiceImpl implements FileService {
 					uploadFile.setBoardno(freeBoard.getFree_no());
 					uploadFile.setPostno(3);
 				}
-			} catch (ClassCastException e) {
+			} catch (NullPointerException | ClassCastException e) {
 				// 세션에서 userno를 가져오지 못했을 때
+				resultBoardno =  -2;
 				if (uploadFile != null) {
 					// 업로드하는 파일이 있었다면 서버 디스크에 저장된 파일 삭제
 					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
-					resultBoardno =  -2;
 				}
 			}
 
@@ -416,8 +530,10 @@ public class FileServiceImpl implements FileService {
 		}
 
 		FreeBoard freeBoard = null;
+		ProjectBoard projectBoard = null;
 		CompBoard compBoard = null;
 		Files uploadFile = null;
+		
 		
 
 		// 1-2 여기 이후는 multipart/form-data로 전송된 상황
@@ -477,6 +593,7 @@ public class FileServiceImpl implements FileService {
 
 		// 모든 요청 정보 처리
 		while (iter.hasNext()) {
+
 			FileItem item = iter.next();
 
 			// 1) 빈 파일 처리
@@ -484,12 +601,92 @@ public class FileServiceImpl implements FileService {
 				continue;
 
 			if (item.isFormField()) {
+
 				String key = item.getFieldName();
 				if (postno == 1) {
 					// 프로필 게시판
 
 				} else if (postno == 2) {
 					// 프로젝트 게시판
+					if (projectBoard == null)
+						projectBoard = new ProjectBoard();
+
+					if ("proj_title".equals(key)) {
+						try {
+							projectBoard.setProj_title(item.getString("UTF-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_name".equals(key)) {
+						try {
+							projectBoard.setProj_name(item.getString("UTF-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_member".equals(key)) {
+						try {
+							projectBoard.setProj_member(Integer.parseInt(item.getString("UTF-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_job".equals(key)) {
+						try {
+							projectBoard.setProj_job(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_progress".equals(key)) {
+						try {
+							projectBoard.setProj_progress(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_loc".equals(key)) {
+						try {
+							projectBoard.setProj_loc(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_career".equals(key)) {
+						try {
+							projectBoard.setProj_career(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_content".equals(key)) {
+						try {
+							projectBoard.setProj_content(item.getString("utf-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_sdate".equals(key)) {
+						try {
+							projectBoard.setProj_sdate(java.sql.Date.valueOf(item.getString("utf-8")));						
+							} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_ddate".equals(key)) {
+						try {
+							projectBoard.setProj_ddate(java.sql.Date.valueOf(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_rec_date".equals(key)) {
+						try {
+							projectBoard.setProj_rec_date(java.sql.Date.valueOf(item.getString("utf-8")));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else if ("proj_no".equals(key)) {
+						try {
+							projectBoard.setProj_no(Integer.parseInt(item.getString()));
+						} catch (NumberFormatException e) {
+							e.printStackTrace();
+							// 게시글 번호를 가져오지 못했다면 리턴
+							resultBoardno =  -2;
+							return resultBoardno;
+						}
+					}
 
 				} else if (postno == 3) {
 					// 자유게시판이라면...
@@ -530,7 +727,9 @@ public class FileServiceImpl implements FileService {
 					}
 				} else if (postno == 4) {
 					// 완성된 게시판
-					if (compBoard == null) compBoard = new CompBoard();
+					if (compBoard == null) {
+						compBoard = new CompBoard();
+					}
 					
 					if ("comp_title".equals(key)) {
 						try {
@@ -575,6 +774,7 @@ public class FileServiceImpl implements FileService {
 					} else if ("comp_no".equals(key)) {
 						try {
 							compBoard.setComp_no(Integer.parseInt(item.getString()));
+							
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 							// 게시글 번호를 가져오지 못했다면 리턴
@@ -582,9 +782,8 @@ public class FileServiceImpl implements FileService {
 							return resultBoardno;
 						}
 					}// key값 비교 if
-
 				}
-
+				
 			} else {
 				UUID uuid = UUID.randomUUID(); // 랜덤 UID 생성
 
@@ -614,6 +813,37 @@ public class FileServiceImpl implements FileService {
 
 		} else if (postno == 2) {
 			// 프로젝트 게시판
+			
+//			// 게시글 내용이 전부 비어있다면
+//			if (projectBoard == null) {
+//				if (uploadFile != null) {
+//					// 업로드하는 파일만 존재한다면 만들어진 서버 디스크에 저장된 파일 삭제
+//					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
+//					return -4;
+//				}
+//				return -3;
+//			}
+//			
+//			// 제목이 비어있는 경우 제목없음
+//			if (projectBoard.getProj_title() == null || "".equals(projectBoard.getProj_title().trim()))
+//				projectBoard.setProj_title("제목없음");
+//
+//			// 내용이 비어있는 경우 내용없음
+//			if (projectBoard.getProj_content() == null || "".equals(projectBoard.getProj_content().trim()))
+//				projectBoard.setProj_content("내용없음");
+//
+//			if (freeBoardDao.updateBoard(projectBoard) != 1) {
+//				resultBoardno = -5;
+//			}
+//
+//			resultBoardno = projectBoard.getProj_no();
+//
+//			// 업로드하는 파일이 있다면
+//			if (uploadFile != null) {
+//				// 파일에 게시글 번호와 게시판 번호를 설정
+//				uploadFile.setBoardno(freeBoard.getFree_no());
+//				uploadFile.setPostno(3);
+//			}
 
 		} else if (postno == 3) {
 			// 자유게시판
@@ -670,7 +900,11 @@ public class FileServiceImpl implements FileService {
 				compBoard.setComp_content("내용없음");
 
 			resultBoardno = compBoard.getComp_no();
-
+			
+			compBoardDao.updateboard(compBoard);
+			
+			System.out.println(compBoard);
+			
 			// 업로드하는 파일이 있다면
 			if (uploadFile != null) {
 				// 파일에 게시글 번호와 게시판 번호를 설정

@@ -39,6 +39,7 @@ public class CompBoardModifyController extends HttpServlet {
 			req.setAttribute("compBoard", compBoard);
 			req.getRequestDispatcher("/WEB-INF/views/board/compBoard/update.jsp").forward(req, resp);
 			
+			
 		} else {
 			resp.sendRedirect("/compBoard/list");
 		}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dto.CompBoard;
 import dto.Files;
+import dto.LikePost;
 import util.Paging;
 
 public interface CompBoardDao {
@@ -58,4 +59,16 @@ public interface CompBoardDao {
 	
 	
 	public void updateboard(CompBoard compBoard);
+	
+	
+	public int checkCountUserByUserno(LikePost like);
+	
+	
+	public void insertLike(LikePost like);
+
+	
+	public void deleteLike(LikePost like);
+	
+	
+	public int selectCountLike(LikePost like);
 }

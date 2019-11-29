@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CompBoard {
 	
+//	private int rownum;
 	private int comp_no;
 	private int categoryno;
 	private int userno;
@@ -18,13 +19,14 @@ public class CompBoard {
 	private int comp_startdate;
 	private int comp_enddate;
 	
+
 	@Override
 	public String toString() {
-		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", userno=" + userno + ", comp_title="
-				+ comp_title + ", comp_name=" + comp_name + ", comp_content=" + comp_content + ", comp_member="
-				+ comp_member + ", comp_date=" + comp_date + ", comp_view=" + comp_view + ", comp_reply=" + comp_reply
-				+ ", comp_like=" + comp_like + ", comp_startdate=" + comp_startdate + ", comp_enddate=" + comp_enddate
-				+ "]";
+		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", userno="
+				+ userno + ", comp_title=" + comp_title + ", comp_name=" + comp_name + ", comp_content=" + comp_content
+				+ ", comp_member=" + comp_member + ", comp_date=" + comp_date + ", comp_view=" + comp_view
+				+ ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + ", comp_startdate=" + comp_startdate
+				+ ", comp_enddate=" + comp_enddate + "]";
 	}
 
 	public int getComp_no() {

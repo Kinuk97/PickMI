@@ -156,7 +156,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 			if (paging.getSearch() != null) {
 				if (paging.getSearchno() == 2) {
 					// 내용으로 검색할 경우
-					System.out.println("test");
 					sql += " AND free_content LIKE '%' || ? || '%'";
 				} else if (paging.getSearchno() == 3) {
 					// 제목 & 내용으로 검색할 경우
@@ -279,7 +278,6 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
-
 		return result;
 	}
 

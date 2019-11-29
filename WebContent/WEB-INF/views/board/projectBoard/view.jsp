@@ -40,6 +40,8 @@ $(document).ready(function() {
 			<tr>
 				<td class="info">프로젝트 번호</td>
 				<td colspan="3">${projectBoard.proj_no }</td>
+				<td class="info">진행상황</td>
+				<td>${projectBoard.proj_progress }</td>
 			</tr>
 
 			<tr>
@@ -75,14 +77,18 @@ $(document).ready(function() {
 				<td class="info">모집기간</td>
 				<td>${projectBoard.proj_rec_date }</td>
 			</tr>
+			
+			<tr>
+				<td colspan="6" style="height: 500px;">${projectBoard.proj_content }</td>
+			</tr>
 
+			<tr>
+				<td colspan="6">첨부파일 <a	href="/file/download?fileno=${files.fileno}">${files.originName }</a>
+				</td>
+			</tr>
 
 		</table>
-
-		<div class="form-group">
-			<label>내용</label> <input type="text" class="form-control"
-				readonly="readonly" style="height: 300px;" value="${projectBoard.proj_content }"/>
-		</div>
+		
 	</div>
 
 

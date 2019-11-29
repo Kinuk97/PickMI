@@ -27,7 +27,24 @@ $(document).ready(function () {
 	
 	<table class="table table-bordered">
 		<tr>
-			<td class="info">제목</td><td>${board.free_title }</td>
+			<td class="info">제목</td>
+			<td>
+			<c:choose>
+				<c:when test="${board.categoryno == 1}">
+					[아이디어]
+				</c:when>
+				<c:when test="${board.categoryno == 2}">
+					[정보]
+				</c:when>
+				<c:when test="${board.categoryno == 3}">
+					[공모전]
+				</c:when>
+				<c:otherwise>
+					[기타]
+				</c:otherwise>
+			</c:choose>
+				${board.free_title }
+			</td>
 			<td class="info">작성자</td><td>${board.userno }</td>
 		</tr>
 		<tr>

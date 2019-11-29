@@ -4,10 +4,31 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.LikePost;
 import dto.ProfileBoard;
 import util.Paging;
 
 public interface ProfileBoardService {
+	
+	/**
+	 * 좋아요를 누를때마다 숫자 증가
+	 * @param like
+	 */
+	public void like(LikePost like);
+	
+	/**
+	 * 찜을 한 적이 있는지 확인하기
+	 * @param like
+	 * @return
+	 */
+	public boolean checkLike(LikePost like);
+	
+	/**
+	 * 찜 받은 갯수 가져오기
+	 * @param like
+	 * @return
+	 */
+	public int countLike(LikePost like);
 	
 	/**
 	 * 유저 번호로 유저 이름 가져오기

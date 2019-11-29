@@ -181,10 +181,10 @@
 	</article>
 	
 
-<!-- 경고 모달창 -->
+<!--모달창 -->
             <div class="modal fade" id="defaultModal">
                <div class="modal-dialog">
-                    <div class="modal-content panel-danger">
+                    <div class="modal-content ">
                         <div class="modal-header panel-heading">
                             <h4 class="modal-title">알림</h4>
                         </div>
@@ -198,7 +198,7 @@
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
        
-            <!--// 경고 모달창 -->
+            <!-- 모달창 -->
 
 
 </body>

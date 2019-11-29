@@ -24,6 +24,7 @@ $(document).ready(function() {
 	<h1>게시글 수정</h1>
 	
 	<form class="form-horizontal" action="<%=response.encodeUrl("/compBoard/update") %>" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="comp_no" value="${compBoard.comp_no }" />
   		<div class="form-group">
     		<label for="comp_title" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 10px; text-align: center;">프로젝트 이름</label>
@@ -67,10 +68,10 @@ $(document).ready(function() {
 		    
 		<div class="form-group text-left" style="margin-top: 5px;">
 		
-			 <input type="file" id="uploadfile" name="uploadfile">
+			 <input type="file" id="uploadfile" name="uploadfile" class="btn btn-default">
              <p class="help-block">파일은 10MB까지만 업로드 가능합니다.
-             	<c:if test="${not empty file }">
-             		<br>원본 파일 : ${file.originName } (${file.fileSize })
+             	<c:if test="${not empty files }">
+             		<br>원본 파일 : ${files.originName } (${files.fileSize })
 				</c:if>
 				</p>
 		</div> 
