@@ -68,10 +68,10 @@ $(document).ready(function() {
 		    
 		<div class="form-group text-left" style="margin-top: 5px;">
 		
-			 <input type="file" id="uploadfile" name="uploadfile">
+			 <input type="file" id="uploadfile" name="uploadfile" class="btn btn-default">
              <p class="help-block">파일은 10MB까지만 업로드 가능합니다.
-             	<c:if test="${not empty file }">
-             		<br>원본 파일 : ${file.originName } (${file.fileSize })
+             	<c:if test="${not empty files }">
+             		<br>원본 파일 : ${files.originName } (${files.fileSize })
 				</c:if>
 				</p>
 		</div> 

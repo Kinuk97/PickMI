@@ -23,7 +23,7 @@ function compLoadList(){
 				var caption = $("<div class='caption caption-comp' onclick=\"location.href='/compBoard/view?comp_no=" + data[i].comp_no + "'\"></div>");
 				
 				//게시글 제목
-				caption.append($("<h4 class='overtext'></h4>").text(data[i].comp_no  + ". " + data[i].comp_title));
+				caption.append($("<h4 class='overtext'></h4>").text("프로젝트 명 : " + data[i].comp_title));
 				
 				//팀 이름
 				caption.append($("<div class='comp_name overtext'></div>").text("팀 이름 : " + data[i].comp_name));
@@ -114,7 +114,7 @@ select {
 			</div>
 			
 				<div class="input-group" style="width: 20%; float: left;">
-					<input type="text" class="form-control" name="search" placeholder="Search for...">
+					<input type="text" class="form-control" name="search" placeholder="검색어를 입력해주세요:-)">
 					<span class="input-group-btn">
 					<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
 					</span>
@@ -146,7 +146,7 @@ select {
 		</c:choose>
 	</div>
 	
-	<br>
+	<hr>
 	<a id="top" href="#">TOP👆</a>
 	<!-- 상위 3개 -->
 <%-- <c:forEach items="${compList }" var="compList"> --%>

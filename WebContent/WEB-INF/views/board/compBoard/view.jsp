@@ -84,7 +84,7 @@ function like(data) {
 })
 </script>
 
-<h2 class="text-center"><strong>완성된 프로젝트</strong>&nbsp;&nbsp; <small>${compBoard.comp_no }</small></h2>
+<h2 class="text-center"><strong>완성된 프로젝트</strong>&nbsp;&nbsp;</h2>
 <br>
 
 <div class="container">
@@ -131,12 +131,12 @@ function like(data) {
 				<td colspan="4" style="height: 500px;">${compBoard.comp_content }</td>
 			</tr>
 
-				<tr>
-					<td>첨부파일<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a></td>
+				
 <!-- 					<td>찜하기<button class="btn btn-default text-center" >찜하기</button></td><td></td> -->
-				</tr>
+				
 			
 		</table>
+		첨부파일<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a>
 		
 		<div class="row text-center">
 			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>

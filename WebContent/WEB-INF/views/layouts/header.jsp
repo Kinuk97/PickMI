@@ -165,6 +165,30 @@ a#top {
     font-size: 20px;
 }
 
+.badge {
+    display: inline;
+    min-width: 10px;
+    padding: 4px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #325adc;
+    border-radius: 10px;
+   	float: right;
+}
+
+#messagebadge {
+	margin-top: 13px;
+}
+
+#badge {
+	margin-top: 1px;
+	margin-left:5px;
+}
 
 </style>
 </head>
@@ -210,23 +234,24 @@ a#top {
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
 									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-									Alert <span class="badge">7</span>
+									Alert <span class="badge" id="badge">7</span>
 								</button>
+								
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Another action</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Something else here</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Separated link</a></li>
+										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 								</ul>
 							</div>
 						</li>
@@ -235,25 +260,39 @@ a#top {
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
 									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-									Message <span class="badge">5</span>
+									Message <span class="badge" id="badge">5</span>
 								</button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Another action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Something else here</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1"
-										href="#">Separated link</a></li>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;">
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</li>

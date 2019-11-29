@@ -29,7 +29,7 @@
     <div id="mainslide" class="item">
 <!--       <img src="/resources/gray.png" alt="..."> -->
       <div class="carousel-caption">
-        <h3>게시판에 글을 업로드해보세요</h3>
+        <h3>게시판에 글을 업로드해보세요.</h3>
         <h3>팀원을 찾거나 아이디어를 공유할 수 있습니다.</h3>
         <br>
         <br>
@@ -40,7 +40,7 @@
     <div id="mainslide" class="item">
 <!--       <img src="/resources/gray.png" alt="..."> -->
       <div class="carousel-caption">
-		<h3>프로젝트와 일정관리를 해보세요</h3>
+		<h3>프로젝트와 일정관리를 해보세요.</h3>
         <h3>편리하게 팀원들과 일정을 공유할 수 있습니다.</h3>
         <br>
         <br>
