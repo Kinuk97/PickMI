@@ -247,7 +247,8 @@ public class FileServiceImpl implements FileService {
 						}
 					} else if ("proj_sdate".equals(key)) {
 						try {
-							projectBoard.setProj_sdate(java.sql.Date.valueOf(item.getString("utf-8")));						} catch (UnsupportedEncodingException e) {
+							projectBoard.setProj_sdate(java.sql.Date.valueOf(item.getString("utf-8")));						
+							} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 					} else if ("proj_ddate".equals(key)) {
@@ -660,7 +661,8 @@ public class FileServiceImpl implements FileService {
 						}
 					} else if ("proj_sdate".equals(key)) {
 						try {
-							projectBoard.setProj_sdate(java.sql.Date.valueOf(item.getString("utf-8")));						} catch (UnsupportedEncodingException e) {
+							projectBoard.setProj_sdate(java.sql.Date.valueOf(item.getString("utf-8")));						
+							} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 					} else if ("proj_ddate".equals(key)) {

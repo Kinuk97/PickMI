@@ -83,9 +83,7 @@ $(document).ready(function() {
 			</tr>
 
 			<tr>
-				<td colspan="6">첨부파일 <a
-					href="/file/download?fileno=${files.fileno}">
-						${files.originName }</a>
+				<td colspan="6">첨부파일 <a	href="/file/download?fileno=${files.fileno}">${files.originName }</a>
 				</td>
 			</tr>
 
