@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import dao.face.ProfileBoardDao;
 import dao.impl.ProfileBoardDaoImpl;
 import dto.Files;
+import dto.LikePost;
 import dto.ProfileBoard;
 import serivce.face.ProfileBoardService;
 import util.Paging;
@@ -35,6 +36,32 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 
 	public static ProfileBoardService getInstance() {
 		return Singleton.instance;
+	}
+	
+	
+	@Override
+	public void like(LikePost like) {
+		
+		boolean check = checkLike(like);
+		
+		if(check) {
+			profileBoardDao.insertLike(like);
+		} else {
+			profileBoardDao.deleteLike(like);
+		}
+	}
+	@Override
+	public boolean checkLike(LikePost like) {
+		int check = profileBoardDao.checkCountUserByUserno(like);
+		if (check == 0) { 
+			return true; //전에 찜을 한 적이 없으면 허가
+		} else {
+			return false; //전에 찜을 한 적이 있으면 비허가
+		}
+	}
+	@Override
+	public int countLike(LikePost like) {
+		return profileBoardDao.selectCountLike(like);
 	}
 	
 	@Override
