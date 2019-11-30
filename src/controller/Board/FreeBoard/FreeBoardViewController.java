@@ -17,6 +17,7 @@ import serivce.face.ReplyService;
 import serivce.impl.FileServiceImpl;
 import serivce.impl.FreeBoardServiceImpl;
 import serivce.impl.ReplyServiceImpl;
+import util.Paging;
 
 @WebServlet("/freeboard/view")
 public class FreeBoardViewController extends HttpServlet {
@@ -49,8 +50,11 @@ public class FreeBoardViewController extends HttpServlet {
 			reply.setBoardno(freeBoard.getFree_no());
 			req.setAttribute("postno", reply.getPostno());
 			req.setAttribute("boardno", reply.getBoardno());
+			// =======================================================
 			
-			req.setAttribute("replyList", replyService.getReplyList(replyService.getPaging(req), reply));
+			Paging paging = replyService.getPaging(req);
+			req.setAttribute("paging", paging);
+			req.setAttribute("replyList", replyService.getReplyList(paging, reply));
 			
 			req.getRequestDispatcher("/WEB-INF/views/board/freeboard/view.jsp").forward(req, resp);
 		} else {
