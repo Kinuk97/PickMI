@@ -190,6 +190,27 @@ a#top {
 	margin-left:5px;
 }
 
+.btn-reply {
+	height: 54px;
+	width: 5%;
+	padding: 0;
+	margin-left: 0px;
+	margin-right: 0px;
+	float: left;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.reply-content {
+	resize: none;
+	width: 95%;
+	display: inline;
+	float: left;
+	margin: 10px 0;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
 </style>
 </head>
 <body>

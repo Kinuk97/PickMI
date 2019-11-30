@@ -104,7 +104,7 @@ public class ReplyServiceImpl implements ReplyService {
 		int totalCount = replyDao.selectCntAll(reply);
 
 //		Paging 객체 생성
-		Paging paging = new Paging(totalCount, curPage, 20);
+		Paging paging = new Paging(totalCount, curPage);
 
 		return paging;
 	}
