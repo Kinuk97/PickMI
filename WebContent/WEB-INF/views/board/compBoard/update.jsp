@@ -44,15 +44,19 @@ $(document).ready(function() {
   		<div class="form-group">
     		<label for="comp_member" class="col-sm-1 col-md-1 col-lg-1 control-label" 
     			   style="padding-top: 16px; text-align: center;">참여인원</label>
-    		<div class="col-sm-9 col-md-9 col-lg-4">
-      			<input type="text" class="form-control" id="comp_member" value="${compBoard.comp_member }" name="comp_member" >
+    		<div class="col-sm-9 col-md-9 col-lg-2">
+      			<input type="number" class="form-control" id="comp_member" value="${compBoard.comp_member }" name="comp_member" >
     		</div>
     		
     		<label class="col-sm-1 col-md-1 col-lg-1 control-label" 
-    			   style="padding-top: 16px; text-align: center;">프로젝트 기간</label>
-    		<div class="col-sm-9 col-md-9 col-lg-2">
-      			<input type="text" class="form-control" id="comp_startdate" value="${compBoard.comp_startdate }" name="comp_startdate">
-      			- <input type="text" class="form-control" id="comp_enddate" value="${compBoard.comp_enddate }" name="comp_enddate">
+    			   style="padding-top: 8px; text-align: center;">프로젝트 시작날짜</label>
+    		<div class="col-sm-9 col-md-9 col-lg-3">
+      			<input type="date" class="form-control" id="comp_startdate" value="${compBoard.comp_startdate }" name="comp_startdate">
+    		</div>
+    		<label class="col-sm-1 col-md-1 col-lg-1 control-label" 
+    			   style="padding-top: 8px; text-align: center;">프로젝트 종료날짜</label>
+    		<div class="col-sm-9 col-md-9 col-lg-3">
+      			<input type="date" class="form-control" id="comp_enddate" value="${compBoard.comp_enddate }" name="comp_enddate">
     		</div>
     		
   		</div>

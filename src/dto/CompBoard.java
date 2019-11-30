@@ -17,10 +17,9 @@ public class CompBoard {
 	private int comp_view;
 	private int comp_reply;
 	private int comp_like;
-	private int comp_startdate;
-	private int comp_enddate;
+	private Date comp_startdate;
+	private Date comp_enddate;
 	
-
 	@Override
 	public String toString() {
 		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", userno=" + userno + ", username="
@@ -57,11 +56,11 @@ public class CompBoard {
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getComp_title() {
 		return comp_title;
 	}
@@ -126,22 +125,22 @@ public class CompBoard {
 		this.comp_like = comp_like;
 	}
 
-	public int getComp_startdate() {
+	public Date getComp_startdate() {
 		return comp_startdate;
 	}
 
-	public void setComp_startdate(int comp_startdate) {
+	public void setComp_startdate(Date comp_startdate) {
 		this.comp_startdate = comp_startdate;
 	}
 
-	public int getComp_enddate() {
+	public Date getComp_enddate() {
 		return comp_enddate;
 	}
 
-	public void setComp_enddate(int comp_enddate) {
+	public void setComp_enddate(Date comp_enddate) {
 		this.comp_enddate = comp_enddate;
 	}
-	
-	
 
+	
+	
 }

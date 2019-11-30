@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -122,8 +123,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res.setComp_view( rs.getInt("comp_view") );
 				res.setComp_reply( rs.getInt("comp_reply") );
 				res.setComp_like( rs.getInt("comp_like") );
-				res.setComp_startdate( rs.getInt("comp_startdate"));
-				res.setComp_enddate( rs.getInt("comp_enddate"));
+				res.setComp_startdate( rs.getDate("comp_startdate"));
+				res.setComp_enddate( rs.getDate("comp_enddate"));
 				
 			}
 			
@@ -229,8 +230,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					compBoard.setComp_view( rs.getInt("comp_view") );
 					compBoard.setComp_reply( rs.getInt("comp_reply") );
 					compBoard.setComp_like( rs.getInt("comp_like") );
-					compBoard.setComp_startdate( rs.getInt("comp_startdate"));
-					compBoard.setComp_enddate( rs.getInt("comp_enddate") );
+					compBoard.setComp_startdate( rs.getDate("comp_startdate"));
+					compBoard.setComp_enddate( rs.getDate("comp_enddate") );
 					
 					List.add(compBoard);
 				}
@@ -272,8 +273,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps.setString(4, compBoard.getComp_name());
 			ps.setString(5, compBoard.getComp_content());
 			ps.setInt(6, compBoard.getComp_member());
-			ps.setInt(7, compBoard.getComp_startdate());
-			ps.setInt(8, compBoard.getComp_enddate());
+			ps.setDate(7, (Date) compBoard.getComp_startdate());
+			ps.setDate(8, (Date) compBoard.getComp_enddate());
 			
 			ps.executeQuery();
 			
@@ -457,8 +458,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps.setString(1, compBoard.getComp_title());
 			ps.setString(2, compBoard.getComp_name());
 			ps.setInt(3, compBoard.getComp_member());
-			ps.setInt(4, compBoard.getComp_startdate());
-			ps.setInt(5, compBoard.getComp_enddate());
+			ps.setDate(4, (Date) compBoard.getComp_startdate());
+			ps.setDate(5, (Date) compBoard.getComp_enddate());
 			ps.setString(6, compBoard.getComp_content());
 			ps.setInt(7, compBoard.getComp_no());
 			
@@ -507,8 +508,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -557,7 +558,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "DELETT FROM likepost WHERE postno = 4 AND userno = ? AND boardno = ?";
+		sql += "DELETE FROM likepost WHERE postno = 4 AND userno = ? AND boardno = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -587,7 +588,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 		String sql="";
 		sql += "SELECT count(userno) FROM likepost ";
-		sql += " WHERE postno = 1 AND boardno = ?";
+		sql += " WHERE postno = 4 AND boardno = ?";
 		
 		int likeno = 0;
 		

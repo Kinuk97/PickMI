@@ -35,14 +35,14 @@ $(document).ready(function(){
 $(document).ready(function() {
 	
 	$("#unlike").click( function(){
-		console.log("된다");
-		$("#unlike").hide();
-		$("#like").show();
+// 		console.log("된다");
+		$("#like").hide();
+		$("#unlike").show();
 		$.ajax({
 			url: "/compBoard/like"
 			, type: "GET"
 			, data: {
-				prof_no : '${compBoard.comp_no}',
+				comp_no : '${compBoard.comp_no}',
 				boardno : '${compBoard.comp_no}',
 				userno : '${compBoard.userno}',
 				postno : '${ 4 }'
@@ -56,14 +56,14 @@ $(document).ready(function() {
 	})
 	
 		$("#like").click( function(){
-		console.log("된다");
-		$("#like").hide();
-		$("#unlike").show();
+// 		console.log("된다");
+		$("#unlike").hide();
+		$("#like").show();
 		$.ajax({
 			url: "/compBoard/like"
 			, type: "GET"
 			, data: {
-				prof_no : '${compBoard.comp_no}',
+				comp_no : '${compBoard.comp_no}',
 				boardno : '${compBoard.comp_no}',
 				userno : '${compBoard.userno}',
 				postno : '${ 4 }'
@@ -77,7 +77,7 @@ $(document).ready(function() {
 	})
 
 function like(data) {
-		console.log("좋아요되랏")
+// 		console.log("좋아요되랏")
 	$("#countLike").html(data.countLike)
 }
 	
@@ -107,19 +107,20 @@ function like(data) {
 			</tr>
 
 			<tr>
-				<td>프로젝트 기간</td><td>${compBoard.comp_startdate } ~ ${compBoard.comp_enddate }</td>
-				<td>찜받은수</td><td><span id="countLike">${ countLike }</span>
-					<c:if test="${ login }">
-						<c:if test="${ canLike }">
-							<button id="like" class="btn btn-default" style="padding: 3px;">LIKE</button>
-							<button id="unlike" style="display: none; padding:3px;" class="btn btn-default">UNLIKE</button>
-						</c:if>
+				<td>프로젝트 기간</td><td>시작날 : " ${compBoard.comp_startdate } " ~ 종료날 : " ${compBoard.comp_enddate } "</td>
+				
+				<td>찜하기</td><td id="countLike">${countLike }
+					<c:choose>
+						<c:when test="${not login }">
+<!-- 							<button id="like" class="btn btn-default" style="padding: 0px; margin-top: 0px;">LIKE</button> -->
+<!-- 							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button> -->
+						</c:when>
 						
-						<c:if test="${ !canLike }">
-							<button id="like" style="display: none;" class="btn btn-default" style="padding: 3px;">LIKE</button>
-							<button id="unlike" class="btn btn-default" style="padding: 3px;">UNLIKE</button>
-						</c:if>
-					</c:if>
+						<c:otherwise>
+							<button id="unlike" class="btn btn-default" style="padding: 0px; margin-top: 0px;">UNLIKE</button>
+							<button id="like" style="display: none; padding: 0px; margin-top:0px;" class="btn btn-default">LIKE</button>
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 
