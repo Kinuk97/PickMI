@@ -324,7 +324,7 @@ a#top {
 							<li><a href="/insert">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<ul style="list-style: none;">
+							<ul style="list-style: none; padding-left: 5px; padding-right: 5px;">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 											data-toggle="dropdown"><img src="/resources/pickmiBlack.jpg" class="img-circle" style="width: 50px; height: 50px;"></a>
 									<ul class="dropdown-menu">
@@ -338,6 +338,9 @@ a#top {
 							</c:otherwise>
 						</c:choose>
 					</li>
+					<c:if test="${not empty login }">
+						<li style="margin-top: 25px;">${name }님, 로그인하셨습니다.</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
