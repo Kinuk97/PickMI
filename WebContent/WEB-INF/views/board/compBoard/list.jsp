@@ -132,7 +132,7 @@ select {
 				<div style="width: 67.3%; text-align: right; float: left;">
 					<!-- 로그인이 되어있으면 글 작성으로 넘어감 -->
 					<button  onclick="location.href = '/compBoard/write';" 
-							class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+							class="btn btn-info">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 				</div>
 			</c:when>
 
@@ -140,12 +140,12 @@ select {
 				<div style="width: 67.3%; text-align: right; float: left;">	
 					<!-- 로그인되어있지 않으면 글쓰기 페이지로 넘어가지 않음 -->
 					<button id="btnNoLoginWrite" onclick="alert('로그인이 필요한 서비스입니다.')"
-							class="btn btn-info">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</button>
+							class="btn btn-info">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>
-	
+	<br>
 	<hr>
 	<a id="top" href="#">TOP👆</a>
 	<!-- 상위 3개 -->

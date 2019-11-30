@@ -149,10 +149,11 @@ $(document).ready(function() {
 			</div>
 			<div style="width: 55%; text-align: right; float: left;">
 				<input type="hidden" value="${paging.categoryno }" name="categoryno">
-				<button type="button" id="writeBtn" class="btn btn-info" style="margin-top: 10px;" data-container="body" data-placement="top" data-content="게시글을 작성하기 위해서는 로그인이 필요합니다.">글작성</button>
+				<button type="button" id="writeBtn" class="btn btn-info" style="margin-top: 10px;" data-container="body" data-placement="top" data-content="게시글을 작성하기 위해서는 로그인이 필요합니다.">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 			</div>
 		</form>
 	</div>
+	<br>
 	<hr>
 </div>
 <div style="clear: both;"></div>
