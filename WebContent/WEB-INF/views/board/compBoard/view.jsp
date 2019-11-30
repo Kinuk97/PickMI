@@ -93,7 +93,7 @@ function like(data) {
 
 			<tr>
 				<td>프로젝트 제목</td><td>${compBoard.comp_title }</td>
-				<td>팀장</td><td>${compBoard.userno }</td>
+				<td>팀장이름</td><td>${compBoard.userno }</td>
 			</tr>
 
 			<tr>
@@ -142,7 +142,15 @@ function like(data) {
 			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
 			<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
 		</div>
-	
+	<br>
+		<div class="row text-right">
+			<form action="/freeboard/comment/write" method="get">
+				<textarea class="form-control" style="resize: none; width: 94%; display: inline; float: left; margin: 10px 0; border-top-right-radius: 0px; border-bottom-right-radius: 0px;" name="reply" required="required"></textarea>
+				<button type="button" id="cmtBtn" class="btn" style="height: 54px; width: 5%; padding: 0; margin-left: 0px; float: left; border-top-left-radius: 0px; border-bottom-left-radius: 0px;"
+				 data-container="body" data-placement="top" data-content="댓글을 작성하기 위해서는 로그인이 필요합니다.">작성</button>
+			</form>	
+		</div>
+		
 </div>
 
 

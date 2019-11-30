@@ -8,6 +8,7 @@ public class CompBoard {
 	private int comp_no;
 	private int categoryno;
 	private int userno;
+	private String username;
 	private String comp_title;
 	private String comp_name;
 	private String comp_content;
@@ -22,11 +23,11 @@ public class CompBoard {
 
 	@Override
 	public String toString() {
-		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", userno="
-				+ userno + ", comp_title=" + comp_title + ", comp_name=" + comp_name + ", comp_content=" + comp_content
-				+ ", comp_member=" + comp_member + ", comp_date=" + comp_date + ", comp_view=" + comp_view
-				+ ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + ", comp_startdate=" + comp_startdate
-				+ ", comp_enddate=" + comp_enddate + "]";
+		return "CompBoard [comp_no=" + comp_no + ", categoryno=" + categoryno + ", userno=" + userno + ", username="
+				+ username + ", comp_title=" + comp_title + ", comp_name=" + comp_name + ", comp_content="
+				+ comp_content + ", comp_member=" + comp_member + ", comp_date=" + comp_date + ", comp_view="
+				+ comp_view + ", comp_reply=" + comp_reply + ", comp_like=" + comp_like + ", comp_startdate="
+				+ comp_startdate + ", comp_enddate=" + comp_enddate + "]";
 	}
 
 	public int getComp_no() {
@@ -53,6 +54,14 @@ public class CompBoard {
 		this.userno = userno;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 	public String getComp_title() {
 		return comp_title;
 	}

@@ -32,7 +32,7 @@ function compLoadList(){
 				caption.append($("<br>"));
 				
 				// 작성자
-				caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].userno));
+				caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].username));
 				
 				//조회수
 				caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));

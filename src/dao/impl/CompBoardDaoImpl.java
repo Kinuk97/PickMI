@@ -155,7 +155,11 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			String sql = "";
 			sql += "SELECT * FROM (";
 			sql += "    SELECT rownum rnum, B.* FROM (";
-			sql += "		SELECT * FROM compBoard";
+			sql += "		SELECT comp_no, userno, comp_title, comp_name, ";
+			sql += "			   comp_content, comp_member, comp_date, comp_view, ";
+			sql += "			   comp_reply, comp_like, comp_startdate, comp_enddate, ";
+			sql += " 			(SELECT name FROM user_table WHERE compBoard.userno = userno) username";
+			sql += "		FROM compBoard";
 			
 			//검색어가 존재할 때
 			if (paging.getSearch() != null) {
@@ -216,6 +220,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 //					compBoard.setRownum( rs.getInt("rnum"));
 					compBoard.setComp_no( rs.getInt("comp_no") );
 					compBoard.setUserno( rs.getInt("userno") );
+					compBoard.setUsername( rs.getString("username"));
 					compBoard.setComp_title( rs.getString("comp_title") );
 					compBoard.setComp_name( rs.getString("comp_name") );
 					compBoard.setComp_content( rs.getString("comp_content") );
