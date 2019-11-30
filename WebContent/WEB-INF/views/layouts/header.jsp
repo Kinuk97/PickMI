@@ -85,7 +85,7 @@ button, input, optgroup, select, textarea {
 
 /* 게시글 호버 */
 .thumbnail:hover {
-	border-color: tomato;
+	border-color: #2E64FE;
 }
 
 /* 각 게시판 리스트 높이 */

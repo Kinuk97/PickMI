@@ -84,7 +84,7 @@ function like(data) {
 })
 </script>
 
-<h2 class="text-center"><strong>완성된 프로젝트</strong>&nbsp;&nbsp;</h2>
+<h2 class="text-center">완성된 프로젝트</h2>
 <br>
 
 <div class="container">

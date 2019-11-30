@@ -147,9 +147,10 @@ $(document).ready(function() {
 					<button class="btn btn-warning" type="submit" style="margin: 10px;">검색</button>
 				</span>
 			</div>
-			<div style="width: 55%; text-align: right; float: left;">
+			<div style="width: 57.6%; text-align: right; float: left;">
 				<input type="hidden" value="${paging.categoryno }" name="categoryno">
-				<button type="button" id="writeBtn" class="btn btn-info" style="margin-top: 10px;" data-container="body" data-placement="top" data-content="게시글을 작성하기 위해서는 로그인이 필요합니다.">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
+				<button type="button" id="writeBtn" class="btn btn-info" style="margin-top: 10px;" data-container="body" data-placement="top" 
+						data-content="게시글을 작성하기 위해서는 로그인이 필요합니다.">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 			</div>
 		</form>
 	</div>
