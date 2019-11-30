@@ -326,21 +326,23 @@ a#top {
 						<c:otherwise>
 							<ul style="list-style: none; padding-left: 5px; padding-right: 5px;">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown"><img src="/resources/pickmiBlack.jpg" class="img-circle" style="width: 50px; height: 50px;"></a>
+											data-toggle="dropdown"><img src="/resources/gray.png" class="img-circle" style="width: 50px; height: 50px;"></a>
 									<ul class="dropdown-menu">
 										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
 										<li><a href="#"><i class="icon-arrow-down"></i>추가할거</a></li>
 										<li><a href="#"><i class="icon-arrow-left"></i>추가해주세요~</a></li>
 										<li><a href="/logout"><i class="icon-arrow-right"></i>로그아웃</a></li>
 									</ul>
-									</li>
-								</ul>
-							</c:otherwise>
-						</c:choose>
+								</li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 					</li>
+					
 					<c:if test="${not empty login }">
-						<li style="margin-top: 25px;">${name }님, 로그인하셨습니다.</li>
+						<li style="margin-top: 25px;">${name }님, 반갑습니다 :-)</li>
 					</c:if>
+					
 				</ul>
 			</div>
 		</div>
