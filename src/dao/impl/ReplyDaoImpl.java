@@ -1,4 +1,4 @@
-package serivce.impl;
+package dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +13,7 @@ import dto.Reply;
 import util.Paging;
 
 public class ReplyDaoImpl implements ReplyDao {
+
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
