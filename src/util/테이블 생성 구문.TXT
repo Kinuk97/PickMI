@@ -52,7 +52,6 @@ DROP SEQUENCE proj_no_seq;
 CREATE SEQUENCE proj_no_seq;
 
 DROP TABLE compboard;
-
 CREATE TABLE compboard (
     comp_no NUMBER PRIMARY KEY,
     userno NUMBER,
@@ -64,13 +63,13 @@ CREATE TABLE compboard (
     comp_view NUMBER,
     comp_reply NUMBER,
     comp_like NUMBER,
-    comp_startdate NUMBER,
-    comp_enddate NUMBER
+    comp_startdate Date,
+    comp_enddate Date
 );
     
 DROP SEQUENCE compBoard_seq;
-
 CREATE SEQUENCE compBoard_seq;
+
 
 DROP TABLE freeboard;
 CREATE TABLE freeboard (
