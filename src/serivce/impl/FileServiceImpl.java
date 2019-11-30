@@ -318,14 +318,14 @@ public class FileServiceImpl implements FileService {
 
 					} else if ("comp_startdate".equals(key)) {
 						try {
-							compBoard.setComp_startdate(Integer.parseInt(item.getString("utf-8")));
+							compBoard.setComp_startdate(java.sql.Date.valueOf(item.getString("utf-8")));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 
 					} else if ("comp_enddate".equals(key)) {
 						try {
-							compBoard.setComp_enddate(Integer.parseInt(item.getString("utf-8")));
+							compBoard.setComp_enddate(java.sql.Date.valueOf(item.getString("utf-8")));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
@@ -752,14 +752,14 @@ public class FileServiceImpl implements FileService {
 
 					} else if ("comp_startdate".equals(key)) {
 						try {
-							compBoard.setComp_startdate(Integer.parseInt(item.getString("utf-8")));
+							compBoard.setComp_startdate(java.sql.Date.valueOf(item.getString("utf-8")));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
 
 					} else if ("comp_enddate".equals(key)) {
 						try {
-							compBoard.setComp_enddate(Integer.parseInt(item.getString("utf-8")));
+							compBoard.setComp_enddate(java.sql.Date.valueOf(item.getString("utf-8")));
 						} catch (UnsupportedEncodingException e) {
 							e.printStackTrace();
 						}
@@ -909,7 +909,7 @@ public class FileServiceImpl implements FileService {
 			if (uploadFile != null) {
 				// 파일에 게시글 번호와 게시판 번호를 설정
 				uploadFile.setBoardno(compBoard.getComp_no());
-				uploadFile.setPostno(3);
+				uploadFile.setPostno(4);
 			}
 
 		}
