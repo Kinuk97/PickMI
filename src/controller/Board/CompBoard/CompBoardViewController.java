@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.face.CompBoardDao;
+import dao.face.ReplyDao;
 import dao.impl.CompBoardDaoImpl;
+import dao.impl.ReplyDaoImpl;
 import dto.CompBoard;
 import dto.Files;
 import dto.Reply;
@@ -38,7 +40,18 @@ public class CompBoardViewController extends HttpServlet {
 		compBoardDao.countViews(compBoard);
 		
 		CompBoard compBoardView = compBoardService.compBoardDetail(compBoard);
+
+		//댓글 갯수 가져오기
+		Reply cntreply = new Reply();
 		
+		cntreply.setBoardno(compBoardView.getComp_no());
+		cntreply.setPostno(4);
+		
+		replyService.CountReply(cntreply);
+		
+		req.setAttribute("cntreply", replyService.CountReply(cntreply));
+		//===========================================
+
 		if (compBoard != null) {
 			Files files = new Files();
 			files.setPostno(4);

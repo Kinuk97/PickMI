@@ -11,6 +11,7 @@ import serivce.face.ReplyService;
 import util.Paging;
 
 public class ReplyServiceImpl implements ReplyService {
+	
 	private ReplyDao replyDao = ReplyDaoImpl.getInstance();
 
 	private ReplyServiceImpl() {
@@ -128,5 +129,10 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void deleteReply(Reply reply) {
 		replyDao.deleteReply(reply);
+	}
+
+	@Override
+	public int CountReply(Reply reply) {
+		return replyDao.selectCntAll(reply);
 	}
 }
