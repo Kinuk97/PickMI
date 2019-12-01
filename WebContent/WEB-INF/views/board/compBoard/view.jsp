@@ -23,29 +23,26 @@ function loadReply(curPage) {
 		success : function(data) {
 			var paging = data.paging;
 			var replyList = data.replyList;
-
+			
 			$("#reply").html("");
 			for (var i = 0; i < replyList.length; i++) {
-				var row = $("<div class='col-lg-12' style=\"margin-top: 10px;\"></div>");
+				var row = $("<div class='col-lg-12' style=\"border: 1px solid rgb(221, 221, 221); margin-top: 10px; padding-bottom: 8px;\"></div>");
 				
 				row.append($("<div class='col-lg-6 text-left'></div>").text("작성자 : " + replyList[i].username));
-				row.append($("<div class='col-lg-6 text-center'></div>").text("작성일 : " + replyList[i].replytime));
+				row.append($("<div class='col-lg-6 text-right'></div>").text("작성일 : " + replyList[i].replytime));
 				row.append($("<div class='col-lg-12'></div>").text(replyList[i].reply));
-				
-				// 내가 작성한 게시글이라면
-				if (userno == replyList[i].userno) {
-					var btn = $(""); 
-// 					<div></div>
-					btn.append($("<button class='replyFormBtn btn btn-default' data-replyno='" + replyList[i].replyno + "'></button>").text("수정"));	
-					btn.append($("<button class='btn btn-default' onclick='location.href=\"/compBoard/reply/delete?replyno=" 
-									+ replyList[i].replyno + "&boardno=${compBoard.comp_no}&curPage=" + curPage + "\";'>삭제</button>"));	
-					
-					row.append(btn);
-				}
-
 				row.append($("<div style='clear: both;'></div>"));
 				
 				var userno = "${userno}";
+				
+				// 내가 작성한 게시글이라면
+				if (userno == replyList[i].userno) {
+					var btn = $("<div class='btns text-right'></div>");
+					btn.append($("<button class='replyFormBtn btn btn-info' data-replyno='" + replyList[i].replyno + "'></button>").text("수정"));	
+					btn.append($("<button class='btn btn-warning' onclick='location.href=\"/compBoard/reply/delete?replyno=" + replyList[i].replyno + "&boardno=${compBoard.comp_no}&curPage=" + curPage + "\";'>삭제</button>"));	
+					
+					row.append(btn);
+				}
 				
 				$("#reply").append(row);
 			}
@@ -69,7 +66,7 @@ function loadReply(curPage) {
 				$(this).parent().append(modifyForm);
 				
 				$("#sendReply").on("click", function() {
-					$("#modifyForm").append($("<input type='hidden' value='${compBboard.comp_no}' name='boardno' />"));
+					$("#modifyForm").append($("<input type='hidden' value='${compBoard.comp_no}' name='boardno' />"));
 					$("#modifyForm").append($("<input type='hidden' value='" + $(this).data("replyno") + "' name='replyno' />"));
 					$("#modifyForm").append($("<input type='hidden' value='" + curPage + "' name='curPage' />"));
 					$("#modifyForm").submit();
@@ -210,9 +207,9 @@ $(document).ready(function() {
 		})
 	})
 	
-		$("#like").click( function(){
-		$("#unlike").hide();
-		$("#like").show();
+	$("#like").click( function(){
+		$("#like").hide();
+		$("#unlike").show();
 		$.ajax({
 			url: "/compBoard/like"
 			, type: "GET"
@@ -264,14 +261,14 @@ function like(data) {
 				
 				<td>찜하기</td><td id="countLike">${countLike }
 					<c:choose>
-						<c:when test="${not login }">
-<!-- 							<button id="like" class="btn btn-default" style="padding: 0px; margin-top: 0px;">LIKE</button> -->
-<!-- 							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button> -->
+						<c:when test="${not empty login }">
+							<button id="like" class="btn btn-default" style="padding: 0px; margin-top: 0px;">LIKE</button>
+							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button>
 						</c:when>
 						
 						<c:otherwise>
-							<button id="unlike" class="btn btn-default" style="padding: 0px; margin-top: 0px;">UNLIKE</button>
-							<button id="like" style="display: none; padding: 0px; margin-top:0px;" class="btn btn-default">LIKE</button>
+<!-- 							<button id="unlike" class="btn btn-default" style="padding: 0px; margin-top: 0px;">UNLIKE</button> -->
+<!-- 							<button id="like" style="display: none; padding: 0px; margin-top:0px;" class="btn btn-default">LIKE</button> -->
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -293,11 +290,11 @@ function like(data) {
 		</div>
 	<br><hr>
 	
-	<h4>00개의 댓글</h4>
+	<h4>${cntreply }개의 댓글</h4>
 	
 	<form action="/compBoard/reply/write" method="get">
 		<textarea class="form-control reply-content" name="reply" required="required"></textarea>
-		<button type="button" id="cmtBtn" class="btn btn-defualt btn-reply" data-container="body" 
+		<button type="button" id="cmtBtn" class="btn btn-default btn-reply" data-container="body" 
 				data-placement="top" data-content="댓글을 작성하기 위해서는 로그인이 필요합니다.">작성</button>
 	</form>	
 	

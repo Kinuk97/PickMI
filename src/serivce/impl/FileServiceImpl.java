@@ -477,6 +477,10 @@ public class FileServiceImpl implements FileService {
 				
 			}
 			
+			if (compBoard.getComp_content() == null) {
+				compBoard.setComp_content("내용없음");
+			}
+			
 			compBoard.setUserno((Integer) req.getSession().getAttribute("userno"));
 			
 			compBoardDao.insert(compBoard);
