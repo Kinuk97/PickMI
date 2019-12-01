@@ -133,11 +133,11 @@
 	<article class="container">
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">
-				<h3>회원가입 Form</h3>
+				<h3>회원가입</h3>
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-offset-3">
-			<form role="form" action="/email" method="post">
+			<form role="form" action="/insert" method="post">
 				<div class="form-group">
 					<label for="name">성명</label> <input type="text"
 						class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요">
@@ -148,6 +148,7 @@
 					<br>
 
 					<button type="button"  id ="emailCheck" class="btn btn-success">중복 체크</button>
+					
 					
 				</div>
 				<div class="form-group">

@@ -33,7 +33,7 @@ public class PwFindController extends HttpServlet {
 		User user = userService.getPwParam(req);
 
 		User pw = userService.findPw(user);
-		System.out.println(pw);
+//		System.out.println(pw);
 //		System.out.println("user : " + user);
 //		System.out.println("userpw : " + pw.getPw());
 //		User userpw = userService.getupdatePwParam(req)
@@ -51,7 +51,7 @@ public class PwFindController extends HttpServlet {
 			newPw = userService.getNewParam(req);
 			newPw.setEmail(user.getEmail());
 //		newPw.setPw(pw.getPw());
-			System.out.println("param : " + newPw);
+//			System.out.println("param : " + newPw);
 			userService.updatePw(newPw);
 			
 			resp.sendRedirect("/login");
