@@ -54,7 +54,7 @@ function loadReply(curPage) {
 				var formTag = $("<form action=\"/freeboard/reply/modify\" method='post' id='modifyForm'></form>")
 				
 				formTag.append($("<textarea class='form-control reply-content' name='reply' required='required'></textarea>"));
-				formTag.append($("<button type='button' id='sendReply' class='btn btn-defualt btn-reply' data-replyno='" + $(this).data("replyno") + "'>수정</button>"));
+				formTag.append($("<button type='button' id='sendReply' class='btn btn-default btn-reply' data-replyno='" + $(this).data("replyno") + "'>수정</button>"));
 				formTag.append($("<div style='clear: both;'></div>"));
 				
 				modifyForm.append(well.append(formTag));
@@ -208,7 +208,7 @@ $(document).ready(function () {
 	
 	<form action="/freeboard/reply/write" method="get">
 		<textarea class="form-control reply-content" name="reply" required="required"></textarea>
-		<button type="button" id="cmtBtn" class="btn btn-defualt btn-reply" data-container="body" data-placement="top" data-content="댓글을 작성하기 위해서는 로그인이 필요합니다.">작성</button>
+		<button type="button" id="cmtBtn" class="btn btn-default btn-reply" data-container="body" data-placement="top" data-content="댓글을 작성하기 위해서는 로그인이 필요합니다.">작성</button>
 	</form>	
 	
 	<hr>
