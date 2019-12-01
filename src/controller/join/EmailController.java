@@ -38,8 +38,30 @@ public class EmailController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Random random = new Random();
-		int ranno = random.nextInt(8999) + 1000;
+		//인증 번호 생성기
+        StringBuffer temp =new StringBuffer();
+        Random rnd = new Random();
+        for(int i=0;i<10;i++)
+        {
+            int rIndex = rnd.nextInt(3);
+            switch (rIndex) {
+            case 0:
+                // a-z
+                temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+                break;
+            case 1:
+                // A-Z
+                temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+                break;
+            case 2:
+                // 0-9
+                temp.append((rnd.nextInt(10)));
+                break;
+            }
+        }
+        String AuthenticationKey = temp.toString();
+        System.out.println("인증번호 : " + AuthenticationKey);
+        req.setAttribute("key", AuthenticationKey);
 
 		// FROM
 		final String FROM = "mindo4393@gmail.com"; // 보내는 사람 이메일
@@ -52,7 +74,7 @@ public class EmailController extends HttpServlet {
 		final String SUBJECT = "이메일 인증번호 입니다."; // <<------------------------------수정하세요
 
 		// 메일 본문
-		final String BODY = String.join("<h1>PickMI 이메일 인증</h1>", "인증번호 : "+ranno+"<br>"+"<p>인증번호를 사이트에 입력해 주세요</p>"); // <<------------------------------수정하세요
+		final String BODY = String.join("<h1>PickMI 이메일 인증</h1>", "인증번호 : "+temp+"<br>"+"<p>인증번호를 사이트에 입력해 주세요</p>"); // <<------------------------------수정하세요
 
 
 		// 인증 객체
@@ -94,6 +116,9 @@ public class EmailController extends HttpServlet {
 			
 		}
 		
+//		resp.sendRedirect("/email");
+		
+		req.getRequestDispatcher("/authentic").forward(req, resp);
 
 	}
 }

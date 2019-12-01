@@ -38,13 +38,6 @@ $(document).ready(function() {
 	
 		<table class="table table-bordered">
 			<tr>
-				<td class="info">프로젝트 번호</td>
-				<td colspan="3">${projectBoard.proj_no }</td>
-				<td class="info">진행상황</td>
-				<td>${projectBoard.proj_progress }</td>
-			</tr>
-
-			<tr>
 				<td class="info">프로젝트 제목</td>
 				<td colspan="3">${projectBoard.proj_title }</td>
 				<td class="info">직업</td>
@@ -54,6 +47,13 @@ $(document).ready(function() {
 			<tr>
 				<td class="info">프로젝트 이름</td>
 				<td colspan="3">${projectBoard.proj_name }</td>
+				<td class="info">진행상황</td>
+				<td>${projectBoard.proj_progress }</td>
+			</tr>
+
+			<tr>
+				<td class="info">작성자 이름</td>
+				<td colspan="3">${projectBoard.userno }(추후 이름으로 수정)</td>
 				<td class="info">작성시간</td>
 				<td>${projectBoard.proj_time }</td>
 				

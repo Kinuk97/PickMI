@@ -34,7 +34,8 @@ public class InsertController extends HttpServlet {
 		userService.join(user);
 //		resp.sendRedirect("/main");
 		
-		req.getRequestDispatcher("/WEB-INF/views/user/mail.jsp").forward(req, resp);;
+		req.getRequestDispatcher("/email").forward(req, resp);
+//		resp.sendRedirect("/email");
 	}
 
 }
