@@ -176,8 +176,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				
 				} else if (paging.getSearchno() == 3) {
 					//제목&내용으로 검색할 경우
-					sql += " AND comp_title LIKE '%' || ? || '%'";
-					sql += " AND comp_content LIKE '%' || ? || '%'";
+					sql += " AND (comp_title LIKE '%' || ? || '%'";
+					sql += " OR comp_content LIKE '%' || ? || '%')";
 					
 				} else {
 					//제목으로 검색할 경우
