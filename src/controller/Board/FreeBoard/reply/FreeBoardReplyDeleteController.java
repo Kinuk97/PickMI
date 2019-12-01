@@ -11,23 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 import dto.Reply;
 import serivce.face.ReplyService;
 import serivce.impl.ReplyServiceImpl;
+import util.Paging;
 
-@WebServlet("/freeboard/reply/write")
-public class FreeBoardReplyWriteController extends HttpServlet {
+@WebServlet("/freeboard/reply/delete")
+public class FreeBoardReplyDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ReplyService replyService = ReplyServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		
 		Reply reply = replyService.getParam(req);
 		
 		reply.setPostno(3);
 		
-		replyService.writeReply(reply);
+		replyService.deleteReply(reply);
 		
-		resp.sendRedirect("/freeboard/view?free_no=" + reply.getBoardno());
+		Paging paging = replyService.getPaging(req);
+		
+		resp.sendRedirect("/freeboard/view?free_no=" + reply.getBoardno() + "&curPage=" + paging.getCurPage());
 	}
 }

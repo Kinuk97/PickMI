@@ -54,4 +54,7 @@ public interface ReplyService {
 	 * @param reply - 게시판, 게시글, 댓글 번호가 담겨있는 DTO
 	 */
 	public void deleteReply(Reply reply);
+	
+	
+	public int CountReply(Reply reply);
 }

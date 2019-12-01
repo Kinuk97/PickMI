@@ -5,11 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.face.ReplyDao;
+import dao.impl.ReplyDaoImpl;
 import dto.Reply;
 import serivce.face.ReplyService;
 import util.Paging;
 
 public class ReplyServiceImpl implements ReplyService {
+	
 	private ReplyDao replyDao = ReplyDaoImpl.getInstance();
 
 	private ReplyServiceImpl() {
@@ -104,7 +106,7 @@ public class ReplyServiceImpl implements ReplyService {
 		int totalCount = replyDao.selectCntAll(reply);
 
 //		Paging 객체 생성
-		Paging paging = new Paging(totalCount, curPage, 20);
+		Paging paging = new Paging(totalCount, curPage);
 
 		return paging;
 	}
@@ -127,5 +129,10 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void deleteReply(Reply reply) {
 		replyDao.deleteReply(reply);
+	}
+
+	@Override
+	public int CountReply(Reply reply) {
+		return replyDao.selectCntAll(reply);
 	}
 }

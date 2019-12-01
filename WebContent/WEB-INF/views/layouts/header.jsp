@@ -85,7 +85,7 @@ button, input, optgroup, select, textarea {
 
 /* 게시글 호버 */
 .thumbnail:hover {
-	border-color: tomato;
+	border-color: #2E64FE;
 }
 
 /* 각 게시판 리스트 높이 */
@@ -190,6 +190,27 @@ a#top {
 	margin-left:5px;
 }
 
+.btn-reply {
+	height: 54px;
+	width: 5%;
+	padding: 0;
+	margin-left: 0px;
+	margin-right: 0px;
+	float: left;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.reply-content {
+	resize: none;
+	width: 95%;
+	display: inline;
+	float: left;
+	margin: 10px 0;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
 </style>
 </head>
 <body>
@@ -201,9 +222,8 @@ a#top {
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> 
+					<span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/main"><img id="logo" alt="logo"
 					src="/resources/logo2.png"></a>
@@ -304,20 +324,25 @@ a#top {
 							<li><a href="/insert">회원가입</a></li>
 						</c:when>
 						<c:otherwise>
-							<ul style="list-style: none;">
+							<ul style="list-style: none; padding-left: 5px; padding-right: 5px;">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown"><img src="/resources/pickmiBlack.jpg" class="img-circle" style="width: 50px; height: 50px;"></a>
+											data-toggle="dropdown"><img src="/resources/gray.png" class="img-circle" style="width: 50px; height: 50px;"></a>
 									<ul class="dropdown-menu">
 										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
 										<li><a href="#"><i class="icon-arrow-down"></i>추가할거</a></li>
 										<li><a href="#"><i class="icon-arrow-left"></i>추가해주세요~</a></li>
 										<li><a href="/logout"><i class="icon-arrow-right"></i>로그아웃</a></li>
 									</ul>
-									</li>
-								</ul>
-							</c:otherwise>
-						</c:choose>
+								</li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 					</li>
+					
+					<c:if test="${not empty login }">
+						<li style="margin-top: 25px;">${name }님, 반갑습니다 :-)</li>
+					</c:if>
+					
 				</ul>
 			</div>
 		</div>

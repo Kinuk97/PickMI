@@ -186,24 +186,21 @@ select {
 		<a href="#">8년차이상</a>
 	</div>
 	</div>
-	
-</div>
-	<c:choose>
+
+<c:choose>
 	<c:when test="${not empty login }">
-		<div class="text-right" style="padding: 0 40px;">
-			<button  onclick="location.href = '/projectBoard/write';" class="btn btn-primary">글 작성</button>
-		</div>
+		<button  onclick="location.href = '/projectBoard/write';" class="btn btn-info" style="float:right; margin-top:30px; margin-right:15px;">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 	</c:when>
 	
 	<c:otherwise>
-		<div class="text-right" style="padding: 0 40px;">
-			<button id="btnNoLogWrite" type="button" class="btn btn-primary">글 작성</button>
-		</div>
+		<button id="btnNoLogWrite" type="button" class="btn btn-info" style="float:right; margin-top:30px; margin-right:15px;">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 	</c:otherwise>
+</c:choose>
 	
-	</c:choose>
-	
-	<hr>
+</div>
+
+<br>	
+<hr>
 	<c:forEach var="board" items="${boardList }">
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">

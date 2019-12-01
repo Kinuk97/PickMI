@@ -1,4 +1,4 @@
-package serivce.impl;
+package dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +13,7 @@ import dto.Reply;
 import util.Paging;
 
 public class ReplyDaoImpl implements ReplyDao {
+
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
@@ -144,13 +145,15 @@ public class ReplyDaoImpl implements ReplyDao {
 
 	@Override
 	public void updateReply(Reply reply) {
-		String sql = "UPDATE reply SET reply = ? WHERE postno = ? AND boardno = ?";
+		String sql = "UPDATE reply SET reply = ? WHERE postno = ? AND boardno = ? AND replyno = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
-			ps.setInt(1, reply.getPostno());
-			ps.setInt(2, reply.getBoardno());
+			ps.setString(1, reply.getReply());
+			ps.setInt(2, reply.getPostno());
+			ps.setInt(3, reply.getBoardno());
+			ps.setInt(4, reply.getReplyno());
 
 			ps.executeQuery();
 		} catch (SQLException e) {
@@ -167,13 +170,14 @@ public class ReplyDaoImpl implements ReplyDao {
 
 	@Override
 	public void deleteReply(Reply reply) {
-		String sql = "DELETE FROM reply WHERE postno = ? AND boardno = ?";
+		String sql = "DELETE FROM reply WHERE postno = ? AND boardno = ? AND replyno = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
 			ps.setInt(1, reply.getPostno());
 			ps.setInt(2, reply.getBoardno());
+			ps.setInt(3, reply.getReplyno());
 
 			ps.executeQuery();
 		} catch (SQLException e) {

@@ -59,6 +59,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 			return false; //전에 찜을 한 적이 있으면 비허가
 		}
 	}
+	
 	@Override
 	public int countLike(LikePost like) {
 		return profileBoardDao.selectCountLike(like);
