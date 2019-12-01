@@ -41,11 +41,12 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				sql += " AND comp_name LIKE '%' || ? || '%'";
 
 			} else if (searchno == 3) {
+				//프로젝트 명&내용으로 검색할 경우
 				sql += " AND (comp_title LIKE '%' || ? || '%'";
 				sql += " OR comp_content LIKE '%' || ? || '%')";
 
 			} else {
-				//제목으로 검색할 경우
+				//프로젝트 명으로 검색할 경우
 				sql += " AND comp_title LIKE '%' || ? || '%'";
 			}
 			
@@ -98,8 +99,11 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		
 		//수행할 SQL쿼리
 		String sql ="";
-		sql += "SELECT * FROM compBoard ";
-		sql += "WHERE comp_no = ? ";
+		sql += "SELECT comp_no, userno, comp_title, comp_name, ";
+		sql += "	   comp_content, comp_member, comp_date, comp_view, ";
+		sql += "	   comp_startdate, comp_enddate, ";
+		sql += " 	   	(SELECT name FROM user_table WHERE compBoard.userno = userno) username ";
+		sql += "			FROM compBoard WHERE comp_no = ?";
 		
 		CompBoard res = null;
 		
@@ -121,10 +125,9 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res.setComp_member( rs.getInt("comp_member") );
 				res.setComp_date( rs.getDate("comp_date") );
 				res.setComp_view( rs.getInt("comp_view") );
-				res.setComp_reply( rs.getInt("comp_reply") );
-				res.setComp_like( rs.getInt("comp_like") );
 				res.setComp_startdate( rs.getDate("comp_startdate"));
 				res.setComp_enddate( rs.getDate("comp_enddate"));
+				res.setUsername( rs.getString("username"));
 				
 			}
 			
@@ -158,7 +161,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += "    SELECT rownum rnum, B.* FROM (";
 			sql += "		SELECT comp_no, userno, comp_title, comp_name, ";
 			sql += "			   comp_content, comp_member, comp_date, comp_view, ";
-			sql += "			   comp_reply, comp_like, comp_startdate, comp_enddate, ";
+			sql += "			   comp_startdate, comp_enddate, ";
 			sql += " 			(SELECT name FROM user_table WHERE compBoard.userno = userno) username";
 			sql += "		FROM compBoard";
 			
@@ -228,8 +231,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					compBoard.setComp_member( rs.getInt("comp_member") );
 					compBoard.setComp_date( rs.getDate("comp_date") );
 					compBoard.setComp_view( rs.getInt("comp_view") );
-					compBoard.setComp_reply( rs.getInt("comp_reply") );
-					compBoard.setComp_like( rs.getInt("comp_like") );
 					compBoard.setComp_startdate( rs.getDate("comp_startdate"));
 					compBoard.setComp_enddate( rs.getDate("comp_enddate") );
 					
@@ -261,8 +262,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		String sql = "";
 		sql +="INSERT INTO compBoard(comp_no, userno, comp_title, comp_name, ";
 		sql +="		 				 comp_content, comp_member, comp_date, comp_view, ";
-		sql +="						 comp_reply, comp_like, comp_startdate, comp_enddate )";
-		sql +=" VALUES(?, ?, ?, ?, ?, ?, sysdate, 0, 0, 0, ?, ?)";
+		sql +="						 comp_startdate, comp_enddate )";
+		sql +=" VALUES(?, ?, ?, ?, ?, ?, sysdate, 0, ?, ?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);
