@@ -61,11 +61,10 @@ CREATE TABLE compboard (
     comp_member NUMBER,
     comp_date DATE default SYSDATE,
     comp_view NUMBER,
-    comp_reply NUMBER,
-    comp_like NUMBER,
     comp_startdate Date,
     comp_enddate Date
 );
+    
     
 DROP SEQUENCE compBoard_seq;
 CREATE SEQUENCE compBoard_seq;
