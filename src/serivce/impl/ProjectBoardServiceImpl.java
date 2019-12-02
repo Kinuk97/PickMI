@@ -71,4 +71,10 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 		return projectBoardDao.selectBoardByProjectno(projectBoard);
 	}
 
+	@Override
+	public void delete(ProjectBoard projectBoard) {
+		projectBoardDao.deleteProjBoard(projectBoard);
+		
+	}
+
 }

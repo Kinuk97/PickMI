@@ -1,4 +1,4 @@
-package controller.projectMgt;
+package controller.ws;
 
 import java.io.IOException;
 
@@ -8,14 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/schedule/list")
-public class ScheduleListController extends HttpServlet {
+@WebServlet("/ws/test")
+public class WsTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		req.setAttribute("scheduleList", o);
-		
-		req.getRequestDispatcher("/WEB-INF/views/projectMgt/schedule.jsp").forward(req, resp);
+		req.getRequestDispatcher("/ws/test.jsp").forward(req, resp);
 	}
 }
