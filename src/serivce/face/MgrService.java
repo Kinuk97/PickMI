@@ -104,6 +104,8 @@ public interface MgrService {
 	public List<ProjectBoard> getPjBoardList();
 	
 	public List<ProjectBoard> getPjBoardList(Paging paging);
+
+//	public void listdeleteComp(HttpServletRequest req);
 	
 // ----- ProjectList
 
