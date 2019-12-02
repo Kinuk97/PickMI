@@ -34,6 +34,20 @@
 </script> -->
 <!--End of Tawk.to Script-->
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#messagelist').stop().slideUp('medium');
+	
+	$('#messagelist').off("click");
+	$('#messagelist').click(function() {
+		
+		console.log("꺌")
+		$('#messagelist').hide();
+		$('#message').show();
+	});
+	
+});
+</script>
 
 <style type="text/css">
 
@@ -229,6 +243,7 @@ a#top {
 	border-bottom-right-radius: 0px;
 }
 
+/* 메인 슬라이드 음영제거 */
 .carousel-control.left {
 	background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
 }
@@ -236,9 +251,12 @@ a#top {
 .carousel-control.right {
 	background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
 }
+/*                       */
 
 </style>
+
 </head>
+
 <body>
 
 <div id="header">
@@ -310,43 +328,47 @@ a#top {
 									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 									Message <span class="badge" id="badge">5</span>
 								</button>
+								
+								<!-- 메세지 목록 -->
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;">
-<!-- 									<li role="presentation"> -->
+									<li id="messagelist" role="presentation">1
 <!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
-<!-- 												<iframe src="http://service.dongledongle.com/godnjs8" style="width:100%; height:500px;"></iframe> -->
+<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
 <!-- 										</a> -->
-<!-- 									</li> -->
-									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
 									</li>
-									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
+									<li role="presentation">2
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
+<!-- 										</a> -->
 									</li>
-									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
+									<li role="presentation">3
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
+<!-- 										</a> -->
 									</li>
-									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
+									<li role="presentation">4
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
+<!-- 										</a> -->
 									</li>
-									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
+									<li role="presentation">5
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
+<!-- 										</a> -->
 									</li>
 								</ul>
+								
+								<!-- 메세지 목록중 하나 클릭했을 시 -->
+<!-- 								<ul class="dropdown-menu" id="message" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;"> -->
+									
+<!-- 								</ul> -->
+								
+								
 							</div>
 						</li>
 						

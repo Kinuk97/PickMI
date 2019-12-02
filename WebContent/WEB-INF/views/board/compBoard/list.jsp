@@ -119,10 +119,6 @@ select {
 					<button class="btn btn-default" type="submit" style='margin: 10px;'>검색</button>
 					</span>
 				</div>
-		
-			<div class="text-right">
-<!-- 				<a href="/compBoard/write" id="btnNoLoginWrite" name="btnNoLoginWrite" class="btn btn-info" style="margin-top: 10px;">&emsp;&emsp;새로운 글 작성&emsp;&emsp;</a> -->
-			</div>
 
 		</form>
 		
