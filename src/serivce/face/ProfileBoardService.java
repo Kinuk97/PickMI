@@ -9,6 +9,11 @@ import dto.ProfileBoard;
 import util.Paging;
 
 public interface ProfileBoardService {
+	/**
+	 * 게시글을 삭제한다
+	 * @param profile
+	 */
+	public void removeProfile(ProfileBoard profile);
 	
 	/**
 	 * 좋아요를 누를때마다 숫자 증가

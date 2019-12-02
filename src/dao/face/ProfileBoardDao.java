@@ -9,6 +9,11 @@ import util.Paging;
 
 public interface ProfileBoardDao {
 	/**
+	 * 게시글을 삭제한다
+	 * @param profile
+	 */
+	public void deleteProfile(ProfileBoard profile);
+	/**
 	 * 프로필 수정하기
 	 * @param profile
 	 */

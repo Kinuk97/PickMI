@@ -38,6 +38,12 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 		return Singleton.instance;
 	}
 	
+	@Override
+	public void removeProfile(ProfileBoard profile) {
+	
+		profileBoardDao.deleteProfile(profile);
+		
+	}
 	
 	@Override
 	public void like(LikePost like) {
