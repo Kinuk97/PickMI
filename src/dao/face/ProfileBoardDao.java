@@ -9,6 +9,11 @@ import util.Paging;
 
 public interface ProfileBoardDao {
 	/**
+	 * 프로필 수정하기
+	 * @param profile
+	 */
+	public void updateProfile(ProfileBoard profile);
+	/**
 	 * 좋아요 지우기
 	 * @param like
 	 */
