@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- jQuery.com의 CDN을 이용한 설치(배포) -->
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style type="text/css">
+.calendar {
+	width: 100%;
+	overflow: visible;
+	text-align: center;
+	display: table;
+	border-collapse: separate;
+	border-spacing: 2px;
+	border-color: grey;
+}
+
+.calendar .week {
+	background: #f1f0f0;
+	color: #515151;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom: 1px solid #d6d6d6;
+	height: 40px;
+}
+
+.calendar .saturday {
+	background: white;
+	color: #3a87ad;
+	font-size: 16px;
+	font-weight: bold;
+	height: 55px;
+	border: 2px solid #f1f0f0;
+}
+
+.calendar .sunday {
+	background: white;
+	color: crimson;
+	font-size: 16px;
+	font-weight: bold;
+	height: 55px;
+	border: 2px solid #f1f0f0;
+}
+
+/* 오늘 날짜 강조 스타일 */
+/* .calendar .today { */
+/* 	background: white; */
+	/* 	color: darkblue; */
+/* 	font-size: 16px; */
+/* 	font-weight: bold; */
+/* 	height: 55px; */
+/* 	border: 2px solid darkblue; */
+	/* 	border: 2px solid #f1f0f0; */
+/* } */
+
+.calendar .blank {
+	background: white;
+	color: brown;
+	font-size: 16px;
+	font-weight: bold;
+	height: 55px;
+	border: 2px solid #f1f0f0;
+}
+
+.calendar .day {
+	background: white;
+	color: #515151;
+	font-size: 16px;
+	font-weight: bold;
+	height: 55px;
+	border: 2px solid #f1f0f0;
+}
+</style>
+
+<script type="text/javascript">
+	var curr_date = new Date();
+	
+	function createCalendar(curr_date) {
+		//Calendar date 객체 생성하기!
+		var Calendar = new Date(curr_date);
+	
+		// getDay() 메서드는 (일요일:0 ~ 토요일:6)을 반환하니 0번째 인덱스부터 일요일을 넣는다.
+		var day_of_week = [ '월', '화', '수', '목', '금', '토', '일' ];
+	
+		// getMonth() 메서드는 (1월:0 ~ 12월:11)을 반환하니 0번째 인덱스부터 1월을 넣는다.
+		var month_of_year = [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월',
+				'10월', '11월', '12월' ];
+	
+		var year = Calendar.getFullYear(); // yyyy   년도
+		var month = Calendar.getMonth(); // 0 ~ 11 (1 ~ 12월 인덱스)
+		var today = Calendar.getDate(); // 1 ~ 31 (1 ~ 31일)
+		var weekday = Calendar.getDay(); // 0 ~ 6  (일요일 ~ 토요일 인덱스)
+	
+		Calendar.setDate(1); // 달력은 1일부터 표시해야하니 setDate() 메서드를 이용해서 1일로 마추자!
+	
+		var DAYS_OF_WEEK = 7; // 일주일은 7일!
+		var DAYS_OF_MONTH = 31; // 한달은 최대 31일!
+		var str; // html 코드를 넣을 str 변수
+	
+		// tr
+		var TR_start = "<div class='row'>";
+		var TR_end = "</div>";
+	
+		//td css 클래스를 이용하여 요일마다 색을 다르게줍니다.(커스텀마이징 가능)
+		var TD_week_start = "<span class='week'>"; // 일요일 ~ 토요일 을 나타낼 td
+		var TD_blank_start = "<span class='blank'>"; // blank (1일 이전의 날짜)
+		var TD_today_start = "<span class='today'>"; // 오늘 날짜
+		var TD_day_start = "<span class='day'>"; // 평일
+		var TD_saturday_start = "<span class='saturday'>"; // 토요일
+		var TD_sunday_start = "<span class='sunday'>"; // 일요일
+		var TD_end = "</span>"; // 테이블 만들기
+		
+		var TD_prev_month = "<span id='prev_month' class='glyphicon glyphicon-triangle-left' style='margin-right: 10px'></span>";
+		var TD_next_month = "<span id='next_month' class='glyphicon glyphicon-triangle-right' style='margin-left: 10px'></span>";
+	
+		str = "<h3>" + TD_prev_month + year + " . " + month_of_year[month] + TD_next_month + "</h3>";
+		str += "<div class='' style='border: 1px solid #CCC;'></div>";
+	
+		// 본격적인 tr 시작!
+		// 일단 맨 첫 줄은 요일을 나타내자!
+		str += TR_start; // 요일 td
+	
+		for (var i = 0; i < DAYS_OF_WEEK; ++i) {
+	
+			// 7번 돌아가면서 day_of_week의 값을 빼내온다. 
+			str += TD_week_start + day_of_week[i] + TD_end;
+		}
+	
+		// 요일이 끝나면 한 줄 내려가기 위해 </tr>
+		str += TR_end;
+	
+		// 1일이 시작하기 전까지의 이전 요일들을 blank 하자!
+		for (var i = 0; i < Calendar.getDay(); ++i) {
+			str += TD_blank_start + TD_end;
+		}
+	
+		// 자 이제 1일부터 시작!
+		for (var i = 0; i < DAYS_OF_MONTH; ++i) {
+			// 날짜가 i보다 클 때만 표현!! 왜냐하면 -> 날짜가 i보다 작다는 건 다음 달로 넘어가서 1일이 되었다는 거다!
+			if (Calendar.getDate() > i) {
+				var day = Calendar.getDate(); // 날짜
+				var week_day = Calendar.getDay(); // 요일
+	
+				// 만약 일요일이면 tr로 한 칸 내려간다!
+				if (week_day == 0) {
+					str += TR_start;
+				}
+	
+				// 오늘 날짜라면
+				if (day == today) {
+					str += TD_today_start + day + TD_end;
+				} else {
+					switch (week_day) {
+					case 5: // 토요일
+						str += TD_saturday_start + day + TD_end;
+						break;
+					case 6: // 일요일
+						str += TD_sunday_start + day + TD_end;
+						str += TR_end; // 토요일이면 </tr>
+						break;
+					default: // 평일
+						str += TD_day_start + day + TD_end;
+						break;
+					}
+				}
+			}// if end
+	
+			// 다음 날짜로 넘어간다.
+			Calendar.setDate(Calendar.getDate() + 1);
+		}// for end
+	
+		str += "</table>";
+		
+		$("#calender").html(str);
+		
+		$("td:not([class='blank'])").on("click", function() {
+			$('.modal').modal()
+			
+			$(".modal-body > p").text($(this).text());
+		});
+	}
+
+	window.onload = function() {
+		createCalendar(curr_date);
+	
+		$("#container").on("click", "#prev_month" , function() {
+			curr_date.setMonth(curr_date.getMonth() - 1);
+			createCalendar(curr_date);
+		});
+		$("#container").on("click", "#next_month", function() {
+			curr_date.setMonth(curr_date.getMonth() + 1);
+			createCalendar(curr_date);
+		});
+
+	}
+</script>
+
+<style type="text/css">
+.week {
+}
+
+var TD_week_start = "<span class='week'>"; // 일요일 ~ 토요일 을 나타낼 td
+		var TD_blank_start = "<span class='blank'>"; // blank (1일 이전의 날짜)
+		var TD_today_start = "<span class='today'>"; // 오늘 날짜
+		var TD_day_start = "<span class='day'>"; // 평일
+		var TD_saturday_start = "<span class='saturday'>"; // 토요일
+		var TD_sunday_start = "<span class='sunday'>"; // 일요일
+		var TD_end = "</span>"; // 테이블 만들기
+</style>
+
+
+</head>
+<body>
+	<div id="container" style="width: 800px; margin: 0 auto; top: 200px; position: relative;">
+		<div id="calender" style="border: 1px solid #CCC; text-align: center;">
+		
+		</div>
+	</div>
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<p>One fine body&hellip;</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+</html>
