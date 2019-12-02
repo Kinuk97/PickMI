@@ -229,6 +229,14 @@ a#top {
 	border-bottom-right-radius: 0px;
 }
 
+.carousel-control.left {
+	background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+
+.carousel-control.right {
+	background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+
 </style>
 </head>
 <body>
@@ -309,7 +317,7 @@ a#top {
 <!-- 										</a> -->
 <!-- 									</li> -->
 									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="/message" style="padding-top: 15px; padding-bottom: 15px;">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
 										</a>
