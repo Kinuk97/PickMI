@@ -47,6 +47,11 @@ CREATE TABLE projboard (
     proj_like NUMBER,
     proj_job VARCHAR2(50)
 );
+
+ALTER TABLE projboard
+ADD CONSTRAINT projboard_fk_01
+    FOREIGN KEY (userno)
+    REFERENCES user_table(userno);
     
 DROP SEQUENCE proj_no_seq;
 CREATE SEQUENCE proj_no_seq;
