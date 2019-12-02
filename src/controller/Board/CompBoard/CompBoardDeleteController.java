@@ -24,7 +24,6 @@ public class CompBoardDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		CompBoard compBoard = compBoardService.getParam(req);
-		CompBoard comp = compBoardService.compBoardDetail(compBoard);
 		
 		fileService.deleteFile(getServletContext().getRealPath("upload"), 4, compBoard.getComp_no());
 		compBoardService.delete(compBoard);

@@ -34,6 +34,58 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	}
 	
 	@Override
+	public void deleteProfile(ProfileBoard profile) {
+		String sql = "";
+		sql += "DELETE FROM profile WHERE prof_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, profile.getProf_no());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void updateProfile(ProfileBoard profile) {
+
+		String sql = "";
+		sql += " UPDATE profile SET prof_interest = ?, prof_loc = ? , prof_job = ?, prof_state = ?, prof_career = ?, prof_content = ? WHERE prof_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, profile.getProf_interest());
+			ps.setString(2, profile.getProf_loc());
+			ps.setString(3, profile.getProf_job());
+			ps.setString(4, profile.getProf_state());
+			ps.setString(5, profile.getProf_career());
+			ps.setString(6, profile.getProf_content());
+			ps.setInt(7, profile.getProf_no());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	@Override
 	public void deleteLike(LikePost like) {
 		String sql = "";
 		sql += "DELETE FROM likepost WHERE postno = 1 AND boardno = ? AND userno = ?";

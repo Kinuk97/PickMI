@@ -17,6 +17,24 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<!--Start of Tawk.to Script-->
+<!-- <script type="text/javascript">
+	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+	
+	(function() {
+		var s1 = document.createElement("script"), s0 = document
+				.getElementsByTagName("script")[0];
+		s1.async = true;
+		s1.src = 'https://embed.tawk.to/5de394e9d96992700fca2231/default';
+		s1.charset = 'UTF-8';
+		s1.setAttribute('crossorigin', '*');
+		s0.parentNode.insertBefore(s1, s0);
+	})();
+	
+</script> -->
+<!--End of Tawk.to Script-->
+
+
 <style type="text/css">
 
 #header {
@@ -211,6 +229,14 @@ a#top {
 	border-bottom-right-radius: 0px;
 }
 
+.carousel-control.left {
+	background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+
+.carousel-control.right {
+	background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+
 </style>
 </head>
 <body>
@@ -285,6 +311,11 @@ a#top {
 									Message <span class="badge" id="badge">5</span>
 								</button>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;">
+<!-- 									<li role="presentation"> -->
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 												<iframe src="http://service.dongledongle.com/godnjs8" style="width:100%; height:500px;"></iframe> -->
+<!-- 										</a> -->
+<!-- 									</li> -->
 									<li role="presentation">
 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">

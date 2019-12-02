@@ -291,6 +291,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				e.printStackTrace();
 				
 			}
+			
 		}
 				
 		

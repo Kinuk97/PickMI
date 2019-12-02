@@ -149,79 +149,16 @@ a#top {
 
 </style>
 
-<div class="text-center">
-	<h1>나를 소개해보세요!😉<small>프로필 게시판</small></h1>
-</div>
-
-
-<div id="filtersystem" style="padding:0 150px; margin-left: 60px; padding-right: 213px;">
-	<div id="filter">
-		<button class="btn btn-info" id="filterBtn">관심</button>
-			<div id="filter-list">
-				<a href="#">java</a>
-				<a href="#">algorithm</a>
-				<a href="#">html/css</a>
-				<a href="#">design</a>
-			</div>
-	</div>
-	
-	<div id="filter">
-		<button class="btn btn-info" id="filterBtn">지역</button>
-			<div id="filter-list">
-				<a href="#">서울</a>
-				<a href="#">경기</a>
-				<a href="#">그외</a>
-			</div>
-	</div>
-	
-	<div id="filter">
-		<button class="btn btn-info" id="filterBtn">직업</button>
-			<div id="filter-list">
-				<a href="#">개발자</a>
-				<a href="#">프리랜서</a>
-				<a href="#">디자이너</a>
-				<a href="#">무직</a>
-			</div>
-	</div>
-	
-	<div id="filter">
-		<button class="btn btn-info" id="filterBtn">상태</button>
-			<div id="filter-list">
-				<a href="#">구직중</a>
-				<a href="#">재직중</a>
-				<a href="#">프리랜서</a>
-			</div>	
-	</div>
-	
-	<div id="filter">
-		<button class="btn btn-info" id="filterBtn">경력</button>
-			<div id="filter-list">
-				<a href="#">1-2년차</a>
-				<a href="#">3-4년차</a>
-				<a href="#">5-7년차</a>
-				<a href="#">8년차이상</a>
-			</div>
-	</div>
-			
-		<c:if test="${ login }">
-<!-- 		<div class="text-right" style="padding: 0 150px; margin-right: 64px;"> -->
-			<a href="/profileBoard/write"><button class="btn btn-info" style="float: right; margin-top: 30px;">&emsp;&emsp;새로운 프로필 등록&emsp;&emsp;</button></a>
-<!-- 		</div> -->
-		</c:if>
-</div>
-
-<br>
-<hr>
-
+<h1 align="center"> 나를 소개해보세요❣❣😄 </h1>
 <c:if test="${ login }">
-<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
-<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
-</div>
+	<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+		<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
+	</div>
 </c:if>
 <c:if test="${ !login }">
-<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
-<a href="/login"><button class="btn btn-info" id="write">프로필 등록</button></a>
-</div>
+	<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+		<button class="btn btn-info" id="write">프로필 등록</button>
+	</div>
 </c:if>
 
 <div id=filtersystem style="padding:0 100px; margin-left: 60px;">
@@ -270,8 +207,7 @@ a#top {
 	</div>
 </div>
 <br>
-<br>
->>>>>>> refs/heads/dongs
+
 <a id="top" href="#">TOP👆</a>
 <div id="board" class="container list-container">
 	<c:forEach items="${ list }" var="pro">
