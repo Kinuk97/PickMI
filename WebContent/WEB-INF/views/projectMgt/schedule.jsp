@@ -7,6 +7,35 @@
 
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"></jsp:include>
 
+<!-- add styles -->
+<link href="/resources/css/jquery-ui.min.css" rel="stylesheet"
+	type="text/css" />
+<!-- add scripts -->
+<script src="/resources/js/jquery-ui.min.js"></script>
+
+
+<style type="text/css">
+.cal_top {
+	text-align: center;
+	font-size: 30px;
+}
+
+.cal {
+	text-align: center;
+}
+
+table.calendar {
+	border: 1px solid black;
+	display: inline-table;
+	text-align: left;
+}
+
+table.calendar td {
+	vertical-align: top;
+	border: 1px solid skyblue;
+	width: 100px;
+}
+</style>
 <script type="text/javascript">
 	var today = null;
 	var year = null;
@@ -15,14 +44,26 @@
 	var lastDay = null;
 	var $tdDay = null;
 	var $tdSche = null;
+	var jsonData = null;
+	$(document).ready(function() {
+		drawCalendar();
+		initDate();
+		drawDays();
+		drawSche();
+		$("#movePrevMonth").on("click", function() {
+			movePrevMonth();
+		});
+		$("#moveNextMonth").on("click", function() {
+			moveNextMonth();
+		});
+	});
 
-	//calendar 그리기
+	//Calendar 그리기
 	function drawCalendar() {
 		var setTableHTML = "";
 		setTableHTML += '<table class="calendar">';
-		setTableHTML += '<tr class="schedule-header"><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>';
+		setTableHTML += '<tr><th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>';
 		for (var i = 0; i < 6; i++) {
-			// tr 높이 지정
 			setTableHTML += '<tr height="100">';
 			for (var j = 0; j < 7; j++) {
 				setTableHTML += '<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
@@ -44,6 +85,9 @@
 		today = new Date();
 		year = today.getFullYear();
 		month = today.getMonth() + 1;
+		if (month < 10) {
+			month = "0" + month;
+		}
 		firstDay = new Date(year, month - 1, 1);
 		lastDay = new Date(year, month, 0);
 	}
@@ -52,7 +96,8 @@
 	function drawDays() {
 		$("#cal_top_year").text(year);
 		$("#cal_top_month").text(month);
-		for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
+		for (var i = firstDay.getDay(); i < firstDay.getDay()
+				+ lastDay.getDate(); i++) {
 			$tdDay.eq(i).text(++dayCount);
 		}
 		for (var i = 0; i < 42; i += 7) {
@@ -88,65 +133,62 @@
 		getNewInfo();
 	}
 
+	//정보갱신
 	function getNewInfo() {
 		for (var i = 0; i < 42; i++) {
 			$tdDay.eq(i).text("");
+			$tdSche.eq(i).text("");
 		}
 		dayCount = 0;
 		firstDay = new Date(year, month - 1, 1);
 		lastDay = new Date(year, month, 0);
 		drawDays();
+		drawSche();
 	}
-	
-	$(window).ready(function() {
-		// 달력 만들기
-		drawCalendar();
-		// 날짜 초기화 (오늘 날짜)
-		initDate();
-		// 일 그리기
-		drawDays();
-		$("#movePrevMonth").on("click", function() {
-			movePrevMonth();
-		});
-		$("#moveNextMonth").on("click", function() {
-			moveNextMonth();
-		});
-	});
+
+	//데이터 등록
+	function setData() {
+		jsonData = {
+			"2019" : {
+				"07" : {
+					"17" : "제헌절"
+				},
+				"08" : {
+					"7" : "칠석",
+					"15" : "광복절",
+					"23" : "처서"
+				},
+				"09" : {
+					"13" : "추석",
+					"23" : "추분"
+				}
+			}
+		}
+	}
+
+	//스케줄 그리기
+	function drawSche() {
+		setData();
+		var dateMatch = null;
+		for (var i = firstDay.getDay(); i < firstDay.getDay()
+				+ lastDay.getDate(); i++) {
+			var txt = "";
+			txt = jsonData[year];
+			if (txt) {
+				txt = jsonData[year][month];
+				if (txt) {
+					txt = jsonData[year][month][i];
+					dateMatch = firstDay.getDay() + i - 1;
+					$tdSche.eq(dateMatch).text(txt);
+				}
+			}
+		}
+	}
 </script>
-<style type="text/css">
-/* 상단바 */
-.cal_top {
-	text-align: center;
-	font-size: 30px;
-}
-
-/* 달력을 가운데 정렬 */
-.cal {
-	text-align: center;
-}
-
-/* 달력 부분 */
-table.calendar {
-	border: 1px solid #46b8da;
-	display: inline-table;
-	text-align: right;
-}
-
-/* td 하나 */
-table.calendar td {
-	vertical-align: top;
-	border: 1px solid #46b8da;
-	width: 100px;
-}
-
-/* 스케쥴러 헤더 */
-table th {
-	border: 1px solid #46b8da;
-	text-align: center;
-}
-</style>
 
 <div class="container">
+	<div id="datepicker"></div>
+
 	<div class="cal_top">
 		<a href="#" id="movePrevMonth"><span id="prevMonth"
 			class="cal_tit">&lt;</span></a> <span id="cal_top_year"></span> <span
@@ -154,7 +196,6 @@ table th {
 			id="nextMonth" class="cal_tit">&gt;</span></a>
 	</div>
 	<div id="cal_tab" class="cal"></div>
-
 </div>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp"></jsp:include>

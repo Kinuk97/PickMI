@@ -38,6 +38,10 @@ public class MgrCompListController extends HttpServlet {
 			
 			//Paging 객체 모델값으로 전달
 			req.setAttribute("paging", paging);
+			
+			//페이징에 필요한 url 전달	
+			req.setAttribute("url", req.getRequestURL());
+			
 //		System.out.println(paging);		
 			
 			

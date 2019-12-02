@@ -29,29 +29,24 @@ public interface ManagerDao {
 
 // ----- 검색	
 	/**
-	 * 총 게시글 수 조회
+	 * 총 사용자 수 조회
 	 * @param search 
-	 * @return int - 총 게시글 수
+	 * @return int - 총 사용자 수
 	 */
 	public int selectCntAll(String search);
 	
 // 검색 -----
 	
 // ----- UserList 	
-	
-	/**
-	 * 게시글 전체 목록 조회
-	 * @return List<ProfileBoard> - 조회된 게시글 목록
-	 */
-	public List<User> userselectAll();
-
-	
+		
 	/**
 	 * 페이징 대상 게시글 목록 조회
 	 * @param paging - 페이징 정보
-	 * @return List<ProfileBoard> - 조회된 게시글 목록
+	 * @return List<User> - 조회된 사용자 목록
 	 */
 	public List<User> userselectAll(Paging paging);	
+	
+	public int deleteUser(User user);
 
 // UserList -----
 		
@@ -66,7 +61,7 @@ public interface ManagerDao {
 	 */
 	public int profileseleCtntAll(String search);
 	
-	public List<ProfileBoard> profileselectAll();
+//	public List<ProfileBoard> profileselectAll();
 	
 	/**
 	 * 프로필 게시글 목록 불러오기

@@ -61,7 +61,9 @@ $(document).ready(function(){
 	</form>
 	</div>
 
-	<jsp:include page = "/WEB-INF/views/mgr/paging/userlistPaging.jsp" />
+	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
+   		<c:param name="url" value="${url }" />
+	</c:import>
 
 </div>
 </div> <!-- .container -->

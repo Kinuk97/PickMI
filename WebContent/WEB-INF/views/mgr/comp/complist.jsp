@@ -64,7 +64,10 @@ $(document).ready(function(){
 			<button id="btnSearch" class="btn btn-primary">검색</button>
 		</form>
 		
-	<jsp:include page = "/WEB-INF/views/mgr/paging/compPaging.jsp" />
+	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
+   		<c:param name="url" value="${url }" />
+	</c:import>
+
 	
 	</div>
 </div>
