@@ -10,6 +10,13 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	
+	//알림 모달 호출 메서드
+	 function warningModal(content) {
+	    $(".modal-contents").text(content);
+	    $("#defaultModal").modal('show');
+	 }
+	
 	//목록버튼 동작
 	$("#btnList").click(function() {
 		$(location).attr("href", "/projectBoard/list");
@@ -17,12 +24,22 @@ $(document).ready(function() {
 	
 	//수정버튼 동작
 	$("#btnUpdate").click(function() {
+    	
+		warningModal("게시글을 수정하시겠습니까?");
+    	
+    	$('#ok').click(function(){    		
 		$(location).attr("href", "/projectBoard/update?proj_no=${projectBoard.proj_no }");
+    	});
 	});
 
 	//삭제버튼 동작
 	$("#btnDelete").click(function() {
+    	
+		warningModal("게시글을 삭제하시겠습니까?");
+    	
+    	$('#ok').click(function(){    		
 		$(location).attr("href", "/projectBoard/delete?proj_no=${projectBoard.proj_no }");
+    	});
 	});
 	
 });
@@ -52,8 +69,8 @@ $(document).ready(function() {
 			</tr>
 
 			<tr>
-				<td class="info">작성자 이름</td>
-				<td colspan="3">${projectBoard.userno }(추후 이름으로 수정)</td>
+				<td class="info">작성자</td>
+				<td colspan="3">${projectBoard.username }</td>
 				<td class="info">작성시간</td>
 				<td>${projectBoard.proj_time }</td>
 				
@@ -103,6 +120,28 @@ $(document).ready(function() {
 
 
 </section>
+
+<!--모달창 -->
+<div class="modal fade" id="defaultModal">
+	<div class="modal-dialog">
+		<div class="modal-content ">
+			<div class="modal-header panel-heading">
+				<h4 class="modal-title">알림</h4>
+			</div>
+			<div class="modal-body">
+				<p class="modal-contents"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="ok">확인</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- 모달창 -->
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

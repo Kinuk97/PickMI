@@ -684,6 +684,7 @@ public class FileServiceImpl implements FileService {
 					if (projectBoard == null)
 						projectBoard = new ProjectBoard();
 
+
 					if ("proj_title".equals(key)) {
 						try {
 							projectBoard.setProj_title(item.getString("UTF-8"));
@@ -753,6 +754,7 @@ public class FileServiceImpl implements FileService {
 					} else if ("proj_no".equals(key)) {
 						try {
 							projectBoard.setProj_no(Integer.parseInt(item.getString()));
+//							System.out.println(resultBoardno);
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 							// 게시글 번호를 가져오지 못했다면 리턴
@@ -917,36 +919,36 @@ public class FileServiceImpl implements FileService {
 		} else if (postno == 2) {
 			// 프로젝트 게시판
 			
-//			// 게시글 내용이 전부 비어있다면
-//			if (projectBoard == null) {
-//				if (uploadFile != null) {
-//					// 업로드하는 파일만 존재한다면 만들어진 서버 디스크에 저장된 파일 삭제
-//					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
-//					return -4;
-//				}
-//				return -3;
-//			}
-//			
-//			// 제목이 비어있는 경우 제목없음
-//			if (projectBoard.getProj_title() == null || "".equals(projectBoard.getProj_title().trim()))
-//				projectBoard.setProj_title("제목없음");
-//
-//			// 내용이 비어있는 경우 내용없음
-//			if (projectBoard.getProj_content() == null || "".equals(projectBoard.getProj_content().trim()))
-//				projectBoard.setProj_content("내용없음");
-//
-//			if (freeBoardDao.updateBoard(projectBoard) != 1) {
-//				resultBoardno = -5;
-//			}
-//
-//			resultBoardno = projectBoard.getProj_no();
-//
-//			// 업로드하는 파일이 있다면
-//			if (uploadFile != null) {
-//				// 파일에 게시글 번호와 게시판 번호를 설정
-//				uploadFile.setBoardno(freeBoard.getFree_no());
-//				uploadFile.setPostno(3);
-//			}
+			// 게시글 내용이 전부 비어있다면
+			if (projectBoard == null) {
+				if (uploadFile != null) {
+					// 업로드하는 파일만 존재한다면 만들어진 서버 디스크에 저장된 파일 삭제
+					new File(context.getRealPath("upload"), uploadFile.getStoredName()).delete();
+					return -4;
+				}
+				return -3;
+			}
+			
+			// 제목이 비어있는 경우 제목없음
+			if (projectBoard.getProj_title() == null || "".equals(projectBoard.getProj_title().trim()))
+				projectBoard.setProj_title("제목없음");
+
+			// 내용이 비어있는 경우 내용없음
+			if (projectBoard.getProj_content() == null || "".equals(projectBoard.getProj_content().trim()))
+				projectBoard.setProj_content("내용없음");
+
+			if (projectBoardDao.updateBoard(projectBoard) != 1) {
+				resultBoardno = -5;
+			}
+
+			resultBoardno = projectBoard.getProj_no();
+
+			// 업로드하는 파일이 있다면
+			if (uploadFile != null) {
+				// 파일에 게시글 번호와 게시판 번호를 설정
+				uploadFile.setBoardno(projectBoard.getProj_no());
+				uploadFile.setPostno(2);
+			}
 
 		} else if (postno == 3) {
 			// 자유게시판

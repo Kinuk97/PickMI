@@ -34,6 +34,28 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	}
 	
 	@Override
+	public void deleteProfile(ProfileBoard profile) {
+		String sql = "";
+		sql += "DELETE FROM profile WHERE prof_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, profile.getProf_no());
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
 	public void updateProfile(ProfileBoard profile) {
 
 		String sql = "";

@@ -68,6 +68,10 @@ $("#loginplz2").click( function loginplz(){
 	alert("로그인 해주세요");
  	$(location).attr("href","/login");
 	});
+$("#loginplz3").click( function loginplz(){
+	alert("로그인 해주세요");
+ 	$(location).attr("href","/login");
+	});
 	
 })
 </script>
@@ -136,6 +140,12 @@ $("#loginplz2").click( function loginplz(){
 </c:if>
 <c:if test="${ !login }">
 	<button id="loginplz2">수정</button>			
+</c:if>
+<c:if test="${ login }">
+	<a href="/profileBoard/delete?prof_no=${profile.prof_no}"><button id="delete">삭제</button></a>			
+</c:if>
+<c:if test="${ !login }">
+	<button id="loginplz3">삭제</button>			
 </c:if>
 
 

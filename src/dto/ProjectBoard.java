@@ -5,6 +5,7 @@ import java.util.Date;
 public class ProjectBoard {
 	private int proj_no;
 	private int userno;
+	private String username;
 	private String proj_title;
 	private String proj_name;
 	private Date proj_time;
@@ -22,7 +23,7 @@ public class ProjectBoard {
 
 	@Override
 	public String toString() {
-		return "ProjectBoard [proj_no=" + proj_no + ", userno=" + userno + ", proj_title=" + proj_title + ", proj_name="
+		return "ProjectBoard [proj_no=" + proj_no + ", userno=" + userno + ", proj_title=" + ",username=" + username + proj_title + ", proj_name="
 				+ proj_name + ", proj_time=" + proj_time + ", proj_loc=" + proj_loc + ", proj_career=" + proj_career
 				+ ", proj_member=" + proj_member + ", proj_apply=" + proj_apply + ", proj_sdate=" + proj_sdate
 				+ ", proj_ddate=" + proj_ddate + ", proj_rec_date=" + proj_rec_date + ", proj_progress=" + proj_progress
@@ -157,4 +158,12 @@ public class ProjectBoard {
 		this.proj_like = proj_like;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
 }

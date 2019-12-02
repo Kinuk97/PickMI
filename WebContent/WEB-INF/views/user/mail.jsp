@@ -164,7 +164,7 @@ body {
 <input id="numcheck2" type="hidden" class="form-control" name="numcheck2" value="${key }" >
 <input id="numcheck" type="text" class="form-control" name="numcheck" placeholder="인증번호 입력" required="required">
 
-<div class="alert alert-success" id="alert-success"> 인증번호가 일치합니다. <button type="button" onclick="location.href = '/login';">확인</button></div>
+<div class="alert alert-success" id="alert-success"> 인증번호가 일치합니다. <button type="button" class="btn btn-primary" onclick="location.href = '/login';">확인</button></div>
 <div class="alert alert-danger" id="alert-danger">인증번호가 일치하지 않습니다.</div>
 </div>
 <!-- </form> -->

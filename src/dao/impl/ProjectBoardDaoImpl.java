@@ -169,7 +169,11 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT * FROM projboard";
+		sql += "SELECT proj_no, userno, proj_title, proj_name, proj_loc, proj_career, "
+				+ "proj_apply, proj_content, proj_sdate, proj_ddate, proj_rec_date, proj_like, "
+				+ "proj_time, proj_progress, proj_member, proj_job, "
+				+ "(SELECT name FROM user_table WHERE projboard.userno = userno) username";
+		sql += " FROM projboard";
 		sql += " WHERE proj_no = ?";
 		
 		try {
@@ -196,6 +200,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				projectBoard.setProj_progress(rs.getString("proj_progress"));
 				projectBoard.setProj_member(rs.getInt("proj_member"));
 				projectBoard.setProj_job(rs.getString("proj_job"));
+				projectBoard.setUsername(rs.getString("username"));
 			}
 		} catch (SQLException e) {
 			
@@ -247,7 +252,6 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 
 		} finally {
 			try {
-				if(rs!=null) rs.close();
 				if(ps!=null) ps.close();
 
 			} catch (SQLException e) {
@@ -256,6 +260,79 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 			}
 		}
 		
+	}
+
+	@Override
+	public void deleteProjBoard(ProjectBoard projectBoard) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "DELETE FROM projboard";
+		sql += " WHERE proj_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, projectBoard.getProj_no());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		}
+		
+	}
+
+	@Override
+	public int updateBoard(ProjectBoard projectBoard) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "UPDATE projboard SET proj_title = ?, proj_name = ?, proj_content = ?, proj_member = ?,";
+		sql += " proj_sdate = ?, proj_ddate = ?, proj_rec_date = ?, proj_loc = ?, proj_progress = ?, proj_job = ?, proj_career = ?";
+		sql += " WHERE proj_no = ?";
+		
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, projectBoard.getProj_title());
+			ps.setString(2, projectBoard.getProj_name());
+			ps.setString(3, projectBoard.getProj_content());
+			ps.setInt(4, projectBoard.getProj_member());
+			ps.setDate(5, (Date) projectBoard.getProj_sdate());
+			ps.setDate(6, (Date) projectBoard.getProj_ddate());
+			ps.setDate(7, (Date) projectBoard.getProj_rec_date());
+			ps.setString(8, projectBoard.getProj_loc());
+			ps.setString(9, projectBoard.getProj_progress());
+			ps.setString(10, projectBoard.getProj_job());
+			ps.setString(11, projectBoard.getProj_career());
+			ps.setInt(12, projectBoard.getProj_no());
+			
+			result = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+		}
+		return result;
 	}
 
 
