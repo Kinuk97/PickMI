@@ -14,8 +14,14 @@
 <!-- 부트스트랩 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- <script -->
+<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+
+<script type="text/javascript" src="/resources/js/dropdown.js"></script>
+<script type="text/javascript" src="/resources/js/carousel.js"></script>
+<script type="text/javascript" src="/resources/js/tooltip.js"></script>
+<script type="text/javascript" src="/resources/js/popover.js"></script>
+<script type="text/javascript" src="/resources/js/modal.js"></script>
 
 <!--Start of Tawk.to Script-->
 <!-- <script type="text/javascript">
@@ -36,17 +42,15 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#messagelist').stop().slideUp('medium');
-	
-	$('#messagelist').off("click");
 	$('#messagelist').click(function() {
 		
 		console.log("꺌")
-		$('#messagelist').hide();
-		$('#message').show();
+		$('.dropdown-menu').css('visibility','hidden');
+		$('#messagebox').css('visibility', 'visible');
 	});
 	
 });
+
 </script>
 
 <style type="text/css">
@@ -253,6 +257,21 @@ a#top {
 }
 /*                       */
 
+#messagebox {
+	border: 1px solid;
+	border-color: #ccc;
+	width: 340px;
+	height: 400px;
+	position: fixed;
+	z-index: 1;
+	background-color: #fff;
+	right: 0;
+	bottom: 0;	
+	visibility: hidden;
+}
+
+
+
 </style>
 
 </head>
@@ -277,6 +296,16 @@ a#top {
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				
+				<!-- 채팅창 -->	
+					<div id="messagebox">
+						<a class="close" style="width: 25px;">x</a>
+						<h3>채팅창</h3>
+						<hr>
+						${name }
+					</div>
+					
+				<!-- 메뉴 -->
 					<ul class="nav navbar-nav center" >
 <!-- 					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
 						<li><a href="/profileBoard/list">프로필 게시판</a></li>
@@ -284,18 +313,12 @@ a#top {
 						<li><a href="/compBoard/list">완성된 프로젝트 게시판</a></li>
 						<li><a href="/freeboard/list">자유게시판</a></li>
 					</ul>
-				
-					<!-- 검색 폼 -->
-<!-- 					<form class="navbar-form navbar-left" role="search"> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<input type="text" class="form-control" placeholder="Search"> -->
-<!-- 						</div> -->
-<!-- 						<button type="submit" class="btn btn-default">Submit</button> -->
-<!-- 					</form> -->
-
 
 				<ul class="nav navbar-nav navbar-right">
 
+
+				<c:choose>
+					<c:when test="${not empty login }">	
  						<li role="presentation"> 					
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
@@ -304,6 +327,9 @@ a#top {
 								</button>
 								
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+								
+									<li class="close" style="width: 25px;">x</li>
+								
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -322,6 +348,7 @@ a#top {
 							</div>
 						</li>
 						
+						
 						<li role="presentation"> 					
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
@@ -330,47 +357,45 @@ a#top {
 								</button>
 								
 								<!-- 메세지 목록 -->
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;">
-									<li id="messagelist" role="presentation">1
-<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
-<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
-<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
-<!-- 										</a> -->
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
+									<li class="close" style="width: 25px;">x</li>
+									
+									<li id="messagelist" role="presentation">
+										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
 									</li>
-									<li role="presentation">2
-<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
-<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
-<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
-<!-- 										</a> -->
+									<li role="presentation">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
 									</li>
-									<li role="presentation">3
-<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
-<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
-<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
-<!-- 										</a> -->
+									<li role="presentation">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
 									</li>
-									<li role="presentation">4
-<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
-<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
-<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
-<!-- 										</a> -->
+									<li role="presentation">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
 									</li>
-									<li role="presentation">5
-<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
-<!-- 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
-<!-- 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span> -->
-<!-- 										</a> -->
+									<li role="presentation">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
+											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
+										</a>
 									</li>
 								</ul>
-								
-								<!-- 메세지 목록중 하나 클릭했을 시 -->
-<!-- 								<ul class="dropdown-menu" id="message" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;"> -->
-									
-<!-- 								</ul> -->
-								
-								
 							</div>
 						</li>
+					</c:when>	
+				</c:choose>	
+						
 						
 					<li>
 					<c:choose>
