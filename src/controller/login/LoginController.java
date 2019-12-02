@@ -40,13 +40,13 @@ public class LoginController extends HttpServlet {
 		
 		if(login == true) {
 //			System.out.println(user);
-			String eamil = req.getParameter("eamil");
+			String email = req.getParameter("email");
 			String pw = req.getParameter("pw");
 			
 			User userno = userService.getUserno(user);
 			
 			session.setAttribute("login", true);
-			session.setAttribute("email", eamil);
+			session.setAttribute("email", email);
 			session.setAttribute("name", userno.getName());
 			session.setAttribute("userno", userno.getUserno());
 //			System.out.println(user);
