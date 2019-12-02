@@ -344,7 +344,9 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		String sql = "";
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
-		sql += "   select * from profile";
+		sql += "   select prof_no, userno, prof_time, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content,";
+		sql += " (SELECT count(*) FROM likepost WHERE boardno = profile.prof_no) AS prof_like,";
+		sql	+= " (SELECT name FROM user_table WHERE userno = profile.userno) AS username from profile";
 		
 		sql += "   order by prof_no desc";
 		sql += "  ) B";
