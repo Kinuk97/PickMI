@@ -47,6 +47,7 @@ $(document).ready(function(){
 	});
 	
 });
+
 </script>
 
 <style type="text/css">
@@ -258,13 +259,15 @@ a#top {
 	border-color: #ccc;
 	width: 340px;
 	height: 400px;
-	position: absolute;
-	top: 100px;
+	position: fixed;
 	z-index: 1;
 	background-color: #fff;
- 	margin-left:921px; 
-	
+	right: 0;
+	bottom: 0;	
 }
+
+
+
 </style>
 
 </head>
@@ -292,6 +295,7 @@ a#top {
 				
 				<!-- 채팅창 -->	
 					<div id="messagebox">
+						<a class="close" style="width: 25px;">x</a>
 						<h3>채팅창</h3>
 						<hr>
 						${name }
@@ -316,7 +320,9 @@ a#top {
 								</button>
 								
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+								
 									<li class="close" style="width: 25px;">x</li>
+								
 									<li role="presentation"><a role="menuitem" tabindex="-1"
 										href="#" style="padding-top: 10px; padding-bottom: 10px;">새로운 알림</a></li>
 									<li role="presentation"><a role="menuitem" tabindex="-1"
@@ -344,8 +350,9 @@ a#top {
 								</button>
 								
 								<!-- 메세지 목록 -->
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 350px; height: 432px;">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
 									<li class="close" style="width: 25px;">x</li>
+									
 									<li id="messagelist" role="presentation">
 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
