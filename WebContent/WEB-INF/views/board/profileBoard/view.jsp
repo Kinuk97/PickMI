@@ -9,6 +9,9 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	var login = "${login}"
+	if(login != ""&& longin ) {
+	
 	$("#unlike").click( function(){
 		console.log("된다");
 		$("#unlike").hide();
@@ -50,11 +53,17 @@ $(document).ready(function() {
 			}
 		})
 	})
+}
 
 function like(data) {
 		console.log("좋아요되랏")
 	$("#countLike").html(data.countLike)
 }
+
+$("#loginplz").click( function loginplz(){
+	alert("로그인 해주세요");
+ 	$(location).attr("href","/login");
+	});
 	
 })
 </script>
@@ -96,6 +105,16 @@ function like(data) {
 			<c:if test="${ !canLike }">
 				<button id="like" style="display: none;">LIKE</button>
 				<button id="unlike">UNLIKE</button>
+			</c:if>
+		</c:if>
+		<c:if test="${ !login }">
+			<c:if test="${ canLike }">
+				<button id="loginplz">LIKE</button>
+				<button id="unlike" style="display: none;">UNLIKE</button>
+			</c:if>
+			<c:if test="${ !canLike }">
+				<button id="like" style="display: none;">LIKE</button>
+				<button id="loginplz">UNLIKE</button>
 			</c:if>
 		</c:if>
 	</td>

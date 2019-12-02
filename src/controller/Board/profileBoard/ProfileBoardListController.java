@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import dto.LikePost;
 import dto.ProfileBoard;
 import serivce.face.ProfileBoardService;
 import serivce.impl.ProfileBoardServiceImpl;
@@ -35,6 +37,14 @@ public class ProfileBoardListController extends HttpServlet {
 		//게시글 목록 조회
 		List<ProfileBoard> list = profileBoardService.getBoardList(paging);
 		
+//		//찜 보여주기
+//		HttpSession session = req.getSession();
+//		LikePost like = new LikePost();
+//		like.setPostno(1);
+//		like.setBoardno(list.getBoardno());
+//		like.setUserno((int)session.getAttribute("userno"));
+//		int countLike = profileBoardService.countLike(like);
+//		req.setAttribute("countLike", countLike);
 		
 		req.setAttribute("list", list);
 		

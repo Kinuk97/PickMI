@@ -46,7 +46,7 @@ text-align:center;
 			<option value="개발" selected>개발</option>
 			<option value="디자인">디자인</option>
 			<option value="스타트업">스타트업</option>
-			<option value="언어">언어</option>
+			<option value="언어">IT언어</option>
 		</select>
 	</td>
 </tr>
