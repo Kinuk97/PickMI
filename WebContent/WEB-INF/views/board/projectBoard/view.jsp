@@ -82,8 +82,15 @@ $(document).ready(function() {
 				<td class="info">참여인원</td>
 				<td>${projectBoard.proj_apply }</td>
 				<td class="info">찜개수</td>
-				<td>${projectBoard.proj_like }</td>
-				
+				<td>${projectBoard.proj_like }
+					<button id="like"
+						class="btn btn-info" style="padding: 0px; margin-top: 0px;">LIKE</button>
+					
+					<button id="unlike"
+						style="display: none; padding: 0px; margin-top: 0px;"
+						class="btn btn-info">UNLIKE</button>
+				</td>
+
 			</tr>
 
 			<tr>

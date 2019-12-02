@@ -46,4 +46,12 @@ public interface ProjectBoardDao {
 	 * @return
 	 */
 	public int updateBoard(ProjectBoard projectBoard);
+	
+//	/**
+//	 * 지역필터에 의한 게시판 조회
+//	 * 
+//	 * @param paging
+//	 * @return
+//	 */
+//	public List<ProjectBoard> selectBoardListByLoc(Paging paging);
 }

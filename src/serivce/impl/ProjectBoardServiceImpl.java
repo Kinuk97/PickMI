@@ -31,6 +31,30 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 		if (param != null && !"".equals(param)) {
 			curPage = Integer.parseInt(param);
 		}
+		
+		param = req.getParameter("proj_loc");
+		String proj_loc = "";
+		if (param != null && !"".equals(param)) {
+			proj_loc = param;
+		}
+		
+		param = req.getParameter("proj_progress");
+		String proj_progress = "";
+		if (param != null && !"".equals(param)) {
+			proj_progress = param;
+		}
+		
+		param = req.getParameter("proj_job");
+		String proj_job = "";
+		if (param != null && !"".equals(param)) {
+			proj_job = param;
+		}
+		
+		param = req.getParameter("proj_career");
+		String proj_career = "";
+		if (param != null && !"".equals(param)) {
+			proj_career = param;
+		}
 
 
 		// Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
@@ -38,13 +62,21 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 
 		// Paging 객체 생성
 		Paging paging = new Paging(totalCount, curPage, 20);
-
+		
+		paging.setProj_loc(proj_loc);
+		paging.setProj_progress(proj_progress);
+		paging.setProj_job(proj_job);
+		paging.setProj_career(proj_career);
 
 		return paging;
 	}
 
 	@Override
 	public List<ProjectBoard> getBoardList(Paging paging) {
+		
+//		if(!paging.getProj_loc().equals(""))
+//		projectBoardDao.selectBoardListByLoc(paging);
+		
 		return projectBoardDao.selectAll(paging);
 	}
 
