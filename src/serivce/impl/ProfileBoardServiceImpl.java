@@ -69,6 +69,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	public ProfileBoard getNameByUserno(int userno) {
 		
 		ProfileBoard profile = null;
+		profile = new ProfileBoard();
 		profile.setUserno(userno);
 		
 		return profile;
