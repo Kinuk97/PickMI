@@ -69,7 +69,11 @@ CREATE TABLE compboard (
     comp_startdate Date,
     comp_enddate Date
 );
-    
+
+ALTER TABLE compboard
+ADD CONSTRAINT compboard_fk_01
+    FOREIGN KEY (userno)
+    REFERENCES user_table(userno);
     
 DROP SEQUENCE compBoard_seq;
 CREATE SEQUENCE compBoard_seq;
