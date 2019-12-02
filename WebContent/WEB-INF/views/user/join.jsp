@@ -180,26 +180,29 @@
 		</div>
 
 	</article>
-	
 
-<!--모달창 -->
-            <div class="modal fade" id="defaultModal">
-               <div class="modal-dialog">
-                    <div class="modal-content ">
-                        <div class="modal-header panel-heading">
-                            <h4 class="modal-title">알림</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p class="modal-contents"></p>
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-       
-            <!-- 모달창 -->
+
+	<!--모달창 -->
+	<div class="modal fade" id="defaultModal">
+		<div class="modal-dialog">
+			<div class="modal-content ">
+				<div class="modal-header panel-heading">
+					<h4 class="modal-title">알림</h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-contents"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- 모달창 -->
 
 
 </body>

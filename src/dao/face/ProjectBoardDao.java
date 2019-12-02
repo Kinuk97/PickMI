@@ -32,4 +32,18 @@ public interface ProjectBoardDao {
 	 * @param projectBoard - 게시글 작성 내용
 	 */
 	public void insert(ProjectBoard projectBoard);
+	
+	/**
+	 * 게시글 삭제
+	 * @param projectBoard
+	 */
+	public void deleteProjBoard(ProjectBoard projectBoard);
+	
+	/**
+	 * 게시글 수정
+	 * 
+	 * @param projectBoard
+	 * @return
+	 */
+	public int updateBoard(ProjectBoard projectBoard);
 }
