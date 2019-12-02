@@ -263,7 +263,7 @@ function like(data) {
 					<c:choose>
 						<c:when test="${not empty login }">
 							<button id="like" class="btn btn-default" style="padding: 0px; margin-top: 0px;">LIKE</button>
-							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button>
+							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button> 
 						</c:when>
 						
 						<c:otherwise>

@@ -907,7 +907,7 @@ public class FileServiceImpl implements FileService {
 			
 			compBoardDao.updateboard(compBoard);
 			
-			System.out.println(compBoard);
+//			System.out.println(compBoard);
 			
 			// 업로드하는 파일이 있다면
 			if (uploadFile != null) {
