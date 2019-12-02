@@ -28,20 +28,20 @@ public class MgrFreeListController extends HttpServlet {
 
 		if (req.getSession().getAttribute("mgrlogin") != null) {
 		
-			//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
+			// 요청파라미터에서 curPage를 구하고 Paging 객체 반환
 			Paging paging = freeBoardService.getPaging(req);
 			
-			//Paging 객체�? model값으�? �??��
+			//Paging 객체를 MODEL값으로 지정
 			req.setAttribute("paging", paging);
 			
 			//mgr main navTab에서 사용할 번호
 			req.setAttribute("boardno", 5);
 			
 			
-			// FreeBoard 게시�? 목록 조회
+			// FreeBoard 게시글 목록 조회
 			List<FreeBoard>freelist = freeBoardService.getBoardList(paging);
-			
-			//freelist 객체�? model값으�? �??��
+		
+			//freelist 객체를 MODEL값으로 전달
 			req.setAttribute("list", freelist);
 			
 			req.getRequestDispatcher("/WEB-INF/views/mgr/free/freelist.jsp").forward(req, resp);

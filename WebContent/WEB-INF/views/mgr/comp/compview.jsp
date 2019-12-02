@@ -15,15 +15,10 @@ $(document).ready(function(){
 	$("#btnList").click(function() {
 		$(location).attr("href", "/mgr/complist");
 	});
-
-// 	수정 버튼 동작
-	$("#btnUpdate").click(function(){
-		$(location).attr("href", "/compBoard/update?comp_no=${compBoard.comp_no }");
-	});
 	
 // 	삭제 버튼 동작
 	$("#btnDelete").click(function(){
-		 $(location).attr("href", "/compBoard/delete?comp_no=${compBoard.comp_no }");
+		 $(location).attr("href", "/mgr/compboard/delete?comp_no=${compBoard.comp_no }");
 	});
 	
 });
@@ -55,12 +50,7 @@ $(document).ready(function(){
 
 			<tr>
 				<td>프로젝트 기간</td><td>${compBoard.comp_startdate } ~ ${compBoard.comp_enddate }</td>
-				<td>찜한수</td><td>${compBoard.comp_like }</td>
 			</tr>
-
-<!-- 			<tr> -->
-<!-- 				<td class="info" colspan="4">본문</td> -->
-<!-- 			</tr> -->
 
 			<tr>
 				<td colspan="4" style="height: 500px;">${compBoard.comp_content }</td>
@@ -75,7 +65,6 @@ $(document).ready(function(){
 		</table>
 		
 		<div class="row text-center">
-			<button id="btnUpdate">게시글 수정</button>
 			<button id="btnDelete" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
 		</div>
 </div>	

@@ -52,7 +52,7 @@ table th {
 		<tr class="info">
 			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
 			<th style="width: 5%">글번호</th>
-			<th style="width: 5%">사용자번호</th>
+			<th style="width: 5%">사용자</th>
 			<th style="width: 20%">제목</th>
 			<th style="width: 10%">작성시간</th>
 		</tr>
@@ -60,7 +60,7 @@ table th {
 		<tr>
 			<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
 			<td>${pjboard.proj_no }</td>
-			<td>${pjboard.userno }</td>
+			<td>${pjboard.proj_name }</td>
 			<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no }">${pjboard.proj_title }</a></td>
 			<td>${pjboard.proj_time }</td>
 		</tr>	
@@ -75,7 +75,10 @@ table th {
 		</form>
 	</div>
 </div>
-<jsp:include page = "/WEB-INF/views/mgr/paging/projectPaging.jsp" />
+
+	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
+   		<c:param name="url" value="${url }" />
+	</c:import>
 
 </body>
 </html>

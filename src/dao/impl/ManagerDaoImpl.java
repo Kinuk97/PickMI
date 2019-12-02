@@ -22,11 +22,25 @@ public class ManagerDaoImpl implements ManagerDao {
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 
+	private ManagerDaoImpl() {
+		conn = DBConn.getConnection();
+	}
+
+	private static class Singleton {
+		private static final ManagerDao instance = new ManagerDaoImpl();
+	}
+
+	public static ManagerDao getInstance() {
+		return Singleton.instance;
+	}
+
+	// ----- Login
+
 	@Override
 	public int selectCntMemberByMgridAndMgrpw(Manager mgr) {
 
-		// DB연결
-		conn = DBConn.getConnection();
+//		// DB연결
+//		conn = DBConn.getConnection();
 
 		if (mgr.getMgrid() == null || mgr.getMgrpw() == null) {
 
@@ -75,7 +89,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public Manager selectMgrByMgr(Manager mgr) {
 
-		conn = DBConn.getConnection();
+//		conn = DBConn.getConnection();
 
 		if (mgr.getMgrid() == null) {
 			return null; // ?
@@ -111,11 +125,12 @@ public class ManagerDaoImpl implements ManagerDao {
 
 		return mgr;
 	}
+// Login -----
 
 	@Override
 	public int selectCntAll(String search) {
 
-		conn = DBConn.getConnection(); // DB연결
+//		conn = DBConn.getConnection(); // DB연결
 		// 수행할 SQL
 		String sql = "";
 		sql += "SELECT ";
@@ -156,52 +171,54 @@ public class ManagerDaoImpl implements ManagerDao {
 		return cnt;
 	}
 
-	@Override
-	public List<User> userselectAll() {
-		conn = DBConn.getConnection(); // DB연결
+// ----- User	
 
-		// 수행할 SQL
-		String sql = "";
-		sql += "SELECT";
-		sql += "	userno, email, pw,";
-		sql += "    name, photo_originname, photo_storedname";
-		sql += "    FROM user_table";
-
-		// 결과 저장 리스트
-		List<User> userlist = new ArrayList<>();
-
-		try {
-			ps = conn.prepareStatement(sql);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				User user = new User();
-
-				user.setUserno(rs.getInt("user_no"));
-				user.setEmail(rs.getString("email"));
-				user.setName(rs.getString("name"));
-				user.setPhoto_originname(rs.getString("photo_originaname"));
-				user.setPhoto_storedname(rs.getString("photo_storedname"));
-
-				userlist.add(user);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (ps != null)
-					ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return userlist;
-	}
+//	@Override
+//	public List<User> userselectAll() {
+//		conn = DBConn.getConnection(); // DB연결
+//
+//		// 수행할 SQL
+//		String sql = "";
+//		sql += "SELECT";
+//		sql += "	userno, email, pw,";
+//		sql += "    name, photo_originname, photo_storedname";
+//		sql += "    FROM user_table";
+//
+//		// 결과 저장 리스트
+//		List<User> userlist = new ArrayList<>();
+//
+//		try {
+//			ps = conn.prepareStatement(sql);
+//
+//			rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				User user = new User();
+//
+//				user.setUserno(rs.getInt("user_no"));
+//				user.setEmail(rs.getString("email"));
+//				user.setName(rs.getString("name"));
+//				user.setPhoto_originname(rs.getString("photo_originaname"));
+//				user.setPhoto_storedname(rs.getString("photo_storedname"));
+//
+//				userlist.add(user);
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (rs != null)
+//					rs.close();
+//				if (ps != null)
+//					ps.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		System.out.println(userlist);
+//		return userlist;
+//	}
 
 	@Override
 	public List<User> userselectAll(Paging paging) {
@@ -267,6 +284,35 @@ public class ManagerDaoImpl implements ManagerDao {
 		return userlist;
 	}
 
+	@Override
+	public int deleteUser(User user) {
+
+		String sql = "DELETE FROM user_table WHERE userno = ?";
+
+		int result = 0;
+
+		try {
+			conn.prepareStatement(sql);
+
+			ps.setInt(1, user.getUserno());
+
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+// User -----
+
 // 플로필게시판, 프로젝트게시판 검색	
 
 	@Override
@@ -306,57 +352,57 @@ public class ManagerDaoImpl implements ManagerDao {
 		return cnt;
 	}
 
-	@Override
-	public List<ProfileBoard> profileselectAll() {
-		conn = DBConn.getConnection(); // db연결
-
-		// 수행할 쿼리
-		String sql = "";
-		sql += "SELECT";
-		sql += " prof_no, userno, prof_time,";
-		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += " prof_content, prof_like FROM profile";
-		sql += " ORDER BY prof_no";
-
-		// 결과 저장 리스트
-		List<ProfileBoard> list = new ArrayList<>();
-
-		try {
-			ps = conn.prepareStatement(sql);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				ProfileBoard proboard = new ProfileBoard();
-				proboard.setProf_no(rs.getInt("prof_no"));
-				proboard.setUserno(rs.getInt("userno"));
-				proboard.setProf_time(rs.getDate("prof_time"));
-				proboard.setProf_interest(rs.getString("prof_interest"));
-				proboard.setProf_job(rs.getString("prof_job"));
-				proboard.setProf_state(rs.getString("prof_state"));
-				proboard.setProf_loc(rs.getString("prof_loc"));
-				proboard.setProf_career(rs.getString("prof_career"));
-				proboard.setProf_content(rs.getString("prof_content"));
-				proboard.setProf_like(rs.getInt("prof_like"));
-
-				list.add(proboard);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (ps != null)
-					ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-//		System.out.println("profile board dao impl : " + list);
-		return list;
-	}
+//	@Override
+//	public List<ProfileBoard> profileselectAll() {
+//		conn = DBConn.getConnection(); // db연결
+//
+//		// 수행할 쿼리
+//		String sql = "";
+//		sql += "SELECT";
+//		sql += " prof_no, userno, prof_time,";
+//		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
+//		sql += " prof_content, prof_like FROM profile";
+//		sql += " ORDER BY prof_no";
+//
+//		// 결과 저장 리스트
+//		List<ProfileBoard> list = new ArrayList<>();
+//
+//		try {
+//			ps = conn.prepareStatement(sql);
+//
+//			rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				ProfileBoard proboard = new ProfileBoard();
+//				proboard.setProf_no(rs.getInt("prof_no"));
+//				proboard.setUserno(rs.getInt("userno"));
+//				proboard.setProf_time(rs.getDate("prof_time"));
+//				proboard.setProf_interest(rs.getString("prof_interest"));
+//				proboard.setProf_job(rs.getString("prof_job"));
+//				proboard.setProf_state(rs.getString("prof_state"));
+//				proboard.setProf_loc(rs.getString("prof_loc"));
+//				proboard.setProf_career(rs.getString("prof_career"));
+//				proboard.setProf_content(rs.getString("prof_content"));
+//				proboard.setProf_like(rs.getInt("prof_like"));
+//
+//				list.add(proboard);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (rs != null)
+//					rs.close();
+//				if (ps != null)
+//					ps.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+////		System.out.println("profile board dao impl : " + list);
+//		return list;
+//	}
 
 	@Override
 	public List<ProfileBoard> profileselectAll(Paging paging) {
@@ -418,7 +464,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public int projecteleCtntAll(String search) {
 		conn = DBConn.getConnection(); // DB연결
-				
+
 		// 수행할 SQL 쿼리
 		String sql = "";
 		sql += "SELECT count(*) FROM projboard";
@@ -462,7 +508,7 @@ public class ManagerDaoImpl implements ManagerDao {
 		sql += " proj_no, userno, proj_title,";
 		sql += " proj_name, proj_time, proj_loc, proj_career, proj_member,";
 		sql += " proj_apply, proj_sdate, proj_ddate, proj_rec_date,";
-		sql += " proj_progress, proj_content, proj_like FROM profile";
+		sql += " proj_progress, proj_content, proj_like FROM projboard";
 		sql += " ORDER BY proj_no";
 
 		// 결과 저장 리스트
@@ -509,8 +555,8 @@ public class ManagerDaoImpl implements ManagerDao {
 
 //		System.out.println("project board dao impl : " + list);
 		return list;
-}
-	
+	}
+
 	@Override
 	public List<ProjectBoard> projectselectAll(Paging paging) {
 		// DB연결
@@ -576,4 +622,5 @@ public class ManagerDaoImpl implements ManagerDao {
 //		System.out.println("project board dao impl : " + list);
 		return list;
 	}
+
 }

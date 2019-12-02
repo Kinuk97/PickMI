@@ -21,7 +21,7 @@ import util.Paging;
 public class MgrProjectListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	MgrService mgrService = new MgrServiceImpl();
+	private MgrService mgrService = MgrServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

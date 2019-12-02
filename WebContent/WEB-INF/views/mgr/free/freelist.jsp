@@ -67,7 +67,10 @@ $(document).ready(function(){
 	</form>
 	</div>
 	
-	<jsp:include page = "/WEB-INF/views/mgr/paging/freePaging.jsp" />
+	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
+   		<c:param name="url" value="${url }" />
+	</c:import>
+	
 <div class="col-lg-1"></div>
 </div>
 </div>
