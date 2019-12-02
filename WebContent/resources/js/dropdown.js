@@ -106,8 +106,9 @@
 //    	  $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
 //      })
       $(".close").click(function() {
-      $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
+    	  $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
       })
+
     })
   }
 
