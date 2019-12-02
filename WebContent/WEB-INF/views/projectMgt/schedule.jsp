@@ -15,6 +15,10 @@
 
 
 <style type="text/css">
+table {
+	width: 100%;
+}
+
 .cal_top {
 	text-align: center;
 	font-size: 30px;
@@ -183,6 +187,10 @@ table.calendar td {
 				}
 			}
 		}
+	}
+	
+	function addSchedule() {
+		
 	}
 </script>
 
