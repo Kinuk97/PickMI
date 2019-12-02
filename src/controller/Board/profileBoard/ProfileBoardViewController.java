@@ -30,16 +30,20 @@ public class ProfileBoardViewController extends HttpServlet {
 
 		//게시글 정보 얻기
 		ProfileBoard profile = profileBoardService.getProfileno(req);
-		
+//		System.out.println("profile view controller :" + profile);
 		//게시판 상세정보 얻기
 		ProfileBoard detailProfile = profileBoardService.view(profile);
 		
-		//찜 보여주기
+		//찜 정보 받아오기
 		HttpSession session = req.getSession();
 		LikePost like = new LikePost();
 		like.setPostno(1);
 		like.setBoardno(profile.getProf_no());
-		like.setUserno((int)session.getAttribute("userno"));
+		try {
+			like.setUserno((int)session.getAttribute("userno"));
+		} catch (NullPointerException e) {
+			System.out.println("프로필 상세보기 : 로그인하지 않은 유저가 글을 읽는 중");
+		}
 		int countLike = profileBoardService.countLike(like);
 		req.setAttribute("countLike", countLike);
 		

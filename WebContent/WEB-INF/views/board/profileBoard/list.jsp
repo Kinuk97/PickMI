@@ -34,7 +34,7 @@ $(document).ready(function() {
 						var caption = $("<div class='caption caption-profile'></div>");
 						
 						caption.append($("<h4></h4>").text(data[i].prof_no));
-						caption.append($("<p></p>").text(data[i].userno));
+						caption.append($("<p></p>").text(data[i].username));
 						caption.append($("<p></p>").text(data[i].prof_interest));
 						caption.append($("<p></p>").text(data[i].prof_loc));
 						caption.append($("<p></p>").text(data[i].prof_job));
@@ -42,6 +42,7 @@ $(document).ready(function() {
 						caption.append($("<p></p>").text(data[i].prof_career));
 						caption.append($("<p class='text-right'></p>").text(data[i].prof_like +"❤"));
 						caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
+			
 					
 						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profileBoard/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
 						$("#board").append(board);
@@ -55,12 +56,22 @@ $(document).ready(function() {
 			});
 	    }
 	});
+	
+$("#nologin").click( function loginplz(){
+	alert("로그인 해주세요");
+ 	$(location).attr("href","/login");
+	});
+$("#write").click( function loginplz(){
+ 	alert("로그인 해주세요");
+ 		$(location).attr("href","/login");
+	});
 });
+
 
 </script>
 <style type="text/css">
 #filterBtn {
-  background-color: #66CCFF;
+  background-color: #A9D0F5;
   color: white;
   padding: 16px;
   font-size: 16px;
@@ -68,6 +79,26 @@ $(document).ready(function() {
 }
 
 #filter {
+  position: relative;
+  display: inline-block;
+}
+
+#filter2 {
+  position: relative;
+  display: inline-block;
+}
+
+#filter3 {
+  position: relative;
+  display: inline-block;
+}
+
+#filter4 {
+  position: relative;
+  display: inline-block;
+}
+
+#filter5 {
   position: relative;
   display: inline-block;
 }
@@ -92,9 +123,22 @@ $(document).ready(function() {
 #filter:hover #filter-list {display: block;}
 #filter:hover #filterBtn {background-color: #CEE3F6;}
 
-/* .thumbnail:hover { */
-/* 	background: #D6F0FF; */
-/* } */
+#filter2:hover #filter-list {display: block;}
+#filter2:hover #filterBtn {background-color: #CEE3F6;}
+
+#filter3:hover #filter-list {display: block;}
+#filter3:hover #filterBtn {background-color: #CEE3F6;}
+
+#filter4:hover #filter-list {display: block;}
+#filter4:hover #filterBtn {background-color: #CEE3F6;}
+
+#filter5:hover #filter-list {display: block;}
+#filter5:hover #filterBtn {background-color: #CEE3F6;}
+
+
+.thumbnail:hover { 
+	background: #EFF8FB;
+}
 a#top {
     position: fixed;
     right: 5%;
@@ -169,14 +213,73 @@ a#top {
 <br>
 <hr>
 
+<c:if test="${ login }">
+<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
+</div>
+</c:if>
+<c:if test="${ !login }">
+<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+<a href="/login"><button class="btn btn-info" id="write">프로필 등록</button></a>
+</div>
+</c:if>
+
+<div id=filtersystem style="padding:0 100px; margin-left: 60px;">
+	<div id="filter">
+		<button class="btn btn-info" id="filterBtn">관심</button>
+		<div id="filter-list">
+			<a href="#">개발</a>
+			<a href="#">디자인</a>
+			<a href="#">스타트업</a>
+			<a href="#">IT언어</a>
+		</div>
+	</div>
+	<div id="filter2">
+		<button class="btn btn-info" id="filterBtn">지역</button>
+		<div id="filter-list">
+			<a href="#">서울</a>
+			<a href="#">경기</a>
+			<a href="#">그외</a>
+		</div>
+	</div>
+	<div id="filter3">
+		<button class="btn btn-info" id="filterBtn">직업</button>
+		<div id="filter-list">
+			<a href="#">개발자</a>
+			<a href="#">프리랜서</a>
+			<a href="#">디자이너</a>
+			<a href="#">무직</a>
+		</div>
+	</div>
+	<div id="filter4">
+		<button class="btn btn-info" id="filterBtn">상태</button>
+		<div id="filter-list">
+			<a href="#">구직중</a>
+			<a href="#">재직중</a>
+			<a href="#">프리랜서</a>
+		</div>
+	</div>
+	<div id="filter5">
+		<button class="btn btn-info" id="filterBtn">경력</button>
+		<div id="filter-list">
+			<a href="#">1-2년차</a>
+			<a href="#">3-4년차</a>
+			<a href="#">5-7년차</a>
+			<a href="#">8년차이상</a>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+>>>>>>> refs/heads/dongs
 <a id="top" href="#">TOP👆</a>
 <div id="board" class="container list-container">
 	<c:forEach items="${ list }" var="pro">
-			<div class="col-sm-6 col-md-4 col-lg-3">
+		<div class="col-sm-6 col-md-4 col-lg-3">
 				<div class="thumbnail" onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
 					<div class="caption caption-profile">
 						<h4>${ pro.prof_no }</h4>
-						<p>${ pro.userno }</p>
+						<p>${ pro.username }</p>
 						<p>${ pro.prof_interest }</p>
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>
@@ -186,7 +289,7 @@ a#top {
 						<p>${ pro.prof_time }에 작성</p>
 					</div>
 				</div>
-			</div>
+		</div>
 	</c:forEach>
 </div>
 <div style="clear: both;"></div>
