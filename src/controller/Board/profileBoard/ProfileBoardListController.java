@@ -29,7 +29,6 @@ public class ProfileBoardListController extends HttpServlet {
 		
 		//요청파라미터에서 curPage를 구하고 Paging 객체 반환
 		Paging paging = profileBoardService.getPaging(req);
-		
 		//Paging 객체를 model값으로 지정
 		req.setAttribute("paging", paging);
 		

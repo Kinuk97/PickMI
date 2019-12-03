@@ -72,8 +72,16 @@ div .cal-schedule span {
 			moveNextMonth();
 		});
 
-		$("div .cal-schedule span").on("click", function() {
-			$(".modal").modal();
+// 		$("div .cal-schedule span").on("click", function() {
+// 			$(".modal").modal();
+// 		});
+
+		//일정 아이콘 클릭시 모달 보이기
+		$("div .cal-schedule #scheduleView").on("click", function() {
+			$("#viewSchedule").modal();
+		});
+		$("div .cal-schedule #add").on("click", function() {
+			$("#addSchedule").modal();
 		});
 
 	});
@@ -200,10 +208,15 @@ div .cal-schedule span {
 					txt = jsonData[year][month][i];
 					dateMatch = firstDay.getDay() + i - 1;
 					$tdSche.eq(dateMatch).text(txt);
+					
+					//달력에서 등록된 일정 아이콘 보이기
+					if(dateMach != null) {
+					$tdSche.eq(i).append($("<span id='scheduleView' class='badge'>new일정</span>"));
+					}
 				}
 			}
 			$tdSche.eq(i).append(
-					$("<span class='glyphicon glyphicon-plus'></span>"));
+					$("<span id='add' class='glyphicon glyphicon-plus'></span>"));
 		}
 	}
 
@@ -223,6 +236,18 @@ div .cal-schedule span {
 			}
 		});
 	}
+	
+// 	function list() {
+// 		$.ajax({
+// 			type : "post",
+// 			url : "/schedule/list",
+// 			data : {
+// 				"proj_no" : "${proj_no}",  "due_date" : "${due_date}"
+// 			}
+// 			dateType : "json",
+// 			success :
+// 		})
+// 	}
 </script>
 
 <div class="container">
@@ -238,7 +263,7 @@ div .cal-schedule span {
 </div>
 
 <!-- 일정 작성 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="addSchedule" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
   
     <div class="modal-content">
@@ -255,7 +280,7 @@ div .cal-schedule span {
 </div>
 
 <!-- 일정 상세보기 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="viewSchedule" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
   
     <div class="modal-content">
@@ -263,9 +288,11 @@ div .cal-schedule span {
 	    	일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	  </div>
 	  <div class="modal-body">
-			<br><br><br><br><br><br><br><br><br>
-			Test
-			<br><br><br><br><br><br><br><br><br>
+	  	<form>
+			<div class="form-group">
+           	 	<label for="recipient-name" class="control-label">일정 간략내용</label>
+          	</div>
+         </form>
 	  </div>
     </div>
   </div>

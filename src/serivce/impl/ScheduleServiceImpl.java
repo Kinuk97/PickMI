@@ -21,8 +21,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public Schedule getSchedule(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String param = req.getParameter("proj_no");
+		
+		int proj_no = 0;
+		if (param != null && !"".equals(param)) {
+			proj_no = Integer.parseInt(param);
+		}
+		
+		Schedule schedule = new Schedule();
+		schedule.setProj_no(proj_no);
+		return schedule;
 	}
 
 	@Override

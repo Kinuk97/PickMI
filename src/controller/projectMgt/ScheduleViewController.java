@@ -12,20 +12,18 @@ import dto.Schedule;
 import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
 
-@WebServlet("/schedule/list")
-public class ScheduleListController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
+@WebServlet("/schedule/view")
+public class ScheduleViewController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
+	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		Schedule schedule = scheduleService.getSchedule(req); 
-//		System.out.println("schedule controller : " + schedule);
-		
-		req.setAttribute("proj_no", schedule.getProj_no());
-		req.setAttribute("scheduleList", scheduleService.getScheduleList(schedule));
-		
-		req.getRequestDispatcher("/WEB-INF/views/projectMgt/schedule.jsp").forward(req, resp);
+		System.out.println("schedule view controller : " + schedule);
 	}
+
 }
