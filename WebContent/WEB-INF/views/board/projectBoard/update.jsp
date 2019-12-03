@@ -115,7 +115,6 @@
 						<option value="충청">충청</option>
 						<option value="경상">경상</option>
 						<option value="전라">전라</option>
-						<option value="기타">기타지역</option>
 					</select>
 			</div>
 
