@@ -250,17 +250,75 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 		String param = req.getParameter("curPage");
 		int curPage = 0;
 		if (param != null && !"".equals(param)) {
+			try {
 			curPage = Integer.parseInt(param);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+	}
+		param = req.getParameter("interestno");
+		int interestno = 0;
+		if (param != null && !"".equals(param)) {
+			try {
+				interestno = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		param = req.getParameter("locationno");
+		int locationno = 0;
+		if (param != null && !"".equals(param)) {
+			try {
+				locationno = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		param = req.getParameter("jobno");
+		int jobno = 0;
+		if (param != null && !"".equals(param)) {
+			try {
+				jobno = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		param = req.getParameter("stateno");
+		int stateno = 0;
+		if (param != null && !"".equals(param)) {
+			try {
+				stateno = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		param = req.getParameter("careerno");
+		int careerno = 0;
+		if (param != null && !"".equals(param)) {
+			try {
+				careerno = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
 		}
 //		System.out.println("curPage :" + curPage);
-
+//		System.out.println("profileboard service impl careerno: " +careerno);
 //		String search = req.getParameter("search");
 		
 		// paging객체를 생성하고 반환
-		int totalCount = profileBoardDao.selectCntAll();
+		int totalCount = profileBoardDao.selectCntAll(interestno, locationno, jobno, stateno, careerno);
 
-		Paging paging = new Paging(totalCount, curPage, 20);
 		// Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage, 20);
+		
+		paging.setInterestno(interestno);
+		paging.setLocationno(locationno);
+		paging.setJobno(jobno);
+		paging.setStateno(stateno);
+		paging.setCareerno(careerno);
+		
+	
+//		System.out.println("profile service impl :" + paging);
 		return paging;
 	}
 	

@@ -57,20 +57,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 		param = req.getParameter("free_title");
 		if (param != null && !"".equals(param)) {
-			try {
-				freeBoard.setFree_title(param);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
+			freeBoard.setFree_title(param);
 		}
 
 		param = req.getParameter("free_content");
 		if (param != null && !"".equals(param)) {
-			try {
-				freeBoard.setFree_content(param);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
+			freeBoard.setFree_content(param);
 		}
 
 		return freeBoard;
@@ -139,16 +131,16 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		if (freeBoard.getUserno() == 0) {
 			return false;
 		}
-		
+
 		int queryResult = freeBoardDao.insertBoard(freeBoard);
 		boolean result = false;
-		
+
 		if (queryResult == 1) {
 			result = true;
 		} else {
 			result = false;
 		}
-		
+
 		return result;
 	}
 
@@ -161,7 +153,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public boolean removeBoard(FreeBoard freeBoard) {
 		int result = freeBoardDao.deleteBoard(freeBoard);
-		
+
 		if (result == 1) {
 			return true;
 		} else {

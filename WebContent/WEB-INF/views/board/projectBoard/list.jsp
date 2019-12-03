@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.net.URLEncoder" %>
+
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,26 +10,17 @@
 
 
 <script type="text/javascript">
-$(document).ready(function() {
+	
 	var curPage = 1;
 	var loading = false;
 	var totalPage = "${paging.totalPage}";
 	
-	$(window).scroll(function() {
-		if (loading) {
-			return;
-		}
-		if (curPage >= totalPage) {
-			return;
-		}
-		
-		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-	    	loading = true;
-	    	curPage += 1;
+	function projectList(){
 	    	$.ajax({
 				type : "post",
 				url : "/projectBoard/list",
-				data : { "curPage" : curPage },
+				data : { "curPage" : curPage, "proj_loc" : "${paging.proj_loc}", "proj_progress" : "${paging.proj_progress}",
+					"proj_job" : "${paging.proj_job}", "proj_career" : "${paging.proj_career}" }, 
 				dataType : "json",
 				success : function(data) {
 					for (var i = 0; i < data.length; i++) {
@@ -56,9 +49,56 @@ $(document).ready(function() {
 					console.log(e);
 				}
 			});
-	    }
-	});
-});
+	} // project end
+	
+	$(document).ready(function() {
+		
+		projectList();
+		var proj_loc = "${paging.proj_loc}";
+		var proj_progress = "${paging.proj_progress}";
+		var proj_job = "${paging.proj_job}";
+		var proj_career = "${paging.proj_career}";
+		
+		if(proj_loc != null && !proj_loc.equals("")){
+			$("#locBtn").addClass("ative");
+		} else if(proj_progress != null && !proj_progress.equals("")){
+			$("#progressBtn").addClass("active");
+		} else if(proj_job != null && !proj_job.equals("")){
+			$("#jobBtn").addClass("active");
+		} else if(proj_career != null && !proj_career.equals("")){
+			$("#careerBtn").addClass("active");
+		}
+		
+		$("#locBtn").on("click",function{
+			location.href = "/projectBoard/list";
+		});
+		$("#progressBtn").on("click",function{
+			location.href = "/projectBoard/list";
+		});
+		$("#jobBtn").on("click",function{
+			location.href = "/projectBoard/list";
+		});
+		$("#careerBtn").on("click",function{
+			location.href = "/projectBoard/list";
+		});
+		
+		
+		$(window).scroll(function() {
+			if (loading) {
+				return;
+			}
+			if (curPage >= totalPage) {
+				return;
+			}
+			
+			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+		    	loading = true;
+		    	curPage += 1;
+		    	projectList();
+			}
+		}); // scroll end
+	
+}); // document end
 </script>
 
 <script type="text/javascript">
@@ -143,47 +183,54 @@ select {
 
 <div id="board" class="container list-container">
 	<h1 class="text-center">😉프로젝트게시판😉</h1>
+	
+<form action="/projectBoard/list" method="get">
+
+<input type="hidden" value="${paging.proj_loc }" name="proj_loc"/>
+<input type="hidden" value="${paging.proj_progress }" name="proj_progress"/>
+<input type="hidden" value="${paging.proj_job }" name="proj_job"/>
+<input type="hidden" value="${paging.proj_career }" name="proj_career"/>
+
 	<div id="filtersystem">
 	<div id="filter">
-	<button class="btn btn-info" id="filterBtn">지역</button>
+	<button class="btn btn-info" id="locBtn">지역</button>
 	<div id="filter-list">
-		<a href="projectBoard/list?proj_loc='서울'">서울</a>
-		<a href="projectBoard/list?proj_loc='인천'">인천</a>
-		<a href="projectBoard/list?proj_loc='경기'">경기</a>
-		<a href="projectBoard/list?proj_loc='강원'">강원</a>
-		<a href="projectBoard/list?proj_loc='충청'">충청</a>
-		<a href="projectBoard/list?proj_loc='경상'">경상</a>
-		<a href="projectBoard/list?proj_loc='전라'">전라</a>
-		<a href="projectBoard/list?proj_loc='서울'">그외</a>
+		<a href="/projectBoard/list?proj_loc=서울">서울</a>
+		<a href="/projectBoard/list?proj_loc=인천">인천</a>
+		<a href="/projectBoard/list?proj_loc=경기">경기</a>
+		<a href="/projectBoard/list?proj_loc=강원">강원</a>
+		<a href="/projectBoard/list?proj_loc=충청">충청</a>
+		<a href="/projectBoard/list?proj_loc=경상">경상</a>
+		<a href="/projectBoard/list?proj_loc=전라">전라</a>
 	</div>
 	</div>
 	
 	<div id="filter2">
-	<button class="btn btn-info" id="filterBtn">진행상황</button>
+	<button class="btn btn-info" id="progressBtn">진행상황</button>
 	<div id="filter-list">
-		<a href="#">설계단계</a>
-		<a href="#">구현단계</a>
+		<a href="/projectBoard/list?proj_progress=설계단계">설계단계</a>
+		<a href="/projectBoard/list?proj_progress=구현단계">구현단계</a>
 	</div>
 	</div>
 	
 	<div id="filter3">
-	<button class="btn btn-info" id="filterBtn">직업</button>
+	<button class="btn btn-info" id="jobBtn">직업</button>
 	<div id="filter-list">
-		<a href="#">개발자</a>
-		<a href="#">프리랜서</a>
-		<a href="#">디자이너</a>
-		<a href="#">무직</a>
+		<a href="/projectBoard/list?proj_job=개발자">개발자</a>
+		<a href="/projectBoard/list?proj_job=프리랜서">프리랜서</a>
+		<a href="/projectBoard/list?proj_job=디자이너">디자이너</a>
+		<a href="/projectBoard/list?proj_job=무직">무직</a>
 	</div>
 	</div>
 	
 	<div id="filter3">
-	<button class="btn btn-info" id="filterBtn">경력</button>
+	<button class="btn btn-info" id="careerBtn">경력</button>
 	<div id="filter-list">
-		<a href="#">1년차</a>
-		<a href="#">3년차</a>
-		<a href="#">5년차</a>
-		<a href="#">7년차</a>
-		<a href="#">8년차이상</a>
+		<a href="/projectBoard/list?proj_career=1년차">1년차</a>
+		<a href="/projectBoard/list?proj_career=3년차">3년차</a>
+		<a href="/projectBoard/list?proj_career=5년차">5년차</a>
+		<a href="/projectBoard/list?proj_career=7년차">7년차</a>
+		<a href="/projectBoard/list?proj_career=8년차이상">8년차이상</a>
 	</div>
 	</div>
 
@@ -196,9 +243,9 @@ select {
 		<button id="btnNoLogWrite" type="button" class="btn btn-info" style="float:right; margin-top:30px; margin-right:15px;">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 	</c:otherwise>
 </c:choose>
-	
 </div>
-
+</form>
+	
 <br>	
 <hr>
 	<c:forEach var="board" items="${boardList }">

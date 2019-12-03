@@ -164,7 +164,7 @@
 				<div class="form-group">
 					<label>약관 동의</label>
 					<div>
-						<input id="agree" type="checkbox" /> <a href="#">이용약관</a>에 동의합니다.
+						<input id="agree" type="checkbox" /> <a href="/agree">이용약관</a>에 동의합니다.
 					</div>
 				</div>
 

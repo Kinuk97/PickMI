@@ -15,7 +15,11 @@ public interface ProjectBoardDao {
 	 */
 	public int getNextBoardno();
 	
-	public int selectCntAll();
+	/**
+	 * 게시글 수 조회
+	 * @return int - 게시글 총 개수
+	 */
+	public int selectCntAll(String proj_loc, String proj_progress, String proj_job, String proj_career);
 	
 	/**
 	 * 게시글 목록

@@ -36,8 +36,23 @@ table.calendar {
 
 table.calendar td {
 	vertical-align: top;
-	border: 1px solid skyblue;
+	border: 1px solid #46b8da;
 	width: 100px;
+	padding-left: 10px;
+	padding-top: 4px;
+}
+
+div .cal-schedule {
+	height: 125px;
+}
+
+div .cal-schedule span {
+	position: relative;
+	top: 80%;
+}
+
+.modal-body {
+	padding: 20px 50px;
 }
 </style>
 <script type="text/javascript">
@@ -49,6 +64,7 @@ table.calendar td {
 	var $tdDay = null;
 	var $tdSche = null;
 	var jsonData = null;
+
 	$(document).ready(function() {
 		drawCalendar();
 		initDate();
@@ -60,6 +76,24 @@ table.calendar td {
 		$("#moveNextMonth").on("click", function() {
 			moveNextMonth();
 		});
+		
+		$("#scheduleForm button[type='submit']").on("click", function() {
+			$("#scheduleForm").append($("#scheduleForm input[type='hidden']").val(""));
+		});
+		
+
+		$("div .cal-schedule span").on("click", function() {
+			// $(this).parent().prev().text() 날짜 가져오기
+			console.log(new Date(year - 1, month - 1, $(this).parent().prev().text()));
+			$("#scheduleDate").text(new Date(year, month, $(this).parent().prev().text()));
+			$("#writeFormModal").modal();
+
+		});
+		//일정 아이콘 클릭시 모달 보이기
+		$("div .cal-schedule #scheduleView").on("click", function() {
+			$("#viewSchedule").modal();
+		});
+
 	});
 
 	//Calendar 그리기
@@ -98,18 +132,34 @@ table.calendar td {
 
 	//calendar 날짜표시
 	function drawDays() {
-		$("#cal_top_year").text(year);
-		$("#cal_top_month").text(month);
-		for (var i = firstDay.getDay(); i < firstDay.getDay()
-				+ lastDay.getDate(); i++) {
-			$tdDay.eq(i).text(++dayCount);
-		}
-		for (var i = 0; i < 42; i += 7) {
-			$tdDay.eq(i).css("color", "red");
-		}
-		for (var i = 6; i < 42; i += 7) {
-			$tdDay.eq(i).css("color", "blue");
-		}
+		$.ajax({
+			type : "post",
+			url : "/schedule/list",
+			data : { "proj_no" : "${proj_no}", "year" : year, "month" : month },
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				
+				$("#cal_top_year").text(year);
+				$("#cal_top_month").text(month);
+				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
+					$tdDay.eq(i).text(++dayCount);
+// 					if (${scheduleList[0].write_date.getDate()} == i) {
+						
+// 					}
+				}
+				for (var i = 0; i < 42; i += 7) {
+					$tdDay.eq(i).css("color", "red");
+				}
+				for (var i = 6; i < 42; i += 7) {
+					$tdDay.eq(i).css("color", "blue");
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+		
 	}
 
 	//calendar 월 이동
@@ -152,46 +202,70 @@ table.calendar td {
 
 	//데이터 등록
 	function setData() {
-		jsonData = {
-			"2019" : {
-				"07" : {
-					"17" : "제헌절"
-				},
-				"08" : {
-					"7" : "칠석",
-					"15" : "광복절",
-					"23" : "처서"
-				},
-				"09" : {
-					"13" : "추석",
-					"23" : "추분"
-				}
-			}
-		}
+// 		var scheduleList = ${scheduleList};
+		
+// 		console.log(scheduleList);
+		
+		let date = new Date("${scheduleList[0].write_date}");
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		
+		
 	}
 
 	//스케줄 그리기
 	function drawSche() {
 		setData();
 		var dateMatch = null;
-		for (var i = firstDay.getDay(); i < firstDay.getDay()
-				+ lastDay.getDate(); i++) {
-			var txt = "";
-			txt = jsonData[year];
-			if (txt) {
-				txt = jsonData[year][month];
-				if (txt) {
-					txt = jsonData[year][month][i];
-					dateMatch = firstDay.getDay() + i - 1;
-					$tdSche.eq(dateMatch).text(txt);
-				}
-			}
+		for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
+			console.log(i);
+			
+			
+			
+			
+// 			var txt = "";
+// 			txt = jsonData[year];
+// 			if (txt) {
+// 				txt = jsonData[year][month];
+// 				if (txt) {
+// 					txt = jsonData[year][month][i];
+// 					dateMatch = firstDay.getDay() + i - 1;
+// 					$tdSche.eq(dateMatch).text(txt);
+// 				}
+// 			}
+			$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
 		}
 	}
-	
+
 	function addSchedule() {
-		
+		$.ajax({
+			type : "post",
+			url : "/schedule/add",
+			data : {
+				"proj_no" : "${proj_no}"
+			},
+			dataType : "json",
+			success : function(data) {
+
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
 	}
+	
+// 	function list() {
+// 		$.ajax({
+// 			type : "post",
+// 			url : "/schedule/list",
+// 			data : {
+// 				"proj_no" : "${proj_no}",  "due_date" : "${due_date}"
+// 			}
+// 			dateType : "json",
+// 			success :
+// 		})
+// 	}
 </script>
 
 <div class="container">
@@ -205,5 +279,65 @@ table.calendar td {
 	</div>
 	<div id="cal_tab" class="cal"></div>
 </div>
+
+<!-- 일정 작성 -->
+<div id="writeFormModal" class="modal fade">
+	<div class="modal-dialog modal-lg">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				일정 추가
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" action="/schedule/add" method="post" id="scheduleForm">
+					<!-- 테스트용 프로젝트 번호 -->
+					<input type="hidden" value="205" name="proj_no">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label"><span id="scheduleDate"></span>일정</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">상세 설명</label>
+						<div class="col-sm-10">
+							<textarea name="content" class="form-control" style="resize: none;" rows="10"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12 text-center">
+							<input type="hidden" name="schedule_date">
+							<button type="submit" class="btn btn-info">ADD</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 일정 상세보기 -->
+<div id="viewSchedule" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  
+    <div class="modal-content">
+	  <div class="modal-header">
+	    	일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  </div>
+	  <div class="modal-body">
+	  	<form>
+			<div class="form-group">
+           	 	<label for="recipient-name" class="control-label">일정 간략내용</label>
+          	</div>
+         </form>
+	  </div>
+    </div>
+  </div>
+</div>
+
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp"></jsp:include>

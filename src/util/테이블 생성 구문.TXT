@@ -136,3 +136,37 @@ CREATE TABLE manager (
     mgrid VARCHAR2(100) PRIMARY KEY,
     mgrpw VARCHAR2(100)
 );
+
+DROP TABLE schedule;
+CREATE TABLE schedule (
+    scheduleno NUMBER PRIMARY KEY,
+    userno NUMBER NOT NULL,
+    proj_no NUMBER NOT NULL,
+    content VARCHAR2(500),
+    place VARCHAR2(300),
+    due_date DATE NOT NULL,
+    write_date DATE DEFAULT sysdate,
+    
+    CONSTRAINT schedule_userno_kf FOREIGN KEY (userno)
+    REFERENCES user_table (userno),
+    CONSTRAINT schedule_proj_no_kf FOREIGN KEY (proj_no)
+    REFERENCES projboard (proj_no)
+);
+
+DROP SEQUENCE schedule_seq;
+CREATE SEQUENCE schedule_seq;
+
+DROP TABLE chceklist;
+CREATE TABLE chceklist (
+    checkno NUMBER PRIMARY KEY,
+    scheduleno NUMBER NOT NULL,
+    check_content VARCHAR2(100),
+    do_check CHAR(1) DEFAULT '0',
+
+    CONSTRAINT boolean_check CHECK (do_check IN ('0', '1')),
+    CONSTRAINT checklist_scheduleno_kf FOREIGN KEY (scheduleno)
+    REFERENCES schedule (scheduleno)
+);
+
+DROP SEQUENCE checklist_seq;
+CREATE SEQUENCE checklist_seq;

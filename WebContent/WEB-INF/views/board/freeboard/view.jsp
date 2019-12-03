@@ -8,8 +8,6 @@
 <script type="text/javascript">
 var curPage = "${paging.curPage}";
 
-// if (curPage);
-
 function loadReply(curPage) {
 	$.ajax({
 		type : "post",
@@ -45,7 +43,6 @@ function loadReply(curPage) {
 			
 			// 수정버튼 누르면 수정 폼 나오게 하기
 			$(".replyFormBtn").on("click", function() {
-				console.log("test");
 				$("#modifyDiv").collapse();
 				$("#modifyDiv").remove();
 				

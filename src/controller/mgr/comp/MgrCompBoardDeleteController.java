@@ -14,9 +14,6 @@ import serivce.face.FileService;
 import serivce.impl.CompBoardServiceImpl;
 import serivce.impl.FileServiceImpl;
 
-/**
- * Servlet implementation class MgrCompBoardDeleteController
- */
 @WebServlet("/mgr/compboard/delete")
 public class MgrCompBoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,8 +24,7 @@ public class MgrCompBoardDeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
+	
 		String[] strings = req.getParameterValues("checkRow");
 		CompBoard compBoard =  new CompBoard();
 //		System.out.println(strings);
