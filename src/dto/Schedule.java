@@ -7,16 +7,21 @@ public class Schedule {
 	private int scheduleno;
 	private int userno;
 	private int proj_no;
+	private String title;
 	private String content;
 	private String place;
 	private Date due_date;
 	private Date write_date;
-	List<CheckList> checkList;
+	private List<CheckList> checkList;
+
+	private String curYear;
+	private String curMonth;
 
 	@Override
 	public String toString() {
-		return "Schedule [scheduleno=" + scheduleno + ", userno=" + userno + ", proj_no=" + proj_no + ", content="
-				+ content + ", place=" + place + ", due_date=" + due_date + ", write_date=" + write_date + "]";
+		return "Schedule [scheduleno=" + scheduleno + ", userno=" + userno + ", proj_no=" + proj_no + ", title=" + title
+				+ ", content=" + content + ", place=" + place + ", due_date=" + due_date + ", write_date=" + write_date
+				+ ", checkList=" + checkList + ", curYear=" + curYear + ", curMonth=" + curMonth + "]";
 	}
 
 	public int getScheduleno() {
@@ -41,6 +46,14 @@ public class Schedule {
 
 	public void setProj_no(int proj_no) {
 		this.proj_no = proj_no;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getContent() {
@@ -73,6 +86,30 @@ public class Schedule {
 
 	public void setWrite_date(Date write_date) {
 		this.write_date = write_date;
+	}
+
+	public List<CheckList> getCheckList() {
+		return checkList;
+	}
+
+	public void setCheckList(List<CheckList> checkList) {
+		this.checkList = checkList;
+	}
+
+	public String getCurYear() {
+		return curYear;
+	}
+
+	public void setCurYear(String curYear) {
+		this.curYear = curYear;
+	}
+
+	public String getCurMonth() {
+		return curMonth;
+	}
+
+	public void setCurMonth(String curMonth) {
+		this.curMonth = curMonth;
 	}
 
 }

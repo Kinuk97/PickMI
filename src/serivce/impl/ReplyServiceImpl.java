@@ -11,7 +11,7 @@ import serivce.face.ReplyService;
 import util.Paging;
 
 public class ReplyServiceImpl implements ReplyService {
-	
+
 	private ReplyDao replyDao = ReplyDaoImpl.getInstance();
 
 	private ReplyServiceImpl() {
@@ -58,11 +58,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 		param = req.getParameter("reply");
 		if (param != null && !"".equals(param)) {
-			try {
-				reply.setReply(param);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
+			reply.setReply(param);
 		} else {
 			reply.setReply("내용없음");
 		}
@@ -83,7 +79,7 @@ public class ReplyServiceImpl implements ReplyService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		Object postno = req.getAttribute("postno");
 		if (postno != null && !"".equals(postno)) {
 			try {
@@ -92,7 +88,7 @@ public class ReplyServiceImpl implements ReplyService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		Object boardno = req.getAttribute("boardno");
 		if (boardno != null && !"".equals(boardno)) {
 			try {
@@ -101,7 +97,7 @@ public class ReplyServiceImpl implements ReplyService {
 				e.printStackTrace();
 			}
 		}
-		
+
 //		Reply TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
 		int totalCount = replyDao.selectCntAll(reply);
 

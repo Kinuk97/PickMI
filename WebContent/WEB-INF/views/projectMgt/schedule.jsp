@@ -50,6 +50,10 @@ div .cal-schedule span {
 	position: relative;
 	top: 80%;
 }
+
+.modal-body {
+	padding: 20px 50px;
+}
 </style>
 <script type="text/javascript">
 	var today = null;
@@ -60,6 +64,7 @@ div .cal-schedule span {
 	var $tdDay = null;
 	var $tdSche = null;
 	var jsonData = null;
+
 	$(document).ready(function() {
 		drawCalendar();
 		initDate();
@@ -73,7 +78,9 @@ div .cal-schedule span {
 		});
 
 		$("div .cal-schedule span").on("click", function() {
-			$(".modal").modal();
+			// $(this).parent().prev().text() 날짜 가져오기
+
+			$("#writeFormModal").modal();
 		});
 
 	});
@@ -114,18 +121,34 @@ div .cal-schedule span {
 
 	//calendar 날짜표시
 	function drawDays() {
-		$("#cal_top_year").text(year);
-		$("#cal_top_month").text(month);
-		for (var i = firstDay.getDay(); i < firstDay.getDay()
-				+ lastDay.getDate(); i++) {
-			$tdDay.eq(i).text(++dayCount);
-		}
-		for (var i = 0; i < 42; i += 7) {
-			$tdDay.eq(i).css("color", "red");
-		}
-		for (var i = 6; i < 42; i += 7) {
-			$tdDay.eq(i).css("color", "blue");
-		}
+		$.ajax({
+			type : "post",
+			url : "/schedule/list",
+			data : { "proj_no" : "${proj_no}", "year" : year, "month" : month },
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				
+				$("#cal_top_year").text(year);
+				$("#cal_top_month").text(month);
+				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
+					$tdDay.eq(i).text(++dayCount);
+					if (${scheduleList[0].write_date.getDate()} == i) {
+						
+					}
+				}
+				for (var i = 0; i < 42; i += 7) {
+					$tdDay.eq(i).css("color", "red");
+				}
+				for (var i = 6; i < 42; i += 7) {
+					$tdDay.eq(i).css("color", "blue");
+				}
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
+		
 	}
 
 	//calendar 월 이동
@@ -168,42 +191,39 @@ div .cal-schedule span {
 
 	//데이터 등록
 	function setData() {
-		jsonData = {
-			"2019" : {
-				"07" : {
-					"17" : "제헌절"
-				},
-				"08" : {
-					"7" : "칠석",
-					"15" : "광복절",
-					"23" : "처서"
-				},
-				"09" : {
-					"13" : "추석",
-					"23" : "추분"
-				}
-			}
-		}
+// 		var scheduleList = ${scheduleList};
+		
+// 		console.log(scheduleList);
+		
+		let date = new Date("${scheduleList[0].write_date}");
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		
+		
 	}
 
 	//스케줄 그리기
 	function drawSche() {
 		setData();
 		var dateMatch = null;
-		for (var i = firstDay.getDay(); i < firstDay.getDay()
-				+ lastDay.getDate(); i++) {
-			var txt = "";
-			txt = jsonData[year];
-			if (txt) {
-				txt = jsonData[year][month];
-				if (txt) {
-					txt = jsonData[year][month][i];
-					dateMatch = firstDay.getDay() + i - 1;
-					$tdSche.eq(dateMatch).text(txt);
-				}
-			}
-			$tdSche.eq(i).append(
-					$("<span class='glyphicon glyphicon-plus'></span>"));
+		for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
+			console.log(i);
+			
+			
+			
+			
+// 			var txt = "";
+// 			txt = jsonData[year];
+// 			if (txt) {
+// 				txt = jsonData[year][month];
+// 				if (txt) {
+// 					txt = jsonData[year][month][i];
+// 					dateMatch = firstDay.getDay() + i - 1;
+// 					$tdSche.eq(dateMatch).text(txt);
+// 				}
+// 			}
+			$tdSche.eq(i).append($("<span class='glyphicon glyphicon-plus'></span>"));
 		}
 	}
 
@@ -238,37 +258,78 @@ div .cal-schedule span {
 </div>
 
 <!-- 일정 작성 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-  
-    <div class="modal-content">
-	  <div class="modal-header">
-	    	일정 추가<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  </div>
-	  <div class="modal-body">
-			<br><br><br><br><br><br><br><br><br>
-			Test
-			<br><br><br><br><br><br><br><br><br>
-	  </div>
-    </div>
-  </div>
+<div id="writeFormModal" class="modal fade">
+	<div class="modal-dialog modal-lg">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				일정 추가
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" action="/schedule/add" method="post">
+					<!-- 테스트용 프로젝트 번호 -->
+					<input type="hidden" value="205" name="proj_no">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">일정</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">상세 설명</label>
+						<div class="col-sm-10">
+							<textarea name="content" class="form-control" style="resize: none;" rows="10"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12 text-center">
+							<button type="submit" class="btn btn-info">ADD</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- 일정 상세보기 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-  
-    <div class="modal-content">
-	  <div class="modal-header">
-	    	일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	  </div>
-	  <div class="modal-body">
-			<br><br><br><br><br><br><br><br><br>
-			Test
-			<br><br><br><br><br><br><br><br><br>
-	  </div>
-    </div>
-  </div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+	aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+
+		<div class="modal-content">
+			<div class="modal-header">
+				일정 보기
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br> Test <br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
 </div>
 
 
