@@ -37,9 +37,10 @@ $(document).ready(function(){
 <body>
 
 <div class="container" >
+	<form action="/mgr/compboard/delete" method="get">
 	<table class="table table-condensed">
 		<tr class="info">
-			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+			<th style="width: 5%"><input type="checkbox" id="checkAll" /></th>
 			<th style="width: 5%">게시글 번호</th>
 			<th style="width: 5%">사용자 번호</th>
 			<th style="width: 20%" >제목</th>
@@ -56,13 +57,16 @@ $(document).ready(function(){
 			<td>${comp.comp_date }</td>
 		</tr>	
 		</c:forEach>
-	</table>
+	</table>	
+		<button>삭제</button>
+	</form>	
 	
 	<div class="src" style="text-align: center;">
 		<form action="/mgr/complist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary">검색</button>
 		</form>
+	
 		
 	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
    		<c:param name="url" value="${url }" />

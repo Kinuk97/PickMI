@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 	//삭제버튼 동작
 	$("#btnDelete").click(function() {
-		$(location).attr("href", "/projectBoard/delete?proj_no=${projectBoard.proj_no }");
+		$(location).attr("href", "/mgr/projectboard/delete?checkRow=${projectBoard.proj_no }");
 	});
 	
 });
