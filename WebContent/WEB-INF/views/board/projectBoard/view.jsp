@@ -68,7 +68,7 @@ $(document).ready(function() {
 				}
 			, dataType: "json"
 			, success: function( data ) {
-// 				console.log("성공");
+				console.log("성공");
 // 				console.log(data);
 
 				if( data.result ) { //추천 성공

@@ -343,7 +343,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		String sql = "";
 		sql += "DELETE likepost";
 		sql += " WHERE";
-		sql += " boardno = ? AND userno = ?";
+		sql += " boardno = ? AND userno = ? AND postno = 2";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -373,8 +373,8 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		conn = DBConn.getConnection();
 
 		String sql = "";
-		sql += "INSERT INTO likepost(userno, boardno)";
-		sql += " VALUES (?, ? )";
+		sql += "INSERT INTO likepost(postno,userno, boardno)";
+		sql += " VALUES (2, ?, ? )";
 		
 		try {
 			ps = conn.prepareStatement(sql);

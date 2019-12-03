@@ -69,7 +69,9 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 		paging.setProj_progress(proj_progress);
 		paging.setProj_job(proj_job);
 		paging.setProj_career(proj_career);
-
+		
+//		System.out.println("paging"+paging);
+		
 		return paging;
 	}
 
@@ -115,7 +117,7 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 	public LikePost getLike(HttpServletRequest req) {
 		//전달파라미터 파싱
 		int proj_no = 0;
-		String param = req.getParameter("boardno");
+		String param = req.getParameter("proj_no");
 		if( param!=null && !"".equals(param) ) {
 			proj_no = Integer.parseInt(param);
 		}
