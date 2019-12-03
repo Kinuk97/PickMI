@@ -46,7 +46,7 @@ public class MgrCompBoardDeleteController extends HttpServlet {
 //
 //		compBoardService.delete(compBoard);
 //		
-//		resp.sendRedirect("/mgr/complist");
+		resp.sendRedirect("/mgr/complist");
 
 	
 	}

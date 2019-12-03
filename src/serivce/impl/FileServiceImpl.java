@@ -26,11 +26,13 @@ import org.apache.commons.io.IOUtils;
 import dao.face.CompBoardDao;
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
+import dao.face.MyPageDao;
 import dao.face.ProfileBoardDao;
 import dao.face.ProjectBoardDao;
 import dao.impl.CompBoardDaoImpl;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
+import dao.impl.MyPageDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
 import dao.impl.ProjectBoardDaoImpl;
 import dto.CompBoard;
@@ -45,6 +47,7 @@ public class FileServiceImpl implements FileService {
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 	private ProjectBoardDao projectBoardDao = ProjectBoardDaoImpl.getInstance();
+	
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
 
@@ -496,6 +499,13 @@ public class FileServiceImpl implements FileService {
 				uploadFile.setBoardno(compBoard.getComp_no());
 				uploadFile.setPostno(4);
 			}
+//		} //else if (postno == 5) {
+			// update originame storedname
+			// uploadFile(오리진,스토어드네임 안에들어있음) 이용
+			
+			
+			
+			
 		}
 
 		// 공통적인 파일 처리, 파일이 있다면 db에 저장, postno와 boardno는 각자의 if문에서 설정
