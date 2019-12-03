@@ -36,8 +36,19 @@ table.calendar {
 
 table.calendar td {
 	vertical-align: top;
-	border: 1px solid skyblue;
+	border: 1px solid #46b8da;
 	width: 100px;
+	padding-left: 10px;
+	padding-top: 4px;
+}
+
+div .cal-schedule {
+	height: 125px;
+}
+
+div .cal-schedule span {
+	position: relative;
+	top: 80%;
 }
 </style>
 <script type="text/javascript">
@@ -60,6 +71,11 @@ table.calendar td {
 		$("#moveNextMonth").on("click", function() {
 			moveNextMonth();
 		});
+
+		$("div .cal-schedule span").on("click", function() {
+			$(".modal").modal();
+		});
+
 	});
 
 	//Calendar 그리기
@@ -186,11 +202,26 @@ table.calendar td {
 					$tdSche.eq(dateMatch).text(txt);
 				}
 			}
+			$tdSche.eq(i).append(
+					$("<span class='glyphicon glyphicon-plus'></span>"));
 		}
 	}
-	
+
 	function addSchedule() {
-		
+		$.ajax({
+			type : "post",
+			url : "/schedule/add",
+			data : {
+				"proj_no" : "${proj_no}"
+			},
+			dataType : "json",
+			success : function(data) {
+
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
 	}
 </script>
 
@@ -205,5 +236,40 @@ table.calendar td {
 	</div>
 	<div id="cal_tab" class="cal"></div>
 </div>
+
+<!-- 일정 작성 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  
+    <div class="modal-content">
+	  <div class="modal-header">
+	    	일정 추가<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  </div>
+	  <div class="modal-body">
+			<br><br><br><br><br><br><br><br><br>
+			Test
+			<br><br><br><br><br><br><br><br><br>
+	  </div>
+    </div>
+  </div>
+</div>
+
+<!-- 일정 상세보기 -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  
+    <div class="modal-content">
+	  <div class="modal-header">
+	    	일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  </div>
+	  <div class="modal-body">
+			<br><br><br><br><br><br><br><br><br>
+			Test
+			<br><br><br><br><br><br><br><br><br>
+	  </div>
+    </div>
+  </div>
+</div>
+
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp"></jsp:include>

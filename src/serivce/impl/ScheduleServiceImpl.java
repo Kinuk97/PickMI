@@ -27,7 +27,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public List<Schedule> getScheduleList(Schedule schedule) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
