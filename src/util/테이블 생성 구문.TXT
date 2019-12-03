@@ -30,7 +30,7 @@ CREATE SEQUENCE profile_seq;
 
 DROP TABLE projboard;
 CREATE TABLE projboard (
-    proj_no NUMBER,
+    proj_no NUMBER PRIMARY KEY,
     userno NUMBER,
     proj_title VARCHAR2(100),
     proj_name VARCHAR2(100),
