@@ -39,7 +39,7 @@ public interface MyPageService {
 	public Paging getPaging(HttpServletRequest req);
 
 	/**
-	 * usertb에서 userid 가져오기
+	 * usertb에서 email 가져오기
 	 * @param req
 	 * @return
 	 */
@@ -55,6 +55,7 @@ public interface MyPageService {
 	public List<ProjectBoard> getpjList(Paging paging, HttpServletRequest req);
 	public List<CompBoard> getcompList(Paging paging, HttpServletRequest req);
 	public List<FreeBoard> getfreeList(Paging paging, HttpServletRequest req);
+
 
 	
 	

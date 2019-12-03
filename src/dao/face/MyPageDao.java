@@ -46,7 +46,8 @@ public interface MyPageDao {
 	List<CompBoard> selectComp(Paging paging, HttpServletRequest req);
 
 	List<FreeBoard> selectFree(Paging paging, HttpServletRequest req);
-	
+
+
 
 
 
