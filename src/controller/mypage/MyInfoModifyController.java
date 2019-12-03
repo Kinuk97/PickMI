@@ -1,8 +1,6 @@
 package controller.mypage;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,32 +12,28 @@ import serivce.face.MyPageService;
 import serivce.impl.MyPageServiceImpl;
 
 /**
- * Servlet implementation class MyInfoListController
+ * Servlet implementation class MyPwModifyController
  */
-@WebServlet("/mypage/info")
-public class MyInfoListController extends HttpServlet {
+@WebServlet("/mypage/infomodify")
+public class MyInfoModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private MyPageService myPageService = MyPageServiceImpl.getInstance();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		// 세션에서 현재 로그인 돼 있는 email 가져오기
-		String email = (String) req.getSession().getAttribute("email");
-		
-//		System.out.println(email);
-		
-		// email에 해당하는 회원정보 가져오기
+	
+        String email = (String) req.getSession().getAttribute("email");
+        String pw = (String) req.getSession().getAttribute("pw");
+        String name = (String) req.getSession().getAttribute("name");
+        myPageService.userUpdate(email, pw, name);
 		User userinfo = myPageService.getUser(email);
-		
-
 		req.setAttribute("userinfo", userinfo);
 
-		req.getRequestDispatcher("/WEB-INF/views/mypage/info.jsp")
-		.forward(req, resp);
-		
+        resp.sendRedirect("/main");
+        return;
+
 		
 	}
-	
+
 }

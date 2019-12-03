@@ -6,10 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import dao.face.ManagerDao;
 import dao.impl.ManagerDaoImpl;
+import dto.CompBoard;
+import dto.Files;
 import dto.Manager;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
 import dto.User;
+import serivce.face.FileService;
 import serivce.face.MgrService;
 import util.Paging;
 
@@ -28,6 +31,8 @@ public class MgrServiceImpl implements MgrService{
 	public static MgrService getInstance() {
 		return Singleton.instance;
 	}
+	
+	private FileService fileService = FileServiceImpl.getInstance();
 	
 // Login -----
 	
@@ -205,12 +210,18 @@ public class MgrServiceImpl implements MgrService{
 		return managerDao.projectselectAll(paging);
 	}
 
-
-
 	
-
-	
-	
-	
-
+	// 체크 리스트
+//	@Override
+//	public void listdeleteComp(HttpServletRequest req) {
+//		
+//		String [] params = req.getParameterValues("checkRow");
+//		System.out.println(params);
+//		for (String param : params) {
+//			
+//			CompBoard compBoardchkdel = new CompBoard();
+//								
+//		}
+//		
+//	}
 }

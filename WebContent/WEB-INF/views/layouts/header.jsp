@@ -45,8 +45,8 @@ $(document).ready(function(){
 	$('#messagelist').click(function() {
 		
 		console.log("꺌")
-// 		$('#messagelist').hide();
-		$('#messagebox').show();
+		$('.dropdown-menu').css('visibility','hidden');
+		$('#messagebox').css('visibility', 'visible');
 	});
 	
 });
@@ -267,6 +267,7 @@ a#top {
 	background-color: #fff;
 	right: 0;
 	bottom: 0;	
+	visibility: hidden;
 }
 
 
@@ -315,6 +316,9 @@ a#top {
 
 				<ul class="nav navbar-nav navbar-right">
 
+
+				<c:choose>
+					<c:when test="${not empty login }">	
  						<li role="presentation"> 					
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
@@ -369,33 +373,29 @@ a#top {
 										</a>
 									</li>
 									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
 										</a>
 									</li>
 									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
 										</a>
 									</li>
 									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
+										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
 											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
 											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
 										</a>
 									</li>
 								</ul>
-								
-								<!-- 메세지 목록중 하나 클릭했을 시 -->
-<!-- 								<ul class="dropdown-menu" id="message" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px; height: 405px;"> -->
-									
-<!-- 								</ul> -->
-								
-								
 							</div>
 						</li>
+					</c:when>	
+				</c:choose>	
+						
 						
 					<li>
 					<c:choose>
