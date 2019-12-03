@@ -77,15 +77,13 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				temp.setScheduleno(rs.getInt("scheduleno"));
 				temp.setProj_no(rs.getInt("proj_no"));
 				temp.setUserno(rs.getInt("userno"));
-				temp.setTask(rs.getString("task"));
 				temp.setContent(rs.getString("content"));
 				temp.setPlace(rs.getString("place"));
-				temp.setTerm_start(rs.getDate("term_start"));
-				temp.setTerm_last(rs.getDate("term_last"));
 				temp.setWrite_date(rs.getDate("write_date"));
 
 				list.add(temp);
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -120,11 +118,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				result.setScheduleno(rs.getInt("scheduleno"));
 				result.setProj_no(rs.getInt("proj_no"));
 				result.setUserno(rs.getInt("userno"));
-				result.setTask(rs.getString("task"));
 				result.setContent(rs.getString("content"));
 				result.setPlace(rs.getString("place"));
-				result.setTerm_start(rs.getDate("term_start"));
-				result.setTerm_last(rs.getDate("term_last"));
 				result.setWrite_date(rs.getDate("write_date"));
 			}
 		} catch (SQLException e) {
@@ -144,7 +139,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	@Override
 	public void insertSchedule(Schedule schedule) {
-		String sql = "INSERT INTO schedule VALUES (?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		String sql = "INSERT INTO schedule VALUES (?, ?, ?, ?, ?, ?, sysdate)";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -153,12 +148,10 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			ps.setInt(2, schedule.getProj_no());
 			ps.setInt(3, schedule.getUserno());
 			ps.setString(4, schedule.getContent());
-			ps.setString(5, schedule.getTask());
-			ps.setString(6, schedule.getPlace());
-			ps.setDate(7, new java.sql.Date(schedule.getTerm_start().getTime()));
-			ps.setDate(8, new java.sql.Date(schedule.getTerm_last().getTime()));
+			ps.setString(5, schedule.getPlace());
+			ps.setDate(6, new java.sql.Date(schedule.getDue_date().getTime()));
 
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -172,19 +165,17 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	@Override
 	public void updateSchedule(Schedule schedule) {
-		String sql = "UPDATE schedule SET content = ?, task = ?, place = ?, term_start = ?, term_last = ? WHERE scheduleno = ?";
+		String sql = "UPDATE schedule SET content = ?, place = ?, due_date = ? WHERE scheduleno = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
 			ps.setString(1, schedule.getContent());
-			ps.setString(2, schedule.getTask());
-			ps.setString(3, schedule.getPlace());
-			ps.setDate(4, new java.sql.Date(schedule.getTerm_start().getTime()));
-			ps.setDate(5, new java.sql.Date(schedule.getTerm_last().getTime()));
-			ps.setInt(6, schedule.getScheduleno());
+			ps.setString(2, schedule.getPlace());
+			ps.setDate(3, new java.sql.Date(schedule.getDue_date().getTime()));
+			ps.setInt(4, schedule.getScheduleno());
 
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -205,7 +196,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 			ps.setInt(1, schedule.getScheduleno());
 
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

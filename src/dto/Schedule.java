@@ -1,23 +1,22 @@
 package dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Schedule {
 	private int scheduleno;
 	private int userno;
 	private int proj_no;
 	private String content;
-	private String task;
 	private String place;
-	private Date term_start;
-	private Date term_last;
+	private Date due_date;
 	private Date write_date;
+	List<CheckList> checkList;
 
 	@Override
 	public String toString() {
 		return "Schedule [scheduleno=" + scheduleno + ", userno=" + userno + ", proj_no=" + proj_no + ", content="
-				+ content + ", task=" + task + ", place=" + place + ", term_start=" + term_start + ", term_last="
-				+ term_last + ", write_date=" + write_date + "]";
+				+ content + ", place=" + place + ", due_date=" + due_date + ", write_date=" + write_date + "]";
 	}
 
 	public int getScheduleno() {
@@ -52,14 +51,6 @@ public class Schedule {
 		this.content = content;
 	}
 
-	public String getTask() {
-		return task;
-	}
-
-	public void setTask(String task) {
-		this.task = task;
-	}
-
 	public String getPlace() {
 		return place;
 	}
@@ -68,20 +59,12 @@ public class Schedule {
 		this.place = place;
 	}
 
-	public Date getTerm_start() {
-		return term_start;
+	public Date getDue_date() {
+		return due_date;
 	}
 
-	public void setTerm_start(Date term_start) {
-		this.term_start = term_start;
-	}
-
-	public Date getTerm_last() {
-		return term_last;
-	}
-
-	public void setTerm_last(Date term_last) {
-		this.term_last = term_last;
+	public void setDue_date(Date due_date) {
+		this.due_date = due_date;
 	}
 
 	public Date getWrite_date() {

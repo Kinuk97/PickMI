@@ -136,3 +136,22 @@ CREATE TABLE manager (
     mgrid VARCHAR2(100) PRIMARY KEY,
     mgrpw VARCHAR2(100)
 );
+
+
+DROP SEQUENCE schedule_seq;
+CREATE SEQUENCE schedule_seq;
+
+DROP TABLE chceklist;
+CREATE TABLE chceklist (
+    checkno NUMBER PRIMARY KEY,
+    scheduleno NUMBER NOT NULL,
+    check_content VARCHAR2(100),
+    do_check CHAR(1) DEFAULT '0',
+
+    CONSTRAINT boolean_check CHECK (do_check IN ('0', '1')),
+    CONSTRAINT checklist_scheduleno_kf FOREIGN KEY (scheduleno)
+    REFERENCES schedule (scheduleno)
+);
+
+DROP SEQUENCE checklist_seq;
+CREATE SEQUENCE checklist_seq;

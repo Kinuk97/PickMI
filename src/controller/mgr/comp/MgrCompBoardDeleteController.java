@@ -28,10 +28,21 @@ public class MgrCompBoardDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		String[] strings = req.getParameterValues("boardno");
+		
+		for (String string : strings) {
+			CompBoard comp = new CompBoard();
+			
+			comp.setComp_no(Integer.parseInt(string));
+			
+			compBoardService.delete(comp);
+			
+			fileService.deleteFile(getServletContext().getRealPath("upload"), 4, comp.getComp_no());
+		}
+		
 		CompBoard compBoard = compBoardService.getParam(req);
 		CompBoard comp = compBoardService.compBoardDetail(compBoard);
 		
-		fileService.deleteFile(getServletContext().getRealPath("upload"), 4, compBoard.getComp_no());
 
 		compBoardService.delete(compBoard);
 		
