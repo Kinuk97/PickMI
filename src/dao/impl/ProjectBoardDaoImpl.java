@@ -65,7 +65,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 	}
 
 	@Override
-	public int selectCntAll() {
+	public int selectCntAll(String proj_loc, String proj_progress, String proj_job, String proj_career) {
 		
 		conn = DBConn.getConnection();
 		
@@ -76,6 +76,67 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		sql += " count(*)";
 		sql += " FROM projboard";
 		
+		
+		if((proj_loc != null && !proj_loc.equals("")) || (proj_progress != null && !proj_progress.equals("")) 
+				|| (proj_job != null && !proj_job.equals("")) || (proj_career != null && !proj_career.equals(""))) {
+			
+			sql += " WHERE 1 = 1";
+			
+			if(proj_loc != null && !proj_loc.equals("")) {
+				sql += " AND proj_loc =";
+				if(proj_loc.equals("서울")) {
+					sql += " '서울'";
+				} else if(proj_loc.equals("인천")) {
+					sql += " '인천'";
+				} else if(proj_loc.equals("경기")) {
+					sql += " '경기'";
+				} else if(proj_loc.equals("강원")) {
+					sql += " '강원'";
+				} else if(proj_loc.equals("충청")) {
+					sql += " '충청'";
+				} else if(proj_loc.equals("경상")) {
+					sql += " '경상'";
+				} else if(proj_loc.equals("전라")) {
+					sql += " '전라'";
+				} 
+			
+			} else if(proj_progress != null && !proj_progress.equals("")) {
+				sql += " AND proj_progress =";
+				if(proj_progress.equals("설계단계")) {
+					sql += " '설계단계'";
+				} else if(proj_progress.equals("구현단계")) {
+					sql += " '구현단계'";
+				}
+			
+			} else if(proj_job != null && !proj_job.equals("")) {
+				sql += " AND proj_job =";
+				if(proj_job.equals("개발자")) {
+					sql += " '개발자'";
+				} else if(proj_job.equals("프리랜서")) {
+					sql += " '프리랜서'";
+				} else if(proj_job.equals("디자이너")) {
+					sql += " '디자이너'";
+				} else if(proj_job.equals("무직")) {
+					sql += " '무직'";
+				}
+			
+			} else if(proj_career != null && !proj_career.equals("")) {
+				sql += " AND proj_career =";
+				if(proj_career.equals("1년차")) {
+					sql += " '1년차'";
+				} else if(proj_career.equals("3년차")) {
+					sql += " '3년차'";
+				} else if(proj_career.equals("5년차")) {
+					sql += " '5년차'";
+				} else if(proj_career.equals("7년차")) {
+					sql += " '7년차'";
+				} else if(proj_career.equals("8년차이상")) {
+					sql += " '8년차이상'";
+				}
+			}
+
+
+		}
 			
 		//결과 저장 리스트
 		int cnt = 0;
@@ -107,8 +168,71 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		String sql = "";
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
-		sql += "   select * from projboard";
-
+		sql += "   select proj_no, userno, proj_title, proj_name, proj_time, proj_loc, proj_career, proj_member,";
+		sql += "	proj_apply, proj_sdate, proj_ddate, proj_rec_date, proj_progress, proj_content, proj_like, proj_job";
+		sql	+= "	 from projboard";
+		
+		// filter 존재한다면 where절 추가
+		if((paging.getProj_loc() != null && !paging.getProj_loc().equals("")) || (paging.getProj_progress() != null && !paging.getProj_progress().equals("")) 
+				|| (paging.getProj_job() != null && !paging.getProj_job().equals("")) || (paging.getProj_career() != null && !paging.getProj_career().equals(""))) {
+			sql += " WHERE 1 = 1";
+			
+			if(paging.getProj_loc() != null && !paging.getProj_loc().equals("")) {
+				
+				sql += " AND proj_loc =";
+				
+				if(paging.getProj_loc().equals("서울")) {
+					sql += " '서울'";
+				} else if(paging.getProj_loc().equals("인천")) {
+					sql += " '인천'";
+				} else if(paging.getProj_loc().equals("경기")) {
+					sql += " '경기'";
+				} else if(paging.getProj_loc().equals("강원")) {
+					sql += " '강원'";
+				} else if(paging.getProj_loc().equals("충청")) {
+					sql += " '충청'";
+				} else if(paging.getProj_loc().equals("경상")) {
+					sql += " '경상'";
+				} else if(paging.getProj_loc().equals("전라")) {
+					sql += " '전라'";
+				}
+			
+			} else if(paging.getProj_progress() != null && !paging.getProj_progress().equals("")){
+				sql += " AND proj_progress =";
+				if(paging.getProj_progress().equals("설계단계")) {
+					sql += " '설계단계'";
+				} else if(paging.getProj_progress().equals("구현단계")) {
+					sql += " '구현단계'";
+				}
+				
+			} else if(paging.getProj_job() != null && !paging.getProj_job().equals("")) {
+				sql += " AND proj_job =";
+				if(paging.getProj_job().equals("개발자")) {
+					sql += " '개발자'";
+				} else if(paging.getProj_job().equals("프리랜서")) {
+					sql += " '프리랜서'";
+				} else if(paging.getProj_job().equals("디자이너")) {
+					sql += " '디자이너'";
+				} else if(paging.getProj_job().equals("무직")) {
+					sql += " '무직'";
+				}
+			
+			} else if(paging.getProj_career() != null && !paging.getProj_career().equals("")) {
+				sql += " AND proj_career =";
+				if(paging.getProj_career().equals("1년차")) {
+					sql += " '1년차'";
+				} else if(paging.getProj_career().equals("3년차")) {
+					sql += " '3년차'";
+				} else if(paging.getProj_career().equals("5년차")) {
+					sql += " '5년차'";
+				} else if(paging.getProj_career().equals("7년차")) {
+					sql += " '7년차'";
+				} else if(paging.getProj_career().equals("8년차이상")) {
+					sql += " '8년차이상'";
+				}
+			}
+		}
+		
 		sql += "   order by proj_no desc";
 		sql += "  ) B";
 		sql += "  ORDER BY rnum";

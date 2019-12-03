@@ -60,7 +60,7 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 
 
 		// Board TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
-		int totalCount = projectBoardDao.selectCntAll();
+		int totalCount = projectBoardDao.selectCntAll(proj_loc, proj_progress, proj_job, proj_career);
 
 		// Paging 객체 생성
 		Paging paging = new Paging(totalCount, curPage, 20);
