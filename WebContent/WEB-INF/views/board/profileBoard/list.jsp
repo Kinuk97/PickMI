@@ -8,54 +8,104 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 <script type="text/javascript">
 $(document).ready(function() {
+	
+	//필터 
+	profileList();
+	var interestno = "${paging.interestno}";
+	var locationno = "${paging.locationno}";
+	var jobno = "${paging.jobno}";
+	var stateno = "${paging.stateno}";
+	var careerno = "${paging.careerno}";
+
+	if (interestno != "0") {
+		$("#interestBtn").addClass("active");
+	} else if (locationno != "0") {
+		$("#locationBtn").addClass("active");
+	} else if (jobno != "0") {
+		$("#jobBtn").addClass("active");
+	} else if (stateno != "0") {
+		$("#stateBtn").addClass("active");
+	} else if (careerno != "0"){
+		$("#careerBtn").addClass("active");
+	} else {
+	}
+
+	$("#interestBtn").on("click", function {
+		location.href= "/profileBoard/list";
+	})
+	$("#locationBtn").on("click",function() {
+		location.href= "/profileBoard/list";
+	})
+	$("#jobBtn").on("click",function() {
+		location.href= "/profileBoard/list";
+	})
+	$("#stateBtn").on("click",function() {
+		location.href= "/profileBoard/list";
+	})
+	$("#careerBtn").on("click",function() {
+		location.href= "/profileBoard/list";
+	})
+	
+
+	
+	
+	
+	
 	var curPage = 1;
 	var totalPage = "${paging.totalPage}";
 	var loading = false;
 	
-	$(window).scroll(function() {
-		if (loading) {
-			return;
-		}
-		if (curPage >= totalPage) {
-			return;
-		}
-		
-		if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-	    	loading = true;
-	    	curPage += 1;
-	    	$.ajax({
-				type : "post",
-				url : "/profileBoard/list",
-				data : { "curPage" : curPage },
-				dataType : "json",
-				success : function(data) {
-					for (var i = 0; i < data.length; i++) {
-						
-						var caption = $("<div class='caption caption-profile'></div>");
-						
-						caption.append($("<h4></h4>").text(data[i].prof_no));
-						caption.append($("<p></p>").text(data[i].username));
-						caption.append($("<p></p>").text(data[i].prof_interest));
-						caption.append($("<p></p>").text(data[i].prof_loc));
-						caption.append($("<p></p>").text(data[i].prof_job));
-						caption.append($("<p></p>").text(data[i].prof_state));
-						caption.append($("<p></p>").text(data[i].prof_career));
-						caption.append($("<p class='text-right'></p>").text(data[i].prof_like +"❤"));
-						caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
+$(window).scroll(function() {
+	if (loading) {
+		return;
+	}
+	if (curPage >= totalPage) {
+		return;
+	}
+	
+	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    	loading = true;
+    	curPage += 1;
+    	profileList();
+    	
+	}
+});	
+
+function profileList() {
+  	$.ajax({
+		type : "post",
+		url : "/profileBoard/list",
+		data : { "curPage" : curPage, "interestno" : "${paging.interestno}", "locationno" : "${paging.locationno}", "jobno" : "${paging.jobno}", "stateno" : "${paging.stateno}", "careerno" : "${paging.careerno}" },
+		dataType : "json",
+		success : function(data) {
+			for (var i = 0; i < data.length; i++) {
+				
+				var caption = $("<div class='caption caption-profile'></div>");
+				
+				caption.append($("<h4></h4>").text(data[i].prof_no));
+				caption.append($("<p></p>").text(data[i].username));
+				caption.append($("<p></p>").text(data[i].prof_interest));
+				caption.append($("<p></p>").text(data[i].prof_loc));
+				caption.append($("<p></p>").text(data[i].prof_job));
+				caption.append($("<p></p>").text(data[i].prof_state));
+				caption.append($("<p></p>").text(data[i].prof_career));
+				caption.append($("<p class='text-right'></p>").text(data[i].prof_like +"❤"));
+				caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
+	
 			
-					
-						var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profileBoard/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
-						$("#board").append(board);
-					}	
-					
-					loading = false;
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			});
-	    }
+				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profileBoard/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
+				$("#board").append(board);
+			}	
+		
+			loading = false;
+		},
+		error : function(e) {
+			console.log(e);
+		}
 	});
+};
+
+
 	
 $("#nologin").click( function loginplz(){
 	alert("로그인 해주세요");
@@ -65,7 +115,9 @@ $("#write").click( function loginplz(){
  	alert("로그인 해주세요");
  		$(location).attr("href","/login");
 	});
-});
+	
+	
+}); //document end
 
 
 </script>
@@ -78,27 +130,27 @@ $("#write").click( function loginplz(){
   border: none;
 }
 
-#filter {
+#interest {
   position: relative;
   display: inline-block;
 }
 
-#filter2 {
+#location {
   position: relative;
   display: inline-block;
 }
 
-#filter3 {
+#job {
   position: relative;
   display: inline-block;
 }
 
-#filter4 {
+#state {
   position: relative;
   display: inline-block;
 }
 
-#filter5 {
+#career {
   position: relative;
   display: inline-block;
 }
@@ -120,20 +172,20 @@ $("#write").click( function loginplz(){
 }
 
 #filter-list a:hover {background-color: #ddd;}
-#filter:hover #filter-list {display: block;}
-#filter:hover #filterBtn {background-color: #CEE3F6;}
+#interest:hover #filter-list {display: block;}
+#interest:hover #filterBtn {background-color: #CEE3F6;}
 
-#filter2:hover #filter-list {display: block;}
-#filter2:hover #filterBtn {background-color: #CEE3F6;}
+#location:hover #filter-list {display: block;}
+#location:hover #filterBtn {background-color: #CEE3F6;}
 
-#filter3:hover #filter-list {display: block;}
-#filter3:hover #filterBtn {background-color: #CEE3F6;}
+#job:hover #filter-list {display: block;}
+#job:hover #filterBtn {background-color: #CEE3F6;}
 
-#filter4:hover #filter-list {display: block;}
-#filter4:hover #filterBtn {background-color: #CEE3F6;}
+#state:hover #filter-list {display: block;}
+#state:hover #filterBtn {background-color: #CEE3F6;}
 
-#filter5:hover #filter-list {display: block;}
-#filter5:hover #filterBtn {background-color: #CEE3F6;}
+#career:hover #filter-list {display: block;}
+#career:hover #filterBtn {background-color: #CEE3F6;}
 
 
 .thumbnail:hover { 
@@ -161,51 +213,59 @@ a#top {
 	</div>
 </c:if>
 
+<form action="/profileBoard/list" method="get">
+<input type="hidden" value="${paging.interestno }" name="interestno">
+<input type="hidden" value="${paging.locationno }" name="locationno">
+<input type="hidden" value="${paging.jobno }" name="jobno">
+<input type="hidden" value="${paging.stateno }" name="stateno">
+<input type="hidden" value="${paging.careerno }" name="careerno">
+
 <div id=filtersystem style="padding:0 100px; margin-left: 60px;">
-	<div id="filter">
-		<button class="btn btn-info" id="filterBtn">관심</button>
+	<div id="interest">
+		<button class="btn btn-info" id="interestBtn">관심</button>
 		<div id="filter-list">
-			<a href="#">개발</a>
-			<a href="#">디자인</a>
-			<a href="#">스타트업</a>
-			<a href="#">IT언어</a>
+			<a href="/profileBoard/list?interestno=1" id="interest1">개발</a>
+			<a href="/profileBoard/list?interestno=2" id="interest2">디자인</a>
+			<a href="/profileBoard/list?interestno=3" id="interest3">스타트업</a>
+			<a href="/profileBoard/list?interestno=4" id="interest4">IT언어</a>
 		</div>
 	</div>
-	<div id="filter2">
-		<button class="btn btn-info" id="filterBtn">지역</button>
+	<div id="location">
+		<button class="btn btn-info" id="locationBtn">지역</button>
 		<div id="filter-list">
-			<a href="#">서울</a>
-			<a href="#">경기</a>
-			<a href="#">그외</a>
+			<a href="/profileBoard/list?locationno=1" id="location1">서울</a>
+			<a href="/profileBoard/list?locationno=2" id="location2">경기</a>
+			<a href="/profileBoard/list?locationno=3" id="location3">그외</a>
 		</div>
 	</div>
-	<div id="filter3">
-		<button class="btn btn-info" id="filterBtn">직업</button>
+	<div id="job">
+		<button class="btn btn-info" id="jobBtn">직업</button>
 		<div id="filter-list">
-			<a href="#">개발자</a>
-			<a href="#">프리랜서</a>
-			<a href="#">디자이너</a>
-			<a href="#">무직</a>
+			<a href="/profileBoard/list?jobno=1" id="job1">개발자</a>
+			<a href="/profileBoard/list?jobno=2" id="job2">프리랜서</a>
+			<a href="/profileBoard/list?jobno=3" id="job3">디자이너</a>
+			<a href="/profileBoard/list?jobno=4" id="job4">무직</a>
 		</div>
 	</div>
-	<div id="filter4">
-		<button class="btn btn-info" id="filterBtn">상태</button>
+	<div id="state">
+		<button class="btn btn-info" id="stateBtn">상태</button>
 		<div id="filter-list">
-			<a href="#">구직중</a>
-			<a href="#">재직중</a>
-			<a href="#">프리랜서</a>
+			<a href="/profileBoard/list?stateno=1" id="state1">구직중</a>
+			<a href="/profileBoard/list?stateno=2" id="state2">재직중</a>
+			<a href="/profileBoard/list?stateno=3" id="state3">프리랜서</a>
 		</div>
 	</div>
-	<div id="filter5">
-		<button class="btn btn-info" id="filterBtn">경력</button>
+	<div id="career">
+		<button class="btn btn-info" id="careerBtn">경력</button>
 		<div id="filter-list">
-			<a href="#">1-2년차</a>
-			<a href="#">3-4년차</a>
-			<a href="#">5-7년차</a>
-			<a href="#">8년차이상</a>
+			<a href="/profileBoard/list?careerno=1" id="career1">1-2년차</a>
+			<a href="/profileBoard/list?careerno=2" id="career2">3-4년차</a>
+			<a href="/profileBoard/list?careerno=3" id="career3">5-7년차</a>
+			<a href="/profileBoard/list?careerno=4" id="career4">8년차이상</a>
 		</div>
 	</div>
 </div>
+</form>
 <br>
 
 <a id="top" href="#">TOP👆</a>
