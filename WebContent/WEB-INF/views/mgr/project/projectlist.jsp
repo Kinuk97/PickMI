@@ -48,6 +48,7 @@ table th {
 
 <div class="container" >
 	<div class="table-responsive">
+	<form action="/mgr/projectboard/delete" method = "get">
 	<table class="table table-condensed table-hover">
 		<tr class="info">
 			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
@@ -66,6 +67,8 @@ table th {
 		</tr>	
 		</c:forEach>
 	</table>
+		<button>삭제</button>
+	</form>
 	</div>
 
 	<div class="src" style="text-align: center;">

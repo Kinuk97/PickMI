@@ -18,7 +18,7 @@ $(document).ready(function(){
 	
 // 	삭제 버튼 동작
 	$("#btnDelete").click(function(){
-		 $(location).attr("href", "/mgr/compboard/delete?comp_no=${compBoard.comp_no }");
+		 $(location).attr("href", "/mgr/compboard/delete?checkRow=${compBoard.comp_no }");
 	});
 	
 });

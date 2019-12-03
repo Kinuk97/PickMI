@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.ProjectBoard;
 import serivce.face.MgrService;
+import serivce.face.ProjectBoardService;
 import serivce.impl.MgrServiceImpl;
+import serivce.impl.ProjectBoardServiceImpl;
 import util.Paging;
 
 /**
@@ -21,6 +23,7 @@ import util.Paging;
 public class MgrProjectListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private ProjectBoardService projectBoardService = ProjectBoardServiceImpl.getInstance(); 
 	private MgrService mgrService = MgrServiceImpl.getInstance();
 	
 	@Override
@@ -30,7 +33,7 @@ public class MgrProjectListController extends HttpServlet {
 		if (req.getSession().getAttribute("mgrlogin") != null ) {
 		
 			//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-			Paging paging = mgrService.getPaging(req);
+			Paging paging = projectBoardService.getPaging(req);
 			
 			// 검색어 파라미터
 			paging.setSearch(req.getParameter("search"));

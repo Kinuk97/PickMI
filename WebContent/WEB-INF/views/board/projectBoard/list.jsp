@@ -147,14 +147,14 @@ select {
 	<div id="filter">
 	<button class="btn btn-info" id="filterBtn">지역</button>
 	<div id="filter-list">
-		<a href="#">서울</a>
-		<a href="#">인천</a>
-		<a href="#">경기</a>
-		<a href="#">강원</a>
-		<a href="#">충청</a>
-		<a href="#">경상</a>
-		<a href="#">전라</a>
-		<a href="#">그외</a>
+		<a href="projectBoard/list?proj_loc='서울'">서울</a>
+		<a href="projectBoard/list?proj_loc='인천'">인천</a>
+		<a href="projectBoard/list?proj_loc='경기'">경기</a>
+		<a href="projectBoard/list?proj_loc='강원'">강원</a>
+		<a href="projectBoard/list?proj_loc='충청'">충청</a>
+		<a href="projectBoard/list?proj_loc='경상'">경상</a>
+		<a href="projectBoard/list?proj_loc='전라'">전라</a>
+		<a href="projectBoard/list?proj_loc='서울'">그외</a>
 	</div>
 	</div>
 	

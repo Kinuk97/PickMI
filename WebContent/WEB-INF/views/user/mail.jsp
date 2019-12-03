@@ -137,10 +137,10 @@ body {
       $("#alert-success").hide();
       $("#alert-danger").hide();
       $("input").keyup(function() {
-         var pwd1 = $("#numcheck2").val();
-         var pwd2 = $("#numcheck").val();
-         if (pwd1 != "" || pwd2 != "") {
-            if (pwd1 == pwd2) {
+         var key = $("#key").val();
+         var num = $("#num").val();
+         if (key != "" || num != "") {
+            if (key == num) {
                $("#alert-success").show();
                $("#alert-danger").hide();
                $("#submit").removeAttr("disabled");
@@ -160,11 +160,11 @@ body {
 
 <!-- <form action="/authentic" method="post"> -->
 <div class="form-group">
-<p> 입력한 이메일로 보내진 인증번호를 입력하세요</p> 
-<input id="numcheck2" type="hidden" class="form-control" name="numcheck2" value="${key }" >
-<input id="numcheck" type="text" class="form-control" name="numcheck" placeholder="인증번호 입력" required="required">
+<p>인증번호를 입력해 주세요</p> 
+<input id="key" type="hidden" class="form-control" name="key" value="${key }" >
+<input id="num" type="text" class="form-control" name="num" placeholder="인증번호 입력" required="required">
 
-<div class="alert alert-success" id="alert-success"> 인증번호가 일치합니다. <button type="button" class="btn btn-primary" onclick="location.href = '/login';">확인</button></div>
+<div class="alert alert-success" id="alert-success"> 인증번호가 일치합니다. <button type="button" class="btn btn-info" onclick="location.href = '/login';">확인</button></div>
 <div class="alert alert-danger" id="alert-danger">인증번호가 일치하지 않습니다.</div>
 </div>
 <!-- </form> -->

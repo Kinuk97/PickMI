@@ -12,6 +12,7 @@ import dao.face.FreeBoardDao;
 import dao.face.ProjectBoardDao;
 import dbutil.DBConn;
 import dto.FreeBoard;
+import dto.LikePost;
 import dto.ProjectBoard;
 import util.Paging;
 
@@ -334,6 +335,207 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		}
 		return result;
 	}
+
+	@Override
+	public void deleteLike(LikePost like) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "DELETE likepost";
+		sql += " WHERE";
+		sql += " boardno = ? AND userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getBoardno());
+			ps.setInt(2, like.getUserno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void insertLike(LikePost like) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "INSERT INTO likepost(userno, boardno)";
+		sql += " VALUES (?, ? )";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public int selectCntLike(LikePost like) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "SELECT count(*) FROM likepost";
+		sql += " WHERE boardno = ?";
+		sql += " 	AND userno = ?";
+		
+		int cnt = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, like.getBoardno());
+			ps.setInt(2, like.getUserno());
+
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+			
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				//DB객체 닫기
+				if(ps!=null)	ps.close();
+				if(rs!=null)	rs.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectTotalCntLike(LikePost like) {
+		conn = DBConn.getConnection();
+
+		String sql = "SELECT COUNT(*) FROM likepost"
+				+ " WHERE boardno=?";
+		
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, like.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return cnt;
+	}
+
+//	@Override
+//	public List<ProjectBoard> selectBoardListByLoc(Paging paging) {
+//		
+//		String sql = "";
+//		sql += "select * from (";
+//		sql += "  select rownum rnum, B.* FROM(";
+//		sql += "   select * from projboard";
+//
+//		sql += "   order by proj_no desc";
+//		sql += "  ) B";
+//		sql += "  ORDER BY rnum";
+//		sql += " ) BOARD";
+//		sql += " WHERE (rnum BETWEEN ? AND ?) AND proj_loc = ?";
+//		
+//		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
+//		
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			
+//			ps.setInt(1, paging.getStartNo());
+//			ps.setInt(2, paging.getEndNo());
+//			ps.setString(3, paging.getProj_loc());
+//			
+//			rs = ps.executeQuery();
+//			
+//			while(rs.next()) {
+//				ProjectBoard projectBoard = new ProjectBoard();
+//				
+//				projectBoard.setProj_no(rs.getInt("proj_no"));
+//				projectBoard.setUserno(rs.getInt("userno"));
+//				projectBoard.setProj_title(rs.getString("proj_title"));
+//				projectBoard.setProj_name(rs.getString("proj_name"));
+//				projectBoard.setProj_loc(rs.getString("proj_loc"));
+//				projectBoard.setProj_career(rs.getString("proj_career"));
+//				projectBoard.setProj_apply(rs.getInt("proj_apply"));
+//				projectBoard.setProj_content(rs.getString("proj_content"));
+//				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
+//				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
+//				projectBoard.setProj_rec_date(rs.getDate("proj_rec_date"));
+//				projectBoard.setProj_like(rs.getInt("proj_like"));
+//				projectBoard.setProj_time(rs.getDate("proj_time"));
+//				projectBoard.setProj_progress(rs.getString("proj_progress"));
+//				projectBoard.setProj_member(rs.getInt("proj_member"));
+//				projectBoard.setProj_job(rs.getString("proj_job"));
+//				
+//				list.add(projectBoard);
+//				
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (rs != null)
+//					rs.close();
+//				if (ps != null)
+//					ps.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		return list;
+//	}
 
 
 }
