@@ -256,7 +256,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 			e.printStackTrace();
 		}
 	}
-		param = req.getParameter("ineterestno");
+		param = req.getParameter("interestno");
 		int interestno = 0;
 		if (param != null && !"".equals(param)) {
 			try {

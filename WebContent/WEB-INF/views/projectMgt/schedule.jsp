@@ -81,6 +81,11 @@ div .cal-schedule span {
 			// $(this).parent().prev().text() 날짜 가져오기
 
 			$("#writeFormModal").modal();
+
+		});
+		//일정 아이콘 클릭시 모달 보이기
+		$("div .cal-schedule #scheduleView").on("click", function() {
+			$("#viewSchedule").modal();
 		});
 
 	});
@@ -223,7 +228,7 @@ div .cal-schedule span {
 // 					$tdSche.eq(dateMatch).text(txt);
 // 				}
 // 			}
-			$tdSche.eq(i).append($("<span class='glyphicon glyphicon-plus'></span>"));
+			$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
 		}
 	}
 
@@ -243,6 +248,18 @@ div .cal-schedule span {
 			}
 		});
 	}
+	
+// 	function list() {
+// 		$.ajax({
+// 			type : "post",
+// 			url : "/schedule/list",
+// 			data : {
+// 				"proj_no" : "${proj_no}",  "due_date" : "${due_date}"
+// 			}
+// 			dateType : "json",
+// 			success :
+// 		})
+// 	}
 </script>
 
 <div class="container">
@@ -297,39 +314,22 @@ div .cal-schedule span {
 </div>
 
 <!-- 일정 상세보기 -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-	aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-
-		<div class="modal-content">
-			<div class="modal-header">
-				일정 보기
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br> Test <br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-			</div>
-		</div>
-	</div>
+<div id="viewSchedule" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  
+    <div class="modal-content">
+	  <div class="modal-header">
+	    	일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  </div>
+	  <div class="modal-body">
+	  	<form>
+			<div class="form-group">
+           	 	<label for="recipient-name" class="control-label">일정 간략내용</label>
+          	</div>
+         </form>
+	  </div>
+    </div>
+  </div>
 </div>
 
 

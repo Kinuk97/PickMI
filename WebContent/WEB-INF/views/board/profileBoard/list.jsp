@@ -30,7 +30,7 @@ $(document).ready(function() {
 	} else {
 	}
 
-	$("#interestBtn").on("click", function {
+	$("#interestBtn").on("click", function() {
 		location.href= "/profileBoard/list";
 	})
 	$("#locationBtn").on("click",function() {
