@@ -9,8 +9,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	var login = "${login}"
-	if(login != ""&& longin ) {
 	
 	$("#unlike").click( function(){
 		console.log("된다");
@@ -53,7 +51,7 @@ $(document).ready(function() {
 			}
 		})
 	})
-}
+
 
 function like(data) {
 		console.log("좋아요되랏")
