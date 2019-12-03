@@ -38,6 +38,7 @@ $(document).ready(function(){
 <body>
 
 <div class="container" >
+	<form action="/mgr/profileboard/delete" method="get">
 	<table class="table table-condensed">
 		<tr class="info">
 			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
@@ -60,6 +61,8 @@ $(document).ready(function(){
 		</tr>	
 		</c:forEach>
 	</table>
+		<button>삭제</button>
+	</form>
 	
 	<div class="src" style="text-align: center;">
 		<form action="/mgr/profilelist" method="get">

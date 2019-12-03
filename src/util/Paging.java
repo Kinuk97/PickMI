@@ -18,10 +18,18 @@ public class Paging {
 	private int searchno;
 	private int categoryno;
 	
+
 	private String proj_loc;
 	private String proj_progress;
 	private String proj_job;
 	private String proj_career;
+
+	private int interestno;
+	private int locationno;
+	private int jobno;
+	private int stateno;
+	private int careerno;
+
 	
 
 	// 총 게시글 수를 입력받는 생성자
@@ -199,6 +207,7 @@ public class Paging {
 		this.categoryno = categoryno;
 	}
 
+
 	public String getProj_loc() {
 		return proj_loc;
 	}
@@ -232,4 +241,47 @@ public class Paging {
 	}
 	
 	
+
+	public int getInterestno() {
+		return interestno;
+	}
+
+	public void setInterestno(int interestno) {
+		this.interestno = interestno;
+	}
+
+	public int getLocationno() {
+		return locationno;
+	}
+
+	public void setLocationno(int locationno) {
+		this.locationno = locationno;
+	}
+
+	public int getJobno() {
+		return jobno;
+	}
+
+	public void setJobno(int jobno) {
+		this.jobno = jobno;
+	}
+
+	public int getStateno() {
+		return stateno;
+	}
+
+	public void setStateno(int stateno) {
+		this.stateno = stateno;
+	}
+
+	public int getCareerno() {
+		return careerno;
+	}
+
+	public void setCareerno(int careerno) {
+		this.careerno = careerno;
+	}
+
+	
+
 }

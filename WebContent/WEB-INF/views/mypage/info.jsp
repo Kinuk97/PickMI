@@ -18,11 +18,11 @@
 <div class="container">
 
 	<form action = "/mypage/info" method="post">
-		이메일 : <input name = "email" value="${userinfo.email }">
-		이름 : <input name = "username" value="${userinfo.name }">	
+		이메일 : <input name = "email" value="${userinfo.email }">${userinfo.email }
+		이름 : <input name = "username" value="${userinfo.name }">${userinfo.name }	
 	</form>
-
-
+	${userinfo.name }
+	${userinfo.name }
 </div>
 
 </body>

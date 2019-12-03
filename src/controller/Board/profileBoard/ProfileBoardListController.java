@@ -37,18 +37,9 @@ public class ProfileBoardListController extends HttpServlet {
 		//게시글 목록 조회
 		List<ProfileBoard> list = profileBoardService.getBoardList(paging);
 		
-//		//찜 보여주기
-//		HttpSession session = req.getSession();
-//		LikePost like = new LikePost();
-//		like.setPostno(1);
-//		like.setBoardno(list.getBoardno());
-//		like.setUserno((int)session.getAttribute("userno"));
-//		int countLike = profileBoardService.countLike(like);
-//		req.setAttribute("countLike", countLike);
-		
 		req.setAttribute("list", list);
-		
 //		System.out.println("profile list controller : " + list);
+		
 		//view 보내기
 		req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/list.jsp").forward(req, resp);
 	
