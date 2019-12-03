@@ -10,6 +10,7 @@ public class Schedule {
 	private String title;
 	private String content;
 	private String place;
+	private Date schedule_date;
 	private Date due_date;
 	private Date write_date;
 	private List<CheckList> checkList;
@@ -20,8 +21,9 @@ public class Schedule {
 	@Override
 	public String toString() {
 		return "Schedule [scheduleno=" + scheduleno + ", userno=" + userno + ", proj_no=" + proj_no + ", title=" + title
-				+ ", content=" + content + ", place=" + place + ", due_date=" + due_date + ", write_date=" + write_date
-				+ ", checkList=" + checkList + ", curYear=" + curYear + ", curMonth=" + curMonth + "]";
+				+ ", content=" + content + ", place=" + place + ", schedule_date=" + schedule_date + ", due_date="
+				+ due_date + ", write_date=" + write_date + ", checkList=" + checkList + ", curYear=" + curYear
+				+ ", curMonth=" + curMonth + "]";
 	}
 
 	public int getScheduleno() {
@@ -70,6 +72,14 @@ public class Schedule {
 
 	public void setPlace(String place) {
 		this.place = place;
+	}
+
+	public Date getSchedule_date() {
+		return schedule_date;
+	}
+
+	public void setSchedule_date(Date schedule_date) {
+		this.schedule_date = schedule_date;
 	}
 
 	public Date getDue_date() {

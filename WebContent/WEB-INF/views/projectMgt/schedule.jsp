@@ -76,10 +76,16 @@ div .cal-schedule span {
 		$("#moveNextMonth").on("click", function() {
 			moveNextMonth();
 		});
+		
+		$("#scheduleForm button[type='submit']").on("click", function() {
+			$("#scheduleForm").append($("#scheduleForm input[type='hidden']").val(""));
+		});
+		
 
 		$("div .cal-schedule span").on("click", function() {
 			// $(this).parent().prev().text() 날짜 가져오기
-
+			console.log(new Date(year - 1, month - 1, $(this).parent().prev().text()));
+			$("#scheduleDate").text(new Date(year, month, $(this).parent().prev().text()));
 			$("#writeFormModal").modal();
 		});
 
@@ -133,9 +139,9 @@ div .cal-schedule span {
 				$("#cal_top_month").text(month);
 				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
 					$tdDay.eq(i).text(++dayCount);
-					if (${scheduleList[0].write_date.getDate()} == i) {
+// 					if (${scheduleList[0].write_date.getDate()} == i) {
 						
-					}
+// 					}
 				}
 				for (var i = 0; i < 42; i += 7) {
 					$tdDay.eq(i).css("color", "red");
@@ -270,11 +276,11 @@ div .cal-schedule span {
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="/schedule/add" method="post">
+				<form class="form-horizontal" action="/schedule/add" method="post" id="scheduleForm">
 					<!-- 테스트용 프로젝트 번호 -->
 					<input type="hidden" value="205" name="proj_no">
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">일정</label>
+						<label for="inputEmail3" class="col-sm-2 control-label"><span id="scheduleDate"></span>일정</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="title">
 						</div>
@@ -287,6 +293,7 @@ div .cal-schedule span {
 					</div>
 					<div class="form-group">
 						<div class="col-sm-12 text-center">
+							<input type="hidden" name="schedule_date">
 							<button type="submit" class="btn btn-info">ADD</button>
 						</div>
 					</div>
