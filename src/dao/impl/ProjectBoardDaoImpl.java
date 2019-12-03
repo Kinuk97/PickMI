@@ -12,6 +12,7 @@ import dao.face.FreeBoardDao;
 import dao.face.ProjectBoardDao;
 import dbutil.DBConn;
 import dto.FreeBoard;
+import dto.LikePost;
 import dto.ProjectBoard;
 import util.Paging;
 
@@ -333,6 +334,142 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public void deleteLike(LikePost like) {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "DELETE likepost";
+		sql += " WHERE";
+		sql += " boardno = ? AND userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getBoardno());
+			ps.setInt(2, like.getUserno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void insertLike(LikePost like) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "INSERT INTO likepost(userno, boardno)";
+		sql += " VALUES (?, ? )";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public int selectCntLike(LikePost like) {
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "SELECT count(*) FROM likepost";
+		sql += " WHERE boardno = ?";
+		sql += " 	AND userno = ?";
+		
+		int cnt = -1;
+		
+		try {
+			//DB작업
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, like.getBoardno());
+			ps.setInt(2, like.getUserno());
+
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+			
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				//DB객체 닫기
+				if(ps!=null)	ps.close();
+				if(rs!=null)	rs.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectTotalCntLike(LikePost like) {
+		conn = DBConn.getConnection();
+
+		String sql = "SELECT COUNT(*) FROM likepost"
+				+ " WHERE boardno=?";
+		
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, like.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return cnt;
 	}
 
 //	@Override

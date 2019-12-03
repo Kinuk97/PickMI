@@ -3,9 +3,11 @@ package serivce.impl;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import dao.face.ProjectBoardDao;
 import dao.impl.ProjectBoardDaoImpl;
+import dto.LikePost;
 import dto.ProjectBoard;
 import serivce.face.FreeBoardService;
 import serivce.face.ProjectBoardService;
@@ -107,6 +109,58 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 	public void delete(ProjectBoard projectBoard) {
 		projectBoardDao.deleteProjBoard(projectBoard);
 		
+	}
+
+	@Override
+	public LikePost getLike(HttpServletRequest req) {
+		//전달파라미터 파싱
+		int proj_no = 0;
+		String param = req.getParameter("boardno");
+		if( param!=null && !"".equals(param) ) {
+			proj_no = Integer.parseInt(param);
+		}
+
+		LikePost like = new LikePost();
+		like.setBoardno(proj_no);
+		like.setPostno(2);
+		
+		HttpSession session = req.getSession();
+		
+		like.setUserno((int) session.getAttribute("userno"));
+		
+
+		return like;
+	}
+
+	@Override
+	public boolean like(LikePost like) {
+		if(isLike(like)) { // 추천한 상태
+			projectBoardDao.deleteLike(like);
+			
+			return false;
+		} else { // 추천하지 않은 상태
+			projectBoardDao.insertLike(like);
+			
+			return true;
+		}
+		
+	}
+
+	@Override
+	public int getTotalCntLike(LikePost like) {
+
+		return projectBoardDao.selectTotalCntLike(like);
+	}
+
+	@Override
+	public boolean isLike(LikePost like) {
+		int cnt = projectBoardDao.selectCntLike(like);
+		
+		if(cnt > 0) { //추천
+			return true;
+		} else { // 추천X
+			return false;			
+		}
 	}
 
 }

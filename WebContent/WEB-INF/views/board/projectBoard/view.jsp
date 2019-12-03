@@ -46,6 +46,59 @@ $(document).ready(function() {
 
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	if(${isLike}) {
+		$("#like")
+			.addClass("btn-warning")
+			.html('UNLIKE');
+		
+	} else {
+		$("#like")
+			.addClass("btn-info")
+			.html('LIKE');
+	}
+	
+	$("#like").click(function() {
+		
+		$.ajax({
+			type: "get"
+			, url: "/projectBoard/like"
+			, data: { "proj_no": '${projectBoard.proj_no }'
+				}
+			, dataType: "json"
+			, success: function( data ) {
+// 				console.log("성공");
+// 				console.log(data);
+
+				if( data.result ) { //추천 성공
+					$("#like")
+					.removeClass("btn-info")
+					.addClass("btn-warning")
+					.html('UNLIKE');
+				
+				} else { //추천 취소 성공
+					$("#like")
+					.removeClass("btn-warning")
+					.addClass("btn-info")
+					.html('LIKE');
+				
+				}
+				
+				//추천수 적용
+				$("#likecnt").html(data.cnt);
+				
+			}
+			, error: function() {
+				console.log("실패");
+				
+			}
+		});
+		
+	});
+});
+</script>
+
 <section class="content container-fluid">
 
 	<div class="box box-primary">
@@ -82,13 +135,10 @@ $(document).ready(function() {
 				<td class="info">참여인원</td>
 				<td>${projectBoard.proj_apply }</td>
 				<td class="info">찜개수</td>
-				<td>${projectBoard.proj_like }
-					<button id="like"
-						class="btn btn-info" style="padding: 0px; margin-top: 0px;">LIKE</button>
-					
-					<button id="unlike"
-						style="display: none; padding: 0px; margin-top: 0px;"
-						class="btn btn-info">UNLIKE</button>
+				<td id="likecnt">${projectBoard.proj_like }
+					<c:if test="${login }">
+					<button id="like" class="" style="padding: 0px; margin-top: 0px;"></button>
+					</c:if>
 				</td>
 
 			</tr>
