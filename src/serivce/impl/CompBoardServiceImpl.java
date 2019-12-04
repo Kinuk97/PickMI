@@ -160,6 +160,13 @@ public class CompBoardServiceImpl implements CompBoardService {
 	}
 
 
+	@Override
+	public List<CompBoard> getMainCompList() {
+		
+		return compBoardDao.selectListToMain();
+	}
+
+
 
 
 

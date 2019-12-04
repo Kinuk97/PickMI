@@ -165,4 +165,10 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 		}
 	}
 
+	@Override
+	public List<ProjectBoard> getMainProjectList() {
+		
+		return projectBoardDao.selectListToMain();
+	}
+
 }

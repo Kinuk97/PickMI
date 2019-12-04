@@ -1,3 +1,4 @@
+//파일
 DROP TABLE files;
 CREATE TABLE files(
     fileno NUMBER PRIMARY KEY,
@@ -11,6 +12,7 @@ CREATE TABLE files(
 DROP SEQUENCE files_seq;
 CREATE SEQUENCE files_seq;
 
+//프로필 게시판
 DROP TABLE profile;
 CREATE TABLE profile (
     prof_no NUMBER,
@@ -28,6 +30,7 @@ CREATE TABLE profile (
 DROP SEQUENCE profile_seq;
 CREATE SEQUENCE profile_seq;
 
+//프로젝트 게시판
 DROP TABLE projboard;
 CREATE TABLE projboard (
     proj_no NUMBER PRIMARY KEY,
@@ -56,6 +59,7 @@ ADD CONSTRAINT projboard_fk_01
 DROP SEQUENCE proj_no_seq;
 CREATE SEQUENCE proj_no_seq;
 
+//완성된 프로젝트 게시판
 DROP TABLE compboard;
 CREATE TABLE compboard (
     comp_no NUMBER PRIMARY KEY,
@@ -78,7 +82,7 @@ ADD CONSTRAINT compboard_fk_01
 DROP SEQUENCE compBoard_seq;
 CREATE SEQUENCE compBoard_seq;
 
-
+//자유게시판
 DROP TABLE freeboard;
 CREATE TABLE freeboard (
     free_no NUMBER PRIMARY KEY,
@@ -93,6 +97,7 @@ CREATE TABLE freeboard (
 DROP SEQUENCE freeboard_seq;
 CREATE SEQUENCE freeboard_seq;
 
+//댓글
 DROP TABLE reply;
 CREATE TABLE reply (
     replyno NUMBER PRIMARY KEY,
@@ -106,14 +111,23 @@ CREATE TABLE reply (
 DROP SEQUENCE reply_seq;
 CREATE SEQUENCE reply_seq;
 
+//찜하기
 DROP TABLE likepost;
+
 CREATE TABLE likepost(
     userno NUMBER,
     postno NUMBER,
     boardno NUMBER
 );
 
+ALTER TABLE likepost
+ADD CONSTRAINT likepost_fk_01
+    FOREIGN KEY (userno)
+    REFERENCES user_table(userno);
+
+//유저
 DROP TABLE user_table;
+
 CREATE TABLE user_table(
     userno NUMBER PRIMARY KEY,
     email VARCHAR2(30),
@@ -123,20 +137,19 @@ CREATE TABLE user_table(
     photo_storedname VARCHAR2(300)
 );
 
-ALTER TABLE likepost
-ADD CONSTRAINT likepost_fk_01
-    FOREIGN KEY (userno)
-    REFERENCES user_table(userno);
 
 DROP SEQUENCE userno_seq;
 CREATE SEQUENCE userno_seq;
 
+//관리자페이지
 DROP TABLE manager;
+
 CREATE TABLE manager (
     mgrid VARCHAR2(100) PRIMARY KEY,
     mgrpw VARCHAR2(100)
 );
 
+//프로젝트 일정
 DROP TABLE schedule CASCADE CONSTRAINT;
 CREATE TABLE schedule (
     scheduleno NUMBER PRIMARY KEY,
@@ -158,6 +171,7 @@ CREATE TABLE schedule (
 DROP SEQUENCE schedule_seq;
 CREATE SEQUENCE schedule_seq;
 
+//체크리스트
 DROP TABLE chceklist;
 CREATE TABLE chceklist (
     checkno NUMBER PRIMARY KEY,
@@ -172,3 +186,47 @@ CREATE TABLE chceklist (
 
 DROP SEQUENCE checklist_seq;
 CREATE SEQUENCE checklist_seq;
+
+//메시지
+DROP TABLE Info;
+DROP TABLE Chatter;
+DROP TABLE Chat;
+
+CREATE TABLE Info(
+    chat_no INT PRIMARY KEY,
+    chat_maketime DATE
+);
+
+
+CREATE TABLE Chatter(
+    chat_no INT,
+    chat_user INT
+);
+
+CREATE TABLE Chat(
+    chat_no INT,
+    chat_sender INT,
+    chat_msg VARCHAR(1000),
+    chat_sendtime DATE
+);
+
+ALTER TABLE Chatter
+ADD CONSTRAINT message_fk_01
+    FOREIGN KEY (chat_no)
+    REFERENCES Info(chat_no);
+
+ALTER TABLE Chat
+ADD CONSTRAINT message_fk_02
+    FOREIGN KEY (chat_no)
+    REFERENCES Info(chat_no);
+    
+ALTER TABLE Chatter
+ADD CONSTRAINT message_fk_03
+    FOREIGN KEY (chat_user)
+    REFERENCES user_table(userno);
+    
+ALTER TABLE Chat
+ADD CONSTRAINT message_fk_04
+    FOREIGN KEY (chat_sender)
+    REFERENCES user_table(userno);
+    

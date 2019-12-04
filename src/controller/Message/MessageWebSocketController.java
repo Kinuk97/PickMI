@@ -52,7 +52,7 @@ public class MessageWebSocketController {
 		
 		if( "list".equals(type) ) {
 			Chatter chatter = gson.fromJson(msg, Chatter.class);
-//			System.out.println(chatter);
+			System.out.println(chatter);
 
 //			List<Chat> chatList = messageService.getChatList();
 			List<Chat> chatList = messageService.getLastChatList(chatter);
