@@ -49,4 +49,10 @@ public interface FileService {
 	 * @param resp - 응답객체
 	 */
 	public void fileDownload(HttpServletRequest req, HttpServletResponse resp);
+	
+	/**
+	 * 마이페이지에서 프로필사진 올리는 기능
+	 * @param req - 파일과 파라미터가 담겨있는 객체
+	 */
+	public void myPhotoFile(HttpServletRequest req); 
 }

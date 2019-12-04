@@ -56,17 +56,14 @@ public interface MyPageService {
 	public List<CompBoard> getcompList(Paging paging, HttpServletRequest req);
 	public List<FreeBoard> getfreeList(Paging paging, HttpServletRequest req);
 
+
 // ------ 비밀번호 수정
-	
-	/**
-	 * 비밀번호 수정에 필요한 파라미터 값 받기
-	 * @param req - 요청받은 파라미터 값 (pw)
-	 * @return user - 비밀번호수정하기 위한 정보
-	 */
-	public User getPwParam(HttpServletRequest req);
 
-//	public boolean modifyPw(User user);
+	public User getcurPwParam(HttpServletRequest req);
 
+	boolean eqPW(User pwparam);
+
+	public void modifyPw(User pwparam);
 
 	
 	

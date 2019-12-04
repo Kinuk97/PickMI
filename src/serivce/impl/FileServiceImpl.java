@@ -501,7 +501,7 @@ public class FileServiceImpl implements FileService {
 			}
 //		} //else if (postno == 5) {
 			// update originame storedname
-			// uploadFile(오리진,스토어드네임 안에들어있음) 이용
+			// uploadFile(오리진,스토어드네임 안에들어있음) 이용 userDao에 update
 			
 			
 			
@@ -1109,4 +1109,112 @@ public class FileServiceImpl implements FileService {
 
 		// ------------------------------------------
 	}
+
+	@Override
+	public void myPhotoFile(HttpServletRequest req) {
+		// 1. 파일업로드 형태의 데이터가 맞는지 확인
+		// enctype이 multipart/form-data가 맞는지 확인
+		boolean isMultipart = false;
+		isMultipart = ServletFileUpload.isMultipartContent(req);
+
+		// 1-1 multipart/form-data 인코딩으로 전송되지 않았을 경우
+		if (!isMultipart) {
+			return ;
+		}
+
+		// 각자 만들어야하는 부분
+		// =========================================================================================================
+
+		Files uploadFile = null;
+		
+
+		// 1-2 여기 이후는 multipart/form-data로 전송된 상황
+		// 파일이 전송된 상황
+
+		// 2. 업로드된 파일을 처리하는 아이템팩토리 객체 생성
+		// ItemFactory : 업로드된 파일을 처리하는 방식을 정하는 클래스
+
+		// FileItem : 클라이언트로부터 전송된 데이터를 객체화시킨 것
+
+		// DiskFileItemFactory class - > 디스크기반(HDD)의 파일 아이템 처리 API
+		// 업로드된 파일을 디스크에 임시 저장하고 후처리한다.
+		DiskFileItemFactory factory = null;
+		// 생성자로 필요한 객체를 넘겨줄 수 있지만 따로 설정
+		factory = new DiskFileItemFactory();
+
+		// 3. 업로드된 아이템이 용량이 작으면 메모리에서 처리
+		int maxMem = 1 * 1024 * 1024; // 1MB
+		factory.setSizeThreshold(maxMem);
+
+		// 4. 용량이 적당히 크면 임시파일을 만들어서 처리 (디스크)
+		ServletContext context = req.getServletContext();
+		// 가상경로인 매개변수를 실제 경로로 만들어준다.
+		String path = context.getRealPath("tmp");
+		File repository = new File(path);
+		factory.setRepository(repository);
+
+		// 5. 업로드 허용 용량 기준을 넘지 않을 경우에만 업로드 처리
+		int maxFile = 10 * 1024 * 1024; // 10MB
+		// 파일 업로드 객체 생성 - DiskFileItemFactory 이용
+		ServletFileUpload upload = null;
+		upload = new ServletFileUpload(factory);
+		// 파일 업로드 용량 제한 설정 : 10MB
+		upload.setFileSizeMax(maxFile);
+
+		// --- 파일 업로드 준비 완료 ---
+
+		// 6. 업로드된 데이터 추출(파싱)
+		// 임시 파일 업로드도 같이 수행함
+		List<FileItem> items = null;
+
+		try {
+			items = upload.parseRequest(req);
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+
+		// 7. 파싱된 데이터 처리하기
+		// items 리스트에 요청 파라미터가 파싱되어있음
+
+		// 요청정보의 형태 3가지
+		// 1. 빈 파일 (용량이 0인 파일)
+		// 2. form-data (일반적인 요청 파라미터)
+		// 3. 파일
+
+		Iterator<FileItem> iter = items.iterator();
+
+		// 모든 요청 정보 처리
+		while (iter.hasNext()) {
+			FileItem item = iter.next();
+
+			// 1) 빈 파일 처리
+			if (item.getSize() <= 0)
+				continue;
+		
+				UUID uuid = UUID.randomUUID(); // 랜덤 UID 생성
+		
+				String u = uuid.toString().split("-")[4];
+		
+				File up = new File(context.getRealPath("upload"), item.getName() + "_" + u);
+		
+				uploadFile = new Files();
+		
+				uploadFile.setOriginName(item.getName());
+				uploadFile.setStoredName(item.getName() + "_" + u);
+				uploadFile.setFileSize(item.getSize());
+		
+				try {
+					item.write(up);
+					item.delete(); // 임시 파일 삭제
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} // 실제 업로드
+			}
+		
+		if (uploadFile != null) {
+			fileDao.insertFile(uploadFile);
+		}
+	}
+	
 }
