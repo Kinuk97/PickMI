@@ -242,6 +242,7 @@ div .cal-schedule span {
 
 	//데이터 등록
 	function setData() {
+
 		
 	}
 
