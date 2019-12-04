@@ -83,6 +83,21 @@ public class ScheduleServiceImpl implements ScheduleService {
 			schedule.setSchedule_date(date);
 		}
 		
+		param = req.getParameter("due_date");
+		if (param != null && !"".equals(param)) {
+//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+			Date date = null;
+			try {
+				date = transFormat.parse(param);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			schedule.setDue_date(date);
+		}
+		
 		SimpleDateFormat format = new SimpleDateFormat ();
 
 		param = req.getParameter("curYear");
@@ -113,7 +128,6 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public Schedule getSchedule(Schedule schedule) {
-		
 		return scheduleDao.selectByScheduleno(schedule);
 	}
 

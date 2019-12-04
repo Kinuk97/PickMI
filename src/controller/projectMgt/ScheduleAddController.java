@@ -20,6 +20,8 @@ public class ScheduleAddController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		
 		Schedule schedule = scheduleService.getSchedule(req);
 
 		scheduleService.putSchedule(schedule);

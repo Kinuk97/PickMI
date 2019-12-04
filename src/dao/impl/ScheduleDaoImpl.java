@@ -64,7 +64,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public List<Schedule> selectAll(Schedule schedule) {
 
-		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ?";
+		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ? ORDER BY schedule_date";
 
 
 		List<Schedule> list = new ArrayList<Schedule>();
@@ -128,8 +128,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				result.setScheduleno(rs.getInt("scheduleno"));
 				result.setProj_no(rs.getInt("proj_no"));
 				result.setUserno(rs.getInt("userno"));
+				result.setTitle(rs.getString("title"));
 				result.setContent(rs.getString("content"));
 				result.setPlace(rs.getString("place"));
+				result.setSchedule_date(rs.getDate("schedule_date"));
+				result.setDue_date(rs.getDate("due_date"));
 				result.setWrite_date(rs.getDate("write_date"));
 			}
 		} catch (SQLException e) {
@@ -177,15 +180,16 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	@Override
 	public void updateSchedule(Schedule schedule) {
-		String sql = "UPDATE schedule SET content = ?, place = ?, due_date = ? WHERE scheduleno = ?";
+		String sql = "UPDATE schedule SET title = ?, content = ?, place = ?, due_date = ? WHERE scheduleno = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
-			ps.setString(1, schedule.getContent());
-			ps.setString(2, schedule.getPlace());
-			ps.setDate(3, new java.sql.Date(schedule.getDue_date().getTime()));
-			ps.setInt(4, schedule.getScheduleno());
+			ps.setString(1, schedule.getTitle());
+			ps.setString(2, schedule.getContent());
+			ps.setString(3, schedule.getPlace());
+			ps.setDate(4, new java.sql.Date(schedule.getDue_date().getTime()));
+			ps.setInt(5, schedule.getScheduleno());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

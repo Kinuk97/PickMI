@@ -41,7 +41,8 @@ public class MessageDaoImpl implements MessageDao {
 				chat.setChat_no( rs.getInt("chat_no"));
 				chat.setChat_sender( rs.getInt("chat_sender"));
 				chat.setChat_msg( rs.getString("chat_msg"));
-				chat.setChat_sendtime( rs.getDate("chat_sendtime"));
+				chat.setChat_sendtime( rs.getString("chat_sendtime"));
+//				chat.setChat_sendtime( rs.getDate("chat_sendtime"));
 				
 				chatList.add(chat);
 				
@@ -72,9 +73,10 @@ public class MessageDaoImpl implements MessageDao {
 		
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "SELECT chat_no, chat_sender, chat_msg, chat_sendtime FROM (";
+		sql += "SELECT chat_no, chat_sender, chat_msg, TO_CHAR(chat_sendtime,'YYYY/MM/DD HH:MI:SS') chat_sendtime, username FROM (";
 		sql += "	SELECT";
 		sql += "		chat.*";
+		sql += "		, (SELECT name FROM user_table U WHERE chat.chat_sender = U.userno) username";
 		sql += "		, rank() over(partition by chat_no order by chat_sendtime desc) top";
 		sql += "	FROM chat";
 		sql += "	WHERE 1=1";
@@ -101,7 +103,8 @@ public class MessageDaoImpl implements MessageDao {
 				chat.setChat_no( rs.getInt("chat_no"));
 				chat.setChat_sender( rs.getInt("chat_sender"));
 				chat.setChat_msg( rs.getString("chat_msg"));
-				chat.setChat_sendtime( rs.getDate("chat_sendtime"));
+				chat.setChat_sendtime( rs.getString("chat_sendtime"));
+				chat.setUsername( rs.getString("username"));
 				
 				chatList.add(chat);
 				
