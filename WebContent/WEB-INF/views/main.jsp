@@ -75,14 +75,15 @@
 <br><br><br>
 <div class="container" id="mainboard">
 
+<p style="font-size: 27px;">최근 게시물</p>
 	<!-- 첫번째 줄 -->
-	<h4>프로필 게시판</h4>
+	<h3>프로필 게시판</h3>
 	<div class="row">
 		<c:forEach items="${profileBoard }" var="pro">
-			<div class="col-sm-6 col-md-4 col-lg-3">
+			<div class="col-sm-6 col-md-4 col-lg-3" id="mainboardlist">
 				<div class="thumbnail"
 					onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
-					<div class="caption caption-profile">
+					<div class="caption">
 						<h4>${ pro.prof_no }</h4>
 						<p>${ pro.username }</p>
 						<p>${ pro.prof_interest }</p>
@@ -99,15 +100,15 @@
 	</div>
 	
 	<!-- 두번째 줄 -->
-	<h4>프로젝트 게시판</h4>
+	<h3>프로젝트 게시판</h3>
 	<div class="row">
 		<!-- 			<div class="thumbnail"> -->
 		<!-- 				<div class="caption"> -->
 		<c:forEach var="board" items="${projectBoard }">
-			<div class="col-sm-6 col-md-4 col-lg-4">
+			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
 				<div class="thumbnail"
 					onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
-					<div class="caption caption-project">
+					<div class="caption">
 
 						<h2>${board.proj_title }</h2>
 
@@ -127,14 +128,14 @@
 		</c:forEach>
 	</div>
 	
-	<h4>완성된 프로젝트 게시판</h4>
+	<h3>완성된 프로젝트 게시판</h3>
 	<div class="row">
 		<c:forEach items="${compBoard }" var="compList">
-			<div class="col-sm-6 col-md-4 col-lg-4">
+			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
 				<div class="thumbnail"
 					onclick="location.href='/compBoard/view?comp_no=${compList.comp_no }'"
 					id="compboardlist" style="cursor: pointer; hover: #ccc;">
-					<div class="caption caption-comp">
+					<div class="caption">
 						<h4>${compList.comp_no}.${compList.comp_title }</h4>
 						<p>팀 이름 : ${compList.comp_name }</p>
 						<br>
@@ -152,14 +153,14 @@
 	</div>
 
 	<!-- 네번째 줄 -->
-	<h4>자유게시판</h4>
+	<h3>자유게시판</h3>
 	<div class="row">
 		<c:forEach items="${freeBoard }" var="free">
-			<div class="col-sm-6 col-md-4 col-lg-4">
+			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
 				<div class="thumbnail"
 					onclick="location.href='/compBoard/view?free_no=${free.free_no }'"
 					id="compboardlist" style="cursor: pointer; hover: #ccc;">
-					<div class="caption caption-comp">
+					<div class="caption">
 						<h4>${free.free_title }</h4>
 						<p>${free.free_content }</p>
 						<br>
