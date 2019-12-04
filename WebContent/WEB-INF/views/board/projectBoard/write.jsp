@@ -17,16 +17,18 @@
 		    $("#defaultModal").modal('show');
 		 }
 		
-		$("#write").click(function() {
+		// 글작성
+// 		$("#write").click(function() {
 			
-			warningModal("글을 작성하시겠습니까?")
+// 			warningModal("글을 작성하시겠습니까?")
 			
-			$('#ok').click(function(){    		
-				$("form").submit();
+// 			$('#ok').click(function(){    		
+// 				$("form").submit();
 		    	
-			});
-		});
-
+// 			});
+// 		});
+		
+		// 글작성 취소
 		$("#cancel").click(function() {
 			
 			warningModal("글 작성을 취소하시겠습니까?")
@@ -109,7 +111,6 @@
 						<option value="충청">충청</option>
 						<option value="경상">경상</option>
 						<option value="전라">전라</option>
-						<option value="기타">기타지역</option>
 					</select>
 			</div>
 

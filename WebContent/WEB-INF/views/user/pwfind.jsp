@@ -80,38 +80,51 @@
 
 <script type="text/javascript">
 
-$(document).ready(function() {
+// $(document).ready(function() {
+	
+// 	//경고 모달 호출 메서드
+// 	   function warningModal(content) {
+// 	      $(".modal-contents").text(content);
+// 	      $("#defaultModal").modal('show');
+// 	   }	
 	
 	
-	// 찾기 버튼 동작
-	$("#find").click(function() {
-// 		if($("email").val() != "${USER.email}" || $("name").val() != "${USER.name}"){
-// 			alert("회원이 아닙니다.");
-// 		} else{
-// 		$.ajax({
-// 	    	 	type:"POST",
-// 	     		url:"/pwFind",
-// 	     		data:{
-// 	            "email":$('#email').val(),
-// 	            "name":$('#name').val()
+	
+// 	// 찾기 버튼 동작
+// 	$("#find").click(function() {
+// // 		if(!$("email").val().equals("${USER.email}") || !$("name").val().equals("${USER.name}")){
+// // 			alert("회원이 아닙니다.");
+// // 		} else{
+// // 		$.ajax({
+// // 	    	 	type:"POST",
+// // 	     		url:"/pwFind",
+// // 	     		data:{
+// // 	            "email":$('#email').val(),
+// // 	            "name":$('#name').val()
 	   			
-// 	     		},
-// 	    		 success:function(data){
-// 	    			 console.log(data)
-// // 	            if(($('#email').val() == ${USER.email}) || $('#name').val() == ${USER.name}){
-	            	$("#hidden").show();
+// // 	     		},
+// // 	    		 success:function(data){
+// // 	    			 console.log(data)
+// // 	            if($('#email').val().equals("${USER.email}") || $('#name').val().equals("${USER.name}")){
+// // 	            	$("#hidden").show();
 	               
 // // 	           	}else{
 	           		
 // // 	           		alert("회원이 아닙니다.");
 	               
 // // 	            }
-// 	         }
-// 	    });
+// // 	         }
+// // 	    });
 			
 			
-// 		}
-	});
+// // 		}
+// // 	if($("email").val() != ${USER.email} || $("name").val() =! ${USER.name}){
+// // 		warningModal("회원이 아닙니다");
+// // 		alert("회원이 아닙니다");
+// //  		}else{
+// 		popupOpen(); 			
+// //  		}
+// 	});
 
 	
 });
@@ -120,17 +133,13 @@ $(document).ready(function() {
 </head>
 <body>
 
-	<a href="/main"> <img src="/resources/black.png"
-		class="img-rounded center-block" style="height: 170px;">
-	</a>
 
-
-	<div class="find-form" id="log">
-		<form action="/pwFind" method="post">
+	<div class="find-form" id="log" style="margin-top: 100px;">
+		<form action="/pwfind" method="post" name="findForm">
 			<h2 class="text-center">비밀번호 찾기</h2>
 			<div class="form-group">
 				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-user"></i></span> <input
+					<span class="input-group-addon"><i class="fa fa-envelope"></i></span> <input
 						type="email" class="form-control" name="email" id="email"
 						placeholder="이메일을 입력하세요" required="required">
 				</div>
@@ -145,38 +154,36 @@ $(document).ready(function() {
 			</div>
 			
 			<div class="form-group">
+
 				<button type="submit" class="btn btn-primary login-btn btn-block"
 					id="find">찾기</button>
 			</div>
 			
-			<div id="hidden" style="display: none;">
-			<div class="or-seperator" type="hidden">
-				<i>비밀번호 변경</i>
-			</div>
-			
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-						type="password" class="form-control" name="pw1" id="pw1"
-						placeholder="패스워드를 입력하세요" required="required">
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span> <input
-						type="password" class="form-control" name="pw2" id="pw2"
-						placeholder="패스워드를 다시 입력하세요" required="required">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary login-btn btn-block"
-					id="change">변경</button>
-			</div>
-			</div>
 		</form>
 
 	</div>
+
+<!--모달창 -->
+<!-- 	<div class="modal fade" id="defaultModal"> -->
+<!-- 		<div class="modal-dialog"> -->
+<!-- 			<div class="modal-content "> -->
+<!-- 				<div class="modal-header panel-heading"> -->
+<!-- 					<h4 class="modal-title">알림</h4> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-body"> -->
+<!-- 					<p class="modal-contents"></p> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-footer"> -->
+<!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			<!-- /.modal-content -->
+<!-- 		</div> -->
+		<!-- /.modal-dialog -->
+<!-- 	</div> -->
+	<!-- /.modal -->
+
+	<!-- 모달창 -->
 
 </body>
 </html>

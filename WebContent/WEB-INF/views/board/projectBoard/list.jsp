@@ -69,16 +69,16 @@
 			$("#careerBtn").addClass("active");
 		}
 		
-		$("#locBtn").on("click",function{
+		$("#locBtn").on("click",function(){
 			location.href = "/projectBoard/list";
 		});
-		$("#progressBtn").on("click",function{
+		$("#progressBtn").on("click",function(){
 			location.href = "/projectBoard/list";
 		});
-		$("#jobBtn").on("click",function{
+		$("#jobBtn").on("click",function(){
 			location.href = "/projectBoard/list";
 		});
-		$("#careerBtn").on("click",function{
+		$("#careerBtn").on("click",function(){
 			location.href = "/projectBoard/list";
 		});
 		
@@ -236,7 +236,7 @@ select {
 
 <c:choose>
 	<c:when test="${not empty login }">
-		<button  onclick="location.href = '/projectBoard/write';" class="btn btn-info" style="float:right; margin-top:30px; margin-right:15px;">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
+		<button  type= "button" onclick="location.href = '/projectBoard/write';" class="btn btn-info" style="float:right; margin-top:30px; margin-right:15px;">&emsp;&emsp;새로운 게시글 작성&emsp;&emsp;</button>
 	</c:when>
 	
 	<c:otherwise>

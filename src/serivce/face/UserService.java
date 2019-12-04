@@ -54,7 +54,7 @@ public interface UserService {
 	 * 비밀번호 찾기에 필요한 파라미터 받기
 	 * 
 	 * @param req - 요청받은 파라미터 값
-	 * @return - 비밀번호
+	 * @return - 이메일, 이름
 	 */
 	User getPwParam(HttpServletRequest req);
 	
@@ -80,6 +80,8 @@ public interface UserService {
 	 * @return
 	 */
 	public void updatePw(User newPw);
+	
+	
 	
 
 }

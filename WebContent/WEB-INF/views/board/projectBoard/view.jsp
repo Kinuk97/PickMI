@@ -135,7 +135,7 @@ $(document).ready(function() {
 				<td class="info">참여인원</td>
 				<td>${projectBoard.proj_apply }</td>
 				<td class="info">찜개수</td>
-				<td id="likecnt">${projectBoard.proj_like }
+				<td id="likecnt">${cnt }
 					<c:if test="${login }">
 					<button id="like" class="" style="padding: 0px; margin-top: 0px;"></button>
 					</c:if>
