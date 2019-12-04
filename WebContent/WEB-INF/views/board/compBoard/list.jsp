@@ -105,7 +105,7 @@ select {
 	<div class="row">
 		<form action="/compBoard/list" method="get">
 			<div style="width: 12%; float: left; margin-left: 21px;">
-				<select name="searchno">
+				<select name="searchno" style="height: 34px;">
 					<option value="">선택없음</option>
 					<option value="1">프로젝트명</option>
 					<option value="2">팀 이름</option>
