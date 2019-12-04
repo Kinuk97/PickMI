@@ -36,10 +36,10 @@ public class MgrProfileListController extends HttpServlet {
 		if (req.getSession().getAttribute("mgrlogin") != null) {
 		
 			// 요청파라미터에서 curPage를 구하고 Paging 객체 반환
-			Paging paging = mgrService.getPaging(req);
+			Paging paging = profileBoardService.getPaging(req);
 			
-//			// 검색어 파라미터
-//			paging.setSearch(req.getParameter("search"));
+			// 검색어 파라미터
+			paging.setSearch(req.getParameter("search"));
 			
 			//mgr main navTab에서 사용할 번호
 			req.setAttribute("boardno", 2);
@@ -51,7 +51,7 @@ public class MgrProfileListController extends HttpServlet {
 			// ProfileBoard 게시글 목록 조회
 			List<ProfileBoard> list = mgrService.getPfBoardList(paging);		
 			
-			System.out.println(list);
+//			System.out.println(list);
 			
 			// mgr/profile/profilelist에 모델 (MODEL = profilelist ) 값 전달하기
 			req.setAttribute("list", list);

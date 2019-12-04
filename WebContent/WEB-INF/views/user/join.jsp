@@ -164,7 +164,9 @@
 				<div class="form-group">
 					<label>약관 동의</label>
 					<div>
-						<input id="agree" type="checkbox" /> <a href="#">이용약관</a>에 동의합니다.
+						<input id="agree" type="checkbox" /> 
+						<a href="/agree" onclick="window.open(this.href, '_blank', 'width=800px, height=700px,left=350, top=30, toolbars=no,scrollbars=no'); return false;">
+						이용약관</a>에 동의합니다.
 					</div>
 				</div>
 

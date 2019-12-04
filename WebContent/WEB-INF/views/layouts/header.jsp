@@ -19,6 +19,7 @@
 
 <script type="text/javascript" src="/resources/js/dropdown.js"></script>
 <script type="text/javascript" src="/resources/js/carousel.js"></script>
+<script type="text/javascript" src="/resources/js/collapse.js"></script>
 <script type="text/javascript" src="/resources/js/tooltip.js"></script>
 <script type="text/javascript" src="/resources/js/popover.js"></script>
 <script type="text/javascript" src="/resources/js/modal.js"></script>

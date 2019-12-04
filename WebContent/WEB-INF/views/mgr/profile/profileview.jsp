@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
-<jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!-- Header -->
+<jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
+
 
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	var login = "${login}"
+	if(login != ""&& longin ) {
 	
 	$("#unlike").click( function(){
 		console.log("된다");
@@ -51,7 +55,7 @@ $(document).ready(function() {
 			}
 		})
 	})
-
+}
 
 function like(data) {
 		console.log("좋아요되랏")
@@ -73,6 +77,9 @@ $("#loginplz3").click( function loginplz(){
 	
 })
 </script>
+
+</head>
+<body>
 
 <h1>${ profile.userno }</h1>
 
@@ -103,38 +110,24 @@ $("#loginplz3").click( function loginplz(){
 </tr>
 <tr>
 	<td class="info">찜받은수</td><td><span id="countLike">${ countLike }</span>
-		<c:if test="${ login }">
+		<c:if test="${ mgrlogin }">
 			<c:if test="${ canLike }">
-				<button id="like" style="color: red;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
-				<button id="unlike" style="display: none; color:blue;">
-				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-				</button>
+				<button id="like">LIKE</button>
+				<button id="unlike" style="display: none;">UNLIKE</button>
 			</c:if>
 			<c:if test="${ !canLike }">
-				<button id="like" style="display: none; color:red;">
-					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-				</button>
-				<button id="unlike" style="color:blue;">
-					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-				</button>
+				<button id="like" style="display: none;">LIKE</button>
+				<button id="unlike">UNLIKE</button>
 			</c:if>
 		</c:if>
 		<c:if test="${ !login }">
 			<c:if test="${ canLike }">
-				<button id="loginplz" style="color:red;" >
-					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-				</button>
-				<button id="unlike" style="display: none; color:blue;">
-					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-				</button>
+				<button id="loginplz" >LIKE</button>
+				<button id="unlike" style="display: none;">UNLIKE</button>
 			</c:if>
 			<c:if test="${ !canLike }">
-				<button id="like" style="display: none; color:red;">
-					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-				</button>
-				<button id="loginplz" style="color:blue;">
-					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-				</button>
+				<button id="like" style="display: none;">LIKE</button>
+				<button id="loginplz" >UNLIKE</button>
 			</c:if>
 		</c:if>
 	</td>
@@ -147,19 +140,12 @@ $("#loginplz3").click( function loginplz(){
 	<td><a href="/file/download?fileno=${file.fileno }">${file.originName }</a></td>
 </tr>
 </table>
-<c:if test="${ login }">
-	<a href="/profileBoard/update?prof_no=${profile.prof_no}"><button id="edit">수정</button></a>			
+<c:if test="${ mgrlogin }">
+	<a href="/mgr/profileboard/delete?checkRow=${profile.prof_no}"><button id="delete">삭제</button></a>			
 </c:if>
-<c:if test="${ !login }">
-	<button id="loginplz2">수정</button>			
-</c:if>
-<c:if test="${ login }">
-	<a href="/profileBoard/delete?prof_no=${profile.prof_no}"><button id="delete">삭제</button></a>			
-</c:if>
-<c:if test="${ !login }">
+<c:if test="${ !mgrlogin }">
 	<button id="loginplz3">삭제</button>			
 </c:if>
 
-
-
-<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
+</body>
+</html>

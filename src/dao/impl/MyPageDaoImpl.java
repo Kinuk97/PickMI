@@ -7,9 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dao.face.MyPageDao;
 import dbutil.DBConn;
+import dto.CompBoard;
+import dto.FreeBoard;
+import dto.ProfileBoard;
+import dto.ProjectBoard;
 import dto.User;
+import util.Paging;
 
 public class MyPageDaoImpl implements MyPageDao{
 
@@ -90,4 +97,56 @@ public class MyPageDaoImpl implements MyPageDao{
 		}
 		
 	}
+
+	@Override
+	public User selectUserbyUserno(HttpServletRequest req) {
+		String sql = "";
+		sql +="SELECT email, userno, name FROM user_table WHERE userno=?";
+		
+		User user = new User();
+		
+		try {
+			ps=conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public int selectCntAll(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<ProfileBoard> selectPf(Paging paging, HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProjectBoard> selectPj(Paging paging, HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CompBoard> selectComp(Paging paging, HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FreeBoard> selectFree(Paging paging, HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
 }

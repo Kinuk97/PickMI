@@ -400,6 +400,67 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		sql += " (SELECT count(*) FROM likepost WHERE boardno = profile.prof_no) AS prof_like,";
 		sql	+= " (SELECT name FROM user_table WHERE userno = profile.userno) AS username from profile";
 		
+		//filter 존재한다면 where절 추가
+		if( paging.getInterestno() != 0 || paging.getLocationno() != 0 || paging.getJobno() != 0 || paging.getStateno() != 0 || paging.getCareerno() != 0) {
+			sql += " WHERE 1 = 1";
+			
+			if(paging.getInterestno() != 0 ) {
+				sql += " AND prof_interest =";
+				if(paging.getInterestno() == 1) {
+					sql += " '개발'";
+				} else if(paging.getInterestno() ==2) {
+					sql += " '디자인'";
+				} else if(paging.getInterestno() ==3) {
+					sql += " '스타트업'";
+				} else { 
+					sql += " 'IT언어'";
+				}
+			}
+			if(paging.getLocationno() != 0 ) {
+				sql += " AND prof_loc = ";
+				if(paging.getLocationno() == 1) {
+					sql += " '서울'";
+				} else if( paging.getLocationno() ==2) {
+					sql += " '경기'";
+				} else {
+					sql += " '그외'";
+				}
+			}
+			if(paging.getJobno() != 0 ) {
+				sql += " AND prof_job = ";
+				if( paging.getJobno() == 1) {
+					sql += " '개발자'";
+				} else if( paging.getJobno() ==2 ) {
+					sql += " '프리랜서'";
+				} else if( paging.getJobno() == 3 ) {
+					sql += " '디자이너'";
+				} else {
+					sql += " '무직'";
+				}
+			}
+			if(paging.getStateno() != 0 ) {
+				sql += " AND prof_state = ";
+				if( paging.getStateno() == 1 ) {
+					sql += " '구직중'";
+				} else if(paging.getStateno() == 2 ) {
+					sql += " '재직중'";
+				} else {
+					sql += " '프리랜서'";
+				}
+			}
+			if(paging.getCareerno() != 0 ) {
+				sql += " AND prof_career =";
+				if( paging.getCareerno() == 1) {
+					sql += " '1-2년차'";
+				} else if ( paging.getCareerno() ==2 ) {
+					sql += " '3-4년차'";
+				} else if ( paging.getCareerno() == 3 ) {
+					sql += " '5-7년차'";
+				} else {
+					sql += " '8년차이상'";
+				}
+			}
+		}
 		sql += "   order by prof_no desc";
 		sql += "  ) B";
 		sql += "  ORDER BY rnum";
@@ -448,7 +509,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	 * 총 게시글 수 조회
 	 */
 	@Override
-	public int selectCntAll() {
+	public int selectCntAll(int interestno, int locationno, int jobno, int stateno, int careerno) {
 		
 
 	//수행할 sql 쿼리
@@ -458,7 +519,69 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 	sql += " count(*)";
 	sql += " FROM profile";
 	
+	if (interestno != 0 || locationno !=0 || jobno !=0 || stateno !=0 || careerno !=0 ) {
 		
+		sql += " WHERE 1 = 1";
+		
+		if(interestno != 0 ) {
+			sql += " AND prof_interest =";
+			if(interestno == 1) {
+				sql += " '개발'";
+			} else if(interestno ==2) {
+				sql += " '디자인'";
+			} else if(interestno ==3) {
+				sql += " '스타트업'";
+			} else { 
+				sql += " 'IT언어'";
+			}
+		}
+		if(locationno != 0 ) {
+			sql += " AND prof_loc =";
+			if(locationno == 1) {
+				sql += " '서울'";
+			} else if( locationno ==2) {
+				sql += " '경기'";
+			} else {
+				sql += " '그외'";
+			}
+		}
+		if(jobno != 0 ) {
+			sql += " AND prof_job = ";
+			if( jobno == 1) {
+				sql += " '개발자'";
+			} else if( jobno ==2 ) {
+				sql += " '프리랜서'";
+			} else if( jobno == 3 ) {
+				sql += " '디자이너'";
+			} else {
+				sql += " '무직'";
+			}
+		}
+		if(stateno != 0 ) {
+			sql += " AND prof_state = ";
+			if( stateno == 1 ) {
+				sql += " '구직중'";
+			} else if(stateno == 2 ) {
+				sql += " '재직중'";
+			} else {
+				sql += " '프리랜서'";
+			}
+		}
+		if(careerno != 0 ) {
+			sql += " AND prof_career =";
+			if( careerno == 1) {
+				sql += " '1-2년차'";
+			} else if ( careerno ==2 ) {
+				sql += " '3-4년차'";
+			} else if ( careerno == 3 ) {
+				sql += " '5-7년차'";
+			} else {
+				sql += " '8년차이상'";
+			}
+		}
+		
+	}
+	
 	//결과 저장 리스트
 	int cnt = 0;
 	
