@@ -61,7 +61,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	@Override
 	public List<Schedule> selectAll(Schedule schedule) {
+<<<<<<< HEAD
 		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND schedule_date BETWEEN ? AND ?";
+=======
+		String sql = "select * from schedule WHERE proj_no = ?";
+>>>>>>> refs/heads/dongs
 
 		List<Schedule> list = new ArrayList<Schedule>();
 

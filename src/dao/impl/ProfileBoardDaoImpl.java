@@ -536,7 +536,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			}
 		}
 		if(locationno != 0 ) {
-			sql += " AND prof_loc = ";
+			sql += " AND prof_loc =";
 			if(locationno == 1) {
 				sql += " '서울'";
 			} else if( locationno ==2) {
