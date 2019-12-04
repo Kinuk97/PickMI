@@ -36,7 +36,7 @@ public class MainController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 프로필 리스트
-		List<ProfileBoard> profileBoard = profileBoardService.getProfileList();
+		List<ProfileBoard> profileBoard = profileBoardService.getMainProfileList();
 		req.setAttribute("profileBoard", profileBoard);
 		
 		// 프로젝트 리스트

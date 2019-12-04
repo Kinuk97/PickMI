@@ -42,60 +42,69 @@ $(document).ready(function() {
     	});
 	});
 	
+	// 찜버튼 동작
+	$("#loginplz").click(function(){
+		warningModal("로그인해야 사용할수 있습니다")
+		
+		$('#ok').click(function(){    		
+			$(location).attr("href", "/login");
+	    });
+	});
+	
 });
 
 </script>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	if(${isLike}) {
-		$("#like")
-			.addClass("btn-warning")
-			.html('UNLIKE');
-		
-	} else {
-		$("#like")
-			.addClass("btn-info")
-			.html('LIKE');
-	}
-	
-	$("#like").click(function() {
-		
+	$("#unlike").click( function(){
+		console.log("찜 취소 확인!");
+		$("#unlike").hide();
+		$("#like").show();
 		$.ajax({
-			type: "get"
-			, url: "/projectBoard/like"
-			, data: { "proj_no": '${projectBoard.proj_no }'
-				}
-			, dataType: "json"
-			, success: function( data ) {
-				console.log("성공");
-// 				console.log(data);
+			url: "/projectBoard/like"
+			, type: "GET"
+			, data: {
+				proj_no : '${proejctBoard.proj_no}',
+				boardno : '${projectBoard.proj_no}',
+				userno : '${projectBoard.userno}',
+				postno : '${ 2 }'
+			}
+			, dataType : "json"
+			, success : like
+			, error : function() {
+				console.log("ajax fail")
+			}
+		})
+	})
+	
+		$("#like").click( function(){
+		console.log("찜 확인!");
+		$("#like").hide();
+		$("#unlike").show();
+		$.ajax({
+			url: "/projectBoard/like"
+			, type: "GET"
+			, data: {
+				proj_no : '${projectBoard.proj_no}',
+				boardno : '${projectBoard.proj_no}',
+				userno : '${projectBoard.userno}',
+				postno : '${ 2 }'
+			}
+			, dataType : "json"
+			, success : like
+			, error : function() {
+				console.log("ajax fail")
+			}
+		})
+	})
 
-				if( data.result ) { //추천 성공
-					$("#like")
-					.removeClass("btn-info")
-					.addClass("btn-warning")
-					.html('UNLIKE');
-				
-				} else { //추천 취소 성공
-					$("#like")
-					.removeClass("btn-warning")
-					.addClass("btn-info")
-					.html('LIKE');
-				
-				}
-				
-				//추천수 적용
-				$("#likecnt").html(data.cnt);
-				
-			}
-			, error: function() {
-				console.log("실패");
-				
-			}
-		});
-		
-	});
+
+function like(data) {
+		console.log("찜 개수 확인!");
+	$("#countLike").html(data.countLike)
+}
+	
 });
 </script>
 
@@ -105,7 +114,9 @@ $(document).ready(function() {
 		<div class="box-header with-border">
 			<h2 class="box-title">프로젝트</h2>
 		</div>
-	
+		
+		<input type="hidden" value="${projectBoard.proj_no }"/>
+		<input type="hidden" value="${projectBoard.userno }"/>
 		<table class="table table-bordered">
 			<tr>
 				<td class="info">프로젝트 제목</td>
@@ -135,9 +146,43 @@ $(document).ready(function() {
 				<td class="info">참여인원</td>
 				<td>${projectBoard.proj_apply }</td>
 				<td class="info">찜개수</td>
-				<td id="likecnt">${cnt }
-					<c:if test="${login }">
-					<button id="like" class="" style="padding: 0px; margin-top: 0px;"></button>
+				<td><span id="countLike">${countLike }</span> 
+					<c:if test="${ login }">
+						<c:if test="${ canLike }">
+							<button id="like" style="color: red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="display: none; color: blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+						
+						<c:if test="${ !canLike }">
+							<button id="like" style="display: none; color: red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="color: blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+					</c:if> 
+					<c:if test="${ !login }">
+						<c:if test="${ canLike }">
+							<button id="loginplz" style="color: red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="display: none; color: blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+						<c:if test="${ !canLike }">
+							<button id="like" style="display: none; color: red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="loginplz" style="color: blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
 					</c:if>
 				</td>
 
