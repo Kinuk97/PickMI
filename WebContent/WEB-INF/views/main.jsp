@@ -79,7 +79,7 @@
 <br><br><br>
 <div class="container" id="mainboard">
 
-<p style="font-size: 27px;">최근 게시물</p>
+<p style="font-size: 27px;">최근 게시물&nbsp;♬</p>
 	<!-- 첫번째 줄 -->
 	<h3>프로필 게시판</h3>
 	<div class="row">
@@ -96,7 +96,7 @@
 						<p>${ pro.prof_state }</p>
 						<p>${ pro.prof_career }</p>
 						<p class="text-right">${ pro.prof_like }❤</p>
-						<p>${ pro.prof_time }에작성</p>
+						<p class="text-right">${ pro.prof_time }에작성</p>
 					</div>
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 					onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
 					<div class="caption">
 
-						<h2>${board.proj_title }</h2>
+						<h4>${board.proj_title }</h4>
 
 						<p>지역 : ${board.proj_loc }</p>
 						<p>경력 : ${board.proj_career }</p>

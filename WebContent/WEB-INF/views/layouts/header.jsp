@@ -325,6 +325,10 @@ hr {
 	padding-left: 60px;
 }
 
+#mainboard p {
+	margin-bottom: 2px;
+}
+
 a#top {
     position: fixed;
     right: 5%;
