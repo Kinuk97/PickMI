@@ -115,6 +115,8 @@ $('#testBtn').click(function(e){
 			<p><button type="button" class="btn btn-info ">프로필사진 변경</button>
 		 	<button type="button" class="btn btn-info ">프로필사진 변경</button></p>
 			
+			<a href="/mypage/pwmodify"><button>비밀번호 수정 TEST ! ! ! </button></a>
+			
 			<ul class="list-group">
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px">이름 : ${userinfo.name }</p></li>
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px">이메일 : ${userinfo.email }</p></li>
