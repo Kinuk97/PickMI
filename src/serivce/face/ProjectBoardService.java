@@ -75,4 +75,10 @@ public interface ProjectBoardService {
 	
 	public boolean isLike(LikePost like);
 	
+	/**
+	 * 메인페이지에 프로젝트 게시판 리스트
+	 * @return
+	 */
+	public List<ProjectBoard> getMainProjectList();
+	
 }
