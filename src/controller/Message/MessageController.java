@@ -1,39 +1,20 @@
 package controller.Message;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
 
-@ServerEndpoint("/ws/msg")
-public class MessageController {
-	public static int cnt = 5;
-	@OnOpen
-	public void onOpen() {
-		System.out.println("opened");
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ws/message")
+public class MessageController extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/layouts/header.jsp").forward(req, resp);
 	}
 	
-	@OnClose
-	public void onClose() {
-		System.out.println("closed");
-	}
-	
-	@OnMessage
-	public String onMessage(String msg, Session session)  {
-		System.out.println(msg);
-		if("check".equals(msg)) {
-			System.out.println("check");
-			return "{\"cnt\":"+ cnt++ +"}";
-		}
-		
-		return null;
-		
-	}
-	
-	@OnError
-	public void onError(Session session, Throwable th) {
-		System.out.println("error");
-	}
+
 }
