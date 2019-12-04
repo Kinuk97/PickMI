@@ -42,16 +42,118 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#messagelist').click(function() {
+	//메세지 리스트의 항목 하나를 눌렀을 떄
+	$('#msgList').on("click", ".messagelist", function() {
+		console.log(9)
 		
-		console.log("꺌")
+		//메세지 리스트 드롭다운 메뉴가 사라짐(close)
 		$('.dropdown-menu').css('visibility','hidden');
+		//대화창이 hidden에서 visible로 변경됨
 		$('#messagebox').css('visibility', 'visible');
 	});
+	
+	//닫기 버튼을 눌렀을 때
+	$('#closebtn').click(function(){
+		//대화창이 visible에서 hidden으로 변경됨
+		$('#messagebox').css('visibility', 'hidden');
+		//메세지 리스트 드롭다운 메뉴가 hidden에서 visible로 변경됨 
+		$('.dropdown-menu').css('visibility', 'visible');
+	})
 	
 });
 
 </script>
+
+<!-- 메세지 -->
+<script type="text/javascript">
+
+window.onload = function(){
+	
+	
+// 	//소켓열리면
+// 	ws.onopen = function() {
+		
+// 		//메세지보내는 메소드 send
+// 		ws.send("안녕");
+// 	}
+	
+// 	onclick
+	
+}
+
+$(document).ready(function(){
+	$("#btnMessageList").click(function(){
+		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+		
+		ws.onopen = function() {
+	 		//메세지보내는 메소드 send
+	 		var obj = { type: "list", chat_user: '${userno}' };
+	 		var msg = JSON.stringify(obj);
+// 	 		console.log(JSON.stringify(obj))
+	 		ws.send(msg);
+	 	}
+		
+		ws.onmessage = function(data) {
+			$("#msgList").html("");
+			var list = JSON.parse(data.data)
+			for(var i = 0; i<list.length; i++){
+				
+				var spantext = list[i].chat_sender+"님의 새료운 메시지 <small>"+list[i].chat_sendtime+"에 보냄</small>";
+				
+				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
+				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
+						.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
+						.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
+						.append( $("<span>").html(spantext) )
+				).appendTo($("#msgList"))
+			}
+			ws.close();
+		}
+		
+	})
+})
+
+
+$(document).ready(function(){
+	$('#msgList').on("click", ".messagelist", function() {
+		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+		
+		var chat_no = $(this).find("input").val()
+		
+		ws.onopen = function() {
+	 		//메세지보내는 메소드 send
+	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no };
+	 		var msg = JSON.stringify(obj);
+	 		console.log(JSON.stringify(obj))
+	 		ws.send(msg);
+	 	}
+		
+		ws.onmessage = function(data) {
+			ws.close();
+		}
+		
+	})
+})
+
+$(document).ready(function(){
+	$("#send").click(function(){
+		
+		var msg = {
+				"type": "msg",
+				"chat_msg": $("#msg").val()
+		}
+		$("#msg").val("");
+		var json = JSON.stringify(msg);
+		console.log(json)
+		ws.send(json)
+		
+	})
+	
+	
+
+});
+</script>
+
 
 <style type="text/css">
 
@@ -184,7 +286,7 @@ hr {
 }
 
 #mainslide{
-	width: 1900px;
+	width: 100%;
 	height: 335px;
 	background-color: #d8f1f9;
 }
@@ -270,6 +372,40 @@ a#top {
 	visibility: hidden;
 }
 
+#msgresult {
+	margin: 0;
+	height: 290px;
+	width: 300px;
+	border: 1px solid;
+	border-color: #ccc;
+	margin-left: 20px;
+}
+
+#msg {
+	width: 233px;
+	height: 51px;
+	margin: 0;
+	margin-top: 10px;
+}
+
+#send {
+	margin-right: -5px;
+	margin-top: 0px;
+}
+
+#close {
+	width:25px;
+}
+
+#drppdownA {
+	padding-top:15px; 
+	padding-bottom:15px;
+}
+
+#msgImage {
+	width:50px; 
+	height:50px;
+}
 
 
 </style>
@@ -299,11 +435,26 @@ a#top {
 				
 				<!-- 채팅창 -->	
 					<div id="messagebox">
-						<a class="close" style="width: 25px;">x</a>
-						<h3>채팅창</h3>
+						<a class="close" id="closebtn" style="width: 25px;">x</a>
+						<h4 style="padding-left: 25px;">채팅창</h4>
+						
+						<!-- 메세지 결과 창 -->	
+						<div id="msgresult">
+						
+						
+						
+						
+						</div>
+						
+						<!-- 메세지 작성 창 -->
+						<input type="text" id="msg">
+						
+						<!-- 메세지 보내기 버튼 -->
+						<input value="전송" type="button" class="btn btn-default" id="send">
+						
 						<hr>
-						${name }
 					</div>
+					
 					
 				<!-- 메뉴 -->
 					<ul class="nav navbar-nav center" >
@@ -322,7 +473,7 @@ a#top {
  						<li role="presentation"> 					
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
-									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+									id="btnAlertList" data-toggle="dropdown" aria-expanded="true">
 									Alert <span class="badge" id="badge">7</span>
 								</button>
 								
@@ -350,47 +501,53 @@ a#top {
 						
 						
 						<li role="presentation"> 					
- 							<div class="dropdown">
+ 							<div class="dropdown" id="dropdownMsg">
 								<button class="btn btn-default dropdown-toggle" type="button"
-									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+									id="btnMessageList" data-toggle="dropdown" aria-expanded="true">
 									Message <span class="badge" id="badge">5</span>
 								</button>
 								
-								<!-- 메세지 목록 -->
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
-									<li class="close" style="width: 25px;">x</li>
+<!-- 								메세지 목록 -->
+<!-- 								<ul id="msgList" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;"> -->
+<!-- 									<li class="close" style="width: 25px;">x</li> -->
 									
-									<li id="messagelist" role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-								</ul>
+<!-- 									<li class="messagelist" role="presentation"> -->
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 										<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<%-- 										<input type="hidden" value="${chatList.chat_no }"> --%>
+<%-- 										${chatList.chat_sender }님의 새로운 메세지 <small>${chatList.chat_sendtime }에 보냄</small> --%>
+<!-- 										</a> -->
+<!-- 									</li> -->
+<!-- 								</ul> -->
+
+								<style type="text/css">
+ 								#msgList { 
+ 									list-style: none; 
+ 									padding: 0; 
+ 									margin: 0; 
+ 								} 
+ 								.messagelist { 
+ 									margin: 7px; 
+								}
+								.dropdownA {
+									padding-top: 15px;
+									padding-bottom: 15px;
+									text-decoration: none;
+								}
+								.messagelist img {
+									width: 50px;
+									height: 50px;
+								}
+								.messagelist span {
+									color: black;
+								}
+								</style>
+								<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
+									<div class="close" style="width: 25px;">x</div>
+									<ul id="msgList" ></ul>
+								</div>
+								
+								
 							</div>
 						</li>
 					</c:when>	
