@@ -64,6 +64,8 @@ div .cal-schedule span {
 	var $tdDay = null;
 	var $tdSche = null;
 	var jsonData = null;
+	
+	var clickDate = null;
 
 	$(document).ready(function() {
 		drawCalendar();
@@ -81,13 +83,17 @@ div .cal-schedule span {
 			$("#scheduleForm").append($("#scheduleForm input[type='hidden']").val(""));
 		});
 		
+		// 일정 추가 버튼 
+		$("#addBtn").on("click", function() {
+			addSchedule();
+		});
 
 		$("div .cal-schedule span").on("click", function() {
-			// $(this).parent().prev().text() 날짜 가져오기
-			console.log(new Date(year - 1, month - 1, $(this).parent().prev().text()));
-			$("#scheduleDate").text(new Date(year, month, $(this).parent().prev().text()));
-			$("#writeFormModal").modal();
+			clickDate = new Date(year, month - 1, $(this).parent().prev().text()).format("yyyy-MM-dd");
+			console.log(clickDate);
 
+			$("#schedule_date").text(new Date(year, month - 1, $(this).parent().prev().text()));
+			$("#writeFormModal").modal();
 		});
 		//일정 아이콘 클릭시 모달 보이기
 		$("div .cal-schedule #scheduleView").on("click", function() {
@@ -95,6 +101,33 @@ div .cal-schedule span {
 		});
 
 	});
+	
+	Date.prototype.format = function(f) {
+	    if (!this.valueOf()) return " ";
+	 
+	    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+	    var d = this;
+	     
+	    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+	        switch ($1) {
+	            case "yyyy": return d.getFullYear();
+	            case "yy": return (d.getFullYear() % 1000).zf(2);
+	            case "MM": return (d.getMonth() + 1).zf(2);
+	            case "dd": return d.getDate().zf(2);
+	            case "E": return weekName[d.getDay()];
+	            case "HH": return d.getHours().zf(2);
+	            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
+	            case "mm": return d.getMinutes().zf(2);
+	            case "ss": return d.getSeconds().zf(2);
+	            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
+	            default: return $1;
+	        }
+	    });
+	};
+	 
+	String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+	String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+	Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 	//Calendar 그리기
 	function drawCalendar() {
@@ -219,7 +252,7 @@ div .cal-schedule span {
 		setData();
 		var dateMatch = null;
 		for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
-			console.log(i);
+// 			console.log(i);
 			
 			
 			
@@ -239,15 +272,19 @@ div .cal-schedule span {
 	}
 
 	function addSchedule() {
+		alert($("#scheduleContent").val());
 		$.ajax({
 			type : "post",
 			url : "/schedule/add",
 			data : {
-				"proj_no" : "${proj_no}"
+				"proj_no" : "${param.proj_no}",
+				"schedule_date" : clickDate,
+				"title" : $("#scheduleTitle").val(),
+				"content" : $("#scheduleContent").val()
 			},
 			dataType : "json",
 			success : function(data) {
-
+				console.log(data);
 			},
 			error : function(e) {
 				console.log(e);
@@ -269,6 +306,7 @@ div .cal-schedule span {
 </script>
 
 <div class="container">
+${param.proj_no}
 	<div id="datepicker"></div>
 
 	<div class="cal_top">
@@ -293,28 +331,25 @@ div .cal-schedule span {
 				</button>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="/schedule/add" method="post" id="scheduleForm">
-					<!-- 테스트용 프로젝트 번호 -->
-					<input type="hidden" value="205" name="proj_no">
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label"><span id="scheduleDate"></span>일정</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="title">
-						</div>
+				<!-- 테스트용 프로젝트 번호 -->
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label"><span id="scheduleDate"></span>일정</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="title" id="scheduleTitle">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">상세 설명</label>
-						<div class="col-sm-10">
-							<textarea name="content" class="form-control" style="resize: none;" rows="10"></textarea>
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">상세 설명</label>
+					<div class="col-sm-10">
+						<textarea  id="scheduleContent" name="content" class="form-control" style="resize: none;" rows="10"></textarea>
 					</div>
-					<div class="form-group">
-						<div class="col-sm-12 text-center">
-							<input type="hidden" name="schedule_date">
-							<button type="submit" class="btn btn-info">ADD</button>
-						</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12 text-center">
+						<button id="addBtn" class="btn btn-info">ADD</button>
 					</div>
-				</form>
+				</div>
+				<div style="clear: both;"></div>
 			</div>
 		</div>
 	</div>

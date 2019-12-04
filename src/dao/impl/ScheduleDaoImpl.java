@@ -156,7 +156,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			ps.setInt(3, schedule.getUserno());
 			ps.setString(4, schedule.getTitle());
 			ps.setString(5, schedule.getContent());
-			ps.setDate(5, new Date(schedule.getSchedule_date().getTime()));
+			ps.setDate(6, new Date(schedule.getSchedule_date().getTime()));
 //			ps.setString(5, schedule.getPlace());
 //			ps.setDate(6, new java.sql.Date(schedule.getDue_date().getTime()));
 
