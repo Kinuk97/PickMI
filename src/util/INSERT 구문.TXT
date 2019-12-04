@@ -586,3 +586,31 @@ INSERT INTO manager( mgrid, mgrpw ) VALUES ('writer2', 'writer22');
 INSERT INTO manager( mgrid, mgrpw ) VALUES ('writer3', 'writer33');
 
 commit;
+
+------------------------------------------------------------------------------------------------------------------- 메시지 -------------------------------------------------------------------------------------------------------------------
+
+--info테이블 INSERT
+INSERT INTO info(chat_no, chat_maketime) VALUES(1, SYSDATE);
+INSERT INTO info(chat_no, chat_maketime) VALUES(2, SYSDATE);
+INSERT INTO info(chat_no, chat_maketime) VALUES(3, SYSDATE);
+INSERT INTO info(chat_no, chat_maketime) VALUES(4, SYSDATE);
+
+
+
+-- chatter테이블 INSERT
+INSERT INTO chatter(chat_no, chat_user) VALUES(1, 8);
+INSERT INTO chatter(chat_no, chat_user) VALUES(2, 12);
+INSERT INTO chatter(chat_no, chat_user) VALUES(3, 1);
+INSERT INTO chatter(chat_no, chat_user) VALUES(4, 3);
+
+
+
+-- chat테이블 INSERT (chat_sender는 자신의 유저테이블에 있는 유저번호들 넣어서)
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(1, 21, '안녕?', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(1, 8, '응', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(2, 21, '꺌?', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(2, 12, '룰랭!', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(3, 21, '뭐해?', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(3, 1, '알빠?', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(4, 21, '랄랄', SYSDATE);
+INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(4, 3, '럴럴', SYSDATE);
