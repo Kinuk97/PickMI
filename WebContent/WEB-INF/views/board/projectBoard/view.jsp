@@ -174,8 +174,6 @@ $(document).ready(function() {
 		<button id="btnList" class="btn btn-primary">목록</button>
 	</div>
 
-
-
 </section>
 
 <!--모달창 -->
