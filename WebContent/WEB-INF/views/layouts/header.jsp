@@ -84,7 +84,7 @@ window.onload = function(){
 
 $(document).ready(function(){
 	$("#btnMessageList").click(function(){
-		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+		var ws = new WebSocket("ws://localhost:8088/ws/msg");
 		
 		ws.onopen = function() {
 	 		//메세지보내는 메소드 send

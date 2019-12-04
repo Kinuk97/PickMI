@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dto.Schedule;
 import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
@@ -20,12 +22,14 @@ public class ScheduleViewController extends HttpServlet {
 	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setCharacterEncoding("UTF-8");
 
-		Schedule schedule = scheduleService.getSchedule(req); 
-//		System.out.println("schedule view controller : " + schedule);
+		Schedule schedule = scheduleService.getSchedule(req);
 		
-		req.setAttribute("viewSchedule", scheduleService.getSchedule(schedule));
+		Gson gson = new Gson();
+		
+		resp.getWriter().println(gson.toJson(scheduleService.getSchedule(schedule)));
 	}
 
 }
