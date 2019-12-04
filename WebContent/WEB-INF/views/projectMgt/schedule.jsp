@@ -168,18 +168,21 @@ div .cal-schedule span {
 		$.ajax({
 			type : "post",
 			url : "/schedule/list",
-			data : { "proj_no" : "${proj_no}", "year" : year, "month" : month },
+			data : { "proj_no" : "${param.proj_no}", "curYear" : year, "curMonth" : month },
 			dataType : "json",
 			success : function(data) {
 				console.log(data);
-				
 				$("#cal_top_year").text(year);
 				$("#cal_top_month").text(month);
 				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
 					$tdDay.eq(i).text(++dayCount);
-// 					if (${scheduleList[0].write_date.getDate()} == i) {
-						
-// 					}
+					
+					for (var j = 0; j < data.length; j++) {
+						let schedule_date = data[j].schedule_date.split(" ")[1].replace(",", "");
+						if (schedule_date - 1 == i) {
+							$tdSche.eq(i).prepend(data[j].title);
+						}
+					}
 				}
 				for (var i = 0; i < 42; i += 7) {
 					$tdDay.eq(i).css("color", "red");
@@ -235,15 +238,6 @@ div .cal-schedule span {
 
 	//데이터 등록
 	function setData() {
-// 		var scheduleList = ${scheduleList};
-		
-// 		console.log(scheduleList);
-		
-		let date = new Date("${scheduleList[0].write_date}");
-		let year = date.getFullYear();
-		let month = date.getMonth() + 1;
-		let day = date.getDate();
-		
 		
 	}
 
@@ -272,7 +266,6 @@ div .cal-schedule span {
 	}
 
 	function addSchedule() {
-		alert($("#scheduleContent").val());
 		$.ajax({
 			type : "post",
 			url : "/schedule/add",
@@ -284,7 +277,8 @@ div .cal-schedule span {
 			},
 			dataType : "json",
 			success : function(data) {
-				console.log(data);
+				$("#writeFormModal").modal('hide');
+				drawDays();
 			},
 			error : function(e) {
 				console.log(e);

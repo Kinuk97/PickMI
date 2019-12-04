@@ -23,14 +23,10 @@ public class ScheduleListController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		Schedule schedule = scheduleService.getSchedule(req); 
-
-//		req.setAttribute("proj_no", schedule.getProj_no());
-//		req.setAttribute("scheduleList", scheduleService.getScheduleList(schedule));
-
+		// 로그인 처리??
+		// 내 프로젝트인 경우에만??
 		req.getRequestDispatcher("/WEB-INF/views/projectMgt/schedule.jsp").forward(req, resp);
 	}
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");

@@ -23,15 +23,8 @@ public class ScheduleAddController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req.getParameter("proj_no"));
-		System.out.println(req.getParameter("schedule_date"));
-		
 		Schedule schedule = scheduleServie.getSchedule(req);
 
-		System.out.println(schedule);
-		
 		scheduleServie.putSchedule(schedule);
-		
-		resp.sendRedirect("/schedule/list?proj_no=" + schedule.getProj_no());
 	}
 }
