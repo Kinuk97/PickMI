@@ -96,17 +96,17 @@ $(document).ready(function(){
 	 	}
 		
 		ws.onmessage = function(data) {
-			
+			console.log("!")
 			$("#msgList").html("");
 			var list = JSON.parse(data.data)
 			for(var i = 0; i<list.length; i++){
-				var spantext = list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small><hr>";
+				var spantext = "&emsp;"+list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small>"+ "<hr class='a'>";
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
 				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
 						.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
 						.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
-						.append( $("<span>").html(spantext) )
+						.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
 				).appendTo($("#msgList"))
 			}
 			ws.close();
@@ -428,8 +428,37 @@ a#top {
 .messagelist span {
 	color: black;
 }
-</style>
 
+.spanmsg small {
+	float: right;
+}
+
+.a {
+	clear: both;
+}
+
+.chatplus { 
+	text-align: center;
+} 
+
+#chatplusBtn {
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	border: none;
+	height: 15px;
+	color: #2049dc;
+	margin-top: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#msgscroll {
+	overflow: auto;
+}
+
+</style>
 </head>
 
 <body>
@@ -460,7 +489,6 @@ a#top {
 						
 						<!-- 메세지 결과 창 -->	
 						<div id="msgresult">
-						
 						
 						
 						
@@ -540,12 +568,17 @@ a#top {
 <!-- 									</li> -->
 <!-- 								</ul> -->
 
-								<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
-									<div class="close" style="width: 25px;">x</div>
-									<ul id="msgList" ></ul>
+								<div class="dropdown-menu" id="msgscroll" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
+									<div class="chatplus">
+										<button class="btn btn-default" id="chatplusBtn">새 메시지</button>
+										<div class="close" style="width: 25px;">x</div>
+									</div>
+									<ul id="msgList" style="clear: both">
+									
+										<!-- 메세지 목록 -->
+									
+									</ul>
 								</div>
-								
-								
 							</div>
 						</li>
 					</c:when>	
