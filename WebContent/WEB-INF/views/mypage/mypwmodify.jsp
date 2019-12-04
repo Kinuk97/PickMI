@@ -11,9 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').focus()
-	})
+
 
 </script>
 
@@ -21,23 +19,12 @@ $('#myModal').on('shown.bs.modal', function () {
 </head>
 <body>
 
-			<div class="modal fade">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title">Modal title</h4>
-			      </div>
-			      <div class="modal-body">
-			        <p>One fine body&hellip;</p>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
-			      </div>
-			    </div><!-- /.modal-content -->
-			  </div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+<form action="/mypage/pwmodify" method="post">
+현재 비밀번호 : <input type="password" name="curpw"/>
+수정 비밀번호 : <input type="password" name="modpw"/>
+수정 비밀번호 확인 : <input type="password" name="modpw"/>
+<button>전송</button>
+</form>
 
 </body>
 </html>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/agree")
-public class Agree extends HttpServlet {
+public class AgreeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    

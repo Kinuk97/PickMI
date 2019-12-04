@@ -42,7 +42,13 @@ public interface UserDao {
 	 * @return User - 비밀번호
 	 */
 	public User selectPwByEmail(User user);
-
+	
+	/**
+	 * 비밀번호 변경
+	 * @param user
+	 */
 	public void updatePw(User user);
+
+	
 
 }

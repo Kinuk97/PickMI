@@ -96,7 +96,7 @@ div .cal-schedule span {
 			$("#writeFormModal").modal();
 		});
 		//일정 아이콘 클릭시 모달 보이기
-		$("div .cal-schedule #scheduleView").on("click", function() {
+		$("div .cal-schedule").on("click", "#scheduleView", function() {
 			$("#viewSchedule").modal();
 		});
 
@@ -180,7 +180,11 @@ div .cal-schedule span {
 					for (var j = 0; j < data.length; j++) {
 						let schedule_date = data[j].schedule_date.split(" ")[1].replace(",", "");
 						if (schedule_date - 1 == i) {
-							$tdSche.eq(i).prepend(data[j].title);
+							$tdSche.eq(i).append(data[j].title);
+							$tdSche.eq(i).append($("<span id=\"scheduleView\" class='label label-info'>일정보기</span>"));
+						} else {
+							$tdSche.eq(i).html("");
+							$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
 						}
 					}
 				}
@@ -243,26 +247,6 @@ div .cal-schedule span {
 
 	//스케줄 그리기
 	function drawSche() {
-		setData();
-		var dateMatch = null;
-		for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
-// 			console.log(i);
-			
-			
-			
-			
-// 			var txt = "";
-// 			txt = jsonData[year];
-// 			if (txt) {
-// 				txt = jsonData[year][month];
-// 				if (txt) {
-// 					txt = jsonData[year][month][i];
-// 					dateMatch = firstDay.getDay() + i - 1;
-// 					$tdSche.eq(dateMatch).text(txt);
-// 				}
-// 			}
-			$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
-		}
 	}
 
 	function addSchedule() {
@@ -286,17 +270,22 @@ div .cal-schedule span {
 		});
 	}
 	
-// 	function list() {
-// 		$.ajax({
-// 			type : "post",
-// 			url : "/schedule/list",
-// 			data : {
-// 				"proj_no" : "${proj_no}",  "due_date" : "${due_date}"
-// 			}
-// 			dateType : "json",
-// 			success :
-// 		})
-// 	}
+	function viewSchedule() {
+		$.ajax({
+			type : "post",
+			url : "/schedule/view",
+			data : {
+				"proj_no" : "${proj_no}"
+			},
+			dataType : "json",
+			success : function(data) {
+				
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		})
+	}
 </script>
 
 <div class="container">

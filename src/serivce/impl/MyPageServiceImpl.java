@@ -94,6 +94,42 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 
+	
+// ----- 비밀번호 수정	
+	@Override
+	public User getPwParam(HttpServletRequest req) {
+		User user = new User();
+		
+		// 파라미터
+		String param = null;
+		
+		// pw 파라미터
+		param = req.getParameter("pw");
+		user.setPw(param);
+		
+		
+		return user; // user로 반환 (pw)
+	}
+
+//	@Override
+////	public boolean modifyPw(User user) {
+//	
+//		int cnt = 0;
+////		cnt = myPageDao.selectCntUserByUserno(user); // 현재 비밀번호와 일치하는 비밀번호의 갯수
+//		
+//		if (cnt == 1) {
+////			myPageDao.updatePw(user); // 일치한다면 비밀번호 수정 가능하게 해주는 메소드
+//			
+//			return true;
+//		} else {
+//			return false;
+//		}
+//		
+////		return false;
+	}
+	
+	
+
 // ----- 비밀번호 수정	
 	
 
@@ -102,4 +138,4 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	
 	
-}
+

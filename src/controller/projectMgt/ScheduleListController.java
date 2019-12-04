@@ -32,10 +32,10 @@ public class ScheduleListController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 
 		Schedule schedule = scheduleService.getSchedule(req);
-
 		Gson gson = new Gson();
 
 		resp.getWriter().println(gson.toJson(scheduleService.getScheduleList(schedule)));
+//		System.out.println("schedule list controller : " + scheduleService.getScheduleList(schedule));
 	}
 
 }
