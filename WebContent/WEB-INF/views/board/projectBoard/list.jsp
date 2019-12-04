@@ -59,13 +59,13 @@
 		var proj_job = "${paging.proj_job}";
 		var proj_career = "${paging.proj_career}";
 		
-		if(proj_loc != null && !proj_loc.equals("")){
+		if(proj_loc != null && proj_loc != ""){
 			$("#locBtn").addClass("ative");
-		} else if(proj_progress != null && !proj_progress.equals("")){
+		} else if(proj_progress != null && proj_progress != ""){
 			$("#progressBtn").addClass("active");
-		} else if(proj_job != null && !proj_job.equals("")){
+		} else if(proj_job != null && proj_job != ""){
 			$("#jobBtn").addClass("active");
-		} else if(proj_career != null && !proj_career.equals("")){
+		} else if(proj_career != null && proj_career != ""){
 			$("#careerBtn").addClass("active");
 		}
 		

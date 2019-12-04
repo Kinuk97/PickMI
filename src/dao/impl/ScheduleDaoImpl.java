@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,16 +64,16 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public List<Schedule> selectAll(Schedule schedule) {
 
-		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND schedule_date BETWEEN ? AND ?";
+		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ? ORDER BY schedule_date";
 
 
 		List<Schedule> list = new ArrayList<Schedule>();
 
 		try {
 			ps = conn.prepareStatement(sql);
-
+			
 			ps.setInt(1, schedule.getProj_no());
-			ps.setString(2, schedule.getCurYear() + "");
+			ps.setString(2, schedule.getCurYear());
 			ps.setString(3, schedule.getCurMonth());
 
 			rs = ps.executeQuery();
@@ -85,7 +87,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				temp.setTitle(rs.getString("title"));
 				temp.setContent(rs.getString("content"));
 				temp.setPlace(rs.getString("place"));
-				temp.setWrite_date(rs.getDate("due_date"));
+				temp.setSchedule_date(rs.getDate("schedule_date"));
+				temp.setDue_date(rs.getDate("due_date"));
 				temp.setWrite_date(rs.getDate("write_date"));
 
 				list.add(temp);
@@ -125,8 +128,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				result.setScheduleno(rs.getInt("scheduleno"));
 				result.setProj_no(rs.getInt("proj_no"));
 				result.setUserno(rs.getInt("userno"));
+				result.setTitle(rs.getString("title"));
 				result.setContent(rs.getString("content"));
 				result.setPlace(rs.getString("place"));
+				result.setSchedule_date(rs.getDate("schedule_date"));
+				result.setDue_date(rs.getDate("due_date"));
 				result.setWrite_date(rs.getDate("write_date"));
 			}
 		} catch (SQLException e) {
@@ -174,15 +180,16 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
 	@Override
 	public void updateSchedule(Schedule schedule) {
-		String sql = "UPDATE schedule SET content = ?, place = ?, due_date = ? WHERE scheduleno = ?";
+		String sql = "UPDATE schedule SET title = ?, content = ?, place = ?, due_date = ? WHERE scheduleno = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
 
-			ps.setString(1, schedule.getContent());
-			ps.setString(2, schedule.getPlace());
-			ps.setDate(3, new java.sql.Date(schedule.getDue_date().getTime()));
-			ps.setInt(4, schedule.getScheduleno());
+			ps.setString(1, schedule.getTitle());
+			ps.setString(2, schedule.getContent());
+			ps.setString(3, schedule.getPlace());
+			ps.setDate(4, new java.sql.Date(schedule.getDue_date().getTime()));
+			ps.setInt(5, schedule.getScheduleno());
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

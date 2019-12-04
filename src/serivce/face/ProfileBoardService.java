@@ -72,7 +72,7 @@ public interface ProfileBoardService {
 	 * profileBoard의 모든 게시글을 불러온다
 	 * @return - 게시글목록
 	 */
-	public List<ProfileBoard> getProfileList();
+	public List<ProfileBoard> getMainProfileList();
 
 	/**
 	 * 요청 파라미터 curPage를 파싱한다
@@ -80,4 +80,5 @@ public interface ProfileBoardService {
 	 * @return - 페이징정보
 	 */
 	public Paging getPaging(HttpServletRequest req);
+
 }

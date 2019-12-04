@@ -56,42 +56,43 @@ public interface ProjectBoardDao {
 	// ------------ 찜하기 ---------------
 	
 	/**
-	 * 추천 삭제
+	 * 찜 삭제
 	 * 
-	 * @param like - 추천 정보
+	 * @param like - 찜 정보
 	 */
 	public void deleteLike(LikePost like);
 	
 	/**
-	 * 추천 기록
+	 * 찜 기록
 	 * 
-	 * @param like - 추천 정보
+	 * @param like - 찜 정보
 	 */
 	public void insertLike(LikePost like);
 	
 	/**
-	 * 게시글 추천상태를 위한 COUNT 조회
+	 * 게시글 찜상태를 위한 COUNT 조회
 	 * 
-	 * @param like - 추천상태 정보 저장 객체
-	 * @return int - 추천상태 확인 값
+	 * @param like - 찜 상태 정보 저장 객체
+	 * @return int - 찜 상태 확인 값
 	 */
 	public int selectCntLike(LikePost like);
 	
 	/**
-	 * 총 추천 수 구하기
-	 *  
-	 * @param board - 추천 대상 게시글 번호 객체
-	 * @return int - 게시글의 총 추천 수
+	 * 찜 여부 확인
+	 * 
+	 * @param like
+	 * @return
 	 */
-	public int selectTotalCntLike(LikePost like);
+	public int checkCntByUserno(LikePost like);
 	
 	// ------------------------------------
 	
-//	/**
-//	 * 지역필터에 의한 게시판 조회
-//	 * 
-//	 * @param paging
-//	 * @return
-//	 */
-//	public List<ProjectBoard> selectBoardListByLoc(Paging paging);
+	/**
+	 * 리스트 출력
+	 * @return
+	 */
+	public List<ProjectBoard> selectListToMain();
+
+	
+
 }

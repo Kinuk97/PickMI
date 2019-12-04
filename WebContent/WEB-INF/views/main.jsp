@@ -75,125 +75,107 @@
 <br><br><br>
 <div class="container" id="mainboard">
 
+<p style="font-size: 27px;">최근 게시물</p>
 	<!-- 첫번째 줄 -->
-	<h4>프로필 게시판</h4>
+	<h3>프로필 게시판</h3>
 	<div class="row">
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
+		<c:forEach items="${profileBoard }" var="pro">
+			<div class="col-sm-6 col-md-4 col-lg-3" id="mainboardlist">
+				<div class="thumbnail"
+					onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
+					<div class="caption">
+						<h4>${ pro.prof_no }</h4>
+						<p>${ pro.username }</p>
+						<p>${ pro.prof_interest }</p>
+						<p>${ pro.prof_loc }</p>
+						<p>${ pro.prof_job }</p>
+						<p>${ pro.prof_state }</p>
+						<p>${ pro.prof_career }</p>
+						<p class="text-right">${ pro.prof_like }❤</p>
+						<p>${ pro.prof_time }에작성</p>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
-				</div>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
+	
 	<!-- 두번째 줄 -->
-	<h4>프로젝트 게시판</h4>
+	<h3>프로젝트 게시판</h3>
 	<div class="row">
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
+		<!-- 			<div class="thumbnail"> -->
+		<!-- 				<div class="caption"> -->
+		<c:forEach var="board" items="${projectBoard }">
+			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
+				<div class="thumbnail"
+					onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
+					<div class="caption">
+
+						<h2>${board.proj_title }</h2>
+
+						<p>지역 : ${board.proj_loc }</p>
+						<p>경력 : ${board.proj_career }</p>
+						<p>직업 : ${board.proj_job }</p>
+						<p>진행상황 : ${board.proj_progress }</p>
+
+						<div class="text-right">신청수 : ${board.proj_apply }</div>
+						<div class="text-right">찜개수 : ${board.proj_like }</div>
+						<div class="text-right">${board.proj_time }</div>
+					</div>
 				</div>
+				<!-- 				</div> -->
+				<!-- 			</div> -->
 			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
-				</div>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
-	<!-- 세번째 줄 -->
-	<h4>자유게시판</h4>
+	
+	<h3>완성된 프로젝트 게시판</h3>
 	<div class="row">
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
+		<c:forEach items="${compBoard }" var="compList">
+			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
+				<div class="thumbnail"
+					onclick="location.href='/compBoard/view?comp_no=${compList.comp_no }'"
+					id="compboardlist" style="cursor: pointer; hover: #ccc;">
+					<div class="caption">
+						<h4>${compList.comp_no}.${compList.comp_title }</h4>
+						<p>팀 이름 : ${compList.comp_name }</p>
+						<br>
+						<br>
+						<p class="text-right" style="margin: 0 0 0px;">작성자 :
+							${compList.userno }</p>
+						<p class="text-right" style="margin: 0 0 0px;">조회수 :
+							${compList.comp_view }</p>
+						<p class="text-right" style="margin: 0 0 0px;">작성날짜 :
+							${compList.comp_date }</p>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
-				</div>
-			</div> 
-		</div>
-		<div class="col-sm-6 col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="caption">
-					<h3>Thumbnail label</h3>
-					<p>...</p>
-					<p>
-						<a href="#" class="btn btn-primary" role="button">Button</a> <a
-							href="#" class="btn btn-default" role="button">Button</a>
-					</p>
+		</c:forEach>
+	</div>
+
+	<!-- 네번째 줄 -->
+	<h3>자유게시판</h3>
+	<div class="row">
+		<c:forEach items="${freeBoard }" var="free">
+			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
+				<div class="thumbnail"
+					onclick="location.href='/compBoard/view?free_no=${free.free_no }'"
+					id="compboardlist" style="cursor: pointer; hover: #ccc;">
+					<div class="caption">
+						<h4>${free.free_title }</h4>
+						<p>${free.free_content }</p>
+						<br>
+						<br>
+						<p class="text-right" style="margin: 0 0 0px;">
+							작성자 : ${free.userno }</p>
+						<p class="text-right" style="margin: 0 0 0px;">
+							조회수 : ${free.views }</p>
+						<p class="text-right" style="margin: 0 0 0px;">
+							${free.free_time }</p>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:forEach>
+		
 	</div>
 	
 </div>

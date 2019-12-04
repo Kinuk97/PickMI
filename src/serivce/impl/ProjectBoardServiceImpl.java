@@ -115,7 +115,7 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 
 	@Override
 	public LikePost getLike(HttpServletRequest req) {
-		//전달파라미터 파싱
+	
 		int proj_no = 0;
 		String param = req.getParameter("proj_no");
 		if( param!=null && !"".equals(param) ) {
@@ -135,34 +135,41 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 	}
 
 	@Override
-	public boolean like(LikePost like) {
-		if(isLike(like)) { // 추천한 상태
-			projectBoardDao.deleteLike(like);
-			
+	public boolean checkLike(LikePost like) {
+		
+		int check = projectBoardDao.checkCntByUserno(like);
+		
+		if(check == 0) {
+			return true;
+		} else {			
 			return false;
-		} else { // 추천하지 않은 상태
+		}
+	}
+	
+	@Override
+	public void like(LikePost like) {
+		
+		boolean check = checkLike(like);
+		
+		if(check) {
 			projectBoardDao.insertLike(like);
-			
-			return true;
+		} else {
+			projectBoardDao.deleteLike(like);
 		}
 		
 	}
-
+	
 	@Override
-	public int getTotalCntLike(LikePost like) {
-
-		return projectBoardDao.selectTotalCntLike(like);
-	}
-
-	@Override
-	public boolean isLike(LikePost like) {
-		int cnt = projectBoardDao.selectCntLike(like);
+	public int countLike(LikePost like) {
 		
-		if(cnt > 0) { //추천
-			return true;
-		} else { // 추천X
-			return false;			
-		}
+		return projectBoardDao.selectCntLike(like);
 	}
+	
+	@Override
+	public List<ProjectBoard> getMainProjectList() {
+		
+		return projectBoardDao.selectListToMain();
+	}
+
 
 }

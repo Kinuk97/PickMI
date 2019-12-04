@@ -1,4 +1,4 @@
-package controller.Message;
+package controller.teamMgt;
 
 import java.io.IOException;
 
@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ws/message")
-public class MessageController extends HttpServlet {
-	
+@WebServlet("/team/list")
+public class TeamListController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/layouts/header.jsp").forward(req, resp);
-	}
-	
 
+		req.getRequestDispatcher("/WEB-INF/views/teamMgt/teamList.jsp").forward(req, resp);
+		
+	}
 }

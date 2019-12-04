@@ -72,4 +72,6 @@ public interface FreeBoardService {
 	 * @param freeBoard - 게시글 번호가 담긴 DTO
 	 */
 	public void viewCounting(FreeBoard freeBoard);
+
+	public List<FreeBoard> getMainFreeList();
 }

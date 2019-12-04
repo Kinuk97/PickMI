@@ -27,7 +27,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	
-	private ProfileBoardServiceImpl() {
+	public ProfileBoardServiceImpl() {
 	}
 
 	private static class Singleton {
@@ -326,7 +326,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	 * 프로필 목록을 가져오는 메소드
 	 */
 	@Override
-	public List<ProfileBoard> getProfileList() {
+	public List<ProfileBoard> getMainProfileList() {
 		return profileBoardDao.selectProfileList();
 	}
 	

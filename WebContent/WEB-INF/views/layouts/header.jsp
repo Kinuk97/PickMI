@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -24,37 +25,143 @@
 <script type="text/javascript" src="/resources/js/popover.js"></script>
 <script type="text/javascript" src="/resources/js/modal.js"></script>
 
+
 <!--Start of Tawk.to Script-->
-<!-- <script type="text/javascript">
-	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+<!-- <!-- <script type="text/javascript"> -->
+<!-- 	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date(); -->
 	
-	(function() {
-		var s1 = document.createElement("script"), s0 = document
-				.getElementsByTagName("script")[0];
-		s1.async = true;
-		s1.src = 'https://embed.tawk.to/5de394e9d96992700fca2231/default';
-		s1.charset = 'UTF-8';
-		s1.setAttribute('crossorigin', '*');
-		s0.parentNode.insertBefore(s1, s0);
-	})();
+<!-- 	(function() { -->
+<!-- 		var s1 = document.createElement("script"), s0 = document -->
+<!-- 				.getElementsByTagName("script")[0]; -->
+<!-- 		s1.async = true; -->
+<!-- 		s1.src = 'https://embed.tawk.to/5de394e9d96992700fca2231/default'; -->
+<!-- 		s1.charset = 'UTF-8'; -->
+<!-- 		s1.setAttribute('crossorigin', '*'); -->
+<!-- 		s0.parentNode.insertBefore(s1, s0); -->
+<!-- 	})(); -->
 	
-</script> -->
+<!-- </script> -->
 <!--End of Tawk.to Script-->
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#messagelist').click(function() {
+	//메세지 리스트의 항목 하나를 눌렀을 떄
+	$('#msgList').on("click", ".messagelist", function() {
+		console.log(9)
 		
-		console.log("꺌")
+		//메세지 리스트 드롭다운 메뉴가 사라짐(close)
 		$('.dropdown-menu').css('visibility','hidden');
+		//대화창이 hidden에서 visible로 변경됨
 		$('#messagebox').css('visibility', 'visible');
 	});
+	
+	//닫기 버튼을 눌렀을 때
+	$('#closebtn').click(function(){
+		//대화창이 visible에서 hidden으로 변경됨
+		$('#messagebox').css('visibility', 'hidden');
+		//메세지 리스트 드롭다운 메뉴가 hidden에서 visible로 변경됨 
+		$('.dropdown-menu').css('visibility', 'visible');
+	})
 	
 });
 
 </script>
 
+<!-- 메세지 -->
+<script type="text/javascript">
+
+window.onload = function(){
+	
+	
+// 	//소켓열리면
+// 	ws.onopen = function() {
+		
+// 		//메세지보내는 메소드 send
+// 		ws.send("안녕");
+// 	}
+	
+// 	onclick
+	
+}
+
+$(document).ready(function(){
+	$("#btnMessageList").click(function(){
+		var ws = new WebSocket("ws://localhost:8088/ws/msg");
+		
+		ws.onopen = function() {
+	 		//메세지보내는 메소드 send
+	 		var obj = { type: "list", chat_user: '${userno}', username: '${name}' };
+	 		var msg = JSON.stringify(obj);
+	 		console.log(msg)
+	 		ws.send(msg);
+	 	}
+		
+		ws.onmessage = function(data) {
+			console.log("!")
+			$("#msgList").html("");
+			var list = JSON.parse(data.data)
+			for(var i = 0; i<list.length; i++){
+				var spantext = "&emsp;"+list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small>"+ "<hr class='a'>";
+				
+				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
+				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
+						.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
+						.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
+						.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
+				).appendTo($("#msgList"))
+			}
+			ws.close();
+		}
+		
+	})
+})
+
+$(document).ready(function(){
+	$('#msgList').on("click", ".messagelist", function() {
+		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+		
+		var chat_no = $(this).find("input").val()
+		
+		ws.onopen = function() {
+	 		//메세지보내는 메소드 send
+	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no };
+	 		var msg = JSON.stringify(obj);
+	 		console.log(JSON.stringify(obj))
+	 		ws.send(msg);
+	 	}
+		
+		ws.onmessage = function(data) {
+			ws.close();
+		}
+		
+	})
+})
+
+$(document).ready(function(){
+	$("#send").click(function(){
+		
+		var msg = {
+				"type": "msg",
+				"chat_msg": $("#msg").val()
+		}
+		$("#msg").val("");
+		var json = JSON.stringify(msg);
+		console.log(json)
+		ws.send(json)
+		
+	})
+	
+	
+
+});
+</script>
+
+
 <style type="text/css">
+
+@font-face {
+	font-family: 'Jeju Gothic', serif;
+}
 
 #header {
 	text-align: center;
@@ -69,7 +176,7 @@ $(document).ready(function(){
 }
 
 #wrapper {
-	min-height: 1200px;
+	min-height: 500px;
 	background-color: #ffffff;
 	clear: both;
 	padding-top: 25px;
@@ -127,7 +234,7 @@ button, input, optgroup, select, textarea {
 
 /* 각 게시판 리스트 높이 */
 .caption-profile {
-	height: 320px;
+	height: 260px;
 }
 .caption-project {
 	height: 260px;
@@ -185,13 +292,13 @@ hr {
 }
 
 #mainslide{
-	width: 1900px;
+	width: 100%;
 	height: 335px;
 	background-color: #d8f1f9;
 }
 
 #mainboard {
-	height: 500px;
+	height: 1300px;
 }
 
 a#top {
@@ -271,10 +378,110 @@ a#top {
 	visibility: hidden;
 }
 
+#msgresult {
+	margin: 0;
+	height: 290px;
+	width: 300px;
+	border: 1px solid;
+	border-color: #ccc;
+	margin-left: 20px;
+}
 
+#msg {
+	width: 233px;
+	height: 51px;
+	margin: 0;
+	margin-top: 10px;
+}
 
+#send {
+	margin-right: -5px;
+	margin-top: 0px;
+}
+
+#close {
+	width:25px;
+}
+
+#drppdownA {
+	padding-top:15px; 
+	padding-bottom:15px;
+}
+
+#msgImage {
+	width:50px; 
+	height:50px;
+}
+
+#msgList { 
+	list-style: none; 
+	padding: 0; 
+	margin: 0; 
+} 
+.messagelist { 
+	margin: 7px; 
+}
+.dropdownA {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-decoration: none;
+}
+.messagelist img {
+	width: 50px;
+	height: 50px;
+}
+.messagelist span {
+	color: black;
+}
+
+.spanmsg small {
+	float: right;
+}
+
+.a {
+	clear: both;
+}
+
+.chatplus { 
+	text-align: center;
+} 
+
+#chatplusBtn {
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	border: none;
+	height: 15px;
+	color: #2049dc;
+	margin-top: 0;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#msgscroll {
+	overflow: auto;
+}
+
+#mainboardlist {
+	width: 360px;
+/* 	height: 210px; */
+}
+
+@font-face {
+	font-family: 고도 M;
+	src: url('./resources/font_ttf/GodoM.ttf');
+}
+
+#searchform {
+	width: 70%;
+	margin-left: 50px;
+}
+
+#searchbtn {
+	float: left;
+}
 </style>
-
 </head>
 
 <body>
@@ -300,11 +507,25 @@ a#top {
 				
 				<!-- 채팅창 -->	
 					<div id="messagebox">
-						<a class="close" style="width: 25px;">x</a>
-						<h3>채팅창</h3>
+						<a class="close" id="closebtn" style="width: 25px;">x</a>
+						<h4 style="padding-left: 25px;">채팅창</h4>
+						
+						<!-- 메세지 결과 창 -->	
+						<div id="msgresult">
+						
+						
+						
+						</div>
+						
+						<!-- 메세지 작성 창 -->
+						<input type="text" id="msg">
+						
+						<!-- 메세지 보내기 버튼 -->
+						<input value="전송" type="button" class="btn btn-default" id="send">
+						
 						<hr>
-						${name }
 					</div>
+					
 					
 				<!-- 메뉴 -->
 					<ul class="nav navbar-nav center" >
@@ -323,7 +544,7 @@ a#top {
  						<li role="presentation"> 					
  							<div class="dropdown">
 								<button class="btn btn-default dropdown-toggle" type="button"
-									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+									id="btnAlertList" data-toggle="dropdown" aria-expanded="true">
 									Alert <span class="badge" id="badge">7</span>
 								</button>
 								
@@ -351,47 +572,54 @@ a#top {
 						
 						
 						<li role="presentation"> 					
- 							<div class="dropdown">
+ 							<div class="dropdown" id="dropdownMsg">
 								<button class="btn btn-default dropdown-toggle" type="button"
-									id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+									id="btnMessageList" data-toggle="dropdown" aria-expanded="true">
 									Message <span class="badge" id="badge">5</span>
 								</button>
 								
-								<!-- 메세지 목록 -->
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
-									<li class="close" style="width: 25px;">x</li>
+<!-- 								메세지 목록 -->
+<!-- 								<ul id="msgList" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;"> -->
+<!-- 									<li class="close" style="width: 25px;">x</li> -->
 									
-									<li id="messagelist" role="presentation">
-										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-									<li role="presentation">
-										<a id="messagelist" role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;">
-											<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;">
-											OOO님의 새로운 메세지<span class="badge" id="messagebadge">1</span>
-										</a>
-									</li>
-								</ul>
+<!-- 									<li class="messagelist" role="presentation"> -->
+<!-- 										<a role="menuitem" tabindex="-1" href="#" style="padding-top: 15px; padding-bottom: 15px;"> -->
+<!-- 										<img src="/resources/gray.png" alt="" class="img-circle" style="width: 50px; height: 50px;"> -->
+<%-- 										<input type="hidden" value="${chatList.chat_no }"> --%>
+<%-- 										${chatList.chat_sender }님의 새로운 메세지 <small>${chatList.chat_sendtime }에 보냄</small> --%>
+<!-- 										</a> -->
+<!-- 									</li> -->
+<!-- 								</ul> -->
+
+
+								<div class="dropdown-menu" id="msgscroll" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
+									<div class="chatplus">
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-md" id="chatplusBtn">새 메시지</button>
+											<div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMiddleModalLabel" aria-hidden="true">
+  												<div class="modal-dialog modal-md">
+   													<div class="modal-content">
+   													 	<div style="height: 500px;">
+   													 		<br>
+		    												<h4>메시지를 보낼 사용자 검색</h4>
+		    												<hr>&emsp;&emsp;
+		    												<input type="text" class="form-control col-lg-4" id="searchform">
+		    												<button class="btn btn-default" id="searchbtn">검색</button>
+		    												<br>
+		    												<br>
+		    												
+	    												</div> 
+												    </div>
+												</div>
+											</div>
+											
+										<div class="close" style="width: 25px;">x</div>
+									</div>
+									<ul id="msgList" style="clear: both">
+									
+										<!-- 메세지 목록 -->
+									
+									</ul>
+								</div>
 							</div>
 						</li>
 					</c:when>	

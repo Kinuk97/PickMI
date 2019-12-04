@@ -61,5 +61,7 @@ public interface CompBoardService {
 	
 	
 	public int countLike(LikePost like);
+
+	public List<CompBoard> getMainCompList();
 	
 }
