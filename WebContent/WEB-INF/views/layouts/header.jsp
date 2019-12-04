@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -88,17 +89,17 @@ $(document).ready(function(){
 		
 		ws.onopen = function() {
 	 		//메세지보내는 메소드 send
-	 		var obj = { type: "list", chat_user: '${userno}', username: '${username}' };
+	 		var obj = { type: "list", chat_user: '${userno}', username: '${name}' };
 	 		var msg = JSON.stringify(obj);
-// 	 		console.log(JSON.stringify(obj))
+	 		console.log(msg)
 	 		ws.send(msg);
 	 	}
 		
 		ws.onmessage = function(data) {
+			
 			$("#msgList").html("");
 			var list = JSON.parse(data.data)
 			for(var i = 0; i<list.length; i++){
-
 				var spantext = list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small><hr>";
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
@@ -113,7 +114,6 @@ $(document).ready(function(){
 		
 	})
 })
-
 
 $(document).ready(function(){
 	$('#msgList').on("click", ".messagelist", function() {
