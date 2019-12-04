@@ -240,7 +240,7 @@ div .cal-schedule span {
 // 		console.log(scheduleList);
 		
 		let date = new Date("${scheduleList[0].write_date}");
-		console.log(${scheduleList[0].write_date});
+		console.log($({scheduleList[0].write_date}));
 		let year = date.getFullYear();
 		let month = date.getMonth() + 1;
 		let day = date.getDate();
