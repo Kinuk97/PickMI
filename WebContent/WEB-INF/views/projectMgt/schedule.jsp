@@ -96,7 +96,7 @@ div .cal-schedule span {
 			$("#writeFormModal").modal();
 		});
 		//일정 아이콘 클릭시 모달 보이기
-		$("div .cal-schedule #scheduleView").on("click", function() {
+		$("div .cal-schedule").on("click", "#scheduleView", function() {
 			$("#viewSchedule").modal();
 		});
 
@@ -168,18 +168,25 @@ div .cal-schedule span {
 		$.ajax({
 			type : "post",
 			url : "/schedule/list",
-			data : { "proj_no" : "${proj_no}", "year" : year, "month" : month },
+			data : { "proj_no" : "${param.proj_no}", "curYear" : year, "curMonth" : month },
 			dataType : "json",
 			success : function(data) {
 				console.log(data);
-				
 				$("#cal_top_year").text(year);
 				$("#cal_top_month").text(month);
 				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
 					$tdDay.eq(i).text(++dayCount);
-// 					if (${scheduleList[0].write_date.getDate()} == i) {
-						
-// 					}
+					
+					for (var j = 0; j < data.length; j++) {
+						let schedule_date = data[j].schedule_date.split(" ")[1].replace(",", "");
+						if (schedule_date - 1 == i) {
+							$tdSche.eq(i).append(data[j].title);
+							$tdSche.eq(i).append($("<span id=\"scheduleView\" class='label label-info'>일정보기</span>"));
+						} else {
+							$tdSche.eq(i).html("");
+							$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
+						}
+					}
 				}
 				for (var i = 0; i < 42; i += 7) {
 					$tdDay.eq(i).css("color", "red");
@@ -235,65 +242,14 @@ div .cal-schedule span {
 
 	//데이터 등록
 	function setData() {
-// 		var scheduleList = ${scheduleList};
-		
-// 		console.log(scheduleList);
-		
-		let date = new Date("${scheduleList[0].write_date}");
-		console.log(${scheduleList[0].write_date});
-		let year = date.getFullYear();
-		let month = date.getMonth() + 1;
-		let day = date.getDate();
-		
-		
-		
 		
 	}
 
 	//스케줄 그리기
 	function drawSche() {
-		setData();
-		var dateMatch = null;
-		for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
-// 			console.log(i);
-			
-			
-			
-// 			$.ajax({
-// 				type : "post",
-// 				url : "/schedule/list",
-// 				data : { "schedule" : schedule },
-// 				dataType : "json",
-// 				success : function(data) {
-// 					console.log(data);
-// 					if(schedule != null) {
-			 		$tdSche.eq(i).append($("<span id=\"scheduleView\" class='label label-info'>일정보기</span>"));
-// 					} else {
-// 						$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
-
-// 					}
-// 				}
-// 			})
-			
-			
-// 			var txt = "";
-// 			txt = jsonData[year];
-// 			if (txt) {
-// 				txt = jsonData[year][month];
-// 				if (txt) {
-// 					txt = jsonData[year][month][i];
-// 					dateMatch = firstDay.getDay() + i - 1;
-// 					$tdSche.eq(dateMatch).text(txt);
-// 				}
-// 			}
-
-		
-			$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
-		}
 	}
 
 	function addSchedule() {
-		alert($("#scheduleContent").val());
 		$.ajax({
 			type : "post",
 			url : "/schedule/add",
@@ -305,7 +261,8 @@ div .cal-schedule span {
 			},
 			dataType : "json",
 			success : function(data) {
-				console.log(data);
+				$("#writeFormModal").modal('hide');
+				drawDays();
 			},
 			error : function(e) {
 				console.log(e);

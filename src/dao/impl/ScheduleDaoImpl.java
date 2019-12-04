@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,16 +64,16 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public List<Schedule> selectAll(Schedule schedule) {
 
-		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND schedule_date BETWEEN ? AND ?";
+		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ?";
 
 
 		List<Schedule> list = new ArrayList<Schedule>();
 
 		try {
 			ps = conn.prepareStatement(sql);
-
+			
 			ps.setInt(1, schedule.getProj_no());
-			ps.setString(2, schedule.getCurYear() + "");
+			ps.setString(2, schedule.getCurYear());
 			ps.setString(3, schedule.getCurMonth());
 
 			rs = ps.executeQuery();
@@ -85,7 +87,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				temp.setTitle(rs.getString("title"));
 				temp.setContent(rs.getString("content"));
 				temp.setPlace(rs.getString("place"));
-				temp.setWrite_date(rs.getDate("due_date"));
+				temp.setSchedule_date(rs.getDate("schedule_date"));
+				temp.setDue_date(rs.getDate("due_date"));
 				temp.setWrite_date(rs.getDate("write_date"));
 
 				list.add(temp);

@@ -82,15 +82,25 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 			schedule.setSchedule_date(date);
 		}
+		
+		SimpleDateFormat format = new SimpleDateFormat ();
 
 		param = req.getParameter("curYear");
 		if (param != null && !"".equals(param)) {
 			schedule.setCurYear(param);
+		} else {
+			format.applyPattern("yyyy");
+					
+			schedule.setCurYear(format.format(new Date()));
 		}
 
 		param = req.getParameter("curMonth");
 		if (param != null && !"".equals(param)) {
 			schedule.setCurMonth(param);
+		} else {
+			format.applyPattern("MM");
+			
+			schedule.setCurMonth(format.format(new Date()));
 		}
 
 		return schedule;
