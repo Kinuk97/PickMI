@@ -617,13 +617,15 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		//수행할 쿼리 
 		String sql="";
 		sql += "SELECT";
-		sql += " prof_no, userno, prof_time,";
+		sql += " prof_no, prof_time, userno,";
 		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += " prof_content, prof_like, username(SELECT name FROM user_table WHERE userno.pforile = userno.user_table) FROM profile";
-		sql += " ORDER BY prof_no";
+		sql += " prof_content, prof_like";
+//				+ "(SELECT name FROM user_table WHERE user_table.userno = profile.userno)username ";
+		sql += " FROM (SELECT * FROM profile ORDER BY prof_time DESC)";
+		sql += " WHERE ROWNUM <= 3";
 		
 		//결과 저장 리스트
-		List<ProfileBoard> list = new ArrayList<>();
+		List<ProfileBoard> list = new ArrayList<ProfileBoard>();
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -633,7 +635,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			while(rs.next()) {
 				ProfileBoard proboard = new ProfileBoard();
 				proboard.setProf_no(rs.getInt("prof_no"));
-				proboard.setUserno(rs.getInt("userno"));
+//				proboard.setUserno(rs.getInt("userno"));
 				proboard.setProf_time(rs.getDate("prof_time"));
 				proboard.setProf_interest(rs.getString("prof_interest"));
 				proboard.setProf_job(rs.getString("prof_job"));
@@ -642,7 +644,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				proboard.setProf_career(rs.getString("prof_career"));
 				proboard.setProf_content(rs.getString("prof_content"));
 				proboard.setProf_like(rs.getInt("prof_like"));
-				proboard.setUsername(rs.getString("username"));
+//				proboard.setUsername(rs.getString("username"));
 				
 				list.add(proboard);
 			}

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.CompBoard;
+import dto.FreeBoard;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
 import serivce.face.CompBoardService;
 import serivce.face.FreeBoardService;
@@ -28,11 +30,14 @@ public class MainController extends HttpServlet {
 	private UserService userService = new UserServiceImpl();
 	private ProjectBoardService projectBoardService = new ProjectBoardServiceImpl();
 	private CompBoardService compBoardService = new CompBoardServiceImpl();
-//	private ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
-//	private FreeBoardService freeBoardService = new FreeBoardServiceImpl();
+	private ProfileBoardService profileBoardService = new ProfileBoardServiceImpl();
+	private FreeBoardService freeBoardService = new FreeBoardServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 프로필 리스트
+		List<ProfileBoard> profileBoard = profileBoardService.getProfileList();
+		req.setAttribute("profileBoard", profileBoard);
 		
 		// 프로젝트 리스트
 		List<ProjectBoard> projectBoard = projectBoardService.getMainProjectList();
@@ -41,6 +46,10 @@ public class MainController extends HttpServlet {
 		// 완성된 프로젝트 리스트
 		List<CompBoard> compBoard = compBoardService.getMainCompList();
 		req.setAttribute("compBoard", compBoard);
+		
+		// 자유게시판 리스트
+		List<FreeBoard> freeBoard = freeBoardService.getMainFreeList();
+		req.setAttribute("freeBoard", freeBoard);
 		
 		
 		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);

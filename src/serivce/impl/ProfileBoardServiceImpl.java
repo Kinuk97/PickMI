@@ -27,7 +27,7 @@ public class ProfileBoardServiceImpl implements ProfileBoardService {
 	
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	
-	private ProfileBoardServiceImpl() {
+	public ProfileBoardServiceImpl() {
 	}
 
 	private static class Singleton {

@@ -13,7 +13,7 @@ import util.Paging;
 public class FreeBoardServiceImpl implements FreeBoardService {
 	private FreeBoardDao freeBoardDao = FreeBoardDaoImpl.getInstance();
 
-	private FreeBoardServiceImpl() {
+	public FreeBoardServiceImpl() {
 	}
 
 	private static class Singleton {
@@ -169,6 +169,12 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Override
 	public void viewCounting(FreeBoard freeBoard) {
 		freeBoardDao.countViews(freeBoard);
+	}
+
+	@Override
+	public List<FreeBoard> getMainFreeList() {
+		
+		return freeBoardDao.selectListToMain();
 	}
 
 }

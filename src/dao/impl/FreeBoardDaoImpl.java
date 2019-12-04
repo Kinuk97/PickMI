@@ -10,6 +10,7 @@ import java.util.List;
 import dao.face.FreeBoardDao;
 import dbutil.DBConn;
 import dto.FreeBoard;
+import dto.ProjectBoard;
 import util.Paging;
 
 public class FreeBoardDaoImpl implements FreeBoardDao {
@@ -397,6 +398,50 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public List<FreeBoard> selectListToMain() {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT free_no, categoryno, userno, free_title, free_content, free_time, views"; 
+//		sql += " (SELECT name FROM user_table WHERE freeboard.userno = userno) username ";
+		sql += " FROM (SELECT * FROM freeboard ORDER BY free_time DESC)";
+		sql += " WHERE ROWNUM <= 3";
+		
+		List<FreeBoard> list = new ArrayList<FreeBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				FreeBoard freeBoard = new FreeBoard();
+				
+				freeBoard.setFree_no(rs.getInt("free_no"));
+				freeBoard.setCategoryno(rs.getInt("categoryno"));
+				freeBoard.setUserno(rs.getInt("userno"));
+//				freeBoard.setUsername(rs.getString("username"));
+				freeBoard.setFree_title(rs.getString("free_title"));
+				freeBoard.setFree_content(rs.getString("free_content"));
+				freeBoard.setFree_time(rs.getDate("free_time"));
+				freeBoard.setViews(rs.getInt("views"));
+				
+				list.add(freeBoard);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)	ps.close();
+				if(rs!=null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 }
