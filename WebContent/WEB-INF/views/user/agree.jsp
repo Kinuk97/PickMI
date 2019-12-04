@@ -36,7 +36,21 @@ $(document).ready(function() {
 });
 </script>
 
-<body style="background-color:#F7F7F4">
+<style type="text/css">
+
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#agreefont {
+	font-family:'KHNPHD';
+}
+</style>
+
+<body id="agreefont" style="background-color:#F7F7F4">
 <div class="container" style="width:600px;">
 <div class="page-header" style="text-align: center;"><h2>이용약관</h2></div>
 

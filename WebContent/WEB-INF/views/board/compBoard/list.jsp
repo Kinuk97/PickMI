@@ -95,6 +95,7 @@ $(document).ready(function(){
 select {
 	padding: 7px;
 }
+
 </style>
 
 <div id="board" class="container list-container">

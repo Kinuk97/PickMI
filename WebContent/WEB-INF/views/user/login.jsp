@@ -78,6 +78,17 @@ function getCookie(cookieName) {
 </script>
 
 <style type="text/css">
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#loginfont {
+	font-family:'KHNPHD';
+}
+
 .login-form {
 	width: 385px;
 	margin: 30px auto;
@@ -152,7 +163,7 @@ function getCookie(cookieName) {
 }
 </style>
 </head>
-<body>
+<body id="loginfont">
 	
 		<a href="/main"> 
 			<img src="/resources/black.png"class="img-rounded center-block" style="height: 170px;">

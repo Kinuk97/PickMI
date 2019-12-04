@@ -123,13 +123,25 @@
 	    });
      }); // 중복체크 끝
 
-		
 	});
-
 </script>
 
+<style type="text/css">
+
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#joinfont {
+	font-family:'KHNPHD';
+}
+</style>
+
 </head>
-<body>
+<body id="joinfont">
 	<article class="container">
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">

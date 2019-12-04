@@ -15,7 +15,19 @@
    src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
 <style type="text/css">
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#mailfont {
+	font-family:'KHNPHD';
+}
+
 body {
    color: #fff;
    background: #63738a;
@@ -155,7 +167,7 @@ body {
 </script>
 
 </head>
-<body>
+<body id="mailfont">
 <div class="signup-form">
 
 <!-- <form action="/authentic" method="post"> -->

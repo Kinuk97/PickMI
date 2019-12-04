@@ -88,8 +88,8 @@ function profileList() {
 				caption.append($("<p></p>").text(data[i].prof_loc));
 				caption.append($("<p></p>").text(data[i].prof_job));
 				caption.append($("<p></p>").text(data[i].prof_state));
-				caption.append($("<p></p>").text(data[i].prof_career));
-				caption.append($("<p class='text-right'></p>").text(data[i].prof_like +"❤"));
+				caption.append($("<p id='abc'></p>").text(data[i].prof_career));
+				caption.append($("<p class='text-right' id='abc'></p>").text(data[i].prof_like +"❤"));
 				caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
 	
 			
@@ -187,7 +187,9 @@ $("#write").click( function loginplz(){
 #career:hover #filter-list {display: block;}
 #career:hover #filterBtn {background-color: #CEE3F6;}
 
-
+#abc {
+	margin:0;
+}
 .thumbnail:hover { 
 	background: #EFF8FB;
 }
@@ -280,8 +282,8 @@ a#top {
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>
 						<p>${ pro.prof_state }</p>
-						<p>${ pro.prof_career }</p>
-						<p class="text-right">${ pro.prof_like }❤</p>
+						<p id="abc">${ pro.prof_career }</p>
+						<p class="text-right" id="abc">${ pro.prof_like }❤</p>
 						<p>${ pro.prof_time }에 작성</p>
 					</div>
 				</div>

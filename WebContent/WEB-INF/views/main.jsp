@@ -17,10 +17,12 @@
   <div class="carousel-inner" role="listbox">
     <div id="mainslide" class="item active">
 <!--       <img src="/resources/gray.png" alt="..."> -->
-	      <div class="carousel-caption">
-	      	<h2>PickMI(Mate&Idea)를 이용하실 땐,</h2>
-			<h3>회원가입을 한 후 이용해보세요 :-)</h3>
-	        <h3>더 많은 서비스를 이용할 수 있습니다.</h3>
+	      <div class="carousel-caption" id="mainservicediv1">
+	      	<h2 id="mainservice">"PickMI Service Guide"</h2>
+	      	<h3 id="mainservice">PickMI(Mate&Idea)를 이용하실 땐,</h3>
+			<h3 id="mainservice">회원가입을 한 후 이용해보세요 :-)</h3>
+			<h3 id="mainservice">간편한 회원가입을 통해서</h3>
+	        <h3 id="mainservice">더 많은 서비스를 이용하실 수 있습니다.</h3>
 	        <br>
 	        <br>
 	        <br>
@@ -28,9 +30,10 @@
     </div>
     <div id="mainslide" class="item">
 <!--       <img src="/resources/gray.png" alt="..."> -->
-      <div class="carousel-caption">
-        <h3>게시판에 글을 업로드해보세요.</h3>
-        <h3>팀원을 찾거나 아이디어를 공유할 수 있습니다.</h3>
+      <div class="carousel-caption" id="mainservicediv2">
+      	<h2 id="mainservice">"PickMI Service Guide"</h2>
+        <h3 id="mainservice">여러 게시판에 글을 작성하여 업로드해보세요.</h3>
+        <h3 id="mainservice">프로젝트나 팀원을 발견하거나 아이디어를 공유할 수 있습니다.</h3>
         <br>
         <br>
         <br>
@@ -39,9 +42,10 @@
     </div>
     <div id="mainslide" class="item">
 <!--       <img src="/resources/gray.png" alt="..."> -->
-      <div class="carousel-caption">
-		<h3>프로젝트와 일정관리를 해보세요.</h3>
-        <h3>편리하게 팀원들과 일정을 공유할 수 있습니다.</h3>
+      <div class="carousel-caption" id="mainservicediv3">
+      	<h2 id="mainservice">"PickMI Service Guide"</h2>
+		<h3 id="mainservice">팀원들과 함께 프로젝트와 일정관리를 해보세요.</h3>
+        <h3 id="mainservice">편리한 PickMI서비스를 통해 팀원들과 일정을 공유할 수 있습니다.</h3>
         <br>
         <br>
         <br>
@@ -136,16 +140,18 @@
 					onclick="location.href='/compBoard/view?comp_no=${compList.comp_no }'"
 					id="compboardlist" style="cursor: pointer; hover: #ccc;">
 					<div class="caption">
-						<h4>${compList.comp_no}.${compList.comp_title }</h4>
-						<p>팀 이름 : ${compList.comp_name }</p>
+						<h4 class="overtext">프로젝트 명 : ${compList.comp_title }</h4>
+						<div class="comp_name overtext">팀 이름 : ${compList.comp_name }</div>
 						<br>
 						<br>
-						<p class="text-right" style="margin: 0 0 0px;">작성자 :
-							${compList.userno }</p>
-						<p class="text-right" style="margin: 0 0 0px;">조회수 :
-							${compList.comp_view }</p>
-						<p class="text-right" style="margin: 0 0 0px;">작성날짜 :
-							${compList.comp_date }</p>
+						<div class="text-right" style="margin: 0 0 0px;">작성자 :
+							${compList.userno }</div>
+						<div class="text-right" style="margin: 0 0 0px;">조회수 :
+							${compList.comp_view }</div>
+						<div class="text-right" style="margin: 0 0 0px;">찜한수 :
+							아직 안함</div>
+						<div class="text-right" style="margin: 0 0 0px;">작성날짜 :
+							${compList.comp_date }</div>
 					</div>
 				</div>
 			</div>
