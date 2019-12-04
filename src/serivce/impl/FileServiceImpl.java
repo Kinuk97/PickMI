@@ -26,20 +26,21 @@ import org.apache.commons.io.IOUtils;
 import dao.face.CompBoardDao;
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
-import dao.face.MyPageDao;
 import dao.face.ProfileBoardDao;
 import dao.face.ProjectBoardDao;
+import dao.face.UserDao;
 import dao.impl.CompBoardDaoImpl;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
-import dao.impl.MyPageDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
 import dao.impl.ProjectBoardDaoImpl;
+import dao.impl.UserDaoImpl;
 import dto.CompBoard;
 import dto.Files;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
 import serivce.face.FileService;
 
 public class FileServiceImpl implements FileService {
@@ -47,6 +48,7 @@ public class FileServiceImpl implements FileService {
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 	private ProjectBoardDao projectBoardDao = ProjectBoardDaoImpl.getInstance();
+	private UserDao userDao = new UserDaoImpl();
 	
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
@@ -511,6 +513,7 @@ public class FileServiceImpl implements FileService {
 		// 공통적인 파일 처리, 파일이 있다면 db에 저장, postno와 boardno는 각자의 if문에서 설정
 		if (uploadFile != null) {
 			fileDao.insertFile(uploadFile);
+
 		}
 		
 		return resultBoardno; 
@@ -1111,7 +1114,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public void myPhotoFile(HttpServletRequest req) {
+	public void myPhotoFile(HttpServletRequest req, User user) {
 		// 1. 파일업로드 형태의 데이터가 맞는지 확인
 		// enctype이 multipart/form-data가 맞는지 확인
 		boolean isMultipart = false;
@@ -1213,7 +1216,12 @@ public class FileServiceImpl implements FileService {
 			}
 		
 		if (uploadFile != null) {
-			fileDao.insertFile(uploadFile);
+			
+			user.setPhoto_originname(uploadFile.getOriginName());
+			user.setPhoto_storedname(uploadFile.getStoredName());
+//			userDao.insertphoto(user);
+			System.out.println("FileServiceImpl에서의 uploadFile : " + uploadFile);
+			System.out.println("FileServiceImpl에서의 user매개변수 : " +  user);
 		}
 	}
 	

@@ -1,12 +1,17 @@
 package controller.mypage;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.face.UserDao;
+import dao.impl.UserDaoImpl;
+import dto.Files;
 import dto.User;
 import serivce.face.FileService;
 import serivce.face.MyPageService;
@@ -22,6 +27,7 @@ public class MyPageController extends HttpServlet {
 	
 	FileService fileService = FileServiceImpl.getInstance();
 	private MyPageService myPageService = MyPageServiceImpl.getInstance();
+	private UserDao userDao = new UserDaoImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,12 +49,24 @@ public class MyPageController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
-		req.setCharacterEncoding("UTF-8");
 		
-		fileService.myPhotoFile(req);
-
-	
+		System.out.println("두포스트");
+		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		
+		User user = new User();
+		
+		user.setUserno((Integer)req.getSession().getAttribute("userno"));
+		user.setPhoto_originname((String)req.getAttribute("originname"));
+		user.setPhoto_storedname((String)req.getAttribute("storedname"));
+		
+//		System.out.println("user 객체 정보 : " + user); -- null
+		
+		fileService.myPhotoFile(req, user);
+//		System.out.println("파일서비스갔다온 후 user :" + user);
+				
+		userDao.insertphoto(user);
+		
 	}
 	
 }
