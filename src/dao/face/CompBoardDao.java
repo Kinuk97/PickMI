@@ -71,4 +71,6 @@ public interface CompBoardDao {
 	
 	
 	public int selectCountLike(LikePost like);
+
+	public List<CompBoard> selectListToMain();
 }

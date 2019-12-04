@@ -87,11 +87,11 @@ public interface ProjectBoardDao {
 	
 	// ------------------------------------
 	
-//	/**
-//	 * 지역필터에 의한 게시판 조회
-//	 * 
-//	 * @param paging
-//	 * @return
-//	 */
-//	public List<ProjectBoard> selectBoardListByLoc(Paging paging);
+	/**
+	 * 리스트 출력
+	 * @return
+	 */
+	public List<ProjectBoard> selectListToMain();
+	
+
 }

@@ -80,4 +80,5 @@ public interface ProfileBoardService {
 	 * @return - 페이징정보
 	 */
 	public Paging getPaging(HttpServletRequest req);
+
 }

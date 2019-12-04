@@ -70,4 +70,6 @@ public interface FreeBoardDao {
 	 */
 	public void countViews(FreeBoard freeBoard);
 
+	public List<FreeBoard> selectListToMain();
+
 }

@@ -13,6 +13,7 @@ import dbutil.DBConn;
 import dto.CompBoard;
 import dto.Files;
 import dto.LikePost;
+import dto.ProjectBoard;
 import util.Paging;
 
 public class CompBoardDaoImpl implements CompBoardDao {
@@ -615,6 +616,52 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			}
 		}
 		return likeno;
+	}
+
+	@Override
+	public List<CompBoard> selectListToMain() {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (SELECT * FROM compboard ORDER BY comp_date DESC)";
+		sql += " WHERE ROWNUM <= 3";
+		
+		List<CompBoard> list = new ArrayList<CompBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				CompBoard compBoard = new CompBoard();
+				
+				compBoard.setComp_no( rs.getInt("comp_no") );
+				compBoard.setUserno( rs.getInt("userno") );
+//				compBoard.setUsername( rs.getString("username"));
+				compBoard.setComp_title( rs.getString("comp_title") );
+				compBoard.setComp_name( rs.getString("comp_name") );
+				compBoard.setComp_content( rs.getString("comp_content") );
+				compBoard.setComp_member( rs.getInt("comp_member") );
+				compBoard.setComp_date( rs.getDate("comp_date") );
+				compBoard.setComp_view( rs.getInt("comp_view") );
+				compBoard.setComp_startdate( rs.getDate("comp_startdate"));
+				compBoard.setComp_enddate( rs.getDate("comp_enddate") );
+				
+				list.add(compBoard);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)	ps.close();
+				if(rs!=null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 

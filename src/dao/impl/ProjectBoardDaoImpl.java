@@ -586,14 +586,65 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
-				ps.close();
+				if(ps!=null)	ps.close();
+				if(rs!=null)	rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		
 		return cnt;
+	}
+
+	@Override
+	public List<ProjectBoard> selectListToMain() {
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT * FROM (SELECT * FROM projboard ORDER BY proj_time DESC)";
+		sql += " WHERE ROWNUM <= 3";
+		
+		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProjectBoard projectBoard = new ProjectBoard();
+				
+				projectBoard.setProj_no(rs.getInt("proj_no"));
+				projectBoard.setUserno(rs.getInt("userno"));
+				projectBoard.setProj_title(rs.getString("proj_title"));
+				projectBoard.setProj_name(rs.getString("proj_name"));
+				projectBoard.setProj_loc(rs.getString("proj_loc"));
+				projectBoard.setProj_career(rs.getString("proj_career"));
+				projectBoard.setProj_apply(rs.getInt("proj_apply"));
+				projectBoard.setProj_content(rs.getString("proj_content"));
+				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
+				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
+				projectBoard.setProj_rec_date(rs.getDate("proj_rec_date"));
+				projectBoard.setProj_like(rs.getInt("proj_like"));
+				projectBoard.setProj_time(rs.getDate("proj_time"));
+				projectBoard.setProj_progress(rs.getString("proj_progress"));
+				projectBoard.setProj_member(rs.getInt("proj_member"));
+				projectBoard.setProj_job(rs.getString("proj_job"));
+				
+				list.add(projectBoard);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)	ps.close();
+				if(rs!=null)	rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
 	}
 
 
