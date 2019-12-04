@@ -15,6 +15,7 @@
 <!-- 부트스트랩 -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <!-- <script -->
 <!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 
@@ -24,7 +25,6 @@
 <script type="text/javascript" src="/resources/js/tooltip.js"></script>
 <script type="text/javascript" src="/resources/js/popover.js"></script>
 <script type="text/javascript" src="/resources/js/modal.js"></script>
-
 
 <!--Start of Tawk.to Script-->
 <!-- <!-- <script type="text/javascript"> -->
@@ -86,7 +86,7 @@ window.onload = function(){
 
 $(document).ready(function(){
 	$("#btnMessageList").click(function(){
-		var ws = new WebSocket("ws://localhost:8088/ws/msg");
+		var ws = new WebSocket("ws://localhost:8089/ws/msg");
 		
 		ws.onopen = function() {
 	 		//메세지보내는 메소드 send
@@ -159,8 +159,31 @@ $(document).ready(function(){
 
 <style type="text/css">
 
-@font-face {
-	font-family: 'Jeju Gothic', serif;
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+.headerfont {
+	font-family:'KHNPHD';
+}
+
+#mainservice {
+/*  	font-family: 'Do Hyeon', sans-serif;  */
+}
+
+#mainservicediv1 {
+	bottom: -7%;
+}
+
+#mainservicediv2{
+	bottom: -2%;
+}
+
+#mainservicediv3{
+	bottom: -2%;
 }
 
 #header {
@@ -293,12 +316,13 @@ hr {
 
 #mainslide{
 	width: 100%;
-	height: 335px;
+	height: 350px;
 	background-color: #d8f1f9;
 }
 
 #mainboard {
 	height: 1300px;
+	padding-left: 60px;
 }
 
 a#top {
@@ -468,11 +492,6 @@ a#top {
 /* 	height: 210px; */
 }
 
-@font-face {
-	font-family: 고도 M;
-	src: url('./resources/font_ttf/GodoM.ttf');
-}
-
 #searchform {
 	width: 70%;
 	margin-left: 50px;
@@ -484,7 +503,7 @@ a#top {
 </style>
 </head>
 
-<body>
+<body class="headerfont">
 
 <div id="header">
 	<nav class="navbar navbar-default" id="header">
