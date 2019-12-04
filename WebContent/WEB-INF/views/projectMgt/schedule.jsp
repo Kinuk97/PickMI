@@ -363,17 +363,20 @@ div .cal-schedule span {
 				// 모달에 상세보기 창 보여주기
 				$("#schedule_title").text("일정 : " + data.title);
 				$("#schedule_content").text("설명 : " + data.content);
+				
+				
 				if (data.due_date != undefined) {
-					// 기한이 안나오는 문제
 					$("#schedule_due_date").text("기한 : " + data.due_date);
 				} else {
 					$("#schedule_due_date").text("");
 				}
-				if (data.checkList != undefined) {
-					$("#schedule_due_date").text("체크리스트 : " + data.due_date);
-				} else {
-					$("#schedule_due_date").text("");
-				}
+				
+// 				if (data.checkList != undefined) {
+// 					$("#schedule_checkList").text("체크리스트 : " + data.due_date);
+// 				} else {
+// 					$("#schedule_checkList").text("");
+// 				}
+				
 				if (data.place != undefined) {
 // 					$("#schedule_checkList").append();
 				} else {
