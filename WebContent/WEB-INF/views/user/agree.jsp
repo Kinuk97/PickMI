@@ -28,7 +28,7 @@ $(document).ready(function() {
 		 	warningModal('약관에 동의해주세요');
 		     return false;      
 		 } else{
-			$(location).attr("href", "/insert");
+			close();
 		 }
 	 });
 	
@@ -72,12 +72,9 @@ $(document).ready(function() {
 <br>
 <br>
 
-		<div class="text-center">
-
-			<input type="button" class="btn btn-success btn-block"
-				style="background: #5BB88B; width: 174px;" id="next"
-				value="다음으로" />
-
+		<div class="center-block">
+			<button class="btn btn-info" style="width: 174px;" id="next">
+			확인</button>
 		</div>
 </div>
 </div>

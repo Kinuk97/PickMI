@@ -137,14 +137,16 @@ CREATE TABLE manager (
     mgrpw VARCHAR2(100)
 );
 
-DROP TABLE schedule;
+DROP TABLE schedule CASCADE CONSTRAINT;
 CREATE TABLE schedule (
     scheduleno NUMBER PRIMARY KEY,
     userno NUMBER NOT NULL,
     proj_no NUMBER NOT NULL,
+    title VARCHAR2(200) NOT NULL,
     content VARCHAR2(500),
     place VARCHAR2(300),
-    due_date DATE NOT NULL,
+    due_date DATE,
+    schedule_date DATE NOT NULL,
     write_date DATE DEFAULT sysdate,
     
     CONSTRAINT schedule_userno_kf FOREIGN KEY (userno)

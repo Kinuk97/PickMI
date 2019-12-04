@@ -74,4 +74,5 @@ public interface ProjectBoardService {
 	public int getTotalCntLike(LikePost like);
 	
 	public boolean isLike(LikePost like);
+	
 }

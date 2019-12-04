@@ -24,6 +24,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	// 아이디 쿠키 저장
     // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
     var key = getCookie("key");
     $("#email").val(key); 
@@ -180,8 +181,11 @@ function getCookie(cookieName) {
 			</div>
 			<div class="clearfix">
 				<label class="pull-left checkbox-inline"><input
-					type="checkbox" id="emailSaveCheck"> 아이디 저장</label> <a href="/pwFind" class="pull-right">비밀번호
-					찾기</a>
+					type="checkbox" id="emailSaveCheck"> 아이디 저장</label> 
+					
+					<a href="/pwfind" class="pull-right" onclick="window.open(this.href, '_blank', 'width=600px, height=500px,left=450, top=150, toolbars=no,scrollbars=no'); return false;">
+					비밀번호 찾기</a>
+					
 			</div>
 			<div class="or-seperator">
 				<i>or</i>

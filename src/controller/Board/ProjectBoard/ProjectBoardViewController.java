@@ -31,24 +31,18 @@ public class ProjectBoardViewController extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		ProjectBoard projectBoard = projectBoardService.getProjectBoardno(req);
-		projectBoard.setUserno((int) session.getAttribute("userno"));
+//		projectBoard.setUserno((int) session.getAttribute("userno"));
 		
 		projectBoard = projectBoardService.view(projectBoard);
 		
-		
 		// 찜 상태 전달
-		LikePost like = new LikePost();
-		like.setBoardno(projectBoard.getProj_no());
-		like.setPostno(2);
-		
-		try {
-		like.setUserno((int)session.getAttribute("userno"));
-		} catch (NullPointerException e) {
-			
-		}
-		
-		boolean isLike = projectBoardService.isLike(like);
-		req.setAttribute("isLike", isLike);
+//		LikePost like = new LikePost();
+//		like.setBoardno(projectBoard.getProj_no());
+//		like.setPostno(2);
+//		like.setUserno((int)session.getAttribute("userno"));
+//		
+//		boolean isLike = projectBoardService.isLike(like);
+//		req.setAttribute("isLike", isLike);
 		
 		if (projectBoard != null) {
 			Files files = new Files();
