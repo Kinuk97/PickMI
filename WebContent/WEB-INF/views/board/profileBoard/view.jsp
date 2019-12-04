@@ -105,22 +105,36 @@ $("#loginplz3").click( function loginplz(){
 	<td class="info">찜받은수</td><td><span id="countLike">${ countLike }</span>
 		<c:if test="${ login }">
 			<c:if test="${ canLike }">
-				<button id="like">LIKE</button>
-				<button id="unlike" style="display: none;">UNLIKE</button>
+				<button id="like" style="color: red;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+				<button id="unlike" style="display: none; color:blue;">
+				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+				</button>
 			</c:if>
 			<c:if test="${ !canLike }">
-				<button id="like" style="display: none;">LIKE</button>
-				<button id="unlike">UNLIKE</button>
+				<button id="like" style="display: none; color:red;">
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				</button>
+				<button id="unlike" style="color:blue;">
+					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+				</button>
 			</c:if>
 		</c:if>
 		<c:if test="${ !login }">
 			<c:if test="${ canLike }">
-				<button id="loginplz" >LIKE</button>
-				<button id="unlike" style="display: none;">UNLIKE</button>
+				<button id="loginplz" style="color:red;" >
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				</button>
+				<button id="unlike" style="display: none; color:blue;">
+					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+				</button>
 			</c:if>
 			<c:if test="${ !canLike }">
-				<button id="like" style="display: none;">LIKE</button>
-				<button id="loginplz" >UNLIKE</button>
+				<button id="like" style="display: none; color:red;">
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				</button>
+				<button id="loginplz" style="color:blue;">
+					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+				</button>
 			</c:if>
 		</c:if>
 	</td>

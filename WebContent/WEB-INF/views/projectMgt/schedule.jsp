@@ -138,9 +138,9 @@ div .cal-schedule span {
 				$("#cal_top_month").text(month);
 				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
 					$tdDay.eq(i).text(++dayCount);
-					if (${scheduleList[0].write_date.getDate()} == i) {
+// 					if (${scheduleList[0].write_date.getDate()} == i) {
 						
-					}
+// 					}
 				}
 				for (var i = 0; i < 42; i += 7) {
 					$tdDay.eq(i).css("color", "red");
