@@ -20,17 +20,24 @@ public class ProjectBoardLikeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// 추천 정보 얻기
+		// 찜 정보 얻기
 		LikePost like = projectBoardService.getLike(req);
 
-		// 추천 정보 토글
-		boolean result = projectBoardService.like(like);
+		// 찜 정보 토글
+		boolean check = projectBoardService.checkLike(like);
+		int countLike = 0;
+		
+		if(check) {
+			projectBoardService.like(like);
+			countLike = projectBoardService.countLike(like);
+		} else {
+			projectBoardService.like(like);
+			countLike = projectBoardService.countLike(like);
+		}
 
-		// 추천 수 조회
-		int cnt = projectBoardService.getTotalCntLike(like);
 
 		// 결과 JSON응답
-		resp.getWriter().println("{\"result\": " + result + ", \"cnt\": " + cnt + "}");
+		resp.getWriter().println("{\"countLike\": " + countLike + ", \"check\": " + check + "}");
 
 	}
 

@@ -465,7 +465,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "DELETE likepost";
+		sql += "DELETE FROM likepost";
 		sql += " WHERE";
 		sql += " boardno = ? AND userno = ? AND postno = 2";
 		
@@ -482,7 +482,6 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 			
 		} finally {
 			try {
-				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				
 			} catch (SQLException e) {
@@ -513,7 +512,6 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 			
 		} finally {
 			try {
-				if(rs!=null)rs.close();
 				if(ps!=null)ps.close();
 				
 			} catch (SQLException e) {
@@ -528,17 +526,16 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		conn = DBConn.getConnection();
 
 		String sql = "";
-		sql += "SELECT count(*) FROM likepost";
+		sql += "SELECT count(userno) FROM likepost";
 		sql += " WHERE boardno = ?";
-		sql += " 	AND userno = ?";
+		sql += " 	AND postno = 2";
 		
-		int cnt = -1;
+		int cnt = 0;
 		
 		try {
 			//DB작업
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, like.getBoardno());
-			ps.setInt(2, like.getUserno());
 
 			rs = ps.executeQuery();
 			
@@ -562,38 +559,42 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		
 		return cnt;
 	}
-
+	
 	@Override
-	public int selectTotalCntLike(LikePost like) {
+	public int checkCntByUserno(LikePost like) {
 		conn = DBConn.getConnection();
-
-		String sql = "SELECT COUNT(*) FROM likepost"
-				+ " WHERE boardno=?";
 		
-		int cnt = 0;
+		String sql = "";
+		sql += "SELECT count(*) FROM likepost";
+		sql += " WHERE postno = 2 AND userno = ? AND boardno = ?";
+		
+		int check = -1;
 		
 		try {
+			
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, like.getBoardno());
+			
+			ps.setInt(1, like.getUserno());
+			ps.setInt(2, like.getBoardno());
 			
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				cnt = rs.getInt(1);
+				check = rs.getInt(1);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				//DB객체 닫기
 				if(ps!=null)	ps.close();
 				if(rs!=null)	rs.close();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return cnt;
+		return check;
 	}
 
 	@Override

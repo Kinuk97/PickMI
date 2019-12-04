@@ -49,8 +49,12 @@ public interface ProjectBoardService {
 	 */
 	public void delete(ProjectBoard projectBoard);
 	
+	
+	
+	// --------------------- 찜하기 ------------------------
+	
 	/**
-	 * 추천 정보 파라미터 얻기
+	 * 찜 정보 파라미터 얻기
 	 * 
 	 * @param req - 요청 정보 객체
 	 * @return LikePost - 추천 정보 객체
@@ -58,27 +62,39 @@ public interface ProjectBoardService {
 	public LikePost getLike(HttpServletRequest req);
 	
 	/**
-	 * 추천 토글
+	 * 게시글 찜 상태 조회
 	 * 
-	 * @param like - 추천 정보 객체
-	 * @return boolean - true:추천 성공, false:추천취소 성공
+	 * @param like - 찜 상태
+	 * @return boolean - true: 찜했음, fale: 찜한적 없음
 	 */
-	public boolean like(LikePost like);
+	public boolean checkLike(LikePost like);
 	
 	/**
-	 * 게시글의 총 추천 수 구하기
-	 * 
-	 * @param board - 해당 게시글
-	 * @return int - 총 추천 수
+	 *  찜할시 찜 증가
+	 *  
+	 * @param like
 	 */
-	public int getTotalCntLike(LikePost like);
+	public void like(LikePost like);
 	
-	public boolean isLike(LikePost like);
+	/**
+	 * 게시글 찜 수 구하기
+	 * 
+	 * @param like - 해당 게시글
+	 * @return int - 찜한 수
+	 */
+	public int countLike(LikePost like);
+	
+	// ------------------------------------------------------
+	
+	
+	
 	
 	/**
 	 * 메인페이지에 프로젝트 게시판 리스트
-	 * @return
+	 * 
+	 * @return List<ProjectBoard> - 프로젝트 게시판 리스트
 	 */
 	public List<ProjectBoard> getMainProjectList();
+
 	
 }

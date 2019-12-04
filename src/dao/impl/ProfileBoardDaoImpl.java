@@ -489,6 +489,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				profileBoard.setProf_career(rs.getString("prof_career"));
 				profileBoard.setProf_time(rs.getDate("prof_time"));
 				profileBoard.setProf_like(rs.getInt("prof_like"));
+				profileBoard.setUsername(rs.getString("username"));
 				
 				list.add(profileBoard);
 			}
