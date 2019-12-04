@@ -24,6 +24,17 @@
 
 
 <style type="text/css">
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#mypwmodifyfont {
+	font-family:'KHNPHD';
+}
+
 .find-form {
 	width: 385px;
 	margin: 30px auto;
@@ -131,7 +142,7 @@ $(document).ready(function() {
 
 </script>
 </head>
-<body>
+<body id="mypwmodifyfont">
 
 	<div class="find-form" id="log" style="margin-top: 100px;">
 		<form action="/mypage/pwmodify" method="post">

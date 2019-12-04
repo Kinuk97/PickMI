@@ -5,8 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#userupdatefont {
+	font-family:'KHNPHD';
+}
+</style>
 </head>
-<body>
+
+<body id="userupdatefont">
 
 <form action = "/mypage/infomodify" method = "post">
 
