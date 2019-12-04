@@ -12,7 +12,7 @@ public class CompBoard {
 	private String comp_name;
 	private String comp_content;
 	private int comp_member;
-	private Date comp_date;
+	private String comp_date;
 	private int comp_view;
 	private Date comp_startdate;
 	private Date comp_enddate;
@@ -81,11 +81,11 @@ public class CompBoard {
 		this.comp_member = comp_member;
 	}
 	
-	public Date getComp_date() {
+	public String getComp_date() {
 		return comp_date;
 	}
 	
-	public void setComp_date(Date comp_date) {
+	public void setComp_date(String comp_date) {
 		this.comp_date = comp_date;
 	}
 	

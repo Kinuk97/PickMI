@@ -124,7 +124,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				res.setComp_name( rs.getString("comp_name") );
 				res.setComp_content( rs.getString("comp_content") );
 				res.setComp_member( rs.getInt("comp_member") );
-				res.setComp_date( rs.getDate("comp_date") );
+				res.setComp_date( rs.getString("comp_date") );
 				res.setComp_view( rs.getInt("comp_view") );
 				res.setComp_startdate( rs.getDate("comp_startdate"));
 				res.setComp_enddate( rs.getDate("comp_enddate"));
@@ -161,7 +161,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += "SELECT * FROM (";
 			sql += "    SELECT rownum rnum, B.* FROM (";
 			sql += "		SELECT comp_no, userno, comp_title, comp_name, ";
-			sql += "			   comp_content, comp_member, comp_date, comp_view, ";
+			sql += "			   comp_content, comp_member, TO_CHAR(comp_date, 'YYYY/MM/DD HH:MI:SS') comp_date, comp_view, ";
 			sql += "			   comp_startdate, comp_enddate, ";
 			sql += " 			(SELECT name FROM user_table WHERE compBoard.userno = userno) username";
 			sql += "		FROM compBoard";
@@ -230,7 +230,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					compBoard.setComp_name( rs.getString("comp_name") );
 					compBoard.setComp_content( rs.getString("comp_content") );
 					compBoard.setComp_member( rs.getInt("comp_member") );
-					compBoard.setComp_date( rs.getDate("comp_date") );
+					compBoard.setComp_date( rs.getString("comp_date") );
 					compBoard.setComp_view( rs.getInt("comp_view") );
 					compBoard.setComp_startdate( rs.getDate("comp_startdate"));
 					compBoard.setComp_enddate( rs.getDate("comp_enddate") );
@@ -643,7 +643,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				compBoard.setComp_name( rs.getString("comp_name") );
 				compBoard.setComp_content( rs.getString("comp_content") );
 				compBoard.setComp_member( rs.getInt("comp_member") );
-				compBoard.setComp_date( rs.getDate("comp_date") );
+				compBoard.setComp_date( rs.getString("comp_date") );
 				compBoard.setComp_view( rs.getInt("comp_view") );
 				compBoard.setComp_startdate( rs.getDate("comp_startdate"));
 				compBoard.setComp_enddate( rs.getDate("comp_enddate") );
