@@ -18,26 +18,19 @@
 
 <script type="text/javascript">
 
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').focus()
-});
-
-
 $('#testBtn').click(function(e){
-	e.preventDefault();
-	$('#testModal').modal("show");
+	$('#testModal').modal();
 });
 
 </script>
 
 <style type="text/css">
 
-.container{
-	width:100%;
-	position: relative;
+.myPageContainer {
+	width: 95%;
 }
 
-.container1{
+.container1 {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 25px;
@@ -46,58 +39,54 @@ $('#testBtn').click(function(e){
 	border: 1px solid #ddd;
 	text-align: center;
 	font-size: 45px;
-	 border-radius: 5%;
+	 border-radius: 80px;
 }
 
-.container2{
-	width: 1500px;
-	height: 800px;
+.box {
+	width: 80%;
+	min-height: 600px;
 	backgorund:#49494A;
 	text-align:center;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: 150px 0 0 -750px;
 	border: 1px solid #ddd;
-	border-radius: 5%;
+	border-radius: 80px;
 }
 
 .inner_con1{
 	display: inner-block;
     float: left;
-    width: 600px;
-    height: 700px;
+    width: 45%;
+    height: 531px;
     border: 1px solid #ddd;
     box-sizing: border-box;
     margin: 50px;
     padding: 16px;
-    border-radius: 5%;
+    border-radius: 40px;
 }
 
 .inner_con2{
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 650px;
-    height: 300px;
+    width: 36%;
+    height: 200px;
     padding: 16px;
     margin: 50px;
     border: 1px solid #ddd;
-    border-radius: 5%;
+    margin-bottom: 30px;
+    border-radius: 40px;
 }
 
 .inner_con3{
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 650px;
+    width: 36%;
     height: 300px;
     padding: 16px;
     margin: 50px;
     border: 1px solid #ddd;
-    border-radius: 5%;
-
-
+    border-radius: 40px;
+    margin-top: 0;
 }
 
 .img-responsive {
@@ -111,9 +100,11 @@ $('#testBtn').click(function(e){
 
 </head>
 <body>
-<div class="container">
-	<div class="container1">마이페이지</div>
-	<div class="container2">
+<div class="container myPageContainer">
+	<div class="container text-center">
+		<h1>마이페이지</h1>
+	</div>
+	<div class="container box">
 
 		<div class="inner_con1" > 
 			<ul class="list-group">
@@ -129,16 +120,12 @@ $('#testBtn').click(function(e){
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px">이메일 : ${userinfo.email }</p></li>
 			</ul>
 
-			<p style="font-size: 25px">이름 : ${userinfo.name }</p>	
-			<p style="font-size: 25px">이메일 : ${userinfo.email }</p>
-			
-			
 			<!-- 모달을 열기 위한 버튼 -->
-			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal">
 			비밀번호 수정
 			</button>
 			<!-- 모달 영역 -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			<div class="modal-header">
@@ -176,6 +163,7 @@ $('#testBtn').click(function(e){
 			<p style=" text-align: left; font-size:25px;">프로젝트관리 <hr>
 		</div>
 		
+		<div style="clear: both;"></div>
 	</div>
 </div> <!-- container -->
 		
