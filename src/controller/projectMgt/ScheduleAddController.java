@@ -19,18 +19,18 @@ import serivce.impl.ScheduleServiceImpl;
 public class ScheduleAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ScheduleService scheduleServie = ScheduleServiceImpl.getInstance();
+	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(req.getParameter("proj_no"));
 		System.out.println(req.getParameter("schedule_date"));
 		
-		Schedule schedule = scheduleServie.getSchedule(req);
+		Schedule schedule = scheduleService.getSchedule(req);
 
 		System.out.println(schedule);
 		
-		scheduleServie.putSchedule(schedule);
+		scheduleService.putSchedule(schedule);
 		
 		resp.sendRedirect("/schedule/list?proj_no=" + schedule.getProj_no());
 	}

@@ -103,8 +103,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public Schedule getSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return scheduleDao.selectByScheduleno(schedule);
 	}
 
 	@Override
@@ -115,13 +115,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public void modifySchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
+		scheduleDao.updateSchedule(schedule);
 
 	}
 
 	@Override
 	public void removeSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
+		scheduleDao.deleteSchedule(schedule);
 
 	}
 

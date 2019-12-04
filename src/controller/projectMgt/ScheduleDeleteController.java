@@ -13,19 +13,23 @@ import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
 
 
-@WebServlet("/schedule/view")
-public class ScheduleViewController extends HttpServlet {
+@WebServlet("/schedule/delete")
+public class ScheduleDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Schedule schedule = scheduleService.getSchedule(req); 
-//		System.out.println("schedule view controller : " + schedule);
+		Schedule schedule = scheduleService.getSchedule(req);
+		schedule = scheduleService.getSchedule(schedule);
 		
-		req.setAttribute("viewSchedule", scheduleService.getSchedule(schedule));
+		if ( schedule.getScheduleno() != 0 ) {
+			scheduleService.removeSchedule(schedule);
+		}
+		resp.sendRedirect("/schedule/list");
+
 	}
 
 }
