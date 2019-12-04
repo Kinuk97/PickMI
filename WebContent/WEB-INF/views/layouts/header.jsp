@@ -99,7 +99,7 @@ $(document).ready(function(){
 			var list = JSON.parse(data.data)
 			for(var i = 0; i<list.length; i++){
 				
-				var spantext = list[i].chat_sender+"님의 새료운 메시지 <small>"+list[i].chat_sendtime+"에 보냄</small>";
+				var spantext = list[i].chat_sender+"님의 새로운 메시지 <small>"+list[i].chat_sendtime+"에 보냄</small>";
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
 				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
