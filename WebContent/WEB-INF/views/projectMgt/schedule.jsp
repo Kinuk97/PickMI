@@ -207,9 +207,12 @@ div .cal-schedule span {
 // 		console.log(scheduleList);
 		
 		let date = new Date("${scheduleList[0].write_date}");
+		console.log(${scheduleList[0].write_date});
 		let year = date.getFullYear();
 		let month = date.getMonth() + 1;
 		let day = date.getDate();
+		
+		
 		
 		
 	}
@@ -223,6 +226,22 @@ div .cal-schedule span {
 			
 			
 			
+// 			$.ajax({
+// 				type : "post",
+// 				url : "/schedule/list",
+// 				data : { "schedule" : schedule },
+// 				dataType : "json",
+// 				success : function(data) {
+// 					console.log(data);
+// 					if(schedule != null) {
+			 		$tdSche.eq(i).append($("<span id=\"scheduleView\" class='label label-info'>일정보기</span>"));
+// 					} else {
+// 						$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
+
+// 					}
+// 				}
+// 			})
+			
 			
 // 			var txt = "";
 // 			txt = jsonData[year];
@@ -234,6 +253,8 @@ div .cal-schedule span {
 // 					$tdSche.eq(dateMatch).text(txt);
 // 				}
 // 			}
+
+		
 			$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus'></span>"));
 		}
 	}
@@ -255,17 +276,22 @@ div .cal-schedule span {
 		});
 	}
 	
-// 	function list() {
-// 		$.ajax({
-// 			type : "post",
-// 			url : "/schedule/list",
-// 			data : {
-// 				"proj_no" : "${proj_no}",  "due_date" : "${due_date}"
-// 			}
-// 			dateType : "json",
-// 			success :
-// 		})
-// 	}
+	function viewSchedule() {
+		$.ajax({
+			type : "post",
+			url : "/schedule/view",
+			data : {
+				"proj_no" : "${proj_no}"
+			},
+			dataType : "json",
+			success : function(data) {
+				
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		})
+	}
 </script>
 
 <div class="container">
