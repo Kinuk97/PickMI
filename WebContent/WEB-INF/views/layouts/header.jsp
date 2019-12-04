@@ -25,20 +25,20 @@
 <script type="text/javascript" src="/resources/js/modal.js"></script>
 
 <!--Start of Tawk.to Script-->
-<!-- <script type="text/javascript">
-	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+<!-- <!-- <script type="text/javascript"> -->
+<!-- 	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date(); -->
 	
-	(function() {
-		var s1 = document.createElement("script"), s0 = document
-				.getElementsByTagName("script")[0];
-		s1.async = true;
-		s1.src = 'https://embed.tawk.to/5de394e9d96992700fca2231/default';
-		s1.charset = 'UTF-8';
-		s1.setAttribute('crossorigin', '*');
-		s0.parentNode.insertBefore(s1, s0);
-	})();
+<!-- 	(function() { -->
+<!-- 		var s1 = document.createElement("script"), s0 = document -->
+<!-- 				.getElementsByTagName("script")[0]; -->
+<!-- 		s1.async = true; -->
+<!-- 		s1.src = 'https://embed.tawk.to/5de394e9d96992700fca2231/default'; -->
+<!-- 		s1.charset = 'UTF-8'; -->
+<!-- 		s1.setAttribute('crossorigin', '*'); -->
+<!-- 		s0.parentNode.insertBefore(s1, s0); -->
+<!-- 	})(); -->
 	
-</script> -->
+<!-- </script> -->
 <!--End of Tawk.to Script-->
 
 <script type="text/javascript">
@@ -88,7 +88,7 @@ $(document).ready(function(){
 		
 		ws.onopen = function() {
 	 		//메세지보내는 메소드 send
-	 		var obj = { type: "list", chat_user: '${userno}' };
+	 		var obj = { type: "list", chat_user: '${userno}', username: '${username}' };
 	 		var msg = JSON.stringify(obj);
 // 	 		console.log(JSON.stringify(obj))
 	 		ws.send(msg);
@@ -98,8 +98,8 @@ $(document).ready(function(){
 			$("#msgList").html("");
 			var list = JSON.parse(data.data)
 			for(var i = 0; i<list.length; i++){
-				
-				var spantext = list[i].chat_sender+"님의 새로운 메시지 <small>"+list[i].chat_sendtime+"에 보냄</small>";
+
+				var spantext = list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small><hr>";
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
 				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
@@ -408,7 +408,26 @@ a#top {
 	height:50px;
 }
 
-
+#msgList { 
+	list-style: none; 
+	padding: 0; 
+	margin: 0; 
+} 
+.messagelist { 
+	margin: 7px; 
+}
+.dropdownA {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-decoration: none;
+}
+.messagelist img {
+	width: 50px;
+	height: 50px;
+}
+.messagelist span {
+	color: black;
+}
 </style>
 
 </head>
@@ -521,28 +540,6 @@ a#top {
 <!-- 									</li> -->
 <!-- 								</ul> -->
 
-								<style type="text/css">
- 								#msgList { 
- 									list-style: none; 
- 									padding: 0; 
- 									margin: 0; 
- 								} 
- 								.messagelist { 
- 									margin: 7px; 
-								}
-								.dropdownA {
-									padding-top: 15px;
-									padding-bottom: 15px;
-									text-decoration: none;
-								}
-								.messagelist img {
-									width: 50px;
-									height: 50px;
-								}
-								.messagelist span {
-									color: black;
-								}
-								</style>
 								<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
 									<div class="close" style="width: 25px;">x</div>
 									<ul id="msgList" ></ul>
