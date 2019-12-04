@@ -24,6 +24,58 @@ $('#testBtn').click(function(e){
 
 </script>
 
+<script>
+
+	var sel_file;
+	
+	$(document).ready(function(){
+		$("#input_img").on("change", handleImgFileSelect);
+	});
+	
+	function handleImgFileSelect(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지 확장자만 가능합니다.")
+				return;
+			}
+		}
+		
+		sel_file = f;
+		
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$("#img").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
+		
+		});
+	}
+
+</script>
+
+<script>
+
+function readURL(input) {
+	 if (input.files && input.files[0]) {
+	  var reader = new FileReader();
+	  
+	  reader.onload = function (e) {
+	   $('#image_section').attr('src', e.target.result);  
+	  }
+	  
+	  reader.readAsDataURL(input.files[0]);
+	  }
+	}
+	  
+	$("#imgInput").change(function(){
+	   readURL(this);
+	});
+
+</script>
+
 <style type="text/css">
 
 .myPageContainer {
@@ -112,8 +164,12 @@ $('#testBtn').click(function(e){
 			</ul>
 			<hr>
 			<p><img src="/resources/mainphoto.png" class="img-responsive img-circle" alt="Responsive image"></p>
-			<p><button type="button" class="btn btn-info ">프로필사진 변경</button>
-		 	<button type="button" class="btn btn-info ">프로필사진 변경</button></p>
+			
+			<form action="/mypage" action="post">
+			<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 변경</button>
+		 	<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 삭제</button>
+		 	<button type= "submit">전송</button>
+			</form>
 			
 			<a href="/mypage/pwmodify"><button>비밀번호 수정 TEST ! ! ! </button></a>
 			
@@ -134,6 +190,12 @@ $('#testBtn').click(function(e){
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			<h4 class="modal-title" id="myModalLabel">비밀번호 수정</h4>
 			</div>
+			
+			<form id="form" runat="server">
+			   <input type='file' id="imgInput"/>
+			   <img id="image_section" src="#" alt="your image"/>
+			</form>
+			
 			<form action="/mypage/pwmodify" method="post">
 				<div class="modal-body">
 				현재비밀번호<input type="password" name="password1"> <br>

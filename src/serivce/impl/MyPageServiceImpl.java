@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.face.MyPageDao;
+import dao.face.UserDao;
 import dao.impl.MyPageDaoImpl;
+import dao.impl.UserDaoImpl;
 import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
@@ -15,6 +17,8 @@ import serivce.face.MyPageService;
 import util.Paging;
 
 public class MyPageServiceImpl implements MyPageService {
+	
+	UserDao userDao = new UserDaoImpl();
 	
 	private MyPageDao myPageDao = MyPageDaoImpl.getInstance();
 	
@@ -94,22 +98,44 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 
-	
 // ----- 비밀번호 수정	
+
 	@Override
-	public User getPwParam(HttpServletRequest req) {
+	public User getcurPwParam(HttpServletRequest req) {
+		
 		User user = new User();
 		
-		// 파라미터
 		String param = null;
 		
-		// pw 파라미터
 		param = req.getParameter("pw");
 		user.setPw(param);
 		
+//		param = req.getParameter("pw1");
+//		user.setPw(param);
 		
-		return user; // user로 반환 (pw)
+		return user;
 	}
+
+	@Override
+	public boolean eqPW(User pwparam) {
+		
+		int cnt = 0;
+		cnt = myPageDao.selectCntUserByupw(pwparam);
+		
+		if(cnt == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void modifyPw(User pwparam) {
+		userDao.updatePw(pwparam);
+	}
+
+
+
+
 
 //	@Override
 ////	public boolean modifyPw(User user) {

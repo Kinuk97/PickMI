@@ -48,6 +48,9 @@ public interface MyPageDao {
 	List<FreeBoard> selectFree(Paging paging, HttpServletRequest req);
 
 
+// ----- 비밀번호 수정
+	
+	int selectCntUserByupw(User pwparam);
 
 
 

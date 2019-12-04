@@ -144,9 +144,50 @@ public class MyPageDaoImpl implements MyPageDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+// ----- 비밀번호 수정
 
+	@Override
+	public int selectCntUserByupw(User pwparam) {
+		conn = DBConn.getConnection();
 
+		if ((Integer)pwparam.getUserno() == null || pwparam.getPw() == null) {
+			return -1;
 
+		}
 
+		int cnt = -1;
 
+		String sql = "";
+		sql += "SELECT count(*) FROM user_table";
+		sql += " WHERE userno = ? AND pw = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, pwparam.getUserno());
+			ps.setString(2, pwparam.getPw());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				cnt = rs.getInt("count(*)");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("비밀번호 일치 여부 확인 : " + cnt); //
+		return cnt;
+	}
 }
