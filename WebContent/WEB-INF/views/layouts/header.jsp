@@ -25,6 +25,7 @@
 <script type="text/javascript" src="/resources/js/popover.js"></script>
 <script type="text/javascript" src="/resources/js/modal.js"></script>
 
+
 <!--Start of Tawk.to Script-->
 <!-- <!-- <script type="text/javascript"> -->
 <!-- 	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date(); -->
@@ -158,6 +159,10 @@ $(document).ready(function(){
 
 <style type="text/css">
 
+@font-face {
+	font-family: 'Jeju Gothic', serif;
+}
+
 #header {
 	text-align: center;
 	background-color: #ffffff;
@@ -171,7 +176,7 @@ $(document).ready(function(){
 }
 
 #wrapper {
-	min-height: 1200px;
+	min-height: 500px;
 	background-color: #ffffff;
 	clear: both;
 	padding-top: 25px;
@@ -229,7 +234,7 @@ button, input, optgroup, select, textarea {
 
 /* 각 게시판 리스트 높이 */
 .caption-profile {
-	height: 320px;
+	height: 260px;
 }
 .caption-project {
 	height: 260px;
@@ -293,7 +298,7 @@ hr {
 }
 
 #mainboard {
-	height: 500px;
+	height: 1300px;
 }
 
 a#top {
@@ -458,6 +463,24 @@ a#top {
 	overflow: auto;
 }
 
+#mainboardlist {
+	width: 360px;
+/* 	height: 210px; */
+}
+
+@font-face {
+	font-family: 고도 M;
+	src: url('./resources/font_ttf/GodoM.ttf');
+}
+
+#searchform {
+	width: 70%;
+	margin-left: 50px;
+}
+
+#searchbtn {
+	float: left;
+}
 </style>
 </head>
 
@@ -568,9 +591,27 @@ a#top {
 <!-- 									</li> -->
 <!-- 								</ul> -->
 
+
 								<div class="dropdown-menu" id="msgscroll" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
 									<div class="chatplus">
-										<button class="btn btn-default" id="chatplusBtn">새 메시지</button>
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-md" id="chatplusBtn">새 메시지</button>
+											<div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMiddleModalLabel" aria-hidden="true">
+  												<div class="modal-dialog modal-md">
+   													<div class="modal-content">
+   													 	<div style="height: 500px;">
+   													 		<br>
+		    												<h4>메시지를 보낼 사용자 검색</h4>
+		    												<hr>&emsp;&emsp;
+		    												<input type="text" class="form-control col-lg-4" id="searchform">
+		    												<button class="btn btn-default" id="searchbtn">검색</button>
+		    												<br>
+		    												<br>
+		    												
+	    												</div> 
+												    </div>
+												</div>
+											</div>
+											
 										<div class="close" style="width: 25px;">x</div>
 									</div>
 									<ul id="msgList" style="clear: both">
