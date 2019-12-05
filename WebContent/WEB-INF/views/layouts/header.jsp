@@ -768,11 +768,11 @@ a#top {
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 											data-toggle="dropdown">
 														<c:choose>
-														<c:when test ="${userinfo.photo_storedname eq null }">
-														<img id=headeruserimg src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
+														<c:when test ="${photo_storedname eq null }">
+														<img id="headeruserimg" src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
 														</c:when>
 														<c:otherwise>
-														<img id=headeruserimg src="/upload/${userinfo.photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
+														<img id="headeruserimg" src="/upload/${photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
 														</c:otherwise>
 														</c:choose>
 											</a>

@@ -18,10 +18,9 @@
 
 <script type="text/javascript">
 
-$('#testBtn').click(function(e){
-	$('#testModal').modal();
-});
-
+// $('#testBtn').click(function(e){
+// 	$('#testModal').modal();
+// });
 </script>
 
 <script>
