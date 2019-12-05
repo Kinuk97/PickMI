@@ -104,17 +104,17 @@ $(document).ready(function(){
 				var spantext = "&emsp;"+list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small>"+ "<hr class='a'>";
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
-				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
-						.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
-						.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
-						.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
+					.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
+					.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
+					.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
+					.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
 				).appendTo($("#msgList"))
 			}
 			ws.close();
 		}
 		
 	})
-})
+});
 
 $(document).ready(function(){
 	$('#msgList').on("click", ".messagelist", function() {
@@ -154,10 +154,71 @@ $(document).ready(function(){
 	
 
 });
+
+$(document).ready(function(){
+	$("#chatplusBtn").click(function(){
+		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+		
+		ws.onopen = function() {
+			
+			var obj = { type: "search", name : '${name}', email: '${email}' };
+			var msg = JSON.stringify(obj);
+			console.log(msg);
+			ws.send(msg);
+		}
+		
+		ws.onmessage = function(data){
+			console.log("!");
+			
+			var search = JSON.parse(data.data);
+			
+			var tr = $("<tr>");
+			tr.append( $("<th>"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
+			var table = $("<table></table>");
+			table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
+			.append(tr);
+			
+			for(var i=0; i<search.length; i++){
+				
+// 				$("<table>").attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
+//	 			.append( $("<tr>"))
+				var tr = $("<tr></tr>");
+				tr.append($("<td>"));
+				tr.append( $("<td>").html(search[i].name))
+				tr.append( $("<td>").html(search[i].email))
+				
+// 				$("<td>")
+// 				.append( $("<input>").attr({"type":"checkbox", "name":"checkRow", "id":"checkRow"}))
+// 				.appendTo( $("#searchplusmsg"));
+				
+// 				$("<td>")
+// 				.append(search[i].name)
+// 				.appendTo( $("#searchplusmsg"));
+				
+// 				$("<td>")
+// 				.append(search[i].email + "<br>")
+// 				.appendTo( $("#searchplusmsg"));
+
+				table.append(tr);
+			}
+			
+			$("#searchtable").append(table);
+			ws.close();
+		}
+		
+	})
+	
+});
 </script>
 
 
 <style type="text/css">
+
+#msgtable {
+	text-align: center;
+}
 
 @font-face { 
 	font-family: 'KHNPHD'; 
@@ -498,11 +559,18 @@ a#top {
 
 #searchform {
 	width: 70%;
-	margin-left: 50px;
+	margin-left: 57px;
 }
 
 #searchbtn {
 	float: left;
+}
+
+#searchtable {
+	width: 420px;
+	height: 300px;
+	margin-top: 50px;
+	overflow: auto;
 }
 </style>
 </head>
@@ -628,8 +696,27 @@ a#top {
 		    												<input type="text" class="form-control col-lg-4" id="searchform">
 		    												<button class="btn btn-default" id="searchbtn">검색</button>
 		    												<br>
-		    												<br>
 		    												
+		    												<div class="container container-center" id="searchtable">
+<!-- 			    												<table class="table table-striped table-hover text-center"> -->
+			    												
+<!-- 			    													<tr> -->
+<!-- 			    														<th></th> -->
+<!-- 			    														<th style="text-align: center;">이름</th> -->
+<!-- 			    														<th style="text-align: center;">이메일</th> -->
+<!-- 			    													</tr> -->
+			    													
+<!-- 			    													<tr style="text-align: center;" id="searchplusmsg"> -->
+<!-- 			    														<td> -->
+<!-- 																			<input type="checkbox" name="checkRow" id="checkRow"> -->
+<!-- 																		</td> -->
+<%-- 			    														<td>${name }</td> --%>
+<%-- 			    														<td>${email }</td> --%>
+<!-- 			    													</tr> -->
+<!-- 																</table> -->
+																
+		    												</div>
+															<button class="btn btn-default">선택</button>
 	    												</div> 
 												    </div>
 												</div>

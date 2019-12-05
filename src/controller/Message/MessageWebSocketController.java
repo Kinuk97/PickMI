@@ -17,6 +17,7 @@ import dao.face.MessageDao;
 import dao.impl.MessageDaoImpl;
 import dto.Chat;
 import dto.Chatter;
+import dto.User;
 import serivce.face.MessageService;
 import serivce.impl.MessageServiceImpl;
 
@@ -58,6 +59,7 @@ public class MessageWebSocketController {
 			List<Chat> chatList = messageService.getLastChatList(chatter);
 			System.out.println( chatList );
 			
+			
 			return new Gson().toJson(chatList);
 		}
 		
@@ -69,6 +71,18 @@ public class MessageWebSocketController {
 			
 		}
 		
+		if( "search".equals(type)) {
+			
+			User user = gson.fromJson(msg, User.class);
+//			System.out.println(user);
+			String search = null;
+			List<User> searchList = messageService.getSearchList(search, user);
+//			System.out.println("searchList : " + searchList);
+			
+			
+			return new Gson().toJson(searchList);
+			
+		}
 		
 		return null;
 	}
