@@ -101,7 +101,7 @@ $(document).ready(function() {
 	
 	
 	// 변경 버튼 동작
-	$("#change").click(function() {
+	$("#change").on("click",function() {
 	
 		// 비밀번호 입력
         if($("#pw1").val() ==''){
@@ -119,7 +119,8 @@ $(document).ready(function() {
 		
         // 동일 비밀번호
 		if($("#pw1").val()!== $("#pw2").val()){
-	    	warningModal('비밀번호를 동일하게 입력하세요');
+			alert('비밀번호를 동일하게 입력하세요');
+// 	    	warningModal('비밀번호를 동일하게 입력하세요');
 	    	return false;
 		}
 	
