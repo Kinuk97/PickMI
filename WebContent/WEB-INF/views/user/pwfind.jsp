@@ -21,7 +21,7 @@
 
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+<script type="text/javascript" src="/resources/js/modal.js"></script>
 
 <style type="text/css">
 @font-face { 
@@ -129,16 +129,15 @@
 			
 			
 // // 		}
-// // 	if($("email").val() != ${USER.email} || $("name").val() =! ${USER.name}){
-// // 		warningModal("회원이 아닙니다");
-// // 		alert("회원이 아닙니다");
-// //  		}else{
-// 		popupOpen(); 			
-// //  		}
+//  	if($("email").val() != ${USER.email} || $("name").val() != ${USER.name}){
+//  		warningModal("회원이 아닙니다");
+// //  		alert("회원이 아닙니다");
+//  		close();
+//   		}
 // 	});
 
 	
-});
+// });
 
 </script>
 </head>
@@ -188,9 +187,9 @@
 <!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
-			<!-- /.modal-content -->
+<!-- 			/.modal-content -->
 <!-- 		</div> -->
-		<!-- /.modal-dialog -->
+<!-- 		/.modal-dialog -->
 <!-- 	</div> -->
 	<!-- /.modal -->
 

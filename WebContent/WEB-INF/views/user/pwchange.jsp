@@ -23,6 +23,9 @@
 	src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
+<script type="text/javascript" src="/resources/js/modal.js"></script>
+
+
 <style type="text/css">
 @font-face { 
 	font-family: 'KHNPHD'; 
@@ -119,11 +122,13 @@ $(document).ready(function() {
 		
         // 동일 비밀번호
 		if($("#pw1").val()!== $("#pw2").val()){
-			alert('비밀번호를 동일하게 입력하세요');
-// 	    	warningModal('비밀번호를 동일하게 입력하세요');
+// 			alert('비밀번호를 동일하게 입력하세요');
+	    	warningModal('비밀번호를 동일하게 입력하세요');
+	    	$("#pw2").focus();
 	    	return false;
 		}
-	
+			
+        $("#changeForm").submit();
 	
 	});
 	
@@ -135,7 +140,7 @@ $(document).ready(function() {
 <body id="pwchangefont">
 
 	<div class="find-form" id="log" style="margin-top: 100px;">
-		<form action="/pwchange" method="post">
+		<form id="changeForm" action="/pwchange" method="post">
 <!-- 			<div id="hidden" style="display: none;"> -->
 				<h2 class="text-center">비밀번호 변경</h2>
 			<input type="hidden" value="${USER.email }" id="email" name="email"/>
@@ -156,7 +161,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary login-btn btn-block"
+				<button type="button" class="btn btn-primary login-btn btn-block"
 					id="change">변경</button>
 			</div>
 <!-- 			</div> -->
