@@ -241,9 +241,9 @@ public class UserDaoImpl implements UserDao {
 
 
 	@Override
-	public void insertphoto(User user) {
+	public User insertphoto(User user) {
 //		System.out.println("userDAO에서의 uploadFile 매개변수가 갖고 있는것 : " + uploadFile); -- null
-		System.out.println("userDao에서의 user 매개변수가 갖고 있는 것 : " + user);
+//		System.out.println("userDao에서의 user 매개변수가 갖고 있는 것 : " + user);
 		
 		conn = DBConn.getConnection();
 		
@@ -273,8 +273,82 @@ public class UserDaoImpl implements UserDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
+		} return user;
 	}
+
+	@Override
+	public void deletephoto(User user) {
+//		System.out.println("userDao에서의 user 매개변수가 갖고 있는 것 : " + user);
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		
+		sql += "UPDATE user_table SET photo_originname = null, photo_storedname = null";
+		sql += " WHERE userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, user.getUserno());
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	@Override
+	public User selectUserPhotonameByuserno(User user) {
+
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		sql += "SELECT photo_originname, photo_storedname FROM user_table";
+		sql += " WHERE userno = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, user.getUserno());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				user.setPhoto_originname(rs.getString("photo_originname"));
+				user.setPhoto_storedname(rs.getString("photo_storedname"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return user;
+
+		
+}
 
 
 		

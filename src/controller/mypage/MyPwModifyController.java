@@ -29,7 +29,16 @@ public class MyPwModifyController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		
+		HttpSession session = req.getSession();
+		User user = new User();
+		
+		user.setEmail(session.getAttribute("email").toString());
+		user.setName(session.getAttribute("name").toString());
+		
+		userService.findPw(user);
+		
+		req.setAttribute("user", user);
 		// 비밀번호 수정 폼 띄우기	
 		req.getRequestDispatcher("/WEB-INF/views/mypage/mypwmodify.jsp")
 		.forward(req, resp);		
@@ -44,8 +53,10 @@ public class MyPwModifyController extends HttpServlet {
 		HttpSession session = req.getSession();
 	
 		User pwparam = myPageService.getcurPwParam(req);
+		
 		pwparam.setUserno((Integer) session.getAttribute("userno"));  
 		pwparam.setEmail((String) session.getAttribute("email"));
+		
 		System.out.println(pwparam);
 		
 		boolean curpw = myPageService.eqPW(pwparam);

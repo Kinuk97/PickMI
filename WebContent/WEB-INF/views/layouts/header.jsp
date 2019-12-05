@@ -758,7 +758,16 @@ a#top {
 						<c:otherwise>
 							<ul style="list-style: none; padding-left: 5px; padding-right: 5px;">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown"><img src="/resources/gray.png" class="img-circle" style="width: 50px; height: 50px;"></a>
+											data-toggle="dropdown">
+														<c:choose>
+														<c:when test ="${userinfo.photo_storedname eq null }">
+														<img id=headeruserimg src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
+														</c:when>
+														<c:otherwise>
+														<img id=headeruserimg src="/upload/${userinfo.photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
+														</c:otherwise>
+														</c:choose>
+											</a>
 									<ul class="dropdown-menu">
 										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
 										<li><a href="#"><i class="icon-arrow-down"></i>추가할거</a></li>

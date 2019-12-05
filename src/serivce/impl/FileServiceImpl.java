@@ -1146,7 +1146,7 @@ public class FileServiceImpl implements FileService {
 		factory = new DiskFileItemFactory();
 
 		// 3. 업로드된 아이템이 용량이 작으면 메모리에서 처리
-		int maxMem = 1 * 1024 * 1024; // 1MB
+		int maxMem = 32 * 1024; // 1MB
 		factory.setSizeThreshold(maxMem);
 
 		// 4. 용량이 적당히 크면 임시파일을 만들어서 처리 (디스크)
@@ -1189,10 +1189,14 @@ public class FileServiceImpl implements FileService {
 		// 모든 요청 정보 처리
 		while (iter.hasNext()) {
 			FileItem item = iter.next();
-
+			
+			
+			
 			// 1) 빈 파일 처리
 			if (item.getSize() <= 0)
 				continue;
+			
+			if (!item.isFormField()) {
 		
 				UUID uuid = UUID.randomUUID(); // 랜덤 UID 생성
 		
@@ -1214,14 +1218,33 @@ public class FileServiceImpl implements FileService {
 					e.printStackTrace();
 				} // 실제 업로드
 			}
+		}
 		
 		if (uploadFile != null) {
 			
 			user.setPhoto_originname(uploadFile.getOriginName());
 			user.setPhoto_storedname(uploadFile.getStoredName());
-//			userDao.insertphoto(user);
-			System.out.println("FileServiceImpl에서의 uploadFile : " + uploadFile);
-			System.out.println("FileServiceImpl에서의 user매개변수 : " +  user);
+//			userDao.insertphoto(user); -> 컨트롤러에서
+//			System.out.println("FileServiceImpl에서의 uploadFile : " + uploadFile);
+//			System.out.println("FileServiceImpl에서의 user매개변수 : " +  user);
+		}
+	}
+
+	@Override
+	public void myPhotoDelete(String path, User user) {
+	
+		// 매개변수로 받아온 userno로 photo_orinnname, photo_storedname 구하는 메소드
+		User userinfo = userDao.selectUserPhotonameByuserno(user);		
+//		System.out.println("파일서비스 userinfo 객체정보 : " + userinfo);
+		
+		if(userinfo.getPhoto_storedname() != null) { //프로필사진 삭제 여러번 누를시 에러 제어
+			
+			File file = new File(path, userinfo.getPhoto_storedname());
+
+			if (file.delete()) {
+				// 유저의 파일경로 삭제 -> 수정
+				userDao.deletephoto(user);
+			} 
 		}
 	}
 	
