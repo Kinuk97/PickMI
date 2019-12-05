@@ -63,26 +63,37 @@ $(document).ready(function(){
 		$('.dropdown-menu').css('visibility', 'visible');
 	})
 	
+	//새 메시지 버튼을 눌렀을 때
+	$('#chatplusbtn').click(function(){
+		//메시지 목록창이 visible에서 hidden으로 변경됨
+		$('#msgscroll').css('visibility', 'hidden');
+	})
+	
 });
+
+//메시지 사용자 검색시 중복체크 방지
+function onecheckbox(a) {
+	var obj = document.getElementsByName("msgcheckbox");
+	
+	for(var i=0; i<obj.length; i++){
+		if(obj[i] != a) {
+			obj[i].checked = false;
+		}
+	}
+}
 
 </script>
 
 <!-- 메세지 -->
 <script type="text/javascript">
-
-window.onload = function(){
-	
-	
+// window.onload = function(){
 // 	//소켓열리면
 // 	ws.onopen = function() {
-		
 // 		//메세지보내는 메소드 send
 // 		ws.send("안녕");
 // 	}
-	
 // 	onclick
-	
-}
+// }
 
 $(document).ready(function(){
 	$("#btnMessageList").click(function(){
@@ -155,6 +166,7 @@ $(document).ready(function(){
 
 });
 
+//메세지를 보낼 사용자 검색
 $(document).ready(function(){
 	$("#chatplusBtn").click(function(){
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
@@ -167,46 +179,42 @@ $(document).ready(function(){
 			ws.send(msg);
 		}
 		
-		ws.onmessage = function(data){
-			console.log("!");
-			
-			var search = JSON.parse(data.data);
-			
-			var tr = $("<tr>");
-			tr.append( $("<th>"));
-			tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
-			tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
-			var table = $("<table></table>");
-			table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
-			.append(tr);
-			
-			for(var i=0; i<search.length; i++){
+		$.ajax({
+			type : "post",
+			url : "/ws/msg",
+			data : { "name" : "${name}", "email" : "${email}" },
+			dataType : "json",
+			success : ws.onmessage = function(data){
+				var search = JSON.parse(data.data);
 				
-// 				$("<table>").attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
-//	 			.append( $("<tr>"))
-				var tr = $("<tr></tr>");
-				tr.append($("<td>"));
-				tr.append( $("<td>").html(search[i].name))
-				tr.append( $("<td>").html(search[i].email))
+				var tr = $("<tr>");
+				tr.append( $("<th>"));
+				tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
+				tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
+				var table = $("<table></table>");
+				table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
+				.append(tr);
 				
-// 				$("<td>")
-// 				.append( $("<input>").attr({"type":"checkbox", "name":"checkRow", "id":"checkRow"}))
-// 				.appendTo( $("#searchplusmsg"));
+				for(var i=0; i<search.length; i++){
+					
+					var tr = $("<tr></tr>"); 
+					var td = $("<td></td>");
+					tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
+					tr.append( $("<td>").html(search[i].name))
+					tr.append( $("<td>").html(search[i].email))
+					
+					table.append(tr);
+				}
+				loading = false;
 				
-// 				$("<td>")
-// 				.append(search[i].name)
-// 				.appendTo( $("#searchplusmsg"));
-				
-// 				$("<td>")
-// 				.append(search[i].email + "<br>")
-// 				.appendTo( $("#searchplusmsg"));
-
-				table.append(tr);
+				$("#searchtable").append(table);
+				ws.close();
+			},
+			error : function(e) {
+				console.log(e);
 			}
 			
-			$("#searchtable").append(table);
-			ws.close();
-		}
+		})
 		
 	})
 	
@@ -215,6 +223,10 @@ $(document).ready(function(){
 
 
 <style type="text/css">
+
+#tableth {
+	text-align: center;
+}
 
 #msgtable {
 	text-align: center;
@@ -550,6 +562,7 @@ a#top {
 
 #msgscroll {
 	overflow: auto;
+	visibility: visible;
 }
 
 #mainboardlist {
@@ -694,7 +707,7 @@ a#top {
 		    												<h4>메시지를 보낼 사용자 검색</h4>
 		    												<hr>&emsp;&emsp;
 		    												<input type="text" class="form-control col-lg-4" id="searchform">
-		    												<button class="btn btn-default" id="searchbtn">검색</button>
+		    												<button class="btn btn-default" id="searchbtn" type="submit">검색</button>
 		    												<br>
 		    												
 		    												<div class="container container-center" id="searchtable">

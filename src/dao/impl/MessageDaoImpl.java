@@ -165,7 +165,7 @@ public class MessageDaoImpl implements MessageDao {
 //				user.setUserno( rs.getInt("userno"));
 
 				searchList.add(users);
-				System.out.println("user : " + users);
+				System.out.println("users : " + users);
 			}
 
 		} catch (SQLException e) {

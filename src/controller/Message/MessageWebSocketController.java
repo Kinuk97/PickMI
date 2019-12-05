@@ -25,7 +25,6 @@ import serivce.impl.MessageServiceImpl;
 public class MessageWebSocketController {
 	
 	private MessageService messageService = new MessageServiceImpl();
-	private MessageDao messageDao = new MessageDaoImpl();
 
 	public static int cnt = 5;
 	
@@ -78,7 +77,6 @@ public class MessageWebSocketController {
 			String search = null;
 			List<User> searchList = messageService.getSearchList(search, user);
 //			System.out.println("searchList : " + searchList);
-			
 			
 			return new Gson().toJson(searchList);
 			
