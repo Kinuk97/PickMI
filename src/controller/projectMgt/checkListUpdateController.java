@@ -8,29 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import dto.Schedule;
+import dto.CheckList;
 import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
 
-@WebServlet("/schedule/add")
-public class ScheduleAddController extends HttpServlet {
+@WebServlet("/schedule/update/check")
+public class checkListUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		resp.setCharacterEncoding("UTF-8");
-		
-		Schedule schedule = scheduleService.getSchedule(req);
+		CheckList checkList = scheduleService.getCheck(req);
 
-		if (scheduleService.checkSchedule(schedule)) {
-			scheduleService.putSchedule(schedule);
-		} else {
-			resp.getWriter().println("{ \"result\" : false }");
-		}
+		scheduleService.modifyCheckDo_check(checkList);
 	}
 }

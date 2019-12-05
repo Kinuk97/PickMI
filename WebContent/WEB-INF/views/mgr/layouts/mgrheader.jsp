@@ -58,21 +58,12 @@ $(document).ready(function() {
 	<div role="tabpanel">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist" id="menubar">
-			<li role="presentation" id="main"><a href="/mgr/main" aria-controls="main" role="tab">AdminMain</a></li>
-			<li role="presentation" id="profile"><a href="/mgr/profilelist" aria-controls="profile" role="tab">ProfileBoard</a></li>
-			<li role="presentation" id="project"><a href="/mgr/projectlist" aria-controls="project" role="tab">ProjectBoard</a></li>
-			<li role="presentation" id="comp"><a href="/mgr/complist" aria-controls="comp" role="tab">CompBoard</a></li>
-			<li role="presentation" id="free"><a href="/mgr/freelist" aria-controls="free" role="tab">FreeBoard</a></li>
-			<li role="presentation" id="user"><a href="/mgr/userlist" aria-controls="user" role="tab">User</a></li>
+			<li id="main"><a href="/mgr/main" aria-controls="main" role="tab">AdminMain</a></li>
+			<li id="profile"><a href="/mgr/profilelist" role="tab">ProfileBoard</a></li>
+			<li id="project"><a href="/mgr/projectlist"role="tab">ProjectBoard</a></li>
+			<li id="comp"><a href="/mgr/complist" aria-controls="comp" role="tab">CompBoard</a></li>
+			<li id="free"><a href="/mgr/freelist" aria-controls="free" role="tab">FreeBoard</a></li>
+			<li id="user"><a href="/mgr/userlist" aria-controls="user" role="tab">User</a></li>
 		</ul>
 
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane active" id="main"></div>
-			<div role="tabpanel" class="tab-pane" id="profile"></div>
-			<div role="tabpanel" class="tab-pane" id="project"></div>
-			<div role="tabpanel" class="tab-pane" id="comp"></div>
-			<div role="tabpanel" class="tab-pane" id="free"></div>
-			<div role="tabpanel" class="tab-pane" id="user"></div>
-		</div>
 	</div>
