@@ -56,4 +56,12 @@ public interface FileService {
 	 * @param req, User user - 파일과 파라미터가 담겨있는 객체
 	 */
 	public void myPhotoFile(HttpServletRequest req, User user); 
+	
+	/**
+	 * 사용사 사진 DB,서버에서 지우기
+	 * @param user - userno, 사진경로
+	 */
+	public void myPhotoDelete(String path, User user);
+	
+	
 }

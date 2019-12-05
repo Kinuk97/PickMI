@@ -25,6 +25,8 @@ public class Chatter {
 	public void setChat_user(int chat_user) {
 		this.chat_user = chat_user;
 	}
+
+	
 	
 	
 }

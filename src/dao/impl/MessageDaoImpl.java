@@ -11,6 +11,7 @@ import dao.face.MessageDao;
 import dbutil.DBConn;
 import dto.Chat;
 import dto.Chatter;
+import dto.User;
 
 public class MessageDaoImpl implements MessageDao {
 	
@@ -86,7 +87,6 @@ public class MessageDaoImpl implements MessageDao {
 		sql += " WHERE top = 1";
 		sql += " ORDER BY chat_sendtime DESC";
 
-		
 		//결과 저장 리스트
 		List<Chat> chatList = new ArrayList<>();
 		
@@ -124,5 +124,63 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		
 		return chatList;
+	}
+
+
+	@Override
+	public List<User> selectSearchMsgUser(String search, User user) {
+		
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "SELECT name, email ";
+		sql += "FROM user_table ";
+		
+		if ( search != null ) {
+			sql += "WHERE 1 = 1";
+			sql += "WHERE email LIKE '%' || ? || '%' OR name LIKE '%' || ? || '%'";
+		}
+				
+		//결과 저장 리스트
+		List<User> searchList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			if (search != null) {
+				ps.setString(1, user.getEmail());
+				ps.setString(2, user.getName());
+				
+			}
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				User users = new User();
+
+				users.setEmail( rs.getString("email"));
+				users.setName( rs.getString("name"));
+//				user.setUserno( rs.getInt("userno"));
+
+				searchList.add(users);
+				System.out.println("users : " + users);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return searchList;
 	}
 }
