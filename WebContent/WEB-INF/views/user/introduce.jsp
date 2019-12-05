@@ -8,6 +8,7 @@
 	}
 	.intro_chapter{
 		text-align: center;
+		margin-top: 120px;
 	}
 	.all{
 		width: 1000px;
@@ -55,7 +56,7 @@
 		<button id="project" class="btn btn-info">프로젝트 등록</button>
 	</div>	
 </div>
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
 
 <div style="text-align: center;">
 	<h3>프로젝트 협업을 도와줄 다양한 컨텐츠를 만나보세요.</h3>
@@ -95,6 +96,6 @@
 </div>
 </div>
 
-
+<br><br><br><br>
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
     
