@@ -48,7 +48,7 @@ div .cal-schedule {
 	width: 150px;
 }
 
-div .cal-schedule span {
+div .cal-schedule span:not([id="scheduleView"]) {
 	position: relative;
 	top: 105px;
 }
@@ -59,7 +59,6 @@ div .cal-schedule span {
 
 #scheduleView {
 	display: block;
-	top: 70%;
 }
 
 .ui-datepicker-month {
@@ -84,6 +83,10 @@ input[type="checkbox"] {
 .progress_meter {
     background-color: #5bc0de;
     height: 100%;
+}
+
+.scheduleText {
+	height: 84%;
 }
 </style>
 <script type="text/javascript">
@@ -119,7 +122,7 @@ input[type="checkbox"] {
 
 		// 일정 추가하는 버튼
 		$("div .cal-schedule").on("click", ".add", function() {
-			clickDate = new Date(year, month - 1, $(this).parent().prev().text()).format("yyyy-MM-dd");
+			clickDate = new Date(year, month - 1, $(this).parent().parent().prev().text()).format("yyyy-MM-dd");
 
 			$("#schedule_date").text(new Date(year, month - 1, $(this).parent().prev().text()));
 			$("#writeFormModal").modal();
@@ -207,6 +210,7 @@ input[type="checkbox"] {
 					$("#check_content").val("");
 					$("#schedule_checkListForm").hide();
 					viewSchedule(clickScheduleno);
+					getNewInfo();
 				},
 				error : function(e) {
 					console.log(e);
@@ -223,6 +227,8 @@ input[type="checkbox"] {
 				$(this).attr("checked", "");
 				checkedList($(this).data("checkno"), false);
 	        }
+			
+			getNewInfo();
 		});
 		
 		// 지도 추가 버튼
@@ -309,18 +315,32 @@ input[type="checkbox"] {
 				$("#cal_top_month").text(month);
 				for (var i = firstDay.getDay(); i < firstDay.getDay() + lastDay.getDate(); i++) {
 					$tdDay.eq(i).text(++dayCount);
+// 					$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus add'></span>"));
 					
-					$tdSche.eq(i).append($("<span id=\"add\" class='glyphicon glyphicon-plus add'></span>"));
+					var div = $("<div class='scheduleText'></div>");
+					
+					div.append($("<span id=\"add\" class='glyphicon glyphicon-plus add'></span>"));
 					
 					for (var j = 0; j < data.length; j++) {
 						let schedule_date = data[j].schedule_date.split(" ")[1].replace(",", "");
 						if (schedule_date == dayCount) {
-							$tdSche.eq(i).html("");
-							$tdSche.eq(i).append(data[j].title);
+							div.html("");
+							div.append($("<div>" + data[j].title + "</div>"));
+							
+							if (data[j].due_date != undefined) {
+								div.append($("<div>기한 : " + data[j].due_date + "</div>"));
+							}
+							
+							if (data[j].cntCheckList != 0) {
+								div.append($("<div>할 일 : " + data[j].cntCheckList + " / " + data[j].cntChecked + "</div>"));
+							}
+							
 							$tdSche.eq(i).append($("<span id=\"scheduleView\" class='label label-info scheduleView' data-scheduleno='" + data[j].scheduleno + "'>일정보기</span>"));
 							break;
 						}
 					} // 일정 반복문
+					
+					$tdSche.eq(i).prepend(div);
 				} // 날짜 반복문
 				
 				for (var i = 0; i < 42; i += 7) {
@@ -384,9 +404,9 @@ input[type="checkbox"] {
 				"title" : $("#scheduleTitle").val(),
 				"content" : $("#scheduleContent").val()
 			},
-			dataType : "text",
+			dataType : "json",
 			success : function(data) {
-				if (data.result == undefined) {
+				if (data.result) {
 					$("#scheduleTitle").val("");
 					$("#scheduleContent").val("");
 					$("#writeFormModal").modal('hide');
@@ -394,7 +414,6 @@ input[type="checkbox"] {
 				} else {
 					alert("이미 일정이 등록되어있습니다.");
 				}
-				
 			},
 			error : function(e) {
 				console.log(e);
@@ -438,7 +457,6 @@ input[type="checkbox"] {
 					$(".progress").show();
 					$("#checkList").show();
 					// ====================== 기능하는지 확인, 수정,삭제구현=============================================================
-					console.log(data.checkList.length);
 					if (data.checkList.length > 9) {
 						$("#addCheckListBtn").hide();
 					}
@@ -466,12 +484,8 @@ input[type="checkbox"] {
 		var checkedCnt = $("input[checked='checked']").length;
 		var checkboxCnt = $("input[type='checkbox']").length;
 		
-		console.log(checkedCnt + " : 체크한 박스");
-		console.log(checkboxCnt + " : 체크박스 수")
-		
 		var percentage = parseInt(((checkedCnt / checkboxCnt) * 100),10);
 		
-		console.log("퍼센트" + percentage);
 		$(".progress_meter").css("width", percentage + "%");
 		$(".progress_label").text(percentage + "%");
 	}
@@ -548,14 +562,18 @@ input[type="checkbox"] {
 	  <div class="modal-body">
 		<div class="form-group">
 			<div id="schedule_title"></div>
+			<br>
 			<div id="schedule_content"></div>
+			<br>
 			<div id="schedule_due_date"></div>
+			<br>
 			<div id="schedule_checkList">
 				<div class="progress">
   					<div class="progress_meter"><span class="progress_label"></span></div>
 				</div>
 				<div id="checkList"></div>
 			</div>
+			<br>
 			<div id="schedule_due_dateForm" hidden="hidden">
 				<div>
 					<h2>기한 추가</h2>
@@ -564,6 +582,7 @@ input[type="checkbox"] {
 					<button id="cancelBtn-due_date" class="btn btn-warning" hidden="hidden">취소</button>
 				</div>
 			</div>
+			<br>
 			<div id="schedule_checkListForm" hidden="hidden">
 				<div>
 					<h2>체크리스트 추가</h2>
@@ -572,6 +591,7 @@ input[type="checkbox"] {
 					<button class="btn btn-warning" id="cancelBtn-checkList" style="vertical-align: baseline;">취소</button>
 				</div>
 			</div>
+			<br>
 			<!-- 장소 추가하는 입력 폼 DIV -->
 <!-- 			<div id="schedule_content"></div> -->
 			
@@ -583,6 +603,5 @@ input[type="checkbox"] {
     </div>
   </div>
 </div>
-
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp"></jsp:include>
