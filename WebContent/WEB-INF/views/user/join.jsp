@@ -184,10 +184,10 @@
 
 				<div class="form-group text-center">
 					<button type="submit" id="join-submit" class="btn btn-primary">
-						회원가입<i class="fa fa-check spaceLeft"></i>
+						회원가입
 					</button>
 					<button type="button" id="join-cancel" class="btn btn-warning">
-						가입취소<i class="fa fa-times spaceLeft"></i>
+						가입취소
 					</button>
 				</div>
 			</form>
