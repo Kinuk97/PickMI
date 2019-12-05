@@ -31,6 +31,13 @@ public interface MessageService {
 	 * @return List - 검색한 목록
 	 */
 	public List<User> getSearchList(String search, User user);
+
+	/**
+	 * 
+	 * @param chat
+	 * @return
+	 */
+	public List<Chat> getChattingList(Chat chat);
 	
 	
 

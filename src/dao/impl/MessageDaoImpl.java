@@ -182,4 +182,59 @@ public class MessageDaoImpl implements MessageDao {
 
 		return searchList;
 	}
+
+
+	@Override
+	public List<Chat> selectChattingList(Chat chat) {
+
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "SELECT chat_no, chat_sender, chat_msg, TO_CHAR(chat_sendtime, 'YYYY/MM/DD HH:MI:SS') chat_sendtime, ";
+		sql += "	(SELECT name FROM user_table WHERE chat.chat_sender = userno) username "; 
+		sql += "FROM chat ";
+		sql += "WHERE chat_no = ? ";
+		sql += "ORDER BY chat_sendtime";
+				
+		//결과 저장 리스트
+		List<Chat> chattingList = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, chat.getChat_no());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Chat chats = new Chat();
+
+				chats.setChat_no( rs.getInt("chat_no"));
+				chats.setChat_sender( rs.getInt("chat_sender"));
+				chats.setChat_msg( rs.getString("chat_msg"));
+				chats.setChat_sendtime( rs.getString("chat_sendtime"));
+				chats.setUsername( rs.getString("username"));
+
+				chattingList.add(chats);
+				System.out.println("chats : " + chats);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return chattingList;
+	}
+
 }

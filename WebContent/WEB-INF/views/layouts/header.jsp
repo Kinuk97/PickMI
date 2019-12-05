@@ -116,7 +116,7 @@ $(document).ready(function(){
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
 					.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
-					.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
+					.append( $("<img>").attr({"src":"/resources/defaultuserphoto.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
 					.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
 					.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
 				).appendTo($("#msgList"))
@@ -135,7 +135,7 @@ $(document).ready(function(){
 		
 		ws.onopen = function() {
 	 		//메세지보내는 메소드 send
-	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no };
+	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no, username: '${name}' };
 	 		var msg = JSON.stringify(obj);
 	 		console.log(JSON.stringify(obj))
 	 		ws.send(msg);
@@ -149,6 +149,8 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
+	var ws = new WebSocket("ws://localhost:8089/ws/msg");
+	
 	$("#send").click(function(){
 		
 		var msg = {
@@ -158,10 +160,13 @@ $(document).ready(function(){
 		$("#msg").val("");
 		var json = JSON.stringify(msg);
 		console.log(json)
-		ws.send(json)
 		
+		ws.send(json);
+		
+		var textMsg = $()
+
 	})
-	
+	ws.close();
 	
 
 });
@@ -635,14 +640,13 @@ a#top {
 						<div id="msgresult">
 						
 						
-						
 						</div>
 						
 						<!-- 메세지 작성 창 -->
 						<input type="text" id="msg">
 						
 						<!-- 메세지 보내기 버튼 -->
-						<input value="전송" type="button" class="btn btn-default" id="send">
+						<input value="전송" type="button" class="btn btn-default" id="send" onclick="input()">
 						
 						<hr>
 					</div>
