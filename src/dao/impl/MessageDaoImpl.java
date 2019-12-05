@@ -135,12 +135,12 @@ public class MessageDaoImpl implements MessageDao {
 
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "SELECT name, email ";
+		sql += "SELECT name, email, userno ";
 		sql += "FROM user_table ";
 		
-		if ( search != null ) {
+		if ( search != null && !"".equals(search) ) {
 			sql += "WHERE 1 = 1";
-			sql += "WHERE email LIKE '%' || ? || '%' OR name LIKE '%' || ? || '%'";
+			sql += " AND ( email LIKE '%' || ? || '%' OR name LIKE '%' || ? || '%' )";
 		}
 				
 		//결과 저장 리스트
@@ -150,9 +150,8 @@ public class MessageDaoImpl implements MessageDao {
 			ps = conn.prepareStatement(sql);
 
 			if (search != null) {
-				ps.setString(1, user.getEmail());
-				ps.setString(2, user.getName());
-				
+				ps.setString(1, search);
+				ps.setString(2, search);
 			}
 
 			rs = ps.executeQuery();
@@ -162,7 +161,7 @@ public class MessageDaoImpl implements MessageDao {
 
 				users.setEmail( rs.getString("email"));
 				users.setName( rs.getString("name"));
-//				user.setUserno( rs.getInt("userno"));
+				users.setUserno( rs.getInt("userno"));
 
 				searchList.add(users);
 				System.out.println("users : " + users);

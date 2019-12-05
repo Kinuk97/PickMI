@@ -4,7 +4,9 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
 <div style="width: 1000px;" class="container container-center">
-<div style="text-align: center;"><h3>서비스 이용 약관</h3></div>
+<div style="text-align: center;">
+<br><br>
+<h3>서비스 이용 약관</h3><br></div>
 <hr>
 
 픽미 – 팀빌딩 플랫폼을 이용해 주셔서 감사합니다. (주)픽미에서 제공하고 있는 고객 정보 와 기업 정보는 (주)픽미에서 팀빌딩을 하고자 하는 예비창업, 스타트업, 기업과 팀과 스타트업을 찾고 있는 개인 및 팀을 위해 만들어 졌습니다. 이러한 자료를 이용하는데 가장 첫번째 필요한 것이 회원가입으로서 그 서비스를 이용하는데 있어 "서비스이용약관"을 공지하는 바입니다.
@@ -168,6 +170,6 @@ ID(고유번호) ,E-mail(전자우편) 주소 ,Password(비밀번호) 기타 회
 적용 일자: 2019년 12월 5일
 픽미 서비스와 관련하여 궁금하신 사항이 있으시면 고객센터(대표번호: 1234 – 5678/ 평일 09:00~18:00)로 문의 주시기 바랍니다.
 
-</div>
+</div><br>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

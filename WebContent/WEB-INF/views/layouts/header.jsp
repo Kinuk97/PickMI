@@ -179,46 +179,54 @@ $(document).ready(function(){
 			ws.send(msg);
 		}
 		
+		
+		ws.onmessage = function(data){
+			console.log("!")
+			var search = JSON.parse(data.data);
+			console.log(search)
+			var tr = $("<tr>");
+			tr.append( $("<th>"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
+			var table = $("<table></table>");
+			table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
+			.append(tr);
+			
+			for(var i=0; i<search.length; i++){
+				
+				var tr = $("<tr></tr>"); 
+				var td = $("<td></td>");
+				tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
+				tr.append( $("<td>").html(search[i].name))
+				tr.append( $("<td>").html(search[i].email))
+				
+				table.append(tr);
+			}
+			$("#searchtable").append(table);
+			ws.close();
+		}
+	
+ 	})
+ 	
+ 	
+ 	$("#searchbtn").click(function(){
 		$.ajax({
 			type : "post",
-			url : "/ws/msg",
-			data : { "name" : "${name}", "email" : "${email}" },
-			dataType : "json",
-			success : ws.onmessage = function(data){
-				var search = JSON.parse(data.data);
+			url : "/msg/search",
+			data : { search: $("#searchform").val() },
+			dataType : "html",
+			success : function(data){
 				
-				var tr = $("<tr>");
-				tr.append( $("<th>"));
-				tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
-				tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
-				var table = $("<table></table>");
-				table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
-				.append(tr);
+				$("#searchtable").html(data);
 				
-				for(var i=0; i<search.length; i++){
-					
-					var tr = $("<tr></tr>"); 
-					var td = $("<td></td>");
-					tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
-					tr.append( $("<td>").html(search[i].name))
-					tr.append( $("<td>").html(search[i].email))
-					
-					table.append(tr);
-				}
-				loading = false;
-				
-				$("#searchtable").append(table);
-				ws.close();
 			},
 			error : function(e) {
 				console.log(e);
 			}
 			
 		})
-		
-	})
-	
-});
+ 	})
+})
 </script>
 
 
@@ -585,6 +593,15 @@ a#top {
 	margin-top: 50px;
 	overflow: auto;
 }
+
+#serviceintro {
+	border-color: #333;
+    background-color: #00ff0000;
+}
+
+#serviceintro:hover {
+	background-color: #fff;
+}
 </style>
 </head>
 
@@ -707,7 +724,7 @@ a#top {
 		    												<h4>메시지를 보낼 사용자 검색</h4>
 		    												<hr>&emsp;&emsp;
 		    												<input type="text" class="form-control col-lg-4" id="searchform">
-		    												<button class="btn btn-default" id="searchbtn" type="submit">검색</button>
+		    												<button class="btn btn-default" id="searchbtn" type="button">검색</button>
 		    												<br>
 		    												
 		    												<div class="container container-center" id="searchtable">
@@ -760,11 +777,11 @@ a#top {
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 											data-toggle="dropdown">
 														<c:choose>
-														<c:when test ="${userinfo.photo_storedname eq null }">
-														<img id=headeruserimg src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
+														<c:when test ="${photo_storedname eq null }">
+														<img id="headeruserimg" src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
 														</c:when>
 														<c:otherwise>
-														<img id=headeruserimg src="/upload/${userinfo.photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
+														<img id="headeruserimg" src="/upload/${photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
 														</c:otherwise>
 														</c:choose>
 											</a>

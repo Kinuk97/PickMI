@@ -21,7 +21,7 @@
 	      	<h2 id="mainservice">"PickMI Service Guide"</h2>
 	      	<h3 id="mainservice">PickMI(Mate&Idea)를 이용하실 땐, 회원가입을 한 후 이용해보세요 :-)</h3>
 			<h3 id="mainservice">간편한 회원가입을 통해서 더 많은 서비스를 이용하실 수 있습니다.</h3>
-	        <button class="btn btn-primary" onclick="location.href='/main/intro'">서비스 소개</button>
+	        <button class="btn btn-default" onclick="location.href='/main/intro'" id="serviceintro">&emsp;&emsp;서비스 소개&emsp;&emsp;</button>
 	        <br>
 	        <br>
 	        <br>
