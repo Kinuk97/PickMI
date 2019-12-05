@@ -220,7 +220,7 @@ function ajaxFileDelete() {
 <!-- 			</form> -->
 						
 			<!-- 모달을 열기 위한 버튼 -->
-			<br>
+			<br><br>
 			<a href="/mypage/pwmodify"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal">
 			비밀번호 수정
 			</button></a>
@@ -253,8 +253,8 @@ function ajaxFileDelete() {
 			<br>
 			<br>
 			<br>
-			<p style="font-size: 17px; text-align:left;">이름 : ${userinfo.name }</p>
-			<p style="font-size: 17px; text-align:left;">이메일 : ${userinfo.email }</p>
+			<p style="font-size: 17px; text-align:left; margin-left:5%;">이름 : ${userinfo.name }</p>
+			<p style="font-size: 17px; text-align:left; margin-left:5%;">이메일 : ${userinfo.email }</p>
 			
 		</div>
 		
