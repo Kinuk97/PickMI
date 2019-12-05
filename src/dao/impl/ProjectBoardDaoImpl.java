@@ -527,8 +527,8 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 
 		String sql = "";
 		sql += "SELECT count(userno) FROM likepost";
-		sql += " WHERE boardno = ?";
-		sql += " 	AND postno = 2";
+		sql += " WHERE postno = 2";
+		sql += " 	AND boardno = ?";
 		
 		int cnt = 0;
 		
@@ -549,8 +549,8 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		} finally {
 			try {
 				//DB객체 닫기
-				if(ps!=null)	ps.close();
 				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

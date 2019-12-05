@@ -37,7 +37,7 @@ public class ProjectBoardLikeController extends HttpServlet {
 
 
 		// 결과 JSON응답
-		resp.getWriter().println("{\"countLike\": " + countLike + ", \"check\": " + check + "}");
+		resp.getWriter().println("{\"countLike\":" + countLike + ", \"check\":" + check +"}");
 
 	}
 
