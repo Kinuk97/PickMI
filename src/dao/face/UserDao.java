@@ -1,5 +1,6 @@
 package dao.face;
 
+import dto.Files;
 import dto.User;
 
 public interface UserDao {
@@ -48,6 +49,13 @@ public interface UserDao {
 	 * @param user
 	 */
 	public void updatePw(User user);
+
+	/**
+	 * 사용자 포토 업로드
+	 * @param uploadFile - photo_originname, photo_stroedname
+	 * @param user - userno
+	 */
+	public void insertphoto(User user);
 
 	
 

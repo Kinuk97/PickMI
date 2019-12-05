@@ -165,7 +165,7 @@ function readURL(input) {
 			<hr>
 			<p><img src="/resources/mainphoto.png" class="img-responsive img-circle" alt="Responsive image"></p>
 			
-			<form action="/mypage" action="post">
+			<form action="/mypage" method="post" enctype="multipart/form-data">
 			<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 변경</button>
 		 	<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 삭제</button>
 		 	<button type= "submit">전송</button>

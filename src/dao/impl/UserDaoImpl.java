@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import dao.face.UserDao;
 import dbutil.DBConn;
+import dto.Files;
 import dto.User;
 
 public class UserDaoImpl implements UserDao {
@@ -239,4 +240,43 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
+	@Override
+	public void insertphoto(User user) {
+//		System.out.println("userDAO에서의 uploadFile 매개변수가 갖고 있는것 : " + uploadFile); -- null
+		System.out.println("userDao에서의 user 매개변수가 갖고 있는 것 : " + user);
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		
+		sql += "UPDATE user_table SET photo_originname = ?, photo_storedname = ?";
+		sql += " WHERE userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, user.getPhoto_originname());
+			ps.setString(2, user.getPhoto_storedname());
+			ps.setInt(3, user.getUserno());
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+		
+	
 }

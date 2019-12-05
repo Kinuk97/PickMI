@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.Files;
+import dto.User;
 
 public interface FileService {
 
@@ -52,7 +53,7 @@ public interface FileService {
 	
 	/**
 	 * 마이페이지에서 프로필사진 올리는 기능
-	 * @param req - 파일과 파라미터가 담겨있는 객체
+	 * @param req, User user - 파일과 파라미터가 담겨있는 객체
 	 */
-	public void myPhotoFile(HttpServletRequest req); 
+	public void myPhotoFile(HttpServletRequest req, User user); 
 }
