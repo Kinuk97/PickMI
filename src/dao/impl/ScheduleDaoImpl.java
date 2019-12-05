@@ -63,7 +63,10 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public List<Schedule> selectAll(Schedule schedule) {
 
-		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ? ORDER BY schedule_date";
+		String sql = "SELECT schedule.*,"
+				+ " (SELECT count(*) FROM checklist WHERE schedule.scheduleno = checklist.scheduleno AND do_check = '1') cntChecked,"
+				+ " (SELECT count(*) FROM checklist WHERE schedule.scheduleno = checklist.scheduleno) cntCheckList"
+				+ " FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ? ORDER BY schedule_date";
 
 		List<Schedule> list = new ArrayList<Schedule>();
 
@@ -88,6 +91,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				temp.setSchedule_date(rs.getDate("schedule_date"));
 				temp.setDue_date(rs.getDate("due_date"));
 				temp.setWrite_date(rs.getDate("write_date"));
+				
+				temp.setCntChecked(rs.getInt("cntChecked"));
+				temp.setCntCheckList(rs.getInt("cntCheckList"));
 
 				list.add(temp);
 			}
