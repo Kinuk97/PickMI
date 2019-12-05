@@ -26,9 +26,10 @@ public class ScheduleAddController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		
 		Schedule schedule = scheduleService.getSchedule(req);
-
+		
 		if (scheduleService.checkSchedule(schedule)) {
 			scheduleService.putSchedule(schedule);
+			resp.getWriter().println("{ \"result\" : true }");
 		} else {
 			resp.getWriter().println("{ \"result\" : false }");
 		}

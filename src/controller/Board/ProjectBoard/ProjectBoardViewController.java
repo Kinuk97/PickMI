@@ -39,16 +39,16 @@ public class ProjectBoardViewController extends HttpServlet {
 		LikePost like = new LikePost();
 		like.setBoardno(projectBoard.getProj_no());
 		like.setPostno(2);
-		
 		try {
 		like.setUserno((int)session.getAttribute("userno"));
 		} catch (NullPointerException e) {
 			
 		}
 		
+//		System.out.println(like);
 		int countLike = projectBoardService.countLike(like);
 		req.setAttribute("countLike", countLike);
-		
+		System.out.println(countLike);
 		boolean check = projectBoardService.checkLike(like);
 		if(check) {
 			req.setAttribute("canLike", true);

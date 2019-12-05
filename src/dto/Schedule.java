@@ -13,6 +13,8 @@ public class Schedule {
 	private Date schedule_date;
 	private Date due_date;
 	private Date write_date;
+	private int cntChecked;
+	private int cntCheckList;
 	private List<CheckList> checkList;
 
 	private String curYear;
@@ -22,8 +24,8 @@ public class Schedule {
 	public String toString() {
 		return "Schedule [scheduleno=" + scheduleno + ", userno=" + userno + ", proj_no=" + proj_no + ", title=" + title
 				+ ", content=" + content + ", place=" + place + ", schedule_date=" + schedule_date + ", due_date="
-				+ due_date + ", write_date=" + write_date + ", checkList=" + checkList + ", curYear=" + curYear
-				+ ", curMonth=" + curMonth + "]";
+				+ due_date + ", write_date=" + write_date + ", cntChecked=" + cntChecked + ", cntCheckList="
+				+ cntCheckList + ", checkList=" + checkList + ", curYear=" + curYear + ", curMonth=" + curMonth + "]";
 	}
 
 	public int getScheduleno() {
@@ -96,6 +98,22 @@ public class Schedule {
 
 	public void setWrite_date(Date write_date) {
 		this.write_date = write_date;
+	}
+
+	public int getCntChecked() {
+		return cntChecked;
+	}
+
+	public void setCntChecked(int cntChecked) {
+		this.cntChecked = cntChecked;
+	}
+
+	public int getCntCheckList() {
+		return cntCheckList;
+	}
+
+	public void setCntCheckList(int cntCheckList) {
+		this.cntCheckList = cntCheckList;
 	}
 
 	public List<CheckList> getCheckList() {

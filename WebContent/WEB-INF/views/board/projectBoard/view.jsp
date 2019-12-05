@@ -188,7 +188,7 @@ function like(data) {
 
 			</tr>
 
-			<tr>
+			<tr	>
 				<td class="info">시작날짜</td>
 				<td>${projectBoard.proj_sdate }</td>
 				<td class="info">마감날짜</td>
