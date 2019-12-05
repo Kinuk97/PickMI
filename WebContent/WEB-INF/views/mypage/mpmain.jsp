@@ -25,56 +25,74 @@ $('#testBtn').click(function(e){
 </script>
 
 <script>
+// 사용자 사진 업로드
+function ajaxFileUpload() {
+	
+    // 업로드 버튼이 클릭되면 파일 찾기 창을 띄운다.
+    jQuery("#ajaxFile").click();
+}
 
-	var sel_file;
+function ajaxFileChange() {
+    // 파일이 선택되면 업로드를 진행한다.
+    ajaxFileTransmit();
+}
+
+function ajaxFileTransmit() {
+    var form = jQuery("ajaxFrom")[0];
+    var formData = new FormData(form);
+    formData.append("message", "파일 확인 창 숨기기");
+    formData.append("file", jQuery("#ajaxFile")[0].files[0]);
+
+    jQuery.ajax({
+          url : "/mypage"
+        , type : "POST"
+        , processData : false
+        , contentType : false
+        , data : formData
+        , dataType : "text"
+        , success:function(data) {
+        	$("#profileImg").attr("src", "/upload/" + data);
+        	$("#headeruserimg").attr("src", "/upload/" + data);
+        }
+    });
+}
+</script>
+
+<script type="text/javascript">
+
+//사용자 사진 업로드
+function ajaxFileDelete() {
 	
-	$(document).ready(function(){
-		$("#input_img").on("change", handleImgFileSelect);
-	});
-	
-	function handleImgFileSelect(e){
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		filesArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.")
-				return;
-			}
-		}
-		
-		sel_file = f;
-		
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$("#img").attr("src", e.target.result);
-		}
-		reader.readAsDataURL(f);
-		
-		});
-	}
+    // 버튼클릭
+//     jQuery("#ajaxDelete").click();
+    
+    ajaxFileTansmit();
+
+}
+
+function ajaxFileDelete() {
+
+    $.ajax({
+          url : "/mypage/photodelete"
+        , type : "POST"
+        , dataType : "text"
+        , success:function(data) {
+        	$("#profileImg").attr("src", "/resources/defaultuserphoto.png");
+        	$("#headeruserimg").attr("src", "/resources/defaultuserphoto.png");
+        }
+    	, error : function (e) {
+    		console.log(e);
+    	}
+    });
+}
 
 </script>
 
-<script>
 
-function readURL(input) {
-	 if (input.files && input.files[0]) {
-	  var reader = new FileReader();
-	  
-	  reader.onload = function (e) {
-	   $('#image_section').attr('src', e.target.result);  
-	  }
-	  
-	  reader.readAsDataURL(input.files[0]);
-	  }
-	}
-	  
-	$("#imgInput").change(function(){
-	   readURL(this);
-	});
+    
+    
 
-</script>
+
 
 <style type="text/css">
 
@@ -119,7 +137,7 @@ function readURL(input) {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 36%;
+    width: 38%;
     height: 200px;
     padding: 16px;
     margin: 50px;
@@ -132,7 +150,7 @@ function readURL(input) {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 36%;
+    width: 38%;
     height: 300px;
     padding: 16px;
     margin: 50px;
@@ -148,13 +166,22 @@ function readURL(input) {
     margin: auto;
 }
 
+#profileImg{
+	width:27%
+}
+
+#wrapper{
+	padding-top: 0px;
+    padding-bottom: 0px
+}
+
 </style>
 
 </head>
 <body>
 <div class="container myPageContainer">
 	<div class="container text-center">
-		<h1>마이페이지</h1>
+		<h1>😉마이페이지😉</h1>
 	</div>
 	<div class="container box">
 
@@ -163,25 +190,40 @@ function readURL(input) {
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px">나의정보</p></li>
 			</ul>
 			<hr>
-			<p><img src="/resources/mainphoto.png" class="img-responsive img-circle" alt="Responsive image"></p>
 			
-			<form action="/mypage" method="post" enctype="multipart/form-data">
-			<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 변경</button>
-		 	<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 삭제</button>
-		 	<button type= "submit">전송</button>
-			</form>
+			<c:choose>
+			<c:when test ="${userinfo.photo_storedname eq null }">
+			<p><img id="profileImg" src="/resources/defaultuserphoto.png" class="img-responsive img-circle" alt="Responsive image"></p>
+			</c:when>
+			<c:otherwise>
+			<p><img id="profileImg" src="/upload/${userinfo.photo_storedname }" class="img-responsive img-circle" alt="Responsive image"></p>
+			</c:otherwise>
+			</c:choose>
 			
-			<a href="/mypage/pwmodify"><button>비밀번호 수정 TEST ! ! ! </button></a>
-			
-			<ul class="list-group">
-			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px">이름 : ${userinfo.name }</p></li>
-			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px">이메일 : ${userinfo.email }</p></li>
-			</ul>
 
+   			 <!-- display:none으로 화면상에서 파일 확인 창을 숨겨둔다 -->
+    		<input type="file" id="ajaxFile" onChange="ajaxFileChange();" style="display:none;" accept=".jpeg, .jpg, .png"/>
+    		<input class="btn btn-info" type="button" onClick="ajaxFileUpload();" value="프로필사진 변경"/>
+			
+<!-- 			<input type="text" id="ajaxFile" onChange="ajaxFileChange();" style="display:none";/> -->
+    		<input class="btn btn-info" type="button" onClick="ajaxFileDelete();" value="프로필사진 삭제"/>
+
+<!-- 			<form action="/mypage/photodelete" method="post"> -->
+<!-- 				<button type="submit" class="btn btn-info">프로필사진 삭제</button> -->
+<!-- 			</form> -->
+			
+<!-- 			<form action="/mypage" method="post" enctype="multipart/form-data"> -->
+<!-- 			<input type='file' id='file' name='file' /> -->
+<!-- 			<button id='btn-upload' class="btn btn-info " onfocus="this.blur();">프로필사진변경</button> -->
+<!-- 			<input class="btn btn-info" type="file" name="uploadFile"><button type="button" class="btn btn-info ">프로필사진 변경</button> -->
+<!-- 		 	<button type= "submit">전송</button> -->
+<!-- 			</form> -->
+						
 			<!-- 모달을 열기 위한 버튼 -->
-			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal">
+			<br>
+			<a href="/mypage/pwmodify"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal">
 			비밀번호 수정
-			</button>
+			</button></a>
 			<!-- 모달 영역 -->
 			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -190,12 +232,7 @@ function readURL(input) {
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			<h4 class="modal-title" id="myModalLabel">비밀번호 수정</h4>
 			</div>
-			
-			<form id="form" runat="server">
-			   <input type='file' id="imgInput"/>
-			   <img id="image_section" src="#" alt="your image"/>
-			</form>
-			
+						
 			<form action="/mypage/pwmodify" method="post">
 				<div class="modal-body">
 				현재비밀번호<input type="password" name="password1"> <br>
@@ -213,10 +250,19 @@ function readURL(input) {
 			
 			<br>
 			<button type="button" class="btn btn-info">회원탈퇴</button>
+			<br>
+			<br>
+			<br>
+			<p style="font-size: 17px; text-align:left;">이름 : ${userinfo.name }</p>
+			<p style="font-size: 17px; text-align:left;">이메일 : ${userinfo.email }</p>
+			
 		</div>
 		
 		<div class="inner_con2">
-			<p style="text-align:left; font-size:25px">활동이력</p>
+			 <ul class="list-group">
+			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">활동이력</p></li>
+			</ul>
+<!-- 			<p style="text-align:left; font-size:25px">활동이력</p> -->
 			<hr>
 			<a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
 			내가쓴댓글가져오기
@@ -224,7 +270,10 @@ function readURL(input) {
 		</div>
 
 		<div class="inner_con3">
-			<p style=" text-align: left; font-size:25px;">프로젝트관리 <hr>
+			<ul class="list-group">
+			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">프로젝트 관리</p></li>
+			</ul>
+			<hr>
 		</div>
 		
 		<div style="clear: both;"></div>
