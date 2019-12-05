@@ -593,6 +593,15 @@ a#top {
 	margin-top: 50px;
 	overflow: auto;
 }
+
+#serviceintro {
+	border-color: #333;
+    background-color: #00ff0000;
+}
+
+#serviceintro:hover {
+	background-color: #fff;
+}
 </style>
 </head>
 
