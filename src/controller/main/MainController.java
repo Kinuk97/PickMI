@@ -1,4 +1,4 @@
-package controller;
+package controller.main;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,6 +52,6 @@ public class MainController extends HttpServlet {
 		req.setAttribute("freeBoard", freeBoard);
 		
 		
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/main/main.jsp").forward(req, resp);
 	}
 }
