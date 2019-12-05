@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
 		
 		String param = null;
 		
-		param = req.getParameter("pw1");
+		param = req.getParameter("pw");
 		user.setPw(param);
 		
 		return user;

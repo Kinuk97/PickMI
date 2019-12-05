@@ -63,26 +63,37 @@ $(document).ready(function(){
 		$('.dropdown-menu').css('visibility', 'visible');
 	})
 	
+	//새 메시지 버튼을 눌렀을 때
+	$('#chatplusbtn').click(function(){
+		//메시지 목록창이 visible에서 hidden으로 변경됨
+		$('#msgscroll').css('visibility', 'hidden');
+	})
+	
 });
+
+//메시지 사용자 검색시 중복체크 방지
+function onecheckbox(a) {
+	var obj = document.getElementsByName("msgcheckbox");
+	
+	for(var i=0; i<obj.length; i++){
+		if(obj[i] != a) {
+			obj[i].checked = false;
+		}
+	}
+}
 
 </script>
 
 <!-- 메세지 -->
 <script type="text/javascript">
-
-window.onload = function(){
-	
-	
+// window.onload = function(){
 // 	//소켓열리면
 // 	ws.onopen = function() {
-		
 // 		//메세지보내는 메소드 send
 // 		ws.send("안녕");
 // 	}
-	
 // 	onclick
-	
-}
+// }
 
 $(document).ready(function(){
 	$("#btnMessageList").click(function(){
@@ -104,17 +115,17 @@ $(document).ready(function(){
 				var spantext = "&emsp;"+list[i].username+"님의 새로운 메시지 <br><small>"+list[i].chat_sendtime+"에 보냄</small>"+ "<hr class='a'>";
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
-				.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
-						.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
-						.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
-						.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
+					.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
+					.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
+					.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
+					.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
 				).appendTo($("#msgList"))
 			}
 			ws.close();
 		}
 		
 	})
-})
+});
 
 $(document).ready(function(){
 	$('#msgList').on("click", ".messagelist", function() {
@@ -154,10 +165,80 @@ $(document).ready(function(){
 	
 
 });
+
+//메세지를 보낼 사용자 검색
+$(document).ready(function(){
+	$("#chatplusBtn").click(function(){
+		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+		
+		ws.onopen = function() {
+			
+			var obj = { type: "search", name : '${name}', email: '${email}' };
+			var msg = JSON.stringify(obj);
+			console.log(msg);
+			ws.send(msg);
+		}
+		
+		
+		ws.onmessage = function(data){
+			console.log("!")
+			var search = JSON.parse(data.data);
+			console.log(search)
+			var tr = $("<tr>");
+			tr.append( $("<th>"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
+			var table = $("<table></table>");
+			table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
+			.append(tr);
+			
+			for(var i=0; i<search.length; i++){
+				
+				var tr = $("<tr></tr>"); 
+				var td = $("<td></td>");
+				tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
+				tr.append( $("<td>").html(search[i].name))
+				tr.append( $("<td>").html(search[i].email))
+				
+				table.append(tr);
+			}
+			$("#searchtable").append(table);
+			ws.close();
+		}
+	
+ 	})
+ 	
+ 	
+ 	$("#searchbtn").click(function(){
+		$.ajax({
+			type : "post",
+			url : "/msg/search",
+			data : { search: $("#searchform").val() },
+			dataType : "html",
+			success : function(data){
+				
+				$("#searchtable").html(data);
+				
+			},
+			error : function(e) {
+				console.log(e);
+			}
+			
+		})
+ 	})
+})
 </script>
 
 
 <style type="text/css">
+
+#tableth {
+	text-align: center;
+}
+
+#msgtable {
+	text-align: center;
+}
 
 @font-face { 
 	font-family: 'KHNPHD'; 
@@ -489,6 +570,7 @@ a#top {
 
 #msgscroll {
 	overflow: auto;
+	visibility: visible;
 }
 
 #mainboardlist {
@@ -498,11 +580,18 @@ a#top {
 
 #searchform {
 	width: 70%;
-	margin-left: 50px;
+	margin-left: 57px;
 }
 
 #searchbtn {
 	float: left;
+}
+
+#searchtable {
+	width: 420px;
+	height: 300px;
+	margin-top: 50px;
+	overflow: auto;
 }
 </style>
 </head>
@@ -626,10 +715,29 @@ a#top {
 		    												<h4>메시지를 보낼 사용자 검색</h4>
 		    												<hr>&emsp;&emsp;
 		    												<input type="text" class="form-control col-lg-4" id="searchform">
-		    												<button class="btn btn-default" id="searchbtn">검색</button>
-		    												<br>
+		    												<button class="btn btn-default" id="searchbtn" type="button">검색</button>
 		    												<br>
 		    												
+		    												<div class="container container-center" id="searchtable">
+<!-- 			    												<table class="table table-striped table-hover text-center"> -->
+			    												
+<!-- 			    													<tr> -->
+<!-- 			    														<th></th> -->
+<!-- 			    														<th style="text-align: center;">이름</th> -->
+<!-- 			    														<th style="text-align: center;">이메일</th> -->
+<!-- 			    													</tr> -->
+			    													
+<!-- 			    													<tr style="text-align: center;" id="searchplusmsg"> -->
+<!-- 			    														<td> -->
+<!-- 																			<input type="checkbox" name="checkRow" id="checkRow"> -->
+<!-- 																		</td> -->
+<%-- 			    														<td>${name }</td> --%>
+<%-- 			    														<td>${email }</td> --%>
+<!-- 			    													</tr> -->
+<!-- 																</table> -->
+																
+		    												</div>
+															<button class="btn btn-default">선택</button>
 	    												</div> 
 												    </div>
 												</div>
@@ -658,7 +766,16 @@ a#top {
 						<c:otherwise>
 							<ul style="list-style: none; padding-left: 5px; padding-right: 5px;">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
-											data-toggle="dropdown">z<img src="/resources/gray.png" class="img-circle" style="width: 50px; height: 50px;"></a>
+											data-toggle="dropdown">
+														<c:choose>
+														<c:when test ="${photo_storedname eq null }">
+														<img id="headeruserimg" src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
+														</c:when>
+														<c:otherwise>
+														<img id="headeruserimg" src="/upload/${photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
+														</c:otherwise>
+														</c:choose>
+											</a>
 									<ul class="dropdown-menu">
 										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
 										<li><a href="#"><i class="icon-arrow-down"></i>추가할거</a></li>

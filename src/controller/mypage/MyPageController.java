@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import dao.face.UserDao;
 import dao.impl.UserDaoImpl;
-import dto.Files;
 import dto.User;
 import serivce.face.FileService;
 import serivce.face.MyPageService;
@@ -42,6 +43,7 @@ public class MyPageController extends HttpServlet {
 		
 		req.setAttribute("userinfo", userinfo);
 
+		resp.setCharacterEncoding("utf-8");
 		req.getRequestDispatcher("/WEB-INF/views/mypage/mpmain.jsp")
 		.forward(req, resp);
 	
@@ -49,16 +51,15 @@ public class MyPageController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		System.out.println("두포스트");
+//		System.out.println("두포스트");
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		
 		User user = new User();
-		
+			
 		user.setUserno((Integer)req.getSession().getAttribute("userno"));
-		user.setPhoto_originname((String)req.getAttribute("originname"));
-		user.setPhoto_storedname((String)req.getAttribute("storedname"));
+//		user.setPhoto_originname((String)req.getAttribute("originname"));
+//		user.setPhoto_storedname((String)req.getAttribute("storedname"));
 		
 //		System.out.println("user 객체 정보 : " + user); -- null
 		
@@ -67,6 +68,9 @@ public class MyPageController extends HttpServlet {
 				
 		userDao.insertphoto(user);
 		
+		//Ajax에서 다시 들어올 때 
+		resp.setCharacterEncoding("utf-8");
+		resp.getWriter().println(user.getPhoto_storedname());
 	}
 	
 }

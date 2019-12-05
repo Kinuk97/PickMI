@@ -52,10 +52,25 @@ public interface UserDao {
 
 	/**
 	 * 사용자 포토 업로드
-	 * @param uploadFile - photo_originname, photo_stroedname
 	 * @param user - userno
+	 * @return 
 	 */
-	public void insertphoto(User user);
+	public User insertphoto(User user);
+	
+	/**
+	 * userno로 DB의 storedname 가져오기
+	 * @param user - userno
+	 * @return user - photo_storedname
+	 */
+	public User selectUserPhotonameByuserno(User user);
+
+	
+	/**
+	 * 사용자 포토 삭제
+	 * @param - uerno, photo_originname, photo_stroedname
+	 * @return 
+	 */
+	public void deletephoto(User user);
 
 	
 

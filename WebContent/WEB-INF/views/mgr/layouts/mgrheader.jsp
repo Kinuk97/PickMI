@@ -49,11 +49,22 @@ $(document).ready(function() {
 	height: 10px;
 }
 
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+#mgrheaderfont {
+	font-family:'KHNPHD';
+}
+
 </style>
 
 
 </head>
-<body>
+<body id="mgrheaderfont">
 
 	<div role="tabpanel">
 		<!-- Nav tabs -->

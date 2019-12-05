@@ -101,12 +101,12 @@ $(document).ready(function() {
 	
 	
 	// 변경 버튼 동작
-	$("#change").click(function() {
+	$("#change").on("click",function() {
 	
 		// 비밀번호 입력
-        if($("#pw").val() ==''){
+        if($("#pw1").val() ==''){
         	warningModal('변경 비밀번호를 입력하세요');
-            $("#pw").focus();
+            $("#pw1").focus();
             return false;
         }
 		
@@ -118,8 +118,9 @@ $(document).ready(function() {
         }
 		
         // 동일 비밀번호
-		if($("#pw").val()!== $("#pw2").val()){
-	    	warningModal('비밀번호를 동일하게 입력하세요');
+		if($("#pw1").val()!== $("#pw2").val()){
+			alert('비밀번호를 동일하게 입력하세요');
+// 	    	warningModal('비밀번호를 동일하게 입력하세요');
 	    	return false;
 		}
 	

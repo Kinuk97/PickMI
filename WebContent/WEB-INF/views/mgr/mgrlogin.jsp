@@ -32,12 +32,22 @@ font-size:1em;
 font-size:0.7666666667em;
 }
 
+@font-face { 
+	font-family: 'KHNPHD'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KHNPHD.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
+.mgrmainfont {
+	font-family:'KHNPHD';
+}
 
 </style>
 
 
 </head>
-<body>
+<body class="mgrmainfont">
 
 	<div class="con1" style="text-align:center;">
 	
@@ -65,9 +75,9 @@ font-size:0.7666666667em;
 	<div class="con2">
 		<div class="col-lg-offset-4 col-md-4">
 			<ul style="color: #444a; margin-left:40px;" class="info">
-				<li>이곳은 관리자전용페이지입니다. 로그인을 하셔야 이용하실 수 있습니다.</li>
-				<li>부여받은 아이디와 비밀번호를 넣으신 후 로그인을 하시면됩니다.</li>
-				<li>아이디와 비밀번호를 잊으셨을 경우는 당사 담당자에게 연락해 주시기 바랍니다.</li>
+				<li style="font-size: larger;">이곳은 관리자전용페이지입니다. 로그인을 하셔야 이용하실 수 있습니다.</li>
+				<li style="font-size: larger;">부여받은 아이디와 비밀번호를 넣으신 후 로그인을 하시면됩니다.</li>
+				<li style="font-size: larger;">아이디와 비밀번호를 잊으셨을 경우는 당사 담당자에게 연락해 주시기 바랍니다.</li>
 			</ul>
 		</div>
 	</div>

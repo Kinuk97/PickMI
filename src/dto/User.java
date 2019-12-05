@@ -7,6 +7,8 @@ public class User {
 	private String name;
 	private String photo_originname;
 	private String photo_storedname;
+	private String search;
+
 
 	@Override
 	public String toString() {
@@ -62,4 +64,11 @@ public class User {
 		this.photo_storedname = photo_storedname;
 	}
 
+	public String getSearch() {
+		return search;
+	}
+	
+	public void setSearch(String search) {
+		this.search = search;
+	}
 }
