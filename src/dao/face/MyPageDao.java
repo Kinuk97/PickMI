@@ -52,6 +52,14 @@ public interface MyPageDao {
 	
 	int selectCntUserByupw(User pwparam);
 
+	/**
+	 * 사용자 삭제하는 메소드
+	 * 
+	 * @param user - 사용자 번호가 담겨있는 객체
+	 * @return 쿼리 수행 결과
+	 */
+	public int deleteUser(User user);
+
 
 
 

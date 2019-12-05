@@ -65,6 +65,14 @@ public interface MyPageService {
 
 	public void modifyPw(User pwparam);
 
+	/**
+	 * 게시글 삭제하는 기능
+	 * 
+	 * @param User - 사용자번호가 담겨있는 객체
+	 * @return 삭제 성공 여부 반환
+	 */
+	public boolean userDelete(User user);
+
 	
 	
 }
