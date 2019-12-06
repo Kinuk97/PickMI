@@ -248,26 +248,26 @@ select {
 	
 <br>	
 <hr>
-	<c:forEach var="board" items="${boardList }">
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
-				<div class="caption caption-project">
-					<h2>
-						${board.proj_title }
-					</h2>
+<%-- 	<c:forEach var="board" items="${boardList }"> --%>
+<!-- 		<div class="col-sm-6 col-md-4 col-lg-3"> -->
+<%-- 			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'"> --%>
+<!-- 				<div class="caption caption-project"> -->
+<!-- 					<h2> -->
+<%-- 						${board.proj_title } --%>
+<!-- 					</h2> -->
 
-					<p>지역 : ${board.proj_loc }</p>
-					<p>경력 : ${board.proj_career }</p>
-					<p>직업 : ${board.proj_job }</p>
-					<p>진행상황 : ${board.proj_progress }</p>
+<%-- 					<p>지역 : ${board.proj_loc }</p> --%>
+<%-- 					<p>경력 : ${board.proj_career }</p> --%>
+<%-- 					<p>직업 : ${board.proj_job }</p> --%>
+<%-- 					<p>진행상황 : ${board.proj_progress }</p> --%>
 					
-					<div class="text-right">신청수 : ${board.proj_apply }</div>
-					<div class="text-right">찜개수 : ${board.proj_like }</div>
-					<div class="text-right">${board.proj_time }</div>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
+<%-- 					<div class="text-right">신청수 : ${board.proj_apply }</div> --%>
+<%-- 					<div class="text-right">찜개수 : ${board.proj_like }</div> --%>
+<%-- 					<div class="text-right">${board.proj_time }</div> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<%-- 	</c:forEach> --%>
 </div>
 <div style="clear: both;"></div>
 
