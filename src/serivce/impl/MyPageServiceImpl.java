@@ -12,6 +12,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import serivce.face.MyPageService;
 import util.Paging;
@@ -22,7 +23,7 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	private MyPageDao myPageDao = MyPageDaoImpl.getInstance();
 	
-	private MyPageServiceImpl() {
+	public MyPageServiceImpl() {
 	}
 	
 	private static class Singleton{
@@ -145,6 +146,12 @@ public class MyPageServiceImpl implements MyPageService {
 			return false;			
 		}
 		
+	}
+
+	@Override
+	public List<Reply> getReplyList(Paging paging) {
+		
+		return myPageDao.selectReply(paging);
 	}
 
 }

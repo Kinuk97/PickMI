@@ -462,7 +462,7 @@ $(document).ready(function() {
 <!-- 			<p style="text-align:left; font-size:25px">활동이력</p> -->
 			<hr>
 			<a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
-			내가쓴댓글가져오기
+			<a href="/mycomment/list">내가쓴댓글가져오기</a> 
 			찜하기한글가져오기
 		</div>
 

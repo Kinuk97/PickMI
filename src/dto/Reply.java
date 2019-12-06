@@ -11,10 +11,12 @@ public class Reply {
 	private String reply;
 	private Date replytime;
 
+	private String title;
+
 	@Override
 	public String toString() {
 		return "Reply [replyno=" + replyno + ", boardno=" + boardno + ", postno=" + postno + ", userno=" + userno
-				+ ", username=" + username + ", reply=" + reply + ", replytime=" + replytime + "]";
+				+ ", username=" + username + ", reply=" + reply + ", replytime=" + replytime + ", title=" + title + "]";
 	}
 
 	public int getReplyno() {
@@ -71,6 +73,14 @@ public class Reply {
 
 	public void setReplytime(Date replytime) {
 		this.replytime = replytime;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

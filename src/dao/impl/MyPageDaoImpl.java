@@ -15,6 +15,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import util.Paging;
 
@@ -226,5 +227,20 @@ public class MyPageDaoImpl implements MyPageDao{
 		}
 		return result;
 		
+	}
+
+	@Override
+	public List<Reply> selectReply(Paging paging) {
+
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		sql += "SELECT replyno, boardno, postno, ";
+		sql	+= "	(SELECT userno FROM user_table WHERE userno = reply.userno)userno, ";
+		sql	+= "		username, reply, replytime";
+		sql += "			FROM reply";
+		
+		
+		return null;
 	}
 }
