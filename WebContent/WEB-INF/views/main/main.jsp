@@ -184,7 +184,9 @@
 		
 	</div>
 	
+	
 </div>
 
+<div style="clear: both;"></div>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
