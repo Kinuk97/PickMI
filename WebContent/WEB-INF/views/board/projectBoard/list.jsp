@@ -27,7 +27,7 @@
 						
 						var caption = $("<div class='caption caption-project' onclick=\"location.href='/projectBoard/view?proj_no="+data[i].proj_no+"'\"></div>");
 						
-						caption.append($("<h2></h2>").text(data[i].proj_title));
+						caption.append($("<h4></h4>").text(data[i].proj_title));
 						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
 						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
 						caption.append($("<p></p>").text("직업 : " + data[i].proj_job));
@@ -252,9 +252,9 @@ select {
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
 				<div class="caption caption-project">
-					<h2>
+					<h4>
 						${board.proj_title }
-					</h2>
+					</h4>
 
 					<p>지역 : ${board.proj_loc }</p>
 					<p>경력 : ${board.proj_career }</p>
