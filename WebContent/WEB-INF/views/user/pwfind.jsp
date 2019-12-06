@@ -87,22 +87,26 @@
 #logo {
 	height: 10px;
 }
+
+.modal-backdrop{
+	z-index: -1;
+}
 </style>
 
 <script type="text/javascript">
 
-// $(document).ready(function() {
+$(document).ready(function() {
 	
-// 	//경고 모달 호출 메서드
-// 	   function warningModal(content) {
-// 	      $(".modal-contents").text(content);
-// 	      $("#defaultModal").modal('show');
-// 	   }	
+	//경고 모달 호출 메서드
+	   function warningModal(content) {
+	      $(".modal-contents").text(content);
+	      $("#defaultModal").modal('show');
+	   }	
 	
 	
 	
 // 	// 찾기 버튼 동작
-// 	$("#find").click(function() {
+// 	$("#find").on("click", function() {
 // // 		if(!$("email").val().equals("${USER.email}") || !$("name").val().equals("${USER.name}")){
 // // 			alert("회원이 아닙니다.");
 // // 		} else{
@@ -132,8 +136,9 @@
 //  	if($("email").val() != ${USER.email} || $("name").val() != ${USER.name}){
 //  		warningModal("회원이 아닙니다");
 // //  		alert("회원이 아닙니다");
-//  		close();
+// 		return false;
 //   		}
+//  		 $("#findForm").submit();
 // 	});
 
 	
@@ -145,7 +150,7 @@
 
 
 	<div class="find-form" id="log" style="margin-top: 100px;">
-		<form action="/pwfind" method="post" name="findForm">
+		<form action="/pwfind" method="post" name="findForm" id="findForm">
 			<h2 class="text-center">비밀번호 찾기</h2>
 			<div class="form-group">
 				<div class="input-group">
@@ -174,23 +179,23 @@
 	</div>
 
 <!--모달창 -->
-<!-- 	<div class="modal fade" id="defaultModal"> -->
-<!-- 		<div class="modal-dialog"> -->
-<!-- 			<div class="modal-content "> -->
-<!-- 				<div class="modal-header panel-heading"> -->
-<!-- 					<h4 class="modal-title">알림</h4> -->
-<!-- 				</div> -->
-<!-- 				<div class="modal-body"> -->
-<!-- 					<p class="modal-contents"></p> -->
-<!-- 				</div> -->
-<!-- 				<div class="modal-footer"> -->
-<!-- 					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+	<div class="modal fade" id="defaultModal">
+		<div class="modal-dialog">
+			<div class="modal-content ">
+				<div class="modal-header panel-heading">
+					<h4 class="modal-title">알림</h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-contents"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
 <!-- 			/.modal-content -->
-<!-- 		</div> -->
+		</div>
 <!-- 		/.modal-dialog -->
-<!-- 	</div> -->
+	</div>
 	<!-- /.modal -->
 
 	<!-- 모달창 -->
