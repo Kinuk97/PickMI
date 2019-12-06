@@ -8,25 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.Schedule;
+import dto.CheckList;
 import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
 
-
-@WebServlet("/schedule/remove")
-public class ScheduleDeleteController extends HttpServlet {
+@WebServlet("/schedule/modify/check")
+public class CheckListModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Schedule schedule = scheduleService.getSchedule(req);
-		schedule = scheduleService.getSchedule(schedule);
+		req.setCharacterEncoding("UTF-8");
 		
-		if ( schedule.getScheduleno() != 0 ) {
-			scheduleService.removeSchedule(schedule);
-		}
+		CheckList checkList = scheduleService.getCheck(req);
+		
+		scheduleService.modifyCheckContent(checkList);
 	}
 
 }

@@ -164,7 +164,7 @@
 		<c:forEach items="${freeBoard }" var="free">
 			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
 				<div class="thumbnail"
-					onclick="location.href='/compBoard/view?free_no=${free.free_no }'"
+					onclick="location.href='/freeboard/view?free_no=${free.free_no }'"
 					id="compboardlist" style="cursor: pointer; hover: #ccc;">
 					<div class="caption">
 						<h4>${free.free_title }</h4>

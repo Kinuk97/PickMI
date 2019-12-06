@@ -15,8 +15,8 @@ import serivce.impl.ScheduleServiceImpl;
 /**
  * Servlet implementation class ScheduleModifyController
  */
-@WebServlet("/schedule/modify/due_date")
-public class ScheduleModifyDue_DateController extends HttpServlet {
+@WebServlet("/schedule/modify")
+public class ScheduleModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
@@ -27,7 +27,18 @@ public class ScheduleModifyDue_DateController extends HttpServlet {
 		
 		Schedule selectSchedule = scheduleService.getSchedule(schedule);
 		
-		selectSchedule.setDue_date(schedule.getDue_date());
+		String kinds = req.getParameter("kinds");
+		
+		if (kinds != null && kinds.equals("1")) {
+			// title 수정
+			selectSchedule.setTitle(schedule.getTitle());
+		} else if (kinds.equals("2")) {
+			// content 수정
+			selectSchedule.setContent(schedule.getContent());
+		} else if (kinds.equals("3")) {
+			// due_date 수정
+			selectSchedule.setDue_date(schedule.getDue_date());
+		} 
 		
 		scheduleService.modifySchedule(selectSchedule);
 	}
