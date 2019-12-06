@@ -28,21 +28,15 @@ public class MgrFreeBoardDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		FreeBoard boardno = freeboardService.getParam(req);
-		FreeBoard selectBoard = freeboardService.FreeBoardDetail(boardno);
-//		System.out.println("boardno : " + boardno);
-//		System.out.println("selectBoard : " + selectBoard);
+		String[] strings = req.getParameterValues("checkRow");
+		FreeBoard freeBoard = new FreeBoard();
 		
-		if (boardno.getFree_no() != 0) {
-			try {
-				if (selectBoard != null) {			
-					fileService.deleteFile(getServletContext().getRealPath("upload"), 3, boardno.getFree_no());
-					freeboardService.removeBoard(boardno);
-				}
-			} catch (ClassCastException e) {
-				e.printStackTrace();	
-			}
-		}	
+		for (String string : strings) {
+			freeBoard.setFree_no(Integer.parseInt(string));
+			fileService.deleteFile(getServletContext().getRealPath("upload"), 3, freeBoard.getFree_no());
+			freeboardService.removeBoard(freeBoard);		
+		}
+		
 			resp.sendRedirect("/mgr/freelist");		
 	}
 }

@@ -62,11 +62,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 		param = req.getParameter("title");
 		if (param != null && !"".equals(param)) {
 			schedule.setTitle(param);
+		} else {
+			schedule.setTitle("내용없음");
 		}
 
 		param = req.getParameter("content");
 		if (param != null && !"".equals(param)) {
 			schedule.setContent(param);
+		} else {
+			schedule.setContent("내용없음");
 		}
 
 		param = req.getParameter("schedule_date");
@@ -188,11 +192,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public void modifySchedule(Schedule schedule) {
 		scheduleDao.updateSchedule(schedule);
-
 	}
 
 	@Override
 	public void removeSchedule(Schedule schedule) {
+		CheckList temp = new CheckList();
+		temp.setScheduleno(schedule.getScheduleno());
+		scheduleDao.deleteCheckList(temp);
 		scheduleDao.deleteSchedule(schedule);
 	}
 
@@ -226,20 +232,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 	@Override
 	public void modifyCheckContent(CheckList checkList) {
-		// TODO Auto-generated method stub
-
+		scheduleDao.updateCheckContent(checkList);
 	}
 
 	@Override
 	public void removeCheck(CheckList checkList) {
-		// TODO Auto-generated method stub
-
+		scheduleDao.deleteCheck(checkList);
 	}
 
 	@Override
 	public void removeCheckList(CheckList checkList) {
-		// TODO Auto-generated method stub
-
+		scheduleDao.deleteCheckList(checkList);
 	}
 
 	// =============================================================================================================

@@ -16,7 +16,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div id="mainslide" class="item active">
-<!--       <img src="/resources/gray.png" alt="..."> -->
+      <img src="/resources/desk.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
 	      <div class="carousel-caption" id="mainservicediv1">
 	      	<h2 id="mainservice">"PickMI Service Guide"</h2>
 	      	<h3 id="mainservice">PickMI(Mate&Idea)를 이용하실 땐, 회원가입을 한 후 이용해보세요 :-)</h3>
@@ -29,7 +29,7 @@
 	      </div>
     </div>
     <div id="mainslide" class="item">
-<!--       <img src="/resources/gray.png" alt="..."> -->
+      <img src="/resources/note.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
       <div class="carousel-caption" id="mainservicediv2">
       	<h2 id="mainservice">"PickMI Service Guide"</h2>
         <h3 id="mainservice">여러 게시판에 글을 작성하여 업로드해보세요.</h3>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div id="mainslide" class="item">
-<!--       <img src="/resources/gray.png" alt="..."> -->
+      <img src="/resources/work.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
       <div class="carousel-caption" id="mainservicediv3">
       	<h2 id="mainservice">"PickMI Service Guide"</h2>
 		<h3 id="mainservice">팀원들과 함께 프로젝트와 일정관리를 해보세요.</h3>
@@ -164,7 +164,7 @@
 		<c:forEach items="${freeBoard }" var="free">
 			<div class="col-sm-6 col-md-4 col-lg-4" id="mainboardlist">
 				<div class="thumbnail"
-					onclick="location.href='/compBoard/view?free_no=${free.free_no }'"
+					onclick="location.href='/freeboard/view?free_no=${free.free_no }'"
 					id="compboardlist" style="cursor: pointer; hover: #ccc;">
 					<div class="caption">
 						<h4>${free.free_title }</h4>

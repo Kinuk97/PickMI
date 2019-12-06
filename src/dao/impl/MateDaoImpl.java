@@ -200,5 +200,47 @@ public class MateDaoImpl implements MateDao {
 //		System.out.println("list : " + list);
 		return list;
 	}
+	
+	@Override
+	public List<ProjectBoard> myProjectList(Mate mate) {
+		String sql = "SELECT p.proj_no, p.proj_title, p.proj_name, p.proj_time, p.proj_loc, p.proj_career, p.proj_member, p.proj_apply, p.proj_sdate, p.proj_ddate, p.proj_rec_date, p.proj_progress, p.proj_content, p.proj_like, p.proj_job, m.userno mateuserno FROM projboard p, mate m WHERE p.proj_no = m.proj_no(+) AND m.mate = '1' AND m.userno = ?";
+		
+		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				ProjectBoard projectBoard = new ProjectBoard();
+				
+				projectBoard.setProj_no(rs.getInt("proj_no"));
+				projectBoard.setUserno(rs.getInt("mateuserno"));
+				projectBoard.setProj_title(rs.getString("proj_title"));
+				projectBoard.setProj_name(rs.getString("proj_name"));
+				projectBoard.setProj_loc(rs.getString("proj_loc"));
+				projectBoard.setProj_career(rs.getString("proj_career"));
+				projectBoard.setProj_apply(rs.getInt("proj_apply"));
+				projectBoard.setProj_content(rs.getString("proj_content"));
+				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
+				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
+				projectBoard.setProj_rec_date(rs.getDate("proj_rec_date"));
+				projectBoard.setProj_like(rs.getInt("proj_like"));
+				projectBoard.setProj_time(rs.getDate("proj_time"));
+				projectBoard.setProj_progress(rs.getString("proj_progress"));
+				projectBoard.setProj_member(rs.getInt("proj_member"));
+				projectBoard.setProj_job(rs.getString("proj_job"));
+
+				list.add(projectBoard);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }
