@@ -589,14 +589,6 @@ commit;
 
 ------------------------------------------------------------------------------------------------------------------- 메시지 -------------------------------------------------------------------------------------------------------------------
 
---info테이블 INSERT
-INSERT INTO info(chat_no, chat_maketime) VALUES(1, SYSDATE);
-INSERT INTO info(chat_no, chat_maketime) VALUES(2, SYSDATE);
-INSERT INTO info(chat_no, chat_maketime) VALUES(3, SYSDATE);
-INSERT INTO info(chat_no, chat_maketime) VALUES(4, SYSDATE);
-
-
-
 -- chatter테이블 INSERT
 INSERT INTO chatter(chat_no, chat_user) VALUES(1, 8);
 INSERT INTO chatter(chat_no, chat_user) VALUES(2, 12);

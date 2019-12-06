@@ -188,14 +188,10 @@ DROP SEQUENCE checklist_seq;
 CREATE SEQUENCE checklist_seq;
 
 //메시지
-DROP TABLE Info;
+
 DROP TABLE Chatter;
 DROP TABLE Chat;
 
-CREATE TABLE Info(
-    chat_no INT PRIMARY KEY,
-    chat_maketime DATE
-);
 
 
 CREATE TABLE Chatter(
@@ -210,23 +206,14 @@ CREATE TABLE Chat(
     chat_sendtime DATE
 );
 
-ALTER TABLE Chatter
-ADD CONSTRAINT message_fk_01
-    FOREIGN KEY (chat_no)
-    REFERENCES Info(chat_no);
-
-ALTER TABLE Chat
-ADD CONSTRAINT message_fk_02
-    FOREIGN KEY (chat_no)
-    REFERENCES Info(chat_no);
     
 ALTER TABLE Chatter
-ADD CONSTRAINT message_fk_03
+ADD CONSTRAINT message_fk_01
     FOREIGN KEY (chat_user)
     REFERENCES user_table(userno);
     
 ALTER TABLE Chat
-ADD CONSTRAINT message_fk_04
+ADD CONSTRAINT message_fk_02
     FOREIGN KEY (chat_sender)
     REFERENCES user_table(userno);
     
