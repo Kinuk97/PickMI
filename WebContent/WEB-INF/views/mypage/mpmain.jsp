@@ -471,6 +471,14 @@ $(document).ready(function() {
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">프로젝트 관리</p></li>
 			</ul>
 			<hr>
+			<c:forEach items="${projList }" var="list">
+				<div class="row">
+					<div class="col-lg-4">${list.proj_title}</div>
+					<div class="col-lg-4">${list.proj_progress}</div>
+					<div class="col-lg-4"><a href='/schedule/list?proj_no=${list.proj_no }'>일정 관리</a></div>
+				</div>
+			</c:forEach>
+			
 			<a href="/mate/list" class="btn btn-info" role="button">팀원 관리하러 가기</a>
 		</div>
 		

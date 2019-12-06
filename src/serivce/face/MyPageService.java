@@ -84,4 +84,5 @@ public interface MyPageService {
 
 	public List<ProfileBoard> getList(Paging pfpaging, User user, int i);
 
+	
 }

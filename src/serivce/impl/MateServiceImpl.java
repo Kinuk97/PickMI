@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import dao.face.MateDao;
 import dao.impl.MateDaoImpl;
 import dto.Mate;
+import dto.ProjectBoard;
 import serivce.face.MateService;
 
 public class MateServiceImpl implements MateService {
@@ -94,6 +95,11 @@ public class MateServiceImpl implements MateService {
 		} else {
 			return true; //가입 되있음
 		}
+	}
+	
+	@Override
+	public List<ProjectBoard> getMyProjList(Mate mate) {
+		return mateDao.myProjectList(mate);
 	}
 
 }
