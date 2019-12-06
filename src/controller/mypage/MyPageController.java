@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
 import dao.face.UserDao;
 import dao.impl.UserDaoImpl;
 import dto.User;
 import serivce.face.FileService;
 import serivce.face.MyPageService;
+import serivce.face.UserService;
 import serivce.impl.FileServiceImpl;
 import serivce.impl.MyPageServiceImpl;
+import serivce.impl.UserServiceImpl;
 
 /**
  * Servlet implementation class MyPageController
@@ -29,7 +29,7 @@ public class MyPageController extends HttpServlet {
 	FileService fileService = FileServiceImpl.getInstance();
 	private MyPageService myPageService = MyPageServiceImpl.getInstance();
 	private UserDao userDao = new UserDaoImpl();
-	
+	private UserService userService = new UserServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -40,6 +40,18 @@ public class MyPageController extends HttpServlet {
 		
 		// email에 해당하는 회원정보 가져오기
 		User userinfo = myPageService.getUser(email);
+		
+
+		
+		HttpSession session = req.getSession();
+		User user = new User();
+		
+		user.setEmail(session.getAttribute("email").toString());
+		user.setName(session.getAttribute("name").toString());
+		
+		userService.findPw(user);
+		
+		req.setAttribute("user", user);
 		
 		req.setAttribute("userinfo", userinfo);
 
@@ -67,6 +79,10 @@ public class MyPageController extends HttpServlet {
 //		System.out.println("파일서비스갔다온 후 user :" + user);
 				
 		userDao.insertphoto(user);
+//		System.out.println(user);
+		// 헤더 사용자 사진 안바뀌게
+		session.setAttribute("photo_storedname", user.getPhoto_storedname());
+
 		
 		//Ajax에서 다시 들어올 때 
 		resp.setCharacterEncoding("utf-8");

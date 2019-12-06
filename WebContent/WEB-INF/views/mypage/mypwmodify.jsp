@@ -94,6 +94,11 @@
 #logo {
 	height: 10px;
 }
+
+.modal-backdrop{
+	z-index: -1;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -190,6 +195,8 @@ $(document).ready(function() {
 });
 
 
+
+	
 </script>
 </head>
 <body id="mypwmodifyfont">

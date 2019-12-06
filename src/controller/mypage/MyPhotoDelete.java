@@ -13,7 +13,9 @@ import dao.face.UserDao;
 import dao.impl.UserDaoImpl;
 import dto.User;
 import serivce.face.FileService;
+import serivce.face.UserService;
 import serivce.impl.FileServiceImpl;
+import serivce.impl.UserServiceImpl;
 
 /**
  * Servlet implementation class MyPhotoDelete
@@ -24,6 +26,7 @@ public class MyPhotoDelete extends HttpServlet {
 	
 	FileService fileService = FileServiceImpl.getInstance();
 	private UserDao userDao = new UserDaoImpl();
+	private UserService userService = new UserServiceImpl();
 
 	@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +44,9 @@ public class MyPhotoDelete extends HttpServlet {
 		System.out.println("photdeletecontroller : " + user);
 		
 		fileService.myPhotoDelete(req.getServletContext().getRealPath("upload"), user);
+
+		session.removeAttribute("photo_storedname");
+		
 		resp.sendRedirect("/mypage");
 		
 		}
