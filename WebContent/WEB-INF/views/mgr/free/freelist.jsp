@@ -37,28 +37,28 @@ $(document).ready(function(){
 
 
 <div class="container" >
-<div class="row">
-<div class="col-lg-1"></div>
-<div class="col-lg-10">
 
-	<table class="table table-condensed">
-		<tr class="info">
-			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 5%">글번호</th>
-			<th style="width: 5%">사용자번호</th>
-			<th style="width: 20%">제목</th>
-			<th style="width: 10%">작성시간</th>
-		</tr>
-		<c:forEach items="${list }" var="frboard">
-		<tr>
-			<td><input type="checkbox" name="checkRow" value="${frboard.free_no }"/></td>
-			<td>${frboard.free_no }</td>
-			<td>${frboard.userno }</td>
-			<td><a href="/mgr/freeview?free_no=${frboard.free_no}">${frboard.free_title }</a></td>
-			<td>${frboard.free_time }</td>
-		</tr>	
-		</c:forEach>
-	</table>
+	<form action="/mgr/freeboard/delete" method="get">
+		<table class="table table-condensed">
+			<tr class="info">
+				<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+				<th style="width: 5%">글번호</th>
+				<th style="width: 5%">사용자번호</th>
+				<th style="width: 20%">제목</th>
+				<th style="width: 10%">작성시간</th>
+			</tr>
+			<c:forEach items="${list }" var="frboard">
+			<tr>
+				<td><input type="checkbox" name="checkRow" value="${frboard.free_no }"/></td>
+				<td>${frboard.free_no }</td>
+				<td>${frboard.userno }</td>
+				<td><a href="/mgr/freeview?free_no=${frboard.free_no}">${frboard.free_title }</a></td>
+				<td>${frboard.free_time }</td>
+			</tr>	
+			</c:forEach>
+		</table>
+			<button>삭제</button>
+	</form>
 
 	<div class="src" style="text-align: center;">
 	<form action="/mgr/freelist" method="get">
@@ -70,9 +70,6 @@ $(document).ready(function(){
 	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
    		<c:param name="url" value="${url }" />
 	</c:import>
-	
-<div class="col-lg-1"></div>
-</div>
 </div>
 
 </body>

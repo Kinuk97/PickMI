@@ -47,12 +47,16 @@
 $(document).ready(function(){
 	//메세지 리스트의 항목 하나를 눌렀을 떄
 	$('#msgList').on("click", ".messagelist", function() {
-		console.log(9)
-		
 		//메세지 리스트 드롭다운 메뉴가 사라짐(close)
 		$('.dropdown-menu').css('visibility','hidden');
 		//대화창이 hidden에서 visible로 변경됨
 		$('#messagebox').css('visibility', 'visible');
+		
+// 		console.log( $(this) )
+// 		console.log( $(this).find("input") )
+// 		console.log( $(this).find("input").val() )
+		$("#send").attr( "data-chat_no", $(this).find("input").val() )
+		msgshow( $(this).find("input").val() )
 	});
 	
 	//닫기 버튼을 눌렀을 때
@@ -86,15 +90,7 @@ function onecheckbox(a) {
 
 <!-- 메세지 -->
 <script type="text/javascript">
-// window.onload = function(){
-// 	//소켓열리면
-// 	ws.onopen = function() {
-// 		//메세지보내는 메소드 send
-// 		ws.send("안녕");
-// 	}
-// 	onclick
-// }
-
+//메시지 목록 띄우기
 $(document).ready(function(){
 	$("#btnMessageList").click(function(){
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
@@ -108,7 +104,7 @@ $(document).ready(function(){
 	 	}
 		
 		ws.onmessage = function(data) {
-			console.log("!")
+// 			console.log("!")
 			$("#msgList").html("");
 			var list = JSON.parse(data.data)
 			for(var i = 0; i<list.length; i++){
@@ -127,6 +123,7 @@ $(document).ready(function(){
 	})
 });
 
+//메세지 목록 중 하나 클릭 시
 $(document).ready(function(){
 	$('#msgList').on("click", ".messagelist", function() {
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
@@ -137,7 +134,7 @@ $(document).ready(function(){
 	 		//메세지보내는 메소드 send
 	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no, username: '${name}' };
 	 		var msg = JSON.stringify(obj);
-	 		console.log(JSON.stringify(obj))
+// 	 		console.log(JSON.stringify(obj))
 	 		ws.send(msg);
 	 	}
 		
@@ -148,34 +145,72 @@ $(document).ready(function(){
 	})
 })
 
+//메시지 창에서 send버튼을 눌렀을 때
 $(document).ready(function(){
-	var ws = new WebSocket("ws://localhost:8089/ws/msg");
-	
+// 	var ws = new WebSocket("ws://localhost:8089/ws/msg");
+	//#send = 메시지 전송 버튼
 	$("#send").click(function(){
+// 		console.log("send clicked")
+// 		var msg = {
+// 				"type": "msg",
+// 				"chat_msg": $("#msg").val()
+// 		}
 		
-		var msg = {
-				"type": "msg",
-				"chat_msg": $("#msg").val()
-		}
-		$("#msg").val("");
-		var json = JSON.stringify(msg);
-		console.log(json)
-		
-		ws.send(json);
-		
-		var textMsg = $()
-
+// 		$("#msg").val("");
+// 		var json = JSON.stringify(msg)
+// 		console.log("json ; " + json)
+		console.log($(this).attr("data-chat_no"))
+		msgsend($(this).attr("data-chat_no"))
 	})
-	ws.close();
-	
-
 });
+function msgshow(n) {
+	$.ajax({
+		type : "post",
+		url : "/msg/chatting",
+		data : {chat_no: n},
+		dataType : "html",
+		success : function(data){
+			console.log(data)
+			$("#msgresult").html(data)
+			$("#msg").val("")
+			$("#msg").focus()
+// 			$("#msgresult").scrollTop($(window).height())
+			$("#msgresult").scrollTop($("#msgresult")[0].scrollHeight);
+		},
+		error : function(e){
+			console.log(e);
+		}
+	})
+}
+function msgsend(n) {
+	console.log("msgsend---")
+	console.log($("#msg").val())
+	console.log(n)
+	
+	$.ajax({
+		type : "post",
+		url : "/msg/chatting",
+		data : {chat_msg: $("#msg").val(), chat_no: n},
+		dataType : "html",
+		success : function(data){
+			console.log(data)
+			$("#msgresult").html(data)
+			$("#msg").val("")
+			$("#msg").focus()
+// 			$("#msgresult").scrollTop($(window).height())
+			$("#msgresult").scrollTop($("#msgresult")[0].scrollHeight);
+		},
+		error : function(e){
+			console.log(e);
+		}
+	})
+}
+
 
 //메세지를 보낼 사용자 검색
 $(document).ready(function(){
 	$("#chatplusBtn").click(function(){
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
-		
 		ws.onopen = function() {
 			
 			var obj = { type: "search", name : '${name}', email: '${email}' };
@@ -186,7 +221,6 @@ $(document).ready(function(){
 		
 		
 		ws.onmessage = function(data){
-			console.log("!")
 			var search = JSON.parse(data.data);
 			console.log(search)
 			var tr = $("<tr>");
@@ -213,7 +247,6 @@ $(document).ready(function(){
 	
  	})
  	
- 	
  	$("#searchbtn").click(function(){
 		$.ajax({
 			type : "post",
@@ -232,6 +265,7 @@ $(document).ready(function(){
 		})
  	})
 })
+
 </script>
 
 
@@ -482,8 +516,8 @@ a#top {
 #messagebox {
 	border: 1px solid;
 	border-color: #ccc;
-	width: 340px;
-	height: 400px;
+	width: 390px;
+	height: 460px;
 	position: fixed;
 	z-index: 1;
 	background-color: #fff;
@@ -493,19 +527,24 @@ a#top {
 }
 
 #msgresult {
+	overflow: auto;
 	margin: 0;
-	height: 290px;
-	width: 300px;
+	height: 345px;
+	width: 348px;
 	border: 1px solid;
 	border-color: #ccc;
 	margin-left: 20px;
 }
 
 #msg {
-	width: 233px;
+	width: 285px;
 	height: 51px;
 	margin: 0;
 	margin-top: 10px;
+}
+
+#msgdate {
+	color: #ccc;
 }
 
 #send {
@@ -546,6 +585,10 @@ a#top {
 }
 .messagelist span {
 	color: black;
+}
+
+.spanmsg {
+	text-decoration: none;
 }
 
 .spanmsg small {
@@ -607,6 +650,7 @@ a#top {
 #serviceintro:hover {
 	background-color: #fff;
 }
+
 </style>
 </head>
 
@@ -646,7 +690,7 @@ a#top {
 						<input type="text" id="msg">
 						
 						<!-- 메세지 보내기 버튼 -->
-						<input value="전송" type="button" class="btn btn-default" id="send" onclick="input()">
+						<input value="전송" type="button" class="btn btn-default" id="send">
 						
 						<hr>
 					</div>
@@ -750,7 +794,7 @@ a#top {
 <!-- 																</table> -->
 																
 		    												</div>
-															<button class="btn btn-default">선택</button>
+															<button class="btn btn-default">메시지 보내기</button>
 	    												</div> 
 												    </div>
 												</div>

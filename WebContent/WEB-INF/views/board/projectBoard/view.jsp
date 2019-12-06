@@ -65,7 +65,7 @@ $(document).ready(function() {
 			url: "/projectBoard/like"
 			, type: "GET"
 			, data: {
-				proj_no : '${proejctBoard.proj_no}',
+				proj_no : '${projectBoard.proj_no}',
 				boardno : '${projectBoard.proj_no}',
 				userno : '${projectBoard.userno}',
 				postno : '${ 2 }'
@@ -78,7 +78,7 @@ $(document).ready(function() {
 		})
 	})
 	
-		$("#like").click( function(){
+	$("#like").click( function(){
 		console.log("찜 확인!");
 		$("#like").hide();
 		$("#unlike").show();
@@ -166,6 +166,7 @@ function like(data) {
 							</button>
 						</c:if>
 					</c:if> 
+					
 					<c:if test="${ !login }">
 						<c:if test="${ canLike }">
 							<button id="loginplz" style="color: red;">

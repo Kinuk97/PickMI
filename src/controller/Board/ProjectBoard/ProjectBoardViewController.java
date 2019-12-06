@@ -48,7 +48,8 @@ public class ProjectBoardViewController extends HttpServlet {
 //		System.out.println(like);
 		int countLike = projectBoardService.countLike(like);
 		req.setAttribute("countLike", countLike);
-		System.out.println(countLike);
+//		System.out.println(countLike);
+		
 		boolean check = projectBoardService.checkLike(like);
 		if(check) {
 			req.setAttribute("canLike", true);
