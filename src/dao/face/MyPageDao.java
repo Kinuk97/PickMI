@@ -8,6 +8,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import util.Paging;
 
@@ -57,6 +58,13 @@ public interface MyPageDao {
 	 * @return 쿼리 수행 결과
 	 */
 	public int deleteUser(User user);
+	
+	/**
+	 * 댓글 조회
+	 * @param paging
+	 * @return
+	 */
+	List<Reply> selectReply(Paging paging);
 
 	public int selectCntAll(HttpServletRequest req, int i);
 

@@ -12,6 +12,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import serivce.face.MyPageService;
 import util.Paging;
@@ -22,7 +23,7 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	private MyPageDao myPageDao = MyPageDaoImpl.getInstance();
 	
-	private MyPageServiceImpl() {
+	public MyPageServiceImpl() {
 	}
 	
 	private static class Singleton{
@@ -152,6 +153,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
+
 	public Paging getPaging(HttpServletRequest req, int i) {
 		//요청파라미터 curPage를 파싱한다
 		String param = req.getParameter("curPage");
@@ -159,6 +161,15 @@ public class MyPageServiceImpl implements MyPageService {
 		if( param!=null && !"".equals(param)) {
 			curPage =Integer.parseInt(param);
 		}
+// 오류나서 주석처리!!!!!!
+//	public List<Reply> getReplyList(Paging paging) {
+//		
+//		return myPageDao.selectReply(paging);
+//	}
+
+//}
+	
+
 
 		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
 		int totalcount = myPageDao.selectCntAll(req, i);
@@ -173,6 +184,13 @@ public class MyPageServiceImpl implements MyPageService {
 	public List getList(Paging paging, User user, int i) {
 		
 		return myPageDao.selectboard(paging, user, i);
+	}
+	
+	// 오류나서 주석처리!!!!!! 대용으로 만들어놓음
+	@Override
+	public List<Reply> getReplyList(Paging paging) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

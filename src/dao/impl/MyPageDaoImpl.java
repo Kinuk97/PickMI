@@ -15,6 +15,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import util.Paging;
 
@@ -592,6 +593,7 @@ public class MyPageDaoImpl implements MyPageDao{
 	}
 
 	@Override
+
 	public int selectCntAll(HttpServletRequest req, int i) {
 		conn = DBConn.getConnection();
 		
@@ -799,4 +801,28 @@ public class MyPageDaoImpl implements MyPageDao{
 		
 		return list;
 	}
+
+	
+	//--------------------------------------------------- 주석처리 도훈씨꺼
+	@Override
+	public List<Reply> selectReply(Paging paging) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+
+//	public List<Reply> selectReply(Paging paging) {
+//
+//		conn = DBConn.getConnection();
+//		
+//		String sql = "";
+//		sql += "SELECT replyno, boardno, postno, ";
+//		sql	+= "	(SELECT userno FROM user_table WHERE userno = reply.userno)userno, ";
+//		sql	+= "		username, reply, replytime";
+//		sql += "			FROM reply";
+//		
+//		
+//		return null;
+//	}
+//}
+

@@ -40,5 +40,13 @@ public interface MateDao {
 	 * @return
 	 */
 	public List<Mate> selectMateList(Mate mate);
+	
+	/**
+	 * 내가 참여하고 있는 프로젝트 리스트
+	 * 
+	 * @param mate - userno가 담겨있는 DTO
+	 * @return
+	 */
+	List<ProjectBoard> myProjectList(Mate mate);
 
 }
