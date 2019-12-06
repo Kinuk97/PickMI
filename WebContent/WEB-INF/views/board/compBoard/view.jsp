@@ -238,7 +238,8 @@ function like(data) {
 <br>
 
 <div class="container">
-	
+					${countLike }
+				${ canLike }
 	<table class="table table-bordered">
 
 			<tr>
@@ -258,7 +259,6 @@ function like(data) {
 
 			<tr>
 				<td>프로젝트 기간</td><td>시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
-				
 				<td>찜하기</td><td id="countLike">${countLike }
 					<c:if test="${ login }">
 						<c:if test="${ canLike }">
