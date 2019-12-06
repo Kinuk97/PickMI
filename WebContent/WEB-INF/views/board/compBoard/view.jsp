@@ -188,8 +188,8 @@ $(document).ready(function(){
 $(document).ready(function() {
 	
 	$("#unlike").click( function(){
-		$("#like").hide();
-		$("#unlike").show();
+		$("#unlike").hide();
+		$("#like").show();
 		$.ajax({
 			url: "/compBoard/like"
 			, type: "GET"
@@ -260,17 +260,40 @@ function like(data) {
 				<td>프로젝트 기간</td><td>시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
 				
 				<td>찜하기</td><td id="countLike">${countLike }
-					<c:choose>
-						<c:when test="${not empty login }">
-							<button id="like" class="btn btn-default" style="padding: 0px; margin-top: 0px;">LIKE</button>
-							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button> 
-						</c:when>
-						
-						<c:otherwise>
-<!-- 							<button id="unlike" class="btn btn-default" style="padding: 0px; margin-top: 0px;">UNLIKE</button> -->
-<!-- 							<button id="like" style="display: none; padding: 0px; margin-top:0px;" class="btn btn-default">LIKE</button> -->
-						</c:otherwise>
-					</c:choose>
+					<c:if test="${ login }">
+						<c:if test="${ canLike }">
+							<button id="like" style="color: red;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+							<button id="unlike" style="display: none; color:blue;">
+							<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+						<c:if test="${ !canLike }">
+							<button id="like" style="display: none; color:red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="color:blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+					</c:if>
+					<c:if test="${ !login }">
+						<c:if test="${ canLike }">
+							<button id="loginplz" style="color:red;" >
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="display: none; color:blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+						<c:if test="${ !canLike }">
+							<button id="like" style="display: none; color:red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="loginplz" style="color:blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+					</c:if>
 				</td>
 			</tr>
 
@@ -283,11 +306,16 @@ function like(data) {
 		첨부파일<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a>
 		
 		<br><br>
+		
+		<c:if test="${login }">
 		<div class="row text-center">
 			<button id="btnList" class="btn btn-default">게시글 목록</button>
 			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
 			<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
 		</div>
+		</c:if>
+		<c:if test="${!login }">
+		</c:if>
 	<br><hr>
 	
 	<h4>${cntreply }개의 댓글</h4>
