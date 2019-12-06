@@ -36,7 +36,7 @@ public interface MyPageService {
 	 * @param req - 요청 정보 객체
 	 * @return Paging - 페이징 처리 객체
 	 */
-	public Paging getPaging(HttpServletRequest req);
+//	public Paging getPaging(HttpServletRequest req);
 
 	/**
 	 * usertb에서 email 가져오기
@@ -48,13 +48,13 @@ public interface MyPageService {
 	/**
 	 * 페이징 정보를 활요앻 보여질 게시물 목록만 조회
 	 * @param paging
-	 * @param req
+	 * @param user
 	 * @return
 	 */
-	public List<ProfileBoard> getpfList(Paging paging, HttpServletRequest req);
-	public List<ProjectBoard> getpjList(Paging paging, HttpServletRequest req);
-	public List<CompBoard> getcompList(Paging paging, HttpServletRequest req);
-	public List<FreeBoard> getfreeList(Paging paging, HttpServletRequest req);
+	public List<ProfileBoard> getpfList(Paging paging, User user);
+	public List<ProjectBoard> getpjList(Paging paging, User user);
+	public List<CompBoard> getcompList(Paging paging, User user);
+	public List<FreeBoard> getfreeList(Paging paging, User user);
 
 
 // ------ 비밀번호 수정
@@ -73,6 +73,8 @@ public interface MyPageService {
 	 */
 	public boolean userDelete(User user);
 
-	
-	
+	public Paging getPaging(HttpServletRequest req, int i);
+
+	public List<ProfileBoard> getList(Paging pfpaging, User user, int i);
+
 }

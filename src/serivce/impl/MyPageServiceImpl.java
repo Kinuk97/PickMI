@@ -53,51 +53,55 @@ public class MyPageServiceImpl implements MyPageService {
 			return false;
 	}
 
-	@Override
-	public Paging getPaging(HttpServletRequest req) {
-	
-		//요청파라미터 curPage를 파싱한다
-		String param = req.getParameter("curPage");
-		int curPage =0;
-		if( param!=null && !"".equals(param)) {
-			curPage =Integer.parseInt(param);
-		}
-
-		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
-		int totalcount = myPageDao.selectCntAll(req);
-
-		//Paging 객체 생성
-		Paging paging = new Paging(totalcount, curPage);
-		
-		return paging;
-	}
+//	@Override
+//	public Paging getPaging(HttpServletRequest req) {
+//	
+//		//요청파라미터 curPage를 파싱한다
+//		String param = req.getParameter("curPage");
+//		int curPage =0;
+//		if( param!=null && !"".equals(param)) {
+//			curPage =Integer.parseInt(param);
+//		}
+//
+//		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
+//		int totalcount = myPageDao.selectCntAll(req);
+//
+//		//Paging 객체 생성
+//		Paging paging = new Paging(totalcount, curPage);
+//		
+//		return paging;
+//	}
 
 	@Override
 	public User getUserno(HttpServletRequest req) {
 		return myPageDao.selectUserbyUserno(req);
 	}
 
+	
+// ----- 내가 작성한 게시글 가져오기
 	@Override
-	public List<ProfileBoard> getpfList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectPf(paging, req);
+	public List<ProfileBoard> getpfList(Paging paging, User user) {
+		return myPageDao.selectPf(paging, user);
+
 	}
 
 	@Override
-	public List<ProjectBoard> getpjList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectPj(paging, req);
-	}
-
-	@Override
-	public List<CompBoard> getcompList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectComp(paging, req);
-	}
-
-	@Override
-	public List<FreeBoard> getfreeList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectFree(paging, req);
+	public List<ProjectBoard> getpjList(Paging paging, User user) {
 		
+		return myPageDao.selectPj(paging, user);
 	}
 
+	@Override
+	public List<CompBoard> getcompList(Paging paging, User user) {
+		return myPageDao.selectComp(paging, user);
+	}
+
+	@Override
+	public List<FreeBoard> getfreeList(Paging paging, User user) {
+		return myPageDao.selectFree(paging, user);
+	}
+// 내가 작성한 게시글 가져오기 -----------------------------------------------
+	
 // ----- 비밀번호 수정	
 
 	@Override
@@ -147,12 +151,28 @@ public class MyPageServiceImpl implements MyPageService {
 		
 	}
 
+	@Override
+	public Paging getPaging(HttpServletRequest req, int i) {
+		//요청파라미터 curPage를 파싱한다
+		String param = req.getParameter("curPage");
+		int curPage =0;
+		if( param!=null && !"".equals(param)) {
+			curPage =Integer.parseInt(param);
+		}
+
+		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
+		int totalcount = myPageDao.selectCntAll(req, i);
+
+		//Paging 객체 생성
+		Paging paging = new Paging(totalcount, curPage);
+
+		return paging;
+	}
+
+	@Override
+	public List getList(Paging paging, User user, int i) {
+		
+		return myPageDao.selectboard(paging, user, i);
+	}
+
 }
-	
-
-
-	
-	
-	
-	
-
