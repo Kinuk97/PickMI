@@ -79,9 +79,19 @@ public interface MyPageService {
 	 * @return
 	 */
 	public List<Reply> getReplyList(Paging paging);
-
+	
 	public Paging getPaging(HttpServletRequest req, int i);
 
-	public List<ProfileBoard> getList(Paging pfpaging, User user, int i);
+	public List getList(Paging pfpaging, User user, int i);
+	
+	
+	/**
+	 * 찜한 리스트
+	 * @param pfpaging - 프로필게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List getLikeList(Paging pfpaging, User user, int i);
 
 }
