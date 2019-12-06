@@ -278,7 +278,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			ps.setDate(7, (Date) compBoard.getComp_startdate());
 			ps.setDate(8, (Date) compBoard.getComp_enddate());
 			
-			ps.executeQuery();
+			rs = ps.executeQuery();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -655,8 +655,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(ps!=null)	ps.close();
 				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -664,17 +664,8 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		return list;
 	}
 
+	
 
 }
-
-
-
-
-
-
-
-
-
-
 
 

@@ -23,7 +23,9 @@ public class MessageController extends HttpServlet {
 		Chat chat = new Chat();
 		chat.setChat_msg(req.getParameter("chat_msg"));
 		chat.setChat_sender((int)req.getSession().getAttribute("userno")); 
-		chat.setChat_no(Integer.parseInt(req.getParameter("chat_no")));
+		System.out.println(Integer.parseInt(req.getParameter("chat_no")));
+		
+		chat.setChat_no(Integer.parseInt(req.getParameter("chat_no"))); //채팅방 생성을 하기 전에 채팅방이 없는 경우에도 채팅방이 있는지 찾아서 null이 나옴
 		
 		List<Chat> chattingList = messageService.getChattingList(chat);
 		req.setAttribute("chattingList", chattingList);
@@ -39,6 +41,10 @@ public class MessageController extends HttpServlet {
 		chat.setChat_msg(request.getParameter("chat_msg"));
 		chat.setChat_sender((int)request.getSession().getAttribute("userno")); 
 		chat.setChat_no(Integer.parseInt(request.getParameter("chat_no")));
+
+		System.out.println("chat_msg : " + request.getParameter("chat_msg"));
+		System.out.println("userno : " + (int)request.getSession().getAttribute("userno"));
+		System.out.println("chat_no : " + request.getParameter("chat_no"));
 		
 		messageService.insert(chat);
 		

@@ -39,4 +39,27 @@ public class MessageServiceImpl implements MessageService {
 	public void insert(Chat chat) {
 		messageDao.insert(chat);
 	}
+
+	@Override
+	public void insert(Chatter chatter) {
+//		messageDao.insert(chatter);
+	}
+	
+	@Override
+	public int selectNextChatno() {
+		return messageDao.selectNextChat_no();
+	}
+	
+	@Override
+	public void makeRoom(Chatter chatter1, Chatter chatter2) {
+		messageDao.insert(chatter1);
+		messageDao.insert(chatter2);
+	}
+	
+	@Override
+	public Chat getExistsChatRoom(Chatter chatter1) {
+		
+		return messageDao.getExistsChatRoom(chatter1);
+		
+	}
 }
