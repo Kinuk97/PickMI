@@ -274,6 +274,7 @@ function ajaxFileDelete() {
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">프로젝트 관리</p></li>
 			</ul>
 			<hr>
+			<a href="/mate/list" class="btn btn-info" role="button">팀원 관리하러 가기</a>
 		</div>
 		
 		<div style="clear: both;"></div>
