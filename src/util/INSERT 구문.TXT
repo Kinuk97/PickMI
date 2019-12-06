@@ -615,6 +615,8 @@ INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(3, 1, '�
 INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(4, 21, '랄랄', SYSDATE);
 INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(4, 3, '럴럴', SYSDATE);
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 -- mate 테이블 insert
 INSERT INTO mate VALUES (21, 196, 1);
 INSERT INTO mate VALUES (1, 197, 1);
