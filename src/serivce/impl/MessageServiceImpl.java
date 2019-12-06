@@ -30,4 +30,9 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.selectSearchMsgUser(search, user);
 	}
 
+	@Override
+	public List<Chat> getChattingList(Chat chat) {
+		return messageDao.selectChattingList(chat);
+	}
+
 }

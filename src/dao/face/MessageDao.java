@@ -14,4 +14,6 @@ public interface MessageDao {
 
 	public List<User> selectSearchMsgUser(String search, User user);
 
+	public List<Chat> selectChattingList(Chat chat);
+
 }

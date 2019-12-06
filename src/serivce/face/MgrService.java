@@ -107,8 +107,10 @@ public interface MgrService {
 
 //	public void listdeleteComp(HttpServletRequest req);
 	
-// ----- ProjectList
+//  ProjectList -----
 
-
+// ----- UserDelete
+	
+	
 
 }

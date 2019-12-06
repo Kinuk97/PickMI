@@ -166,7 +166,8 @@ function ajaxFileDelete() {
 }
 
 #profileImg{
-	width:27%
+	width:144px;
+	height:139px;
 }
 
 #wrapper{
@@ -248,9 +249,9 @@ function ajaxFileDelete() {
 			</div>
 			
 			<br>
-			<button type="button" class="btn btn-info">회원탈퇴</button>
-			<br>
-			<br>
+			<form action = "/mypage/selfdelete" method="post" name = "userdeletebtn">
+			<button type="submit" class="btn btn-info">회원탈퇴</button>
+			</form>
 			<br>
 			<p style="font-size: 17px; text-align:left; margin-left:5%;">이름 : ${userinfo.name }</p>
 			<p style="font-size: 17px; text-align:left; margin-left:5%;">이메일 : ${userinfo.email }</p>
@@ -273,6 +274,7 @@ function ajaxFileDelete() {
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">프로젝트 관리</p></li>
 			</ul>
 			<hr>
+			<a href="/mate/list" class="btn btn-info" role="button">팀원 관리하러 가기</a>
 		</div>
 		
 		<div style="clear: both;"></div>
