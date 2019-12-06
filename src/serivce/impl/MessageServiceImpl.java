@@ -35,4 +35,8 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.selectChattingList(chat);
 	}
 
+	@Override
+	public void insert(Chat chat) {
+		messageDao.insert(chat);
+	}
 }
