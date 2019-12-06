@@ -26,13 +26,13 @@ import org.apache.commons.io.IOUtils;
 import dao.face.CompBoardDao;
 import dao.face.FileDao;
 import dao.face.FreeBoardDao;
-import dao.face.MyPageDao;
+import dao.face.MateDao;
 import dao.face.ProfileBoardDao;
 import dao.face.ProjectBoardDao;
 import dao.impl.CompBoardDaoImpl;
 import dao.impl.FileDaoImpl;
 import dao.impl.FreeBoardDaoImpl;
-import dao.impl.MyPageDaoImpl;
+import dao.impl.MateDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
 import dao.impl.ProjectBoardDaoImpl;
 import dto.CompBoard;
@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
 	private ProfileBoardDao profileBoardDao = ProfileBoardDaoImpl.getInstance();
 	private CompBoardDao compBoardDao = new CompBoardDaoImpl();
 	private ProjectBoardDao projectBoardDao = ProjectBoardDaoImpl.getInstance();
-	
+	private MateDao mateDao = MateDaoImpl.getInstance();
 
 	private FileDao fileDao = FileDaoImpl.getInstance();
 
@@ -416,9 +416,12 @@ public class FileServiceImpl implements FileService {
 				projectBoard.setUserno((Integer) req.getSession().getAttribute("userno"));
 				// nextval 가져오기
 				projectBoard.setProj_no(projectBoardDao.getNextBoardno());
+				
 				// 게시글 작성
 				projectBoardDao.insert(projectBoard);
 				resultBoardno = projectBoard.getProj_no();
+				//mate테이블에 추가
+				mateDao.insertTeam(projectBoard);
 
 
 
