@@ -252,7 +252,6 @@ select {
 		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
 				<div class="caption caption-project">
-
 					<h2>
 						${board.proj_title }
 					</h2>

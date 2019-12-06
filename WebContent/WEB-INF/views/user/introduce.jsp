@@ -42,7 +42,7 @@
 		<h4>Mate & Idea</h4>
 	</div>
 	<div class="sub_title2">
-		<h1>"아이디, 사람을 찾습니다"</h1>
+		<h1>"아이디어, 사람을 찾습니다"</h1>
 	</div>
 	<div class="sub_title3">
 		<p>PickMI는 프로젝트협업을 위한 사람과 사람을 이어주는 플랫폼입니다.</p> 

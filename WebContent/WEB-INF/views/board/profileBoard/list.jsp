@@ -82,8 +82,8 @@ function profileList() {
 				
 				var caption = $("<div class='caption caption-profile'></div>");
 				
-				caption.append($("<h4></h4>").text(data[i].prof_no));
-				caption.append($("<p></p>").text(data[i].username));
+				caption.append($("<h4></h4>").text(data[i].username));
+// 				caption.append($("<p></p>").text(data[i].username));
 				caption.append($("<p></p>").text(data[i].prof_interest));
 				caption.append($("<p></p>").text(data[i].prof_loc));
 				caption.append($("<p></p>").text(data[i].prof_job));
@@ -276,8 +276,7 @@ a#top {
 		<div class="col-sm-6 col-md-4 col-lg-3">
 				<div class="thumbnail" onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
 					<div class="caption caption-profile">
-						<h4>${ pro.prof_no }</h4>
-						<p>${ pro.username }</p>
+						<h4>${ pro.username }</h4>
 						<p>${ pro.prof_interest }</p>
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>

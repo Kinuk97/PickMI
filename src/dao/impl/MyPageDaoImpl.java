@@ -190,4 +190,41 @@ public class MyPageDaoImpl implements MyPageDao{
 		System.out.println("비밀번호 일치 여부 확인 : " + cnt); //
 		return cnt;
 	}
+
+	@Override
+	public int deleteUser(User user) {
+
+//		System.out.println("myPageDao(deleteUser)에서의 user 매개변수가 갖고 있는 것 : " + user);
+		
+		conn = DBConn.getConnection();
+		
+		String sql = "";
+		
+		sql += "DELETE FROM user_table WHERE userno = ?";
+		
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, user.getUserno());
+			result=ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			try {
+
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+		
+	}
 }
