@@ -172,8 +172,8 @@ DROP SEQUENCE schedule_seq;
 CREATE SEQUENCE schedule_seq;
 
 //체크리스트
-DROP TABLE chceklist;
-CREATE TABLE chceklist (
+DROP TABLE checklist;
+CREATE TABLE checklist (
     checkno NUMBER PRIMARY KEY,
     scheduleno NUMBER NOT NULL,
     check_content VARCHAR2(100),
