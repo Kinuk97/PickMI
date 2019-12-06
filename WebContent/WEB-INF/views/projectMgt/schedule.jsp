@@ -76,8 +76,10 @@ div .cal-schedule span:not([id="scheduleView"]) {
 }
 
 input[type="checkbox"] {
-	vertical-align: middle;
+    vertical-align: top;
     margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 3px;
 }
 
 .progress_meter {
@@ -87,6 +89,22 @@ input[type="checkbox"] {
 
 .scheduleText {
 	height: 84%;
+}
+
+.check {
+	vertical-align: top;
+    margin: 0 5px;
+	cursor: pointer;
+}
+
+#checkModifyContent {
+	margin: 0px;
+	margin-top: -3px;
+}
+
+.modifyFormBtn {
+	cursor: pointer;
+	margin: 2px 10px;
 }
 </style>
 <script type="text/javascript">
@@ -128,6 +146,76 @@ input[type="checkbox"] {
 			$("#writeFormModal").modal();
 		});
 		
+		// 일정 수정 폼 버튼
+		$("#showTitleForm").on("click", function() {
+			$("#schedule_title_form").show();
+		});
+		// 일정 내용 수정 폼 버튼
+		$("#showContentForm").on("click", function() {
+			$("#schedule_content_form").show();
+		});
+		// 일정 수정 폼 숨기는 버튼
+		$("#hideTitleForm").on("click", function() {
+			$("#schedule_title_form").hide();
+		});
+		// 일정 내용 수정 폼 숨기는 버튼
+		$("#hideContentForm").on("click", function() {
+			$("#schedule_content_form").hide();
+		});
+		
+		// 수정 적용 버튼
+		$("#modifyTitleBtn").on("click", function() {
+			$.ajax({
+				type : "post",
+				url : "/schedule/modify",
+				data : { "scheduleno" : clickScheduleno , "title" : $("#sc_title_form").val(), "kinds" : "1" },
+				dataType : "text",
+				success : function(data) {
+					$("#sc_title_form").val("");
+					
+					viewSchedule();
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
+		
+		// 수정 적용 버튼
+		$("#modifyContentBtn").on("click", function() {
+			$.ajax({
+				type : "post",
+				url : "/schedule/modify",
+				data : { "scheduleno" : clickScheduleno , "content" : $("#sc_content_form").val(), "kinds" : "2" },
+				dataType : "text",
+				success : function(data) {
+					$("#sc_content_form").val("");
+					
+					viewSchedule();
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
+		
+		// 일정 삭제하는 버튼
+		$("#scheduleRemoveBtn").on("click", function() {
+			$.ajax({
+				type : "post",
+				url : "/schedule/remove",
+				data : { "scheduleno" : clickScheduleno },
+				dataType : "text",
+				success : function(data) {
+					$("#viewSchedule").modal('toggle');
+					getNewInfo();
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
+		
 		//일정 아이콘 클릭시 모달 보이기
 		$("div .cal-schedule").on("click", "#scheduleView", function() {
 			clickDate = new Date(year, month - 1, $(this).parent().prev().text()).format("yyyy-MM-dd");
@@ -166,6 +254,11 @@ input[type="checkbox"] {
 //             $('#datepicker2').datepicker('setDate', '+1D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 		});
 		
+		// 수정도 마찬가지로 기한 작성하는 폼 띄우기
+		$("#showDue_dateForm").on("click", function() {
+			$("#addDue_dateBtn").click();
+		});
+		
 		// 기한 폼 다시 숨기는 버튼 (취소버튼)
 		$("#cancelBtn-due_date").on("click", function() {
 			$("#schedule_due_dateForm").hide();
@@ -175,8 +268,8 @@ input[type="checkbox"] {
 		$("#saveDue_dateBtn").on("click", function() {
 			$.ajax({
 				type : "post",
-				url : "/schedule/modify/due_date",
-				data : { "scheduleno" : clickScheduleno, "due_date" : $("#datepicker").val() },
+				url : "/schedule/modify",
+				data : { "scheduleno" : clickScheduleno, "due_date" : $("#datepicker").val(), "kinds" : "3" },
 				dataType : "text",
 				success : function(data) {
 					$("#schedule_due_dateForm").hide();
@@ -188,18 +281,100 @@ input[type="checkbox"] {
 				}
 			});
 		});
+
+		// 기한 삭제 버튼
+		$("#removeDue_dateBtn").on("click", function() {
+			$.ajax({
+				type : "post",
+				url : "/schedule/modify",
+				data : { "scheduleno" : clickScheduleno, "kinds" : "3" },
+				dataType : "text",
+				success : function(data) {
+					viewSchedule(clickScheduleno);
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
 		
-		// 체크리스트 추가 버튼
+		// 할 일 추가 버튼
 		$("#addCheckListBtn").on("click", function() {
 			$("#schedule_checkListForm").show();
 		});
 		
-		// 체크리스트 작성 취소 버튼
+		// 할 일 전부 삭제하는 버튼
+		$("#removeAllCheckListBtn").on("click", function() {
+// 			alert(clickScheduleno);
+			$.ajax({
+				type : "post",
+				url : "/schedule/remove/allCheck",
+				data : { "scheduleno" : clickScheduleno },
+				dataType : "text",
+				success : function(data) {
+					viewSchedule(clickScheduleno);
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
+		
+		// 할 일 삭제하는 버튼
+		$("#checkList").on("click", ".checkRemoveBtn", function() {
+			$.ajax({
+				type : "post",
+				url : "/schedule/remove/check",
+				data : { "checkno" : $(this).data("checkno") },
+				dataType : "text",
+				success : function(data) {
+					viewSchedule(clickScheduleno);
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
+		
+		var modifyCheck = false;
+		// 할 일 수정하는 폼 나오게하는 버튼
+		$("#checkList").on("click", ".checkModifyBtn", function() {
+			if (!modifyCheck) {
+				let checkSpan = $(this).prev();
+				let content = checkSpan.text();
+				
+				$(checkSpan).html("<input data-checkno='" + $(this).data("checkno") + "' type='text' placeholder='수정을 다시 누르면 취소합니다' id='checkModifyContent'/>");
+				$(checkSpan).append($("<span class='check glyphicon glyphicon-ok' id='modifyconfirmBtn'></span>"));
+				$("#checkModifyContent").focus();
+				modifyCheck = true;
+			} else {
+				viewSchedule();
+				modifyCheck = false;
+			}
+		});
+		
+		// 할 일 수정 적용하는 버튼
+		$("#checkList").on("click", "#modifyconfirmBtn", function() {
+			$.ajax({
+				type : "post",
+				url : "/schedule/modify/check",
+				data : { "checkno" : $(this).prev().data("checkno"), "check_content" : $(this).prev().val() },
+				dataType : "text",
+				success : function(data) {
+					viewSchedule(clickScheduleno);
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			});
+		});
+		
+		// 할 일 작성 취소 버튼
 		$("#cancelBtn-checkList").on("click", function() {
 			$("#schedule_checkListForm").hide();
 		});
 		
-		// 체크리스트 저장 버튼
+		// 할 일 저장 버튼
 		$("#saveCheckListBtn").on("click", function() {
 			$.ajax({
 				type : "post",
@@ -210,7 +385,6 @@ input[type="checkbox"] {
 					$("#check_content").val("");
 					$("#schedule_checkListForm").hide();
 					viewSchedule(clickScheduleno);
-					getNewInfo();
 				},
 				error : function(e) {
 					console.log(e);
@@ -218,7 +392,7 @@ input[type="checkbox"] {
 			});
 		});
 		
-		// 체크리스트 클릭 이벤트
+		// 할 일 클릭 이벤트
 		$("#schedule_checkList").on("change", "input[type='checkbox']", function() {
 			if($(this).is(":checked")) {
 				$(this).attr("checked", "checked");
@@ -227,8 +401,6 @@ input[type="checkbox"] {
 				$(this).attr("checked", "");
 				checkedList($(this).data("checkno"), false);
 	        }
-			
-			getNewInfo();
 		});
 		
 		// 지도 추가 버튼
@@ -409,7 +581,7 @@ input[type="checkbox"] {
 				if (data.result) {
 					$("#scheduleTitle").val("");
 					$("#scheduleContent").val("");
-					$("#writeFormModal").modal('hide');
+					$("#writeFormModal").modal('toggle');
 					getNewInfo();
 				} else {
 					alert("이미 일정이 등록되어있습니다.");
@@ -421,35 +593,50 @@ input[type="checkbox"] {
 		});
 	}
 	
+	// 일정 상세보기
 	function viewSchedule(scheduleno) {
+		$("#schedule_title_form").hide();
+		$("#schedule_content_form").hide();
+		$("#schedule_due_dateForm").hide();
+		$("#schedule_checkListForm").hide();
+		
 		$.ajax({
 			type : "post",
 			url : "/schedule/view",
 			data : { "scheduleno" : clickScheduleno },
 			dataType : "json",
 			success : function(data) {
+				$("#schedule_title").html("");
+				$("#schedule_content").html("");
+				$("#schedule_due_date").html("");
+				
 				// 모달에 상세보기 창 보여주기
-				$("#schedule_title").text("일정 : " + data.title);
-				$("#schedule_content").text("설명 : " + data.content);
+				$("#schedule_title").append($("<div id='sc_title'>" + data.title + "</div>"));
+				$("#schedule_content").append($("<div id='sc_content'>" + data.content + "</div>"));
 				
 				if (data.due_date != undefined) {
-					$("#schedule_due_date").text("기한 : " + data.due_date);
+					$("#schedule_due_date").append($("<div id='sc_due_date'>" + data.due_date + "</div>"));
+					$("[data-category='3']").show();
 					$("#addDue_dateBtn").hide();
 				} else {
-					$("#schedule_due_date").text("");
+					$("#sc_due_date").remove();
+					$("[data-category='3']").hide();
 					$("#addDue_dateBtn").show();
 				}
 				
 				if (data.checkList.length != 0) {
+				$("[data-category='4']").show();
 					$("#checkList").html("");
 					for (var i = 0; i < data.checkList.length; i++) {
 						var list = data.checkList;
-						$("#checkList").append(list[i].check_content);
 						if (list[i].do_check == 1) {
 							$("#checkList").append($("<input data-checkno='" + list[i].checkno + "' type='checkbox' checked='checked'>"));
 						} else {
 							$("#checkList").append($("<input data-checkno='" + list[i].checkno + "' type='checkbox'>"));
 						}
+						$("#checkList").append($("<span>" + list[i].check_content + "</span>"));
+						$("#checkList").append($("<span data-checkno='" + list[i].checkno + "' class='check glyphicon glyphicon-edit checkModifyBtn'></span>"))
+						$("#checkList").append($("<span data-checkno='" + list[i].checkno + "' class='check glyphicon glyphicon-remove checkRemoveBtn'></span>"))
 						
 						$("#checkList").append("<br>");
 					}
@@ -461,6 +648,7 @@ input[type="checkbox"] {
 						$("#addCheckListBtn").hide();
 					}
 				} else {
+					$("[data-category='4']").hide();
 					$(".progress").hide();
 					$("#checkList").hide();
 					$("#addCheckListBtn").show();
@@ -473,6 +661,7 @@ input[type="checkbox"] {
 					$("#addPlaceBtn").show();
 				}
 				
+				getNewInfo();
 			},
 			error : function(e) {
 				console.log(e);
@@ -480,6 +669,7 @@ input[type="checkbox"] {
 		})
 	}
 	
+	// 진행바 채우기
 	function onProgress() {
 		var checkedCnt = $("input[checked='checked']").length;
 		var checkboxCnt = $("input[type='checkbox']").length;
@@ -490,6 +680,7 @@ input[type="checkbox"] {
 		$(".progress_label").text(percentage + "%");
 	}
 	
+	// 체크박스 클릭하면 체크여부 변경해주는 기능
 	function checkedList(checkno, check) {
 		$.ajax({
 			type : "post",
@@ -557,16 +748,15 @@ input[type="checkbox"] {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 	  <div class="modal-header">
-	    	일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	    	<div>일정 보기<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><button id="scheduleRemoveBtn" type="button" class='btn btn-danger' style="float: right; margin-top: -6px;">일정 삭제</button></div>
+		  <div style="clear: both;"></div>
 	  </div>
 	  <div class="modal-body">
 		<div class="form-group">
-			<div id="schedule_title"></div>
-			<br>
-			<div id="schedule_content"></div>
-			<br>
-			<div id="schedule_due_date"></div>
-			<br>
+			<h3 data-category="1">일정<span class="check glyphicon glyphicon-edit" id="showTitleForm"></span></h3><div id="schedule_title"></div>
+			<h3 data-category="2">내용<span class="check glyphicon glyphicon-edit" id="showContentForm"></span></h3><div id="schedule_content"></div>
+			<h3 data-category="3">기한<span class="check glyphicon glyphicon-edit" id="showDue_dateForm"></span><span class="check glyphicon glyphicon-trash" id="removeDue_dateBtn"></span></h3><div id="schedule_due_date"></div>
+			<h3 data-category="4">할 일<span class="check glyphicon glyphicon-trash" id="removeAllCheckListBtn"></span></h3>
 			<div id="schedule_checkList">
 				<div class="progress">
   					<div class="progress_meter"><span class="progress_label"></span></div>
@@ -574,9 +764,17 @@ input[type="checkbox"] {
 				<div id="checkList"></div>
 			</div>
 			<br>
+			<div id="schedule_title_form" hidden="hidden">
+				<h3>일정 수정</h3>
+				<input type="text" id="sc_title_form" placeholder="수정할 내용을 입력해주세요"  style="margin: 0;"/><span id="modifyTitleBtn" class="modifyFormBtn glyphicon glyphicon-ok"></span><span id="hideTitleForm" class="modifyFormBtn glyphicon glyphicon-remove"></span>
+			</div>
+			<div id="schedule_content_form" hidden="hidden">
+				<h3>내용 수정</h3>
+				<input type="text" id="sc_content_form" placeholder="수정할 내용을 입력해주세요" style="margin: 0;"/><span id="modifyContentBtn" class="modifyFormBtn glyphicon glyphicon-ok"></span><span id="hideContentForm" class="modifyFormBtn glyphicon glyphicon-remove"></span>
+			</div>
 			<div id="schedule_due_dateForm" hidden="hidden">
 				<div>
-					<h2>기한 추가</h2>
+					<h3>기한 정하기</h3>
 					<input type="text" id="datepicker" autocomplete="off">
 					<button class="btn btn-primary" id="saveDue_dateBtn">저장</button>
 					<button id="cancelBtn-due_date" class="btn btn-warning" hidden="hidden">취소</button>
@@ -597,7 +795,7 @@ input[type="checkbox"] {
 			
 			<button id="addDue_dateBtn" class="btn btn-info">기한 추가</button>
 			<button id="addCheckListBtn" class="btn btn-info">체크리스트 추가</button>
-			<button id="addPlaceBtn" class="btn btn-info">만남 장소 선택</button>
+<!-- 			<button id="addPlaceBtn" class="btn btn-info">만남 장소 선택</button> -->
        	</div>
 	  </div>
     </div>
