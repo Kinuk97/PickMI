@@ -180,11 +180,23 @@ public class MyPageServiceImpl implements MyPageService {
 		return paging;
 	}
 
+	// ----- 내가 작성한 게시글 가져오기
+
 	@Override
 	public List getList(Paging paging, User user, int i) {
 		
 		return myPageDao.selectboard(paging, user, i);
 	}
+	// 내가 작성한 게시글 가져오기 -------------------------
+
+	
+	// ----- 내가 찜한 게시글 가져오기
+	
+	public List getLikeList(Paging paging, User user, int i) {
+		return myPageDao.likeboard(paging, user, i);
+	}
+	// 내가 찜한 게시글 가져오기 ---------------------------
+	
 	
 	// 오류나서 주석처리!!!!!! 대용으로 만들어놓음
 	@Override

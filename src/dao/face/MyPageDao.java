@@ -67,10 +67,25 @@ public interface MyPageDao {
 	List<Reply> selectReply(Paging paging);
 
 	public int selectCntAll(HttpServletRequest req, int i);
+	
+	/**
+	 * 작성한 게시글 리스트
+	 * @param paging - 각 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List selectboard(Paging paging, User user, int i);
 
-	public List selectboard(Paging pfpaging, User user, int i);
-
-
+	
+	/**
+	 * 찜한 게시글 리스트
+	 * @param paging - 각 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List likeboard(Paging paging, User user, int i);
 
 
 

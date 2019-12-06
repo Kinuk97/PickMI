@@ -19,7 +19,7 @@
       <img src="/resources/desk.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
 	      <div class="carousel-caption" id="mainservicediv1">
 	      	<h2 id="mainservice">"PickMI Service Guide"</h2>
-	      	<h3 id="mainservice">PickMI(Mate&Idea)를 이용하실 땐, 회원가입을 한 후 이용해보세요 :-)</h3>
+	      	<h3 id="mainservice">PickMI(Mate&amp;Idea)를 이용하실 땐, 회원가입을 한 후 이용해보세요 :-)</h3>
 			<h3 id="mainservice">간편한 회원가입을 통해서 더 많은 서비스를 이용하실 수 있습니다.</h3>
 	        <button class="btn btn-default" onclick="location.href='/main/intro'" id="serviceintro">&emsp;&emsp;서비스 소개&emsp;&emsp;</button>
 	        <br>
@@ -77,13 +77,13 @@
 				<div class="thumbnail"
 					onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
 					<div class="caption">
-						<h4>${username }</h4>
+						<h4>${ pro.username }</h4>
 						<p>${ pro.prof_interest }</p>
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>
 						<p>${ pro.prof_state }</p>
 						<p>${ pro.prof_career }</p>
-						<p class="text-right">${ countLike}❤</p>
+						<p class="text-right">${ pro.prof_like}❤</p>
 						<p class="text-right">${ pro.prof_time }에작성</p>
 					</div>
 				</div>
@@ -109,6 +109,7 @@
 						<p>직업 : ${board.proj_job }</p>
 						<p>진행상황 : ${board.proj_progress }</p>
 
+						<div class="text-right">작성자 : ${board.username }</div>
 						<div class="text-right">신청수 : ${board.proj_apply }</div>
 						<div class="text-right">찜개수 : ${board.proj_like }</div>
 						<div class="text-right">${board.proj_time }</div>
@@ -132,7 +133,7 @@
 						<br>
 						<div class="text-right">작성자 : ${compList.username }</div>
 						<div class="text-right">조회수 : ${compList.comp_view }</div>
-						<div class="text-right">찜한수 : ${countLike }</div>
+						<div class="text-right">찜한수 : ${compList.comp_like }</div>
 						<div class="text-right">작성날짜 : ${compList.comp_date }</div>
 					</div>
 				</div>
@@ -154,7 +155,7 @@
 						<br>
 						<br>
 						<p class="text-right" style="margin: 0 0 0px;">
-							작성자 : ${free.userno }</p>
+							작성자 : ${free.username }</p>
 						<p class="text-right" style="margin: 0 0 0px;">
 							조회수 : ${free.views }</p>
 						<p class="text-right" style="margin: 0 0 0px;">

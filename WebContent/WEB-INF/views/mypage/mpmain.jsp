@@ -463,7 +463,7 @@ $(document).ready(function() {
 			<hr>
 			<a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
 			<a href="/mycomment/list">내가쓴댓글가져오기</a> 
-			찜하기한글가져오기
+			<a href="/mypage/likelist">찜하기한글가져오기</a>
 		</div>
 
 		<div class="inner_con3">
