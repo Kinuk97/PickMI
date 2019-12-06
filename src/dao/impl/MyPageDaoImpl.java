@@ -644,6 +644,8 @@ public class MyPageDaoImpl implements MyPageDao{
 		return cnt;
 	}
 
+	
+	// 사용자가 작성한 게시글 목록 불러오기
 	@Override
 	public List selectboard(Paging paging, User user, int i) {
 		
@@ -801,7 +803,143 @@ public class MyPageDaoImpl implements MyPageDao{
 		
 		return list;
 	}
+	
+	// ----- 찜한 게시글 불러오기
 
+	@Override
+	public List likeboard(Paging paging, User user, int i) {
+
+		conn = DBConn.getConnection();
+
+		String sql = "";
+		if(i == 1) {
+			sql += "select * from (";
+			sql += "  select rownum rnum, B.* FROM(";
+			sql += "   select P.* from likepost L, profile P";
+			sql += "	where L.boardno = P.prof_no";
+			sql += "	and L.postno = 1 and L.userno = ?"	;		
+			sql += "   order by prof_no desc";
+			sql += "  ) B";
+			sql += "  ORDER BY rnum";
+			sql += " ) BOARD";
+			sql += " WHERE rnum BETWEEN ? AND ?";
+		} else if (i == 2) {
+			sql += "select * from (";
+			sql += "  select rownum rnum, B.* FROM(";
+			sql += "   select P.* from likepost L, projboard P";
+			sql += "	where L.boardno = P.proj_no";
+			sql += "	and L.postno = 2 and P.userno = ?"	;		
+			sql += "   order by proj_no desc";
+			sql += "  ) B";
+			sql += "  ORDER BY rnum";
+			sql += " ) BOARD";
+			sql += " WHERE rnum BETWEEN ? AND ?";
+		} else if (i == 3) {
+			sql += "select * from (";
+			sql += "  select rownum rnum, B.* FROM(";
+			sql += "   select C.* from likepost L, compboard C";
+			sql += "	where L.boardno = C.comp_no";
+			sql += "	and L.postno = 3 and L.userno = ?"	;		
+			sql += "   order by comp_no desc";
+			sql += "  ) B";
+			sql += "  ORDER BY rnum";
+			sql += " ) BOARD";
+			sql += " WHERE rnum BETWEEN ? AND ?";
+		}
+		List list = new ArrayList();
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, user.getUserno());
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+
+			rs = ps.executeQuery();
+			if (i == 1) {
+
+				while(rs.next()) {
+
+					ProfileBoard profileBoard = new ProfileBoard();
+
+					profileBoard.setProf_no(rs.getInt("prof_no"));
+					profileBoard.setUserno(rs.getInt("userno"));
+					profileBoard.setProf_interest(rs.getString("prof_interest"));
+					profileBoard.setProf_loc(rs.getString("prof_loc"));
+					profileBoard.setProf_job(rs.getString("prof_job"));
+					profileBoard.setProf_state(rs.getString("prof_state"));
+					profileBoard.setProf_career(rs.getString("prof_career"));
+					profileBoard.setProf_time(rs.getDate("prof_time"));
+					profileBoard.setProf_like(rs.getInt("prof_like"));
+
+					list.add(profileBoard);
+
+
+				}
+			} else if ( i== 2) {
+				while(rs.next()) {
+					ProjectBoard projectBoard = new ProjectBoard();
+
+					projectBoard.setProj_no(rs.getInt("proj_no"));
+					projectBoard.setUserno(rs.getInt("userno"));
+					projectBoard.setProj_title(rs.getString("proj_title"));
+					projectBoard.setProj_name(rs.getString("proj_name"));
+					projectBoard.setProj_loc(rs.getString("proj_loc"));
+					projectBoard.setProj_career(rs.getString("proj_career"));
+					projectBoard.setProj_apply(rs.getInt("proj_apply"));
+					projectBoard.setProj_content(rs.getString("proj_content"));
+					projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
+					projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
+					projectBoard.setProj_rec_date(rs.getDate("proj_rec_date"));
+					projectBoard.setProj_like(rs.getInt("proj_like"));
+					projectBoard.setProj_time(rs.getDate("proj_time"));
+					projectBoard.setProj_progress(rs.getString("proj_progress"));
+					projectBoard.setProj_member(rs.getInt("proj_member"));
+
+					list.add(projectBoard);
+
+				}
+			}  else if ( i== 3) {
+				while(rs.next()) {
+					CompBoard compBoard = new CompBoard();
+
+					//					compBoard.setRownum( rs.getInt("rnum"));
+					compBoard.setComp_no( rs.getInt("comp_no") );
+					compBoard.setUserno( rs.getInt("userno") );
+					compBoard.setUsername( rs.getString("username"));
+					compBoard.setComp_title( rs.getString("comp_title") );
+					compBoard.setComp_name( rs.getString("comp_name") );
+					compBoard.setComp_content( rs.getString("comp_content") );
+					compBoard.setComp_member( rs.getInt("comp_member") );
+					compBoard.setComp_date( rs.getString("comp_date") );
+					compBoard.setComp_view( rs.getInt("comp_view") );
+					compBoard.setComp_startdate( rs.getDate("comp_startdate"));
+					compBoard.setComp_enddate( rs.getDate("comp_enddate") );
+
+					list.add(compBoard);
+					System.out.println(list);
+				}
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			try {
+
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		return list;
+	}
+	
+	// 찜한 게시글 불러오기 ----------------------------------
+	
+	
 	
 	//--------------------------------------------------- 주석처리 도훈씨꺼
 	@Override
@@ -809,6 +947,7 @@ public class MyPageDaoImpl implements MyPageDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
 
 //	public List<Reply> selectReply(Paging paging) {

@@ -27,15 +27,12 @@ public class CompBoardLikeController extends HttpServlet {
 		LikePost like = new LikePost();
 		
 		like.setPostno(4);
-		System.out.println(like);
 		like.setBoardno(compBoardService.getParam(req).getComp_no());
 		like.setUserno((int)session.getAttribute("userno"));
 		
 		
 		boolean check = compBoardService.checkLike(like);
 		int countLike = 0;
-		
-		System.out.println(like);
 		
 		if (check) {
 			compBoardService.like(like);
