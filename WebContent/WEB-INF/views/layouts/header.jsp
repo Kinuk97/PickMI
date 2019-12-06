@@ -516,8 +516,8 @@ a#top {
 #messagebox {
 	border: 1px solid;
 	border-color: #ccc;
-	width: 340px;
-	height: 400px;
+	width: 390px;
+	height: 460px;
 	position: fixed;
 	z-index: 1;
 	background-color: #fff;
@@ -529,18 +529,22 @@ a#top {
 #msgresult {
 	overflow: auto;
 	margin: 0;
-	height: 290px;
-	width: 300px;
+	height: 345px;
+	width: 348px;
 	border: 1px solid;
 	border-color: #ccc;
 	margin-left: 20px;
 }
 
 #msg {
-	width: 233px;
+	width: 285px;
 	height: 51px;
 	margin: 0;
 	margin-top: 10px;
+}
+
+#msgdate {
+	color: #ccc;
 }
 
 #send {
@@ -789,7 +793,7 @@ a#top {
 <!-- 																</table> -->
 																
 		    												</div>
-															<button class="btn btn-default">선택</button>
+															<button class="btn btn-default">메시지 보내기</button>
 	    												</div> 
 												    </div>
 												</div>
