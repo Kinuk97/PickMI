@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.Mate;
+import dto.ProjectBoard;
 
 public interface MateService {
 	/**
@@ -55,6 +56,14 @@ public interface MateService {
 	 * @return
 	 */
 	public Mate getParam(HttpServletRequest req);
+	
+	/**
+	 * 유저번호로 내가 참여하고 있는 프로젝트 리스트 불러오기
+	 * 
+	 * @param Mate mate - 검색할 유저번호
+	 * @return - 결과 리스트
+	 */
+	public List<ProjectBoard> getMyProjList(Mate mate);
 
 
 }
