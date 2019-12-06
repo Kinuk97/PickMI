@@ -237,4 +237,35 @@ public class MessageDaoImpl implements MessageDao {
 		return chattingList;
 	}
 
+	@Override
+	public void insert(Chat chat) {
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "INSERT INTO chat ( chat_no, chat_sender, chat_msg, chat_sendtime )";
+		sql += " VALUES( ?, ?, ?, sysdate )";
+				
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, chat.getChat_no());
+			ps.setInt(2, chat.getChat_sender());
+			ps.setString(3, chat.getChat_msg());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

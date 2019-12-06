@@ -16,4 +16,6 @@ public interface MessageDao {
 
 	public List<Chat> selectChattingList(Chat chat);
 
+	public void insert(Chat chat);
+	
 }

@@ -26,8 +26,6 @@ public class MessageSearchController extends HttpServlet {
 		
 		List<User> searchList = messageService.getSearchList(search, null);
 		
-		
-		
 		req.setAttribute("searchList", searchList);		
 		req.getRequestDispatcher("/WEB-INF/views/msg/search.jsp").forward(req, resp);
 	}
