@@ -623,7 +623,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT * FROM (SELECT * FROM compboard ORDER BY comp_date DESC)";
+		sql += "SELECT comp.*, (SELECT name FROM user_table WHERE comp.userno = userno) username FROM (SELECT * FROM compboard ORDER BY comp_date DESC) comp";
 		sql += " WHERE ROWNUM <= 3";
 		
 		List<CompBoard> list = new ArrayList<CompBoard>();
@@ -638,7 +638,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				
 				compBoard.setComp_no( rs.getInt("comp_no") );
 				compBoard.setUserno( rs.getInt("userno") );
-//				compBoard.setUsername( rs.getString("username"));
+				compBoard.setUsername( rs.getString("username"));
 				compBoard.setComp_title( rs.getString("comp_title") );
 				compBoard.setComp_name( rs.getString("comp_name") );
 				compBoard.setComp_content( rs.getString("comp_content") );

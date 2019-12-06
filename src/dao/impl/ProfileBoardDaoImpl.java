@@ -621,8 +621,8 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		sql += " prof_no, prof_time, userno,";
 		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
 		sql += " prof_content, prof_like";
-//				+ "(SELECT name FROM user_table WHERE user_table.userno = profile.userno)username ";
-		sql += " FROM (SELECT * FROM profile ORDER BY prof_time DESC)";
+		sql += ", (SELECT name FROM user_table WHERE user_table.userno = profile.userno) username ";
+		sql += " FROM (SELECT * FROM profile ORDER BY prof_time DESC) profile";
 		sql += " WHERE ROWNUM <= 3";
 		
 		//결과 저장 리스트
@@ -645,7 +645,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				proboard.setProf_career(rs.getString("prof_career"));
 				proboard.setProf_content(rs.getString("prof_content"));
 				proboard.setProf_like(rs.getInt("prof_like"));
-//				proboard.setUsername(rs.getString("username"));
+				proboard.setUsername(rs.getString("username"));
 				
 				list.add(proboard);
 			}

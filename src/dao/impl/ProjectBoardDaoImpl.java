@@ -604,8 +604,9 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		
 		String sql = "";
 		sql += "SELECT proj_no, proj_title, proj_time, proj_loc, proj_career,";
-		sql += "	proj_apply, proj_progress, proj_job, proj_like";
-		sql += " 		FROM (SELECT * FROM projboard ORDER BY proj_time DESC)";
+		sql += "	proj_apply, proj_progress, proj_job, proj_like, ";
+		sql += "	(SELECT name FROM user_table WHERE userno = proj.userno) username";
+		sql += " 		FROM (SELECT * FROM projboard ORDER BY proj_time DESC) proj";
 		sql += " 		WHERE ROWNUM <= 3";
 		
 		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
@@ -621,6 +622,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 //				projectBoard.setUserno(rs.getInt("userno"));
 				projectBoard.setProj_title(rs.getString("proj_title"));
 //				projectBoard.setProj_name(rs.getString("proj_name"));
+				projectBoard.setUsername(rs.getString("username"));
 				projectBoard.setProj_loc(rs.getString("proj_loc"));
 				projectBoard.setProj_career(rs.getString("proj_career"));
 				projectBoard.setProj_apply(rs.getInt("proj_apply"));

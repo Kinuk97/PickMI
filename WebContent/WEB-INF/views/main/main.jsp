@@ -88,8 +88,7 @@
 				<div class="thumbnail"
 					onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
 					<div class="caption">
-						<h4>${ pro.prof_no }</h4>
-						<p>${ pro.username }</p>
+						<h4>${ pro.username }</h4>
 						<p>${ pro.prof_interest }</p>
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>
@@ -121,6 +120,7 @@
 						<p>직업 : ${board.proj_job }</p>
 						<p>진행상황 : ${board.proj_progress }</p>
 
+						<div class="text-right">작성자 : ${board.username }</div>
 						<div class="text-right">신청수 : ${board.proj_apply }</div>
 						<div class="text-right">찜개수 : ${board.proj_like }</div>
 						<div class="text-right">${board.proj_time }</div>
@@ -145,7 +145,7 @@
 						<br>
 						<br>
 						<div class="text-right" style="margin: 0 0 0px;">작성자 :
-							${compList.userno }</div>
+							${compList.username }</div>
 						<div class="text-right" style="margin: 0 0 0px;">조회수 :
 							${compList.comp_view }</div>
 						<div class="text-right" style="margin: 0 0 0px;">찜한수 :
@@ -172,7 +172,7 @@
 						<br>
 						<br>
 						<p class="text-right" style="margin: 0 0 0px;">
-							작성자 : ${free.userno }</p>
+							작성자 : ${free.username }</p>
 						<p class="text-right" style="margin: 0 0 0px;">
 							조회수 : ${free.views }</p>
 						<p class="text-right" style="margin: 0 0 0px;">
