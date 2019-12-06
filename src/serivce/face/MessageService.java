@@ -39,6 +39,6 @@ public interface MessageService {
 	 */
 	public List<Chat> getChattingList(Chat chat);
 	
-	
+	public void insert(Chat chat);
 
 }
