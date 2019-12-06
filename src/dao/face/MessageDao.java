@@ -18,4 +18,9 @@ public interface MessageDao {
 
 	public void insert(Chat chat);
 	
+	public void insert(Chatter chatter);
+
+	public int selectNextChat_no();
+
+	public Chat getExistsChatRoom(Chatter chatter1);
 }

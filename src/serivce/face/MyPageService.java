@@ -94,4 +94,5 @@ public interface MyPageService {
 	 */
 	public List getLikeList(Paging pfpaging, User user, int i);
 
+	
 }

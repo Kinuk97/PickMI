@@ -41,4 +41,16 @@ public interface MessageService {
 	
 	public void insert(Chat chat);
 
+	public void insert(Chatter chatter);
+
+	public int selectNextChatno();
+
+	public void makeRoom(Chatter chatter1, Chatter chatter2);
+	
+	/**
+	 * 상대방과의 이전에 채팅이 존재하면 기존 채팅 불러오기
+	 * 
+	 * @param chatter1
+	 */
+	public Chat getExistsChatRoom(Chatter chatter1);
 }

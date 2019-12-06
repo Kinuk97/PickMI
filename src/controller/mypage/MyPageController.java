@@ -11,11 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import dao.face.UserDao;
 import dao.impl.UserDaoImpl;
+import dto.Mate;
 import dto.User;
 import serivce.face.FileService;
+import serivce.face.MateService;
 import serivce.face.MyPageService;
 import serivce.face.UserService;
 import serivce.impl.FileServiceImpl;
+import serivce.impl.MateServiceImpl;
 import serivce.impl.MyPageServiceImpl;
 import serivce.impl.UserServiceImpl;
 
@@ -26,10 +29,11 @@ import serivce.impl.UserServiceImpl;
 public class MyPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	FileService fileService = FileServiceImpl.getInstance();
+	private FileService fileService = FileServiceImpl.getInstance();
 	private MyPageService myPageService = MyPageServiceImpl.getInstance();
 	private UserDao userDao = new UserDaoImpl();
 	private UserService userService = new UserServiceImpl();
+	private MateService mateService = MateServiceImpl.getInstance();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -48,12 +52,20 @@ public class MyPageController extends HttpServlet {
 		
 		user.setEmail(session.getAttribute("email").toString());
 		user.setName(session.getAttribute("name").toString());
+		if (session.getAttribute("userno") != null && !session.getAttribute("userno").equals(""))
+			user.setUserno(Integer.parseInt(session.getAttribute("userno").toString()));
 		
 		userService.findPw(user);
 		
 		req.setAttribute("user", user);
 		
 		req.setAttribute("userinfo", userinfo);
+		
+		Mate mate = new Mate();
+		
+		mate.setUserno(user.getUserno());
+		
+		req.setAttribute("projList", mateService.getMyProjList(mate));
 
 		resp.setCharacterEncoding("utf-8");
 		req.getRequestDispatcher("/WEB-INF/views/mypage/mpmain.jsp")

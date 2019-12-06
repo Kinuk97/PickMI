@@ -63,7 +63,7 @@ public class MessageWebSocketController {
 		}
 		
 		if( "msg".equals(type) ) {
-			System.out.println("msg");
+//			System.out.println("msg");
 			
 			Chat chat = gson.fromJson(msg, Chat.class);
 //			System.out.println("chat : " + chat);

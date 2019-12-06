@@ -74,7 +74,7 @@ public class MessageDaoImpl implements MessageDao {
 		
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "SELECT chat_no, chat_sender, chat_msg, TO_CHAR(chat_sendtime,'YYYY/MM/DD HH:MI:SS') chat_sendtime, username FROM (";
+		sql += "SELECT chat_no, chat_sender, chat_msg, TO_CHAR(chat_sendtime,'YYYY/MM/DD HH24:MI:SS') chat_sendtime, username FROM (";
 		sql += "	SELECT";
 		sql += "		chat.*";
 		sql += "		, (SELECT name FROM user_table U WHERE chat.chat_sender = U.userno) username";
@@ -192,7 +192,7 @@ public class MessageDaoImpl implements MessageDao {
 
 		//수행할 SQL쿼리
 		String sql = "";
-		sql += "SELECT chat_no, chat_sender, chat_msg, TO_CHAR(chat_sendtime, 'YYYY/MM/DD HH:MI:SS') chat_sendtime, ";
+		sql += "SELECT chat_no, chat_sender, chat_msg, TO_CHAR(chat_sendtime, 'YYYY/MM/DD HH24:MI:SS') chat_sendtime, ";
 		sql += "	(SELECT name FROM user_table WHERE chat.chat_sender = userno) username "; 
 		sql += "FROM chat ";
 		sql += "WHERE chat_no = ? ";
@@ -267,5 +267,110 @@ public class MessageDaoImpl implements MessageDao {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public void insert(Chatter chatter) {
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "INSERT INTO chatter (chat_no, chat_user)";
+		sql += " VALUES(?, ?)";
+				
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, chatter.getChat_no());
+			ps.setInt(2, chatter.getChat_user());
+
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public int selectNextChat_no() {
+		//DB연결
+		conn = DBConn.getConnection();
+		
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "SELECT chatter_seq.nextval FROM dual";
+		
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public Chat getExistsChatRoom(Chatter chatter1) {
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "SELECT * FROM chat, chatter ";
+		sql += " WHERE chat.chat_no = chatter.chat_no";
+
+		Chat chat = new Chat();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				
+				chat.setChat_no( rs.getInt("chat_no"));
+				chat.setChat_sender( rs.getInt("chat_sender"));
+				chat.setChat_msg( rs.getString("chat_msg"));
+				chat.setChat_sendtime( rs.getString("chat_sendtime"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+				if(rs!=null) rs.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return chat;
 	}
 }
