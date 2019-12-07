@@ -200,17 +200,16 @@ a#top {
     z-index: 999;
     font-size: 20px;
 }
-
 </style>
 
 <h1 align="center"> 나를 소개해보세요❣❣😄 </h1>
 <c:if test="${ login }">
-	<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+	<div class="text-right" style="padding: 0 120px; margin-right: 119px;">
 		<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
 	</div>
 </c:if>
 <c:if test="${ !login }">
-	<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+	<div class="text-right" style="padding: 0 120px; margin-right: 119px;">
 		<button class="btn btn-info" id="write">프로필 등록</button>
 	</div>
 </c:if>
@@ -222,7 +221,7 @@ a#top {
 <input type="hidden" value="${paging.stateno }" name="stateno">
 <input type="hidden" value="${paging.careerno }" name="careerno">
 
-<div id=filtersystem style="padding:0 100px; margin-left: 60px;">
+<div id=filtersystem style="padding:0 100px; margin-left: 150px;">
 	<div id="interest">
 		<button class="btn btn-info" id="interestBtn">관심</button>
 		<div id="filter-list">
