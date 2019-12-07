@@ -99,9 +99,11 @@ $(document).ready(function() {
 	<td class="info">찜받은수</td><td><span id="countLike">${ countLike }</span>
 		<c:if test="${ login }">
 			<c:if test="${ canLike }">
-				<button id="like" style="color: red;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+				<button id="like" style="color: red;">
+					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+				</button>
 				<button id="unlike" style="display: none; color:blue;">
-				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
 				</button>
 			</c:if>
 			<c:if test="${ !canLike }">
