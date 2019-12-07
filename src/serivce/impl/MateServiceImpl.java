@@ -70,7 +70,11 @@ public class MateServiceImpl implements MateService {
 		param = req.getParameter("proj_no");
 		int proj_no = 0;
 		if (param != null && !"".equals(param)) {
-			proj_no = Integer.parseInt(param);
+			try {
+				proj_no = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		param = req.getParameter("mate");

@@ -23,11 +23,12 @@ public class ProjectBoard {
 
 	@Override
 	public String toString() {
-		return "ProjectBoard [proj_no=" + proj_no + ", userno=" + userno + ", proj_title=" + ",username=" + username + proj_title + ", proj_name="
-				+ proj_name + ", proj_time=" + proj_time + ", proj_loc=" + proj_loc + ", proj_career=" + proj_career
-				+ ", proj_member=" + proj_member + ", proj_apply=" + proj_apply + ", proj_sdate=" + proj_sdate
-				+ ", proj_ddate=" + proj_ddate + ", proj_rec_date=" + proj_rec_date + ", proj_progress=" + proj_progress
-				+ ", proj_content=" + proj_content + ", proj_like=" + proj_like +  ", proj_job=" + proj_job + "]";
+		return "ProjectBoard [proj_no=" + proj_no + ", userno=" + userno + ", username=" + username + ", proj_title="
+				+ proj_title + ", proj_name=" + proj_name + ", proj_time=" + proj_time + ", proj_loc=" + proj_loc
+				+ ", proj_career=" + proj_career + ", proj_member=" + proj_member + ", proj_apply=" + proj_apply
+				+ ", proj_sdate=" + proj_sdate + ", proj_ddate=" + proj_ddate + ", proj_rec_date=" + proj_rec_date
+				+ ", proj_progress=" + proj_progress + ", proj_content=" + proj_content + ", proj_like=" + proj_like
+				+ ", proj_job=" + proj_job + "]";
 	}
 
 	public int getProj_no() {

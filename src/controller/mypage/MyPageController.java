@@ -38,7 +38,14 @@ public class MyPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// 세션에서 현재 로그인 돼 있는 email 가져오기
-		String email = (String) req.getSession().getAttribute("email");
+		Object obj = req.getSession().getAttribute("email");
+		String email = null;
+		if (obj != null && !"".equals(obj)) {
+			email = (String) obj;
+		} else {
+			resp.sendRedirect("/login");
+			return;
+		}
 		
 //		System.out.println(email);
 		
@@ -50,7 +57,7 @@ public class MyPageController extends HttpServlet {
 		HttpSession session = req.getSession();
 		User user = new User();
 		
-		user.setEmail(session.getAttribute("email").toString());
+		user.setEmail(email);
 		user.setName(session.getAttribute("name").toString());
 		if (session.getAttribute("userno") != null && !session.getAttribute("userno").equals(""))
 			user.setUserno(Integer.parseInt(session.getAttribute("userno").toString()));

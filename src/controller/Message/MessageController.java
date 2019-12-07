@@ -26,7 +26,11 @@ public class MessageController extends HttpServlet {
 		chat.setChat_sender((int)req.getSession().getAttribute("userno")); 
 //		System.out.println(Integer.parseInt(req.getParameter("chat_no")));
 		
-		chat.setChat_no(Integer.parseInt(req.getParameter("chat_no"))); //채팅방 생성을 하기 전에 채팅방이 없는 경우에도 채팅방이 있는지 찾아서 null이 나옴
+		try {
+			chat.setChat_no(Integer.parseInt(req.getParameter("chat_no"))); //채팅방 생성을 하기 전에 채팅방이 없는 경우에도 채팅방이 있는지 찾아서 null이 나옴
+		} catch (NumberFormatException e) {
+			// 채팅방이 없는 경우
+		}
 		
 		List<Chat> chattingList = messageService.getChattingList(chat);
 		req.setAttribute("chattingList", chattingList);

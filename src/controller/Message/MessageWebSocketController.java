@@ -56,6 +56,7 @@ public class MessageWebSocketController {
 
 //			List<Chat> chatList = messageService.getChatList();
 			List<Chat> chatList = messageService.getLastChatList(chatter);
+			System.out.println(chatList);
 //			System.out.println("chatList : " + chatList );
 			
 			

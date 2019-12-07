@@ -424,4 +424,5 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		return existsUser;
 	}
+	
 }
