@@ -260,7 +260,7 @@ $(document).ready(function() {
 
 			<tr>
 				<td>프로젝트 기간</td><td>시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
-				<td>찜하기</td><td id="countLike">${countLike }
+				<td>찜하기</td><td><span id="countLike">${countLike }</span>
 					<c:if test="${ login }">
 						<c:if test="${ canLike }">
 							<button id="like" style="color: red;">
