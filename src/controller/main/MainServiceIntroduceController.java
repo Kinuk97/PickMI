@@ -17,7 +17,7 @@ public class MainServiceIntroduceController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/user/introduce.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/main/introduce.jsp").forward(req, resp);
 	}
 
 }

@@ -115,8 +115,6 @@ function loadReply(curPage) {
 
 </style>
 
-
-
 <div class="container">
 
 	<div class="innercon1">
@@ -149,6 +147,7 @@ function loadReply(curPage) {
 			</tbody>
 			
 		</table>
+>>>>>>> refs/remotes/origin/testing
 	</div>
 
 			

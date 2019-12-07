@@ -123,7 +123,7 @@ function like(data) {
 });
 </script>
 
-<section class="content container-fluid">
+<div class="container">
 
 	<div class="box box-primary">
 		<div class="box-header with-border">
@@ -225,20 +225,28 @@ function like(data) {
 		</table>
 		
 	</div>
+</div>
 
-
+<div class="container">
 	<div class="box-footer">
 		<c:if test="${userno eq projectBoard.userno }">
-		<button id="btnUpdate" class="btn btn-warning">수정</button>
-		<button id="btnDelete" class="btn btn-danger">삭제</button>
+			<button id="btnUpdate" class="btn btn-warning">수정</button>
+			<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		<button id="btnList" class="btn btn-primary">목록</button>
-		
-		<a id="invite" href="/alert/fromproject?proj_no=${projectBoard.proj_no}" role="button" class="btn btn-info" data-proj_no="${ projectBoard.proj_no }" data-userno="${ projectBoard.userno }">팀 참가 신청하기💌</a>			
-		
-	</div>
 
-</section>
+		<a id="invite"
+			href="/alert/fromproject?proj_no=${projectBoard.proj_no}"
+			role="button" class="btn btn-info"
+			data-proj_no="${ projectBoard.proj_no }"
+			data-userno="${ projectBoard.userno }"
+			style = "margin-top : 9px;">팀 참가 신청하기💌
+			</a>
+
+	</div>
+</div>
+
+
 
 <!--모달창 -->
 <div class="modal fade" id="defaultModal">

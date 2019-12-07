@@ -41,9 +41,23 @@ public class MateViewController extends HttpServlet {
 		req.setAttribute("mateList", mateList);
 //		System.out.println("matelist : " + mateList);
 		
-		//유저 정보 보여주기
+		// 팀원 보기에서 내가 팀장인지 확인하기
 		HttpSession session = req.getSession();
-
+		try {
+			mate.setUserno((int)session.getAttribute("userno"));
+		} catch (NullPointerException e) {
+			System.out.println("로그인 안했음");
+		}
+		
+		boolean checkLeader = mateService.checkLeader(mate);
+		
+		if(checkLeader) {
+			req.setAttribute("leader", true);
+		} else {
+			req.setAttribute("leader", false);
+		}
+		
+		//유저 정보 보여주기
 		ProfileBoard profile = new ProfileBoard();
 		try {
 			profile.setUserno((int)session.getAttribute("userno"));
