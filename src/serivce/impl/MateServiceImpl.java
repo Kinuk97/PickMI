@@ -31,6 +31,12 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public List<Mate> showUser(List<Mate> list4) {
+		
+		return mateDao.showUser(list4);
+	}
+	
+	@Override
 	public List<Mate> appliedUser(Mate mate) {
 		
 		return mateDao.selectUsers(mate);

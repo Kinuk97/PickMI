@@ -58,14 +58,15 @@ public class MateListController extends HttpServlet {
 //			System.out.println("체크체크 : " + list3);
 			
 			//신청한 사용자 정보 불러오기
-//			mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
-//			System.out.println("제발제발제발 : " + mate);
-//			List<Mate> list4 = mateService.AppliedUser(mate);
+			mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
+			List<Mate> list4 = mateService.appliedUser(mate);
+			//사용자 번호로 사용자들 조회하기
+			List<Mate> list5 = mateService.showUser(list4);
 
 		
 
 		
-		System.out.println(req.getAttribute("leader"));
+//		System.out.println(req.getAttribute("leader"));
 		
 		req.getRequestDispatcher("/WEB-INF/views/mateMgt/mateList.jsp").forward(req, resp);
 		
