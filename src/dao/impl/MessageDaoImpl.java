@@ -286,7 +286,7 @@ public class MessageDaoImpl implements MessageDao {
 			ps.setInt(2, chatter.getChat_user());
 
 			ps.executeUpdate();
-			System.out.println(9);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -407,7 +407,7 @@ public class MessageDaoImpl implements MessageDao {
 				chatters.setChat_user( rs.getInt("chat_user"));
 
 				existsUser.add(chatters);
-				System.out.println("existsUser : " + existsUser);
+
 			}
 
 		} catch (SQLException e) {

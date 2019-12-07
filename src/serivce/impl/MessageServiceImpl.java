@@ -53,7 +53,6 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public void makeRoom(Chatter chatter1, Chatter chatter2) {
-		System.out.println(8);
 		messageDao.insert(chatter1);
 		messageDao.insert(chatter2);
 	}
@@ -73,13 +72,13 @@ public class MessageServiceImpl implements MessageService {
 		list = messageDao.selectExistsChatUser(chatter1);
 		
 		int chat_no;
-		System.out.println(5);
+		
 		for (int i=0; i<list.size(); i++) {
 			int chat_user = list.get(i).getChat_user();
 			
 			if(chat_user == chatter2.getChat_user()) {
 				chat_no = list.get(i).getChat_no();
-				System.out.println(6);
+				
 				return chat_no;
 			}
 		}
@@ -88,9 +87,9 @@ public class MessageServiceImpl implements MessageService {
 		
 		chatter1.setChat_no(val);
 		chatter2.setChat_no(val);
-		System.out.println(7);
+		
 		makeRoom(chatter1, chatter2);	
-		System.out.println("val : " + val);
+		
 		return val;
 	}
 }
