@@ -32,15 +32,9 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
-<<<<<<< HEAD
 	public List<ProfileBoard> showUser(Mate mate) {
 		
 		return mateDao.showUser(mate);
-=======
-	public List<Mate> showUser(List<Mate> list4) {
-		
-		return mateDao.showUser(list4);
->>>>>>> refs/remotes/origin/testing
 	}
 	
 	@Override

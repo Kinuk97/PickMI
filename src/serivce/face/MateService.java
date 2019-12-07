@@ -14,11 +14,7 @@ public interface MateService {
 	 * @param list4
 	 * @return
 	 */
-<<<<<<< HEAD
 	public List<ProfileBoard> showUser(Mate mate);
-=======
-	public List<Mate> showUser(List<Mate> list4);
->>>>>>> refs/remotes/origin/testing
 	/**
 	 * 참가 신청 한 사용자들의 정보를 불러온다
 	 * @param mate
