@@ -131,9 +131,9 @@
 						<div class="comp_name overtext">팀 이름 : ${compList.comp_name }</div>
 						<br>
 						<br>
-						<div class="text-right">작성자 : ${compList.username }</div>
+						<div class="text-right">${compList.comp_like }개의 👍</div>
 						<div class="text-right">조회수 : ${compList.comp_view }</div>
-						<div class="text-right">찜한수 : ${compList.comp_like }</div>
+						<div class="text-right">작성자 : ${compList.username }</div>
 						<div class="text-right">작성날짜 : ${compList.comp_date }</div>
 					</div>
 				</div>
