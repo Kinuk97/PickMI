@@ -46,9 +46,9 @@ public class MessageController extends HttpServlet {
 		chat.setChat_sender((int)request.getSession().getAttribute("userno")); 
 		chat.setChat_no(Integer.parseInt(request.getParameter("chat_no")));
 
-		System.out.println("chat_msg : " + request.getParameter("chat_msg"));
-		System.out.println("userno : " + (int)request.getSession().getAttribute("userno"));
-		System.out.println("chat_no : " + request.getParameter("chat_no"));
+//		System.out.println("chat_msg : " + request.getParameter("chat_msg"));
+//		System.out.println("userno : " + (int)request.getSession().getAttribute("userno"));
+//		System.out.println("chat_no : " + request.getParameter("chat_no"));
 		
 		messageService.insert(chat);
 		

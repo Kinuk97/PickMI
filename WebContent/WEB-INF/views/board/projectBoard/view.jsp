@@ -103,11 +103,22 @@ $(document).ready(function() {
 function like(data) {
 		console.log("찜 개수 확인!");
 	$("#countLike").html(data.countLike)
-}
+	}
+	
 	//팀참가 신청 버튼 눌르면 알림
-	$("#invite").click(function (){
+	$("#invite").click( function(data){
+		if( data.waiting == true) {
+			alert("이미 신청 하신 프로젝트 입니다!");
+		} else if ( data.already == true) {
+			alert("이미 가입되어 있는 프로젝트 입니다!");
+		} else if ( data.leader == true) {
+			alert ("당신은 팀장입니다!");
+		} else {
 		alert("팀 참가 신청 되었습니다!");
-	})
+			
+		}
+		})		
+	
 	
 });
 </script>
@@ -222,6 +233,7 @@ function like(data) {
 		<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		<button id="btnList" class="btn btn-primary">목록</button>
+		
 		<a id="invite" href="/alert/fromproject?proj_no=${projectBoard.proj_no}" role="button" class="btn btn-info" data-proj_no="${ projectBoard.proj_no }" data-userno="${ projectBoard.userno }">팀 참가 신청하기💌</a>			
 		
 	</div>

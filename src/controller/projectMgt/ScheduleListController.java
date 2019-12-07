@@ -36,6 +36,16 @@ public class ScheduleListController extends HttpServlet {
 		
 		Mate mate = mateService.getParam(req);
 		
+		Object obj = req.getSession().getAttribute("userno");
+		
+		if (obj != null && !obj.equals("")) {
+			try {
+				mate.setUserno((Integer) obj);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		ProjectBoard projectBoard = new ProjectBoard();
 		
 		projectBoard.setProj_no(mate.getProj_no());
@@ -55,6 +65,7 @@ public class ScheduleListController extends HttpServlet {
 				// 만약 내가 참여하고 있는 프로젝트의 팀원이라면
 				if (list.get(i).getProj_no() == projectBoard.getProj_no()) {
 					req.getRequestDispatcher("/WEB-INF/views/projectMgt/schedule.jsp").forward(req, resp);
+					return;
 				}
 			}
 			

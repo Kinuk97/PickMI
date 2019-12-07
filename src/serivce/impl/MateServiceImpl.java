@@ -5,14 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.face.MateDao;
+import dao.face.ProfileBoardDao;
 import dao.impl.MateDaoImpl;
+import dao.impl.ProfileBoardDaoImpl;
 import dto.Mate;
 import dto.ProjectBoard;
 import serivce.face.MateService;
+import sun.java2d.cmm.Profile;
 
 public class MateServiceImpl implements MateService {
 	
 	private MateDao mateDao = MateDaoImpl.getInstance();
+	private ProfileBoardDao profileDao = ProfileBoardDaoImpl.getInstance();
 	
 	public MateServiceImpl() {
 		
@@ -27,10 +31,44 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public List<Mate> appliedUser(Mate mate) {
+		
+		return mateDao.selectUsers(mate);
+	}
+	
+	@Override
+	public int checkJoin(Mate mate) {
+		//전에가입한적 있는지 확인하기
+		int cnt = mateDao.countMyTeam(mate);
+		
+		if (cnt == 0) {
+			return -1; // 가입한 적 없음
+		} else {
+		//메이트 상태 확인하기
+		mateDao.selectMylog(mate);
+		
+		int check = mate.getMate();
+		
+		return check;
+		}
+	}
+	
+	@Override
+	public List<Mate> waitingAnswer(Mate mate) {
+		return mateDao.selectWantToJoinList(mate);
+	}
+	
+	@Override
+	public void wantToJoin(Mate mate) {
+		mateDao.insertMate(mate);
+		
+	}
+	
+	@Override
 	public boolean checkLeader(Mate mate) {
 		
 		int cnt = mateDao.countLeader(mate);
-		
+//		System.out.println("mate service , check leader  : " + cnt);
 		if ( cnt > 0 ) {
 			return true; //팀장인 유저
 			}
@@ -104,8 +142,8 @@ public class MateServiceImpl implements MateService {
 	@Override
 	public boolean mateCheck(Mate mate) {
 		
-		char check = mate.getMate();
-		if (check == '0') {
+		int check = mate.getMate();
+		if (check == 0 ) {
 			return false; //가입 안되있음		
 		} else {
 			return true; //가입 되있음

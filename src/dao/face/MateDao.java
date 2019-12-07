@@ -4,8 +4,39 @@ import java.util.List;
 
 import dto.Mate;
 import dto.ProjectBoard;
+import sun.java2d.cmm.Profile;
 
 public interface MateDao {
+	/**
+	 * 가입 신청한 사용자 정보 불러오기
+	 * @param mate
+	 * @return
+	 */
+	public List<Mate> selectUsers(Mate mate);
+	
+	/**
+	 * 전에 가입했었는지 체크
+	 * @param mate
+	 * @return
+	 */
+	public int countMyTeam(Mate mate);
+	/**
+	 * 내가 팀 등급 확인하기
+	 * @param mate
+	 * @return
+	 */
+	public Mate selectMylog(Mate mate);
+	/**
+	 * 내가 참가 신청한 팀 목록 보기
+	 * @param mate
+	 * @return
+	 */
+	public List<Mate> selectWantToJoinList(Mate mate);
+	/**
+	 * 팀 참가 신청 하면 팀관리 테이블에 추가하기
+	 * @param mate
+	 */
+	public void insertMate(Mate mate);
 	/**
 	 * 사용자가 몇개의 팀장을 맡고 있는지 확인한다
 	 * @param mate

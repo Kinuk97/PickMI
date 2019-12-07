@@ -287,7 +287,6 @@ $(document).ready(function(){
 				}
 				var tr = $("<tr class='selectUser' data-userno='" + search[i].userno + "'></tr>"); 
 				var td = $("<td data-userno='" + search[i].userno + "'></td>");
-// 				tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
 				tr.append( $("<td>").html(search[i].name))
 				tr.append( $("<td>").html(search[i].email))
 				
@@ -320,6 +319,15 @@ $(document).ready(function(){
 
 </script>
 
+<!-- 알림 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#invite').click(function(){
+		console.log("안녕");
+	})
+})
+
+</script>
 
 <style type="text/css">
 
@@ -347,15 +355,15 @@ $(document).ready(function(){
 }
 
 #mainservicediv1 {
-	bottom: -7%;
+	bottom: -2%;
 }
 
 #mainservicediv2{
-	bottom: -2%;
+	bottom: 2%;
 }
 
 #mainservicediv3{
-	bottom: -2%;
+	bottom: 2%;
 }
 
 #header {
