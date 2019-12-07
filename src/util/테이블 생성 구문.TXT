@@ -222,8 +222,8 @@ DROP TABLE mate;
 CREATE TABLE mate (
     userno NUMBER,
     proj_no NUMBER,
-    mate CHAR(1) DEFAULT '0',
-    CONSTRAINT mate_check CHECK (mate IN ('0','1')),
+    mate NUMBER DEFAULT '0',
+    CONSTRAINT mate_check CHECK (mate IN ('0','1','2')),
     CONSTRAINT mate_userno_fk FOREIGN KEY (userno) REFERENCES user_table (userno),
     CONSTRAINT mate_proj_no_fk FOREIGN KEY (proj_no) REFERENCES projboard (proj_no) 
     );
