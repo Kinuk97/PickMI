@@ -79,8 +79,9 @@ $(document).ready(function() {
 })// document end
 </script>
 
-<h1>${ profile.userno }</h1>
 
+<div class="container">
+<h2 class="text-center"> 프로필 게시판 </h2>
 <table class="table table-bordered">
 <tr>
 	<td class="info">번호</td><td>${ profile.prof_no }</td>
@@ -144,6 +145,8 @@ $(document).ready(function() {
 	
 </tr>
 </table>
+</div>
+<div class="text-center">
 <c:if test="${ login }">
 	<a id="edit" role="button" class="btn btn-info" href="/profileBoard/update?prof_no=${profile.prof_no}">수정</a>
 </c:if>
@@ -158,6 +161,7 @@ $(document).ready(function() {
 <c:if test="${ !login }">
 	<a id="loginplz3" role="button" class="btn btn-info">삭제</a>			
 </c:if>
+</div>
 
 
 
