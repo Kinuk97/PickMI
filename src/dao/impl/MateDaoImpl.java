@@ -10,8 +10,8 @@ import java.util.List;
 import dao.face.MateDao;
 import dbutil.DBConn;
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
-import sun.java2d.cmm.Profile;
 
 public class MateDaoImpl implements MateDao {
 	
@@ -31,13 +31,82 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
-	
+	@Override
+	public List<ProfileBoard> showUser(Mate mate) {
+		String sql="";
+		sql += "SELECT p.*, (SELECT name FROM user_table WHERE userno = p.userno) username FROM profile p WHERE userno IN (SELECT userno FROM mate WHERE proj_no = ? AND mate = 0)";
+		
+		List<ProfileBoard> list = new ArrayList<ProfileBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProfileBoard temp = new ProfileBoard();
+				
+				temp.setProf_no(rs.getInt("prof_no"));
+				temp.setUserno(rs.getInt("userno"));
+				temp.setProf_interest(rs.getString("prof_interest"));
+				temp.setProf_loc(rs.getString("prof_loc"));
+				temp.setProf_job(rs.getString("prof_job"));
+				temp.setProf_state(rs.getString("prof_state"));
+				temp.setProf_career(rs.getString("prof_career"));
+				temp.setProf_content(rs.getString("prof_content"));
+				temp.setProf_like(rs.getInt("prof_like"));
+				temp.setProf_time(rs.getDate("prof_time"));
+				temp.setUsername(rs.getString("username"));
+				
+				list.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
 	@Override
 	public List<Mate> selectUsers(Mate mate) {
 		String sql="";
-		sql += "SELECT userno FROM mate WHERE proj_no = ? AND mate = 0";
+		sql += "SELECT userno , proj_no FROM mate WHERE proj_no = ? AND mate = 0";
 		
-		return null;
+		List<Mate> list = new ArrayList<Mate>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mate.getProj_no());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Mate temp = new Mate();
+				
+				temp.setUserno(rs.getInt("userno"));
+				temp.setProj_no(rs.getInt("proj_no"));
+				
+				list.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+		
 	}
 	
 //	@Override
@@ -267,7 +336,6 @@ public class MateDaoImpl implements MateDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
 			ps.setInt(1, mate.getProj_no());
 			
 			rs = ps.executeQuery();
@@ -419,6 +487,29 @@ public class MateDaoImpl implements MateDao {
 		}
 		
 		return list;
+	}
+	
+	@Override
+	public void updateMate(Mate mate) {
+		String sql = "UPDATE mate SET mate = 1 WHERE proj_no = ? AND userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			ps.setInt(2, mate.getUserno());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

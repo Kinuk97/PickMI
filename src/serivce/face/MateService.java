@@ -5,9 +5,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
 
 public interface MateService {
+	/**
+	 * 사용자들 프로필 조회
+	 * @param list4
+	 * @return
+	 */
+	public List<ProfileBoard> showUser(Mate mate);
 	/**
 	 * 참가 신청 한 사용자들의 정보를 불러온다
 	 * @param mate
@@ -71,7 +78,7 @@ public interface MateService {
 	 * @param mate
 	 * @return
 	 */
-	public Mate addMate(Mate mate);
+	public void addMate(Mate mate);
 
 	/**
 	 * 팀관리 리스트들을 가져온다

@@ -9,6 +9,7 @@ import dao.face.ProfileBoardDao;
 import dao.impl.MateDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
 import serivce.face.MateService;
 import sun.java2d.cmm.Profile;
@@ -28,6 +29,12 @@ public class MateServiceImpl implements MateService {
 
 	public static MateService getInstance() {
 		return Singleton.instance;
+	}
+	
+	@Override
+	public List<ProfileBoard> showUser(Mate mate) {
+		
+		return mateDao.showUser(mate);
 	}
 	
 	@Override
@@ -97,9 +104,8 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
-	public Mate addMate(Mate mate) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addMate(Mate mate) {
+		mateDao.updateMate(mate);
 	}
 	
 	@Override

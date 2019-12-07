@@ -639,7 +639,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			while(rs.next()) {
 				ProfileBoard proboard = new ProfileBoard();
 				proboard.setProf_no(rs.getInt("prof_no"));
-//				proboard.setUserno(rs.getInt("userno"));
+				proboard.setUserno(rs.getInt("userno"));
 				proboard.setProf_time(rs.getDate("prof_time"));
 				proboard.setProf_interest(rs.getString("prof_interest"));
 				proboard.setProf_job(rs.getString("prof_job"));

@@ -3,10 +3,12 @@ package dao.face;
 import java.util.List;
 
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
-import sun.java2d.cmm.Profile;
 
 public interface MateDao {
+	
+	public List<ProfileBoard> showUser(Mate	mate);
 	/**
 	 * 가입 신청한 사용자 정보 불러오기
 	 * @param mate
@@ -85,5 +87,12 @@ public interface MateDao {
 	 * @return
 	 */
 	List<ProjectBoard> myProjectList(Mate mate);
+	
+	/**
+	 * 팀원초대 수락
+	 * 
+	 * @param mate
+	 */
+	public void updateMate(Mate mate);
 
 }

@@ -10,39 +10,47 @@
 <script src="/resources/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
-$(document).ready (function() {
-
+function myTeamMateList(proj_no) {
 	$.ajax({
 		type : "post",
-		url : "/profileBoard/list",
-		data : { "curPage" : curPage, "interestno" : "${paging.interestno}", "locationno" : "${paging.locationno}", "jobno" : "${paging.jobno}", "stateno" : "${paging.stateno}", "careerno" : "${paging.careerno}" },
-		dataType : "json",
+		url : "/mate/mymate",
+		data : { "proj_no" : proj_no },
+		dataType : "text",
 		success : function(data) {
-			for (var i = 0; i < data.length; i++) {
+			$("#showPeople").html("");
+			var list = JSON.parse(data);
+// 			$("#myTeamMateCaption")
+			for (var i = 0; i < list.length; i++) {
 				
-				var caption = $("<div class='caption caption-profile' onclick=\"location.href='/profileBoard/view?prof_no="+data[i].prof_no +"'\"></div>");
+				var caption = $("<div class='caption caption-profile' onclick=\"location.href='/profileBoard/view?prof_no="+list[i].prof_no +"'\" style='height: 300px;'\"></div>");
 				
-				caption.append($("<h4></h4>").text(data[i].username));
-// 				caption.append($("<p></p>").text(data[i].username));
-				caption.append($("<p></p>").text(data[i].prof_interest));
-				caption.append($("<p></p>").text(data[i].prof_loc));
-				caption.append($("<p></p>").text(data[i].prof_job));
-				caption.append($("<p></p>").text(data[i].prof_state));
-				caption.append($("<p id='abc'></p>").text(data[i].prof_career));
-				caption.append($("<p class='text-right' id='abc'></p>").text(data[i].prof_like +"❤"));
-				caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
-	
+				caption.append($("<h4></h4>").text(list[i].username));
+				caption.append($("<p></p>").text(list[i].prof_interest));
+				caption.append($("<p></p>").text(list[i].prof_loc));
+				caption.append($("<p></p>").text(list[i].prof_job));
+				caption.append($("<p></p>").text(list[i].prof_state));
+				caption.append($("<p id='abc'></p>").text(list[i].prof_career));
+				caption.append($("<p class='text-right' id='abc'></p>").text(list[i].prof_like +"❤"));
+				caption.append($("<p></p>").text(list[i].prof_time+"에 작성"));
+				caption.append($("<p></p>").append($("<a href=\"/mate/accept?proj_no=" + proj_no + "&userno=" + list[i].userno + "\" class=\"btn btn-info\">수락</a> <a href=\"/mate/denied?proj_no=" + proj_no + "&userno=" + list[i].userno + "\"  class=\"btn btn-default\">거절</a>")));
 			
-				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
-				$("#board").append(board);
-			}	
+				var board = $("<div class='col-sm-3 col-md-3 col-lg-4'></div>").append($("<div class='thumbnail'></div>").append(caption));
+				$("#showPeople").append(board);
+			}
+			
+			if (list.length < 1) {
+				$("#showPeople").html("신청 없음");
+			}
 		
-			loading = false;
 		},
 		error : function(e) {
 			console.log(e);
 		}
 	});
+	
+}
+
+$(document).ready (function() {
 	
 	$('.startmodal').click(function(){
 		var proj_no = $(this).data("projno");
@@ -61,19 +69,7 @@ $(document).ready (function() {
 	}); /* 첫번째 모달 끝 */
 	
 	$('.showUsers').click(function() {
-		var proj_no = $(this).data("proj_no");
-		$.ajax({
-			type : "get",
-			url : "/mate/list",
-			data : {
-				"proj_no" : proj_no
-			},
-			dataType : "html",
-			success : function(data) {
-				console.log('신청자보기');
-				$('#showPeople').html(data);
-			}
-		})
+		myTeamMateList($(this).data("proj_no"));
 	}); /* 두번째모달 끝 */
 	
 })
@@ -135,41 +131,29 @@ $(document).ready (function() {
 	</div>
   		<div class="panel-body">
 			<c:forEach items="${ leaderlist }" var="list">
-			${ list.proj_no }
-    		<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
+<%-- 			${ list.proj_no } --%>
+    		<p><a href="/projectBoard/view?proj_no=${ list.proj_no }">${ list.proj_title }</a></p>
 		<!-- 신청자보기 모달 -->
 		<!-- Button trigger modal -->
-			<button data-proj_no="${ list.proj_no }" id="showUsers" type="button" class="btn btn-info" data-toggle="modal" data-target="#showApplied">
+			<button data-proj_no="${ list.proj_no }" id="showUsers" type="button" class="btn btn-info showUsers" data-toggle="modal" data-target="#showApplied">
 			  신청자 보기
 			</button>
 			</c:forEach>
 			
 			<!-- Modal -->
 			<div class="modal fade" id="showApplied" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
+			  <div class="modal-dialog" style="width: 80%;">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title" id="myModalLabel">신청자 현황</h4>
 			      </div>
 			      <div class="modal-body" id="showPeople">
-			        	<!-- 썸네일 -->
-						<div class="row">
-						  <div class="col-sm-6 col-md-4">
-						    <div class="thumbnail">
-						      <div class="caption">
-						        <h3>${ list.username }</h3>
-						        <p>...</p>
-						        <p><a href="#" class="btn btn-info" role="button">수락</a> <a href="#" class="btn btn-default" role="button">거절</a></p>
-						      </div>
-						    </div>
-						  </div>
-						</div>
 					</div>
-			      </div>
+					<div style="clear: both;"></div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<!-- 			        <button type="button" class="btn btn-info">확인</button> -->
+			      </div>
 			      </div>
 			    </div>
 			  </div>

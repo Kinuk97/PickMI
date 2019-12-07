@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
 import serivce.face.MateService;
 import serivce.impl.MateServiceImpl;
@@ -52,20 +53,14 @@ public class MateListController extends HttpServlet {
 //			System.out.println("joinTeam LIst :" + list2);
 
 			
-			//내가 신청한 프로젝트 리스트 불러오기
-			List<Mate> list3 = mateService.waitingAnswer(mate);
-			req.setAttribute("waitTeamList", list3);
+		//내가 신청한 프로젝트 리스트 불러오기
+		List<Mate> list3 = mateService.waitingAnswer(mate);
+		req.setAttribute("waitTeamList", list3);
 //			System.out.println("체크체크 : " + list3);
-			
-			//신청한 사용자 정보 불러오기
-			mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
-			System.out.println("제발제발제발 : " + mate);
-//			List<Mate> list4 = mateService.AppliedUser(mate);
-
 		
 
 		
-		System.out.println(req.getAttribute("leader"));
+//		System.out.println(req.getAttribute("leader"));
 		
 		req.getRequestDispatcher("/WEB-INF/views/mateMgt/mateList.jsp").forward(req, resp);
 		
