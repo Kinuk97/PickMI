@@ -771,11 +771,12 @@ a#top {
 				<c:choose>
 					<c:when test="${not empty login }">	
  						<li role="presentation"> 					
- 							<div class="dropdown">
-								<button class="btn btn-default dropdown-toggle" type="button"
-									id="btnAlertList" data-toggle="dropdown" aria-expanded="true">
-									Alert <span class="badge" id="badge">7</span>
-								</button>
+ 							<div class="dropdown" style="margin-right: 20px;">
+<!-- 								<button class="btn btn-default dropdown-toggle" type="button" -->
+<!-- 									id="btnAlertList" data-toggle="dropdown" aria-expanded="true"> -->
+<!-- 									Alert  -->
+								<img src="/resources/alerticon.png" type="button" id="btnAlertList" data-toggle="dropdown" aria-expanded="true" style="width:44px;"><span class="badge" id="badge">7</span>
+<!-- 								</button> -->
 								
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
 								
@@ -799,13 +800,14 @@ a#top {
 							</div>
 						</li>
 						
-						
 						<li role="presentation"> 					
- 							<div class="dropdown" id="dropdownMsg">
-								<button class="btn btn-default dropdown-toggle" type="button"
-									id="btnMessageList" data-toggle="dropdown" aria-expanded="true">
-									Message <span class="badge" id="badge">5</span>
-								</button>
+ 							<div class="dropdown" id="dropdownMsg" style="margin-right: 20px;">
+<!-- 								<button class="btn btn-default dropdown-toggle" type="button" -->
+<!-- 									id="btnMessageList" data-toggle="dropdown" aria-expanded="true"> -->
+<!-- 									Message -->
+								<img src="/resources/messageicon.png" type="button" id="btnMessageList" data-toggle="dropdown" aria-expanded="true" style="width:50px;"> 
+								<span class="badge" id="badge">5</span>
+<!-- 								</button> -->
 								
 <!-- 								메세지 목록 -->
 <!-- 								<ul id="msgList" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;"> -->
