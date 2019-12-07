@@ -153,7 +153,10 @@ $(document).ready (function() {
 					<div style="clear: both;"></div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<<<<<<< HEAD
 			      </div>
+=======
+>>>>>>> refs/remotes/origin/testing
 			      </div>
 			    </div>
 			  </div>

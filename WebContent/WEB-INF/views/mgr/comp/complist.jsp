@@ -67,7 +67,7 @@ $(document).ready(function(){
 <!-- 	</div> -->
 	
 	<div class="innercon2">
-		<form action="/mgr/profileboard/delete" method="get">
+		<form action="/mgr/compboard/delete" method="get">
 			<table class="table table-hover">
 				<thead>
 				<tr class = "info"  >
@@ -84,7 +84,7 @@ $(document).ready(function(){
 				<tr>
 					<td><input type="checkbox" name="checkRow" value="${comp.comp_no  }"/></td>
 					<td>${comp.comp_no }</td>
-					<td><a href="/profileBoard/view?prof_no=${comp.comp_no}">${comp.comp_title }</a></td>
+					<td><a href="/mgr/compview?comp_no=${comp.comp_no}">${comp.comp_title }</a></td>
 					<td>${comp.userno }</td>
 					<td>${comp.comp_date }</td>
 				</tr>
@@ -95,7 +95,7 @@ $(document).ready(function(){
 			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
 		<div class="src" style="text-align: right;">
-			<form action="/mgr/profilelist" method="get">
+			<form action="/mgr/complist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
 			</form>

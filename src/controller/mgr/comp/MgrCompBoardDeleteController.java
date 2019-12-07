@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.CompBoard;
+import dto.ProjectBoard;
 import serivce.face.CompBoardService;
 import serivce.face.FileService;
 import serivce.impl.CompBoardServiceImpl;
@@ -26,11 +27,17 @@ public class MgrCompBoardDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		String[] strings = req.getParameterValues("checkRow");
-		CompBoard compBoard =  new CompBoard();
+		CompBoard chkcompBoard = new CompBoard();
+		CompBoard compBoard =  compBoardService.getParam(req);
 //		System.out.println(strings);
-		
-		for (String string : strings) {
-			compBoard.setComp_no(Integer.parseInt(string));
+		if (strings != null ) {
+			
+			for (String string : strings) {
+				chkcompBoard.setComp_no(Integer.parseInt(string));
+				fileService.deleteFile(getServletContext().getRealPath("upload"), 4, chkcompBoard.getComp_no());
+				compBoardService.delete(chkcompBoard);
+			}
+		} else {
 			fileService.deleteFile(getServletContext().getRealPath("upload"), 4, compBoard.getComp_no());
 			compBoardService.delete(compBoard);
 		}

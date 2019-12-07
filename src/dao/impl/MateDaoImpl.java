@@ -32,6 +32,7 @@ public class MateDaoImpl implements MateDao {
 		return Singleton.instance;
 	}
 	@Override
+<<<<<<< HEAD
 	public List<ProfileBoard> showUser(Mate mate) {
 		String sql="";
 		sql += "SELECT p.*, (SELECT name FROM user_table WHERE userno = p.userno) username FROM profile p WHERE userno IN (SELECT userno FROM mate WHERE proj_no = ? AND mate = 0)";
@@ -73,6 +74,12 @@ public class MateDaoImpl implements MateDao {
 		}
 		
 		return list;
+=======
+	public List<Mate> showUser(List<Mate> list4) {
+		String sql="";
+//		sql += "SELECT p.prof_no, p."
+		return null;
+>>>>>>> refs/remotes/origin/testing
 	}
 	@Override
 	public List<Mate> selectUsers(Mate mate) {

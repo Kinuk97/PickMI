@@ -8,7 +8,11 @@ import dto.ProjectBoard;
 
 public interface MateDao {
 	
+<<<<<<< HEAD
 	public List<ProfileBoard> showUser(Mate	mate);
+=======
+	public List<Mate> showUser(List<Mate> list4);
+>>>>>>> refs/remotes/origin/testing
 	/**
 	 * 가입 신청한 사용자 정보 불러오기
 	 * @param mate
