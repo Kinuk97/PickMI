@@ -20,10 +20,11 @@ public class MessageController extends HttpServlet {
 		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		Chat chat = new Chat();
 		chat.setChat_msg(req.getParameter("chat_msg"));
 		chat.setChat_sender((int)req.getSession().getAttribute("userno")); 
-		System.out.println(Integer.parseInt(req.getParameter("chat_no")));
+//		System.out.println(Integer.parseInt(req.getParameter("chat_no")));
 		
 		chat.setChat_no(Integer.parseInt(req.getParameter("chat_no"))); //채팅방 생성을 하기 전에 채팅방이 없는 경우에도 채팅방이 있는지 찾아서 null이 나옴
 		
@@ -35,7 +36,6 @@ public class MessageController extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		Chat chat = new Chat();
 		chat.setChat_msg(request.getParameter("chat_msg"));

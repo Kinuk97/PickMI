@@ -53,4 +53,12 @@ public interface MessageService {
 	 * @param chatter1
 	 */
 	public Chat getExistsChatRoom(Chatter chatter1);
+
+	/**
+	 * 
+	 * @param chatter1
+	 * @param chatter2
+	 */
+	public int chattingUserCheck(Chatter chatter1, Chatter chatter2);
+	
 }

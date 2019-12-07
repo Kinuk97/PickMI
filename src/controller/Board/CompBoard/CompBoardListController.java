@@ -35,7 +35,7 @@ public class CompBoardListController extends HttpServlet {
 		
 		String photo = (String) req.getSession().getAttribute("photo_storedname");
 
-		System.out.println(photo);
+//		System.out.println(photo);
 
 		
 		//Paging객체를 MODEL값으로 지정
