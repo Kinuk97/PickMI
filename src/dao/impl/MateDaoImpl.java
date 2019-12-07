@@ -31,13 +31,45 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
-	
+	@Override
+	public List<Mate> showUser(List<Mate> list4) {
+		String sql="";
+//		sql += "SELECT p.prof_no, p."
+		return null;
+	}
 	@Override
 	public List<Mate> selectUsers(Mate mate) {
 		String sql="";
-		sql += "SELECT userno FROM mate WHERE proj_no = ? AND mate = 0";
+		sql += "SELECT userno , proj_no FROM mate WHERE proj_no = ? AND mate = 0";
 		
-		return null;
+		List<Mate> list = new ArrayList<Mate>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mate.getProj_no());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Mate temp = new Mate();
+				
+				temp.setUserno(rs.getInt("userno"));
+				temp.setProj_no(rs.getInt("proj_no"));
+				
+				list.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+		
 	}
 	
 //	@Override
@@ -267,7 +299,6 @@ public class MateDaoImpl implements MateDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			
 			ps.setInt(1, mate.getProj_no());
 			
 			rs = ps.executeQuery();
