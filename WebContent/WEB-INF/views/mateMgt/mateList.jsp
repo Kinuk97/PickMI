@@ -103,8 +103,8 @@ $(document).ready (function() {
 	</div>
   		<div class="panel-body">
 			<c:forEach items="${ leaderlist }" var="list">
-			${ list.proj_no }
-    		<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
+<%-- 			${ list.proj_no } --%>
+    		<p><a href="/projectBoard/view?proj_no=${ list.proj_no }">${ list.proj_title }</a></p>
 		<!-- 신청자보기 모달 -->
 		<!-- Button trigger modal -->
 			<button data-proj_no="${ list.proj_no }" id="showUsers" type="button" class="btn btn-info" data-toggle="modal" data-target="#showApplied">
@@ -137,7 +137,6 @@ $(document).ready (function() {
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<!-- 			        <button type="button" class="btn btn-info">확인</button> -->
 			      </div>
 			    </div>
 			  </div>
