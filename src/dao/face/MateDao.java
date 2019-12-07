@@ -7,6 +7,12 @@ import dto.ProjectBoard;
 
 public interface MateDao {
 	/**
+	 * 사용자가 몇개의 팀장을 맡고 있는지 확인한다
+	 * @param mate
+	 * @return
+	 */
+	public int countLeader(Mate mate);
+	/**
 	 * 프로젝트 게시판에 글이 작성될때 팀이 형성된다
 	 * @param mate
 	 */
