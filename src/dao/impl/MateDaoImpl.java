@@ -11,6 +11,7 @@ import dao.face.MateDao;
 import dbutil.DBConn;
 import dto.Mate;
 import dto.ProjectBoard;
+import sun.java2d.cmm.Profile;
 
 public class MateDaoImpl implements MateDao {
 	
@@ -30,6 +31,24 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
+	
+	@Override
+	public List<Mate> selectUsers(Mate mate) {
+		String sql="";
+		sql += "SELECT userno FROM mate WHERE proj_no = ? AND mate = 0";
+		
+		return null;
+	}
+	
+//	@Override
+//	public List<Profile> selectAppliedUser(Mate mate) {
+//		String sql="";
+//		sql += "SELECT p.prof_no, p.prof_interest, p.prof_job, p.prof_time, p.prof_loc, p.prof_career,";
+//				" p.prof_state, p.prof_content, p.userno,";
+//				"(SELECT name FROM user_table WHERE userno = p.userno) AS username";
+//				+ "FROM profile p WHERE p.proj_no = m.proj_no(+) AND m.mate in (1,2) AND m.userno = ?"
+//		return null;
+//	}
 	
 	@Override
 	public int countMyTeam(Mate mate) {
