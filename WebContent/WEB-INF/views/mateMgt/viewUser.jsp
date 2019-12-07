@@ -39,9 +39,12 @@ $("#cantdelete").click( function() {
 </script>
 <c:forEach items="${ mateList }" var="mate">
 	<div id="userDelete">
-<span><a tabindex="0" role="button" class="btn btn-info" data-toggle="popover" data-trigger="focus" title="${ mate.username }의 간단정보☺" 
+		<span>
+			<c:if test="${ leader }"></c:if>
+			<a tabindex="0" role="button" class="btn btn-info" data-toggle="popover" data-trigger="focus" title="${ mate.username }의 간단정보☺" 
 			data-content="${ profile.prof_interest }/${ profile.prof_job }/${ profile.prof_state }/${ profile.prof_loc }/${profile.prof_career}">
-			${ mate.username }</a></span>
+			${ mate.username }</a>
+		</span>
 	<c:if test="${ check }">
 	<span><button class="label label-warning" data-projno2="${ mate.proj_no }" data-userno="${ mate.userno }">추방</button></span>
 	</c:if>

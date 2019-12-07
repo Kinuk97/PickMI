@@ -50,6 +50,11 @@ public class MateListController extends HttpServlet {
 			List<ProjectBoard> list2 = mateService.getMyProjList(mate);
 			req.setAttribute("joinTeamList", list2);
 //			System.out.println("joinTeam LIst :" + list2);
+			
+			//내가 신청한 프로젝트 리스트 불러오기
+			List<Mate> list3 = mateService.waitingAnswer(mate);
+			req.setAttribute("waitTeamList", list3);
+			System.out.println("체크체크 : " + list3);
 		
 		
 		
