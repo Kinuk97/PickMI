@@ -27,7 +27,7 @@ public class MateListController extends HttpServlet {
 		Mate mate = new Mate();
 		HttpSession session = req.getSession();
 		try {
-		mate.setUserno((int)session.getAttribute("userno"));
+			mate.setUserno((int)session.getAttribute("userno"));
 		} catch (NullPointerException e) {
 			System.out.println("로그인 안했음");
 		}
@@ -46,17 +46,17 @@ public class MateListController extends HttpServlet {
 			req.setAttribute("leader", false);
 		}
 		
-			//내가 가입한 프로젝트 리스트 불러오기
-			List<ProjectBoard> list2 = mateService.getMyProjList(mate);
-			req.setAttribute("joinTeamList", list2);
+		//내가 가입한 프로젝트 리스트 불러오기
+		List<ProjectBoard> list2 = mateService.getMyProjList(mate);
+		req.setAttribute("joinTeamList", list2);
 //			System.out.println("joinTeam LIst :" + list2);
-			
-			//내가 신청한 프로젝트 리스트 불러오기
-			List<Mate> list3 = mateService.waitingAnswer(mate);
-			req.setAttribute("waitTeamList", list3);
-			System.out.println("체크체크 : " + list3);
 		
+		//내가 신청한 프로젝트 리스트 불러오기
+		List<Mate> list3 = mateService.waitingAnswer(mate);
+		req.setAttribute("waitTeamList", list3);
+		System.out.println("체크체크 : " + list3);
 		
+		System.out.println(req.getAttribute("leader"));
 		
 		req.getRequestDispatcher("/WEB-INF/views/mateMgt/mateList.jsp").forward(req, resp);
 		

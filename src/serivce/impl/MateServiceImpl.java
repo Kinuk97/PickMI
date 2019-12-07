@@ -73,8 +73,8 @@ public class MateServiceImpl implements MateService {
 	 * 프로젝트게시번호로 작성자(유저번호)를 조회한다
 	 */
 	@Override
-	public Mate getUsernoByProjectno(Mate mate2) {
-		return mateDao.selectUsernoByProjectno(mate2);
+	public List<Mate> getUsernoByProjectno(Mate mate) {
+		return mateDao.selectUsernoByProjectno(mate);
 	}
 	@Override
 	public int getProj_no(Mate mate) {
