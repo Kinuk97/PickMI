@@ -227,3 +227,15 @@ CREATE TABLE mate (
     CONSTRAINT mate_userno_fk FOREIGN KEY (userno) REFERENCES user_table (userno),
     CONSTRAINT mate_proj_no_fk FOREIGN KEY (proj_no) REFERENCES projboard (proj_no) 
     );
+    
+//알림 테이블
+ DROP TABLE alert;
+ CREATE TABLE alert (
+    userno NUMBER,
+    alert VARCHAR2(100),
+    alerttime DATE DEFAULT sysdate,
+    sender NUMBER,
+    checkcheck CHAR(1) DEFAULT '0',
+    CONSTRAINT alert_check CHECK (checkcheck IN ('0','1')),
+    CONSTRAINT alert_userno_fk FOREIGN KEY (userno) REFERENCES user_table (userno)
+    );

@@ -620,9 +620,11 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		sql += "SELECT";
 		sql += " prof_no, prof_time, userno,";
 		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
+
 		sql += " prof_content";
 		sql += " ,(SELECT count(*) FROM likepost WHERE boardno = profile.prof_no AND postno = 1) AS prof_like";
 		sql += ", (SELECT name FROM user_table WHERE user_table.userno = profile.userno) username ";
+
 		sql += " FROM (SELECT * FROM profile ORDER BY prof_time DESC) profile";
 		sql += " WHERE ROWNUM <= 3";
 		

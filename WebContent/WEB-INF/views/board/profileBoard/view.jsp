@@ -53,25 +53,30 @@ $(document).ready(function() {
 	})
 
 
-function like(data) {
-		console.log("좋아요되랏")
-	$("#countLike").html(data.countLike)
-}
-
-$("#loginplz").click( function loginplz(){
-	alert("로그인 해주세요");
- 	$(location).attr("href","/login");
-	});
-$("#loginplz2").click( function loginplz(){
-	alert("로그인 해주세요");
- 	$(location).attr("href","/login");
-	});
-$("#loginplz3").click( function loginplz(){
-	alert("로그인 해주세요");
- 	$(location).attr("href","/login");
-	});
+	function like(data) {
+			console.log("좋아요되랏")
+		$("#countLike").html(data.countLike)
+	}
 	
-})
+	$("#loginplz").click( function loginplz(){
+		alert("로그인 해주세요");
+	 	$(location).attr("href","/login");
+		});
+	$("#loginplz2").click( function loginplz(){
+		alert("로그인 해주세요");
+	 	$(location).attr("href","/login");
+		});
+	$("#loginplz3").click( function loginplz(){
+		alert("로그인 해주세요");
+	 	$(location).attr("href","/login");
+		});
+	
+	
+	$("#invite").click(function (){
+		alert("초대되었습니다!");
+	})
+	
+})// document end
 </script>
 
 <h1>${ profile.userno }</h1>
@@ -79,29 +84,18 @@ $("#loginplz3").click( function loginplz(){
 <table class="table table-bordered">
 <tr>
 	<td class="info">번호</td><td>${ profile.prof_no }</td>
-</tr>
-<tr>
 	<td class="info">유저이름</td><td>${ profile.username }</td>
-</tr>
-<tr>
 	<td class="info">작성일</td><td>${ profile.prof_time }</td>
 </tr>
 <tr>
 	<td class="info">관심</td><td>${ profile.prof_interest }</td>
-</tr>
-<tr>
 	<td class="info">지역</td><td>${ profile.prof_loc }</td>
-</tr>
-<tr>
 	<td class="info">직업</td><td>${ profile.prof_job }</td>
 </tr>
 <tr>
 	<td class="info">상태</td><td>${ profile.prof_state }</td>
-</tr>
-<tr>
 	<td class="info">경력</td><td>${ profile.prof_career }</td>
-</tr>
-<tr>
+
 	<td class="info">찜받은수</td><td><span id="countLike">${ countLike }</span>
 		<c:if test="${ login }">
 			<c:if test="${ canLike }">
@@ -140,24 +134,27 @@ $("#loginplz3").click( function loginplz(){
 	</td>
 </tr>
 <tr>
-	<td class="info">내용</td><td>${ profile.prof_content }</td>
+	<td colspan="6" style="height: 500px;">${profile.prof_content }</td>
 </tr>
 <tr>
 	<td class="info">첨부파일</td>
 	<td><a href="/file/download?fileno=${file.fileno }">${file.originName }</a></td>
+	
 </tr>
 </table>
 <c:if test="${ login }">
-	<a href="/profileBoard/update?prof_no=${profile.prof_no}"><button id="edit">수정</button></a>			
+	<a id="edit" role="button" class="btn btn-info" href="/profileBoard/update?prof_no=${profile.prof_no}">수정</a>
 </c:if>
 <c:if test="${ !login }">
-	<button id="loginplz2">수정</button>			
+	<a id="loginplz2" role="button" class="btn btn-info">수정</a>			
 </c:if>
 <c:if test="${ login }">
-	<a href="/profileBoard/delete?prof_no=${profile.prof_no}"><button id="delete">삭제</button></a>			
+	<a id="delete" role="button" class="btn btn-info" href="/profileBoard/delete?prof_no=${profile.prof_no}">삭제</a>			
+	<a id="invite" href="/alert/fromprofile?prof_no=${profile.prof_no}" role="button" class="btn btn-info" data-prof_no="${ profile.prof_no }" data-userno="${ profile.userno }">우리팀으로 초대하기💌</a>			
+	
 </c:if>
 <c:if test="${ !login }">
-	<button id="loginplz3">삭제</button>			
+	<a id="loginplz3" role="button" class="btn btn-info">삭제</a>			
 </c:if>
 
 
