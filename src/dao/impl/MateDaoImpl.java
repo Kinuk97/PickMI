@@ -31,7 +31,12 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
-	
+	@Override
+	public List<Mate> showUser(List<Mate> list4) {
+		String sql="";
+//		sql += "SELECT p.prof_no, p."
+		return null;
+	}
 	@Override
 	public List<Mate> selectUsers(Mate mate) {
 		String sql="";
