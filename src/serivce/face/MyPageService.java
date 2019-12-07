@@ -46,20 +46,6 @@ public interface MyPageService {
 	 */
 	public User getUserno(HttpServletRequest req);
 
-	/**
-	 * 페이징 정보를 활요앻 보여질 게시물 목록만 조회
-	 * @param paging
-	 * @param user
-	 * @return
-	 */
-	public List<ProfileBoard> getpfList(Paging paging, User user);
-	public List<ProjectBoard> getpjList(Paging paging, User user);
-	public List<CompBoard> getcompList(Paging paging, User user);
-	public List<FreeBoard> getfreeList(Paging paging, User user);
-
-
-// ------ 비밀번호 수정
-
 	public User getcurPwParam(HttpServletRequest req);
 
 	boolean eqPW(User pwparam);
@@ -73,26 +59,42 @@ public interface MyPageService {
 	 * @return 삭제 성공 여부 반환
 	 */
 	public boolean userDelete(User user);
+		
+	public Paging getPaging(HttpServletRequest req, int i);
+	
 	
 	/**
-	 * 댓글 리스트
+	 * 내가 작성한 게시글 리스트
+	 * @param pfpaging
+	 * @param user
+	 * @param i
 	 * @return
 	 */
-	public List<Reply> getReplyList(Paging paging);
-	
-	public Paging getPaging(HttpServletRequest req, int i);
-
 	public List getList(Paging pfpaging, User user, int i);
 	
 	
 	/**
-	 * 찜한 리스트
-	 * @param pfpaging - 프로필게시판 페이징
+	 * 내가 찜한 리스트
+	 * @param paging - 게시판 페이징
 	 * @param user - userno
 	 * @param i - postno
 	 * @return
 	 */
-	public List getLikeList(Paging pfpaging, User user, int i);
+	public List getLikeList(Paging paging, User user, int i);
 
+	/**
+	 * 내 댓글 리스트
+	 * @param paging
+	 * @param userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List getReplyList(Paging paging, User user, int i);
+
+// -------------------- tES T ---------------------------------	
+	
+	public Paging getPaging(HttpServletRequest req);
+	
+//-----------------------------------------------------------------
 	
 }

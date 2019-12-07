@@ -37,15 +37,6 @@ public interface MyPageDao {
 	 */
 	public int selectpfCntAll(HttpServletRequest req);
 	
-// ----- 내가 작성한 게시글
-	List<ProfileBoard> selectPf(Paging paging, User user);
-
-	List<ProjectBoard> selectPj(Paging paging, User user);
-
-	List<CompBoard> selectComp(Paging paging, User user);
-
-	List<FreeBoard> selectFree(Paging paging, User user);
-// 내가 작성한 게시글 -------------------------------------------
 
 // ----- 비밀번호 수정
 	
@@ -58,13 +49,6 @@ public interface MyPageDao {
 	 * @return 쿼리 수행 결과
 	 */
 	public int deleteUser(User user);
-	
-	/**
-	 * 댓글 조회
-	 * @param paging
-	 * @return
-	 */
-	List<Reply> selectReply(Paging paging);
 
 	public int selectCntAll(HttpServletRequest req, int i);
 	
@@ -86,6 +70,19 @@ public interface MyPageDao {
 	 * @return
 	 */
 	public List likeboard(Paging paging, User user, int i);
+
+	/**
+	 * 작성한 댓글 리스트
+	 * @param paging - 각 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List writeReply(Paging paging, User user, int i);
+
+	
+	// ---------------------- tES T --------------------
+	public int selectCntAll(HttpServletRequest req);
 
 
 
