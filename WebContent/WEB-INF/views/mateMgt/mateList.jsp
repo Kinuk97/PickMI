@@ -11,6 +11,38 @@
 
 <script type="text/javascript">
 $(document).ready (function() {
+
+	$.ajax({
+		type : "post",
+		url : "/profileBoard/list",
+		data : { "curPage" : curPage, "interestno" : "${paging.interestno}", "locationno" : "${paging.locationno}", "jobno" : "${paging.jobno}", "stateno" : "${paging.stateno}", "careerno" : "${paging.careerno}" },
+		dataType : "json",
+		success : function(data) {
+			for (var i = 0; i < data.length; i++) {
+				
+				var caption = $("<div class='caption caption-profile' onclick=\"location.href='/profileBoard/view?prof_no="+data[i].prof_no +"'\"></div>");
+				
+				caption.append($("<h4></h4>").text(data[i].username));
+// 				caption.append($("<p></p>").text(data[i].username));
+				caption.append($("<p></p>").text(data[i].prof_interest));
+				caption.append($("<p></p>").text(data[i].prof_loc));
+				caption.append($("<p></p>").text(data[i].prof_job));
+				caption.append($("<p></p>").text(data[i].prof_state));
+				caption.append($("<p id='abc'></p>").text(data[i].prof_career));
+				caption.append($("<p class='text-right' id='abc'></p>").text(data[i].prof_like +"❤"));
+				caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
+	
+			
+				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
+				$("#board").append(board);
+			}	
+		
+			loading = false;
+		},
+		error : function(e) {
+			console.log(e);
+		}
+	});
 	
 	$('.startmodal').click(function(){
 		var proj_no = $(this).data("projno");
