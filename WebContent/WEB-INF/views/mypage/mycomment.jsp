@@ -48,7 +48,7 @@ table th {
 
 <div class="container" >
 	<div class="table-responsive">
-	<form action="/mgr/projectboard/delete" method = "get">
+	<form action="/mycomment/list" method = "get">
 	<table class="table table-condensed table-hover">
 		<tr class="info">
 			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>

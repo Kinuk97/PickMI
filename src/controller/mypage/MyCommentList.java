@@ -23,6 +23,8 @@ public class MyCommentList extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		 req.setCharacterEncoding("UTF-8");
+		 
 		req.getRequestDispatcher("/WEB-INF/views/mypage/mycomment.jsp").forward(req, resp);
 		
 		Paging paging = myPageService.getPaging(req);

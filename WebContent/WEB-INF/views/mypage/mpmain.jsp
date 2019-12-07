@@ -248,8 +248,8 @@ $(document).ready(function() {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 38%;
-    height: 200px;
+    width: 40%;
+    height: 220px;
     padding: 16px;
     margin: 50px;
     border: 1px solid #ddd;
@@ -461,9 +461,22 @@ $(document).ready(function() {
 			</ul>
 <!-- 			<p style="text-align:left; font-size:25px">활동이력</p> -->
 			<hr>
-			<a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
-			<a href="/mycomment/list">내가쓴댓글가져오기</a> 
-			<a href="/mypage/likelist">찜하기한글가져오기</a>
+			
+			<div style="float: left">
+			<a href="/mypage/boardwrite"><img src="/resources/edit.png" style="width:45x; height: 45px;"></a>
+			<p>내가쓴 게시글</p>
+			</div>	
+			
+			<div style="float: left; margin-left: 95px;">		 
+			<a href="/mycomment/list"><img src="/resources/chat.png" style="width:45px; height: 45px;"></a>
+			<p>내가쓴 댓글</p>
+			</div>
+			
+			<div style="float: right">
+			<a href="/mypage/likelist"><img src="/resources/heart.png" style="width:45px; height: 45px;"></a>
+			<p>내가 찜한 글</p>
+			</div>
+			
 		</div>
 
 		<div class="inner_con3">
