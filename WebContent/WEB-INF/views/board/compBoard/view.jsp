@@ -281,7 +281,7 @@ $(document).ready(function() {
 						</c:if>
 					</c:if>
 					<c:if test="${ !login }">
-						
+<!-- 						로그인 안했을 때는 아무것도 안 뜸 -->
 					</c:if>
 				</td>
 			</tr>

@@ -99,9 +99,8 @@ public class CompBoardViewController extends HttpServlet {
 			req.setAttribute("replyList", replyService.getReplyList(paging, reply));
 			
 			req.getRequestDispatcher("/WEB-INF/views/board/compBoard/view.jsp").forward(req, resp);
-			
 		} else {
-			resp.sendRedirect("compBoard/list");
+			resp.sendRedirect("/compBoard/list");
 		}
 		
 	}
