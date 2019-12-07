@@ -43,14 +43,20 @@ public class MyBoardWriteController extends HttpServlet {
 		Paging comppaging = myPageService.getPaging(req,3);
 		Paging freepaging = myPageService.getPaging(req,4);
 		
+		System.out.println(pfpaging);
+		
 		// paging 객체를 MODEL값으로 지정
 		req.setAttribute("pfpaging", pfpaging);
 		req.setAttribute("pjpaging", pjpaging);
 		req.setAttribute("comppaging", comppaging);
 		req.setAttribute("freepaging", freepaging);
 		
+		req.setAttribute("url", req.getRequestURL());
+
+		
 		// 세션값에서 userno 꺼내기
-		user.setUserno((Integer)session.getAttribute("userno"));		
+		user.setUserno((Integer)session.getAttribute("userno"));
+		user.setName((String)session.getAttribute("name"));
 //		System.out.println(user);
 		
 		Map<Integer, List> map = new HashMap<Integer, List>();

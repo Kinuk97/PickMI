@@ -355,15 +355,15 @@ $(document).ready(function(){
 }
 
 #mainservicediv1 {
-	bottom: -7%;
+	bottom: -2%;
 }
 
 #mainservicediv2{
-	bottom: -2%;
+	bottom: 2%;
 }
 
 #mainservicediv3{
-	bottom: -2%;
+	bottom: 2%;
 }
 
 #header {

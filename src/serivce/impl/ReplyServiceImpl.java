@@ -131,4 +131,68 @@ public class ReplyServiceImpl implements ReplyService {
 	public int CountReply(Reply reply) {
 		return replyDao.selectCntAll(reply);
 	}
+
+	
+	// ----- TEST -------------------------------
+	
+	@Override
+	public Paging getPaging(HttpServletRequest req, int i) {
+
+		Reply reply = new Reply();
+
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if (param != null && !"".equals(param)) {
+			try {
+				curPage = Integer.parseInt(param);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Object userno = req.getSession().getAttribute("userno");
+		if (userno != null && !"".equals(userno)) {
+			try {
+				reply.setUserno((Integer) userno);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+
+		Object postno = req.getAttribute("postno");
+		if (postno != null && !"".equals(postno)) {
+			try {
+				reply.setPostno((Integer) postno);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+
+		Object boardno = req.getAttribute("boardno");
+		if (boardno != null && !"".equals(boardno)) {
+			try {
+				reply.setBoardno((Integer) boardno);
+			} catch (ClassCastException e) {
+				e.printStackTrace();
+			}
+		}
+
+//		Reply TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
+
+//		System.out.println("리플리서비스임플 겟페이징 : " + reply);
+//		System.out.println("리플리서비스임플 겟페이징 : " + i);
+		int totalCount = replyDao.selectCntAll(reply, i);
+
+
+//		Paging 객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		return paging;
+	}
+	
+	@Override
+	public List<Reply> getReplyList(Paging paging, Reply reply, int i) {
+		return replyDao.selectAll(paging, reply, i);
+	}
+// --------------------------------------------------------------------------	
+	
 }
