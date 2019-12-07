@@ -188,6 +188,7 @@ $(document).ready(function(){
 $(document).ready(function() {
 	
 	$("#unlike").click( function(){
+		console.log("된다");
 		$("#unlike").hide();
 		$("#like").show();
 		$.ajax({
@@ -208,6 +209,7 @@ $(document).ready(function() {
 	})
 	
 	$("#like").click( function(){
+		console.log("된다");
 		$("#like").hide();
 		$("#unlike").show();
 		$.ajax({
@@ -227,9 +229,10 @@ $(document).ready(function() {
 		})
 	})
 
-function like(data) {
-	$("#countLike").html(data.countLike)
-}
+	function like(data) {
+		console.log("찜개수");
+		$("#countLike").html(data.countLike)
+	}
 	
 })
 </script>
@@ -238,8 +241,6 @@ function like(data) {
 <br>
 
 <div class="container">
-					${countLike }
-				${ canLike }
 	<table class="table table-bordered">
 
 			<tr>
@@ -262,11 +263,14 @@ function like(data) {
 				<td>찜하기</td><td id="countLike">${countLike }
 					<c:if test="${ login }">
 						<c:if test="${ canLike }">
-							<button id="like" style="color: red;"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+							<button id="like" style="color: red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
 							<button id="unlike" style="display: none; color:blue;">
-							<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
 							</button>
 						</c:if>
+						
 						<c:if test="${ !canLike }">
 							<button id="like" style="display: none; color:red;">
 								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -277,22 +281,7 @@ function like(data) {
 						</c:if>
 					</c:if>
 					<c:if test="${ !login }">
-						<c:if test="${ canLike }">
-							<button id="loginplz" style="color:red;" >
-								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-							</button>
-							<button id="unlike" style="display: none; color:blue;">
-								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-							</button>
-						</c:if>
-						<c:if test="${ !canLike }">
-							<button id="like" style="display: none; color:red;">
-								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-							</button>
-							<button id="loginplz" style="color:blue;">
-								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-							</button>
-						</c:if>
+						
 					</c:if>
 				</td>
 			</tr>
