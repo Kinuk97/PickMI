@@ -92,13 +92,13 @@ $(document).ready (function() {
 <!-- 팀원신청 -->
 <div class="panel panel-info">
   <!-- Default panel contents -->
-  <div class="panel-heading">새로운 팀원 신청	
+  <div class="panel-heading">새로운 가입 신청	
   </div>
   <div class="panel-body">
   	<c:forEach items="${ list }" var="list">
     	<p>${ list.proj_no }</p>
     </c:forEach>
-  </div>
+<!--   </div> -->
 
 	  <!-- 팀원신청수락/거절 -->
 	<div class="row">
@@ -112,6 +112,7 @@ $(document).ready (function() {
 	    </div>
 	  </div>
 	</div>
+	 </div>
 </div>
 
 

@@ -35,6 +35,9 @@ public class MateListController extends HttpServlet {
 		List<Mate> list = mateService.getProj_noByUserno(mate);
 		req.setAttribute("list", list);
 		
+		//팀장인지 아닌지 확인하기
+		mateService.checkLeader(mate);
+		
 		
 		req.getRequestDispatcher("/WEB-INF/views/mateMgt/mateList.jsp").forward(req, resp);
 		

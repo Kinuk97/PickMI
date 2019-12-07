@@ -124,7 +124,7 @@ public class MateDaoImpl implements MateDao {
 		String sql="";
 		sql += "select proj_no,";
 		sql	+= " (SELECT proj_title FROM projboard WHERE proj_no = mate.proj_no) AS proj_title";  
-		sql += " from mate where userno = ?";
+		sql += " from mate where userno = ? AND mate = 1";
 		
 		List<Mate> list = new ArrayList<Mate>();
 		try {
@@ -164,7 +164,7 @@ public class MateDaoImpl implements MateDao {
 		sql += " userno, proj_no, mate,";
 		sql += " (SELECT proj_title FROM projboard WHERE proj_no = mate.proj_no) AS proj_title,";
 		sql += " (SELECT name FROM user_table WHERE userno = mate.userno) AS username";
-		sql += " FROM mate WHERE proj_no = ?";
+		sql += " FROM mate WHERE proj_no = ? AND mate = 1";
 		
 		List<Mate> list = new ArrayList<>();
 		

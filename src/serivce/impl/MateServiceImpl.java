@@ -27,6 +27,13 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public boolean checkLeader(Mate mate) {
+		
+		
+		return false;
+	}
+	
+	@Override
 	public void removeUserFromTeam(Mate mate) {
 		mateDao.deleteUserFromTeam(mate);
 	}
