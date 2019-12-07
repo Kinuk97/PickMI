@@ -4,8 +4,16 @@ import java.util.List;
 
 import dto.Mate;
 import dto.ProjectBoard;
+import sun.java2d.cmm.Profile;
 
 public interface MateDao {
+	/**
+	 * 가입 신청한 사용자 정보 불러오기
+	 * @param mate
+	 * @return
+	 */
+	public List<Mate> selectUsers(Mate mate);
+	
 	/**
 	 * 전에 가입했었는지 체크
 	 * @param mate

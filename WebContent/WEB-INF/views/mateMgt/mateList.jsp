@@ -93,11 +93,23 @@ $(document).ready (function() {
   <!-- Default panel contents -->
 	<div class="panel-heading">새로운 가입 신청	
 	</div>
-	<c:forEach items="${ leaderlist }" var="list">
   		<div class="panel-body">
+			<c:forEach items="${ leaderlist }" var="list">
     		<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
+			</c:forEach>
+		<div class="row">
+		  <div class="col-sm-6 col-md-4">
+		    <div class="thumbnail">
+		      <div class="caption">
+		        <h3>${ list.username }</h3>
+		        <p>...</p>
+		        <p><a href="#" class="btn btn-info" role="button">수락</a> <a href="#" class="btn btn-default" role="button">거절</a></p>
+		      </div>
+		    </div>
+		  </div>
 		</div>
-	</c:forEach>
+		</div>
+		
 <!-- 내프로젝트에참가신청한사람들 -->
 		
 </div>
@@ -112,6 +124,7 @@ $(document).ready (function() {
 			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
    			 </c:forEach>
 		  </ul>
+		  
   	</div>
 </div>
 
