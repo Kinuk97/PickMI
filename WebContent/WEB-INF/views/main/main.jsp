@@ -88,8 +88,7 @@
 				<div class="thumbnail"
 					onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
 					<div class="caption">
-						<h4>${ pro.prof_no }</h4>
-						<p>${ pro.username }</p>
+						<h4>${ pro.username }</h4>
 						<p>${ pro.prof_interest }</p>
 						<p>${ pro.prof_loc }</p>
 						<p>${ pro.prof_job }</p>
