@@ -9,6 +9,12 @@ import dto.ProjectBoard;
 
 public interface MateService {
 	/**
+	 * 팀장인지 아닌지 확인하기
+	 * @param mate
+	 * @return
+	 */
+	public boolean checkLeader(Mate mate);
+	/**
 	 * mate테이블에서 유저 삭제하기
 	 * @param mate
 	 */

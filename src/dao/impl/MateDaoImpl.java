@@ -32,6 +32,39 @@ public class MateDaoImpl implements MateDao {
 	}
 	
 	@Override
+	public int countLeader(Mate mate) {
+		String sql = "";
+		sql += "SELECT count(*) FROM mate";
+		sql += " WHERE mate.proj_no = (SELECT proj_no FROM projboard WHERE proj_no = mate.proj_no)";
+		sql += " AND mate.userno = ?";
+		
+		//결과 저장 리스트
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //쿼리 수행 객체 얻기
+			
+			ps.setInt(1, mate.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	@Override
 	public void insertTeam(ProjectBoard projectBoard) {
 		String sql="";
 		sql += "INSERT INTO mate (userno, proj_no, mate)";
@@ -124,7 +157,7 @@ public class MateDaoImpl implements MateDao {
 		String sql="";
 		sql += "select proj_no,";
 		sql	+= " (SELECT proj_title FROM projboard WHERE proj_no = mate.proj_no) AS proj_title";  
-		sql += " from mate where userno = ?";
+		sql += " from mate where userno = ? AND mate = 1";
 		
 		List<Mate> list = new ArrayList<Mate>();
 		try {
@@ -164,7 +197,7 @@ public class MateDaoImpl implements MateDao {
 		sql += " userno, proj_no, mate,";
 		sql += " (SELECT proj_title FROM projboard WHERE proj_no = mate.proj_no) AS proj_title,";
 		sql += " (SELECT name FROM user_table WHERE userno = mate.userno) AS username";
-		sql += " FROM mate WHERE proj_no = ?";
+		sql += " FROM mate WHERE proj_no = ? AND mate = 1";
 		
 		List<Mate> list = new ArrayList<>();
 		

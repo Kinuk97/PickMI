@@ -49,8 +49,8 @@ $(document).ready (function() {
   <!-- Default panel contents -->
 	<div class="panel-heading">내가 가입한 프로젝트 목록</div>
   		<div class="panel-body">
-		  		<c:forEach items="${ list }" var="list">
-	    			<p><a href="/projectBoard/view?proj_no=${list.proj_no}">${ list.proj_title }</a></p>
+		  		<c:forEach items="${ joinTeamList }" var="list">
+	    			<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
 			  			
 						<p>
 						<button data-projno="${ list.proj_no }" type="button" id="startmodal" class="btn btn-info startmodal" data-toggle="modal" data-target="#matemodal">인원보기
@@ -92,13 +92,13 @@ $(document).ready (function() {
 <!-- 팀원신청 -->
 <div class="panel panel-info">
   <!-- Default panel contents -->
-  <div class="panel-heading">새로운 팀원 신청	
+  <div class="panel-heading">새로운 가입 신청	
   </div>
   <div class="panel-body">
-  	<c:forEach items="${ list }" var="list">
-    	<p>${ list.proj_no }</p>
+  	<c:forEach items="${ leaderlist }" var="list">
+    	<p>${ list.proj_title }</p>
     </c:forEach>
-  </div>
+<!--   </div> -->
 
 	  <!-- 팀원신청수락/거절 -->
 	<div class="row">
@@ -112,6 +112,7 @@ $(document).ready (function() {
 	    </div>
 	  </div>
 	</div>
+	 </div>
 </div>
 
 
