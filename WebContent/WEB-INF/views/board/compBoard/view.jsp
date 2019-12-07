@@ -244,23 +244,24 @@ $(document).ready(function() {
 	<table class="table table-bordered">
 
 			<tr>
-				<td>프로젝트 제목</td><td>${compBoard.comp_title }</td>
-				<td>작성자(팀장)</td><td>${compBoard.username }</td>
+				<td class="info">프로젝트 제목</td><td>${compBoard.comp_title }</td>
+				<td class="info">작성자(팀장)</td><td>${compBoard.username }</td>
 			</tr>
 
 			<tr>
-				<td>팀 이름</td><td>${compBoard.comp_name }</td>
-				<td>작성날짜</td><td>${compBoard.comp_date }</td>
+				<td class="info">팀 이름</td><td>${compBoard.comp_name }</td>
+				<td class="info">작성날짜</td><td>${compBoard.comp_date }</td>
 			</tr>
 
 			<tr>
-				<td>참여인원</td><td>${compBoard.comp_member }</td>
-				<td>조회수</td><td>${compBoard.comp_view }</td>
+				<td class="info">참여인원</td><td>${compBoard.comp_member }</td>
+				<td class="info">조회수</td><td>${compBoard.comp_view }</td>
 			</tr>
 
 			<tr>
-				<td>프로젝트 기간</td><td>시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
-				<td>찜하기</td><td><span id="countLike">${countLike }</span>
+				<td class="info" style="padding-top: 22px;">프로젝트 기간</td><td style="padding-top: 22px;">시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
+				
+				<td class="info" style="padding-top: 22px;">찜하기</td><td><span id="countLike">${countLike }</span>
 					<c:if test="${ login }">
 						<c:if test="${ canLike }">
 							<button id="like" style="color: red;">
@@ -299,8 +300,10 @@ $(document).ready(function() {
 		<c:if test="${login }">
 		<div class="row text-center">
 			<button id="btnList" class="btn btn-default">게시글 목록</button>
-			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
-			<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+			<c:if test="${userno eq compBoard.userno }">
+				<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
+				<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+			</c:if>
 		</div>
 		</c:if>
 		<c:if test="${!login }">
