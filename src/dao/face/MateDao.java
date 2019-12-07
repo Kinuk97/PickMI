@@ -7,6 +7,23 @@ import dto.ProjectBoard;
 
 public interface MateDao {
 	/**
+	 * 내가 전에 신청했는지, 방장인지 확인하기
+	 * @param mate
+	 * @return
+	 */
+	public Mate selectMylog(Mate mate);
+	/**
+	 * 내가 참가 신청한 팀 목록 보기
+	 * @param mate
+	 * @return
+	 */
+	public List<Mate> selectWantToJoinList(Mate mate);
+	/**
+	 * 팀 참가 신청 하면 팀관리 테이블에 추가하기
+	 * @param mate
+	 */
+	public void insertMate(Mate mate);
+	/**
 	 * 사용자가 몇개의 팀장을 맡고 있는지 확인한다
 	 * @param mate
 	 * @return

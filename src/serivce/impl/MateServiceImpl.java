@@ -27,10 +27,31 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public int checkJoin(Mate mate) {
+		//메이트 상태 확인하기
+		mateDao.selectMylog(mate);
+		
+		int check = mate.getMate();
+		
+		return check;
+	}
+	
+	@Override
+	public List<Mate> waitingAnswer(Mate mate) {
+		return mateDao.selectWantToJoinList(mate);
+	}
+	
+	@Override
+	public void wantToJoin(Mate mate) {
+		mateDao.insertMate(mate);
+		
+	}
+	
+	@Override
 	public boolean checkLeader(Mate mate) {
 		
 		int cnt = mateDao.countLeader(mate);
-		
+//		System.out.println("mate service , check leader  : " + cnt);
 		if ( cnt > 0 ) {
 			return true; //팀장인 유저
 			}
@@ -100,8 +121,8 @@ public class MateServiceImpl implements MateService {
 	@Override
 	public boolean mateCheck(Mate mate) {
 		
-		char check = mate.getMate();
-		if (check == '0') {
+		int check = mate.getMate();
+		if (check == 0 ) {
 			return false; //가입 안되있음		
 		} else {
 			return true; //가입 되있음

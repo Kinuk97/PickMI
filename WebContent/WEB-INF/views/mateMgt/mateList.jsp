@@ -39,19 +39,18 @@ $(document).ready (function() {
   <h1>팀원관리 <small>팀원을 추가하고 관리할 수 있습니다</small></h1>
 </div>
 
-<!-- <ul class="nav nav-tabs"> -->
-<!--   <li role="presentation" class="active"><a href="#">팀 목록</a></li> -->
-<!--   <li role="presentation" class=""><a href="#">팀 추가</a></li> -->
-<!--   <li role="presentation" class=""><a href="#">팀 삭제</a></li> -->
-<!-- </ul> -->
 
 <div id="mateList" class="panel panel-info">
   <!-- Default panel contents -->
 	<div class="panel-heading">내가 가입한 프로젝트 목록</div>
   		<div class="panel-body">
 		  		<c:forEach items="${ joinTeamList }" var="list">
-	    			<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
-			  			
+<%-- 		  			<c:if test="${ list.mate eq '2' }"> --%>
+	    			<p><a href='/schedule/list?proj_no=${list.proj_no }'>${ list.proj_title }</a></p>
+<%-- 		  			</c:if> --%>
+<%-- 		  			<c:if test="${ !leader }"> --%>
+<%-- 	    			<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p> --%>
+<%-- 			  		</c:if>	 --%>
 						<p>
 						<button data-projno="${ list.proj_no }" type="button" id="startmodal" class="btn btn-info startmodal" data-toggle="modal" data-target="#matemodal">인원보기
 						</button>
@@ -96,7 +95,7 @@ $(document).ready (function() {
   </div>
   <div class="panel-body">
   	<c:forEach items="${ leaderlist }" var="list">
-    	<p>${ list.proj_title }</p>
+    	<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
     </c:forEach>
 <!--   </div> -->
 
@@ -115,6 +114,18 @@ $(document).ready (function() {
 	 </div>
 </div>
 
+<!-- 내가 신청한 프로젝트 가입 현황 -->
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+	<div class="panel-heading">프로젝트 가입 현황</div>
+		<div class="panel-body">
+		  <ul class="list-group">
+		  	<c:forEach items="${ waitTeamList }" var="list">
+			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
+   			 </c:forEach>
+		  </ul>
+  	</div>
+</div>
 
 
 

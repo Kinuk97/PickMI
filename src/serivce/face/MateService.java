@@ -9,6 +9,23 @@ import dto.ProjectBoard;
 
 public interface MateService {
 	/**
+	 * 기존에 신청한 적이 있는지 확인하기
+	 * @param mate
+	 * @return
+	 */
+	public int checkJoin(Mate mate);
+	
+	/**
+	 * 내가 참가 신청 한 목록 보기
+	 * @param mate
+	 */
+	public List<Mate> waitingAnswer(Mate mate);
+	/**
+	 * 팀원 참가 신청하면 테이블에 추가하기
+	 * @param mate
+	 */
+	public void wantToJoin(Mate mate);
+	/**
 	 * 팀장인지 아닌지 확인하기
 	 * @param mate
 	 * @return
