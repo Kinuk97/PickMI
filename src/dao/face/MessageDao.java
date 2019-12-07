@@ -23,4 +23,6 @@ public interface MessageDao {
 	public int selectNextChat_no();
 
 	public Chat getExistsChatRoom(Chatter chatter1);
+	
+	public List<Chatter> selectExistsChatUser(Chatter chatter);
 }

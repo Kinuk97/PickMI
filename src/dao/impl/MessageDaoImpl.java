@@ -54,8 +54,8 @@ public class MessageDaoImpl implements MessageDao {
 			
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -115,8 +115,8 @@ public class MessageDaoImpl implements MessageDao {
 			
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -164,7 +164,7 @@ public class MessageDaoImpl implements MessageDao {
 				users.setUserno( rs.getInt("userno"));
 
 				searchList.add(users);
-				System.out.println("users : " + users);
+//				System.out.println("users : " + users);
 			}
 
 		} catch (SQLException e) {
@@ -172,8 +172,8 @@ public class MessageDaoImpl implements MessageDao {
 
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -218,7 +218,7 @@ public class MessageDaoImpl implements MessageDao {
 				chats.setUsername( rs.getString("username"));
 
 				chattingList.add(chats);
-				System.out.println("chats : " + chats);
+//				System.out.println("chats : " + chats);
 			}
 
 		} catch (SQLException e) {
@@ -226,8 +226,8 @@ public class MessageDaoImpl implements MessageDao {
 
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -286,7 +286,7 @@ public class MessageDaoImpl implements MessageDao {
 			ps.setInt(2, chatter.getChat_user());
 
 			ps.executeUpdate();
-
+			System.out.println(9);
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -323,8 +323,8 @@ public class MessageDaoImpl implements MessageDao {
 			
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -363,8 +363,8 @@ public class MessageDaoImpl implements MessageDao {
 
 		} finally {
 			try {
-				if(ps!=null) ps.close();
 				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -372,5 +372,56 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		
 		return chat;
+	}
+	
+	@Override
+	public List<Chatter> selectExistsChatUser(Chatter chatter) {
+
+		//DB연결
+		conn = DBConn.getConnection();
+
+		//수행할 SQL쿼리
+		String sql = "";
+		sql += "SELECT chat_user, chat_no FROM chatter ";
+		sql += "WHERE chat_no IN (";
+		sql += "	SELECT chat_no FROM chatter WHERE chat_user = ? ) ";
+		sql += "AND chat_user != ? ";
+
+		//결과 저장 리스트
+		List<Chatter> existsUser = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, chatter.getChat_user());
+			ps.setInt(2, chatter.getChat_user());
+			
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				
+				Chatter chatters = new Chatter();
+
+				chatters.setChat_no( rs.getInt("chat_no"));
+				chatters.setChat_user( rs.getInt("chat_user"));
+
+				existsUser.add(chatters);
+				System.out.println("existsUser : " + existsUser);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return existsUser;
 	}
 }

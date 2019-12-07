@@ -28,19 +28,28 @@ public class MessageCreateController extends HttpServlet {
 		Chatter chatter1 = new Chatter(); //나
 		Chatter chatter2 = new Chatter(); //상대방
 		
-		//1. 지금 대화중인 방이 있는지 확인한다 ( 대화 상대 번호 필요 )
-		//2. 적절한 방 번호를 찾는다
-		//	( 존재하는 방 또는 새로운 방 )
-		
-		int val = messageService.selectNextChatno();
-		
 		chatter1.setChat_user((Integer) req.getSession().getAttribute("userno")); //로그인한 유저의 유저번호
 		chatter2.setChat_user(Integer.parseInt(req.getParameter("userno"))); //채팅을 나눌 사용자의 유저번호
-
-		chatter1.setChat_no(val);
-		chatter2.setChat_no(val);
-		messageService.makeRoom(chatter1, chatter2);
 		
+		System.out.println(1);
+		
+		System.out.println("chatter1 : " + chatter1);
+		System.out.println("chatter2 : " + chatter2);
+		
+		int i = messageService.chattingUserCheck(chatter1, chatter2);
+		
+		if ( i==0) {
+			System.out.println(2);
+			System.out.println("error");
+			
+		} else {
+			req.setAttribute("chat_no", i);
+			System.out.println(3);
+			
+		}
+		
+		System.out.println(4);
 		resp.getWriter().println("{\"chat_no\":"+chatter1.getChat_no()+"}");
+		
 	}
 }
