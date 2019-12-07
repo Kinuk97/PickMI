@@ -58,7 +58,7 @@ public interface MateDao {
 	 * @param mate2
 	 * @return
 	 */
-	public Mate selectUsernoByProjectno(Mate mate2);
+	public List<Mate> selectUsernoByProjectno(Mate mate2);
 	/**
 	 * 유저번호로 프로젝트 번호를 조회한다
 	 * @param mate

@@ -259,19 +259,25 @@ public class MateDaoImpl implements MateDao {
 		}
 	}
 	@Override
-	public Mate selectUsernoByProjectno(Mate mate2) {
+	public List<Mate> selectUsernoByProjectno(Mate mate) {
 		String sql="";
 		sql += "SELECT userno, proj_no FROM projboard WHERE proj_no = ?";
 		
-		Mate mate = new Mate();
+		List<Mate> list = new ArrayList<Mate>();
+		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, mate2.getProj_no());
+			
+			ps.setInt(1, mate.getProj_no());
 			
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				mate.setUserno(rs.getInt("userno"));
-				mate.setProj_no(rs.getInt("proj_no"));
+				Mate temp = new Mate();
+				
+				temp.setUserno(rs.getInt("userno"));
+				temp.setProj_no(rs.getInt("proj_no"));
+				
+				list.add(temp);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -284,7 +290,7 @@ public class MateDaoImpl implements MateDao {
 			}
 		}
 		
-		return mate;
+		return list;
 	}
 	@Override
 	public int selectProj_no(Mate mate) {
@@ -294,7 +300,7 @@ public class MateDaoImpl implements MateDao {
 	@Override
 	public List<Mate> selectProj_noByUserno(Mate mate) {
 		String sql="";
-		sql += "select proj_no,";
+		sql += "select proj_no, ";
 		sql	+= " (SELECT proj_title FROM projboard WHERE proj_no = mate.proj_no) AS proj_title";  
 		sql += " from mate where userno = ? AND mate = 2";
 		

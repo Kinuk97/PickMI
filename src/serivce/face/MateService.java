@@ -47,7 +47,7 @@ public interface MateService {
 	 * @param mate
 	 * @return
 	 */
-	public Mate getUsernoByProjectno(Mate mate2);
+	public List<Mate> getUsernoByProjectno(Mate mate);
 	/**
 	 * 유저번호로 사용자정보 받아오기
 	 * @param mate
