@@ -4,7 +4,7 @@ public class Mate {
 	
 	private int userno;
 	private int proj_no;
-	private char mate;
+	private int mate;
 	private String username;
 	private String proj_title;
 	
@@ -51,10 +51,10 @@ public class Mate {
 	public void setProj_no(int proj_no) {
 		this.proj_no = proj_no;
 	}
-	public char getMate() {
+	public int getMate() {
 		return mate;
 	}
-	public void setMate(char mate) {
+	public void setMate(int mate) {
 		this.mate = mate;
 	}
 	

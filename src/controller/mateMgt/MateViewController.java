@@ -44,15 +44,15 @@ public class MateViewController extends HttpServlet {
 		//유저 정보 보여주기
 		HttpSession session = req.getSession();
 
-//		ProfileBoard profile = new ProfileBoard();
-//		try {
-//			profile.setUserno((int)session.getAttribute("userno"));
-//		} catch(NullPointerException e) {
+		ProfileBoard profile = new ProfileBoard();
+		try {
+			profile.setUserno((int)session.getAttribute("userno"));
+		} catch(NullPointerException e) {
 //			System.out.println("mateview controller : 로그인 정보...문제" );
-//		}
+		}
 //
-//		ProfileBoard detailProfile = profileBoardService.view(profile);
-//		req.setAttribute("profile", detailProfile);
+		ProfileBoard detailProfile = profileBoardService.view(profile);
+		req.setAttribute("profile", detailProfile);
 //		System.out.println("view :" + detailProfile);
 		
 		req.getRequestDispatcher("/WEB-INF/views/mateMgt/viewUser.jsp").forward(req, resp);

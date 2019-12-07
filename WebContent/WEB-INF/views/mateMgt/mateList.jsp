@@ -39,19 +39,18 @@ $(document).ready (function() {
   <h1>팀원관리 <small>팀원을 추가하고 관리할 수 있습니다</small></h1>
 </div>
 
-<!-- <ul class="nav nav-tabs"> -->
-<!--   <li role="presentation" class="active"><a href="#">팀 목록</a></li> -->
-<!--   <li role="presentation" class=""><a href="#">팀 추가</a></li> -->
-<!--   <li role="presentation" class=""><a href="#">팀 삭제</a></li> -->
-<!-- </ul> -->
 
 <div id="mateList" class="panel panel-info">
   <!-- Default panel contents -->
 	<div class="panel-heading">내가 가입한 프로젝트 목록</div>
   		<div class="panel-body">
 		  		<c:forEach items="${ joinTeamList }" var="list">
-	    			<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
-			  			
+<%-- 		  			<c:if test="${ list.mate eq '2' }"> --%>
+	    			<p><a href='/schedule/list?proj_no=${list.proj_no }'>${ list.proj_title }</a></p>
+<%-- 		  			</c:if> --%>
+<%-- 		  			<c:if test="${ !leader }"> --%>
+<%-- 	    			<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p> --%>
+<%-- 			  		</c:if>	 --%>
 						<p>
 						<button data-projno="${ list.proj_no }" type="button" id="startmodal" class="btn btn-info startmodal" data-toggle="modal" data-target="#matemodal">인원보기
 						</button>
@@ -92,29 +91,29 @@ $(document).ready (function() {
 <!-- 팀원신청 -->
 <div class="panel panel-info">
   <!-- Default panel contents -->
-  <div class="panel-heading">새로운 가입 신청	
-  </div>
-  <div class="panel-body">
-  	<c:forEach items="${ leaderlist }" var="list">
-    	<p>${ list.proj_title }</p>
-    </c:forEach>
-<!--   </div> -->
-
-	  <!-- 팀원신청수락/거절 -->
-	<div class="row">
-	  <div class="col-sm-4 col-md-2">
-	    <div class="thumbnail">
-	      <div class="caption">
-	        <h3>회원이름</h3>
-	        <p>회원...정보?</p>
-	        <p><a href="#" class="btn btn-info" role="button">수락</a> <a href="#" class="btn btn-default" role="button">거절</a></p>
-	      </div>
-	    </div>
-	  </div>
+	<div class="panel-heading">새로운 가입 신청	
 	</div>
-	 </div>
+	<c:forEach items="${ leaderlist }" var="list">
+  		<div class="panel-body">
+    		<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
+		</div>
+	</c:forEach>
+<!-- 내프로젝트에참가신청한사람들 -->
+		
 </div>
 
+<!-- 내가 신청한 프로젝트 가입 현황 -->
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+	<div class="panel-heading">프로젝트 가입 현황</div>
+		<div class="panel-body">
+		  <ul class="list-group">
+		  	<c:forEach items="${ waitTeamList }" var="list">
+			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
+   			 </c:forEach>
+		  </ul>
+  	</div>
+</div>
 
 
 

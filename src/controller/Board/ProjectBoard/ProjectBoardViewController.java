@@ -11,10 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import dto.Files;
 import dto.LikePost;
+import dto.Mate;
 import dto.ProjectBoard;
 import serivce.face.FileService;
+import serivce.face.MateService;
 import serivce.face.ProjectBoardService;
 import serivce.impl.FileServiceImpl;
+import serivce.impl.MateServiceImpl;
 import serivce.impl.ProjectBoardServiceImpl;
 
 
@@ -24,6 +27,7 @@ public class ProjectBoardViewController extends HttpServlet {
 	
 	ProjectBoardService projectBoardService = new ProjectBoardServiceImpl();
 	private FileService fileService = FileServiceImpl.getInstance();
+
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,6 +60,8 @@ public class ProjectBoardViewController extends HttpServlet {
 		} else {
 			req.setAttribute("canLike", false);
 		}
+		
+	
 		
 		if (projectBoard != null) {
 			Files files = new Files();

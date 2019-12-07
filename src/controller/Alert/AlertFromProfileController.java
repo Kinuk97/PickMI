@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.Alert;
+import dto.Mate;
 import dto.ProfileBoard;
 import serivce.face.AlertService;
+import serivce.face.MateService;
 import serivce.face.ProfileBoardService;
 import serivce.impl.AlertServiceImpl;
+import serivce.impl.MateServiceImpl;
 import serivce.impl.ProfileBoardServiceImpl;
 
 
@@ -23,6 +26,7 @@ public class AlertFromProfileController extends HttpServlet {
 	private AlertService alertService = AlertServiceImpl.getInstance();
 	private ProfileBoardService profileBoardService = ProfileBoardServiceImpl.getInstance();
 
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
