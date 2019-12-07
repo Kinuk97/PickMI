@@ -34,47 +34,79 @@ $(document).ready(function(){
 
 </script>
 
+<style type="text/css">
+.innercon2{
+
+	width:80%;
+	text-align: start;
+	margin-left: 13%;
+	
+}
+
+.table{
+
+	height: 80%;
+}
+
+
+</style>
+
+
 </head>
 <body>
 
-<div class="container" >
-	<form action="/mgr/profileboard/delete" method="get">
-	<table class="table table-condensed">
-		<tr class="info">
-			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 5%">글번호</th>
-			<th style="width: 10%">사용자번호</th>
-			<th style="width: 10%">작성시간</th>
-			<th style="width: 10%">직무</th>
-			<th style="width: 10%">상태</th>
-			<th style="width: 10%">지역</th>
-		</tr>
-		<c:forEach items="${list }" var="pbboard">
-		<tr>
-			<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
-			<td><a href="/mgr/profileview?prof_no=${pbboard.prof_no}">${pbboard.prof_no}</a></td>
-			<td>${pbboard.userno }</td>
-			<td>${pbboard.prof_time }</td>
-			<td>${pbboard.prof_job }</td>
-			<td>${pbboard.prof_state }</td>
-			<td>${pbboard.prof_loc }</td>
-		</tr>	
-		</c:forEach>
-	</table>
-		<button>삭제</button>
-	</form>
+<div class="container">
+
+<!-- 	<div class="innercon1"> -->
+<!-- 		<div class="src" style="text-align: center;"> -->
+<!-- 			<form action="/mgr/profilelist" method="get"> -->
+<!-- 			<input type="text" name="search" id="search"/> -->
+<!-- 			<button id="btnSearch" class="btn btn-primary">검색</button> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
-	<div class="src" style="text-align: center;">
-		<form action="/mgr/profilelist" method="get">
-			<input type="text" name="search" id="search"/>
-			<button id="btnSearch" class="btn btn-primary">검색</button>
+	<div class="innercon2">
+		<form action="/mgr/profileboard/delete" method="get">
+			<table class="table table-hover">
+				<thead>
+				<tr class = "info"  >
+					<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+					<th style="width: 10%">글번호</th>
+					<th style="width: 50%">제목</th>					
+					<th style="width: 20%">작성자</th>
+					<th style="width: 15%">작성일</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<c:forEach items="${list }" var="pbboard">
+				<tr>
+					<td><input type="checkbox" name="checkRow" value="${pbboard.prof_no }"/></td>
+					<td>${pbboard.prof_no }</td>
+					<td><a href="/profileBoard/view?prof_no=${pbboard.prof_no}">${pbboard.prof_state }, ${pbboard.prof_job }, ${pbboard.prof_loc }</a></td>
+					<td>${pbboard.userno }</td>
+					<td>${pbboard.prof_time }</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+				
+			</table>
+			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
+		<div class="src" style="text-align: right;">
+			<form action="/mgr/profilelist" method="get">
+			<input type="text" name="search" id="search"/>
+			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
+			</form>
+		</div>
 	</div>
+</div> <!-- container -->
+
 
 	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
    		<c:param name="url" value="${url }" />
 	</c:import>
-	
-</div>	
+
 </body>
 </html>

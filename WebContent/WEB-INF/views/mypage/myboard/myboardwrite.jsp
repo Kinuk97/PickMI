@@ -93,7 +93,7 @@ function loadReply(curPage) {
 			}
 			
 		}
-
+	}
 </script>
 
 <style type="text/css">

@@ -34,42 +34,77 @@ $(document).ready(function(){
 
 </script>
 
+<style type="text/css">
+.innercon2{
+
+	width:80%;
+	text-align: start;
+	margin-left: 13%;
+	
+}
+
+.table{
+
+	height: 80%;
+}
+
+
+</style>
+
+
 </head>
 <body>
 
-<div class="container" >
-	<form action="/mgr/user/delete" method="get">
-	<table class="table table-condensed">
-		<tr class="info">
-			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 5%">사용자번호</th>
-			<th style="width: 20%">아이디(email)</th>
-			<th style="width: 10%">이름</th>
-		</tr>
-		<c:forEach items="${userlist }" var="userboard">
-		<tr>
-			<td><input type="checkbox" name="checkRow" value="${userboard.userno }"/></td>
-			<td>${userboard.userno }</td>
-			<td>${userboard.email }</td>
-			<td>${userboard.name }</td>
-		</tr>	
-		</c:forEach>
-	</table>
-		<button>삭제</button>
-	</form>
-	<div class="src" style="text-align: center;">
-	<form action="/mgr/userlist" method="get">
-		<input type="text" name="search" id="search"/>
-		<button id="btnSearch" class="btn btn-primary">검색</button>
-	</form>
+<div class="container">
+
+<!-- 	<div class="innercon1"> -->
+<!-- 		<div class="src" style="text-align: center;"> -->
+<!-- 			<form action="/mgr/profilelist" method="get"> -->
+<!-- 			<input type="text" name="search" id="search"/> -->
+<!-- 			<button id="btnSearch" class="btn btn-primary">검색</button> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	<div class="innercon2">
+		<form action="/mgr/profileboard/delete" method="get">
+			<table class="table table-hover">
+				<thead>
+				<tr class = "info"  >
+					<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+					<th style="width: 15%">사용자 번호</th>
+					<th style="width: 60%">아이디(E-MAIL)</th>					
+					<th style="width: 20%">이름</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<c:forEach items="${userlist }" var="userboard">
+				<tr>
+					<td><input type="checkbox" name="checkRow" value="${userboard.userno }"/></td>
+					<td>${userboard.userno }</td>
+					<td>${userboard.email }</td>
+					<td>${userboard.name }</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+				
+			</table>
+			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
+		</form>
+		<div class="src" style="text-align: right;">
+			<form action="/mgr/profilelist" method="get">
+			<input type="text" name="search" id="search"/>
+			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
+			</form>
+		</div>
 	</div>
+</div> <!-- container -->
+
 
 	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
    		<c:param name="url" value="${url }" />
 	</c:import>
-
-</div>
-</div> <!-- .container -->
 
 </body>
 </html>
