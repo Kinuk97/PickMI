@@ -29,8 +29,12 @@ public class MateServiceImpl implements MateService {
 	@Override
 	public boolean checkLeader(Mate mate) {
 		
+		int cnt = mateDao.countLeader(mate);
 		
-		return false;
+		if ( cnt > 0 ) {
+			return true; //팀장인 유저
+			}
+		return false; //팀장이 아님
 	}
 	
 	@Override
