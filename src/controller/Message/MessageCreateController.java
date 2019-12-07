@@ -36,20 +36,15 @@ public class MessageCreateController extends HttpServlet {
 		System.out.println("chatter1 : " + chatter1);
 		System.out.println("chatter2 : " + chatter2);
 		
-		int i = messageService.chattingUserCheck(chatter1, chatter2);
+		int chatno = messageService.chattingUserCheck(chatter1, chatter2);
 		
-		if ( i==0) {
+		if (chatno == 0) {
 			System.out.println(2);
-			System.out.println("error");
-			
-		} else {
-			req.setAttribute("chat_no", i);
-			System.out.println(3);
-			
+			System.out.println("검색한 사용자와 메세지 생성 중 오류");
 		}
 		
 		System.out.println(4);
-		resp.getWriter().println("{\"chat_no\":"+chatter1.getChat_no()+"}");
+		resp.getWriter().println("{\"chat_no\":"+chatno+"}");
 		
 	}
 }

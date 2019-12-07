@@ -81,20 +81,16 @@ public class MessageServiceImpl implements MessageService {
 				chat_no = list.get(i).getChat_no();
 				System.out.println(6);
 				return chat_no;
-			} else {
-				int val = selectNextChatno(); //나랑 선택한 유저랑 채팅을 한 적이 없다면 해야하는 동작
-				
-				chatter1.setChat_no(val);
-				chatter2.setChat_no(val);
-				System.out.println(7);
-				makeRoom(chatter1, chatter2);	
-				System.out.println("val : " + val);
-				return val;
 			}
-			
 		}
 		
-		return 0;
+		int val = selectNextChatno(); //나랑 선택한 유저랑 채팅을 한 적이 없다면 해야하는 동작
 		
+		chatter1.setChat_no(val);
+		chatter2.setChat_no(val);
+		System.out.println(7);
+		makeRoom(chatter1, chatter2);	
+		System.out.println("val : " + val);
+		return val;
 	}
 }

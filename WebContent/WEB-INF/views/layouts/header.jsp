@@ -36,7 +36,6 @@ $(document).ready(function(){
 		//대화창이 hidden에서 visible로 변경됨
 		$('#messagebox').css('visibility', 'visible');
 		
-		console.log( $(this).find("input").val() )
 		$("#send").attr( "data-chat_no", $(this).find("input").val() )
 		msgshow( $(this).find("input").val() )
 	});
@@ -56,28 +55,27 @@ $(document).ready(function(){
 	})
 	
 	//검색 후 메시지를 보낼 사용자를 클릭했을 때
-	$('#selectUser').on("click", function(){
-		$('#searchModal').hide();
-		$('#msgresult').html("");
+// 	$('#selectUser').on("click", function(){
+// 		$('#searchModal').modal("toggle");
+// 		$('#msgresult').html("");
 // 		$('#messagebox').show();
-		$('#messagebox').css('visibility', 'visible');
-		$('#msgscroll').css('visibility', 'hidden');
+// 		$('#messagebox').css('visibility', 'visible');
+// 		$('#msgscroll').css('visibility', 'hidden');
+
 		
-		//===========================================================================================
-		
-		$.ajax({
-			type : "post",
-			url : "/msg/create",
-			data : { "userno" : $("input[]")},
-			dataType : "html",
-			success : function(data){
-				
-			},
-			error : function(e){
-				console.log(e);
-			}
-		});
-	})
+// 		$.ajax({
+// 			type : "post",
+// 			url : "/msg/create",
+// 			data : { "userno" : $("input[]")},
+// 			dataType : "html",
+// 			success : function(data){
+// 				msgshow(data.chat_no);
+// 			},
+// 			error : function(e){
+// 				console.log(e);
+// 			}
+// 		});
+// 	})
 	
 	//메시지창에 메시지를 쓰고 엔터키를 눌렀을 때 전송버튼과 같은 작동을 하게하기
 	$('#msg').keypress(function(event){
@@ -189,7 +187,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 		
 	$("#searchtable").on("click", ".selectUser", function() {
-		$('#searchModal').hide();
+		$('#searchModal').modal("toggle");
 		$('#msgresult').html("");
 	//		$('#messagebox').show();
 		$('#messagebox').css('visibility', 'visible');
@@ -199,10 +197,7 @@ $(document).ready(function(){
 			data : { "userno" : $(this).data("userno")},
 			dataType : "json",
 			success : function(data){
-				console.log($(this).data)
 				console.log("selectUser success")
-				console.log(data)
-				console.log(data.chat_no)
 				$("#send").attr( "data-chat_no", data.chat_no )
 				msgshow(data);
 			},
@@ -215,15 +210,15 @@ $(document).ready(function(){
 })
 
 function msgshow(n) {
+	$(".dropdown-menu").css('visibility', 'hidden');
+	
 	console.log("---msgshow()---")
-	console.log(n)
 	$.ajax({
 		type : "get",
 		url : "/msg/chatting",
 		data : {chat_no: n},
 		dataType : "html",
 		success : function(data){
-			console.log(data)
 			$("#msgresult").html(data)
 			$("#msg").val("")
 			$("#msg").focus()
@@ -238,7 +233,6 @@ function msgshow(n) {
 function msgsend(n) {
 	
 	console.log("msgsend")
-	console.log(n)
 	
 	$.ajax({
 		type : "post",
@@ -246,7 +240,6 @@ function msgsend(n) {
 		data : {chat_msg: $("#msg").val(), chat_no: n},
 		dataType : "html",
 		success : function(data){
-			console.log(data)
 			$("#msgresult").html(data)
 			$("#msg").val("")
 			$("#msg").focus()
@@ -262,6 +255,8 @@ function msgsend(n) {
 //메세지를 보낼 사용자 검색
 $(document).ready(function(){
 	$("#chatplusBtn").click(function(){
+		console.log("test");
+		$("#searchtable").html("");
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
 		ws.onopen = function() {
 			
@@ -273,6 +268,7 @@ $(document).ready(function(){
 		
 		
 		ws.onmessage = function(data){
+			
 			var search = JSON.parse(data.data);
 // 			console.log(search);
 			var tr = $("<tr>");
@@ -283,8 +279,12 @@ $(document).ready(function(){
 			table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
 			.append(tr);
 			
+			var myUserno = "${userno}";
 			for(var i=0; i<search.length; i++){
 				
+				if (search[i].userno == myUserno) {
+					continue;
+				}
 				var tr = $("<tr class='selectUser' data-userno='" + search[i].userno + "'></tr>"); 
 				var td = $("<td data-userno='" + search[i].userno + "'></td>");
 // 				tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
