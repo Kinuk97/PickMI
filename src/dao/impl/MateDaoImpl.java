@@ -32,6 +32,35 @@ public class MateDaoImpl implements MateDao {
 	}
 	
 	@Override
+	public int countMyTeam(Mate mate) {
+		String sql ="";
+		sql += "SELECT count(*) FROM mate WHERE userno =? and proj_no = ?";
+		int cnt = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getUserno());
+			ps.setInt(2, mate.getProj_no());
+		
+			rs = ps.executeQuery();
+		
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs!=null)rs.close();
+					if(ps!=null)ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+//		System.out.println(cnt);
+		return cnt;
+	}
+	@Override
 	public Mate selectMylog(Mate mate) {
 		String sql="";
 		sql += "SELECT userno, proj_no, mate FROM mate WHERE userno =? and proj_no = ?";
@@ -59,7 +88,6 @@ public class MateDaoImpl implements MateDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(mate);
 		return mate;
 	}
 	@Override

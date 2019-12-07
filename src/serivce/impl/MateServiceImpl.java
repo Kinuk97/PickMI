@@ -28,12 +28,19 @@ public class MateServiceImpl implements MateService {
 	
 	@Override
 	public int checkJoin(Mate mate) {
+		//전에가입한적 있는지 확인하기
+		int cnt = mateDao.countMyTeam(mate);
+		
+		if (cnt == 0) {
+			return -1; // 가입한 적 없음
+		} else {
 		//메이트 상태 확인하기
 		mateDao.selectMylog(mate);
 		
 		int check = mate.getMate();
 		
 		return check;
+		}
 	}
 	
 	@Override

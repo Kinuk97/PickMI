@@ -53,9 +53,13 @@ public class AlertFromProjectController extends HttpServlet {
 		mate.setProj_no(projectBoard.getProj_no());
 		//기존에 참가 신청을 했는지 확인하기
 		int check = mateService.checkJoin(mate);
-		System.out.println(check);
+//		System.out.println(check);
 		if(check == 0) {
 			req.setAttribute("waiting", true);
+			//알림테이블에 저장하기
+			alertService.sendInvite(alert);
+			//팀원관리 테이블에 저장하기
+			mateService.wantToJoin(mate);
 		} else if (check == 1) {
 			req.setAttribute("already", true);
 		} else if( check ==2 ) {

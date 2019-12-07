@@ -7,7 +7,13 @@ import dto.ProjectBoard;
 
 public interface MateDao {
 	/**
-	 * 내가 전에 신청했는지, 방장인지 확인하기
+	 * 전에 가입했었는지 체크
+	 * @param mate
+	 * @return
+	 */
+	public int countMyTeam(Mate mate);
+	/**
+	 * 내가 팀 등급 확인하기
 	 * @param mate
 	 * @return
 	 */
