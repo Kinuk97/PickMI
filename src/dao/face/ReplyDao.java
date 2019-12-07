@@ -2,7 +2,10 @@ package dao.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dto.Reply;
+import dto.User;
 import util.Paging;
 
 public interface ReplyDao {
@@ -44,5 +47,13 @@ public interface ReplyDao {
 	 * @param reply - 게시판, 게시글, 댓글 번호가 담겨있는 DTO
 	 */
 	public void deleteReply(Reply reply);
+
+	
+	// ---------- TEST ----------------
+	public int selectCntAll(Reply reply, int i);
+
+
+	public List<Reply> selectAll(Paging paging, Reply reply, int i);
+	//---------------------------------------------------------------
 
 }

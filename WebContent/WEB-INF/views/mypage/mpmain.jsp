@@ -248,8 +248,8 @@ $(document).ready(function() {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 38%;
-    height: 200px;
+    width: 40%;
+    height: 220px;
     padding: 16px;
     margin: 50px;
     border: 1px solid #ddd;
@@ -461,9 +461,22 @@ $(document).ready(function() {
 			</ul>
 <!-- 			<p style="text-align:left; font-size:25px">활동이력</p> -->
 			<hr>
-			<a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
-			<a href="/mycomment/list">내가쓴댓글가져오기</a> 
-			<a href="/mypage/likelist">찜하기한글가져오기</a>
+			
+			<div style="float: left">
+			<a href="/mypage/boardwrite"><img src="/resources/edit.png" style="width:45x; height: 45px;"></a>
+			<p>내가쓴 게시글</p>
+			</div>	
+			
+			<div style="float: left; margin-left: 95px;">		 
+			<a href="/mycomment/list"><img src="/resources/chat.png" style="width:45px; height: 45px;"></a>
+			<p>내가쓴 댓글</p>
+			</div>
+			
+			<div style="float: right">
+			<a href="/mypage/likelist"><img src="/resources/heart.png" style="width:45px; height: 45px;"></a>
+			<p>내가 찜한 글</p>
+			</div>
+			
 		</div>
 
 		<div class="inner_con3">
@@ -475,11 +488,12 @@ $(document).ready(function() {
 				<div class="row">
 					<div class="col-lg-4">${list.proj_title}</div>
 					<div class="col-lg-4">${list.proj_progress}</div>
-					<div class="col-lg-4"><a href='/schedule/list?proj_no=${list.proj_no }'>일정 관리</a></div>
+					<div class="col-lg-4"><a class="btn btn-warning" href='/schedule/list?proj_no=${list.proj_no }' style="width: 45%;">일정</a>
+					<a href="/mate/list?proj_no=${list.proj_no }" class="btn btn-info" role="button" style="width: 45%;">팀원</a>
+					</div>
 				</div>
 			</c:forEach>
 			
-			<a href="/mate/list" class="btn btn-info" role="button">팀원 관리하러 가기</a>
 		</div>
 		
 		<div style="clear: both;"></div>

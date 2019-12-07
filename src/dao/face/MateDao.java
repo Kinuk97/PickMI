@@ -4,9 +4,10 @@ import java.util.List;
 
 import dto.Mate;
 import dto.ProjectBoard;
-import sun.java2d.cmm.Profile;
 
 public interface MateDao {
+	
+	public List<Mate> showUser(List<Mate> list4);
 	/**
 	 * 가입 신청한 사용자 정보 불러오기
 	 * @param mate
@@ -58,7 +59,7 @@ public interface MateDao {
 	 * @param mate2
 	 * @return
 	 */
-	public Mate selectUsernoByProjectno(Mate mate2);
+	public List<Mate> selectUsernoByProjectno(Mate mate2);
 	/**
 	 * 유저번호로 프로젝트 번호를 조회한다
 	 * @param mate
