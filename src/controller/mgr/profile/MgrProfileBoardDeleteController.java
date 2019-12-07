@@ -29,21 +29,28 @@ public class MgrProfileBoardDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		String[] strings = req.getParameterValues("checkRow");
-		ProfileBoard chkpfBoard = new ProfileBoard();
 		
-		for (String string : strings) {
-			chkpfBoard.setProf_no(Integer.parseInt(string));
-			fileService.deleteFile(getServletContext().getRealPath("uplaod"), 1, chkpfBoard.getProf_no());
-			profileBoardService.removeProfile(chkpfBoard);
+
+		String[] strings = req.getParameterValues("checkRow");
+		if( strings != null ) {
+			ProfileBoard chkpfBoard = new ProfileBoard();
+			
+			for (String string : strings) {
+				chkpfBoard.setProf_no(Integer.parseInt(string));
+				fileService.deleteFile(getServletContext().getRealPath("uplaod"), 1, chkpfBoard.getProf_no());
+				profileBoardService.removeProfile(chkpfBoard);
+			}
+			
+		} else {
+			
+			ProfileBoard pfBoard = profileBoardService.getProfileno(req);
+			fileService.deleteFile(getServletContext().getRealPath("uplaod"), 1, pfBoard.getProf_no());
+			profileBoardService.removeProfile(pfBoard);
+		
 		}
 		
-		ProfileBoard pfBoard = profileBoardService.getProfileno(req);
-		fileService.deleteFile(getServletContext().getRealPath("uplaod"), 1, pfBoard.getProf_no());
-		profileBoardService.removeProfile(pfBoard);
-		
 		resp.sendRedirect("/mgr/profilelist");
-	}
+}
 	
 	
 }

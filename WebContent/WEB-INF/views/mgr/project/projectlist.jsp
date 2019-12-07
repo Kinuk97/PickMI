@@ -67,7 +67,7 @@ $(document).ready(function(){
 <!-- 	</div> -->
 	
 	<div class="innercon2">
-		<form action="/mgr/profileboard/delete" method="get">
+		<form action="/mgr/projectboard/delete" method="get">
 			<table class="table table-hover">
 				<thead>
 				<tr class = "info"  >
@@ -84,8 +84,8 @@ $(document).ready(function(){
 				<tr>
 					<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
 					<td>${pjboard.proj_no }</td>
-					<td><a href="/profileBoard/view?prof_no=${pbboard.prof_no}">${pjboard.proj_title }</a></td>
-					<td>${pjboard.userno }</td>
+					<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no}">${pjboard.proj_title }</a></td>
+					<td>${pjboard.userno }</td> 
 					<td>${pjboard.proj_time }</td>
 				</tr>
 				</c:forEach>
@@ -95,7 +95,7 @@ $(document).ready(function(){
 			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
 		<div class="src" style="text-align: right;">
-			<form action="/mgr/profilelist" method="get">
+			<form action="/mgr/projectlist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
 			</form>

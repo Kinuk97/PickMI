@@ -67,7 +67,7 @@ $(document).ready(function(){
 <!-- 	</div> -->
 	
 	<div class="innercon2">
-		<form action="/mgr/profileboard/delete" method="get">
+		<form action="/mgr/freeboard/delete" method="get">
 			<table class="table table-hover">
 				<thead>
 				<tr class = "info"  >
@@ -84,7 +84,7 @@ $(document).ready(function(){
 				<tr>
 					<td><input type="checkbox" name="checkRow" value="${frboard.free_no }"/></td>
 					<td>${frboard.free_no }</td>
-					<td><a href="/profileBoard/view?prof_no=${frboard.free_no}">${frboard.free_title }</a></td>
+					<td><a href="/mgr/freeview?free_no=${frboard.free_no}">${frboard.free_title }</a></td>
 					<td>${frboard.userno }</td>
 					<td>${frboard.free_time }</td>
 				</tr>
@@ -95,7 +95,7 @@ $(document).ready(function(){
 			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
 		<div class="src" style="text-align: right;">
-			<form action="/mgr/profilelist" method="get">
+			<form action="/mgr/freelist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
 			</form>

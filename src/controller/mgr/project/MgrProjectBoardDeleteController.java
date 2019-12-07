@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.ProfileBoard;
 import dto.ProjectBoard;
 import serivce.face.FileService;
 import serivce.face.ProjectBoardService;
@@ -28,13 +29,21 @@ public class MgrProjectBoardDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String[] strings = req.getParameterValues("checkRow");
-		System.out.println(strings);
-		ProjectBoard pjBoard = new ProjectBoard();
-		for (String string : strings) {
-			pjBoard.setProj_no(Integer.parseInt(string));
+		ProjectBoard chkpjBoard = new ProjectBoard();
+		if(strings != null) {
+			
+			for (String string : strings) {
+				chkpjBoard.setProj_no(Integer.parseInt(string));
+				fileService.deleteFile(getServletContext().getRealPath("uplaod"), 2, chkpjBoard.getProj_no());
+				projectBoardService.delete(chkpjBoard);			
+
+			}		
+		} else {
+			ProjectBoard pjBoard = projectBoardService.getProjectBoardno(req);
 			fileService.deleteFile(getServletContext().getRealPath("uplaod"), 2, pjBoard.getProj_no());
 			projectBoardService.delete(pjBoard);			
-		}		
+			
+		}
 		resp.sendRedirect("/mgr/projectlist");
 	}
 }
