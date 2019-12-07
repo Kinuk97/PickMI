@@ -1,4 +1,4 @@
-package controller.alertFromProfile;
+package controller.Alert;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import serivce.impl.ProfileBoardServiceImpl;
 
 
 @WebServlet("/alert/fromprofile")
-public class AlertController extends HttpServlet {
+public class AlertFromProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AlertService alertService = AlertServiceImpl.getInstance();
 	private ProfileBoardService profileBoardService = ProfileBoardServiceImpl.getInstance();
