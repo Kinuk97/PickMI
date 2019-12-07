@@ -15,10 +15,13 @@
 			data : {
 				"proj_no" : proj_no , "userno" : userno
 			},
-			dataType : "text",
+			dataType : "json",
 			success : function(data) {
-				console.log('작동');
-// 				$("#userDelete").html(data)
+				if (JSON.parse(data).result == 2) {
+					$("#matemodal").modal("toggle");
+				} else {
+					location.href = "/main";
+				}
 			}
 		})
 	})

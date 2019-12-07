@@ -35,6 +35,7 @@ public class MateDeleteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int result = 0;
+		int deleteAction = 0;
 		
 		//로그인 한 사람 정보 받기
 		HttpSession session = req.getSession();
@@ -62,6 +63,7 @@ public class MateDeleteController extends HttpServlet {
 						// 내가 팀장이 아니면서 내 유저번호가 파라미터로 왔고 세션이랑 같다면
 						mate.setUserno(Integer.parseInt(reqUserno));
 						mateService.removeUserFromTeam(mate);
+						deleteAction = 1;
 					}
 				} else {
 					// case 2 로그인한 사람이 이 프로젝트의 팀장이라면 삭제
@@ -69,6 +71,7 @@ public class MateDeleteController extends HttpServlet {
 						// 내가 팀장이고 팀원을 삭제하려고 한다면
 						mate.setUserno(Integer.parseInt(reqUserno));
 						mateService.removeUserFromTeam(mate);
+						deleteAction = 2;
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -77,6 +80,6 @@ public class MateDeleteController extends HttpServlet {
 		}
 		
 		// 응답??
-		resp.getWriter().println(new Gson().toJson());
+		resp.getWriter().println(new Gson().toJson("{ \"result\" : " + deleteAction + " }"));
 	}
 }
