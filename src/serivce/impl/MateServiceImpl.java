@@ -5,14 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dao.face.MateDao;
+import dao.face.ProfileBoardDao;
 import dao.impl.MateDaoImpl;
+import dao.impl.ProfileBoardDaoImpl;
 import dto.Mate;
 import dto.ProjectBoard;
 import serivce.face.MateService;
+import sun.java2d.cmm.Profile;
 
 public class MateServiceImpl implements MateService {
 	
 	private MateDao mateDao = MateDaoImpl.getInstance();
+	private ProfileBoardDao profileDao = ProfileBoardDaoImpl.getInstance();
 	
 	public MateServiceImpl() {
 		
@@ -24,6 +28,12 @@ public class MateServiceImpl implements MateService {
 
 	public static MateService getInstance() {
 		return Singleton.instance;
+	}
+	
+	@Override
+	public List<Mate> appliedUser(Mate mate) {
+		
+		return mateDao.selectUsers(mate);
 	}
 	
 	@Override

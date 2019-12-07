@@ -26,7 +26,23 @@ $(document).ready (function() {
 				$("#modalBody").html(data)
 			}
 		})
-	})
+	}); /* 첫번째 모달 끝 */
+	
+	$('.showUsers').click(function() {
+		var proj_no = $(this).data("proj_no");
+		$.ajax({
+			type : "get",
+			url : "/mate/list",
+			data : {
+				"proj_no" : proj_no
+			},
+			dataType : "html",
+			success : function(data) {
+				console.log('신청자보기');
+				$('#showPeople').html(data);
+			}
+		})
+	}); /* 두번째모달 끝 */
 	
 })
 
@@ -59,11 +75,6 @@ $(document).ready (function() {
 					<hr>
 	    		</c:forEach>
   		</div>
-  <!-- Table -->
-  <table class="table">
-  	<tr>
-    </tr>
-  </table>
 </div>
 
 
@@ -76,13 +87,10 @@ $(document).ready (function() {
         <h4 class="modal-title" id="myModalLabel">함께하는 팀원들</h4>
       </div>
       <div class="modal-body" id="modalBody">
-<%--       	<c:forEach items="${ mateList }" var="mateList"> --%>
-<%--       		<p>${ mateList.username }</p> --%>
-<%--         </c:forEach> --%>
+      <!-- viewuser jsp로 넘어감 -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
@@ -93,11 +101,50 @@ $(document).ready (function() {
   <!-- Default panel contents -->
 	<div class="panel-heading">새로운 가입 신청	
 	</div>
-	<c:forEach items="${ leaderlist }" var="list">
   		<div class="panel-body">
+			<c:forEach items="${ leaderlist }" var="list">
     		<p><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a></p>
-		</div>
-	</c:forEach>
+		<!-- 신청자보기 모달 -->
+		<!-- Button trigger modal -->
+			<button data-proj_no="${ list.proj_no }" id="showUsers" type="button" class="btn btn-info" data-toggle="modal" data-target="#showApplied">
+			  신청자 보기
+			</button>
+			</c:forEach>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="showApplied" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">신청자 현황</h4>
+			      </div>
+			      <div class="modal-body" id="showPeople">
+			        	<!-- 썸네일 -->
+						<div class="row">
+						  <div class="col-sm-6 col-md-4">
+						    <div class="thumbnail">
+						      <div class="caption">
+						        <h3>${ list.username }</h3>
+						        <p>...</p>
+						        <p><a href="#" class="btn btn-info" role="button">수락</a> <a href="#" class="btn btn-default" role="button">거절</a></p>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<!-- 			        <button type="button" class="btn btn-info">확인</button> -->
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		
+		
+	
+		
 <!-- 내프로젝트에참가신청한사람들 -->
 		
 </div>
@@ -112,6 +159,7 @@ $(document).ready (function() {
 			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
    			 </c:forEach>
 		  </ul>
+		  
   	</div>
 </div>
 

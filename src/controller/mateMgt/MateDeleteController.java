@@ -77,6 +77,6 @@ public class MateDeleteController extends HttpServlet {
 		}
 		
 		// 응답??
-		resp.getWriter().println(new Gson().toJson(mateService.getMateList(mate)));
+		resp.getWriter().println(new Gson().toJson());
 	}
 }

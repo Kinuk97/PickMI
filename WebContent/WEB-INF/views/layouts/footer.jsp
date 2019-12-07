@@ -4,7 +4,7 @@
 </div>
 
 <div id="footer">
-	<div class="fotter_center_tl">		
+	<div class="fotter_center_tl" style="margin-bottom: 20px;">		
 			<a href="/main/intro">서비스소개&emsp;|</a>
 			<a href="/main/agree">&emsp;회원약관&emsp;|</a>
 			<a href="/main/agree2">&emsp;개인정보처리방침&emsp;</a>
@@ -13,6 +13,10 @@
 		<br>
 		<br>
 		<span>Made By. 채해원 강인욱 김도훈 서동산 이빈</span>
+		<br>
+		<br>
+		<br>
+		
 		</div>
 	</div>
 </div>

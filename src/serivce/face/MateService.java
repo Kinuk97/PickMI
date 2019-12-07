@@ -9,6 +9,12 @@ import dto.ProjectBoard;
 
 public interface MateService {
 	/**
+	 * 참가 신청 한 사용자들의 정보를 불러온다
+	 * @param mate
+	 * @return
+	 */
+	public List<Mate> appliedUser(Mate mate);
+	/**
 	 * 기존에 신청한 적이 있는지 확인하기
 	 * @param mate
 	 * @return

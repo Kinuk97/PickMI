@@ -163,6 +163,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 			sql += "		SELECT comp_no, userno, comp_title, comp_name, ";
 			sql += "			   comp_content, comp_member, TO_CHAR(comp_date, 'YYYY/MM/DD HH:MI:SS') comp_date, comp_view, ";
 			sql += "			   comp_startdate, comp_enddate, ";
+			sql += "			(SELECT count(*) FROM likepost WHERE boardno = compboard.comp_no AND postno = 4) comp_like, ";
 			sql += " 			(SELECT name FROM user_table WHERE compBoard.userno = userno) username";
 			sql += "		FROM compBoard";
 			
@@ -222,7 +223,6 @@ public class CompBoardDaoImpl implements CompBoardDao {
 				while(rs.next()) {
 					CompBoard compBoard = new CompBoard();
 
-//					compBoard.setRownum( rs.getInt("rnum"));
 					compBoard.setComp_no( rs.getInt("comp_no") );
 					compBoard.setUserno( rs.getInt("userno") );
 					compBoard.setUsername( rs.getString("username"));
@@ -234,6 +234,7 @@ public class CompBoardDaoImpl implements CompBoardDao {
 					compBoard.setComp_view( rs.getInt("comp_view") );
 					compBoard.setComp_startdate( rs.getDate("comp_startdate"));
 					compBoard.setComp_enddate( rs.getDate("comp_enddate") );
+					compBoard.setComp_like( rs.getInt("comp_like"));
 					
 					List.add(compBoard);
 				}

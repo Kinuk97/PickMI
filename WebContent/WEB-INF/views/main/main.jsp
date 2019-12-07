@@ -16,7 +16,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div id="mainslide" class="item active">
-      <img src="/resources/desk.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
+      <img src="/resources/desk.png" style="width : 100%; height: 400px; filter: opacity(0.5);">
 	      <div class="carousel-caption" id="mainservicediv1">
 	      	<h2 id="mainservice">"PickMI Service Guide"</h2>
 	      	<h3 id="mainservice">PickMI(Mate&amp;Idea)를 이용하실 땐, 회원가입을 한 후 이용해보세요 :-)</h3>
@@ -29,11 +29,11 @@
 	      </div>
     </div>
     <div id="mainslide" class="item">
-      <img src="/resources/note.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
+      <img src="/resources/note.png" style="width : 100%; height: 400px; filter: opacity(0.5);">
       <div class="carousel-caption" id="mainservicediv2">
       	<h2 id="mainservice">"PickMI Service Guide"</h2>
         <h3 id="mainservice">여러 게시판에 글을 작성하여 업로드해보세요.</h3>
-        <h3 id="mainservice">프로젝트나 팀원을 발견하거나 아이디어를 공유할 수 있습니다.</h3>
+        <h3 id="mainservice">프로젝트 또는 팀원을 발견하거나 아이디어를 공유할 수 있습니다.</h3>
         <br>
         <br>
         <br>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div id="mainslide" class="item">
-      <img src="/resources/work.png" style="width : 100%; height: 350px; filter: opacity(0.5);">
+      <img src="/resources/work.png" style="width : 100%; height: 400px; filter: opacity(0.5);">
       <div class="carousel-caption" id="mainservicediv3">
       	<h2 id="mainservice">"PickMI Service Guide"</h2>
 		<h3 id="mainservice">팀원들과 함께 프로젝트와 일정관리를 해보세요.</h3>
@@ -131,9 +131,9 @@
 						<div class="comp_name overtext">팀 이름 : ${compList.comp_name }</div>
 						<br>
 						<br>
-						<div class="text-right">작성자 : ${compList.username }</div>
+						<div class="text-right">${compList.comp_like }개의 👍</div>
 						<div class="text-right">조회수 : ${compList.comp_view }</div>
-						<div class="text-right">찜한수 : ${compList.comp_like }</div>
+						<div class="text-right">작성자 : ${compList.username }</div>
 						<div class="text-right">작성날짜 : ${compList.comp_date }</div>
 					</div>
 				</div>
