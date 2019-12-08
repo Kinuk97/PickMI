@@ -182,10 +182,11 @@ public class ReplyServiceImpl implements ReplyService {
 //		System.out.println("리플리서비스임플 겟페이징 : " + reply);
 //		System.out.println("리플리서비스임플 겟페이징 : " + i);
 		int totalCount = replyDao.selectCntAll(reply, i);
-
+		
 
 //		Paging 객체 생성
 		Paging paging = new Paging(totalCount, curPage);
+		System.out.println("페이징 처리 잘하는지? " + paging); 
 		return paging;
 	}
 	
