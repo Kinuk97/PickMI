@@ -13,7 +13,7 @@ import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
 
 @WebServlet("/schedule/update/check")
-public class checkListUpdateController extends HttpServlet {
+public class CheckListUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ScheduleService scheduleService = ScheduleServiceImpl.getInstance();
