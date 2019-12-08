@@ -28,7 +28,6 @@ public class MateAcceptController extends HttpServlet {
 		
 		// 프로젝트 번호와 유저번호가 필요
 		Mate mate = mateService.getParam(req);
-		
 		mateService.addMate(mate);
 		
 		resp.sendRedirect("/mate/list?proj_no=" + mate.getProj_no());

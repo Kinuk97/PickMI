@@ -202,7 +202,7 @@ a#top {
 }
 </style>
 
-<h1 align="center"> 나를 소개해보세요❣❣😄 </h1>
+<h1 align="center"> 😄프로필 게시판😄 </h1>
 <c:if test="${ login }">
 	<div class="text-right" style="padding: 0 120px; margin-right: 119px;">
 		<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>

@@ -90,7 +90,7 @@ function loadReply(curPage) {
 				});
 			}
 			
-		}
+		
 
 </script>
 
@@ -147,7 +147,6 @@ function loadReply(curPage) {
 			</tbody>
 			
 		</table>
->>>>>>> refs/remotes/origin/testing
 	</div>
 
 			
