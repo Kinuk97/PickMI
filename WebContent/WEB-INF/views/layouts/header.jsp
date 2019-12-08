@@ -775,10 +775,10 @@ a#top {
 <!-- 								<button class="btn btn-default dropdown-toggle" type="button" -->
 <!-- 									id="btnAlertList" data-toggle="dropdown" aria-expanded="true"> -->
 <!-- 									Alert  -->
-								<img src="/resources/alerticon.png" type="button" id="btnAlertList" data-toggle="dropdown" aria-expanded="true" style="width:44px;"><span class="badge" id="badge">7</span>
+								<img src="/resources/alerticon.png" id="btnAlertList" data-toggle="dropdown" aria-expanded="true" style="width:44px;"><span class="badge" id="badge">7</span>
 <!-- 								</button> -->
 								
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;" id="alertList">
 								
 									<li class="close" style="width: 25px;">x</li>
 								

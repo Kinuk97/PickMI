@@ -39,11 +39,19 @@ public interface MateService {
 	 */
 	public void wantToJoin(Mate mate);
 	/**
-	 * 팀장인지 아닌지 확인하기
+	 * 내가 팀장인 프로젝트가 있는지 확인하기
 	 * @param mate
 	 * @return
 	 */
 	public boolean checkLeader(Mate mate);
+	
+	/**
+	 * 내가 이 프로젝트의 팀장인지 확인
+	 * 
+	 * @return
+	 */
+	public boolean countProjectLeader(Mate mate);
+	
 	/**
 	 * mate테이블에서 유저 삭제하기
 	 * @param mate

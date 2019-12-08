@@ -273,6 +273,40 @@ public class MateDaoImpl implements MateDao {
 	}
 	
 	@Override
+	public int countProjectLeader(Mate mate) {
+		String sql = "";
+		sql += "SELECT count(*) FROM mate";
+		sql += " WHERE proj_no = ?";
+		sql += " AND userno = ? AND mate = 2";
+		
+		//결과 저장 리스트
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //쿼리 수행 객체 얻기
+			
+			ps.setInt(1, mate.getProj_no());
+			ps.setInt(2, mate.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	@Override
 	public void insertTeam(ProjectBoard projectBoard) {
 		String sql="";
 		sql += "INSERT INTO mate (userno, proj_no, mate)";

@@ -94,5 +94,13 @@ public interface MateDao {
 	 * @param mate
 	 */
 	public void updateMate(Mate mate);
+	
+	/**
+	 * 내가 이 프로젝트의 팀장인지 확인하는 메소드
+	 * 
+	 * @param mate
+	 * @return
+	 */
+	public int countProjectLeader(Mate mate);
 
 }

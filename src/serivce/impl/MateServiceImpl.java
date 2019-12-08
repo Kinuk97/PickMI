@@ -83,6 +83,16 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public boolean countProjectLeader(Mate mate) {
+		int cnt = mateDao.countProjectLeader(mate);
+		
+		if ( cnt > 0 ) {
+			return true; //팀장인 유저
+			}
+		return false; //팀장이 아님
+	}
+	
+	@Override
 	public void removeUserFromTeam(Mate mate) {
 		mateDao.deleteUserFromTeam(mate);
 	}
