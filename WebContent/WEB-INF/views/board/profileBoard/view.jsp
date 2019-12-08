@@ -74,13 +74,13 @@ $(document).ready(function() {
 	
 	$("#inviteproject").click(function (){
 // 		$('#myModal').on('shown.bs.modal', function () {
-		var prof_no = $(this).data("prof_no");
+		var proj_no = $(this).data("proj_no");
 		var userno = $(this).data("userno");
 		$.ajax({
 			type : "get",
-			url : "/mate/invite",
+			url : "/profile/view",
 			data : {
-				"prof_no" : prof_no, "userno" : userno
+				"proj_no" : proj_no, "userno" : userno
 			},
 			dataType : "html",
 			success : function(data) {
@@ -189,7 +189,7 @@ $(document).ready(function() {
       <div class="modal-body">
       	<c:if test="${ leader }">
 		<c:forEach items="${ project }" var="project">
-		  <p><a href="/mate/invite">${ project.proj_title }</a></p>
+		  <p><a href="/mate/invite?proj_no=${project.proj_no }&userno=${profile.userno}">${ project.proj_title }</a></p>
 		</c:forEach>
         </c:if>
       </div>

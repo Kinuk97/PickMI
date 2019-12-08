@@ -1,6 +1,7 @@
 package controller.mateMgt;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dto.Mate;
 import dto.ProfileBoard;
-import dto.ProjectBoard;
 import serivce.face.MateService;
 import serivce.impl.MateServiceImpl;
 
@@ -22,37 +22,29 @@ public class MateInviteController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		Mate mate = new Mate();
 		ProfileBoard profile = new ProfileBoard();
-		//게시판 번호받기
-		profile.setProf_no(Integer.parseInt(req.getParameter("prof_no")));
 
-//		mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
-		HttpSession session = req.getSession();
-		try {
-			mate.setUserno((int)session.getAttribute("userno")); //초대자 정보저장
-		} catch (NullPointerException e) {
-			System.out.println("로그인 안했음");
-		}
-		
-		boolean checkLeader = mateService.countProjectLeader(mate);
-		
+		//게시판 번호받기
+//		profile1.setProf_no(Integer.parseInt(req.getParameter("prof_no")));
+
+		mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
+		mate.setUserno(Integer.parseInt(req.getParameter("userno"))); //초대받는사람 정보
+		System.out.println("메이트 인바이트 : " +mate);
+		boolean checkLeader = mateService.checkLeader(mate);
+//		System.out.println("프로필뷰 :" + checkLeader);
 		if(checkLeader) {
 			req.setAttribute("leader", true);
-			//로그인 정보로, 팀장이 가지고 있는 프로젝트 조회
-			ProjectBoard project = mateService.selectMyproject(mate);
-			req.setAttribute("project", project);
-			System.out.println("dkdkdk" + project);
+			//mate테이블에 넣어주기
+			mateService.inviteMate(mate);
+//			System.out.println("dkdkdk" + project);
 			
 		} else {
 			req.setAttribute("leader", false);
 		}
 		
 		resp.sendRedirect("/profileBoard/view?prof_no="+req.getParameter("prof_no"));
-//		req.getRequestDispatcher("/WEB-INF/views/board//profileBoard/view?prof_no=${prof_no}.jsp").forward(req, resp);
-
-
-		
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
