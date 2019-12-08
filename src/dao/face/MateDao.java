@@ -9,6 +9,12 @@ import dto.User;
 
 public interface MateDao {
 	/**
+	 * 사용자가 가지고 있는 프로젝트 조회
+	 * @param mate
+	 * @return
+	 */
+	public ProjectBoard selectMyproject(Mate mate);
+	/**
 	 * 사용자의 프로필이 있는지 확인한다
 	 * @param mate
 	 * @return

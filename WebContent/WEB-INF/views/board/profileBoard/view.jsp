@@ -72,8 +72,26 @@ $(document).ready(function() {
 		});
 	
 	
-	$("#invite").click(function (){
-		alert("초대되었습니다!");
+	$("#inviteproject").click(function (){
+// 		$('#myModal').on('shown.bs.modal', function () {
+		var prof_no = $(this).data("prof_no");
+		var userno = $(this).data("userno");
+		$.ajax({
+			type : "get",
+			url : "/mate/invite",
+			data : {
+				"prof_no" : prof_no, "userno" : userno
+			},
+			dataType : "html",
+			success : function(data) {
+			  $('#inviteProj').html(data);
+				
+			}
+			  
+				
+			
+			})
+		
 	})
 	
 })// document end
@@ -154,8 +172,35 @@ $(document).ready(function() {
 	<a id="loginplz2" role="button" class="btn btn-info">수정</a>			
 </c:if>
 <c:if test="${ login }">
-	<a id="delete" role="button" class="btn btn-info" href="/profileBoard/delete?prof_no=${profile.prof_no}">삭제</a>			
-	<a id="invite" href="/alert/fromprofile?prof_no=${profile.prof_no}" role="button" class="btn btn-info" data-prof_no="${ profile.prof_no }" data-userno="${ profile.userno }">우리팀으로 초대하기💌</a>			
+	<a id="delete" role="button" class="btn btn-info" href="/profileBoard/delete?prof_no=${profile.prof_no}">삭제</a>
+	<!-- Button trigger modal -->
+<button id="inviteproject" type="button" class="btn btn-info" data-toggle="modal" data-target="#inviteProj" data-prof_no="${ profile.prof_no }" data-userno="${ profile.userno }">
+ 우리팀으로 초대하기💌
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="inviteProj" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">초대할 프로젝트를 선택하세요!</h4>
+      </div>
+      <div class="modal-body">
+      	<c:if test="${ leader }">
+		<c:forEach items="${ project }" var="project">
+		  <p><a href="/mate/invite">${ project.proj_title }</a></p>
+		</c:forEach>
+        </c:if>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>			
+<%-- 	<a href="/alert/fromprofile?prof_no=${profile.prof_no}" role="button" class="btn btn-info" data-prof_no="${ profile.prof_no }" data-userno="${ profile.userno }">우리팀으로 초대하기💌</a>			 --%>
 	
 </c:if>
 <c:if test="${ !login }">

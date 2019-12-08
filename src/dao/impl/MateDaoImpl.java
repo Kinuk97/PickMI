@@ -32,6 +32,39 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
+	@Override
+	public ProjectBoard selectMyproject(Mate mate) {
+		String sql="";
+		sql += "SELECT userno, proj_no, proj_title, (select name from user_table where userno = ?)as username from projboard where userno=?";
+		ProjectBoard project = new ProjectBoard();
+		
+		try {
+			ps= conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getUserno());
+			ps.setInt(2, mate.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				project.setUserno(rs.getInt("userno"));
+				project.setProj_no(rs.getInt("proj_no"));
+				project.setProj_title(rs.getString("proj_title"));
+				project.setUsername(rs.getString("username"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return project;
+	}
 	
 	@Override
 	public int countProfile(Mate mate) {
