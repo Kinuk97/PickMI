@@ -5,8 +5,21 @@ import java.util.List;
 import dto.Mate;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
 
 public interface MateDao {
+	/**
+	 * 사용자의 프로필이 있는지 확인한다
+	 * @param mate
+	 * @return
+	 */
+	public int countProfile(Mate mate);
+	/**
+	 * 사용자의 프로필이 없는 경우를 위해 이름만 조회
+	 * @param mate
+	 * @return
+	 */
+	public List<User> showUserName(Mate mate);
 	
 	public List<ProfileBoard> showUser(Mate	mate);
 	/**

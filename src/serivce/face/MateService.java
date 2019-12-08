@@ -7,8 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import dto.Mate;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
 
 public interface MateService {
+	/**
+	 * 사용자의 프로필이 없는 경우를 위해 이름만 조회
+	 * @param mate
+	 * @return
+	 */
+	public List<User> showUserName(Mate mate);
 	/**
 	 * 사용자들 프로필 조회
 	 * @param list4
