@@ -196,8 +196,11 @@ $(document).ready (function() {
 		<div class="panel-body">
 		  <ul class="list-group">
 		  	<c:forEach items="${ invitedList }" var="list">
-			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.sender }">${ list.sender }</a> 당신을 초대합니다!😍</li>
-   			 </c:forEach>
+			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no }">${ list.username }</a>님이 당신을 초대합니다!😍</li>
+				</c:forEach>
+			<c:if test="${empty invitedList}">
+				<li class="list-group-item">초대장이 없습니다! 프로필을 작성해보세요!💪</li>
+			</c:if>
 		  </ul>
 		  
   	</div>

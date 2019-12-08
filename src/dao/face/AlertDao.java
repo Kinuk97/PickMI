@@ -3,6 +3,7 @@ package dao.face;
 import java.util.List;
 
 import dto.Alert;
+import dto.Mate;
 import dto.ProjectBoard;
 
 public interface AlertDao {
@@ -11,7 +12,7 @@ public interface AlertDao {
 	 * @param alert
 	 * @return
 	 */
-	public List<Alert> invitedList(Alert alert);
+	public List<Mate> invitedList(Alert alert);
 	/**
 	 * 프로필 게시판에 글 쓴적 있는지 확인하기
 	 * @param alert

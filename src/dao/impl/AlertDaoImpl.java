@@ -10,8 +10,7 @@ import java.util.List;
 import dao.face.AlertDao;
 import dbutil.DBConn;
 import dto.Alert;
-import dto.ProfileBoard;
-import dto.ProjectBoard;
+import dto.Mate;
 
 public class AlertDaoImpl implements AlertDao {
 	
@@ -30,12 +29,13 @@ public class AlertDaoImpl implements AlertDao {
 	public static AlertDao getInstance() {
 		return Singleton.instance;
 	}
+	
 	@Override
-	public List<Alert> invitedList(Alert alert) {
+	public List<Mate> invitedList(Alert alert) {
 		String sql="";
-		sql += "SELECT sender FROM alert WHERE  userno = ? AND checkcheck = 0";
+		sql += "SELECT mate.*, (SELECT name FROM user_table WHERE mate.userno = user_table.userno) username FROM mate WHERE userno = ? AND mate = 3";
 		
-		List<Alert> list = new ArrayList<Alert>();
+		List<Mate> list = new ArrayList<Mate>();
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -44,13 +44,15 @@ public class AlertDaoImpl implements AlertDao {
 			
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				Alert temp = new Alert();
+				Mate mate = new Mate();
 				
-				temp.setSender(rs.getInt("sender"));
+				mate.setUserno(rs.getInt("userno"));
+				mate.setProj_no(rs.getInt("proj_no"));
+				mate.setMate(rs.getInt("mate"));
+				mate.setUsername(rs.getString("username"));
 			
 				
-				list.add(temp);
-//				System.out.println("matedaoimpl : " + list);
+				list.add(mate);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.Alert;
+import dto.Mate;
 
 public interface AlertService {
 
@@ -27,7 +28,7 @@ public interface AlertService {
 	 * @param alert
 	 * @return
 	 */
-	public List<Alert> invitedList(Alert alert);
+	public List<Mate> invitedList(Alert alert);
 	/**
 	 * 프로필 게시판에 글이 있는지 확인하기
 	 * @param alert

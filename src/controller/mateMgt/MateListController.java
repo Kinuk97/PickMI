@@ -73,7 +73,7 @@ public class MateListController extends HttpServlet {
 	
 			
 			//나를 초대한 목록 보기
-		List<Alert> inviteList = alertService.invitedList(alert);
+		List<Mate> inviteList = alertService.invitedList(alert);
 		req.setAttribute("invitedList", inviteList);
 		
 			

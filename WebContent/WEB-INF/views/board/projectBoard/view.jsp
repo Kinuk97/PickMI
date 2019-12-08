@@ -239,7 +239,7 @@ function like(data) {
 		<button id="btnList" class="btn btn-primary">목록</button>
 		<c:if test="${ login }">
 		<c:choose>
-			<c:when test="${ !checkprofile }">
+			<c:when test="${ !checkprofile && empty decideJoin }">
 				<a id="cant"
 				role="button" class="btn btn-info"
 				data-proj_no="${ projectBoard.proj_no }"
@@ -274,7 +274,7 @@ function like(data) {
 					</a>
 				</c:when>
 			<c:otherwise>
-<%-- 				<c:if test="${ checkprofile }"> --%>
+				<c:if test="${ checkprofile && empty decideJoin }">
 				<a id="invite"
 				href="/alert/fromproject?proj_no=${projectBoard.proj_no}"
 				role="button" class="btn btn-info"
@@ -282,18 +282,27 @@ function like(data) {
 				data-userno="${ projectBoard.userno }"
 				style = "margin-top : 9px;">팀 참가 신청하기💌
 				</a>
-<%-- 				</c:if> --%>
+				</c:if>
+				
 			</c:otherwise>
 				</c:choose>
 			</c:otherwise>
 		</c:choose>
 		</c:if>
-	
-
+		<c:if test="${decideJoin }">
+				<a id=""
+				href="/mate/accept?proj_no=${projectBoard.proj_no}&userno=${userno}"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }" style = "margin-top : 9px;">초대 수락하기💌
+				</a>
+				<a id=""
+				href="/mate/denied?proj_no=${projectBoard.proj_no}&userno=${userno}"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }" style = "margin-top : 9px;">초대 거절하기💌
+				</a>
+				</c:if>
 	</div>
 </div>
-
-
 
 <!--모달창 -->
 <div class="modal fade" id="defaultModal">

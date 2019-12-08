@@ -12,9 +12,6 @@ import dto.Mate;
 import serivce.face.MateService;
 import serivce.impl.MateServiceImpl;
 
-/**
- * Servlet implementation class MateAcceptController
- */
 @WebServlet("/mate/accept")
 public class MateAcceptController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +20,7 @@ public class MateAcceptController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 팅잠일 때에만 동작하기
+		// 팀장일 때에만 동작하기
 
 		
 		// 프로젝트 번호와 유저번호가 필요

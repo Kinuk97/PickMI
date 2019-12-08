@@ -80,6 +80,8 @@ public class ProjectBoardViewController extends HttpServlet {
 			req.setAttribute("already", true); // 이미 팀가입되있음
 		} else if( check1 ==2 ) {
 			req.setAttribute("leader", true); //팀장임
+		} else if (check1 == 3) {
+			req.setAttribute("decideJoin", true); // 이 프로젝트 게시글에 초대된 사람
 		}
 		//기존에 프로필 작성을 했었는지 확인하기
 		Alert alert = new Alert();

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import dao.face.AlertDao;
 import dao.impl.AlertDaoImpl;
 import dto.Alert;
+import dto.Mate;
 import serivce.face.AlertService;
 
 public class AlertServiceImpl implements AlertService {
@@ -64,7 +65,7 @@ public class AlertServiceImpl implements AlertService {
 	public List<Alert> getAlertList(Alert alert) {
 		return alertDao.selectMyAlert(alert);
 	}
-	public List<Alert> invitedList(Alert alert) {
+	public List<Mate> invitedList(Alert alert) {
 //		List<Alert> alert1 = new ArrayList<Alert>();
 //			alert1 = alertDao.invitedList(alert);
 			
