@@ -27,7 +27,32 @@
 <script type="text/javascript" src="/resources/js/modal.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
+function alertList(userno) {
+	$.ajax({
+		type : "post",
+		url : "/alert/list",
+		data : { "userno" : userno },
+		dataType : "json",
+		success : function(data){
+			var listTag = $("#alertList").html("");
+
+			var list = data;
+
+			listTag.append($("<li class=\"close\" style=\"width: 25px;\">x</li>"));
+
+			for (var i = 0; i < list.length; i++) {
+				listTag.append($("<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/mate/list?alert=true\" style=\"padding-top: 10px; padding-bottom: 10px;\">" + list[i].alert + "</a></li>"));
+			}
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+
+}
+
+$(document).ready(function() {
+	alertList(1);
 	
 	//메세지 리스트의 항목 하나를 눌렀을 떄
 	$('#msgList').on("click", ".messagelist", function() {
@@ -248,7 +273,7 @@ function msgsend(n) {
 		error : function(e){
 			console.log(e);
 		}
-	})
+	});
 }
 
 

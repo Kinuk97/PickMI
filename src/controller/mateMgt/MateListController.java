@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.Alert;
 import dto.Mate;
-import dto.ProfileBoard;
 import dto.ProjectBoard;
+import serivce.face.AlertService;
 import serivce.face.MateService;
+import serivce.impl.AlertServiceImpl;
 import serivce.impl.MateServiceImpl;
 
 @WebServlet("/mate/list")
@@ -21,14 +23,25 @@ public class MateListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private MateService mateService = MateServiceImpl.getInstance();
+	private AlertService alertService = AlertServiceImpl.getInstance();
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String alertCheck = req.getParameter("alert");
+		if (alertCheck != null && !"".equals(alertCheck)) {
+			if (alertCheck.equals("true")) {
+//				alertService.readAlert();
+			}
+		}
+		
 		//유저 정보 셋팅
 		Mate mate = new Mate();
+		Alert alert = new Alert();
 		HttpSession session = req.getSession();
 		try {
 			mate.setUserno((int)session.getAttribute("userno"));
+			alert.setUserno((int)session.getAttribute("userno"));
 		} catch (NullPointerException e) {
 			System.out.println("로그인 안했음");
 		}
@@ -58,21 +71,17 @@ public class MateListController extends HttpServlet {
 		req.setAttribute("waitTeamList", list3);
 //			System.out.println("체크체크 : " + list3);
 	
-//			//신청한 사용자 정보 불러오기
-//			mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
-//			List<Mate> list4 = mateService.appliedUser(mate);
-//			//사용자 번호로 사용자들 조회하기
-//			List<Mate> list5 = mateService.showUser(list4);
-			
 			
 			//나를 초대한 목록 보기
+		List<Alert> inviteList = alertService.invitedList(alert);
+		req.setAttribute("invitedList", inviteList);
+		
 			
 
 
 		
 
 		
-//		System.out.println(req.getAttribute("leader"));
 		
 		req.getRequestDispatcher("/WEB-INF/views/mateMgt/mateList.jsp").forward(req, resp);
 		
