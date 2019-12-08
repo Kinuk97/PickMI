@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.face.AlertDao;
 import dbutil.DBConn;
@@ -25,6 +27,47 @@ public class AlertDaoImpl implements AlertDao {
 	
 	public static AlertDao getInstance() {
 		return Singleton.instance;
+	}
+	
+	@Override
+	public List<Alert> selectMyAlert(Alert alert) {
+		String sql = "SELECT * FROM alert WHERE userno = ? ORDER BY alerttime";
+		
+		List<Alert> list = new ArrayList<Alert>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, alert.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Alert temp = new Alert();
+				
+				temp.setUserno(alert.getUserno());
+				temp.setAlert(rs.getString("alert"));
+				temp.setAlerttime(rs.getDate("alerttime"));
+				temp.setSender(rs.getInt("sender"));
+				temp.setCheckcheck(rs.getString("checkcheck").charAt(0));
+
+				list.add(temp);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
 	}
 	
 	@Override

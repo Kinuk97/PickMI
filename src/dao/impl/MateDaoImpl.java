@@ -37,7 +37,7 @@ public class MateDaoImpl implements MateDao {
 		sql += "SELECT p.*, (SELECT name FROM user_table WHERE userno = p.userno) username FROM profile p WHERE userno IN (SELECT userno FROM mate WHERE proj_no = ? AND mate = 0)";
 		
 		List<ProfileBoard> list = new ArrayList<ProfileBoard>();
-		
+		System.out.println(mate);
 		try {
 			ps = conn.prepareStatement(sql);
 			

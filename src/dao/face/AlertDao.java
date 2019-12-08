@@ -1,5 +1,7 @@
 package dao.face;
 
+import java.util.List;
+
 import dto.Alert;
 
 public interface AlertDao {
@@ -8,5 +10,13 @@ public interface AlertDao {
 	 * @param alert
 	 */
 	public void insertAlert(Alert alert);
+
+	/**
+	 * 알림 리스트 가져오기
+	 * 
+	 * @param alert
+	 * @return
+	 */
+	public List<Alert> selectMyAlert(Alert alert);
 
 }

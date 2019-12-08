@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import dto.Mate;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import serivce.face.AlertService;
 import serivce.face.MateService;
+import serivce.impl.AlertServiceImpl;
 import serivce.impl.MateServiceImpl;
 
 @WebServlet("/mate/list")
@@ -21,9 +23,17 @@ public class MateListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private MateService mateService = MateServiceImpl.getInstance();
+	private AlertService alertService = AlertServiceImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String alertCheck = req.getParameter("alert");
+		if (alertCheck != null && !"".equals(alertCheck)) {
+			if (alertCheck.equals("true")) {
+//				alertService.readAlert();
+			}
+		}
+		
 		//유저 정보 셋팅
 		Mate mate = new Mate();
 		HttpSession session = req.getSession();
