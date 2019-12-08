@@ -57,6 +57,18 @@ public class MateListController extends HttpServlet {
 		List<Mate> list3 = mateService.waitingAnswer(mate);
 		req.setAttribute("waitTeamList", list3);
 //			System.out.println("체크체크 : " + list3);
+	
+//			//신청한 사용자 정보 불러오기
+//			mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
+//			List<Mate> list4 = mateService.appliedUser(mate);
+//			//사용자 번호로 사용자들 조회하기
+//			List<Mate> list5 = mateService.showUser(list4);
+			
+			
+			//나를 초대한 목록 보기
+			
+
+
 		
 
 		

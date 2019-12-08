@@ -178,7 +178,19 @@ $(document).ready (function() {
 		  
   	</div>
 </div>
-
+<!-- 나에게 들어온 초대 신청 -->
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+	<div class="panel-heading">나에게 온 초대 현황</div>
+		<div class="panel-body">
+		  <ul class="list-group">
+		  	<c:forEach items="${ waitTeamList }" var="list">
+			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
+   			 </c:forEach>
+		  </ul>
+		  
+  	</div>
+</div>
 
 
 
