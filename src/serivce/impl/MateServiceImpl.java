@@ -14,7 +14,6 @@ import dto.ProjectBoard;
 import dto.User;
 import serivce.face.AlertService;
 import serivce.face.MateService;
-import sun.java2d.cmm.Profile;
 
 public class MateServiceImpl implements MateService {
 	
