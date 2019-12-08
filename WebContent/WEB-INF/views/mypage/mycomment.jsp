@@ -148,7 +148,7 @@ function loadReply(curPage) {
 			
 		</table>
 	</div>
-
+	<jsp:include page = "/WEB-INF/views/layouts/paging.jsp" />
 			
 </div> <!-- container -->
 

@@ -33,7 +33,7 @@ public interface ManagerDao {
 	 * @param search 
 	 * @return int - 총 사용자 수
 	 */
-	public int selectCntAll(String search);
+	public int selectCntAll(String search, int i);
 	
 // 검색 -----
 	

@@ -33,6 +33,11 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public ProjectBoard selectMyproject(Mate mate) {
+		return mateDao.selectMyproject(mate);
+	}
+	
+	@Override
 	public List<User> showUserName(Mate mate) {
 		return mateDao.showUserName(mate);
 	}

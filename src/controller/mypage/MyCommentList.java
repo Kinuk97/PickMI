@@ -42,20 +42,21 @@ public class MyCommentList extends HttpServlet {
 
 		User user = new User();
 		
-		// 요청파라미터에서 curPage 구하고 Paging 객체 반환
-		Paging comppaging = replyService.getPaging(req,1);
-		Paging freepaging = replyService.getPaging(req,2);
-		
-		// paging 객체를 MODEL값으로 지정
-		req.setAttribute("comppaging", comppaging);
-		req.setAttribute("freepaging", freepaging);
-		
 		// 세션값에서 userno 꺼내기
 		user.setUserno((Integer)session.getAttribute("userno"));
 		reply.setUserno((Integer)session.getAttribute("userno"));
 		reply.setUsername((String)session.getAttribute("name"));
 		user.setName((String)session.getAttribute("name"));
 //		System.out.println(user);
+
+		// 요청파라미터에서 curPage 구하고 Paging 객체 반환
+		Paging comppaging = replyService.getPaging(req,1);
+		Paging freepaging = replyService.getPaging(req,2);
+		
+		// paging 객체를 MODEL값으로 지정
+		req.setAttribute("paging", comppaging);
+		req.setAttribute("freepaging", freepaging);
+		req.setAttribute("url", req.getRequestURL());
 		
 		Map<Integer, List> map = new HashMap<Integer, List>();
 		

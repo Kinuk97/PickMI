@@ -30,11 +30,11 @@ public class MgrUserListController extends HttpServlet {
 		if (req.getSession().getAttribute("mgrlogin") != null ) {
 		
 			// 요청파라미터에서 curPage를 구하고 Paging 객체 반환
-			Paging paging = mgrService.getPaging(req);
+			Paging paging = mgrService.getPaging(req, 3);
 			
 			// paging 객체를 MODEL값으로 지정
 			req.setAttribute("paging", paging);
-			
+			System.out.println(paging);
 			// mgr main navTab에서 사용할 번호
 			req.setAttribute("boardno", 6);
 			
