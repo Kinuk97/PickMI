@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dto.Mate;
 import dto.ProfileBoard;
+import dto.ProjectBoard;
 import serivce.face.MateService;
 import serivce.impl.MateServiceImpl;
 
@@ -30,9 +31,12 @@ public class MateInviteController extends HttpServlet {
 //		profile1.setProf_no(Integer.parseInt(req.getParameter("prof_no")));
 
 		mate.setProj_no(Integer.parseInt(req.getParameter("proj_no")));
-		mate.setUserno(Integer.parseInt(req.getParameter("userno"))); //초대받는사람 정보
-		System.out.println("메이트 인바이트 : " +mate);
+		mate.setUserno((Integer) req.getSession().getAttribute("userno"));
+		
+		// 다시 초대하면 또 db에 입력되는 문제 해결해야함.
+		
 		boolean checkLeader = mateService.checkLeader(mate);
+		mate.setUserno(Integer.parseInt(req.getParameter("userno"))); //초대받는사람 정보
 //		System.out.println("프로필뷰 :" + checkLeader);
 		if(checkLeader) {
 			req.setAttribute("leader", true);

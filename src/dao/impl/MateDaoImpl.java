@@ -34,6 +34,33 @@ public class MateDaoImpl implements MateDao {
 	}
 	
 	@Override
+	public void insertInvite(Mate mate) {
+		String sql="";
+		sql += "INSERT INTO mate (userno, proj_no, mate)";
+		sql += " VALUES (?, ?, 3)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getUserno());
+			ps.setInt(2, mate.getProj_no());
+			
+			ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+	}
+	
+	@Override
 	public void inviteMate(Mate mate) {
 		String sql = "UPDATE mate SET mate = 3 WHERE proj_no = ? AND userno = ?";
 		
@@ -60,7 +87,7 @@ public class MateDaoImpl implements MateDao {
 	@Override
 	public List<ProjectBoard> selectMyproject(Mate mate) {
 		String sql="";
-		sql += "select distinct p.proj_no, p.proj_title, (SELECT name FROM user_table WHERE userno = p.userno) username FROM projboard p, mate m WHERE p.proj_no IN (SELECT proj_no FROM mate WHERE m.userno = ? AND m.mate = 2)";
+		sql += "select p.proj_no, p.proj_title, (SELECT name FROM user_table WHERE userno = p.userno) username FROM projboard p WHERE p.proj_no IN (SELECT proj_no FROM mate WHERE mate.userno = ? AND mate.mate = 2)";
 		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
 		
 		try {

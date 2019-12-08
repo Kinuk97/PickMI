@@ -123,5 +123,12 @@ public interface MateDao {
 	 * @return
 	 */
 	public int countProjectLeader(Mate mate);
+	
+	/**
+	 * 초대할 유저 넣기
+	 * 
+	 * @param mate
+	 */
+	public void insertInvite(Mate mate);
 
 }

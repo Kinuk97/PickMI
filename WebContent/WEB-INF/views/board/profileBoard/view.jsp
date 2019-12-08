@@ -189,7 +189,7 @@ $(document).ready(function() {
       <div class="modal-body">
       	<c:if test="${ leader }">
 		<c:forEach items="${ project }" var="project">
-		  <p><a href="/mate/invite?proj_no=${project.proj_no }&userno=${profile.userno}">${ project.proj_title }</a></p>
+		  <p><a href="/mate/invite?proj_no=${project.proj_no }&userno=${profile.userno}&prof_no=${profile.prof_no}">${ project.proj_title }</a></p>
 		</c:forEach>
         </c:if>
       </div>

@@ -34,7 +34,7 @@ public class MateServiceImpl implements MateService {
 	
 	@Override
 	public void inviteMate(Mate mate) {
-		mateDao.inviteMate(mate);
+		mateDao.insertInvite(mate);
 		
 	}
 	
