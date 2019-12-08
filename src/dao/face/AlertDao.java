@@ -1,8 +1,17 @@
 package dao.face;
 
+import java.util.List;
+
 import dto.Alert;
+import dto.ProjectBoard;
 
 public interface AlertDao {
+	/**
+	 * 나를 초대한 팀장들 불러오기
+	 * @param alert
+	 * @return
+	 */
+	public List<Alert> invitedList(Alert alert);
 	/**
 	 * 프로필 게시판에 글 쓴적 있는지 확인하기
 	 * @param alert
