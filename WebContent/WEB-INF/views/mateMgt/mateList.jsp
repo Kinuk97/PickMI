@@ -11,6 +11,8 @@
 
 <script type="text/javascript">
 function myTeamMateList(proj_no) {
+	
+
 	$.ajax({
 		type : "post",
 		url : "/mate/mymate",
@@ -19,7 +21,12 @@ function myTeamMateList(proj_no) {
 		success : function(data) {
 			$("#showPeople").html("");
 			var list = JSON.parse(data);
+// 			var list1 = {"myTeamList" : data.myTeamList};
+// 			var list2 = {"onlyName" : data.onlyName};
+// 			console.log(list2);
+// 			console.log(list2);
 // 			$("#myTeamMateCaption")
+			
 			for (var i = 0; i < list.length; i++) {
 				
 				var caption = $("<div class='caption caption-profile' onclick=\"location.href='/profileBoard/view?prof_no="+list[i].prof_no +"'\" style='height: 300px;'\"></div>");
@@ -30,19 +37,20 @@ function myTeamMateList(proj_no) {
 				caption.append($("<p></p>").text(list[i].prof_job));
 				caption.append($("<p></p>").text(list[i].prof_state));
 				caption.append($("<p id='abc'></p>").text(list[i].prof_career));
-				caption.append($("<p class='text-right' id='abc'></p>").text(list[i].prof_like +"❤"));
-				caption.append($("<p></p>").text(list[i].prof_time+"에 작성"));
+// 				caption.append($("<p class='text-right' id='abc'></p>").text(list[i].prof_like +"❤"));
+// 				caption.append($("<p></p>").text(list[i].prof_time+"에 작성"));
 				caption.append($("<p></p>").append($("<a href=\"/mate/accept?proj_no=" + proj_no + "&userno=" + list[i].userno + "\" class=\"btn btn-info\">수락</a> <a href=\"/mate/denied?proj_no=" + proj_no + "&userno=" + list[i].userno + "\"  class=\"btn btn-default\">거절</a>")));
 			
 				var board = $("<div class='col-sm-3 col-md-3 col-lg-4'></div>").append($("<div class='thumbnail'></div>").append(caption));
 				$("#showPeople").append(board);
-			}
+				}
 			
 			if (list.length < 1) {
-				$("#showPeople").html("신청 없음");
+				$("#showPeople").html("아직 팀장님의 신박한 프로젝트를 알아보는 사람이 없나봐요..😓");
 			}
 		
 		},
+			
 		error : function(e) {
 			console.log(e);
 		}
@@ -174,6 +182,9 @@ $(document).ready (function() {
 		  	<c:forEach items="${ waitTeamList }" var="list">
 			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
    			 </c:forEach>
+   			 <c:if test="${ empty waitTeamList }">
+   			 	<li class="list-group-item">신청한 프로젝트가 없습니다! 도전하세요!💪</li>
+   			 </c:if>
 		  </ul>
 		  
   	</div>

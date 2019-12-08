@@ -489,10 +489,10 @@ $(document).ready(function() {
 					<div class="col-lg-4">${list.proj_title}</div>
 					<div class="col-lg-4">${list.proj_progress}</div>
 					<div class="col-lg-4"><a class="btn btn-warning" href='/schedule/list?proj_no=${list.proj_no }' style="width: 45%;">일정</a>
-					<a href="/mate/list?proj_no=${list.proj_no }" class="btn btn-info" role="button" style="width: 45%;">팀원</a>
 					</div>
 				</div>
 			</c:forEach>
+					<a href="/mate/list" class="btn btn-info" role="button" style="width: 45%;">내 프로젝트 팀원관리</a>
 			
 		</div>
 		
