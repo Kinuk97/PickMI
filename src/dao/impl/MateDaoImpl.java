@@ -32,26 +32,53 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
+	
 	@Override
-	public ProjectBoard selectMyproject(Mate mate) {
+	public void inviteMate(Mate mate) {
+		String sql = "UPDATE mate SET mate = 3 WHERE proj_no = ? AND userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			ps.setInt(2, mate.getUserno());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+		
+	
+	@Override
+	public List<ProjectBoard> selectMyproject(Mate mate) {
 		String sql="";
-		sql += "SELECT userno, proj_no, proj_title, (select name from user_table where userno = ?)as username from projboard where userno=?";
-		ProjectBoard project = new ProjectBoard();
+		sql += "select distinct p.proj_no, p.proj_title, (SELECT name FROM user_table WHERE userno = p.userno) username FROM projboard p, mate m WHERE p.proj_no IN (SELECT proj_no FROM mate WHERE m.userno = ? AND m.mate = 2)";
+		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
 		
 		try {
 			ps= conn.prepareStatement(sql);
 			
 			ps.setInt(1, mate.getUserno());
-			ps.setInt(2, mate.getUserno());
 			
 			rs = ps.executeQuery();
 			
 			
 			while(rs.next()) {
-				project.setUserno(rs.getInt("userno"));
+				ProjectBoard project = new ProjectBoard();
+//				project.setUserno(rs.getInt("userno"));
 				project.setProj_no(rs.getInt("proj_no"));
 				project.setProj_title(rs.getString("proj_title"));
 				project.setUsername(rs.getString("username"));
+				
+				list.add(project);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +90,7 @@ public class MateDaoImpl implements MateDao {
 				e.printStackTrace();
 			}
 		}
-		return project;
+		return list;
 	}
 	
 	@Override

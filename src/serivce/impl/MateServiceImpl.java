@@ -33,7 +33,13 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
-	public ProjectBoard selectMyproject(Mate mate) {
+	public void inviteMate(Mate mate) {
+		mateDao.inviteMate(mate);
+		
+	}
+	
+	@Override
+	public List<ProjectBoard> selectMyproject(Mate mate) {
 		return mateDao.selectMyproject(mate);
 	}
 	
