@@ -62,6 +62,10 @@ public class MateListController extends HttpServlet {
 			List<Mate> list4 = mateService.appliedUser(mate);
 			//사용자 번호로 사용자들 조회하기
 			List<Mate> list5 = mateService.showUser(list4);
+			
+			
+			//나를 초대한 목록 보기
+			
 
 		
 
