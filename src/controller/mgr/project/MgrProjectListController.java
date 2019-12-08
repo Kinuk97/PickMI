@@ -33,7 +33,7 @@ public class MgrProjectListController extends HttpServlet {
 		if (req.getSession().getAttribute("mgrlogin") != null ) {
 		
 			//?���??��?��미터?��?�� curPage�? 구하�? Paging 객체 반환
-			Paging paging = projectBoardService.getPaging(req);
+			Paging paging = mgrService.getPaging(req, 2);
 			
 			// 검색어 파라미터
 			paging.setSearch(req.getParameter("search"));

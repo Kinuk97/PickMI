@@ -8,10 +8,7 @@
    
    <!-- 처음으로 가기 -->
    <c:if test="${paging.curPage ne 1 }">
-   <li><a href="${url }">&larr;처음</a></li>
-   </c:if>
-   <c:if test="${paging.curPage eq 1 }">
-	<li class="disabled"><a>&larr;맨앞</a></li>
+   <li><a href="${url }?/curPage=${paging.startPage}">&larr;처음</a></li>
    </c:if>
    <!-- 이전 페이징 리스트로 가기 -->
    <c:if test="${paging.startPage gt paging.pageCount }">
