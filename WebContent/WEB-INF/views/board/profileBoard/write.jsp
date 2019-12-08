@@ -64,16 +64,16 @@ text-align:center;
 								<option value="무직">무직</option>
 							</select>
 						</div>
-						<div class="col-sm-9 col-md-9 col-lg-10">
-					<label for="prof_state" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">상태 </label>
+						<div class="col-sm-9 col-md-9 col-lg-5">
+					<label for="prof_state" class="col-sm-1 col-md-1 col-lg-3 control-label" style="padding-top: 16px; text-align: center;">상태 </label>
 							<select name="prof_state">
 								<option value="구직중" selected>구직중</option>
 								<option value="재직중">재직중</option>
 								<option value="프리랜서">프리랜서</option>
 							</select>
 						</div>
-						<div class="col-sm-9 col-md-9 col-lg-10">
-					<label for="prof_career" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">경력 </label>
+						<div class="col-sm-9 col-md-9 col-lg-5">
+					<label for="prof_career" class="col-sm-1 col-md-1 col-lg-3 control-label" style="padding-top: 16px; text-align: center;">경력 </label>
 							<select name="prof_career">
 								<option value="1-2년차" selected>1-2년 차</option>
 								<option value="3-4년차">3-4년 차</option>
@@ -83,15 +83,15 @@ text-align:center;
 						</div>
 					</div>
 					<div class="col-sm-9 col-md-9 col-lg-10">
-						<label for="prof_content" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 16px; text-align: center;">내용 </label>
+<!-- 						<label for="prof_content" class="col-sm-1 col-md-1 col-lg-3 control-label" style="padding-top: 16px; text-align: center;"></label> -->
 						<textarea name="prof_content" id="prof_content"></textarea>
 					</div>
-				<div class="col-sm-9 col-md-9 col-lg-10">
-					<label>파일 : <input type="file" name="file" /></label>
+				<div class="col-sm-9 col-md-9 col-lg-5">
+					<input type="file" name="file" />
 				</div>
 		<div class="col-sm-offset-2 col-sm-8 text-center">
-			<button class="btn btn-info" id="write">작성완료</button>
-			<button class="btn btn-info" id="cancel">취소</button>
+			<button class="btn btn-default" id="write">작성완료</button>
+			<button class="btn btn-default" id="cancel">취소</button>
 		</div>
 	</form>
 </div>
