@@ -68,6 +68,9 @@ public class AlertDaoImpl implements AlertDao {
 		}
 		
 		return list;
+	}
+	
+	@Override
 	public int checkProfile(Alert alert) {
 		String sql="";
 		sql += "SELECT count(*) FROM profile where userno = ?";
