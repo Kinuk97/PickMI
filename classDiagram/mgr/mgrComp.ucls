@@ -1,413 +1,432 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="controller.Board.FreeBoard.FreeBoardDeleteController" project="PickMI" 
-    file="/PickMI/src/controller/Board/FreeBoard/FreeBoardDeleteController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="39" y="822"/>    
+  <class id="1" language="java" name="controller.mgr.comp.MgrCompBoardDeleteController" project="PickMI" 
+    file="/PickMI/src/controller/mgr/comp/MgrCompBoardDeleteController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1070" y="228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="controller.Board.FreeBoard.FreeBoardListController" project="PickMI" 
-    file="/PickMI/src/controller/Board/FreeBoard/FreeBoardListController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="38" y="97"/>    
+  <class id="2" language="java" name="controller.mgr.comp.MgrCompListController" project="PickMI" 
+    file="/PickMI/src/controller/mgr/comp/MgrCompListController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="291" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="controller.Board.FreeBoard.FreeBoardViewController" project="PickMI" 
-    file="/PickMI/src/controller/Board/FreeBoard/FreeBoardViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="38" y="279"/>    
+  <class id="3" language="java" name="controller.mgr.comp.MgrCompBoardViewController" project="PickMI" 
+    file="/PickMI/src/controller/mgr/comp/MgrCompBoardViewController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="682" y="225"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="controller.Board.FreeBoard.FreeBoardWriteController" project="PickMI" 
-    file="/PickMI/src/controller/Board/FreeBoard/FreeBoardWriteController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="40" y="460"/>    
+  <class id="4" language="java" name="controller.mgr.comp.MgrCompBoardReplyDelete" project="PickMI" 
+    file="/PickMI/src/controller/mgr/comp/MgrCompBoardReplyDelete.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="331" x="1398" y="138"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="controller.Board.FreeBoard.FreeBoardModifyController" project="PickMI" 
-    file="/PickMI/src/controller/Board/FreeBoard/FreeBoardModifyController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="39" y="640"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="6" language="java" name="serivce.face.FreeBoardService" project="PickMI" 
-    file="/PickMI/src/serivce/face/FreeBoardService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="666" y="241"/>    
+  <interface id="5" language="java" name="serivce.face.CompBoardService" project="PickMI" 
+    file="/PickMI/src/serivce/face/CompBoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="388" y="502"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="7" language="java" name="serivce.impl.FreeBoardServiceImpl.Singleton" project="PickMI" 
-    file="/PickMI/src/serivce/impl/FreeBoardServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="922" y="357"/>    
+  <interface id="6" language="java" name="serivce.face.MgrService" project="PickMI" 
+    file="/PickMI/src/serivce/face/MgrService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1372" y="496"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="8" language="java" name="serivce.impl.FreeBoardServiceImpl" project="PickMI" 
-    file="/PickMI/src/serivce/impl/FreeBoardServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="662" y="553"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="9" language="java" name="serivce.face.FileService" project="PickMI" 
+  </interface>  
+  <interface id="7" language="java" name="serivce.face.FileService" project="PickMI" 
     file="/PickMI/src/serivce/face/FileService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="665" y="842"/>    
+    <position height="-1" width="-1" x="914" y="488"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="10" language="java" name="serivce.impl.FileServiceImpl" project="PickMI" 
+  <class id="8" language="java" name="serivce.impl.FileServiceImpl" project="PickMI" 
     file="/PickMI/src/serivce/impl/FileServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="668" y="1173"/>    
+    <position height="-1" width="-1" x="925" y="898"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="serivce.impl.FileServiceImpl.Singleton" project="PickMI" 
+  <class id="9" language="java" name="serivce.impl.FileServiceImpl.Singleton" project="PickMI" 
     file="/PickMI/src/serivce/impl/FileServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="996" y="970"/>    
+    <position height="-1" width="-1" x="632" y="674"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="serivce.face.ReplyService" project="PickMI" 
+  <class id="10" language="java" name="serivce.impl.CompBoardServiceImpl" project="PickMI" 
+    file="/PickMI/src/serivce/impl/CompBoardServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="379" y="847"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="serivce.impl.MgrServiceImpl" project="PickMI" 
+    file="/PickMI/src/serivce/impl/MgrServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1375" y="896"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="serivce.impl.MgrServiceImpl.Singleton" project="PickMI" 
+    file="/PickMI/src/serivce/impl/MgrServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1628" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="13" language="java" name="serivce.face.ReplyService" project="PickMI" 
     file="/PickMI/src/serivce/face/ReplyService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="669" y="-382"/>    
+    <position height="-1" width="-1" x="1385" y="-49"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="13" language="java" name="serivce.impl.ReplyServiceImpl.Singleton" project="PickMI" 
+  <class id="14" language="java" name="serivce.impl.ReplyServiceImpl.Singleton" project="PickMI" 
     file="/PickMI/src/serivce/impl/ReplyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="958" y="-235"/>    
+    <position height="-1" width="-1" x="1563" y="-285"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="serivce.impl.ReplyServiceImpl" project="PickMI" 
+  <class id="15" language="java" name="serivce.impl.ReplyServiceImpl" project="PickMI" 
     file="/PickMI/src/serivce/impl/ReplyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="670" y="-56"/>    
+    <position height="-1" width="-1" x="1774" y="-47"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="15" language="java" name="dao.face.FreeBoardDao" project="PickMI" 
-    file="/PickMI/src/dao/face/FreeBoardDao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1200" y="550"/>    
+  <interface id="16" language="java" name="dao.face.CompBoardDao" project="PickMI" 
+    file="/PickMI/src/dao/face/CompBoardDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="375" y="1259"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="16" language="java" name="dao.impl.FreeBoardDaoImpl.Singleton" project="PickMI" 
-    file="/PickMI/src/dao/impl/FreeBoardDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1454" y="400"/>    
+  <class id="17" language="java" name="dao.impl.CompBoardDaoImpl" project="PickMI" 
+    file="/PickMI/src/dao/impl/CompBoardDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="871" y="1310"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="dao.impl.FreeBoardDaoImpl" project="PickMI" 
-    file="/PickMI/src/dao/impl/FreeBoardDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1197" y="207"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="18" language="java" name="dao.face.ReplyDao" project="PickMI" file="/PickMI/src/dao/face/ReplyDao.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1199" y="-93"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="19" language="java" name="dao.impl.ReplyDaoImpl" project="PickMI" 
-    file="/PickMI/src/dao/impl/ReplyDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1193" y="-414"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="20" language="java" name="dao.impl.ReplyDaoImpl.Singleton" project="PickMI" 
-    file="/PickMI/src/dao/impl/ReplyDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1452" y="-245"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="21" language="java" name="dao.face.FileDao" project="PickMI" file="/PickMI/src/dao/face/FileDao.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1213" y="1148"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="22" language="java" name="dao.impl.FileDaoImpl.Singleton" project="PickMI" 
+  <class id="18" language="java" name="dao.impl.FileDaoImpl.Singleton" project="PickMI" 
     file="/PickMI/src/dao/impl/FileDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1439" y="1015"/>    
+    <position height="-1" width="-1" x="1458" y="1277"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="dao.impl.FileDaoImpl" project="PickMI" 
+  <class id="19" language="java" name="dao.impl.FileDaoImpl" project="PickMI" 
     file="/PickMI/src/dao/impl/FileDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1212" y="847"/>    
+    <position height="-1" width="-1" x="1241" y="1424"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="24">    
+  <interface id="20" language="java" name="dao.face.FileDao" project="PickMI" file="/PickMI/src/dao/face/FileDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1236" y="1182"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="21" language="java" name="dao.face.ManagerDao" project="PickMI" 
+    file="/PickMI/src/dao/face/ManagerDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1773" y="938"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="dao.impl.ManagerDaoImpl.Singleton" project="PickMI" 
+    file="/PickMI/src/dao/impl/ManagerDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2048" y="1081"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="dao.impl.ManagerDaoImpl" project="PickMI" 
+    file="/PickMI/src/dao/impl/ManagerDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1774" y="1287"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="dao.face.ReplyDao" project="PickMI" file="/PickMI/src/dao/face/ReplyDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2111" y="-73"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="dao.impl.ReplyDaoImpl" project="PickMI" 
+    file="/PickMI/src/dao/impl/ReplyDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2115" y="264"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="dao.impl.ReplyDaoImpl.Singleton" project="PickMI" 
+    file="/PickMI/src/dao/impl/ReplyDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2362" y="73"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="27">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="25" name="freeBoardDao"/>      
-      <multiplicity id="26" minimum="0" maximum="1"/>    
+      <attribute id="28" name="compBoardDao"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="27">    
+  <realization id="30">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <nesting id="31">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <association id="32">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="33" name="compBoardService"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="36" name="fileService"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="39" name="replyService"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="42" name="compBoardService"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="44">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="45">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="46" name="instance"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="48">    
     <end type="SOURCE" refId="23"/>    
     <end type="TARGET" refId="21"/>  
   </realization>  
-  <association id="28">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="29" name="instance"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="32" name="freeBoardService"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="34">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="35" name="fileService"/>      
-      <multiplicity id="36" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="37">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="38" name="instance"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="41" name="replyService"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="43">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="20"/>  
-  </nesting>  
-  <association id="44">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="45" name="instance"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="48" name="fileDao"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="50">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="13"/>  
-  </nesting>  
-  <association id="51">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="52" name="replyDao"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="55" name="freeboardService"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="57">    
-    <end type="SOURCE" refId="14"/>    
+  <nesting id="49">    
+    <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="12"/>  
-  </realization>  
-  <realization id="58">    
+  </nesting>  
+  <nesting id="50">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <association id="51">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="52" name="instance"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="54">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <realization id="55">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="5"/>  
   </realization>  
-  <association id="59">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="60" name="fileService"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="63" name="freeBoardService"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="66" name="fileService"/>      
-      <multiplicity id="67" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="68">    
+  <nesting id="56">    
     <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="9"/>  
   </nesting>  
-  <association id="69">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="70" name="instance"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="72">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="16"/>  
-  </nesting>  
-  <association id="73">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="74" name="instance"/>      
-      <multiplicity id="75" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="76">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="77" name="instance"/>      
-      <multiplicity id="78" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="79">    
+  <realization id="57">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <nesting id="58">    
     <end type="SOURCE" refId="23"/>    
     <end type="TARGET" refId="22"/>  
   </nesting>  
-  <realization id="80">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="9"/>  
+  <realization id="59">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="24"/>  
   </realization>  
-  <association id="81">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="82" name="freeBoardService"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
+  <association id="60">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="61" name="replyDao"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="64" name="instance"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="84">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="85" name="fileService"/>      
-      <multiplicity id="86" minimum="0" maximum="1"/>    
+  <association id="66">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="67" name="compBoardService"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="87">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
+  <association id="69">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="70" name="fileService"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="72">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
   </realization>  
-  <association id="88">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="89" name="freeBoardDao"/>      
-      <multiplicity id="90" minimum="0" maximum="1"/>    
+  <association id="73">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="74" name="instance"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="91">    
-    <end type="SOURCE" refId="8"/>    
+  <association id="76">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="77" name="fileDao"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="80" name="compBoardDao"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="83" name="instance"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="86" name="instance"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="88">    
+    <end type="SOURCE" refId="11"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
-  <nesting id="92">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="11"/>  
-  </nesting>  
+  <association id="89">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="90" name="managerDao"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

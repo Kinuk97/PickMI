@@ -90,9 +90,8 @@
 			
 		</table>
 	</div>
-				<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
-   					<c:param name="url" value="${url }" />
-				</c:import>
+		<jsp:include page = "/WEB-INF/views/layouts/paging.jsp" />
+
 			
 </div> <!-- container -->
 

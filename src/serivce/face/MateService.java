@@ -11,6 +11,12 @@ import dto.User;
 
 public interface MateService {
 	/**
+	 * 사용자가 가지고 있는 프로젝트번호 조회
+	 * @param mate
+	 * @return
+	 */
+	public ProjectBoard selectMyproject(Mate mate);
+	/**
 	 * 사용자의 프로필이 없는 경우를 위해 이름만 조회
 	 * @param mate
 	 * @return

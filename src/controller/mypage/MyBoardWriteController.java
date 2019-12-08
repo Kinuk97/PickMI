@@ -49,7 +49,7 @@ public class MyBoardWriteController extends HttpServlet {
 		req.setAttribute("pfpaging", pfpaging);
 		req.setAttribute("pjpaging", pjpaging);
 		req.setAttribute("comppaging", comppaging);
-		req.setAttribute("freepaging", freepaging);
+		req.setAttribute("paging", freepaging);
 		
 		req.setAttribute("url", req.getRequestURL());
 
@@ -73,24 +73,12 @@ public class MyBoardWriteController extends HttpServlet {
 			}
 		}
 		
-//		// Profile List 목록 조회
-//		List<ProfileBoard> pflist = myPageService.getpfList(pfpaging, user);
-//		
-//		// Project List 목록 조회
-//		List<ProjectBoard> pjlist = myPageService.getpjList(pjpaging, user);
-//		
-//		// Comp List 목록 조회
-//		List<CompBoard> complist = myPageService.getcompList(comppaging, user);
-//		
-//		// Free List 목록 조회
-//		List<FreeBoard> freelist = myPageService.getfreeList(freepaging, user);
-		
 		req.setAttribute("pflist", map.get(1));
 		req.setAttribute("pjlist", map.get(2));
 		req.setAttribute("complist", map.get(3));
 		req.setAttribute("freelist", map.get(4));
 		
-		req.getRequestDispatcher("/WEB-INF/views/mypage/myboard/myboardwrite.jsp")
+		req.getRequestDispatcher("/WEB-INF/views/mypage/myboardwrite.jsp")
 		.forward(req, resp);	
 	}
 }

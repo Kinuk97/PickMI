@@ -258,7 +258,7 @@ public class MyPageDaoImpl implements MyPageDao{
 		sql += "	WHERE userno = ?";
 		
 		int userno = Integer.parseInt((req.getSession().getAttribute("userno").toString()));
-		System.out.println("마이페이지 씨엔티 올 : " + userno);
+//		System.out.println("cntall메소드 usreno : " + userno);
 		int cnt = 0;
 		
 		try {
@@ -451,7 +451,10 @@ public class MyPageDaoImpl implements MyPageDao{
 
 	@Override
 	public List likeboard(Paging paging, User user, int i) {
-
+		
+//		System.out.println("찜한게시글 DAOIMPL 매개변수 잘받아오는지 paging : " + paging);
+//		System.out.println("찜한게시글 DAOIMPL 매개변수 잘받아오는지 user : " + user);
+		
 		conn = DBConn.getConnection();
 
 		String sql = "";
@@ -471,7 +474,7 @@ public class MyPageDaoImpl implements MyPageDao{
 			sql += "  select rownum rnum, B.* FROM(";
 			sql += "   select P.* from likepost L, projboard P";
 			sql += "	where L.boardno = P.proj_no";
-			sql += "	and L.postno = 2 and P.userno = ?"	;		
+			sql += "	and L.postno = 2 and L.userno = ?"	;		
 			sql += "   order by proj_no desc";
 			sql += "  ) B";
 			sql += "  ORDER BY rnum";
@@ -482,7 +485,7 @@ public class MyPageDaoImpl implements MyPageDao{
 			sql += "  select rownum rnum, B.* FROM(";
 			sql += "   select C.* from likepost L, compboard C";
 			sql += "	where L.boardno = C.comp_no";
-			sql += "	and L.postno = 3 and L.userno = ?"	;		
+			sql += "	and L.postno = 4 and L.userno = ?"	;		
 			sql += "   order by comp_no desc";
 			sql += "  ) B";
 			sql += "  ORDER BY rnum";
@@ -548,7 +551,6 @@ public class MyPageDaoImpl implements MyPageDao{
 					//					compBoard.setRownum( rs.getInt("rnum"));
 					compBoard.setComp_no( rs.getInt("comp_no") );
 					compBoard.setUserno( rs.getInt("userno") );
-					compBoard.setUsername( rs.getString("username"));
 					compBoard.setComp_title( rs.getString("comp_title") );
 					compBoard.setComp_name( rs.getString("comp_name") );
 					compBoard.setComp_content( rs.getString("comp_content") );
@@ -576,7 +578,8 @@ public class MyPageDaoImpl implements MyPageDao{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}	
+		}
+//		System.out.println("찜한 게시판 최종 list : " + list);
 		return list;
 	}
 	
@@ -638,9 +641,9 @@ public class MyPageDaoImpl implements MyPageDao{
 					reply.setReply(rs.getString("reply"));
 					reply.setReplytime(rs.getDate("reply_time"));
 					list.add(compBoard);
-					System.out.println("MyPageDaoIMPL완성된게시판정보 : " + compBoard);
+//					System.out.println("MyPageDaoIMPL완성된게시판정보 : " + compBoard);
 					list.add(reply);
-					System.out.println("MyPageDaoIMPL완성된게시판댓글 정보 : " + reply);
+//					System.out.println("MyPageDaoIMPL완성된게시판댓글 정보 : " + reply);
 					
 
 				}
@@ -658,7 +661,7 @@ public class MyPageDaoImpl implements MyPageDao{
 					freeBoard.setViews(rs.getInt("views"));
 
 //					System.out.println("while --");
-					System.out.println(freeBoard);
+//					System.out.println(freeBoard);
 					list.add(freeBoard);
 
 				}
@@ -678,7 +681,7 @@ public class MyPageDaoImpl implements MyPageDao{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("최종 댓글 리스트 : " + list);
+//		System.out.println("최종 댓글 리스트 : " + list);
 		
 		return list;
 		

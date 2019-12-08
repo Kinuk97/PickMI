@@ -16,85 +16,8 @@
 
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
-<script type="text/javascript">
 
-var curPage = "${paging.curPage}";
 
-function loadReply(curPage) {
-	$.ajax({
-		type : "post",
-		url : "/freeboard/reply/list",
-		data : { "curPage" : curPage, "free_no" : "${board.free_no}" },
-		dataType : "json",
-		success : function(data) {
-			var paging = data.paging;
-			var replyList = data.replyList;
-			
-			$("#reply").html("");
-
-			
-			if (replyList.length != 0) {
-				// 페이징 생성하는 스크립트
-				var pagingUl = $("<ul class='pagination pagination-sm'></ul>");
-				
-				// 맨앞 생성
-				if (paging.curPage != 1) {
-					pagingUl.append($("<li data-page='first'><a>&larr;맨앞</a></li>"))
-				}
-				
-				// 이전 페이징 리스트로 가기
-				if (paging.startPage > paging.pageCount) {
-					pagingUl.append($("<li data-page='prev'><a>&laquo;이전</a></li>"))
-				}
-				
-				// 페이징 리스트
-				for (i = paging.startPage; i <= paging.endPage; i++) {
-					if (paging.curPage == i) {
-						pagingUl.append($("<li class='active'><a>" + i + "</a></li>"))
-					} else {
-						pagingUl.append($("<li data-page='page'><a>" + i + "</a></li>"))
-					}
-				}
-				
-				// 다음 페이징 리스트 생성
-				if (paging.endPage != paging.totalPage) {
-					pagingUl.append($("<li data-page='next'><a>다음&raquo;</a></li>"))
-				}
-				
-				// 맨뒤
-				if (paging.curPage != paging.totalPage) {
-					pagingUl.append($("<li data-page='end'><a>맨뒤&rarr;</a></li>"))
-				}
-				
-				// 본문에 넣기
-				$(".container > #paging").html(pagingUl);
-				
-				// 이벤트 추가
-				$("li[data-page='first']").on("click", function() {
-					loadReply(1);
-					curPage = 1;
-				});
-				$("li[data-page='prev']").on("click", function() {
-					loadReply(paging.startPage - paging.pageCount);
-					curPage = paging.startPage - paging.pageCount;
-				});
-				$("li[data-page='page']").on("click", function() {
-					loadReply($(this).text());
-					curPage = $(this).text();
-				});
-				$("li[data-page='next']").on("click", function() {
-					loadReply(paging.startPage + paging.pageCount);
-					curPage = paging.startPage + paging.pageCount;
-				});
-				$("li[data-page='end']").on("click", function() {
-					loadReply(paging.totalPage);
-					curPage = paging.totalPage;
-				});
-			}
-			
-		}
-	}
-</script>
 
 <style type="text/css">
 
@@ -171,8 +94,10 @@ function loadReply(curPage) {
 		</table>
 	</div>
 	
-	<div id="paging" class="text-center"></div>
-	
+	<jsp:include page = "/WEB-INF/views/layouts/paging.jsp" />
+<%-- 			<c:import url="/WEB-INF/views/mypage/paging.jsp"> --%>
+<%-- 			<c:param name="url" value="${url }" /> --%>
+<%-- 			</c:import> --%>
 </div> <!-- container -->
 
 

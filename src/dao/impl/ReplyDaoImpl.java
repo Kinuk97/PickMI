@@ -256,7 +256,7 @@ public class ReplyDaoImpl implements ReplyDao {
 			
 			sql += "select * from (";
 			sql += "  select rownum rnum, B.* FROM(";
-			sql += "   select R.*, C.comp_no from reply R, compboard C";
+			sql += "   select R.* from reply R, compboard C";
 			sql += "	where r.boardno = c.comp_no";
 			sql += "	and r.postno = 4 and r.userno = ?"	;		
 			sql += "   order by replyno desc";
@@ -268,7 +268,7 @@ public class ReplyDaoImpl implements ReplyDao {
 			
 			sql += "select * from (";
 			sql += "  select rownum rnum, B.* FROM(";
-			sql += "   select R.*  from reply R, freeboard F";
+			sql += "   select R.* from reply R, freeboard F";
 			sql += "	where r.boardno = f.free_no";
 			sql += "	and r.postno = 3 and r.userno = ?"	;		
 			sql += "   order by replyno desc";
@@ -281,7 +281,6 @@ public class ReplyDaoImpl implements ReplyDao {
 		}
 
 		List<Reply> list = new ArrayList<Reply>();
-		List list1 = new ArrayList();
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -304,6 +303,7 @@ public class ReplyDaoImpl implements ReplyDao {
 					rstReply.setPostno(rs.getInt("postno"));
 					list.add(rstReply);
 				}
+				
 			} else if (i == 2 ) {
 					
 				while (rs.next()) {

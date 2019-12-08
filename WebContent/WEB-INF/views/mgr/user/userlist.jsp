@@ -67,7 +67,7 @@ $(document).ready(function(){
 <!-- 	</div> -->
 	
 	<div class="innercon2">
-		<form action="/mgr/profileboard/delete" method="get">
+		<form action="/mgr/user/delete" method="get">
 			<table class="table table-hover">
 				<thead>
 				<tr class = "info"  >
@@ -93,7 +93,7 @@ $(document).ready(function(){
 			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
 		<div class="src" style="text-align: right;">
-			<form action="/mgr/profilelist" method="get">
+			<form action="/mgr/userlist" method="get">
 			<input type="text" name="search" id="search"/>
 			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
 			</form>
