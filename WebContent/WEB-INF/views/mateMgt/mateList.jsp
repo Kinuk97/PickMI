@@ -10,6 +10,54 @@
 <script src="/resources/js/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
+function myTeamMateList(proj_no) {
+	
+
+	$.ajax({
+		type : "post",
+		url : "/mate/mymate",
+		data : { "proj_no" : proj_no },
+		dataType : "text",
+		success : function(data) {
+			$("#showPeople").html("");
+			var list = JSON.parse(data);
+// 			var list1 = {"myTeamList" : data.myTeamList};
+// 			var list2 = {"onlyName" : data.onlyName};
+// 			console.log(list2);
+// 			console.log(list2);
+// 			$("#myTeamMateCaption")
+			
+			for (var i = 0; i < list.length; i++) {
+				
+				var caption = $("<div class='caption caption-profile' onclick=\"location.href='/profileBoard/view?prof_no="+list[i].prof_no +"'\" style='height: 300px;'\"></div>");
+				
+				caption.append($("<h4></h4>").text(list[i].username));
+				caption.append($("<p></p>").text(list[i].prof_interest));
+				caption.append($("<p></p>").text(list[i].prof_loc));
+				caption.append($("<p></p>").text(list[i].prof_job));
+				caption.append($("<p></p>").text(list[i].prof_state));
+				caption.append($("<p id='abc'></p>").text(list[i].prof_career));
+// 				caption.append($("<p class='text-right' id='abc'></p>").text(list[i].prof_like +"❤"));
+// 				caption.append($("<p></p>").text(list[i].prof_time+"에 작성"));
+				caption.append($("<p></p>").append($("<a href=\"/mate/accept?proj_no=" + proj_no + "&userno=" + list[i].userno + "\" class=\"btn btn-info\">수락</a> <a href=\"/mate/denied?proj_no=" + proj_no + "&userno=" + list[i].userno + "\"  class=\"btn btn-default\">거절</a>")));
+			
+				var board = $("<div class='col-sm-3 col-md-3 col-lg-4'></div>").append($("<div class='thumbnail'></div>").append(caption));
+				$("#showPeople").append(board);
+				}
+			
+			if (list.length < 1) {
+				$("#showPeople").html("아직 팀장님의 신박한 프로젝트를 알아보는 사람이 없나봐요..😓");
+			}
+		
+		},
+			
+		error : function(e) {
+			console.log(e);
+		}
+	});
+	
+}
+
 $(document).ready (function() {
 	
 	$('.startmodal').click(function(){
@@ -29,19 +77,7 @@ $(document).ready (function() {
 	}); /* 첫번째 모달 끝 */
 	
 	$('.showUsers').click(function() {
-		var proj_no = $(this).data("proj_no");
-		$.ajax({
-			type : "get",
-			url : "/mate/list",
-			data : {
-				"proj_no" : proj_no
-			},
-			dataType : "html",
-			success : function(data) {
-				console.log('신청자보기');
-				$('#showPeople').html(data);
-			}
-		})
+		myTeamMateList($(this).data("proj_no"));
 	}); /* 두번째모달 끝 */
 	
 })
@@ -107,34 +143,22 @@ $(document).ready (function() {
     		<p><a href="/projectBoard/view?proj_no=${ list.proj_no }">${ list.proj_title }</a></p>
 		<!-- 신청자보기 모달 -->
 		<!-- Button trigger modal -->
-			<button data-proj_no="${ list.proj_no }" id="showUsers" type="button" class="btn btn-info" data-toggle="modal" data-target="#showApplied">
+			<button data-proj_no="${ list.proj_no }" id="showUsers" type="button" class="btn btn-info showUsers" data-toggle="modal" data-target="#showApplied">
 			  신청자 보기
 			</button>
 			</c:forEach>
 			
 			<!-- Modal -->
 			<div class="modal fade" id="showApplied" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
+			  <div class="modal-dialog" style="width: 80%;">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title" id="myModalLabel">신청자 현황</h4>
 			      </div>
 			      <div class="modal-body" id="showPeople">
-			        	<!-- 썸네일 -->
-						<div class="row">
-						  <div class="col-sm-6 col-md-4">
-						    <div class="thumbnail">
-						      <div class="caption">
-						        <h3>${ list.username }</h3>
-						        <p>...</p>
-						        <p><a href="#" class="btn btn-info" role="button">수락</a> <a href="#" class="btn btn-default" role="button">거절</a></p>
-						      </div>
-						    </div>
-						  </div>
-						</div>
 					</div>
-			      </div>
+					<div style="clear: both;"></div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			      </div>
@@ -158,11 +182,26 @@ $(document).ready (function() {
 		  	<c:forEach items="${ waitTeamList }" var="list">
 			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
    			 </c:forEach>
+   			 <c:if test="${ empty waitTeamList }">
+   			 	<li class="list-group-item">신청한 프로젝트가 없습니다! 도전하세요!💪</li>
+   			 </c:if>
 		  </ul>
 		  
   	</div>
 </div>
-
+<!-- 나에게 들어온 초대 신청 -->
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+	<div class="panel-heading">나에게 온 초대 현황</div>
+		<div class="panel-body">
+		  <ul class="list-group">
+		  	<c:forEach items="${ waitTeamList }" var="list">
+			    <li class="list-group-item"><a href="/projectBoard/view?proj_no=${ list.proj_no}">${ list.proj_title }</a> 아직 기다리고 있어요!😅</li>
+   			 </c:forEach>
+		  </ul>
+		  
+  	</div>
+</div>
 
 
 

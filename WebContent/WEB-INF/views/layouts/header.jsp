@@ -520,15 +520,15 @@ a#top {
 .badge {
     display: inline;
     min-width: 10px;
-    padding: 4px 7px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1;
     color: #fff;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    background-color: #325adc;
+    background-color: #0d95ff;
     border-radius: 10px;
    	float: right;
 }
@@ -538,8 +538,8 @@ a#top {
 }
 
 #badge {
-	margin-top: 1px;
-	margin-left:5px;
+	margin-top: 0px;
+	margin-left:2px;
 }
 
 .btn-reply {
@@ -775,10 +775,11 @@ a#top {
 <!-- 								<button class="btn btn-default dropdown-toggle" type="button" -->
 <!-- 									id="btnAlertList" data-toggle="dropdown" aria-expanded="true"> -->
 <!-- 									Alert  -->
-								<img src="/resources/alerticon.png" type="button" id="btnAlertList" data-toggle="dropdown" aria-expanded="true" style="width:44px;"><span class="badge" id="badge">7</span>
+								<img src="/resources/alerticon.png" id="btnAlertList" data-toggle="dropdown" aria-expanded="true" style="width:44px;">
+									<span class="badge" id="badge">!</span>
 <!-- 								</button> -->
 								
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;" id="alertList">
 								
 									<li class="close" style="width: 25px;">x</li>
 								
@@ -806,7 +807,7 @@ a#top {
 <!-- 									id="btnMessageList" data-toggle="dropdown" aria-expanded="true"> -->
 <!-- 									Message -->
 								<img src="/resources/messageicon.png" type="button" id="btnMessageList" data-toggle="dropdown" aria-expanded="true" style="width:50px;"> 
-								<span class="badge" id="badge">5</span>
+								<span class="badge" id="badge">!</span>
 <!-- 								</button> -->
 								
 <!-- 								메세지 목록 -->
@@ -821,6 +822,7 @@ a#top {
 <!-- 										</a> -->
 <!-- 									</li> -->
 <!-- 								</ul> -->
+
 
 
 								<div class="dropdown-menu" id="msgscroll" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">

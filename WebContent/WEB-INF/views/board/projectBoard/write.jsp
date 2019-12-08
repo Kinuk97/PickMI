@@ -50,7 +50,7 @@
 		<div class="form-group">
 			<label for="proj_title"
 				class="col-sm-1 col-md-1 col-lg-1 control-label"
-				style="padding-top: 10px; text-align: center;">프로젝트제목</label>
+				style="padding-top: 10px; text-align: center;">프로젝트 제목</label>
 			<div class="col-sm-9 col-md-9 col-lg-10">
 				<input type="text" class="form-control" id="comp_title"
 					placeholder="제목을 입력하세요" name="proj_title" maxlength="120">
@@ -60,7 +60,7 @@
 		<div class="form-group">
 			<label for="comp_name"
 				class="col-sm-1 col-md-1 col-lg-1 control-label"
-				style="padding-top: 16px; text-align: center;">프로젝트이름 </label>
+				style="padding-top: 16px; text-align: center;">프로젝트 이름 </label>
 			<div class="col-sm-9 col-md-9 col-lg-10">
 				<input type="text" class="form-control" id="proj_name"
 					placeholder="프로젝트 이름을 입력하세요" name="proj_name" maxlength="120">
@@ -81,13 +81,13 @@
 
 		<div class="form-group">
 			<label class="col-sm-1 col-md-1 col-lg-1 control-label"
-				style="padding-top: 16px; text-align: center;">프로젝트시작날짜</label>
+				style="padding-top: 8px; text-align: center;">프로젝트 시작날짜</label>
 			<div class="col-sm-9 col-md-9 col-lg-2">
 				<input type="date" class="form-control" id="proj_sdate"
 					name="proj_sdate">
 			</div>
 			<label class="col-sm-1 col-md-1 col-lg-1 control-label"
-				style="padding-top: 16px; text-align: center;">프로젝트마감날짜</label>
+				style="padding-top: 8px; text-align: center;">프로젝트 마감날짜</label>
 			<div class="col-sm-9 col-md-9 col-lg-2">
 				<input type="date" class="form-control" id="proj_ddate"
 					name="proj_ddate">

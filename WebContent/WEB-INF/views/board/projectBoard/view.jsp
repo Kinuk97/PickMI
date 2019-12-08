@@ -107,17 +107,20 @@ function like(data) {
 	
 	//팀참가 신청 버튼 눌르면 알림
 	$("#invite").click( function(data){
-		if( data.waiting == true) {
-			alert("이미 신청 하신 프로젝트 입니다!");
-		} else if ( data.already == true) {
-			alert("이미 가입되어 있는 프로젝트 입니다!");
-		} else if ( data.leader == true) {
-			alert ("당신은 팀장입니다!");
-		} else {
 		alert("팀 참가 신청 되었습니다!");
-			
-		}
-		})		
+		});
+	$("#cant").click(function() {
+		alert("프로필 게시판에 먼저 등록해주세요!");
+	});
+	$("#cant1").click(function() {
+		alert("이미 가입하신 프로젝트 입니다!");
+	});
+	$("#cant2").click(function() {
+		alert("당신은 이 프로젝트의 팀장입니다!");
+	});
+	$("#cant3").click(function() {
+		alert("이미 참가신청 하셨어요! 답변을 기다려주세요!");
+	});
 	
 	
 });
@@ -234,14 +237,58 @@ function like(data) {
 			<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		<button id="btnList" class="btn btn-primary">목록</button>
-
-		<a id="invite"
-			href="/alert/fromproject?proj_no=${projectBoard.proj_no}"
-			role="button" class="btn btn-info"
-			data-proj_no="${ projectBoard.proj_no }"
-			data-userno="${ projectBoard.userno }"
-			style = "margin-top : 9px;">팀 참가 신청하기💌
-			</a>
+		<c:if test="${ login }">
+		<c:choose>
+			<c:when test="${ !checkprofile }">
+				<a id="cant"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }"
+				data-userno="${ projectBoard.userno }"
+				style = "margin-top : 9px;">팀 참가 신청하기💌
+				</a>
+			</c:when>
+		<c:otherwise>
+				<c:choose>
+				<c:when test="${ already }">
+					<a id="cant1"
+					role="button" class="btn btn-info"
+					data-proj_no="${ projectBoard.proj_no }"
+					data-userno="${ projectBoard.userno }"
+					style = "margin-top : 9px;">팀 참가 신청하기💌
+					</a>
+				</c:when>
+				<c:when test="${ leader }">
+					<a id="cant2"
+					role="button" class="btn btn-info"
+					data-proj_no="${ projectBoard.proj_no }"
+					data-userno="${ projectBoard.userno }"
+					style = "margin-top : 9px;">팀 참가 신청하기💌
+					</a>
+				</c:when>
+				<c:when test="${ waiting }">
+					<a id="cant3"
+					role="button" class="btn btn-info"
+					data-proj_no="${ projectBoard.proj_no }"
+					data-userno="${ projectBoard.userno }"
+					style = "margin-top : 9px;">팀 참가 신청하기💌
+					</a>
+				</c:when>
+			<c:otherwise>
+<%-- 				<c:if test="${ checkprofile }"> --%>
+				<a id="invite"
+				href="/alert/fromproject?proj_no=${projectBoard.proj_no}"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }"
+				data-userno="${ projectBoard.userno }"
+				style = "margin-top : 9px;">팀 참가 신청하기💌
+				</a>
+<%-- 				</c:if> --%>
+			</c:otherwise>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
+		</c:if>
+	
 
 	</div>
 </div>

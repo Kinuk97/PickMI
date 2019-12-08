@@ -10,8 +10,9 @@ import java.util.List;
 import dao.face.MateDao;
 import dbutil.DBConn;
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
-import sun.java2d.cmm.Profile;
+import dto.User;
 
 public class MateDaoImpl implements MateDao {
 	
@@ -31,11 +32,90 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
+	
 	@Override
-	public List<Mate> showUser(List<Mate> list4) {
+	public int countProfile(Mate mate) {
 		String sql="";
-//		sql += "SELECT p.prof_no, p."
-		return null;
+//		sql += "SELECT count(*) FROM profile where userno IN "
+		return 0;
+	}
+	@Override
+	public List<User> showUserName(Mate mate) {
+		String sql="";
+		sql += "SELECT name from user_table where userno IN (SELECT userno FROM mate WHERE proj_no = ? AND mate = 0)";
+		List<User> list = new ArrayList<User>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				User temp = new User();
+				
+				temp.setName(rs.getString("name"));
+				
+				list.add(temp);
+//				System.out.println("matedaoimpl : " + list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<ProfileBoard> showUser(Mate mate) {
+		String sql="";
+		sql += "SELECT p.*, (SELECT name FROM user_table WHERE userno = p.userno) username FROM profile p WHERE userno IN (SELECT userno FROM mate WHERE proj_no = ? AND mate = 0)";
+		
+		List<ProfileBoard> list = new ArrayList<ProfileBoard>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProfileBoard temp = new ProfileBoard();
+				
+				temp.setProf_no(rs.getInt("prof_no"));
+				temp.setUserno(rs.getInt("userno"));
+				temp.setProf_interest(rs.getString("prof_interest"));
+				temp.setProf_loc(rs.getString("prof_loc"));
+				temp.setProf_job(rs.getString("prof_job"));
+				temp.setProf_state(rs.getString("prof_state"));
+				temp.setProf_career(rs.getString("prof_career"));
+				temp.setProf_content(rs.getString("prof_content"));
+				temp.setProf_like(rs.getInt("prof_like"));
+				temp.setProf_time(rs.getDate("prof_time"));
+				temp.setUsername(rs.getString("username"));
+				
+				list.add(temp);
+//				System.out.println("matedaoimpl : " + list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
 	}
 	@Override
 	public List<Mate> selectUsers(Mate mate) {
@@ -216,6 +296,40 @@ public class MateDaoImpl implements MateDao {
 			ps = conn.prepareStatement(sql); //쿼리 수행 객체 얻기
 			
 			ps.setInt(1, mate.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next() ) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	@Override
+	public int countProjectLeader(Mate mate) {
+		String sql = "";
+		sql += "SELECT count(*) FROM mate";
+		sql += " WHERE proj_no = ?";
+		sql += " AND userno = ? AND mate = 2";
+		
+		//결과 저장 리스트
+		int cnt = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //쿼리 수행 객체 얻기
+			
+			ps.setInt(1, mate.getProj_no());
+			ps.setInt(2, mate.getUserno());
 			
 			rs = ps.executeQuery();
 			
@@ -450,6 +564,29 @@ public class MateDaoImpl implements MateDao {
 		}
 		
 		return list;
+	}
+	
+	@Override
+	public void updateMate(Mate mate) {
+		String sql = "UPDATE mate SET mate = 1 WHERE proj_no = ? AND userno = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			ps.setInt(2, mate.getUserno());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

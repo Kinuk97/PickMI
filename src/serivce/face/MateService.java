@@ -5,15 +5,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
 
 public interface MateService {
+	/**
+	 * 사용자의 프로필이 없는 경우를 위해 이름만 조회
+	 * @param mate
+	 * @return
+	 */
+	public List<User> showUserName(Mate mate);
 	/**
 	 * 사용자들 프로필 조회
 	 * @param list4
 	 * @return
 	 */
-	public List<Mate> showUser(List<Mate> list4);
+	public List<ProfileBoard> showUser(Mate mate);
 	/**
 	 * 참가 신청 한 사용자들의 정보를 불러온다
 	 * @param mate
@@ -38,11 +46,19 @@ public interface MateService {
 	 */
 	public void wantToJoin(Mate mate);
 	/**
-	 * 팀장인지 아닌지 확인하기
+	 * 내가 팀장인 프로젝트가 있는지 확인하기
 	 * @param mate
 	 * @return
 	 */
 	public boolean checkLeader(Mate mate);
+	
+	/**
+	 * 내가 이 프로젝트의 팀장인지 확인
+	 * 
+	 * @return
+	 */
+	public boolean countProjectLeader(Mate mate);
+	
 	/**
 	 * mate테이블에서 유저 삭제하기
 	 * @param mate
@@ -77,7 +93,7 @@ public interface MateService {
 	 * @param mate
 	 * @return
 	 */
-	public Mate addMate(Mate mate);
+	public void addMate(Mate mate);
 
 	/**
 	 * 팀관리 리스트들을 가져온다

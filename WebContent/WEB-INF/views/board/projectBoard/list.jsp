@@ -34,7 +34,7 @@
 						caption.append($("<p></p>").text("진행상황 : " + data[i].proj_progress));
 						
 						caption.append($("<p class='text-right'></p>").text(data[i].proj_like + "💙"));
-						caption.append($("<p class='text-right'></p>").text("신청수 : "+data[i].proj_apply));
+						caption.append($("<p class='text-right'></p>").text("작성자 : "+data[i].username));
 						caption.append($("<p class='text-right'></p>").text(data[i].proj_time));
 						
 					

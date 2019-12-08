@@ -3,11 +3,25 @@ package dao.face;
 import java.util.List;
 
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
 
 public interface MateDao {
+	/**
+	 * 사용자의 프로필이 있는지 확인한다
+	 * @param mate
+	 * @return
+	 */
+	public int countProfile(Mate mate);
+	/**
+	 * 사용자의 프로필이 없는 경우를 위해 이름만 조회
+	 * @param mate
+	 * @return
+	 */
+	public List<User> showUserName(Mate mate);
 	
-	public List<Mate> showUser(List<Mate> list4);
+	public List<ProfileBoard> showUser(Mate	mate);
 	/**
 	 * 가입 신청한 사용자 정보 불러오기
 	 * @param mate
@@ -86,5 +100,20 @@ public interface MateDao {
 	 * @return
 	 */
 	List<ProjectBoard> myProjectList(Mate mate);
+	
+	/**
+	 * 팀원초대 수락
+	 * 
+	 * @param mate
+	 */
+	public void updateMate(Mate mate);
+	
+	/**
+	 * 내가 이 프로젝트의 팀장인지 확인하는 메소드
+	 * 
+	 * @param mate
+	 * @return
+	 */
+	public int countProjectLeader(Mate mate);
 
 }

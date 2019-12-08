@@ -49,7 +49,7 @@ public class MateViewController extends HttpServlet {
 			System.out.println("로그인 안했음");
 		}
 		
-		boolean checkLeader = mateService.checkLeader(mate);
+		boolean checkLeader = mateService.countProjectLeader(mate);
 		
 		if(checkLeader) {
 			req.setAttribute("leader", true);

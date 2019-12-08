@@ -9,14 +9,17 @@ import dao.face.ProfileBoardDao;
 import dao.impl.MateDaoImpl;
 import dao.impl.ProfileBoardDaoImpl;
 import dto.Mate;
+import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
+import serivce.face.AlertService;
 import serivce.face.MateService;
 import sun.java2d.cmm.Profile;
 
 public class MateServiceImpl implements MateService {
 	
 	private MateDao mateDao = MateDaoImpl.getInstance();
-	private ProfileBoardDao profileDao = ProfileBoardDaoImpl.getInstance();
+
 	
 	public MateServiceImpl() {
 		
@@ -31,9 +34,15 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
-	public List<Mate> showUser(List<Mate> list4) {
+	public List<User> showUserName(Mate mate) {
+		return mateDao.showUserName(mate);
+	}
+	
+	@Override
+	public List<ProfileBoard> showUser(Mate mate) {
 		
-		return mateDao.showUser(list4);
+		
+		return mateDao.showUser(mate);
 	}
 	
 	@Override
@@ -82,6 +91,16 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public boolean countProjectLeader(Mate mate) {
+		int cnt = mateDao.countProjectLeader(mate);
+		
+		if ( cnt > 0 ) {
+			return true; //팀장인 유저
+			}
+		return false; //팀장이 아님
+	}
+	
+	@Override
 	public void removeUserFromTeam(Mate mate) {
 		mateDao.deleteUserFromTeam(mate);
 	}
@@ -103,9 +122,8 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
-	public Mate addMate(Mate mate) {
-		// TODO Auto-generated method stub
-		return null;
+	public void addMate(Mate mate) {
+		mateDao.updateMate(mate);
 	}
 	
 	@Override
