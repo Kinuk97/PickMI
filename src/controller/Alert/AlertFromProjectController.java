@@ -51,15 +51,20 @@ public class AlertFromProjectController extends HttpServlet {
 		alert.setUserno(projectBoard.getUserno());
 		alert.setAlert("팀원이 되고싶어요!");
 		mate.setProj_no(projectBoard.getProj_no());
+		//프로필 게시판에 글을 쓴 적이 있는지 확인하기
+		int checkprofile = alertService.checkProfile(alert);
+		
+		if( checkprofile > 0 ) {
+		
 		//기존에 참가 신청을 했는지 확인하기
 		int check = mateService.checkJoin(mate);
 //		System.out.println(check);
 		if(check == 0) {
 			req.setAttribute("waiting", true);
 			//알림테이블에 저장하기
-			alertService.sendInvite(alert);
+//			alertService.sendInvite(alert);
 			//팀원관리 테이블에 저장하기
-			mateService.wantToJoin(mate);
+//			mateService.wantToJoin(mate);
 		} else if (check == 1) {
 			req.setAttribute("already", true);
 		} else if( check ==2 ) {
@@ -70,7 +75,9 @@ public class AlertFromProjectController extends HttpServlet {
 			//팀원관리 테이블에 저장하기
 			mateService.wantToJoin(mate);
 		}
-		
+		} else {
+			req.setAttribute("checkprofile", false);
+		}
 		
 //		System.out.println(req.getParameter("proj_no"));
 		resp.sendRedirect("/projectBoard/view?proj_no="+req.getParameter("proj_no"));
