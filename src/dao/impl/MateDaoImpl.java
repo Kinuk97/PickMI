@@ -62,7 +62,7 @@ public class MateDaoImpl implements MateDao {
 	
 	@Override
 	public void inviteMate(Mate mate) {
-		String sql = "UPDATE mate SET mate = 3 WHERE proj_no = ? AND userno = ?";
+		String sql = "INSERT INTO mate (mate, proj_no, userno)  VALUES (3, ? ,?)";
 		
 		try {
 			ps = conn.prepareStatement(sql);

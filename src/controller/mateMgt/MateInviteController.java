@@ -14,18 +14,25 @@ import dto.Mate;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
 import serivce.face.MateService;
+import serivce.face.ProfileBoardService;
 import serivce.impl.MateServiceImpl;
+import serivce.impl.ProfileBoardServiceImpl;
 
 @WebServlet("/mate/invite")
 public class MateInviteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MateService mateService = MateServiceImpl.getInstance();
+	private ProfileBoardService profileBoardService = ProfileBoardServiceImpl.getInstance();
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Mate mate = new Mate();
 		ProfileBoard profile = new ProfileBoard();
+		profile.setProf_no(Integer.parseInt(req.getParameter("prof_no")));
+		profile = profileBoardService.view(profile);
+//		System.out.println(profile);
 
 		//게시판 번호받기
 //		profile1.setProf_no(Integer.parseInt(req.getParameter("prof_no")));
