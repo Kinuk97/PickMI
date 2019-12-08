@@ -109,9 +109,8 @@
 						<p>직업 : ${board.proj_job }</p>
 						<p>진행상황 : ${board.proj_progress }</p>
 
+						<div class="text-right">${board.proj_like }💙</div>
 						<div class="text-right">작성자 : ${board.username }</div>
-						<div class="text-right">신청수 : ${board.proj_apply }</div>
-						<div class="text-right">찜개수 : ${board.proj_like }</div>
 						<div class="text-right">${board.proj_time }</div>
 					</div>
 				</div>

@@ -12,6 +12,7 @@ import dbutil.DBConn;
 import dto.Mate;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
 
 public class MateDaoImpl implements MateDao {
 	
@@ -31,6 +32,47 @@ public class MateDaoImpl implements MateDao {
 	public static MateDao getInstance() {
 		return Singleton.instance;
 	}
+	
+	@Override
+	public int countProfile(Mate mate) {
+		String sql="";
+//		sql += "SELECT count(*) FROM profile where userno IN "
+		return 0;
+	}
+	@Override
+	public List<User> showUserName(Mate mate) {
+		String sql="";
+		sql += "SELECT name from user_table where userno IN (SELECT userno FROM mate WHERE proj_no = ? AND mate = 0)";
+		List<User> list = new ArrayList<User>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, mate.getProj_no());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				User temp = new User();
+				
+				temp.setName(rs.getString("name"));
+				
+				list.add(temp);
+//				System.out.println("matedaoimpl : " + list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public List<ProfileBoard> showUser(Mate mate) {
 		String sql="";
@@ -60,6 +102,7 @@ public class MateDaoImpl implements MateDao {
 				temp.setUsername(rs.getString("username"));
 				
 				list.add(temp);
+//				System.out.println("matedaoimpl : " + list);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

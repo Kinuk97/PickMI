@@ -239,7 +239,7 @@ $(document).ready(function() {
     height: 531px;
     border: 1px solid #ddd;
     box-sizing: border-box;
-    margin: 50px;
+    margin: 3%;
     padding: 16px;
     border-radius: 40px;
 }
@@ -251,7 +251,7 @@ $(document).ready(function() {
     width: 40%;
     height: 220px;
     padding: 16px;
-    margin: 50px;
+    margin: 3%;
     border: 1px solid #ddd;
     margin-bottom: 30px;
     border-radius: 40px;
@@ -261,10 +261,10 @@ $(document).ready(function() {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 38%;
+    width: 40%;
     height: 300px;
     padding: 16px;
-    margin: 50px;
+    margin: 3%;
     border: 1px solid #ddd;
     border-radius: 40px;
     margin-top: 0;
@@ -295,9 +295,9 @@ $(document).ready(function() {
 <body>
 <div class="container myPageContainer">
 	<div class="container text-center">
-		<h1>😉마이페이지😉</h1>
+		<h1 style="margin-bottom: 5%;">😉마이페이지😉</h1>
 	</div>
-	<div class="container box">
+	<div class="container box" style="margin-bottom: 1%;">
 
 		<div class="inner_con1" > 
 			<ul class="list-group">
@@ -462,23 +462,23 @@ $(document).ready(function() {
 <!-- 			<p style="text-align:left; font-size:25px">활동이력</p> -->
 			<hr>
 			
-			<div style="float: left">
-			<a href="/mypage/boardwrite"><img src="/resources/edit.png" style="width:45x; height: 45px;"></a>
-			<p>내가쓴 게시글</p>
-			</div>	
+			<div class="row">
+				<div class="col-md-4">
+					<a href="/mypage/boardwrite"><img src="/resources/edit.png" style="width:45x; height: 45px;">
+					<br>내가 작성한 게시글</a>
+				</div>	
 			
-			<div style="float: left; margin-left: 95px;">		 
-			<a href="/mycomment/list"><img src="/resources/chat.png" style="width:45px; height: 45px;"></a>
-			<p>내가쓴 댓글</p>
+				<div class="col-md-4">
+					<a href="/mycomment/list"><img src="/resources/chat.png" style="width:45px; height: 45px;">
+					<br>내가 작성한 댓글</a>
+				</div>
+				
+				<div class="col-md-4">
+					<a href="/mypage/likelist"><img src="/resources/heart.png" style="width:45px; height: 45px;">
+					<br>내가 찜한 게시글</a>						
+				</div>
 			</div>
-			
-			<div style="float: right">
-			<a href="/mypage/likelist"><img src="/resources/heart.png" style="width:45px; height: 45px;"></a>
-			<p>내가 찜한 글</p>
-			</div>
-			
 		</div>
-
 		<div class="inner_con3">
 			<ul class="list-group">
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">프로젝트 관리</p></li>
@@ -489,10 +489,10 @@ $(document).ready(function() {
 					<div class="col-lg-4">${list.proj_title}</div>
 					<div class="col-lg-4">${list.proj_progress}</div>
 					<div class="col-lg-4"><a class="btn btn-warning" href='/schedule/list?proj_no=${list.proj_no }' style="width: 45%;">일정</a>
-					<a href="/mate/list?proj_no=${list.proj_no }" class="btn btn-info" role="button" style="width: 45%;">팀원</a>
 					</div>
 				</div>
 			</c:forEach>
+					<a href="/mate/list" class="btn btn-info" role="button" style="width: 45%;">내 프로젝트 팀원관리</a>
 			
 		</div>
 		

@@ -11,13 +11,14 @@ import dao.impl.ProfileBoardDaoImpl;
 import dto.Mate;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.User;
+import serivce.face.AlertService;
 import serivce.face.MateService;
-import sun.java2d.cmm.Profile;
 
 public class MateServiceImpl implements MateService {
 	
 	private MateDao mateDao = MateDaoImpl.getInstance();
-	private ProfileBoardDao profileDao = ProfileBoardDaoImpl.getInstance();
+
 	
 	public MateServiceImpl() {
 		
@@ -32,7 +33,13 @@ public class MateServiceImpl implements MateService {
 	}
 	
 	@Override
+	public List<User> showUserName(Mate mate) {
+		return mateDao.showUserName(mate);
+	}
+	
+	@Override
 	public List<ProfileBoard> showUser(Mate mate) {
+		
 		
 		return mateDao.showUser(mate);
 	}

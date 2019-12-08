@@ -68,6 +68,60 @@ public class AlertDaoImpl implements AlertDao {
 		}
 		
 		return list;
+	public int checkProfile(Alert alert) {
+		String sql="";
+		sql += "SELECT count(*) FROM profile where userno = ?";
+		
+		int cnt = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, alert.getSender());
+			
+			rs = ps.executeQuery();
+			
+
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs!=null)rs.close();
+					if(ps!=null)ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+//		System.out.println(cnt);
+		return cnt;
+	}
+	
+	@Override
+	public void insertDeniedAlert(Alert alert) {
+		
+		String sql="";
+		sql += "INSERT INTO alert (userno, alert, sender, checkcheck) VALUES (?, ?, ?, 0)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1,  alert.getUserno());
+			ps.setString(2, alert.getAlert());
+			ps.setInt(3, alert.getSender());
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	@Override

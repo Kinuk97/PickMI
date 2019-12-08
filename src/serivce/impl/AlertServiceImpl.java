@@ -66,6 +66,14 @@ public class AlertServiceImpl implements AlertService {
 	@Override
 	public List<Alert> getAlertList(Alert alert) {
 		return alertDao.selectMyAlert(alert);
+	public int checkProfile(Alert alert) {
+		return alertDao.checkProfile(alert);
+	}
+	
+	@Override
+	public void sendAlertdenied(Alert alert) {
+		alertDao.insertDeniedAlert(alert);
+		
 	}
 	
 	@Override
