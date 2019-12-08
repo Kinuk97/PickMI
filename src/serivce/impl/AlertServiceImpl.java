@@ -1,8 +1,5 @@
 package serivce.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +63,13 @@ public class AlertServiceImpl implements AlertService {
 	@Override
 	public List<Alert> getAlertList(Alert alert) {
 		return alertDao.selectMyAlert(alert);
+	}
+	public List<Alert> invitedList(Alert alert) {
+//		List<Alert> alert1 = new ArrayList<Alert>();
+//			alert1 = alertDao.invitedList(alert);
+			
+		
+		return alertDao.invitedList(alert);
 	}
 	
 	@Override

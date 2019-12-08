@@ -10,6 +10,8 @@ import java.util.List;
 import dao.face.AlertDao;
 import dbutil.DBConn;
 import dto.Alert;
+import dto.ProfileBoard;
+import dto.ProjectBoard;
 
 public class AlertDaoImpl implements AlertDao {
 	
@@ -27,6 +29,42 @@ public class AlertDaoImpl implements AlertDao {
 	
 	public static AlertDao getInstance() {
 		return Singleton.instance;
+	}
+	@Override
+	public List<Alert> invitedList(Alert alert) {
+		String sql="";
+		sql += "SELECT sender FROM alert WHERE  userno = ? AND checkcheck = 0";
+		
+		List<Alert> list = new ArrayList<Alert>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, alert.getUserno());
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Alert temp = new Alert();
+				
+				temp.setSender(rs.getInt("sender"));
+			
+				
+				list.add(temp);
+//				System.out.println("matedaoimpl : " + list);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+		
 	}
 	
 	@Override
