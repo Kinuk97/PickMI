@@ -59,7 +59,7 @@ public class UserSelfDelete extends HttpServlet {
 			session.invalidate();
 		}
 		
-		resp.sendRedirect("/main");
+		resp.sendRedirect("/logout");
 		
 		
 		

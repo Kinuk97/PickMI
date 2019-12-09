@@ -923,8 +923,6 @@ a#top {
 											</a>
 									<ul class="dropdown-menu">
 										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
-										<li><a href="#"><i class="icon-arrow-down"></i>추가할거</a></li>
-										<li><a href="#"><i class="icon-arrow-left"></i>추가해주세요~</a></li>
 										<li><a href="/logout"><i class="icon-arrow-right"></i>로그아웃</a></li>
 									</ul>
 								</li>

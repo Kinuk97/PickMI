@@ -108,7 +108,7 @@ public class ProfileBoardViewController extends HttpServlet {
 			req.setAttribute("file", fileService.getFiles(file));
 			//모델값 지정하기
 			req.setAttribute("profile", detailProfile);
-			System.out.println("컨트롤러 뷰 : " + detailProfile);
+//			System.out.println("컨트롤러 뷰 : " + detailProfile);
 			//view 지정
 			req.getRequestDispatcher("/WEB-INF/views/board/profileBoard/view.jsp").forward(req, resp);
 		} else {
