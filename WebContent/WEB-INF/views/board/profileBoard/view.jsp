@@ -165,14 +165,14 @@ $(document).ready(function() {
 </table>
 </div>
 <div class="text-center">
-<c:if test="${ login }">
+<c:if test="${userno eq profile.userno }">
 	<a id="edit" role="button" class="btn btn-info" href="/profileBoard/update?prof_no=${profile.prof_no}">수정</a>
+	<a id="delete" role="button" class="btn btn-info" href="/profileBoard/delete?prof_no=${profile.prof_no}">삭제</a>
 </c:if>
 <c:if test="${ !login }">
 	<a id="loginplz2" role="button" class="btn btn-info">수정</a>			
 </c:if>
 <c:if test="${ login }">
-	<a id="delete" role="button" class="btn btn-info" href="/profileBoard/delete?prof_no=${profile.prof_no}">삭제</a>
 	<!-- Button trigger modal -->
 <button id="inviteproject" type="button" class="btn btn-info" data-toggle="modal" data-target="#inviteProj" data-prof_no="${ profile.prof_no }" data-userno="${ profile.userno }">
  우리팀으로 초대하기💌
