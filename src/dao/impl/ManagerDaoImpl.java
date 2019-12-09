@@ -128,16 +128,33 @@ public class ManagerDaoImpl implements ManagerDao {
 // Login -----
 
 	@Override
-	public int selectCntAll(String search) {
+	public int selectCntAll(String search, int i) {
 
 //		conn = DBConn.getConnection(); // DB연결
 		// 수행할 SQL
 		String sql = "";
-		sql += "SELECT ";
-		sql += " count(*)";
-		sql += " FROM user_table";
-		if (search != null && !"".equals(search)) {
-			sql += "   WHERE EMAIL LIKE '%'||'" + search + "'||'%'";
+		if( i == 3 ) {			
+			sql += "SELECT ";
+			sql += " count(*)";
+			sql += " FROM user_table";
+			if (search != null && !"".equals(search)) {
+				sql += "   WHERE EMAIL LIKE '%'||'" + search + "'||'%'";
+			}
+		} else if (i == 2 ) {
+			sql += "SELECT ";
+			sql += " count(*)";
+			sql += " FROM projboard";
+			if (search != null && !"".equals(search)) {
+				sql += "   WHERE proj_title LIKE '%'||'" + search + "'||'%'";
+			}
+
+		} else if (i == 1) {
+			sql += "SELECT ";
+			sql += " count(*)";
+			sql += " FROM profile";
+			if (search != null && !"".equals(search)) {
+				sql += "   WHERE prof_no LIKE '%'||'" + search + "'||'%'";
+			}
 		}
 
 		// 최종 결과 변수
@@ -163,7 +180,7 @@ public class ManagerDaoImpl implements ManagerDao {
 				if (ps != null)
 					ps.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				e.printStackTrace();	
 			}
 		}
 

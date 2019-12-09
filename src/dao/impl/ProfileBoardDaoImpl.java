@@ -397,7 +397,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
 		sql += "   select prof_no, userno, prof_time, prof_interest, prof_job, prof_state, prof_loc, prof_career, prof_content,";
-		sql += " (SELECT count(*) FROM likepost WHERE boardno = profile.prof_no) AS prof_like,";
+		sql += " (SELECT count(*) FROM likepost WHERE boardno = profile.prof_no AND postno = 1) AS prof_like,";
 		sql	+= " (SELECT name FROM user_table WHERE userno = profile.userno) AS username from profile";
 		
 		//filter 존재한다면 where절 추가
@@ -620,9 +620,12 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 		sql += "SELECT";
 		sql += " prof_no, prof_time, userno,";
 		sql += " prof_interest, prof_job, prof_state, prof_loc, prof_career,";
-		sql += " prof_content, prof_like";
-//				+ "(SELECT name FROM user_table WHERE user_table.userno = profile.userno)username ";
-		sql += " FROM (SELECT * FROM profile ORDER BY prof_time DESC)";
+
+		sql += " prof_content";
+		sql += " ,(SELECT count(*) FROM likepost WHERE boardno = profile.prof_no AND postno = 1) AS prof_like";
+		sql += ", (SELECT name FROM user_table WHERE user_table.userno = profile.userno) username ";
+
+		sql += " FROM (SELECT * FROM profile ORDER BY prof_time DESC) profile";
 		sql += " WHERE ROWNUM <= 3";
 		
 		//결과 저장 리스트
@@ -636,7 +639,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 			while(rs.next()) {
 				ProfileBoard proboard = new ProfileBoard();
 				proboard.setProf_no(rs.getInt("prof_no"));
-//				proboard.setUserno(rs.getInt("userno"));
+				proboard.setUserno(rs.getInt("userno"));
 				proboard.setProf_time(rs.getDate("prof_time"));
 				proboard.setProf_interest(rs.getString("prof_interest"));
 				proboard.setProf_job(rs.getString("prof_job"));
@@ -645,7 +648,7 @@ public class ProfileBoardDaoImpl implements ProfileBoardDao {
 				proboard.setProf_career(rs.getString("prof_career"));
 				proboard.setProf_content(rs.getString("prof_content"));
 				proboard.setProf_like(rs.getInt("prof_like"));
-//				proboard.setUsername(rs.getString("username"));
+				proboard.setUsername(rs.getString("username"));
 				
 				list.add(proboard);
 			}

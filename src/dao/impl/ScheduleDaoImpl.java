@@ -5,13 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.face.ScheduleDao;
 import dbutil.DBConn;
+import dto.CheckList;
 import dto.Schedule;
 
 public class ScheduleDaoImpl implements ScheduleDao {
@@ -64,14 +63,16 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public List<Schedule> selectAll(Schedule schedule) {
 
-		String sql = "SELECT * FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ? ORDER BY schedule_date";
-
+		String sql = "SELECT schedule.*,"
+				+ " (SELECT count(*) FROM checklist WHERE schedule.scheduleno = checklist.scheduleno AND do_check = '1') cntChecked,"
+				+ " (SELECT count(*) FROM checklist WHERE schedule.scheduleno = checklist.scheduleno) cntCheckList"
+				+ " FROM schedule WHERE proj_no = ? AND EXTRACT(YEAR FROM schedule_date) = ? AND EXTRACT(MONTH FROM schedule_date) = ? ORDER BY schedule_date";
 
 		List<Schedule> list = new ArrayList<Schedule>();
 
 		try {
 			ps = conn.prepareStatement(sql);
-			
+
 			ps.setInt(1, schedule.getProj_no());
 			ps.setString(2, schedule.getCurYear());
 			ps.setString(3, schedule.getCurMonth());
@@ -91,19 +92,23 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				temp.setDue_date(rs.getDate("due_date"));
 				temp.setWrite_date(rs.getDate("write_date"));
 
+				temp.setCntChecked(rs.getInt("cntChecked"));
+				temp.setCntCheckList(rs.getInt("cntCheckList"));
+
 				list.add(temp);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			if (rs != null)
-				rs.close();
-			if (ps != null)
-				ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return list;
@@ -137,14 +142,15 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			if (rs != null)
-				rs.close();
-			if (ps != null)
-				ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return result;
@@ -169,18 +175,29 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			if (ps != null)
-				ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void updateSchedule(Schedule schedule) {
-		String sql = "UPDATE schedule SET title = ?, content = ?, place = ?, due_date = ? WHERE scheduleno = ?";
+		String sql = "UPDATE schedule SET title = ?, content = ?, place = ?";
+		
+		// 수정하는 기한이 있다면 수정
+		if (schedule.getDue_date() != null) {
+			sql += " , due_date = ?";
+		} else {
+			// 수정하는 기한이 없다면 null
+			sql += " , due_date = null";
+		}
+		
+		sql += " WHERE scheduleno = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -188,18 +205,24 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			ps.setString(1, schedule.getTitle());
 			ps.setString(2, schedule.getContent());
 			ps.setString(3, schedule.getPlace());
-			ps.setDate(4, new java.sql.Date(schedule.getDue_date().getTime()));
-			ps.setInt(5, schedule.getScheduleno());
+			if (schedule.getDue_date() != null) {
+				// 기한을 추가, 수정할 때
+				ps.setDate(4, new java.sql.Date(schedule.getDue_date().getTime()));
+				ps.setInt(5, schedule.getScheduleno());
+			} else {
+				ps.setInt(4, schedule.getScheduleno());
+			}
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			if (ps != null)
-				ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -215,13 +238,202 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		try {
-			if (ps != null)
-				ps.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
+	@Override
+	public int selectCntScheduleDate(Schedule schedule) {
+		String sql = "SELECT count(*) FROM schedule WHERE proj_no = ? AND schedule_date = ?";
+
+		int result = 0;
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, schedule.getProj_no());
+			ps.setDate(2, new java.sql.Date(schedule.getSchedule_date().getTime()));
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+	// ===================================================== 체크리스트
+
+	@Override
+	public List<CheckList> selectCheckList(Schedule selectSchedule) {
+		String sql = "SELECT * FROM checklist WHERE scheduleno = ? ORDER BY scheduleno ASC";
+
+		List<CheckList> list = new ArrayList<CheckList>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, selectSchedule.getScheduleno());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				CheckList checklist = new CheckList();
+
+				checklist.setCheckno(rs.getInt("checkno"));
+				checklist.setScheduleno(rs.getInt("scheduleno"));
+				checklist.setCheck_content(rs.getString("check_content"));
+				checklist.setDo_check(rs.getString("do_check").charAt(0));
+
+				list.add(checklist);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public void insertCheck(CheckList checkList) {
+		String sql = "INSERT INTO checkList VALUES (checklist_seq.nextval, ?, ?, '0')";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, checkList.getScheduleno());
+			ps.setString(2, checkList.getCheck_content());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void updateCheckDo_check(CheckList checkList) {
+		String sql = "UPDATE checkList SET do_check = ? WHERE checkno = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, String.valueOf(checkList.getDo_check()));
+			ps.setInt(2, checkList.getCheckno());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void updateCheckContent(CheckList checkList) {
+		String sql = "UPDATE checkList SET check_content = ? WHERE checkno = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, checkList.getCheck_content());
+			ps.setInt(2, checkList.getCheckno());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void deleteCheck(CheckList checkList) {
+		String sql = "DELETE FROM checklist WHERE checkno = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, checkList.getCheckno());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void deleteCheckList(CheckList checkList) {
+		String sql = "DELETE FROM checklist WHERE scheduleno = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, checkList.getScheduleno());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// ======================================================================================================================
 }

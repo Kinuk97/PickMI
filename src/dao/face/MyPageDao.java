@@ -8,6 +8,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import util.Paging;
 
@@ -26,32 +27,62 @@ public interface MyPageDao {
 	 */
 	public User selectUserbyUserno(HttpServletRequest req);
 
+	
+// ------ 페이징	
+	
 	/**
 	 * 총 게시글 수 조회
 	 * @param req
 	 * @return
 	 */
-	public int selectCntAll(HttpServletRequest req);
+	public int selectpfCntAll(HttpServletRequest req);
 	
-	/**
-	 * 페이징 대상 게시글 목록 조회
-	 * @param paging - 페이징 조회
-	 * @param req List - 조회된 회원 게시물 목록
-	 * @return
-	 */
-	List<ProfileBoard> selectPf(Paging paging, HttpServletRequest req);
-
-	List<ProjectBoard> selectPj(Paging paging, HttpServletRequest req);
-
-	List<CompBoard> selectComp(Paging paging, HttpServletRequest req);
-
-	List<FreeBoard> selectFree(Paging paging, HttpServletRequest req);
-
 
 // ----- 비밀번호 수정
 	
 	int selectCntUserByupw(User pwparam);
 
+	/**
+	 * 사용자 삭제하는 메소드
+	 * 
+	 * @param user - 사용자 번호가 담겨있는 객체
+	 * @return 쿼리 수행 결과
+	 */
+	public int deleteUser(User user);
+
+	public int selectCntAll(HttpServletRequest req, int i);
+	
+	/**
+	 * 작성한 게시글 리스트
+	 * @param paging - 각 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List selectboard(Paging paging, User user, int i);
+
+	
+	/**
+	 * 찜한 게시글 리스트
+	 * @param paging - 각 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List likeboard(Paging paging, User user, int i);
+
+	/**
+	 * 작성한 댓글 리스트
+	 * @param paging - 각 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List writeReply(Paging paging, User user, int i);
+
+	
+	// ---------------------- tES T --------------------
+	public int selectCntAll(HttpServletRequest req);
 
 
 

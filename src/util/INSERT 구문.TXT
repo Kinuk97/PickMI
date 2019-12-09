@@ -589,14 +589,6 @@ commit;
 
 ------------------------------------------------------------------------------------------------------------------- 메시지 -------------------------------------------------------------------------------------------------------------------
 
---info테이블 INSERT
-INSERT INTO info(chat_no, chat_maketime) VALUES(1, SYSDATE);
-INSERT INTO info(chat_no, chat_maketime) VALUES(2, SYSDATE);
-INSERT INTO info(chat_no, chat_maketime) VALUES(3, SYSDATE);
-INSERT INTO info(chat_no, chat_maketime) VALUES(4, SYSDATE);
-
-
-
 -- chatter테이블 INSERT
 INSERT INTO chatter(chat_no, chat_user) VALUES(1, 8);
 INSERT INTO chatter(chat_no, chat_user) VALUES(2, 12);
@@ -614,3 +606,17 @@ INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(3, 21, '�
 INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(3, 1, '알빠?', SYSDATE);
 INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(4, 21, '랄랄', SYSDATE);
 INSERT INTO chat(chat_no, chat_sender, chat_msg, chat_sendtime) VALUES(4, 3, '럴럴', SYSDATE);
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- mate 테이블 insert
+INSERT INTO mate VALUES (21, 196, 1);
+INSERT INTO mate VALUES (1, 197, 1);
+INSERT INTO mate VALUES (2, 198, 1);
+INSERT INTO mate VALUES (3, 199, 1);
+INSERT INTO mate VALUES (4, 200, 1);
+INSERT INTO mate VALUES (5, 201, 0);
+INSERT INTO mate VALUES (6, 197, 1);
+INSERT INTO mate VALUES (7, 197, 1);
+INSERT INTO mate VALUES (21, 197, 1);
+INSERT INTO mate VALUES (21, 198, 1);

@@ -29,7 +29,10 @@ public class ScheduleViewController extends HttpServlet {
 		
 		Gson gson = new Gson();
 		
-		resp.getWriter().println(gson.toJson(scheduleService.getSchedule(schedule)));
+		schedule = scheduleService.getSchedule(schedule);
+		schedule.setCheckList(scheduleService.getCheckList(schedule));
+		
+		resp.getWriter().println(gson.toJson(schedule));
 	}
 
 }

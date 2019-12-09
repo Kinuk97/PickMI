@@ -405,9 +405,9 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT free_no, categoryno, userno, free_title, free_content, free_time, views"; 
-//		sql += " (SELECT name FROM user_table WHERE freeboard.userno = userno) username ";
-		sql += " FROM (SELECT * FROM freeboard ORDER BY free_time DESC)";
+		sql += "SELECT free_no, categoryno, free_title, free_content, free_time, views"; 
+		sql += " , (SELECT name FROM user_table WHERE freeboard.userno = userno) username";
+		sql += " FROM (SELECT * FROM freeboard ORDER BY free_time DESC) freeboard";
 		sql += " WHERE ROWNUM <= 3";
 		
 		List<FreeBoard> list = new ArrayList<FreeBoard>();
@@ -421,8 +421,7 @@ public class FreeBoardDaoImpl implements FreeBoardDao {
 				
 				freeBoard.setFree_no(rs.getInt("free_no"));
 				freeBoard.setCategoryno(rs.getInt("categoryno"));
-				freeBoard.setUserno(rs.getInt("userno"));
-//				freeBoard.setUsername(rs.getString("username"));
+				freeBoard.setUsername(rs.getString("username"));
 				freeBoard.setFree_title(rs.getString("free_title"));
 				freeBoard.setFree_content(rs.getString("free_content"));
 				freeBoard.setFree_time(rs.getDate("free_time"));

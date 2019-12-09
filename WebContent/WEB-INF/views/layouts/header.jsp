@@ -26,33 +26,43 @@
 <script type="text/javascript" src="/resources/js/popover.js"></script>
 <script type="text/javascript" src="/resources/js/modal.js"></script>
 
-<!--Start of Tawk.to Script-->
-<!-- <!-- <script type="text/javascript"> -->
-<!-- 	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date(); -->
-	
-<!-- 	(function() { -->
-<!-- 		var s1 = document.createElement("script"), s0 = document -->
-<!-- 				.getElementsByTagName("script")[0]; -->
-<!-- 		s1.async = true; -->
-<!-- 		s1.src = 'https://embed.tawk.to/5de394e9d96992700fca2231/default'; -->
-<!-- 		s1.charset = 'UTF-8'; -->
-<!-- 		s1.setAttribute('crossorigin', '*'); -->
-<!-- 		s0.parentNode.insertBefore(s1, s0); -->
-<!-- 	})(); -->
-	
-<!-- </script> -->
-<!--End of Tawk.to Script-->
-
 <script type="text/javascript">
-$(document).ready(function(){
+function alertList(userno) {
+	$.ajax({
+		type : "post",
+		url : "/alert/list",
+		data : { "userno" : userno },
+		dataType : "json",
+		success : function(data){
+			var listTag = $("#alertList").html("");
+
+			var list = data;
+
+			listTag.append($("<li class=\"close\" style=\"width: 25px;\">x</li>"));
+
+			for (var i = 0; i < list.length; i++) {
+				listTag.append($("<li role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" href=\"/mate/list?alert=true\" style=\"padding-top: 10px; padding-bottom: 10px;\">" + list[i].alert + "</a></li>"));
+			}
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+
+}
+
+$(document).ready(function() {
+	alertList(1);
+	
 	//메세지 리스트의 항목 하나를 눌렀을 떄
 	$('#msgList').on("click", ".messagelist", function() {
-		console.log(9)
-		
 		//메세지 리스트 드롭다운 메뉴가 사라짐(close)
 		$('.dropdown-menu').css('visibility','hidden');
 		//대화창이 hidden에서 visible로 변경됨
 		$('#messagebox').css('visibility', 'visible');
+		
+		$("#send").attr( "data-chat_no", $(this).find("input").val() )
+		msgshow( $(this).find("input").val() )
 	});
 	
 	//닫기 버튼을 눌렀을 때
@@ -69,32 +79,63 @@ $(document).ready(function(){
 		$('#msgscroll').css('visibility', 'hidden');
 	})
 	
+	//검색 후 메시지를 보낼 사용자를 클릭했을 때
+// 	$('#selectUser').on("click", function(){
+// 		$('#searchModal').modal("toggle");
+// 		$('#msgresult').html("");
+// 		$('#messagebox').show();
+// 		$('#messagebox').css('visibility', 'visible');
+// 		$('#msgscroll').css('visibility', 'hidden');
+
+		
+// 		$.ajax({
+// 			type : "post",
+// 			url : "/msg/create",
+// 			data : { "userno" : $("input[]")},
+// 			dataType : "html",
+// 			success : function(data){
+// 				msgshow(data.chat_no);
+// 			},
+// 			error : function(e){
+// 				console.log(e);
+// 			}
+// 		});
+// 	})
+	
+	//메시지창에 메시지를 쓰고 엔터키를 눌렀을 때 전송버튼과 같은 작동을 하게하기
+	$('#msg').keypress(function(event){
+		if(event.which==13){
+			$('#send').click();
+			return false;
+		}
+	})
+	
+	//메시지를 보낼 사용자 검색창에 검색하고 엔터키 눌렀을 때 전송버튼과 같은 작동을 하게하기
+	$('#searchform').keypress(function(event){
+		if(event.which==13){
+			$('#searchbtn').click();
+			return false;
+		}
+	})
+	
 });
 
 //메시지 사용자 검색시 중복체크 방지
-function onecheckbox(a) {
-	var obj = document.getElementsByName("msgcheckbox");
+// function onecheckbox(a) {
+// 	var obj = document.getElementsByName("msgcheckbox");
 	
-	for(var i=0; i<obj.length; i++){
-		if(obj[i] != a) {
-			obj[i].checked = false;
-		}
-	}
-}
+// 	for(var i=0; i<obj.length; i++){
+// 		if(obj[i] != a) {
+// 			obj[i].checked = false;
+// 		}
+// 	}
+// }
 
 </script>
 
 <!-- 메세지 -->
 <script type="text/javascript">
-// window.onload = function(){
-// 	//소켓열리면
-// 	ws.onopen = function() {
-// 		//메세지보내는 메소드 send
-// 		ws.send("안녕");
-// 	}
-// 	onclick
-// }
-
+//메시지 목록 띄우기
 $(document).ready(function(){
 	$("#btnMessageList").click(function(){
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
@@ -103,12 +144,12 @@ $(document).ready(function(){
 	 		//메세지보내는 메소드 send
 	 		var obj = { type: "list", chat_user: '${userno}', username: '${name}' };
 	 		var msg = JSON.stringify(obj);
-	 		console.log(msg)
+// 	 		console.log(msg)
 	 		ws.send(msg);
 	 	}
 		
 		ws.onmessage = function(data) {
-			console.log("!")
+// 			console.log("!")
 			$("#msgList").html("");
 			var list = JSON.parse(data.data)
 			for(var i = 0; i<list.length; i++){
@@ -116,7 +157,7 @@ $(document).ready(function(){
 				
 				$("<a>").attr({"role":"menuitem", "tabindex":"-1", "class":"dropdownA", "href":"#"})
 					.append( $("<li>").attr({"class":"messagelist", "role":"presentation"})
-					.append( $("<img>").attr({"src":"/resources/gray.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
+					.append( $("<img>").attr({"src":"/resources/defaultuserphoto.png", "alt":"", "class":"img-circle", "id":"msgImage"}) )
 					.append( $("<input>").attr({"type":"hidden", "value":list[i].chat_no}) )
 					.append( $("<span>").attr({"class":"spanmsg"}).html(spantext) )
 				).appendTo($("#msgList"))
@@ -127,100 +168,191 @@ $(document).ready(function(){
 	})
 });
 
+//메세지 목록 중 하나 클릭 시
 $(document).ready(function(){
 	$('#msgList').on("click", ".messagelist", function() {
-		var ws = new WebSocket("ws://localhost:8089/ws/msg");
+// 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
 		
-		var chat_no = $(this).find("input").val()
+// 		var chat_no = $(this).find("input").val()
 		
-		ws.onopen = function() {
-	 		//메세지보내는 메소드 send
-	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no };
-	 		var msg = JSON.stringify(obj);
-	 		console.log(JSON.stringify(obj))
-	 		ws.send(msg);
-	 	}
+// 		ws.onopen = function() {
+// 	 		//메세지보내는 메소드 send
+// 	 		var obj = { type: "msg", chat_user: '${userno}', chat_no: chat_no, username: '${name}' };
+// 	 		var msg = JSON.stringify(obj);
+// // 	 		console.log(JSON.stringify(obj))
+// // 	 		ws.send(msg);
+// 	 	}
 		
-		ws.onmessage = function(data) {
-			ws.close();
-		}
+// 		ws.onmessage = function(data) {
+// 			ws.close();
+// 		}
 		
 	})
 })
 
+//메시지 창에서 send버튼을 눌렀을 때
 $(document).ready(function(){
+// 	var ws = new WebSocket("ws://localhost:8089/ws/msg");
+	//#send = 메시지 전송 버튼
 	$("#send").click(function(){
+// 		console.log("send clicked")
+// 		var msg = {
+// 				"type": "msg",
+// 				"chat_msg": $("#msg").val()
+// 		}
 		
-		var msg = {
-				"type": "msg",
-				"chat_msg": $("#msg").val()
-		}
-		$("#msg").val("");
-		var json = JSON.stringify(msg);
-		console.log(json)
-		ws.send(json)
-		
+// 		$("#msg").val("");
+// 		var json = JSON.stringify(msg)
+// 		console.log("json ; " + json)
+// 		console.log($(this).attr("data-chat_no"))
+		msgsend($(this).attr("data-chat_no"))
 	})
-	
-	
-
 });
+
+$(document).ready(function(){
+		
+	$("#searchtable").on("click", ".selectUser", function() {
+		$('#searchModal').modal("toggle");
+		$('#msgresult').html("");
+	//		$('#messagebox').show();
+		$('#messagebox').css('visibility', 'visible');
+		$.ajax({
+			type : "post",
+			url : "/msg/create",
+			data : { "userno" : $(this).data("userno")},
+			dataType : "json",
+			success : function(data){
+				console.log("selectUser success")
+				$("#send").attr( "data-chat_no", data.chat_no )
+				msgshow(data);
+			},
+			error : function(e){
+				console.log("selectUser error")
+				console.log(e);
+			}
+		});
+	});
+})
+
+function msgshow(n) {
+	$(".dropdown-menu").css('visibility', 'hidden');
+	
+	console.log("---msgshow()---")
+	$.ajax({
+		type : "get",
+		url : "/msg/chatting",
+		data : {chat_no: n},
+		dataType : "html",
+		success : function(data){
+			$("#msgresult").html(data)
+			$("#msg").val("")
+			$("#msg").focus()
+			$("#msgresult").scrollTop($("#msgresult")[0].scrollHeight);
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+}
+
+function msgsend(n) {
+	
+	console.log("msgsend")
+	
+	$.ajax({
+		type : "post",
+		url : "/msg/chatting",
+		data : {chat_msg: $("#msg").val(), chat_no: n},
+		dataType : "html",
+		success : function(data){
+			$("#msgresult").html(data)
+			$("#msg").val("")
+			$("#msg").focus()
+			$("#msgresult").scrollTop($("#msgresult")[0].scrollHeight);
+		},
+		error : function(e){
+			console.log(e);
+		}
+	});
+}
+
 
 //메세지를 보낼 사용자 검색
 $(document).ready(function(){
 	$("#chatplusBtn").click(function(){
+		console.log("test");
+		$("#searchtable").html("");
 		var ws = new WebSocket("ws://localhost:8089/ws/msg");
-		
 		ws.onopen = function() {
 			
 			var obj = { type: "search", name : '${name}', email: '${email}' };
 			var msg = JSON.stringify(obj);
-			console.log(msg);
+// 			console.log(msg);
 			ws.send(msg);
 		}
 		
+		
+		ws.onmessage = function(data){
+			
+			var search = JSON.parse(data.data);
+// 			console.log(search);
+			var tr = $("<tr>");
+// 			tr.append( $("<th>"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
+			tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
+			var table = $("<table></table>");
+			table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
+			.append(tr);
+			
+			var myUserno = "${userno}";
+			for(var i=0; i<search.length; i++){
+				
+				if (search[i].userno == myUserno) {
+					continue;
+				}
+				var tr = $("<tr class='selectUser' data-userno='" + search[i].userno + "'></tr>"); 
+				var td = $("<td data-userno='" + search[i].userno + "'></td>");
+				tr.append( $("<td>").html(search[i].name))
+				tr.append( $("<td>").html(search[i].email))
+				
+				table.append(tr);
+			}
+			$("#searchtable").append(table);
+			ws.close();
+		}
+	
+ 	})
+ 	
+ 	$("#searchbtn").click(function(){
 		$.ajax({
 			type : "post",
-			url : "/ws/msg",
-			data : { "name" : "${name}", "email" : "${email}" },
-			dataType : "json",
-			success : ws.onmessage = function(data){
-				var search = JSON.parse(data.data);
+			url : "/msg/search",
+			data : { search: $("#searchform").val() },
+			dataType : "html",
+			success : function(data){
 				
-				var tr = $("<tr>");
-				tr.append( $("<th>"));
-				tr.append( $("<th>").attr({"id":"tableth"}).html("이름"));
-				tr.append( $("<th>").attr({"id":"tableth"}).html("이메일"));
-				var table = $("<table></table>");
-				table.attr({"class":"table table-striped table-hover text-center", "id":"msgtable"})
-				.append(tr);
+				$("#searchtable").html(data);
 				
-				for(var i=0; i<search.length; i++){
-					
-					var tr = $("<tr></tr>"); 
-					var td = $("<td></td>");
-					tr.append($("<td>").append($("<input>").attr({"type":"checkbox", "name":"msgcheckbox", "id":"msgcheckbox", "onclick":"onecheckbox(this)"})))
-					tr.append( $("<td>").html(search[i].name))
-					tr.append( $("<td>").html(search[i].email))
-					
-					table.append(tr);
-				}
-				loading = false;
-				
-				$("#searchtable").append(table);
-				ws.close();
 			},
 			error : function(e) {
 				console.log(e);
 			}
 			
 		})
-		
-	})
-	
-});
+ 	})
+})
+
 </script>
 
+<!-- 알림 -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#invite').click(function(){
+		console.log("안녕");
+	})
+})
+
+</script>
 
 <style type="text/css">
 
@@ -248,15 +380,15 @@ $(document).ready(function(){
 }
 
 #mainservicediv1 {
-	bottom: -7%;
+	bottom: -2%;
 }
 
 #mainservicediv2{
-	bottom: -2%;
+	bottom: 2%;
 }
 
 #mainservicediv3{
-	bottom: -2%;
+	bottom: 2%;
 }
 
 #header {
@@ -413,15 +545,15 @@ a#top {
 .badge {
     display: inline;
     min-width: 10px;
-    padding: 4px 7px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1;
     color: #fff;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    background-color: #325adc;
+    background-color: #0d95ff;
     border-radius: 10px;
    	float: right;
 }
@@ -431,8 +563,8 @@ a#top {
 }
 
 #badge {
-	margin-top: 1px;
-	margin-left:5px;
+	margin-top: 0px;
+	margin-left:2px;
 }
 
 .btn-reply {
@@ -469,8 +601,8 @@ a#top {
 #messagebox {
 	border: 1px solid;
 	border-color: #ccc;
-	width: 340px;
-	height: 400px;
+	width: 390px;
+	height: 460px;
 	position: fixed;
 	z-index: 1;
 	background-color: #fff;
@@ -480,19 +612,24 @@ a#top {
 }
 
 #msgresult {
+	overflow: auto;
 	margin: 0;
-	height: 290px;
-	width: 300px;
+	height: 345px;
+	width: 348px;
 	border: 1px solid;
 	border-color: #ccc;
 	margin-left: 20px;
 }
 
 #msg {
-	width: 233px;
+	width: 285px;
 	height: 51px;
 	margin: 0;
 	margin-top: 10px;
+}
+
+#msgdate {
+	color: #ccc;
 }
 
 #send {
@@ -533,6 +670,10 @@ a#top {
 }
 .messagelist span {
 	color: black;
+}
+
+.spanmsg {
+	text-decoration: none;
 }
 
 .spanmsg small {
@@ -585,6 +726,16 @@ a#top {
 	margin-top: 50px;
 	overflow: auto;
 }
+
+#serviceintro {
+	border-color: #333;
+    background-color: #00ff0000;
+}
+
+#serviceintro:hover {
+	background-color: #fff;
+}
+
 </style>
 </head>
 
@@ -618,7 +769,6 @@ a#top {
 						<div id="msgresult">
 						
 						
-						
 						</div>
 						
 						<!-- 메세지 작성 창 -->
@@ -646,13 +796,15 @@ a#top {
 				<c:choose>
 					<c:when test="${not empty login }">	
  						<li role="presentation"> 					
- 							<div class="dropdown">
-								<button class="btn btn-default dropdown-toggle" type="button"
-									id="btnAlertList" data-toggle="dropdown" aria-expanded="true">
-									Alert <span class="badge" id="badge">7</span>
-								</button>
+ 							<div class="dropdown" style="margin-right: 20px;">
+<!-- 								<button class="btn btn-default dropdown-toggle" type="button" -->
+<!-- 									id="btnAlertList" data-toggle="dropdown" aria-expanded="true"> -->
+<!-- 									Alert  -->
+								<img src="/resources/alerticon.png" id="btnAlertList" data-toggle="dropdown" aria-expanded="true" style="width:44px;">
+									<span class="badge" id="badge">!</span>
+<!-- 								</button> -->
 								
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;">
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width: 400px;" id="alertList">
 								
 									<li class="close" style="width: 25px;">x</li>
 								
@@ -674,13 +826,14 @@ a#top {
 							</div>
 						</li>
 						
-						
 						<li role="presentation"> 					
- 							<div class="dropdown" id="dropdownMsg">
-								<button class="btn btn-default dropdown-toggle" type="button"
-									id="btnMessageList" data-toggle="dropdown" aria-expanded="true">
-									Message <span class="badge" id="badge">5</span>
-								</button>
+ 							<div class="dropdown" id="dropdownMsg" style="margin-right: 20px;">
+<!-- 								<button class="btn btn-default dropdown-toggle" type="button" -->
+<!-- 									id="btnMessageList" data-toggle="dropdown" aria-expanded="true"> -->
+<!-- 									Message -->
+								<img src="/resources/messageicon.png" type="button" id="btnMessageList" data-toggle="dropdown" aria-expanded="true" style="width:50px;"> 
+								<span class="badge" id="badge">!</span>
+<!-- 								</button> -->
 								
 <!-- 								메세지 목록 -->
 <!-- 								<ul id="msgList" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;"> -->
@@ -696,10 +849,11 @@ a#top {
 <!-- 								</ul> -->
 
 
+
 								<div class="dropdown-menu" id="msgscroll" role="menu" aria-labelledby="dropdownMenu2" style="width: 350px; height: 432px;">
 									<div class="chatplus">
 										<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-md" id="chatplusBtn">새 메시지</button>
-											<div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMiddleModalLabel" aria-hidden="true">
+											<div class="modal fade bs-example-modal-md" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myMiddleModalLabel" aria-hidden="true">
   												<div class="modal-dialog modal-md">
    													<div class="modal-content">
    													 	<div style="height: 500px;">
@@ -707,7 +861,7 @@ a#top {
 		    												<h4>메시지를 보낼 사용자 검색</h4>
 		    												<hr>&emsp;&emsp;
 		    												<input type="text" class="form-control col-lg-4" id="searchform">
-		    												<button class="btn btn-default" id="searchbtn" type="submit">검색</button>
+		    												<button class="btn btn-default" id="searchbtn" type="button">검색</button>
 		    												<br>
 		    												
 		    												<div class="container container-center" id="searchtable">
@@ -729,7 +883,6 @@ a#top {
 <!-- 																</table> -->
 																
 		    												</div>
-															<button class="btn btn-default">선택</button>
 	    												</div> 
 												    </div>
 												</div>
@@ -760,11 +913,11 @@ a#top {
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 											data-toggle="dropdown">
 														<c:choose>
-														<c:when test ="${userinfo.photo_storedname eq null }">
-														<img id=headeruserimg src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
+														<c:when test ="${photo_storedname eq null }">
+														<img id="headeruserimg" src="/resources/defaultuserphoto.png" class="img-circle" style="width: 50px; height: 50px;">
 														</c:when>
 														<c:otherwise>
-														<img id=headeruserimg src="/upload/${userinfo.photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
+														<img id="headeruserimg" src="/upload/${photo_storedname }" class="img-circle" style="width: 50px; height: 50px;">
 														</c:otherwise>
 														</c:choose>
 											</a>

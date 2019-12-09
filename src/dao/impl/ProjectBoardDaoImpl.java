@@ -169,8 +169,10 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		sql += "select * from (";
 		sql += "  select rownum rnum, B.* FROM(";
 		sql += "   select proj_no, userno, proj_title, proj_name, proj_time, proj_loc, proj_career, proj_member,";
-		sql += "	proj_apply, proj_sdate, proj_ddate, proj_rec_date, proj_progress, proj_content, proj_like, proj_job";
-		sql	+= "	 from projboard";
+		sql += "	proj_sdate, proj_ddate, proj_rec_date, proj_progress, proj_content, proj_job,";
+		sql += "		(SELECT count(*) FROM likepost WHERE boardno = projboard.proj_no) AS proj_like,";
+		sql += "		(SELECT name FROM user_table WHERE projboard.userno = userno) username";
+		sql	+= "	 		from projboard";
 		
 		// filter 존재한다면 where절 추가
 		if((paging.getProj_loc() != null && !paging.getProj_loc().equals("")) || (paging.getProj_progress() != null && !paging.getProj_progress().equals("")) 
@@ -258,7 +260,6 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				projectBoard.setProj_name(rs.getString("proj_name"));
 				projectBoard.setProj_loc(rs.getString("proj_loc"));
 				projectBoard.setProj_career(rs.getString("proj_career"));
-				projectBoard.setProj_apply(rs.getInt("proj_apply"));
 				projectBoard.setProj_content(rs.getString("proj_content"));
 				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
 				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
@@ -268,6 +269,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				projectBoard.setProj_progress(rs.getString("proj_progress"));
 				projectBoard.setProj_member(rs.getInt("proj_member"));
 				projectBoard.setProj_job(rs.getString("proj_job"));
+				projectBoard.setUsername(rs.getString("username"));
 				
 
 				list.add(projectBoard);
@@ -295,7 +297,7 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		
 		String sql = "";
 		sql += "SELECT proj_no, userno, proj_title, proj_name, proj_loc, proj_career, "
-				+ "proj_apply, proj_content, proj_sdate, proj_ddate, proj_rec_date, proj_like, "
+				+ "proj_content, proj_sdate, proj_ddate, proj_rec_date, proj_like, "
 				+ "proj_time, proj_progress, proj_member, proj_job, "
 				+ "(SELECT name FROM user_table WHERE projboard.userno = userno) username";
 		sql += " FROM projboard";
@@ -315,7 +317,6 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				projectBoard.setProj_name(rs.getString("proj_name"));
 				projectBoard.setProj_loc(rs.getString("proj_loc"));
 				projectBoard.setProj_career(rs.getString("proj_career"));
-				projectBoard.setProj_apply(rs.getInt("proj_apply"));
 				projectBoard.setProj_content(rs.getString("proj_content"));
 				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
 				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
@@ -350,8 +351,8 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		String sql = "";
 		sql +="INSERT INTO projBoard(proj_no, userno, proj_title, proj_name, ";
 		sql +="		 				 proj_content, proj_member, proj_time, proj_loc, proj_job, ";
-		sql +="						 proj_career, proj_sdate, proj_ddate, proj_rec_date, proj_progress, proj_like, proj_apply )";
-		sql +=" VALUES(?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, 0, 0)";
+		sql +="						 proj_career, proj_sdate, proj_ddate, proj_rec_date, proj_progress, proj_like)";
+		sql +=" VALUES(?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, 0)";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -527,8 +528,8 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 
 		String sql = "";
 		sql += "SELECT count(userno) FROM likepost";
-		sql += " WHERE boardno = ?";
-		sql += " 	AND postno = 2";
+		sql += " WHERE postno = 2";
+		sql += " 	AND boardno = ?";
 		
 		int cnt = 0;
 		
@@ -549,8 +550,8 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		} finally {
 			try {
 				//DB객체 닫기
-				if(ps!=null)	ps.close();
 				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -602,8 +603,12 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 		conn = DBConn.getConnection();
 		
 		String sql = "";
-		sql += "SELECT * FROM (SELECT * FROM projboard ORDER BY proj_time DESC)";
-		sql += " WHERE ROWNUM <= 3";
+		sql += "SELECT proj_no, proj_title, proj_time, proj_loc, proj_career,";
+		sql += "	proj_progress, proj_job,";
+		sql += "	(SELECT name FROM user_table WHERE userno = proj.userno) username,";
+		sql += "	(SELECT count(*) FROM likepost WHERE boardno = proj.proj_no) proj_like";
+		sql += " 		FROM (SELECT * FROM projboard ORDER BY proj_time DESC) proj";
+		sql += " 		WHERE ROWNUM <= 3";
 		
 		List<ProjectBoard> list = new ArrayList<ProjectBoard>();
 		
@@ -615,20 +620,20 @@ public class ProjectBoardDaoImpl implements ProjectBoardDao {
 				ProjectBoard projectBoard = new ProjectBoard();
 				
 				projectBoard.setProj_no(rs.getInt("proj_no"));
-				projectBoard.setUserno(rs.getInt("userno"));
+//				projectBoard.setUserno(rs.getInt("userno"));
 				projectBoard.setProj_title(rs.getString("proj_title"));
-				projectBoard.setProj_name(rs.getString("proj_name"));
+//				projectBoard.setProj_name(rs.getString("proj_name"));
+				projectBoard.setUsername(rs.getString("username"));
 				projectBoard.setProj_loc(rs.getString("proj_loc"));
 				projectBoard.setProj_career(rs.getString("proj_career"));
-				projectBoard.setProj_apply(rs.getInt("proj_apply"));
-				projectBoard.setProj_content(rs.getString("proj_content"));
-				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
-				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
-				projectBoard.setProj_rec_date(rs.getDate("proj_rec_date"));
+//				projectBoard.setProj_content(rs.getString("proj_content"));
+//				projectBoard.setProj_sdate(rs.getDate("proj_sdate"));
+//				projectBoard.setProj_ddate(rs.getDate("proj_ddate"));
+//				projectBoard.setProj_rec_date(rs.getDate("proj_rec_date"));
 				projectBoard.setProj_like(rs.getInt("proj_like"));
 				projectBoard.setProj_time(rs.getDate("proj_time"));
 				projectBoard.setProj_progress(rs.getString("proj_progress"));
-				projectBoard.setProj_member(rs.getInt("proj_member"));
+//				projectBoard.setProj_member(rs.getInt("proj_member"));
 				projectBoard.setProj_job(rs.getString("proj_job"));
 				
 				list.add(projectBoard);

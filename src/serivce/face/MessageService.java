@@ -31,7 +31,34 @@ public interface MessageService {
 	 * @return List - 검색한 목록
 	 */
 	public List<User> getSearchList(String search, User user);
-	
-	
 
+	/**
+	 * 
+	 * @param chat
+	 * @return
+	 */
+	public List<Chat> getChattingList(Chat chat);
+	
+	public void insert(Chat chat);
+
+	public void insert(Chatter chatter);
+
+	public int selectNextChatno();
+
+	public void makeRoom(Chatter chatter1, Chatter chatter2);
+	
+	/**
+	 * 상대방과의 이전에 채팅이 존재하면 기존 채팅 불러오기
+	 * 
+	 * @param chatter1
+	 */
+	public Chat getExistsChatRoom(Chatter chatter1);
+
+	/**
+	 * 
+	 * @param chatter1
+	 * @param chatter2
+	 */
+	public int chattingUserCheck(Chatter chatter1, Chatter chatter2);
+	
 }

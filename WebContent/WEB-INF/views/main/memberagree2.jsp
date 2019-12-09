@@ -4,7 +4,9 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
 <div style="width: 1000px; border: " class="container container-center">
-<div style="text-align: center;"><h3>개인정보 처리 방침</h3></div>
+<div style="text-align: center;">
+<br><br>
+<h3>개인정보 처리 방침</h3><br></div>
 <hr>
 정보통신망법 규정에 따라 픽미에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 <br><br>
@@ -70,6 +72,6 @@ PICK MI 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과�
 
 참고로 픽미는 ‘개인정보 유효기간제’에 따라 1년간 서비스를 이용하지 않은 회원의 개인정보를 별도로 분리 보관하여 관리하고 있습니다.
 
-</div>
+</div><br>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

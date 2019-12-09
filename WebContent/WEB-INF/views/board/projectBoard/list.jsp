@@ -27,14 +27,14 @@
 						
 						var caption = $("<div class='caption caption-project' onclick=\"location.href='/projectBoard/view?proj_no="+data[i].proj_no+"'\"></div>");
 						
-						caption.append($("<h2></h2>").text(data[i].proj_title));
+						caption.append($("<h4></h4>").text(data[i].proj_title));
 						caption.append($("<p></p>").text("지역 : " + data[i].proj_loc));
 						caption.append($("<p></p>").text("경력 : " + data[i].proj_career));
 						caption.append($("<p></p>").text("직업 : " + data[i].proj_job));
 						caption.append($("<p></p>").text("진행상황 : " + data[i].proj_progress));
 						
-						caption.append($("<p class='text-right'></p>").text("신청수 : "+data[i].proj_apply));
-						caption.append($("<p class='text-right'></p>").text("찜개수 : "+data[i].proj_like));
+						caption.append($("<p class='text-right'></p>").text(data[i].proj_like + "💙"));
+						caption.append($("<p class='text-right'></p>").text("작성자 : "+data[i].username));
 						caption.append($("<p class='text-right'></p>").text(data[i].proj_time));
 						
 					
@@ -248,27 +248,26 @@ select {
 	
 <br>	
 <hr>
-	<c:forEach var="board" items="${boardList }">
-		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'">
-				<div class="caption caption-project">
+<%-- 	<c:forEach var="board" items="${boardList }"> --%>
+<!-- 		<div class="col-sm-6 col-md-4 col-lg-3"> -->
+<%-- 			<div class="thumbnail" onclick="location.href='/projectBoard/view?proj_no=${board.proj_no }'"> --%>
+<!-- 				<div class="caption caption-project"> -->
+<!-- 					<h2> -->
+<%-- 						${board.proj_title } --%>
+<!-- 					</h2> -->
 
-					<h2>
-						${board.proj_title }
-					</h2>
-
-					<p>지역 : ${board.proj_loc }</p>
-					<p>경력 : ${board.proj_career }</p>
-					<p>직업 : ${board.proj_job }</p>
-					<p>진행상황 : ${board.proj_progress }</p>
+<%-- 					<p>지역 : ${board.proj_loc }</p> --%>
+<%-- 					<p>경력 : ${board.proj_career }</p> --%>
+<%-- 					<p>직업 : ${board.proj_job }</p> --%>
+<%-- 					<p>진행상황 : ${board.proj_progress }</p> --%>
 					
-					<div class="text-right">신청수 : ${board.proj_apply }</div>
-					<div class="text-right">찜개수 : ${board.proj_like }</div>
-					<div class="text-right">${board.proj_time }</div>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
+<%-- 					<div class="text-right">신청수 : ${board.proj_apply }</div> --%>
+<%-- 					<div class="text-right">찜개수 : ${board.proj_like }</div> --%>
+<%-- 					<div class="text-right">${board.proj_time }</div> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<%-- 	</c:forEach> --%>
 </div>
 <div style="clear: both;"></div>
 

@@ -1,4 +1,3 @@
-<%@page import="dto.CompBoard" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -31,14 +30,14 @@ function compLoadList(){
 				caption.append($("<br>"));
 				caption.append($("<br>"));
 				
-				// 작성자
-				caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].username));
+				//찜한수				
+				caption.append($("<div class='text-right'></div>").text(data[i].comp_like + "👍"));
 				
 				//조회수
 				caption.append($("<div class='text-right'></div>").text("조회수 : " + data[i].comp_view));
 				
-				//찜한수				
-				caption.append($("<div class='text-right'></div>").text("찜한수 : " + data[i].comp_like));
+				// 작성자
+				caption.append($("<div class='text-right'></div>").text("작성자 : " + data[i].username));
 				 
 				
 				//작성일
@@ -144,47 +143,6 @@ select {
 	<br>
 	<hr>
 	<a id="top" href="#">TOP👆</a>
-	<!-- 상위 3개 -->
-<%-- <c:forEach items="${compList }" var="compList"> --%>
-<!-- 		<div class="col-sm-6 col-md-4 col-lg-4"> -->
-<!-- 			<div class="thumbnail"> -->
-<!-- 				<div class="caption"> -->
-<!-- 					<h3>상위 3개 넣을 것 - 찜한 수</h3> -->
-<!-- 					<p>...</p> -->
-<!-- 					<p> -->
-<%-- 						<a href="/compBoard/view?comp_no=${compList.comp_no }" class="btn btn-default" role="button">Button</a> --%>
-<!-- 					</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<%-- </c:forEach> --%>
-<!-- 	<br> -->
-<!-- 	<br> -->
-<!-- 	<br> -->
-	
-<!-- 두번째 줄 -->
-<!-- <div id="board"> -->
-<%-- 	<c:forEach items="${compList }" var="compList"> --%>
-<!-- 			<div class="col-sm-6 col-md-4 col-lg-3"> -->
-<%-- 				<div class="thumbnail" onclick="location.href='/compBoard/view?comp_no=${compList.comp_no }'"  --%>
-<!-- 					 id="compboardlist" style="cursor:pointer; hover: #ccc;"> -->
-<!-- 					<div class="caption caption-comp"> -->
-<%-- 	<%-- 					<input type="checkbox" name="checkRow" id="checkRow" value="${compList.comp_no }"> --%>
-<%-- 						<h4>${compList.comp_no}. ${compList.comp_title }</h4> --%>
-<%-- 						<p>팀 이름 : ${compList.comp_name }</p> --%>
-<!-- 						<br><br> -->
-<%-- 						<p class="text-right" style="margin: 0 0 0px;">작성자 : ${compList.userno }</p> --%>
-<%-- 						<p class="text-right" style="margin: 0 0 0px;">조회수 : ${compList.comp_view }</p> --%>
-<%-- 						<p class="text-right" style="margin: 0 0 0px;">찜한수 : ${compList.comp_like }</p> --%>
-<%-- 						<p class="text-right" style="margin: 0 0 0px;">작성날짜 : ${compList.comp_date }</p> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<%-- 	</c:forEach> --%>
-	
-<!-- </div> -->
-
-
 </div>
 
 <div style="clear: both;"></div>

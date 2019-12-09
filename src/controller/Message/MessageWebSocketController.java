@@ -52,21 +52,28 @@ public class MessageWebSocketController {
 		
 		if( "list".equals(type) ) {
 			Chatter chatter = gson.fromJson(msg, Chatter.class);
-			System.out.println(chatter);
+//			System.out.println("chatter : " + chatter);
 
 //			List<Chat> chatList = messageService.getChatList();
 			List<Chat> chatList = messageService.getLastChatList(chatter);
-			System.out.println( chatList );
+//			System.out.println("chatList : " + chatList );
 			
 			
 			return new Gson().toJson(chatList);
 		}
 		
 		if( "msg".equals(type) ) {
-			System.out.println("msg");
+//			System.out.println("msg");
 			
+			Chat chat = gson.fromJson(msg, Chat.class);
+//			System.out.println("chat : " + chat);
 			Chatter chatter = gson.fromJson(msg, Chatter.class);
-			System.out.println(chatter);
+//			System.out.println("chatter : " + chatter);
+
+			List<Chat> chattingList = messageService.getChattingList(chat);
+//			System.out.println("chattingList : " + chattingList);
+			
+			return new Gson().toJson(chattingList);
 			
 		}
 		

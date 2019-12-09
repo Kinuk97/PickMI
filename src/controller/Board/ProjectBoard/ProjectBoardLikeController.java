@@ -19,9 +19,9 @@ public class ProjectBoardLikeController extends HttpServlet {
 	private ProjectBoardService projectBoardService = new ProjectBoardServiceImpl();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		// 찜 정보 얻기
 		LikePost like = projectBoardService.getLike(req);
+//		System.out.println("likepost : " + like);
 
 		// 찜 정보 토글
 		boolean check = projectBoardService.checkLike(like);
@@ -37,7 +37,7 @@ public class ProjectBoardLikeController extends HttpServlet {
 
 
 		// 결과 JSON응답
-		resp.getWriter().println("{\"countLike\": " + countLike + ", \"check\": " + check + "}");
+		resp.getWriter().println("{\"countLike\":" + countLike + ", \"check\":" + check +"}");
 
 	}
 

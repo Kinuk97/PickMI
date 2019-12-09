@@ -65,7 +65,7 @@ $(document).ready(function() {
 			url: "/projectBoard/like"
 			, type: "GET"
 			, data: {
-				proj_no : '${proejctBoard.proj_no}',
+				proj_no : '${projectBoard.proj_no}',
 				boardno : '${projectBoard.proj_no}',
 				userno : '${projectBoard.userno}',
 				postno : '${ 2 }'
@@ -78,7 +78,7 @@ $(document).ready(function() {
 		})
 	})
 	
-		$("#like").click( function(){
+	$("#like").click( function(){
 		console.log("찜 확인!");
 		$("#like").hide();
 		$("#unlike").show();
@@ -103,12 +103,30 @@ $(document).ready(function() {
 function like(data) {
 		console.log("찜 개수 확인!");
 	$("#countLike").html(data.countLike)
-}
+	}
+	
+	//팀참가 신청 버튼 눌르면 알림
+	$("#invite").click( function(data){
+		alert("팀 참가 신청 되었습니다!");
+		});
+	$("#cant").click(function() {
+		alert("프로필 게시판에 먼저 등록해주세요!");
+	});
+	$("#cant1").click(function() {
+		alert("이미 가입하신 프로젝트 입니다!");
+	});
+	$("#cant2").click(function() {
+		alert("당신은 이 프로젝트의 팀장입니다!");
+	});
+	$("#cant3").click(function() {
+		alert("이미 참가신청 하셨어요! 답변을 기다려주세요!");
+	});
+	
 	
 });
 </script>
 
-<section class="content container-fluid">
+<div class="container">
 
 	<div class="box box-primary">
 		<div class="box-header with-border">
@@ -166,6 +184,7 @@ function like(data) {
 							</button>
 						</c:if>
 					</c:if> 
+					
 					<c:if test="${ !login }">
 						<c:if test="${ canLike }">
 							<button id="loginplz" style="color: red;">
@@ -188,7 +207,7 @@ function like(data) {
 
 			</tr>
 
-			<tr>
+			<tr	>
 				<td class="info">시작날짜</td>
 				<td>${projectBoard.proj_sdate }</td>
 				<td class="info">마감날짜</td>
@@ -209,17 +228,81 @@ function like(data) {
 		</table>
 		
 	</div>
+</div>
 
-
+<div class="container">
 	<div class="box-footer">
 		<c:if test="${userno eq projectBoard.userno }">
-		<button id="btnUpdate" class="btn btn-warning">수정</button>
-		<button id="btnDelete" class="btn btn-danger">삭제</button>
+			<button id="btnUpdate" class="btn btn-warning">수정</button>
+			<button id="btnDelete" class="btn btn-danger">삭제</button>
 		</c:if>
 		<button id="btnList" class="btn btn-primary">목록</button>
+		<c:if test="${ login }">
+		<c:choose>
+			<c:when test="${ !checkprofile && empty decideJoin }">
+				<a id="cant"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }"
+				data-userno="${ projectBoard.userno }"
+				style = "margin-top : 9px;">팀 참가 신청하기💌
+				</a>
+			</c:when>
+		<c:otherwise>
+				<c:choose>
+				<c:when test="${ already }">
+					<a id="cant1"
+					role="button" class="btn btn-info"
+					data-proj_no="${ projectBoard.proj_no }"
+					data-userno="${ projectBoard.userno }"
+					style = "margin-top : 9px;">팀 참가 신청하기💌
+					</a>
+				</c:when>
+				<c:when test="${ leader }">
+					<a id="cant2"
+					role="button" class="btn btn-info"
+					data-proj_no="${ projectBoard.proj_no }"
+					data-userno="${ projectBoard.userno }"
+					style = "margin-top : 9px;">팀 참가 신청하기💌
+					</a>
+				</c:when>
+				<c:when test="${ waiting }">
+					<a id="cant3"
+					role="button" class="btn btn-info"
+					data-proj_no="${ projectBoard.proj_no }"
+					data-userno="${ projectBoard.userno }"
+					style = "margin-top : 9px;">팀 참가 신청하기💌
+					</a>
+				</c:when>
+			<c:otherwise>
+				<c:if test="${ checkprofile && empty decideJoin }">
+				<a id="invite"
+				href="/alert/fromproject?proj_no=${projectBoard.proj_no}"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }"
+				data-userno="${ projectBoard.userno }"
+				style = "margin-top : 9px;">팀 참가 신청하기💌
+				</a>
+				</c:if>
+				
+			</c:otherwise>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
+		</c:if>
+		<c:if test="${decideJoin }">
+				<a id=""
+				href="/mate/accept?proj_no=${projectBoard.proj_no}&userno=${userno}"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }" style = "margin-top : 9px;">초대 수락하기💌
+				</a>
+				<a id=""
+				href="/mate/denied?proj_no=${projectBoard.proj_no}&userno=${userno}"
+				role="button" class="btn btn-info"
+				data-proj_no="${ projectBoard.proj_no }" style = "margin-top : 9px;">초대 거절하기💌
+				</a>
+				</c:if>
 	</div>
-
-</section>
+</div>
 
 <!--모달창 -->
 <div class="modal fade" id="defaultModal">

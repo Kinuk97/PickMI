@@ -113,7 +113,7 @@ public class MgrServiceImpl implements MgrService{
 
 	
 	@Override
-	public Paging getPaging(HttpServletRequest req) {
+	public Paging getPaging(HttpServletRequest req, int i) {
 		
 		// 요청파라미터 curPage 파싱
 		String param = req.getParameter("curPage");
@@ -135,7 +135,7 @@ public class MgrServiceImpl implements MgrService{
 //		System.out.println(search);
 		
 		// ProfileBoard TB와 curPage 값을 이용한 Paging 객체를 생성하고 반환
-		int totalCount = managerDao.selectCntAll(search);
+		int totalCount = managerDao.selectCntAll(search, i);
 			
 		// Paging 객체 생성
 		Paging paging = new Paging(totalCount, curPage, 20);

@@ -7,7 +7,6 @@
 <!-- Header -->
 <jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
 
-
 <!-- checkBox -->
 <script type="text/javascript">
 
@@ -36,52 +35,79 @@ $(document).ready(function(){
 </script>
 
 <style type="text/css">
+.innercon2{
 
-table th {
-    width: auto !important;
+	width:80%;
+	text-align: start;
+	margin-left: 13%;
+	
 }
 
+.table{
+
+	height: 80%;
+}
+
+
 </style>
+
+
 </head>
 <body>
 
+<div class="container">
 
-<div class="container" >
-	<div class="table-responsive">
-	<form action="/mgr/projectboard/delete" method = "get">
-	<table class="table table-condensed table-hover">
-		<tr class="info">
-			<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
-			<th style="width: 5%">글번호</th>
-			<th style="width: 5%">사용자</th>
-			<th style="width: 20%">제목</th>
-			<th style="width: 10%">작성시간</th>
-		</tr>
-		<c:forEach items="${list }" var="pjboard">
-		<tr>
-			<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
-			<td>${pjboard.proj_no }</td>
-			<td>${pjboard.proj_name }</td>
-			<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no }">${pjboard.proj_title }</a></td>
-			<td>${pjboard.proj_time }</td>
-		</tr>	
-		</c:forEach>
-	</table>
-		<button>삭제</button>
-	</form>
-	</div>
-
-	<div class="src" style="text-align: center;">
-		<form action="/mgr/projectlist" method="get">
-			<input type="text" name="search" id="search"/>
-			<button id="btnSearch" class="btn btn-primary">검색</button>
+<!-- 	<div class="innercon1"> -->
+<!-- 		<div class="src" style="text-align: center;"> -->
+<!-- 			<form action="/mgr/profilelist" method="get"> -->
+<!-- 			<input type="text" name="search" id="search"/> -->
+<!-- 			<button id="btnSearch" class="btn btn-primary">검색</button> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	<div class="innercon2">
+		<form action="/mgr/projectboard/delete" method="get">
+			<table class="table table-hover">
+				<thead>
+				<tr class = "info"  >
+					<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+					<th style="width: 10%">글번호</th>
+					<th style="width: 50%">제목</th>					
+					<th style="width: 20%">작성자</th>
+					<th style="width: 15%">작성일</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<c:forEach items="${list }" var="pjboard">
+				<tr>
+					<td><input type="checkbox" name="checkRow" value="${pjboard.proj_no }"/></td>
+					<td>${pjboard.proj_no }</td>
+					<td><a href="/mgr/projectview?proj_no=${pjboard.proj_no}">${pjboard.proj_title }</a></td>
+					<td>${pjboard.userno }</td> 
+					<td>${pjboard.proj_time }</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+				
+			</table>
+			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
+		<div class="src" style="text-align: right;">
+			<form action="/mgr/projectlist" method="get">
+			<input type="text" name="search" id="search"/>
+			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
+			</form>
+		</div>
 	</div>
-</div>
+</div> <!-- container -->
+
 
 	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
    		<c:param name="url" value="${url }" />
 	</c:import>
+
 
 </body>
 </html>

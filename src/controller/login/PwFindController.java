@@ -46,8 +46,10 @@ public class PwFindController extends HttpServlet {
 
 			req.getRequestDispatcher("/WEB-INF/views/user/pwchange.jsp").forward(req, resp);
 		} else { // 유저 정보가 일치하지 않는다면
-			PrintWriter out = resp.getWriter();
 			
+//			req.getRequestDispatcher("/WEB-INF/views/user/pwfind.jsp").forward(req, resp);
+			PrintWriter out = resp.getWriter();
+//			
 			out.println("<script>alert('없는 회원입니다^^'); close(); </script>");
 			out.flush();
 		}

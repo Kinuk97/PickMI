@@ -24,7 +24,7 @@ CREATE TABLE profile (
     prof_loc VARCHAR2(20),
     prof_career VARCHAR2(20),
     prof_content VARCHAR2(500),
-    prof_like   NUMBER
+ 
 );
 
 DROP SEQUENCE profile_seq;
@@ -41,13 +41,11 @@ CREATE TABLE projboard (
     proj_loc VARCHAR2(100),
     proj_career VARCHAR2(50),
     proj_member NUMBER,
-    proj_apply NUMBER,
     proj_sdate DATE,
     proj_ddate DATE,
     proj_rec_date DATE,
     proj_progress VARCHAR2(50),
     proj_content VARCHAR2(500),
-    proj_like NUMBER,
     proj_job VARCHAR2(50)
 );
 
@@ -172,8 +170,8 @@ DROP SEQUENCE schedule_seq;
 CREATE SEQUENCE schedule_seq;
 
 //체크리스트
-DROP TABLE chceklist;
-CREATE TABLE chceklist (
+DROP TABLE checklist;
+CREATE TABLE checklist (
     checkno NUMBER PRIMARY KEY,
     scheduleno NUMBER NOT NULL,
     check_content VARCHAR2(100),
@@ -188,45 +186,54 @@ DROP SEQUENCE checklist_seq;
 CREATE SEQUENCE checklist_seq;
 
 //메시지
-DROP TABLE Info;
+
 DROP TABLE Chatter;
 DROP TABLE Chat;
 
-CREATE TABLE Info(
-    chat_no INT PRIMARY KEY,
-    chat_maketime DATE
-);
 
 
 CREATE TABLE Chatter(
-    chat_no INT,
-    chat_user INT
+    chat_no NUMBER,
+    chat_user NUMBER
 );
 
 CREATE TABLE Chat(
-    chat_no INT,
-    chat_sender INT,
+    chat_no NUMBER,
+    chat_sender NUMBER,
     chat_msg VARCHAR(1000),
     chat_sendtime DATE
 );
 
-ALTER TABLE Chatter
-ADD CONSTRAINT message_fk_01
-    FOREIGN KEY (chat_no)
-    REFERENCES Info(chat_no);
-
-ALTER TABLE Chat
-ADD CONSTRAINT message_fk_02
-    FOREIGN KEY (chat_no)
-    REFERENCES Info(chat_no);
     
 ALTER TABLE Chatter
-ADD CONSTRAINT message_fk_03
+ADD CONSTRAINT message_fk_01
     FOREIGN KEY (chat_user)
     REFERENCES user_table(userno);
     
 ALTER TABLE Chat
-ADD CONSTRAINT message_fk_04
+ADD CONSTRAINT message_fk_02
     FOREIGN KEY (chat_sender)
     REFERENCES user_table(userno);
     
+//팀관리 테이블
+DROP TABLE mate;
+CREATE TABLE mate (
+    userno NUMBER,
+    proj_no NUMBER,
+    mate NUMBER DEFAULT '0',
+    CONSTRAINT mate_check CHECK (mate IN ('0','1','2','3')),
+    CONSTRAINT mate_userno_fk FOREIGN KEY (userno) REFERENCES user_table (userno),
+    CONSTRAINT mate_proj_no_fk FOREIGN KEY (proj_no) REFERENCES projboard (proj_no) 
+    );
+    
+//알림 테이블
+ DROP TABLE alert;
+ CREATE TABLE alert (
+    userno NUMBER,
+    alert VARCHAR2(100),
+    alerttime DATE DEFAULT sysdate,
+    sender NUMBER,
+    checkcheck CHAR(1) DEFAULT '0',
+    CONSTRAINT alert_check CHECK (checkcheck IN ('0','1')),
+    CONSTRAINT alert_userno_fk FOREIGN KEY (userno) REFERENCES user_table (userno)
+    );

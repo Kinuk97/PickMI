@@ -49,8 +49,10 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("email", email);
 			session.setAttribute("name", userno.getName());
 			session.setAttribute("userno", userno.getUserno());
-//			System.out.println(user);
-//			System.out.println("test" + session.getAttribute("userno"));
+			session.setAttribute("photo_storedname", userno.getPhoto_storedname());
+			
+//			System.out.println(userno);
+//			System.out.println("test" + session.getAttribute("photo_storedname"));
 			
 			resp.sendRedirect("/main");
 		} else {		

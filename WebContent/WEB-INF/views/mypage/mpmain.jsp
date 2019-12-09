@@ -18,13 +18,22 @@
 
 <script type="text/javascript">
 
-$('#testBtn').click(function(e){
-	$('#testModal').modal();
-});
+// $('#testBtn').click(function(e){
+// 	$('#testModal').modal();
+// });
+
+// $('#testBtn1').click(function(e){
+// 	$('#deleteModal').modal();
+// });
+
+
+
 
 </script>
 
 <script>
+
+
 // 사용자 사진 업로드
 function ajaxFileUpload() {
 	
@@ -86,15 +95,117 @@ function ajaxFileDelete() {
     });
 }
 
+// --- 비밀번호수정 모달 ---
+$(document).ready(function() {
+	
+	//경고 모달 호출 메서드
+   function warningModal(content) {
+      $(".modal-contents").text(content);
+      $("#defaultModal").modal('show');
+      console.log(11111111111);
+   }
+
+	$("#change").on("click", function(){
+		// 비밀번호 입력
+        if($("#pw").val() ==''){
+        	warningModal('현재 비밀번호를 입력하세요');
+            $("#pw").focus();
+            return false;
+        }
+		
+		// 현재 비밀번호 불일치
+        if($("#pw").val() !== "${user.pw}"){
+        	warningModal('현재 비밀번호가 일치하지 않습니다.');
+            $("#pw").focus();
+            console.log('${user.pw}');
+            return false;
+        }
+		
+        // 비밀번호 확인
+        if($("#pw1").val() ==''){
+        	warningModal('변경하실 비밀번호를 입력하세요');
+            $("#pw1").focus();
+            return false;
+        }
+		
+        if($("#pw2").val() ==''){
+        	warningModal('변경하실 비밀번호를 다시 한번 더 입력하세요');
+            $("#pw2").focus();
+            return false;
+        }
+        
+       	 // 동일 비밀번호
+		if(($("#pw").val()) == ($("#pw1").val())){
+	    	warningModal('현재비밀번호와 다르게 입력하세요');
+	    	return false;
+		}
+       	
+		if(($("#pw1").val()) !== ($("#pw2").val())){
+	    	warningModal('변경하실 비밀번호가 일치하지 않습니다');
+	    	return false;
+		}
+		       	 
+       	 $("#pwdchangeForm").submit();
+	});
+	
+});
+
+
+
 </script>
 
 
+
+
+<script>
+//탈퇴 확인 비밀번호 모달창
+
+$(document).ready(function() {
+	
+	//경고 모달 호출 메서드
+   function warningModal1(content) {
+      $(".modal-contents1").text(content);
+      $("#deleteModal").modal('show');
+
+   }
+
+	$("#change1").on("click", function(){
+		
+		// 비밀번호 입력
+        if($("#pw3").val() ==''){
+    		alert("비밀번호를 입력하세요")
+        	//warningModal('현재 비밀번호를 입력하세요');
+	
+            $("#pw3").focus();
+            return false;
+        }
+		
+		// 현재 비밀번호 불일치
+        if($("#pw3").val() !== "${user.pw}"){
+			console.log(2);
+			alert("비밀번호가 일치하지 않습니다.");
+//         	warningModal1('현재 비밀번호가 일치하지 않습니다.');
+            $("#pw3").focus();
+            console.log('${user.pw}');
+            return false;
+        }
+       	 $("#deleteForm").submit();
+	});
+	
+});
+
+
+
+</script>
     
     
 
 
 
 <style type="text/css">
+.modal-backdrop{
+	z-index: -1;
+}
 
 .myPageContainer {
 	width: 95%;
@@ -128,7 +239,7 @@ function ajaxFileDelete() {
     height: 531px;
     border: 1px solid #ddd;
     box-sizing: border-box;
-    margin: 50px;
+    margin: 3%;
     padding: 16px;
     border-radius: 40px;
 }
@@ -137,10 +248,10 @@ function ajaxFileDelete() {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 38%;
-    height: 200px;
+    width: 40%;
+    height: 220px;
     padding: 16px;
-    margin: 50px;
+    margin: 3%;
     border: 1px solid #ddd;
     margin-bottom: 30px;
     border-radius: 40px;
@@ -150,10 +261,10 @@ function ajaxFileDelete() {
 	display: inner-block;
     float: right;
     background: #FFFFFF;
-    width: 38%;
+    width: 40%;
     height: 300px;
     padding: 16px;
-    margin: 50px;
+    margin: 3%;
     border: 1px solid #ddd;
     border-radius: 40px;
     margin-top: 0;
@@ -167,7 +278,8 @@ function ajaxFileDelete() {
 }
 
 #profileImg{
-	width:27%
+	width:144px;
+	height:139px;
 }
 
 #wrapper{
@@ -175,15 +287,17 @@ function ajaxFileDelete() {
     padding-bottom: 0px
 }
 
+
+
 </style>
 
 </head>
 <body>
 <div class="container myPageContainer">
 	<div class="container text-center">
-		<h1>😉마이페이지😉</h1>
+		<h1 style="margin-bottom: 5%;">😉마이페이지😉</h1>
 	</div>
-	<div class="container box">
+	<div class="container box" style="margin-bottom: 1%;">
 
 		<div class="inner_con1" > 
 			<ul class="list-group">
@@ -219,12 +333,13 @@ function ajaxFileDelete() {
 <!-- 		 	<button type= "submit">전송</button> -->
 <!-- 			</form> -->
 						
-			<!-- 모달을 열기 위한 버튼 -->
-			<br>
-			<a href="/mypage/pwmodify"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal">
+			<!-- 비밀번호 수정 모달을 열기 위한 버튼 -->
+			<br><br>
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#testModal" >
 			비밀번호 수정
-			</button></a>
+			</button>
 			<!-- 모달 영역 -->
+			<form action="/mypage/pwmodify" method="post" id="deleteForm">
 			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -233,28 +348,110 @@ function ajaxFileDelete() {
 			<h4 class="modal-title" id="myModalLabel">비밀번호 수정</h4>
 			</div>
 						
-			<form action="/mypage/pwmodify" method="post">
 				<div class="modal-body">
-				현재비밀번호<input type="password" name="password1"> <br>
-				수정할비밀번호<input type="password" name="password2"> <br>
-				수정할비밀번호 확인<input type="password" name="password2">
+				<input type="hidden" value="${USER.email }" id="email" name="email"/>
+				<input type="hidden" value="${USER.userno }" id="userno" name="userno"/>
+				
+				<p>현재 비밀번호<input type="password" name="pw" id="pw"
+				placeholder="현재 비밀번호를 입력하세요" required="required"></p> 
+				<p>변경 비밀번호<input type="password" name="pw1" id="pw1"
+				placeholder="수정 비밀번호를 입력하세요" required="required"></p> 
+				<p>변경 비밀번호 확인<input type="password" name="password2"  name="pw2" id="pw2"
+				placeholder="수정 비밀번호를 다시 입력하세요" required="required"></p>
 				</div>
-			</form>
 			<div class="modal-footer">
-			<button type="button" class="btn btn-primary">확인</button>
+			<button type="submit" class="btn btn-primary" id="change">변경하기</button>
 			<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 			</div>
 			</div>
 			</div>
 			</div>
+			</form>
 			
-			<br>
-			<button type="button" class="btn btn-info">회원탈퇴</button>
-			<br>
-			<br>
-			<br>
-			<p style="font-size: 17px; text-align:left;">이름 : ${userinfo.name }</p>
-			<p style="font-size: 17px; text-align:left;">이메일 : ${userinfo.email }</p>
+				<!--모달창 -->
+	<div class="modal fade" id="defaultModal">
+		<div class="modal-dialog">
+			<div class="modal-content ">
+				<div class="modal-header panel-heading">
+					<h4 class="modal-title">알림</h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-contents"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- 모달창 -->
+
+	
+	
+			<!-- 회원탈퇴 확인을 위한 모달창 -->
+			<!-- 모달을 열기 위한 버튼 -->
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#deleteModal" >
+			회원 탈퇴
+			</button>
+			<!-- 모달 영역 -->
+			<form action="/mypage/selfdelete" method="post" id="selfdelete">
+			<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<h4 class="modal-title" id="myModalLabel">회원 탈퇴를 위해 비밀번호를 입력해 주세요</h4>
+			</div>
+						
+				<div class="modal-body">
+				<input type="hidden" value="${USER.email }" id="email2" name="email"/>
+				<input type="hidden" value="${USER.userno }" id="userno2" name="userno"/>
+				
+				<p>현재 비밀번호<input type="password" name="pw" id="pw3"
+				placeholder="현재 비밀번호를 입력하세요" required="required"></p> 
+				</div>
+			<div class="modal-footer">
+			<button type="submit" class="btn btn-primary" id="change1">확인</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			</div>
+			</div>
+			</div>
+			</div>
+			</form>
+			
+				<!--모달창 -->
+	<div class="modal fade" id="deleteModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header panel-heading">
+					<h4 class="modal-title">알림</h4>
+				</div>
+				<div class="modal-body">
+					<p class="modal-contents1"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<!-- 모달창 -->
+			
+					
+<!-- 			<form action = "/mypage/selfdelete" method="post" name = "userdeletebtn"> -->
+<!-- 			<button type="submit" class="btn btn-info">회원탈퇴</button> -->
+<!-- 			</form> -->
+		
+			<p style="font-size: 17px; text-align:left; margin-left:5%;">이름 : ${userinfo.name }</p>
+			<p style="font-size: 17px; text-align:left; margin-left:5%;">이메일 : ${userinfo.email }</p>
 			
 		</div>
 		
@@ -264,16 +461,39 @@ function ajaxFileDelete() {
 			</ul>
 <!-- 			<p style="text-align:left; font-size:25px">활동이력</p> -->
 			<hr>
-			<a href="/mypage/boardwrite">내가쓴게시글가져오기</a> 
-			내가쓴댓글가져오기
-			찜하기한글가져오기
+			
+			<div class="row">
+				<div class="col-md-4">
+					<a href="/mypage/boardwrite"><img src="/resources/edit.png" style="width:45x; height: 45px;">
+					<br>내가 작성한 게시글</a>
+				</div>	
+			
+				<div class="col-md-4">
+					<a href="/mycomment/list"><img src="/resources/chat.png" style="width:45px; height: 45px;">
+					<br>내가 작성한 댓글</a>
+				</div>
+				
+				<div class="col-md-4">
+					<a href="/mypage/likelist"><img src="/resources/heart.png" style="width:45px; height: 45px;">
+					<br>내가 찜한 게시글</a>						
+				</div>
+			</div>
 		</div>
-
 		<div class="inner_con3">
 			<ul class="list-group">
 			  <li class="list-group-item list-group-item-info"><p style="font-size: 25px; text-align: left;">프로젝트 관리</p></li>
 			</ul>
 			<hr>
+			<c:forEach items="${projList }" var="list">
+				<div class="row">
+					<div class="col-lg-4">${list.proj_title}</div>
+					<div class="col-lg-4">${list.proj_progress}</div>
+					<div class="col-lg-4"><a class="btn btn-warning" href='/schedule/list?proj_no=${list.proj_no }' style="width: 45%;">일정</a>
+					</div>
+				</div>
+			</c:forEach>
+					<a href="/mate/list" class="btn btn-info" role="button" style="width: 45%;">내 프로젝트 팀원관리</a>
+			
 		</div>
 		
 		<div style="clear: both;"></div>

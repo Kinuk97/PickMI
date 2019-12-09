@@ -8,6 +8,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import util.Paging;
 
@@ -36,7 +37,7 @@ public interface MyPageService {
 	 * @param req - 요청 정보 객체
 	 * @return Paging - 페이징 처리 객체
 	 */
-	public Paging getPaging(HttpServletRequest req);
+//	public Paging getPaging(HttpServletRequest req);
 
 	/**
 	 * usertb에서 email 가져오기
@@ -45,26 +46,55 @@ public interface MyPageService {
 	 */
 	public User getUserno(HttpServletRequest req);
 
-	/**
-	 * 페이징 정보를 활요앻 보여질 게시물 목록만 조회
-	 * @param paging
-	 * @param req
-	 * @return
-	 */
-	public List<ProfileBoard> getpfList(Paging paging, HttpServletRequest req);
-	public List<ProjectBoard> getpjList(Paging paging, HttpServletRequest req);
-	public List<CompBoard> getcompList(Paging paging, HttpServletRequest req);
-	public List<FreeBoard> getfreeList(Paging paging, HttpServletRequest req);
-
-
-// ------ 비밀번호 수정
-
 	public User getcurPwParam(HttpServletRequest req);
 
 	boolean eqPW(User pwparam);
 
 	public void modifyPw(User pwparam);
 
+	/**
+	 * 게시글 삭제하는 기능
+	 * 
+	 * @param User - 사용자번호가 담겨있는 객체
+	 * @return 삭제 성공 여부 반환
+	 */
+	public boolean userDelete(User user);
+		
+	public Paging getPaging(HttpServletRequest req, int i);
 	
+	
+	/**
+	 * 내가 작성한 게시글 리스트
+	 * @param pfpaging
+	 * @param user
+	 * @param i
+	 * @return
+	 */
+	public List getList(Paging pfpaging, User user, int i);
+	
+	
+	/**
+	 * 내가 찜한 리스트
+	 * @param paging - 게시판 페이징
+	 * @param user - userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List getLikeList(Paging paging, User user, int i);
+
+	/**
+	 * 내 댓글 리스트
+	 * @param paging
+	 * @param userno
+	 * @param i - postno
+	 * @return
+	 */
+	public List getReplyList(Paging paging, User user, int i);
+
+// -------------------- tES T ---------------------------------	
+	
+	public Paging getPaging(HttpServletRequest req);
+	
+//-----------------------------------------------------------------
 	
 }

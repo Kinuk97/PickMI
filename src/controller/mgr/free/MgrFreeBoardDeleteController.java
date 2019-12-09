@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.FreeBoard;
+import dto.ProjectBoard;
 import serivce.face.FileService;
 import serivce.face.FreeBoardService;
 import serivce.impl.FileServiceImpl;
@@ -28,21 +29,27 @@ public class MgrFreeBoardDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		FreeBoard boardno = freeboardService.getParam(req);
-		FreeBoard selectBoard = freeboardService.FreeBoardDetail(boardno);
-//		System.out.println("boardno : " + boardno);
-//		System.out.println("selectBoard : " + selectBoard);
-		
-		if (boardno.getFree_no() != 0) {
-			try {
-				if (selectBoard != null) {			
-					fileService.deleteFile(getServletContext().getRealPath("upload"), 3, boardno.getFree_no());
-					freeboardService.removeBoard(boardno);
-				}
-			} catch (ClassCastException e) {
-				e.printStackTrace();	
+		String[] strings = req.getParameterValues("checkRow");
+		FreeBoard chkfrBoard = new FreeBoard();
+
+		if(strings != null) {
+			
+			for (String string : strings) {
+				chkfrBoard.setFree_no(Integer.parseInt(string));
+				fileService.deleteFile(getServletContext().getRealPath("upload"), 3, chkfrBoard.getFree_no());
+				freeboardService.removeBoard(chkfrBoard);		
 			}
-		}	
+						
+		} else {
+			
+			FreeBoard freeBoard = freeboardService.getParam(req);
+			fileService.deleteFile(getServletContext().getRealPath("uplaod"), 2, freeBoard.getFree_no());
+			freeboardService.removeBoard(freeBoard);			
+
+			
+		}
+		
+		
 			resp.sendRedirect("/mgr/freelist");		
 	}
 }

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dto.Schedule;
 import serivce.face.ScheduleService;
 import serivce.impl.ScheduleServiceImpl;
@@ -21,9 +23,15 @@ public class ScheduleAddController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
 		
 		Schedule schedule = scheduleService.getSchedule(req);
-
-		scheduleService.putSchedule(schedule);
+		
+		if (scheduleService.checkSchedule(schedule)) {
+			scheduleService.putSchedule(schedule);
+			resp.getWriter().println("{ \"result\" : true }");
+		} else {
+			resp.getWriter().println("{ \"result\" : false }");
+		}
 	}
 }

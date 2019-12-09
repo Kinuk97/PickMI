@@ -52,7 +52,7 @@ public interface MgrService {
 	 * @param req - 요청 정보 객체
 	 * @return Paging - 페이징 처리 객체
 	 */
-	public Paging getPaging(HttpServletRequest req);
+	public Paging getPaging(HttpServletRequest req, int i);
 	
 //	/**
 //	 * user리스트 목록 조회 
@@ -107,8 +107,10 @@ public interface MgrService {
 
 //	public void listdeleteComp(HttpServletRequest req);
 	
-// ----- ProjectList
+//  ProjectList -----
 
-
+// ----- UserDelete
+	
+	
 
 }

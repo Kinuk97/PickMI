@@ -36,7 +36,7 @@ public class MgrProfileListController extends HttpServlet {
 		if (req.getSession().getAttribute("mgrlogin") != null) {
 		
 			// 요청파라미터에서 curPage를 구하고 Paging 객체 반환
-			Paging paging = profileBoardService.getPaging(req);
+			Paging paging = mgrService.getPaging(req, 1);
 			
 			// 검색어 파라미터
 			paging.setSearch(req.getParameter("search"));

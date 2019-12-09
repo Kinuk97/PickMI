@@ -80,10 +80,10 @@ function profileList() {
 		success : function(data) {
 			for (var i = 0; i < data.length; i++) {
 				
-				var caption = $("<div class='caption caption-profile'></div>");
+				var caption = $("<div class='caption caption-profile' onclick=\"location.href='/profileBoard/view?prof_no="+data[i].prof_no +"'\"></div>");
 				
-				caption.append($("<h4></h4>").text(data[i].prof_no));
-				caption.append($("<p></p>").text(data[i].username));
+				caption.append($("<h4></h4>").text(data[i].username));
+// 				caption.append($("<p></p>").text(data[i].username));
 				caption.append($("<p></p>").text(data[i].prof_interest));
 				caption.append($("<p></p>").text(data[i].prof_loc));
 				caption.append($("<p></p>").text(data[i].prof_job));
@@ -93,7 +93,7 @@ function profileList() {
 				caption.append($("<p></p>").text(data[i].prof_time+"에 작성"));
 	
 			
-				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class=\"thumbnail\" onclick=\"location.href='/profileBoard/view?profileno="+data[i].prof_no +"'\"></div>").append(caption));
+				var board = $("<div class='col-sm6 col-md-4 col-lg-3'></div>").append($("<div class='thumbnail'></div>").append(caption));
 				$("#board").append(board);
 			}	
 		
@@ -200,17 +200,16 @@ a#top {
     z-index: 999;
     font-size: 20px;
 }
-
 </style>
 
-<h1 align="center"> 나를 소개해보세요❣❣😄 </h1>
+<h1 align="center"> 😄프로필 게시판😄 </h1>
 <c:if test="${ login }">
-	<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+	<div class="text-right" style="padding: 0 120px; margin-right: 119px;">
 		<a href="/profileBoard/write"><button class="btn btn-info">프로필 등록</button></a>
 	</div>
 </c:if>
 <c:if test="${ !login }">
-	<div class="text-right" style="padding: 0 120px; margin-right: 50px;">
+	<div class="text-right" style="padding: 0 120px; margin-right: 119px;">
 		<button class="btn btn-info" id="write">프로필 등록</button>
 	</div>
 </c:if>
@@ -222,7 +221,7 @@ a#top {
 <input type="hidden" value="${paging.stateno }" name="stateno">
 <input type="hidden" value="${paging.careerno }" name="careerno">
 
-<div id=filtersystem style="padding:0 100px; margin-left: 60px;">
+<div id=filtersystem style="padding:0 100px; margin-left: 150px;">
 	<div id="interest">
 		<button class="btn btn-info" id="interestBtn">관심</button>
 		<div id="filter-list">
@@ -272,23 +271,22 @@ a#top {
 
 <a id="top" href="#">TOP👆</a>
 <div id="board" class="container list-container">
-	<c:forEach items="${ list }" var="pro">
-		<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="thumbnail" onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'">
-					<div class="caption caption-profile">
-						<h4>${ pro.prof_no }</h4>
-						<p>${ pro.username }</p>
-						<p>${ pro.prof_interest }</p>
-						<p>${ pro.prof_loc }</p>
-						<p>${ pro.prof_job }</p>
-						<p>${ pro.prof_state }</p>
-						<p id="abc">${ pro.prof_career }</p>
-						<p class="text-right" id="abc">${ pro.prof_like }❤</p>
-						<p>${ pro.prof_time }에 작성</p>
-					</div>
-				</div>
-		</div>
-	</c:forEach>
+<%-- 	<c:forEach items="${ list }" var="pro"> --%>
+<!-- 		<div class="col-sm-6 col-md-4 col-lg-3"> -->
+<%-- 				<div class="thumbnail" onclick="location.href='/profileBoard/view?prof_no=${pro.prof_no }'"> --%>
+<!-- 					<div class="caption caption-profile"> -->
+<%-- 						<h4>${ pro.username }</h4> --%>
+<%-- 						<p>${ pro.prof_interest }</p> --%>
+<%-- 						<p>${ pro.prof_loc }</p> --%>
+<%-- 						<p>${ pro.prof_job }</p> --%>
+<%-- 						<p>${ pro.prof_state }</p> --%>
+<%-- 						<p id="abc">${ pro.prof_career }</p> --%>
+<%-- 						<p class="text-right" id="abc">${ pro.prof_like }❤</p> --%>
+<%-- 						<p>${ pro.prof_time }에 작성</p> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 		</div> -->
+<%-- 	</c:forEach> --%>
 </div>
 <div style="clear: both;"></div>
 

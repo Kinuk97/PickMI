@@ -14,4 +14,15 @@ public interface MessageDao {
 
 	public List<User> selectSearchMsgUser(String search, User user);
 
+	public List<Chat> selectChattingList(Chat chat);
+
+	public void insert(Chat chat);
+	
+	public void insert(Chatter chatter);
+
+	public int selectNextChat_no();
+
+	public Chat getExistsChatRoom(Chatter chatter1);
+	
+	public List<Chatter> selectExistsChatUser(Chatter chatter);
 }

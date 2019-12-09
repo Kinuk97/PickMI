@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 
 
+
 <!-- Header -->
 <jsp:include page="/WEB-INF/views/mgr/layouts/mgrheader.jsp"/>  
 
@@ -33,48 +34,79 @@ $(document).ready(function(){
 
 </script>
 
+<style type="text/css">
+.innercon2{
+
+	width:80%;
+	text-align: start;
+	margin-left: 13%;
+	
+}
+
+.table{
+
+	height: 80%;
+}
+
+
+</style>
+
+
 </head>
 <body>
 
-<div class="container" >
-	<form action="/mgr/compboard/delete" method="get">
-	<table class="table table-condensed">
-		<tr class="info">
-			<th style="width: 5%"><input type="checkbox" id="checkAll" /></th>
-			<th style="width: 5%">게시글 번호</th>
-			<th style="width: 5%">사용자 번호</th>
-			<th style="width: 20%" >제목</th>
-			<th style="width: 10%">팀이름</th>
-			<th style="width: 10%">작성시간</th>
-		</tr>
-		<c:forEach items="${ list }" var="comp">
-		<tr>
-			<td><input type="checkbox" name="checkRow" value="${comp.comp_no }"/></td>
-			<td>${comp.comp_no }</td>
-			<td>${comp.userno }</td>
-			<td><a href="/mgr/compview?comp_no=${ comp.comp_no }">${comp.comp_title }</a></td>
-			<td>${comp.comp_name }</td>
-			<td>${comp.comp_date }</td>
-		</tr>	
-		</c:forEach>
-	</table>	
-		<button>삭제</button>
-	</form>	
+<div class="container">
+
+<!-- 	<div class="innercon1"> -->
+<!-- 		<div class="src" style="text-align: center;"> -->
+<!-- 			<form action="/mgr/profilelist" method="get"> -->
+<!-- 			<input type="text" name="search" id="search"/> -->
+<!-- 			<button id="btnSearch" class="btn btn-primary">검색</button> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
-	<div class="src" style="text-align: center;">
-		<form action="/mgr/complist" method="get">
-			<input type="text" name="search" id="search"/>
-			<button id="btnSearch" class="btn btn-primary">검색</button>
+	<div class="innercon2">
+		<form action="/mgr/compboard/delete" method="get">
+			<table class="table table-hover">
+				<thead>
+				<tr class = "info"  >
+					<th style="width: 5%"><input type="checkbox" id="checkAll"/></th>
+					<th style="width: 10%">글번호</th>
+					<th style="width: 50%">제목</th>					
+					<th style="width: 15%">작성자</th>
+					<th style="width: 20%">작성일</th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<c:forEach items="${list }" var="comp">
+				<tr>
+					<td><input type="checkbox" name="checkRow" value="${comp.comp_no  }"/></td>
+					<td>${comp.comp_no }</td>
+					<td><a href="/mgr/compview?comp_no=${comp.comp_no}">${comp.comp_title }</a></td>
+					<td>${comp.userno }</td>
+					<td>${comp.comp_date }</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+				
+			</table>
+			<button class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; ">삭제</button>
 		</form>
-	
-		
+		<div class="src" style="text-align: right;">
+			<form action="/mgr/complist" method="get">
+			<input type="text" name="search" id="search"/>
+			<button id="btnSearch" class="btn btn-primary" style="background-color: #5bc0de; border-color: #5bc0de; text-align: right;">검색</button>
+			</form>
+		</div>
+	</div>
+</div> <!-- container -->
+
+
 	<c:import url="/WEB-INF/views/mgr/layouts/mgrpaging.jsp">
    		<c:param name="url" value="${url }" />
 	</c:import>
-
-	
-	</div>
-</div>
 
 </body>
 </html>

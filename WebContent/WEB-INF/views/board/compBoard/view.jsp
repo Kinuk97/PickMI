@@ -188,8 +188,9 @@ $(document).ready(function(){
 $(document).ready(function() {
 	
 	$("#unlike").click( function(){
-		$("#like").hide();
-		$("#unlike").show();
+		console.log("된다");
+		$("#unlike").hide();
+		$("#like").show();
 		$.ajax({
 			url: "/compBoard/like"
 			, type: "GET"
@@ -208,6 +209,7 @@ $(document).ready(function() {
 	})
 	
 	$("#like").click( function(){
+		console.log("된다");
 		$("#like").hide();
 		$("#unlike").show();
 		$.ajax({
@@ -227,9 +229,10 @@ $(document).ready(function() {
 		})
 	})
 
-function like(data) {
-	$("#countLike").html(data.countLike)
-}
+	function like(data) {
+		console.log("찜개수");
+		$("#countLike").html(data.countLike)
+	}
 	
 })
 </script>
@@ -238,39 +241,49 @@ function like(data) {
 <br>
 
 <div class="container">
-	
 	<table class="table table-bordered">
 
 			<tr>
-				<td>프로젝트 제목</td><td>${compBoard.comp_title }</td>
-				<td>작성자(팀장)</td><td>${compBoard.username }</td>
+				<td class="info">프로젝트 제목</td><td>${compBoard.comp_title }</td>
+				<td class="info">작성자(팀장)</td><td>${compBoard.username }</td>
 			</tr>
 
 			<tr>
-				<td>팀 이름</td><td>${compBoard.comp_name }</td>
-				<td>작성날짜</td><td>${compBoard.comp_date }</td>
+				<td class="info">팀 이름</td><td>${compBoard.comp_name }</td>
+				<td class="info">작성날짜</td><td>${compBoard.comp_date }</td>
 			</tr>
 
 			<tr>
-				<td>참여인원</td><td>${compBoard.comp_member }</td>
-				<td>조회수</td><td>${compBoard.comp_view }</td>
+				<td class="info">참여인원</td><td>${compBoard.comp_member }</td>
+				<td class="info">조회수</td><td>${compBoard.comp_view }</td>
 			</tr>
 
 			<tr>
-				<td>프로젝트 기간</td><td>시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
+				<td class="info" style="padding-top: 22px;">프로젝트 기간</td><td style="padding-top: 22px;">시작날 : ${compBoard.comp_startdate } / 종료날 : ${compBoard.comp_enddate }</td>
 				
-				<td>찜하기</td><td id="countLike">${countLike }
-					<c:choose>
-						<c:when test="${not empty login }">
-							<button id="like" class="btn btn-default" style="padding: 0px; margin-top: 0px;">LIKE</button>
-							<button id="unlike" style="display: none; padding:0px; margin-top: 0px;" class="btn btn-default">UNLIKE</button> 
-						</c:when>
+				<td class="info" style="padding-top: 22px;">찜하기</td><td><span id="countLike">${countLike }</span>
+					<c:if test="${ login }">
+						<c:if test="${ canLike }">
+							<button id="like" style="color: red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="display: none; color:blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
 						
-						<c:otherwise>
-<!-- 							<button id="unlike" class="btn btn-default" style="padding: 0px; margin-top: 0px;">UNLIKE</button> -->
-<!-- 							<button id="like" style="display: none; padding: 0px; margin-top:0px;" class="btn btn-default">LIKE</button> -->
-						</c:otherwise>
-					</c:choose>
+						<c:if test="${ !canLike }">
+							<button id="like" style="display: none; color:red;">
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</button>
+							<button id="unlike" style="color:blue;">
+								<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+							</button>
+						</c:if>
+					</c:if>
+					<c:if test="${ !login }">
+<!-- 						로그인 안했을 때는 아무것도 안 뜸 -->
+					</c:if>
 				</td>
 			</tr>
 
@@ -283,11 +296,18 @@ function like(data) {
 		첨부파일<a href ="/file/download?fileno=${files.fileno}"> ${files.originName }</a>
 		
 		<br><br>
+		
+		<c:if test="${login }">
 		<div class="row text-center">
 			<button id="btnList" class="btn btn-default">게시글 목록</button>
-			<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
-			<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+			<c:if test="${userno eq compBoard.userno }">
+				<button id="btnUpdate" class="btn btn-default">게시글 수정</button>
+				<button id="btnDelete" class="btn btn-default" onclick="alert('게시글을 정말 삭제하시겠습니까?.')">게시글 삭제</button>
+			</c:if>
 		</div>
+		</c:if>
+		<c:if test="${!login }">
+		</c:if>
 	<br><hr>
 	
 	<h4>${cntreply }개의 댓글</h4>

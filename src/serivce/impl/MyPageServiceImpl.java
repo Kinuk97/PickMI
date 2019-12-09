@@ -12,6 +12,7 @@ import dto.CompBoard;
 import dto.FreeBoard;
 import dto.ProfileBoard;
 import dto.ProjectBoard;
+import dto.Reply;
 import dto.User;
 import serivce.face.MyPageService;
 import util.Paging;
@@ -22,7 +23,7 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	private MyPageDao myPageDao = MyPageDaoImpl.getInstance();
 	
-	private MyPageServiceImpl() {
+	public MyPageServiceImpl() {
 	}
 	
 	private static class Singleton{
@@ -54,48 +55,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public Paging getPaging(HttpServletRequest req) {
-	
-		//요청파라미터 curPage를 파싱한다
-		String param = req.getParameter("curPage");
-		int curPage =0;
-		if( param!=null && !"".equals(param)) {
-			curPage =Integer.parseInt(param);
-		}
-
-		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
-		int totalcount = myPageDao.selectCntAll(req);
-
-		//Paging 객체 생성
-		Paging paging = new Paging(totalcount, curPage);
-		
-		return paging;
-	}
-
-	@Override
 	public User getUserno(HttpServletRequest req) {
 		return myPageDao.selectUserbyUserno(req);
-	}
-
-	@Override
-	public List<ProfileBoard> getpfList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectPf(paging, req);
-	}
-
-	@Override
-	public List<ProjectBoard> getpjList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectPj(paging, req);
-	}
-
-	@Override
-	public List<CompBoard> getcompList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectComp(paging, req);
-	}
-
-	@Override
-	public List<FreeBoard> getfreeList(Paging paging, HttpServletRequest req) {
-		return myPageDao.selectFree(paging, req);
-		
 	}
 
 // ----- 비밀번호 수정	
@@ -133,35 +94,97 @@ public class MyPageServiceImpl implements MyPageService {
 		userDao.updatePw(pwparam);
 	}
 
-
-
-
-
-//	@Override
-////	public boolean modifyPw(User user) {
-//	
-//		int cnt = 0;
-////		cnt = myPageDao.selectCntUserByUserno(user); // 현재 비밀번호와 일치하는 비밀번호의 갯수
-//		
-//		if (cnt == 1) {
-////			myPageDao.updatePw(user); // 일치한다면 비밀번호 수정 가능하게 해주는 메소드
-//			
-//			return true;
-//		} else {
-//			return false;
-//		}
-//		
-////		return false;
+	//사용자 삭제
+	@Override
+	public boolean userDelete(User user) {
+		
+		int result = myPageDao.deleteUser(user);
+		
+		if( result == 1) {
+			return true;
+		} else {
+			return false;			
+		}
+		
 	}
 	
+	@Override
+	public Paging getPaging(HttpServletRequest req, int i) {
+		//요청파라미터 curPage를 파싱한다
+		String param = req.getParameter("curPage");
+		int curPage =0;
+		if( param!=null && !"".equals(param)) {
+			curPage =Integer.parseInt(param);
+		}
+
+		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
+		int totalcount = myPageDao.selectCntAll(req, i);
+
+		//Paging 객체 생성
+		Paging paging = new Paging(totalcount, curPage);
+
+		return paging;
+	}
+
+	// ----- 내가 작성한 게시글 가져오기
+
+	@Override
+	public List getList(Paging paging, User user, int i) {
+		
+		return myPageDao.selectboard(paging, user, i);
+	}
+	// 내가 작성한 게시글 가져오기 -------------------------
+
+	
+	// ----- 내가 찜한 게시글 가져오기
+	
+	public List getLikeList(Paging paging, User user, int i) {
+		System.out.println("서비스임플(찜한게시글 : " + paging);
+		return myPageDao.likeboard(paging, user, i);
+	}
+	// 내가 찜한 게시글 가져오기 ---------------------------
 	
 
-// ----- 비밀번호 수정	
-	
+	// ----- 내가 작성한 댓글 가져오기
+	@Override
+	public List getReplyList(Paging paging, User user, int i) {
+		System.out.println("서비스임플 : " + paging);
+		System.out.println("서비스임플 : " + user);
+		System.out.println("서비스임플 : " + i);
+		return myPageDao.writeReply(paging, user, i);
+	}
+	// 내가 작성한 댓글 가져오기 ------------------------------
 
+	
+	// TEST -----------------------------------------------------
+	@Override
+	public Paging getPaging(HttpServletRequest req) {
+		//요청파라미터 curPage를 파싱한다
+		String param = req.getParameter("curPage");
+		int curPage =0;
+		if( param!=null && !"".equals(param)) {
+			curPage =Integer.parseInt(param);
+		}
 
-	
-	
-	
-	
+		//Board TB와 curPage 값을 이용해 Paging 객체를 생성하고 반환
+		int totalcount = myPageDao.selectCntAll(req);
 
+		//Paging 객체 생성
+		Paging paging = new Paging(totalcount, curPage);
+
+		return paging;
+	}
+
+	// -----------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
