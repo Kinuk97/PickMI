@@ -26,6 +26,7 @@ $(document).ready(function() {
 
 <h1 class="text-center">프로필 수정✍</h1>
 
+<div class="container text-center" style="width: 38%">
 <form action="/profileBoard/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="prof_no" value="${ profile.prof_no }" />
 <table>
@@ -104,6 +105,7 @@ $(document).ready(function() {
 <button type="button" id="edit">수정완료</button>
 <button type="button" id="cancel">취소</button>
 </form>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
