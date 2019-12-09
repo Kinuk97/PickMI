@@ -923,6 +923,8 @@ a#top {
 											</a>
 									<ul class="dropdown-menu">
 										<li><a href="/mypage"><i class="icon-arrow-up"></i>마이페이지</a></li>
+										<li><a href="/mate/list"><i class="icon-arrow-down"></i>내 프로젝트 팀원관리</a></li>
+										<li><a href="/schedule/list?proj_no=${list.proj_no }"><i class="icon-arrow-left"></i>일정관리</a></li>
 										<li><a href="/logout"><i class="icon-arrow-right"></i>로그아웃</a></li>
 									</ul>
 								</li>

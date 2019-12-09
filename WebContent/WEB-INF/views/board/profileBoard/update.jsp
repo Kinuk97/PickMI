@@ -23,16 +23,16 @@ $(document).ready(function() {
 	});
 });
 </script>
-<div class="container text-center" style="width: 38%">
+<div class="container text-center">
 
 <h1 class="text-center">프로필 수정✍</h1>
 
 <form  class="form-horizontal" action="/profileBoard/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="prof_no" value="${ profile.prof_no }" />
-	<div class="form-group">
-		<label for="prof_name" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;">${ profile.username }</label>
-		<label for="prof_username" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;">${ profile.userno }</label>
-		<label for="prof_no" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;">${ profile.prof_no }</label>
+	<div class="form-group" style="text-align: center;">
+		<label for="prof_name" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;">ID⭐ ${ profile.username }</label>
+		<label for="prof_username" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;"> NAME⭐ ${ profile.userno }</label>
+<%-- 		<label for="prof_no" class="col-sm-1 col-md-1 col-lg-1 control-label" style="padding-top: 10px; text-align: center;">${ profile.prof_no }</label> --%>
 	
 	</div>
 	
