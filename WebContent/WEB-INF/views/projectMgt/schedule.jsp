@@ -336,7 +336,6 @@ input[type="checkbox"] {
 			});
 		});
 		
-		var modifyCheck = false;
 		// 할 일 수정하는 폼 나오게하는 버튼
 		$("#checkList").on("click", ".checkModifyBtn", function() {
 			if (!modifyCheck) {
@@ -592,13 +591,14 @@ input[type="checkbox"] {
 			}
 		});
 	}
-	
+	var modifyCheck;
 	// 일정 상세보기
 	function viewSchedule(scheduleno) {
 		$("#schedule_title_form").hide();
 		$("#schedule_content_form").hide();
 		$("#schedule_due_dateForm").hide();
 		$("#schedule_checkListForm").hide();
+		modifyCheck = false;
 		
 		$.ajax({
 			type : "post",
