@@ -44,11 +44,12 @@ public class ProfileBoardViewController extends HttpServlet {
 		} catch (NullPointerException e) {
 			System.out.println("프로필 상세보기 : 로그인하지 않은 유저가 글을 읽는 중");
 		}
+//		System.out.println(like);
 		int countLike = profileBoardService.countLike(like);
 		req.setAttribute("countLike", countLike);
 		
 //		System.out.println("profile view controller :" + like);
-		
+		System.out.println(countLike);
 		//찜버튼 보여주기
 		boolean check = profileBoardService.checkLike(like);
 		if(check) {
